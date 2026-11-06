@@ -69,6 +69,7 @@ def build():
            'liveSandboxLifecycle':any(q['passed'] for q in saved.get('sandboxQualifications',[])),
            'graphApprovalPause':any(s.get('qualification') and any(t['to']=='approval' for t in s['transitions']) for s in saved.get('graphs',[])),
            'protectedGraphExecution':any(not s.get('qualification') and s['sourceCommit']==graph_source and s.get('lastProtectedGrade') and len(s.get('verification',[]))==2 and s['node'] in ['approval','failed','done','rejected'] for s in saved.get('graphs',[])),
+           'fullGraphControlFlow':any(s.get('qualification') and s.get('lastProtectedGrade',{}).get('passed') and s['node']=='approval' and len(s.get('verification',[]))==2 and all(v['passed'] for v in s['verification']) and any(t['to']=='rollback' for t in s['transitions']) for s in saved.get('graphs',[])),
            'sandboxCleanup':bool(sandbox_audit.get('allTerminal')),'noUnsettledReservations':not ledger['reservations'] and not ledger.get('halted'),
            'documentationChecks':all(local_checks.get(k,{}).get('exitCode')==0 for k in ['anchors','docs'])}
     status='verified_delivery' if all(gates.values()) else 'verification_in_progress' 

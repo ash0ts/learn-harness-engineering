@@ -74,12 +74,22 @@ def publish():
         for row in saved['trials']:
             table.add_data(row['id'],'coding-trial',row['outcome'],row.get('estimatedCostUsd'),ledger['settled'].get(row['id']),row['sourceCommit'])
         run.log({'attempts':table})
-        loop_table=wandb.Table(columns=['checkpoint','mode','status','rounds','observed_interventions','duration_limit_seconds','source_commit'],data=[])
+        by_id={r['id']:r for r in saved['trials']}
+        def evidence_links(trial_id):
+            row=by_id.get(trial_id,{})
+            conversations=row.get('conversationIds',[])
+            trace=f'https://forge.coreweave.com/agent-lens/{entity}/{project}/conversations/{conversations[0]}' if conversations else None
+            return row.get('wandbRunUrl'),row.get('artifactUrl'),trace
+        link_columns=['latest_trial_run','latest_trial_artifact','latest_agent_trace']
+        loop_table=wandb.Table(columns=['checkpoint','mode','status','rounds','observed_interventions','duration_limit_seconds','source_commit']+link_columns,data=[])
         for state in loops:
-            loop_table.add_data(state['file'],state['mode'],state['status'],len(state['rounds']),len(state.get('interventions',[])),(state['deadlineAt']-state['startedAt'])/1000,state['sourceCommit'])
-        graph_table=wandb.Table(columns=['checkpoint','manual_qualification','node','maker_attempts','transitions','candidate_sha256','source_commit'],data=[])
+            trial_id=state['rounds'][-1]['trialId'] if state['rounds'] else None
+            loop_table.add_data(state['file'],state['mode'],state['status'],len(state['rounds']),len(state.get('interventions',[])),(state['deadlineAt']-state['startedAt'])/1000,state['sourceCommit'],*evidence_links(trial_id))
+        graph_table=wandb.Table(columns=['checkpoint','manual_qualification','node','maker_attempts','transitions','candidate_sha256','protected_grade_passed','source_commit']+link_columns,data=[])
         for state in graphs:
-            graph_table.add_data(state['file'],bool(state.get('qualification')),state['node'],state['attempts'],len(state['transitions']),state.get('candidate',{}).get('sha256'),state['sourceCommit'])
+            grade=state.get('lastProtectedGrade') or {};candidate=state.get('candidate') or {}
+            trial_id=candidate.get('trialId') or (Path(grade['evidence']).parent.name if grade.get('evidence') else None)
+            graph_table.add_data(state['file'],bool(state.get('qualification')),state['node'],state['attempts'],len(state['transitions']),candidate.get('sha256'),grade.get('passed'),state['sourceCommit'],*evidence_links(trial_id))
         run.log({'loopEvidence':loop_table,'graphEvidence':graph_table})
         artifact=wandb.Artifact('forge-course-qualification-evidence',type='course-evidence',metadata={'schemaVersion':1,'status':'recorded-evidence','completedComparisonBlocks':blocks,'publisherSourceCommit':publisher_commit})
         for row in saved['qualifications']+saved['trials']+concurrent+saved.get('sandboxQualifications',[])+saved.get('visibleUiQualifications',[]):
@@ -96,7 +106,7 @@ def publish():
                 if path.is_file():add_evidence_file(artifact,str(path),name=str(path.relative_to(LOCAL)))
         for directory in sorted(LOCAL.glob('graph-qualification-*')):
             for path in sorted(directory.rglob('*')):
-                if path.is_file() and path.suffix in {'.json','.diff','.png'}:
+                if path.is_file() and path.suffix in {'.json','.diff','.png','.log'}:
                     add_evidence_file(artifact,str(path),name=str(path.relative_to(LOCAL)))
         for path in sorted((ROOT/'forge/results').glob('*')):
             if path.name in {'README.md','evidence-publication.json'}:continue
