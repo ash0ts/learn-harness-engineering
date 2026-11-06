@@ -1,3 +1,4 @@
+import {forgeTool} from './forge-hooks';
 import { v4 as uuidv4 } from 'uuid';
 import { Chunk, Document, AppStatus } from '../shared/types';
 import { PersistenceService } from './persistence-service';
@@ -24,6 +25,7 @@ export class IndexingService {
 
   /** Start indexing documents. If documentId is provided, index only that document. */
   async startIndexing(documentId?: string): Promise<IndexStatus> {
+    return forgeTool('indexing.start', {documentId}, async () => {
     const status = this.getStatus();
 
     if (documentId) {
@@ -70,6 +72,7 @@ export class IndexingService {
 
     this.persistence.writeJson(INDEX_META, chunksMeta);
     return this.getStatus();
+    });
   }
 
   /** Get current indexing status including chunk counts. */
