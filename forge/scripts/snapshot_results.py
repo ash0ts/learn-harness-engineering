@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 import hashlib
 import json
 from pathlib import Path
+from evidence_reports import read_reports
 
 ROOT=Path(__file__).resolve().parents[2]
 LOCAL=ROOT/'forge/local-results'
@@ -37,8 +38,7 @@ def build():
         row.update(reconciledEstimateUsd=audits.get(r['id'],r.get('estimatedCostUsd')),chargedUnknownReservationUsd=uncertain.get(r['id']),agentConversationId=r.get('agent',{}).get('conversationId'),appConversationId=r.get('app',{}).get('conversationId'))
         qualifications.append(row)
     blocks=[]
-    for path in sorted(LOCAL.glob('report-*.json')):
-        report=read(path)
+    for report in read_reports(LOCAL):
         for block in report['blocks']:
             if block['project'] not in [f'project-0{i}' for i in range(1,7)]: continue
             expected=set(read(ROOT/'forge/tasks'/f"{block['project']}.json")['variants'])
