@@ -1,0 +1,294 @@
+{
+  "schemaVersion": 1,
+  "verified": true,
+  "browser": {
+    "verified": true,
+    "pageRenders": 22,
+    "uniqueLocalResources": 146,
+    "uniqueImageSources": 45,
+    "viewports": [
+      1440,
+      390
+    ],
+    "checks": [
+      "links and anchors",
+      "image sources and alt text",
+      "responsive overflow",
+      "scrollable wide figures",
+      "primary counts",
+      "project filters",
+      "missing screenshot state",
+      "selected trial reload",
+      "browser back and forward",
+      "pagination",
+      "empty filters",
+      "keyboard trial expansion",
+      "CSV and catalog readback",
+      "portable ZIP download"
+    ],
+    "records": [
+      {
+        "file": "01-minimal-harness.md",
+        "width": 1440,
+        "images": 2,
+        "links": 32
+      },
+      {
+        "file": "02-workspace-docs.md",
+        "width": 1440,
+        "images": 2,
+        "links": 31
+      },
+      {
+        "file": "03-session-recovery.md",
+        "width": 1440,
+        "images": 3,
+        "links": 32
+      },
+      {
+        "file": "04-runtime-feedback.md",
+        "width": 1440,
+        "images": 3,
+        "links": 31
+      },
+      {
+        "file": "05-role-separation.md",
+        "width": 1440,
+        "images": 3,
+        "links": 33
+      },
+      {
+        "file": "06-capstone.md",
+        "width": 1440,
+        "images": 2,
+        "links": 32
+      },
+      {
+        "file": "07-bounded-loops.md",
+        "width": 1440,
+        "images": 2,
+        "links": 32
+      },
+      {
+        "file": "08-state-machine.md",
+        "width": 1440,
+        "images": 2,
+        "links": 33
+      },
+      {
+        "file": "evidence.md",
+        "width": 1440,
+        "images": 59,
+        "links": 98
+      },
+      {
+        "file": "index.md",
+        "width": 1440,
+        "images": 3,
+        "links": 41
+      },
+      {
+        "file": "running.md",
+        "width": 1440,
+        "images": 0,
+        "links": 30
+      },
+      {
+        "file": "01-minimal-harness.md",
+        "width": 390,
+        "images": 2,
+        "links": 32
+      },
+      {
+        "file": "02-workspace-docs.md",
+        "width": 390,
+        "images": 2,
+        "links": 31
+      },
+      {
+        "file": "03-session-recovery.md",
+        "width": 390,
+        "images": 3,
+        "links": 32
+      },
+      {
+        "file": "04-runtime-feedback.md",
+        "width": 390,
+        "images": 3,
+        "links": 31
+      },
+      {
+        "file": "05-role-separation.md",
+        "width": 390,
+        "images": 3,
+        "links": 33
+      },
+      {
+        "file": "06-capstone.md",
+        "width": 390,
+        "images": 2,
+        "links": 32
+      },
+      {
+        "file": "07-bounded-loops.md",
+        "width": 390,
+        "images": 2,
+        "links": 32
+      },
+      {
+        "file": "08-state-machine.md",
+        "width": 390,
+        "images": 2,
+        "links": 33
+      },
+      {
+        "file": "evidence.md",
+        "width": 390,
+        "images": 59,
+        "links": 98
+      },
+      {
+        "file": "index.md",
+        "width": 390,
+        "images": 3,
+        "links": 41
+      },
+      {
+        "file": "running.md",
+        "width": 390,
+        "images": 0,
+        "links": 30
+      }
+    ]
+  },
+  "articles": {
+    "verified": true,
+    "articles": [
+      {
+        "slug": "forge-01-minimal-harness",
+        "sourceSha256": "4e037ba70b2895b44dc6783e988f654f952bd941fc7b43ae9c3beb0a490977a2",
+        "htmlAssets": {
+          "./assets/figures/project-01-checks.svg": "0fd3b0d00d9c9871f26d8530e8a04b5034c6c4fa1a5608b6a1a1f9d93663f064",
+          "./assets/captures/643a867a-74e8-4987-aa56-5640b4c1982e-grader-visible-answer.png": "3bafb83798eaf79aeb09bd192ddedaa7e8771cde02a88272815cb216f3ca28d1"
+        },
+        "validated": true
+      },
+      {
+        "slug": "forge-02-workspace-docs",
+        "sourceSha256": "665c46582e831b5f2c673761f867b6b59f10bea8989d16b58c2f029e0773762a",
+        "htmlAssets": {
+          "./assets/figures/project-02-checks.svg": "72d0b89aaa2c22453efc79d7a368c553a28e12988a10826edaeb61197432f90f",
+          "./assets/captures/notebook-02.jpg": "2cf988629d8a000c16a162cb9142cd03fd0b307109fce94b9a9caa090705e02b"
+        },
+        "validated": true
+      },
+      {
+        "slug": "forge-03-session-recovery",
+        "sourceSha256": "54503a70cdeb75e8e2d5f2e1204d0707db55a7c48a88ebd9ac3bb37ebb1cd987",
+        "htmlAssets": {
+          "./assets/figures/project-03-checks.svg": "6e47a6f9d84c0c2e1c5189e3689832174c71eb0efdd0a884ce96c95f70141370",
+          "./assets/diagrams/session-boundary.svg": "f870593be802f3a7d28a7ef7975dea0f6e7e8b09284eab2ead79ed99d5cd8d07",
+          "./assets/captures/9d859517-72db-4b1a-a683-cd81b9f7ca14-grader-visible-answer.png": "7e3ac894326b95018bc4d8933b79a351dbeebb8101a5435f9b9d8f01b81e21d5"
+        },
+        "validated": true
+      },
+      {
+        "slug": "forge-04-runtime-feedback",
+        "sourceSha256": "709affacca7e5041da1d7091388a6318e3c7c9ac7299580b7a36ae5e487e7dc7",
+        "htmlAssets": {
+          "./assets/figures/project-04-checks.svg": "3208528a724ee2d9f45064ffabfea4dfde61a8ef739b27e3bf9bb4f507a389d8",
+          "./assets/captures/agent-lens-agent-revision4.jpg": "efc3a266247e3203126953e85338bf16042d8054ebe5b45ee8993838919f36bd",
+          "./assets/captures/agent-lens-revision4.jpg": "adfffd7d27c1d84cf2eeae4d38f6786238e176d9a3badbbcf25cf8b9e084c15c"
+        },
+        "validated": true
+      },
+      {
+        "slug": "forge-05-role-separation",
+        "sourceSha256": "2fd4e9f8afc0b6ea722fdf32b5aa1b967e6c747e858f3a5687e5f1a1aa627325",
+        "htmlAssets": {
+          "./assets/figures/role-allowances.svg": "85344742c1e9677402cdbec91ac9335d58f1c5ada87cb2468081ae42ed463b49",
+          "./assets/captures/73c46965-1093-4b68-a810-a901dd78bfc0-grader-electron.png": "e22eb15841575f5ea5e27525fd9426754ec6ae7c5f0fb7dc7953ba037e844f52",
+          "./assets/figures/project-05-checks.svg": "92e9c5c89f74a3e4f88d1120d3fb21b1bd858cd20c48b6cc9d35a131776a59e8"
+        },
+        "validated": true
+      },
+      {
+        "slug": "forge-06-capstone",
+        "sourceSha256": "e31e6a69c86d2f8407ca8677b8b67431a579370f7fe63cae712b62f7017e7f28",
+        "htmlAssets": {
+          "./assets/captures/fd98af3b-1b52-448c-bc7b-b6cc47e785ea-grader-electron.png": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+          "./assets/figures/project-06-checks.svg": "adc32767131eea7dfcdf64751f2e22eaf9c3de072e2cd973221eb56f8d4c419a"
+        },
+        "validated": true
+      },
+      {
+        "slug": "forge-07-bounded-loops",
+        "sourceSha256": "ef0d9b3539168db8ac8ffed6598d7f84dccf7951f221c138c18bfd289f72c751",
+        "htmlAssets": {
+          "./assets/figures/timer-timeline.svg": "28b63f2f16aeed28c26fc95d245cd1aec3a04a37d2a6d77f797bf44eff9a26d7",
+          "./assets/captures/dashboard-loop-evidence-final.jpg": "14c75488acecc20a968fcec25a3d5c9e2dfda419f8e6d8f61f42b4b6d23cad15"
+        },
+        "validated": true
+      },
+      {
+        "slug": "forge-08-state-machine",
+        "sourceSha256": "e5937fc748025d37e59bcb941c659f20c4aa4b2d529490a1b60cacf93ef5c814",
+        "htmlAssets": {
+          "./assets/diagrams/graph-attempts.svg": "7d8804a82315ac1be02f138ac5f0e6ea4463c98562248339f1857cf29eba6a84",
+          "./assets/captures/dashboard-graph-evidence-final.jpg": "011824ad3f54f6af44dd171ffd1495bff5fdaf278b4096d25f4c325fc9254f20"
+        },
+        "validated": true
+      },
+      {
+        "slug": "forge-evidence",
+        "sourceSha256": "7a0ef540b3ab8393b895e52fd5a04dcf4ca7326a534acef0f1ab74397f4e4543",
+        "htmlAssets": {
+          "./assets/figures/primary-outcomes.svg": "c231b527cccb1407ca2f3cf0a88cfdefae29ab1c95c23378d15976e84a58e29d",
+          "./assets/captures/dashboard-comparisons-final.jpg": "b5d0610852e69dcb7fb18046ae7d37042846ccf4231e4162b22630996c51b45e",
+          "./assets/captures/dashboard-operations-final.jpg": "1484cfc26b1d05bb4fafff8b412b50a4aa7b2ac6d3b40253b412248c37448065",
+          "./assets/captures/dashboard-source-evidence-final.jpg": "5581c63f8f11a1e4fa0fcf09bc9cf758a9be8b7f9ff982c0c2c0eb83ece05b5d",
+          "./assets/captures/agent-lens-agent-revision4.jpg": "efc3a266247e3203126953e85338bf16042d8054ebe5b45ee8993838919f36bd",
+          "./assets/captures/agent-lens-revision4.jpg": "adfffd7d27c1d84cf2eeae4d38f6786238e176d9a3badbbcf25cf8b9e084c15c",
+          "./assets/figures/timer-timeline.svg": "28b63f2f16aeed28c26fc95d245cd1aec3a04a37d2a6d77f797bf44eff9a26d7",
+          "./assets/captures/dashboard-loop-evidence-final.jpg": "14c75488acecc20a968fcec25a3d5c9e2dfda419f8e6d8f61f42b4b6d23cad15",
+          "./assets/diagrams/graph-attempts.svg": "7d8804a82315ac1be02f138ac5f0e6ea4463c98562248339f1857cf29eba6a84",
+          "./assets/captures/dashboard-graph-evidence-final.jpg": "011824ad3f54f6af44dd171ffd1495bff5fdaf278b4096d25f4c325fc9254f20"
+        },
+        "validated": true
+      },
+      {
+        "slug": "forge-overview",
+        "sourceSha256": "5b5b5e7e58e837511f699a2f343b3bed32c67322e19e11289c265138ebaf7969",
+        "htmlAssets": {
+          "./assets/diagrams/trial-evidence-chain.svg": "9fccf7dfc9784a88b4920e0946eab20987e68301350be0e302b4fe93357c298c",
+          "./assets/figures/primary-outcomes.svg": "c231b527cccb1407ca2f3cf0a88cfdefae29ab1c95c23378d15976e84a58e29d",
+          "./assets/captures/dashboard-comparisons-final.jpg": "b5d0610852e69dcb7fb18046ae7d37042846ccf4231e4162b22630996c51b45e"
+        },
+        "validated": true
+      }
+    ]
+  },
+  "artifactReadback": {
+    "artifact": "wandb/learn-harness-engineering-forge/forge-course-qualification-evidence:v4",
+    "artifactFiles": 8512,
+    "checkedFiles": 7850,
+    "verified": true
+  },
+  "visualInspection": {
+    "originalCaptures": 123,
+    "workflowDiagrams": 3,
+    "figureFormats": [
+      "PNG",
+      "SVG"
+    ],
+    "viewports": [
+      1440,
+      390
+    ]
+  },
+  "limits": [
+    "Byte agreement does not establish semantic correctness of a grade.",
+    "Native dashboards and raw artifacts require private-project access.",
+    "No inference, sandbox, grading, or notebook execution was launched for these visuals."
+  ]
+}
