@@ -26,7 +26,7 @@ def validate(export=True,projects=None):
         if projects and project not in projects:continue
         master=json.loads((ROOT / 'forge/results/snapshot.json').read_text())
         expected=project_snapshot(master,project)
-        for key in ['trials','completedComparisonBlocks','loops','graphs','qualifications','concurrencyQualifications','sandboxQualifications']:
+        for key in ['trials','completedComparisonBlocks','loops','graphs','qualifications','concurrencyQualifications','sandboxQualifications','visibleUiQualifications']:
             if saved.get(key,[])!=expected.get(key,[]):
                 raise RuntimeError(f'{source.name}: stale {key}; regenerate this notebook')
         # Earlier completed projects may be published while the timer runs.
