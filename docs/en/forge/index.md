@@ -6,17 +6,17 @@ The original exercises still work offline. Their mock defaults, starter gaps and
 
 ## Learning path
 
-| Project | Controlled question | Canonical notebook |
-| --- | --- | --- |
-| Overview | What counts as evidence, and what remains unknown? | [00 · Overview](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-notebooks/forge/notebooks/00-overview.py) |
-| 01 | Do explicit repository rules help this unfinished app? | [01 · Minimal harness](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-notebooks/forge/notebooks/01-minimal-harness.py) |
-| 02 | Can a fresh agent use workspace documentation? | [02 · Workspace docs](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-notebooks/forge/notebooks/02-workspace-docs.py) |
-| 03 | Can another session recover from files and a patch? | [03 · Session recovery](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-notebooks/forge/notebooks/03-session-recovery.py) |
-| 04 | Does runtime feedback expose the seeded indexing defect? | [04 · Runtime feedback](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-notebooks/forge/notebooks/04-runtime-feedback.py) |
-| 05 | Does role separation improve the same history feature? | [05 · Role separation](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-notebooks/forge/notebooks/05-role-separation.py) |
-| 06 | Does the complete harness improve verified behavior? | [06 · Capstone](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-notebooks/forge/notebooks/06-capstone.py) |
-| 07 | When should a durable loop continue or stop? | [07 · Bounded loops](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-notebooks/forge/notebooks/07-bounded-loops.py) |
-| 08 | How do retries, rollback and human approval compose? | [08 · State machine](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-notebooks/forge/notebooks/08-state-machine.py) |
+| Project | Controlled question | Canonical notebook | Forge notebook |
+| --- | --- | --- | --- |
+| Overview | What counts as evidence, and what remains unknown? | [00 · Overview](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-notebooks/forge/notebooks/00-overview.py) | [Open in Forge](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTM%3D) |
+| 01 | Do explicit repository rules help this unfinished app? | [01 · Minimal harness](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-notebooks/forge/notebooks/01-minimal-harness.py) | [Open in Forge](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTQ%3D) |
+| 02 | Can a fresh agent use workspace documentation? | [02 · Workspace docs](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-notebooks/forge/notebooks/02-workspace-docs.py) | [Open in Forge](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTU%3D) |
+| 03 | Can another session recover from files and a patch? | [03 · Session recovery](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-notebooks/forge/notebooks/03-session-recovery.py) | [Open in Forge](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTY%3D) |
+| 04 | Does runtime feedback expose the seeded indexing defect? | [04 · Runtime feedback](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-notebooks/forge/notebooks/04-runtime-feedback.py) | [Open in Forge](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTc%3D) |
+| 05 | Does role separation improve the same history feature? | [05 · Role separation](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-notebooks/forge/notebooks/05-role-separation.py) | [Open in Forge](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTg%3D) |
+| 06 | Does the complete harness improve verified behavior? | [06 · Capstone](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-notebooks/forge/notebooks/06-capstone.py) | [Open in Forge](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTk%3D) |
+| 07 | When should a durable loop continue or stop? | [07 · Bounded loops](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-notebooks/forge/notebooks/07-bounded-loops.py) | [Open in Forge](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjA%3D) |
+| 08 | How do retries, rollback and human approval compose? | [08 · State machine](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-notebooks/forge/notebooks/08-state-machine.py) | [Open in Forge](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjE%3D) |
 
 Start with the overview, then follow project order. Each notebook explains the experiment, displays a saved evidence snapshot, exposes configuration, and can invoke a bounded rerun through the shared TypeScript coordinator. Opening a notebook never starts an inference or coding trial. Hosted notebook runtime itself may incur compute charges.
 
@@ -56,7 +56,9 @@ Pi uses its documented Weave tracing extension; application hooks use the Forge 
 
 ## Budget and recovery
 
-The application budget is $50 including inference, sandboxes and notebook execution. It reserves estimated in-flight costs before paid launches, defaults to CPU-only sandboxes and two trial workers, and collects patches/logs/checkpoints before teardown. Unknown pricing, missing usage or uncertain cleanup halts new paid work. This is a conservative application control, not a guaranteed provider billing cap.
+The default application budget is $50 including inference, sandboxes and notebook execution. It reserves estimated in-flight costs before paid launches, defaults to CPU-only sandboxes and two trial workers, and collects patches/logs/checkpoints before teardown. Unknown pricing, missing usage or uncertain cleanup halts new paid work. This is a conservative application control, not a guaranteed provider billing cap.
+
+This delivery records a later explicit unlimited-budget authorization in its ledger. `FORGE_BUDGET_USD=unlimited` must match that recorded authorization; accounting and worker bounds still apply.
 
 Keep the shared `forge/local-results/budget.json` ledger across launches. Do not delete it to bypass a halt. Reconcile an uncertain attempt only from billing evidence or an explicit audited user decision. Timer exercises checkpoint between sessions and release idle sandboxes; the real exercise lasts two hours. Accelerated tests are separate evidence. Graphs pause at approval and need an explicit checksum-bound approve/reject decision before resuming.
 
@@ -65,9 +67,9 @@ Keep the shared `forge/local-results/budget.json` ledger across launches. Do not
 Canonical Marimo sources live in `forge/notebooks/` with pinned Python dependencies and runner provenance. To view one locally:
 
 ```sh
-uv run --with marimo==0.25.2 marimo edit forge/notebooks/00-overview.py
+uv run --with marimo==0.25.1 marimo edit forge/notebooks/00-overview.py
 ```
 
 The analysis view is self-contained. Paid reruns require a mounted coordinator checkout at the displayed runner revision, Node dependencies, external credentials and the existing budget ledger. A hosted analysis notebook without that coordinator cannot launch reruns. The Python cells call the shared runner; they do not reimplement the app.
 
-Publication creates a BASIC notebook in the private project, renames it, opens an authenticated EDIT session and loads the canonical source through the Marimo editor. The normal save workflow commits source. A notebook is only marked published after its committed `currentVersion`, source checksum and rendered output are verified. Reuse recorded notebook IDs and detect remote edits before replacing source. Consult the repository publication manifest and results report for actual completion status; source links above do not imply successful hosted publication.
+Publication creates a BASIC notebook in the private project, renames it, opens an authenticated EDIT session and loads the canonical source through the Marimo editor. The normal save workflow commits source. A notebook is only marked published after its committed `currentVersion`, source checksum and rendered output are verified. Reuse recorded notebook IDs and detect remote edits before replacing source. Consult the repository publication manifest and results report for actual completion status; the manifest records verification separately from the stable source and hosted links above.
