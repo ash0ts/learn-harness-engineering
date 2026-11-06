@@ -21,7 +21,8 @@ def publish():
     concurrent=[json.loads(p.read_text()) for p in LOCAL.glob('concurrency-*/concurrency.json')]
     publications=json.loads((ROOT/'forge/publication-manifest.json').read_text())
     supplemental=saved.get('sandboxQualifications',[])+saved.get('graphs',[])+saved.get('loops',[])
-    commits=sorted({r['sourceCommit'] for r in saved['trials']+saved['qualifications']+concurrent+supplemental+publications['notebooks'] if r.get('sourceCommit')})
+    publisher_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
+    commits=sorted({publisher_commit}|{r['sourceCommit'] for r in saved['trials']+saved['qualifications']+concurrent+supplemental+publications['notebooks'] if r.get('sourceCommit')})
     archives=[]
     for commit in commits:
         path=sources/(commit+'.tar.gz')
@@ -39,7 +40,7 @@ def publish():
         for row in saved['trials']:
             table.add_data(row['id'],'coding-trial',row['outcome'],row.get('estimatedCostUsd'),ledger['settled'].get(row['id']),row['sourceCommit'])
         run.log({'attempts':table})
-        artifact=wandb.Artifact('forge-course-qualification-evidence',type='course-evidence',metadata={'schemaVersion':1,'status':'recorded-evidence','completedComparisonBlocks':blocks})
+        artifact=wandb.Artifact('forge-course-qualification-evidence',type='course-evidence',metadata={'schemaVersion':1,'status':'recorded-evidence','completedComparisonBlocks':blocks,'publisherSourceCommit':publisher_commit})
         for row in saved['qualifications']+saved['trials']+concurrent+saved.get('sandboxQualifications',[]):
             directory=LOCAL/row['id']
             for path in sorted(directory.rglob('*')):
@@ -62,7 +63,7 @@ def publish():
         for path in sorted((ROOT/'forge/notebooks').glob('*.py')):artifact.add_file(str(path),name='notebooks/'+path.name)
         artifact.add_file(str(ROOT/'forge/publication-manifest.json'),name='publication-manifest.json')
         committed=run.log_artifact(artifact).wait()
-        receipt={'schemaVersion':1,'runId':run.id,'runUrl':run.url,'artifact':f'{entity}/{project}/{committed.name}','artifactUrl':f'https://wandb.ai/{entity}/{project}/artifacts/course-evidence/{committed.name}','sourceArchives':archives}
+        receipt={'schemaVersion':1,'runId':run.id,'runUrl':run.url,'artifact':f'{entity}/{project}/{committed.name}','artifactUrl':f'https://wandb.ai/{entity}/{project}/artifacts/course-evidence/{committed.name}','publisherSourceCommit':publisher_commit,'sourceArchives':archives}
     api=wandb.Api();remote=api.artifact(receipt['artifact'],type='course-evidence')
     receipt['artifactFileCount']=len(list(remote.files()))
     receipt['verifiedRunBudgetHalted']=api.run(f'{entity}/{project}/{receipt["runId"]}').summary.get('budgetHalted')
