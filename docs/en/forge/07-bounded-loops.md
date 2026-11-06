@@ -1,3 +1,8 @@
+<script setup>
+import forgeImage0 from './assets/figures/timer-timeline.svg?url'
+import forgeImage1 from './assets/captures/dashboard-loop-evidence-final.jpg?url'
+</script>
+
 # Two hours of agent work, with a stop condition
 
 We ran the timer exercise for its real two-hour window. It recorded eight coding rounds and ended at its deadline. All eight rounds retain `task_failed` outcomes under that historical protocol. Completing the timer demonstrated scheduled execution and stopping behavior; it did not demonstrate a completed repair.
@@ -50,6 +55,23 @@ Accelerated timer tests use a controllable clock to exercise scheduling and stop
 
 The timer's historical grading protocol also predates the corrected visible-answer checks used in the primary comparison. Its failed grades remain historical observations. We do not promote them into current UI acceptance evidence, and we do not rescore them merely to make the timer's story cleaner.
 
+
+<div class="forge-figure" tabindex="0" role="region" aria-label="Eight failed historical timer rounds spread across a two-hour wall-clock interval, with one recorded intervention and the original deadline.">
+
+<a :href="forgeImage0" target="_blank" rel="noopener"><img src="./assets/figures/timer-timeline.svg" alt="Eight failed historical timer rounds spread across a two-hour wall-clock interval, with one recorded intervention and the original deadline." /></a>
+
+</div>
+
+The bars show each trial’s elapsed interval, including coordination and checking. They do not represent continuous inference or billed sandbox occupancy. [Inspect the timer checkpoint and all eight attempts](./evidence.md#loops-and-approval). Open the image for full size; wide figures scroll on small screens.
+
+<div class="forge-figure" tabindex="0" role="region" aria-label="Original Forge operations table listing loop checkpoints, modes, statuses, and linked trial evidence.">
+
+<a :href="forgeImage1" target="_blank" rel="noopener"><img src="./assets/captures/dashboard-loop-evidence-final.jpg" alt="Original Forge operations table listing loop checkpoints, modes, statuses, and linked trial evidence." /></a>
+
+</div>
+
+The operations view keeps the passing goal run, deadline completion, and no-progress stops as distinct outcomes. The recorded timer intervention remains part of the evidence. Open the image for full size; wide figures scroll on small screens.
+
 ## Read a checkpoint as an operational record
 
 A loop checkpoint should tell another operator what can safely happen next. In this implementation it records the source revision, start and deadline, round limit, prior trial IDs, candidate patch path, feedback, pending work, and interventions.
@@ -59,3 +81,5 @@ Before resuming, resolve the paths to the candidate and prior trial evidence, th
 Open the [Project 07 notebook](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjA%3D) to inspect the saved checkpoints with private-project access. Before launching a rerun, use the [runner guide](./running.md#budget-and-recovery) to check the existing ledger and pending work. The [public report](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-publication/forge/results/README.md) lists each loop's status and source.
 
 Once a coordinator can continue, stop, and resume, it becomes possible to require different checks before a candidate moves forward. [Project 08](./08-state-machine.md) follows that candidate through rollback, parallel verification, and a separate human decision.
+
+[Browse the complete evidence companion](./evidence.md): original captures, all 129 attempts, source hashes, notebooks, dashboards, and private artifacts.
