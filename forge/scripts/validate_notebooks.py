@@ -23,14 +23,14 @@ def validate(export=True):
         saved = json.loads(ast.literal_eval(assignments['saved'].args[0]))
         if saved != json.loads((ROOT / 'forge/results/snapshot.json').read_text()):
             raise RuntimeError(f'{source.name}: stale embedded evidence; regenerate notebooks')
-        subprocess.run(['uv', 'run', '--with', 'marimo==0.25.2', 'marimo', 'check', str(source)], check=True, cwd=ROOT)
+        subprocess.run(['uv', 'run', '--with', 'marimo==0.25.1', 'marimo', 'check', str(source)], check=True, cwd=ROOT)
         row = {'file': str(source.relative_to(ROOT)), 'sha256': hashlib.sha256(source.read_bytes()).hexdigest(),
                'runnerCommit': ast.literal_eval(assignments['runner_commit']), 'syntaxValidated': True, 'rendered': False}
         if export:
             dest = output / (source.stem + '.html')
             # A missing credential is intentional: the initial view must need no paid execution.
             env = {key: value for key, value in os.environ.items() if key not in {'WANDB_API_KEY', 'FORGE_RUNNER_ROOT'}}
-            subprocess.run(['uv', 'run', '--with', 'marimo==0.25.2', 'marimo', 'export', 'html', str(source), '-o', str(dest), '--force', '--no-include-code'], cwd=ROOT, env=env, check=True, timeout=120)
+            subprocess.run(['uv', 'run', '--with', 'marimo==0.25.1', 'marimo', 'export', 'html', str(source), '-o', str(dest), '--force', '--no-include-code'], cwd=ROOT, env=env, check=True, timeout=120)
             html = dest.read_text()
             marker = '"session": '
             session, _ = json.JSONDecoder().raw_decode(html[html.index(marker) + len(marker):])
