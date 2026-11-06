@@ -38,10 +38,11 @@ def publish():
     traces=json.loads((LOCAL/'trace-audit.json').read_text())
     models=json.loads((LOCAL/'models-audit.json').read_text())
     cleanup=json.loads((LOCAL/'sandbox-final-audit.json').read_text())
+    comparisons=json.loads((LOCAL/'comparison-audit.json').read_text())
     audit_metrics.update(agentLensConversationsVerified=sum(r['verified'] for r in traces['conversations']),
                          modelsTrialArtifactsVerified=sum(r['verified'] for r in models['trials']),
                          cleanupRecordsVerified=sum(r['verified'] for r in cleanup['workers']),
-                         activeCourseWorkers=len(cleanup['active']))
+                         activeCourseWorkers=len(cleanup['active']),comparisonBlocksVerified=sum(r['verified'] for r in comparisons['blocks']))
     with wandb.init(entity=entity,project=project,id='course-audit-20261106',resume='allow',job_type='qualification-audit',name='Forge course execution and publication evidence',config={'protocol':json.loads((ROOT/'forge/protocol.json').read_text()),'upstreamCommit':'a9342ff471f2c0e60be0c08b9f4a7c502df4e442'},allow_val_change=True,settings=wandb.Settings(disable_git=True,disable_code=True)) as run:
         run.name='Forge course execution and publication evidence'
         run.log(audit_metrics)
@@ -58,7 +59,7 @@ def publish():
                 if path.is_file() and path.suffix in {'.json','.diff','.txt','.log','.png'}:
                     artifact.add_file(str(path),name=str(path.relative_to(LOCAL)))
         for path in sorted(sources.iterdir()):artifact.add_file(str(path),name='source-archives/'+path.name)
-        for filename in ['budget.json','app-checks.json','notebook-validation.json','trace-audit.json','models-audit.json','forge-tests-final.log','sandbox-final-audit.json','local-checks.json','docs-check.log','anchors-check.log']:
+        for filename in ['budget.json','app-checks.json','notebook-validation.json','trace-audit.json','models-audit.json','comparison-audit.json','forge-tests-final.log','sandbox-final-audit.json','local-checks.json','docs-check.log','anchors-check.log']:
             path=LOCAL/filename
             if path.exists():artifact.add_file(str(path),name=filename)
         for pattern in ['project-07-*.json','project-08-*.json','rollback-*.json','report-*.json','graph-*/*.json','graph-*/*.png','notebook-sessions/*.json','trace-readback/*.json','reconciliations/*.json','publication/*/notebook.py','publication/*/rendered.html','publication/*.jpg']:
