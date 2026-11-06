@@ -66,6 +66,16 @@ def publish():
     api=wandb.Api();remote=api.artifact(receipt['artifact'],type='course-evidence')
     receipt['artifactFileCount']=len(list(remote.files()))
     receipt['verifiedRunBudgetHalted']=api.run(f'{entity}/{project}/{receipt["runId"]}').summary.get('budgetHalted')
+    readback=LOCAL/'evidence-readback';readback.mkdir(exist_ok=True)
+    for source in archives:
+        downloaded=Path(remote.get_entry('source-archives/'+source['file']).download(root=str(readback)))
+        if hashlib.sha256(downloaded.read_bytes()).hexdigest()!=source['sha256']:
+            raise RuntimeError('Committed source archive checksum mismatch: '+source['sourceCommit'])
+    manifest_copy=Path(remote.get_entry('publication-manifest.json').download(root=str(readback)))
+    if manifest_copy.read_bytes()!=(ROOT/'forge/publication-manifest.json').read_bytes():
+        raise RuntimeError('Committed publication manifest differs from verified local manifest')
+    receipt['sourceArchivesReadBackVerified']=True
+    receipt['publicationManifestReadBackVerified']=True
     receipt['completedComparisonBlocks']=blocks
     receipt['completedCodingAttempts']=len(saved['trials'])
     (ROOT/'forge/results/evidence-publication.json').write_text(json.dumps(receipt,indent=2)+'\n')
