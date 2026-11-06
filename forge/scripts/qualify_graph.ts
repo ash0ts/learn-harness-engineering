@@ -13,8 +13,8 @@ if(!process.argv.includes('--execute'))throw new Error('Qualification requires -
 const c=config();await requirePrivateProject(c);
 const source=await sourceHead(),task=await readTask('project-08');
 const p=JSON.parse(await readFile(join(courseRoot,'forge/protocol.json'),'utf8'));
-const output=join(courseRoot,'forge/local-results'),file=join(output,'project-08-control-flow-qualification.json');
 const state=newGraph(source);state.maxAttempts=2;
+const output=join(courseRoot,'forge/local-results'),file=join(output,`project-08-control-flow-qualification-${state.id}.json`);
 Object.assign(state,{qualification:'deterministic control-flow fixture; excluded from coding trial counts'});
 const budget=new Budget(join(output,'budget.json'),c.budgetUsd);
 const root=join(output,`graph-qualification-${state.id}`);await mkdir(root,{recursive:true});
