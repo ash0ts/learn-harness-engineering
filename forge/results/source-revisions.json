@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "frozenSources": [
+    {
+      "tag": "forge-course-r2",
+      "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef",
+      "url": "https://github.com/ash0ts/learn-harness-engineering/tree/forge-course-r2"
+    },
+    {
+      "tag": "forge-course-r3",
+      "sourceCommit": "7c563eb14f3999ab3e659b77c4095c883619002f",
+      "url": "https://github.com/ash0ts/learn-harness-engineering/tree/forge-course-r3"
+    },
+    {
+      "tag": "forge-course-r4",
+      "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+      "url": "https://github.com/ash0ts/learn-harness-engineering/tree/forge-course-r4"
+    }
+  ]
+}
