@@ -97,8 +97,8 @@
       "file": "forge/notebooks/03-session-recovery.py",
       "project": "project-03",
       "title": "03 \u00b7 Interrupted-session recovery",
-      "sourceCommit": "c3fa6bab9c4c714f020756f728977e5349a001cd",
-      "sha256": "aa25287eba35df29cb4c0c4573b81d7f1a9be5b868465fdb785be855b617b3fe",
+      "sourceCommit": "51a5acdffea40bb5db4118b404efa6687c0d30fd",
+      "sha256": "d621a173ddbc463acdb834c45a6b02598a5ae185aa65087f679dffa38a1b4ddc",
       "id": "Tm90ZWJvb2s6MTUzMTY=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTY%3D",
       "status": "published_verified",
@@ -106,29 +106,29 @@
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "03-Interrupted-session-recovery",
-        "versionIndex": 3,
+        "versionIndex": 6,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:40Z",
-      "expectedRemoteSha256": "aa25287eba35df29cb4c0c4573b81d7f1a9be5b868465fdb785be855b617b3fe",
+      "expectedRemoteSha256": "d621a173ddbc463acdb834c45a6b02598a5ae185aa65087f679dffa38a1b4ddc",
       "currentVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "03-Interrupted-session-recovery",
-        "versionIndex": 3,
+        "versionIndex": 6,
         "sourceFileName": "notebook.py"
       },
-      "renderedOutputSha256": "e6b792527ec0f29cf1b50888dfed83ca6d6ff59f99c0c5179b0605feb91db60a",
+      "renderedOutputSha256": "b7a88d0fe4325e71986958a1779a55cc7a20797094b4e5a1f6c4dc44c9749c06",
       "renderedCellSourceVerified": true,
-      "verifiedAggregateGroups": 2,
+      "verifiedAggregateGroups": 4,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-06T10:25:29.708563+00:00"
+      "verifiedAt": "2026-11-06T11:53:51.844034+00:00"
     },
     {
       "file": "forge/notebooks/04-runtime-feedback.py",
       "project": "project-04",
       "title": "04 \u00b7 Runtime evidence and the seeded defect",
-      "sourceCommit": "c3fa6bab9c4c714f020756f728977e5349a001cd",
-      "sha256": "16b31105d6b8ac33b6f0a2153dca0504211734cb4a1010638d4ccb6198de1a2c",
+      "sourceCommit": "20100192fce9fd2c54b8dce2cf6eacd636167bdc",
+      "sha256": "93ccc0df8afca276ba03b317920813ee2b17e2e481fd4097345759881df1c8a4",
       "id": "Tm90ZWJvb2s6MTUzMTc=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTc%3D",
       "status": "published_verified",
@@ -136,22 +136,22 @@
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "04-Runtime-evidence-and-the-seeded-defect",
-        "versionIndex": 3,
+        "versionIndex": 7,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:42Z",
-      "expectedRemoteSha256": "16b31105d6b8ac33b6f0a2153dca0504211734cb4a1010638d4ccb6198de1a2c",
+      "expectedRemoteSha256": "93ccc0df8afca276ba03b317920813ee2b17e2e481fd4097345759881df1c8a4",
       "currentVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "04-Runtime-evidence-and-the-seeded-defect",
-        "versionIndex": 3,
+        "versionIndex": 7,
         "sourceFileName": "notebook.py"
       },
-      "renderedOutputSha256": "d97ad42659fb6a733784fed559b0767fd18b4727837810a27ecc50e5e75713b5",
+      "renderedOutputSha256": "2552873da920ca738c3c1897e3412e919b78a164c6c0661af8b3ac6214c9d25e",
       "renderedCellSourceVerified": true,
-      "verifiedAggregateGroups": 2,
+      "verifiedAggregateGroups": 4,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-06T10:25:31.087469+00:00"
+      "verifiedAt": "2026-11-06T12:01:10.850365+00:00"
     },
     {
       "file": "forge/notebooks/05-role-separation.py",
