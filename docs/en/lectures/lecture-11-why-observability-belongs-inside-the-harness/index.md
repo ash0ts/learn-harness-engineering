@@ -175,4 +175,4 @@ The evaluator wasn't always this sharp. Early versions would identify reasonable
 
 ## Optional Forge experiment
 
-Follow the [Forge learning path](/en/forge/) for sandbox execution, Agent Lens traces, W&B evidence and the corresponding Marimo notebook. The offline exercise remains the default.
+The Forge article [Debugging an index full of empty chunks](/en/forge/04-runtime-feedback) follows an executed example with recorded failures and saved results. The [Forge overview](/en/forge/) links the full series. The offline exercise remains the default.

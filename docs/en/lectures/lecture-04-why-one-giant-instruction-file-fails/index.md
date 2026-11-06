@@ -132,4 +132,4 @@ A paired study used gpt-5.2-codex on 124 PR-derived tasks from 10 repositories, 
 
 ## Optional Forge experiment
 
-Follow the [Forge learning path](/en/forge/) for sandbox execution, Agent Lens traces, W&B evidence and the corresponding Marimo notebook. The offline exercise remains the default.
+The Forge article [Writing a repository guide an agent can use](/en/forge/02-workspace-docs) follows an executed example with recorded failures and saved results. The [Forge overview](/en/forge/) links the full series. The offline exercise remains the default.
