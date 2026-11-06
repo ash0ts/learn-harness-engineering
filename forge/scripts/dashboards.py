@@ -199,7 +199,7 @@ def publish():
     operations.sections = [ws.Section(name="Qualification, publication and accounting", is_open=True, panels=[
         wr.ScalarChart(title=title, metric=metric, layout=wr.Layout(x=(i%3)*8,y=(i//3)*6,w=8,h=6))
         for i,(title,metric) in enumerate([
-            ("Completed coding attempts", "codingTrialAttempts"), ("Passing coding attempts", "passedCodingTrials"),
+            ("All completed coding attempts", "codingTrialAttempts"), ("Verified visible-answer passes", "verifiedUiPasses"),
             ("Verified notebooks", "notebooksPublishedVerified"), ("Charged estimate (USD)", "totalChargedEstimateUsd"),
             ("Unknown-usage charges (USD)", "chargedUnknownReservationsUsd"), ("Unresolved reservations (USD)", "unresolvedReservationsUsd")])])]
     operations.save()
