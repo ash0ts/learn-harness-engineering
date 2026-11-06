@@ -6,6 +6,12 @@ import {parseArgs} from 'node:util';
 const command = process.argv[2] ?? 'help';
 if(command==='workshop'){
   console.log(JSON.stringify(await (await import('./workshop-cli.js')).workshopCLI(process.argv.slice(3)),null,2));
+} else if (command === 'validate-notebooks') {
+  const {spawnSync}=await import('node:child_process');
+  const {courseRoot}=await import('./staging.js');
+  const result=spawnSync('python3',[`${courseRoot}/forge/scripts/validate_notebooks.py`,...process.argv.slice(3)],{cwd:courseRoot,stdio:'inherit'});
+  if(result.error)throw result.error;
+  process.exitCode=result.status??1;
 } else if (command === 'doctor' && process.argv.includes('--qualify')) {
   if(!process.argv.includes('--execute'))throw new Error('Qualification requires --execute');
   const {values}=parseArgs({args:process.argv.slice(3),options:{qualify:{type:'boolean'},execute:{type:'boolean'},output:{type:'string'},'operation-id':{type:'string'}}});
@@ -51,5 +57,5 @@ if(command==='workshop'){
   const result=await (await import('./campaign.js')).compare({...values,operationId:values['operation-id'],repeats:command==='run'?1:values.repeats?Number(values.repeats):undefined});
   console.log(JSON.stringify(result,null,2));
 } else {
-  console.log('Forge course: doctor | services | run | compare. Paid run/compare require --execute.');
+  console.log('Forge course: doctor | services | run | compare | loop | graph | validate-notebooks. Paid run/compare require --execute.');
 }

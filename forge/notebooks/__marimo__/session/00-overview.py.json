@@ -1,0 +1,113 @@
+{
+  "version": "1",
+  "metadata": {
+    "marimo_version": "0.25.2",
+    "script_metadata_hash": "9e8924369069d282621a13423777c86e"
+  },
+  "cells": [
+    {
+      "id": "Hbol",
+      "code_hash": "026b7c8b9af7ba24290a73150c0ac36c",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "MJUe",
+      "code_hash": "241956ca5f7fa276a7c6e00b40c68d3b",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "vblA",
+      "code_hash": "681b4f79f91faf52da54e12635ac9e39",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h1 id=\"forge-track-evidence-before-conclusions\">Forge track: evidence before conclusions</h1>\n<span class=\"paragraph\">Follow all eight projects from a frozen task to a sandbox patch, independent grading, Agent Lens conversation and W&amp;B artifact.</span>\n<span class=\"paragraph\">Keep the task, model and fixtures fixed. Inspect evidence before comparing scores.</span>\n<span class=\"paragraph\">Runner revision: <code>35f2438de849313d5025960e2e63fe6f66c04178</code>. Opening this notebook displays saved evidence and launches no inference or coding work.</span></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "bkHC",
+      "code_hash": "b98755410c7168236778371f49f38dbe",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"saved-results\">Saved results</h2>\n<span class=\"paragraph\">Preliminary evidence. One timer attempt halted on a local input bound; paid launches are now paused after a separate qualification request returned no usage. No complete comparison blocks or real two-hour exercise are claimed.</span></span><marimo-ui-element object-id='bkHC-0' random-id='855bc11c-64cc-b6db-dd85-02565497c3fd'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;variant&#92;&quot;:&#92;&quot;timer&#92;&quot;,&#92;&quot;attempts&#92;&quot;:1,&#92;&quot;passed&#92;&quot;:0,&#92;&quot;task_failed&#92;&quot;:0,&#92;&quot;infrastructure_failed&#92;&quot;:0,&#92;&quot;telemetry_missing&#92;&quot;:1,&#92;&quot;known_estimate_usd&#92;&quot;:0,&#92;&quot;unknown_cost_attempts&#92;&quot;:1}]&quot;' data-total-rows='1' data-total-columns='8' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-show-filters='false' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element><span class=\"markdown prose dark:prose-invert contents\"><span class=\"paragraph\">Target: three repeats per automated variant. Show task failures, infrastructure failures and missing telemetry separately. Repeats of one task are not independent tasks. Known cost sums exclude unknown amounts; consult the shared ledger for reservations and audited reconciliations.</span></span><marimo-ui-element object-id='bkHC-1' random-id='5d81c24e-3f6b-8932-4102-dea2cd440315'><marimo-table data-initial-value='[]' data-label='null' data-data='&quot;[{&#92;&quot;id&#92;&quot;:&#92;&quot;ace2d466-a1f6-4998-bb1c-130618b52651&#92;&quot;,&#92;&quot;project&#92;&quot;:&#92;&quot;project-07&#92;&quot;,&#92;&quot;variant&#92;&quot;:&#92;&quot;timer&#92;&quot;,&#92;&quot;trial&#92;&quot;:1,&#92;&quot;sourceCommit&#92;&quot;:&#92;&quot;bf760399391f0862c6b642c62854c9baf4ca7523&#92;&quot;,&#92;&quot;outcome&#92;&quot;:&#92;&quot;telemetry_missing&#92;&quot;,&#92;&quot;inputTokens&#92;&quot;:17545,&#92;&quot;outputTokens&#92;&quot;:876,&#92;&quot;estimatedCostUsd&#92;&quot;:null,&#92;&quot;conversationIds&#92;&quot;:[&#92;&quot;01a1afca-9cab-751c-8d3f-02d983484664&#92;&quot;],&#92;&quot;wandbRunUrl&#92;&quot;:&#92;&quot;https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/ace2d466a1f64998&#92;&quot;,&#92;&quot;artifactUrl&#92;&quot;:&#92;&quot;https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-ace2d466-a1f6-4998-bb1c-130618b52651:v0&#92;&quot;}]&quot;' data-total-rows='1' data-total-columns='12' data-max-columns='50' data-banner-text='&quot;&quot;' data-pagination='false' data-page-size='10' data-show-filters='false' data-show-download='true' data-show-search='true' data-show-column-summaries='false' data-show-data-types='true' data-show-page-size-selector='false' data-show-column-explorer='true' data-show-chart-builder='true' data-row-headers='[]' data-hidden-columns='[]' data-has-stable-row-id='false' data-lazy='false' data-preload='false'></marimo-table></marimo-ui-element></div>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "lEQa",
+      "code_hash": "c4694c5e0623af123c61d5c461d00c8d",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"evidence-links\">Evidence links</h2>\n<ul>\n<li><a href=\"https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/ace2d466a1f64998\" rel=\"noopener noreferrer\" target=\"_blank\">ace2d466-a1f6-4998-bb1c-130618b52651 \u00b7 W&amp;B run</a></li>\n<li>Agent Lens conversation <a href=\"https://forge.coreweave.com/agent-lens/wandb/learn-harness-engineering-forge/conversations/01a1afca-9cab-751c-8d3f-02d983484664\" rel=\"noopener noreferrer\" target=\"_blank\"><code>01a1afca-9cab-751c-8d3f-02d983484664</code></a></li>\n<li><a href=\"https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-ace2d466-a1f6-4998-bb1c-130618b52651:v0\" rel=\"noopener noreferrer\" target=\"_blank\">Versioned trial evidence</a></li>\n</ul></span>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "PKri",
+      "code_hash": "78a5719c4327c34cfe8cb3494c2ec035",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/html": "<div style='display: flex;flex: 1;flex-direction: column;justify-content: flex-start;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"bounded-rerun\">Bounded rerun</h2>\n<span class=\"paragraph\">Paid work requires this explicit button. The coordinator needs Node, installed pinned dependencies, external credentials, a successful qualification, and the existing durable budget ledger. Hosted analysis works without that coordinator. Configure its mounted checkout to enable execution; this notebook never creates a fresh $50 ledger on opening. A failed or uncertain request stays recorded.</span></span><marimo-ui-element object-id='PKri-0' random-id='15a3b4cb-aecc-d50a-217c-12abdc962f32'><marimo-text data-initial-value='&quot;&quot;' data-label='&quot;&#92;u003cspan class=&#92;&quot;markdown prose dark:prose-invert contents&#92;&quot;&#92;u003e&#92;u003cspan class=&#92;&quot;paragraph&#92;&quot;&#92;u003eShared coordinator checkout (absolute path)&#92;u003c/span&#92;u003e&#92;u003c/span&#92;u003e&quot;' data-placeholder='&quot;&quot;' data-kind='&quot;text&quot;' data-full-width='true' data-disabled='false' data-debounce='true'></marimo-text></marimo-ui-element><div style='display: flex;flex: 1;flex-direction: row;justify-content: space-between;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><marimo-ui-element object-id='PKri-1' random-id='2f482f08-2bff-2257-59ad-a2deb2dbc58b'><marimo-text data-initial-value='&quot;wandb&quot;' data-label='&quot;&#92;u003cspan class=&#92;&quot;markdown prose dark:prose-invert contents&#92;&quot;&#92;u003e&#92;u003cspan class=&#92;&quot;paragraph&#92;&quot;&#92;u003eW&amp;amp;B team&#92;u003c/span&#92;u003e&#92;u003c/span&#92;u003e&quot;' data-placeholder='&quot;&quot;' data-kind='&quot;text&quot;' data-full-width='false' data-disabled='false' data-debounce='true'></marimo-text></marimo-ui-element><marimo-ui-element object-id='PKri-2' random-id='032d8ff6-9ed6-aafc-ebc9-bbe96b719e0e'><marimo-text data-initial-value='&quot;learn-harness-engineering-forge&quot;' data-label='&quot;&#92;u003cspan class=&#92;&quot;markdown prose dark:prose-invert contents&#92;&quot;&#92;u003e&#92;u003cspan class=&#92;&quot;paragraph&#92;&quot;&#92;u003ePrivate W&amp;amp;B project&#92;u003c/span&#92;u003e&#92;u003c/span&#92;u003e&quot;' data-placeholder='&quot;&quot;' data-kind='&quot;text&quot;' data-full-width='false' data-disabled='false' data-debounce='true'></marimo-text></marimo-ui-element></div><div style='display: flex;flex: 1;flex-direction: row;justify-content: space-between;align-items: normal;flex-wrap: nowrap;gap: 0.5rem'><marimo-ui-element object-id='PKri-3' random-id='b972a4e5-2d85-e503-6dff-134bc4e20d91'><marimo-dropdown data-initial-value='[&quot;minimal&quot;]' data-label='&quot;&#92;u003cspan class=&#92;&quot;markdown prose dark:prose-invert contents&#92;&quot;&#92;u003e&#92;u003cspan class=&#92;&quot;paragraph&#92;&quot;&#92;u003eHarness treatment&#92;u003c/span&#92;u003e&#92;u003c/span&#92;u003e&quot;' data-options='[&quot;minimal&quot;,&quot;explicit&quot;]' data-allow-select-none='false' data-searchable='false' data-full-width='false' data-disabled='false'></marimo-dropdown></marimo-ui-element><marimo-ui-element object-id='PKri-4' random-id='539eb691-30ef-661c-5d80-c85738eefdf1'><marimo-number data-initial-value='1' data-label='&quot;&#92;u003cspan class=&#92;&quot;markdown prose dark:prose-invert contents&#92;&quot;&#92;u003e&#92;u003cspan class=&#92;&quot;paragraph&#92;&quot;&#92;u003eRepeats for Projects 01\u201306&#92;u003c/span&#92;u003e&#92;u003c/span&#92;u003e&quot;' data-start='1' data-stop='3' data-debounce='false' data-full-width='false' data-disabled='false'></marimo-number></marimo-ui-element></div><marimo-ui-element object-id='PKri-5' random-id='5e3e11d5-6c31-bfd7-f766-04a59553b6d3'><marimo-button data-initial-value='0' data-label='&quot;&#92;u003cspan class=&#92;&quot;markdown prose dark:prose-invert contents&#92;&quot;&#92;u003e&#92;u003cspan class=&#92;&quot;paragraph&#92;&quot;&#92;u003eLaunch bounded rerun \u00b7 uses shared budget&#92;u003c/span&#92;u003e&#92;u003c/span&#92;u003e&quot;' data-kind='&quot;neutral&quot;' data-disabled='false' data-full-width='false'></marimo-button></marimo-ui-element></div>"
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "Xref",
+      "code_hash": "0c9cc0993230d2ff64e51fdf61a40cfc",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/plain": ""
+          }
+        }
+      ],
+      "console": []
+    },
+    {
+      "id": "SFPL",
+      "code_hash": "cffc0f3f62900fc9f478f3abfe0d384b",
+      "outputs": [
+        {
+          "type": "data",
+          "data": {
+            "text/markdown": "<span class=\"markdown prose dark:prose-invert contents\"><h2 id=\"last-explicit-action\">Last explicit action</h2>\n<div class=\"language-json codehilite\"><pre><span></span><code><span class=\"p\">{</span>\n<span class=\"w\">  </span><span class=\"nt\">&quot;click&quot;</span><span class=\"p\">:</span><span class=\"w\"> </span><span class=\"mi\">0</span><span class=\"p\">,</span>\n<span class=\"w\">  </span><span class=\"nt\">&quot;status&quot;</span><span class=\"p\">:</span><span class=\"w\"> </span><span class=\"s2\">&quot;Not launched&quot;</span>\n<span class=\"p\">}</span>\n</code></pre></div></span>"
+          }
+        }
+      ],
+      "console": []
+    }
+  ]
+}

@@ -347,3 +347,8 @@ Not every task deserves a graph. Five criteria — try at least three before you
 4. **Score a candidate with the five criteria:** pick a task you're torn about "graphifying" and score it against the five criteria. It needs at least three to be worth a graph. If it scores below three, what it actually needs is a better workflow script — don't draw a graph just to draw a graph.
 
 5. **Turn your `graph.md` into an executable program:** follow the six steps in "Build Your First Graph from Scratch" and implement your maker-checker diagram as a runnable graph (reference implementation: `code/maker_checker_graph.py`, written with LangGraph). Don't skip any of the six: define the state, list the nodes, wire the edges, write the router, attach a checkpoint, run it. Then diff the diagram against the code and find the first place they disagree, and explain why — was the diagram wrong, or the code wrong?
+
+
+## Optional Forge experiment
+
+Follow the [Forge learning path](/en/forge/) for sandbox execution, Agent Lens traces, W&B evidence and the corresponding Marimo notebook. The offline exercise remains the default.
