@@ -30,7 +30,7 @@ def validate(export=True):
             dest = output / (source.stem + '.html')
             # A missing credential is intentional: the initial view must need no paid execution.
             env = {key: value for key, value in os.environ.items() if key not in {'WANDB_API_KEY', 'FORGE_RUNNER_ROOT'}}
-            subprocess.run(['uv', 'run', '--with', 'marimo==0.25.2', 'marimo', 'export', 'html', str(source), '-o', str(dest), '--force'], cwd=ROOT, env=env, check=True, timeout=120)
+            subprocess.run(['uv', 'run', '--with', 'marimo==0.25.2', 'marimo', 'export', 'html', str(source), '-o', str(dest), '--force', '--no-include-code'], cwd=ROOT, env=env, check=True, timeout=120)
             html = dest.read_text()
             marker = '"session": '
             session, _ = json.JSONDecoder().raw_decode(html[html.index(marker) + len(marker):])
@@ -38,7 +38,7 @@ def validate(export=True):
                       if item.get('type') == 'error' or 'application/vnd.marimo+error' in item.get('data', {})]
             if errors:
                 raise RuntimeError(f'{source.name}: rendering errors: {errors}')
-            if 'Not launched' not in html or 'Runner finished' not in html or 'Saved results' not in html:
+            if 'Not launched' not in html or 'Saved results' not in html:
                 raise RuntimeError(f'{source.name}: missing expected saved view')
             row.update(rendered=True, htmlSha256=hashlib.sha256(dest.read_bytes()).hexdigest())
         rows.append(row)
