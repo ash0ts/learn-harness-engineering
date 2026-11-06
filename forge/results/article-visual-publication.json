@@ -1,19 +1,19 @@
 {
   "schemaVersion": 1,
-  "publishedAt": "2026-11-06T16:36:35.186310+00:00",
+  "publishedAt": "2026-11-06T16:40:45.016036+00:00",
   "entity": "wandb",
   "project": "learn-harness-engineering-forge",
   "access": "PRIVATE",
-  "sourceCommit": "64f6d86b7db33986f92822e63bb8c8cf64c9def6",
+  "sourceCommit": "2763962fda6dda9177e0e8405a4bf7de6e0b2b93",
   "sourceReportCommit": "258cf51fdc692f9be60952d8dd811de90588a0c4",
-  "publisherSha256": "01763e11c1397cb664632ac043087cc8aa3382aede88d932da4544c3f399317f",
+  "publisherSha256": "fe61a728d9233cec5dd90ac58c7e24933e59993267ef3cba427cfd0c74025751",
   "runId": "course-article-evidence-20261106",
   "runUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/course-article-evidence-20261106",
   "workspaceUrl": "https://forge.coreweave.com/wandb/learn-harness-engineering-forge?nw=su19wan3xra",
   "forgeUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=su19wan3xra",
-  "artifact": "wandb/learn-harness-engineering-forge/forge-article-visual-evidence:v1",
-  "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-article-visual-evidence:v1",
-  "bundleSha256": "782e7046daae601330c4d1f381b8d36f40fc7ca181d485ad62490fc835ed6620",
+  "artifact": "wandb/learn-harness-engineering-forge/forge-article-visual-evidence:v2",
+  "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-article-visual-evidence:v2",
+  "bundleSha256": "84acc1e948631a830281252498fc3aef8e18bca6fe16deb6c567421fedb3ad1d",
   "counts": {
     "recordedAttempts": 129,
     "primaryAttempts": 39,
@@ -798,8 +798,8 @@
     },
     {
       "path": "articles/evidence.md",
-      "sha256": "7a0ef540b3ab8393b895e52fd5a04dcf4ca7326a534acef0f1ab74397f4e4543",
-      "bytes": 13529
+      "sha256": "b9d9d9c53fbe31c6cd9d92020a98322633f259809d113ce56011177ad1837d54",
+      "bytes": 13860
     },
     {
       "path": "articles/index.md",
@@ -818,18 +818,18 @@
     },
     {
       "path": "forge-visual-evidence.zip",
-      "sha256": "782e7046daae601330c4d1f381b8d36f40fc7ca181d485ad62490fc835ed6620",
-      "bytes": 8269331
+      "sha256": "84acc1e948631a830281252498fc3aef8e18bca6fe16deb6c567421fedb3ad1d",
+      "bytes": 8269403
     },
     {
       "path": "manifest.json",
-      "sha256": "1fb7de0b6c47b429df0815f5ee77bfac99b78e9876b241e37aef97e2d226fefe",
+      "sha256": "2859c0dc1552a2cd396235857abcf4a6ac267e319ea1ee4a5ad468ee5dc8a867",
       "bytes": 124548
     },
     {
       "path": "scripts/publish_article_visuals.py",
-      "sha256": "01763e11c1397cb664632ac043087cc8aa3382aede88d932da4544c3f399317f",
-      "bytes": 9073
+      "sha256": "fe61a728d9233cec5dd90ac58c7e24933e59993267ef3cba427cfd0c74025751",
+      "bytes": 9252
     },
     {
       "path": "scripts/publish_article_visuals.py.lock",
@@ -843,7 +843,7 @@
     },
     {
       "path": "validation.json",
-      "sha256": "4e0b76052810ea17034f0972ce31adf51276e85c0b347763f623bd5a0b715d56",
+      "sha256": "e7c48f39f47815cd71bcfa0917dab1751ee97039c17df52fcf5f6ff57f585fab",
       "bytes": 10189
     },
     {
@@ -858,7 +858,98 @@
     }
   ],
   "browserVerification": {
-    "verified": false,
-    "reason": "Pending authenticated native workspace inspection"
+    "verified": true,
+    "forgeUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=su19wan3xra",
+    "sourceArtifact": "wandb/learn-harness-engineering-forge/forge-article-visual-evidence:v2",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "observed": {
+      "summary": {
+        "recordedAttempts": 129,
+        "primaryAttempts": 39,
+        "primaryPasses": 19,
+        "originalCaptures": 123,
+        "dataFigures": 9,
+        "verifiedSourceFiles": 7850
+      },
+      "figurePanelsRendered": 9,
+      "attemptTableRows": 129,
+      "captureTableRows": 123,
+      "originalImageThumbnailsVisible": true,
+      "savedViewReopened": true
+    },
+    "captures": [
+      {
+        "path": "dashboard-attempts.jpg",
+        "sha256": "b6ba679af4d6bcfffb2f304b682c1f64a12552919e912f50421a4aeeed45467b",
+        "bytes": 82161
+      },
+      {
+        "path": "dashboard-captures.jpg",
+        "sha256": "dd827711dd36a51dcf38c931fa4d1afa9dbd3d7bb3dd0e1434f20ec5713538bf",
+        "bytes": 105117
+      },
+      {
+        "path": "dashboard-primary-figure.jpg",
+        "sha256": "3f95fb2fbfafdc43854f3e95d7a30eab962355d8203a90b73c6019a9cca9385b",
+        "bytes": 72330
+      },
+      {
+        "path": "dashboard-project-01-checks.jpg",
+        "sha256": "9bd4044ee19164e326e9977cfcafb4fd1c0216e0d8cb6d1d1e20e81015be66c3",
+        "bytes": 79394
+      },
+      {
+        "path": "dashboard-project-02-checks.jpg",
+        "sha256": "8da72164ea51acb6585f3fd8e24cc4797d01e53e5f84f2f1024ef656d3dfd8eb",
+        "bytes": 80523
+      },
+      {
+        "path": "dashboard-project-03-checks.jpg",
+        "sha256": "117a46c1d6c40db7dd55b23b8c0e45e625faee3f156c5ed8c3c20591caa36b41",
+        "bytes": 79429
+      },
+      {
+        "path": "dashboard-project-04-checks.jpg",
+        "sha256": "7024e114433ef95c0c4a41e60a10c6a4f5e1898f39d8e9c775ee152df7f3a254",
+        "bytes": 82199
+      },
+      {
+        "path": "dashboard-project-05-checks.jpg",
+        "sha256": "b1701f165c1d109398ffb024856dbb881738f42708812893cc2a3cb0bdc18e55",
+        "bytes": 77970
+      },
+      {
+        "path": "dashboard-project-06-checks.jpg",
+        "sha256": "4bab994208dd6fddc9642431823ef6089431e53256499be6beeaedcad27c1b7d",
+        "bytes": 77194
+      },
+      {
+        "path": "dashboard-role-allowances.jpg",
+        "sha256": "177b75c4d65484f12b8d6bca9b18fef51254df48df97c6e47bf20de1d0924cec",
+        "bytes": 71721
+      },
+      {
+        "path": "dashboard-summary.jpg",
+        "sha256": "a1854f53c06c61705a947a326b7f3c95ea8238dd0cb86d5440554cf6a5619c7f",
+        "bytes": 72924
+      },
+      {
+        "path": "dashboard-timer-timeline.jpg",
+        "sha256": "57ab324bf882792de162793ecb5d408d0375c4d5ecaf561e54f3fb53d87120dc",
+        "bytes": 67109
+      }
+    ],
+    "limitations": [
+      "Native UI inspected at 1280 by 720. The course explorer was separately tested at 1440 and 390 pixels.",
+      "Some native media panels clip footer text at this viewport; the complete original PNG and SVG files remain in the downloadable artifact.",
+      "The project run-list total includes derived publications and aggregates; it is not the coding-attempt denominator."
+    ],
+    "recordedAt": "2026-11-06T16:47:31.549739+00:00",
+    "proofArtifact": "wandb/learn-harness-engineering-forge/forge-article-visual-browser-proof:v0",
+    "proofArtifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-article-visual-browser-proof:v0",
+    "artifactFilesVerified": 13
   }
 }
