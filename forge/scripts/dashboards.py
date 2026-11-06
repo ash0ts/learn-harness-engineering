@@ -186,10 +186,13 @@ def publish():
                                                 pinned_columns=["config:label", "passRate", "attempts"])
         view.settings = ws.WorkspaceSettings(max_runs=100)
         view.sections = [ws.Section(name="Verified task outcomes and execution evidence" if revision >= 4 else "Historical checker outcomes — UI acceptance unqualified", panels=panels(revision), is_open=True,
-                                    layout_settings=ReadableLayout(columns=2, rows=1))]
+                                    layout_settings=ReadableLayout(columns=2, rows=1)),
+                         ws.Section(name="Original trial runs, traces and artifacts", is_open=True,
+                                    panels=[wr.WeavePanelSummaryTable(table_name='sourceEvidence',layout=wr.Layout(x=0,y=0,w=24,h=10))],
+                                    layout_settings=ReadableLayout(columns=1,rows=1))]
         view.save()
         restored = ws.Workspace.from_url(view.url)
-        if restored.name != view.name or len(restored.sections[0].panels) != 6:
+        if restored.name != view.name or len(restored.sections)!=2 or len(restored.sections[0].panels) != 6 or len(restored.sections[1].panels)!=1:
             raise RuntimeError("Dashboard readback mismatch")
         views.append({"protocolRevision": revision, "sourceCommit": source, "url": view.url, "forgeUrl": forge_url(view.url), "name": view.name, "readBackVerified": True})
     prior = previous.get("operations")
