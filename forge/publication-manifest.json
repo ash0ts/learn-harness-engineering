@@ -37,8 +37,8 @@
       "file": "forge/notebooks/01-minimal-harness.py",
       "project": "project-01",
       "title": "01 \u00b7 Minimal instructions and explicit harnesses",
-      "sourceCommit": "c3fa6bab9c4c714f020756f728977e5349a001cd",
-      "sha256": "0dbc95954e7c1c66cc535a926014d5408feecf42c93a563bbac4c77bddd0823a",
+      "sourceCommit": "4733dfa740fa175d32e66699c7206fc77a1d670f",
+      "sha256": "6e7dd4f1dc50289e62d3161377971fe96fbec3f1072653efc9d0fc25a3e0ca94",
       "id": "Tm90ZWJvb2s6MTUzMTQ=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTQ%3D",
       "status": "published_verified",
@@ -46,22 +46,22 @@
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "01-Minimal-instructions-and-explicit-harnesses",
-        "versionIndex": 8,
+        "versionIndex": 10,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:36Z",
-      "expectedRemoteSha256": "0dbc95954e7c1c66cc535a926014d5408feecf42c93a563bbac4c77bddd0823a",
+      "expectedRemoteSha256": "6e7dd4f1dc50289e62d3161377971fe96fbec3f1072653efc9d0fc25a3e0ca94",
       "currentVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "01-Minimal-instructions-and-explicit-harnesses",
-        "versionIndex": 8,
+        "versionIndex": 10,
         "sourceFileName": "notebook.py"
       },
-      "renderedOutputSha256": "b2ca5ced1961a2ad1eaeb9f75890eebf4b26c5103da14536392876c1e9e2f655",
+      "renderedOutputSha256": "ad27c9279b716d9e21cf6e71fa3fe87fa552b5142156b0a60ddf2aa706b80b74",
       "renderedCellSourceVerified": true,
-      "verifiedAggregateGroups": 2,
+      "verifiedAggregateGroups": 6,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-06T10:25:27.051526+00:00"
+      "verifiedAt": "2026-11-06T11:28:09.424992+00:00"
     },
     {
       "file": "forge/notebooks/02-workspace-docs.py",
