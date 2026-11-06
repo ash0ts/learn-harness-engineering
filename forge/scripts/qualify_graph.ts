@@ -36,6 +36,7 @@ const result=await driveGraph(file,state,{
         await stageWorkspace(sandbox,staged.archive);const patch=await readFile(candidate.patch);
         if(patch.length){await sandbox.files.write('/tmp/qualification.diff',patch);await sandbox.commands.run(['git','apply','/tmp/qualification.diff'],{cwd:'/workspace/task'});}
         await sandbox.files.write('/tmp/graph-lane.cjs',await readFile(join(courseRoot,'forge/graders/graph-lane.cjs')));
+        await sandbox.files.write('/tmp/poll.cjs',await readFile(join(courseRoot,'forge/graders/poll.cjs')));
         await writeJson(join(dir,'command.json'),await sandbox.commands.run(['xvfb-run','-a','node','/tmp/graph-lane.cjs',lane],{cwd:'/workspace/task',check:false,timeoutMs:180000}));
         const grade=JSON.parse(Buffer.from(await sandbox.files.read('/tmp/graph-grade.json')).toString());await writeJson(join(dir,'grade.json'),grade);passed=grade.passed;
         if(lane==='electron')try{await writeFile(join(dir,'electron.png'),await sandbox.files.read('/tmp/graph-electron.png'));}catch{}
