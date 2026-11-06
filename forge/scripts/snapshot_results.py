@@ -21,6 +21,7 @@ def build():
         if not r.get('finishedAt'): continue
         keys=['id','project','variant','trial','sourceCommit','outcome','inputTokens','outputTokens','estimatedCostUsd','conversationIds','wandbRunUrl','artifactUrl','startedAt','finishedAt','actorCompleted','error']
         row={key:r.get(key) for key in keys}
+        row['protocolRevision']=r.get('protocol',{}).get('protocolRevision',1)
         row.update(protocolSha256=protocol_hash(r['protocol']) if r.get('protocol') else None,
                    grade=r.get('grade'),reconciledEstimateUsd=audits.get(r['id'],r.get('estimatedCostUsd')),
                    chargedUnknownReservationUsd=uncertain.get(r['id']))
@@ -48,8 +49,11 @@ def build():
     graphs=[dict(file=p.name,**read(p)) for p in sorted(LOCAL.glob('project-08-*.json'))]
     concurrency=[read(p) for p in sorted(LOCAL.glob('concurrency-*/concurrency.json'))]
     sandboxes=[read(p) for p in sorted(LOCAL.glob('sandbox-qualification-*/sandbox-qualification.json'))]
+    visible_ui=[read(p) for p in sorted(LOCAL.glob('visible-ui-*/visible-ui.json'))]
     status=f"Recorded {len(trials)} completed coding attempts and {len(blocks)} complete comparison blocks. Outcomes include unsuccessful attempts; no human time savings are inferred."
     snapshot={'schemaVersion':1,'capturedAt':datetime.now(timezone.utc).isoformat(),'status':status,'trials':trials,'qualifications':qualifications,'concurrencyQualifications':concurrency,'sandboxQualifications':sandboxes,'completedComparisonBlocks':blocks,'loops':loops,'graphs':graphs,'budget':ledger,'costScope':'Budget snapshot as of capturedAt. Final publication/editor costs are recorded separately in the delivery report and W&B audit artifact.'}
+    snapshot['visibleUiQualifications']=visible_ui
+    snapshot['measurementCaveat']='Revision 2 and 3 native grades used unreliable asynchronous UI waits. They remain historical evidence. Revision 4 requires resolved IPC state and visible answer text; supplemental qualifications never rewrite original grades.'
     (ROOT/'forge/results/snapshot.json').write_text(json.dumps(snapshot,indent=2)+'\n')
     print(status)
     return snapshot
