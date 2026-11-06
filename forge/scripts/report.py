@@ -28,6 +28,11 @@ def build():
     published=sum(n['status']=='published_verified' and n.get('sha256')==hashlib.sha256((ROOT/n['file']).read_bytes()).hexdigest() for n in notebooks)
     comparison_ids={identifier for block in blocks for identifier in block['trialIds']}
     comparison_rows=[r for r in rows if r['id'] in comparison_ids]
+    latest_sources={}
+    for row in comparison_rows:
+        if qualified(row) and row.get('finishedAt','')>latest_sources.get(row['project'],('',None))[0]:
+            latest_sources[row['project']]=(row['finishedAt'],row['sourceCommit'])
+    primary_rows=[r for r in comparison_rows if qualified(r) and latest_sources[r['project']][1]==r['sourceCommit']]
     comparison_checks={}
     for row in comparison_rows:
         for check in (row.get('grade') or {}).get('checks',[]):
@@ -65,6 +70,7 @@ def build():
            'documentationChecks':all(local_checks.get(k,{}).get('exitCode')==0 for k in ['anchors','docs'])}
     status='verified_delivery' if all(gates.values()) else 'verification_in_progress' 
     delivery={'schemaVersion':1,'generatedAt':datetime.now(timezone.utc).isoformat(),'status':status,'completionGates':gates,'traceAudit':{'conversations':len(conversations),'verified':sum(c['verified'] for c in conversations)},'modelsAudit':{'trials':len(models_audit.get('trials',[])),'verified':sum(r['verified'] for r in models_audit.get('trials',[]))},'sandboxAudit':sandbox_audit,'upstreamCommit':'a9342ff471f2c0e60be0c08b9f4a7c502df4e442','forkUrl':'https://github.com/ash0ts/learn-harness-engineering','targetRepeatsPerVariant':3,'trialAttempts':len(rows),'comparisonTrialAttempts':len(comparison_rows),'comparisonOutcomes':dict(Counter(r['outcome'] for r in comparison_rows)),'outcomes':dict(Counter(r['outcome'] for r in rows)),'passedTrials':sum(r['outcome']=='passed' for r in rows),'completedComparisonBlocks':blocks,'realTwoHourExerciseCompleted':real_timer,'loopStates':saved.get('loops',[]),'graphStates':saved.get('graphs',[]),'qualifications':{'attempted':len(saved['qualifications']),'passed':sum(r['passed'] for r in saved['qualifications'])},'budget':ledger,'knownAndAuditedEstimateUsd':ledger['spentEstimateUsd']-uncertain,'chargedUnknownReservationsUsd':uncertain,'checks':{'forgeTests':tests,'offlineAppsPassed':sum(a['passed'] for a in apps),'offlineAppsTotal':len(apps),'notebooksRenderedLocally':sum(n['rendered'] for n in validation['notebooks']),'notebooksPublishedVerified':published},'prs':[p['url'] for p in prs],'notebooks':notebooks,'trials':rows}
+    delivery['primaryComparisons']={'attempts':len(primary_rows),'passed':sum(r['outcome']=='passed' for r in primary_rows),'sourceByProject':{p:v[1] for p,v in latest_sources.items()},'trialIds':[r['id'] for r in primary_rows]}
     delivery['comparisonChecks']=comparison_checks
     delivery['verifiedUiAttempts']=len(verified_rows)
     delivery['verifiedUiPasses']=sum(r['outcome']=='passed' for r in verified_rows)
@@ -79,7 +85,7 @@ def build():
     for key in sorted({(r['project'],r['variant'],r['sourceCommit']) for r in rows}):
         group=[r for r in rows if (r['project'],r['variant'],r['sourceCommit'])==key];c=Counter(r['outcome'] for r in group)
         lines.append(f"| {key[0]} | {key[1]} | `{key[2][:12]}` | {len(group)} | {c['passed']} | {c['task_failed']} | {c['infrastructure_failed']} | {c['telemetry_missing']} |")
-    lines += ['',f"The complete comparison blocks contain **{len(comparison_rows)} coding attempts**, with **{sum(r['outcome']=='passed' for r in comparison_rows)} native checker passes** across separate historical cohorts. Native grades from revisions 2 and 3 do not establish visible-answer acceptance.", '',
+    lines += ['',f"**Primary qualified comparisons: {delivery['primaryComparisons']['passed']}/{delivery['primaryComparisons']['attempts']} attempts pass.** These use the latest qualified complete blocks per project; source revisions remain separate.", '',f"The complete comparison blocks contain **{len(comparison_rows)} coding attempts**, with **{sum(r['outcome']=='passed' for r in comparison_rows)} native checker passes** across separate historical cohorts. Native grades from revisions 2 and 3 do not establish visible-answer acceptance.", '',
               f"**Qualified visible-answer acceptance: {delivery['verifiedUiPasses']}/{delivery['verifiedUiAttempts']} attempts pass.** These require resolved IPC state, actual rendered answers, all service checks and Electron under Xvfb; the affected Project 05–06 checker cohorts are excluded. Earlier native outcomes are preserved. Supplemental patch qualifications are separate and do not change original trial grades."]
     lines += ['', '| Main comparison check | Passed | Executed |', '| --- | --- | --- |']
     lines += [f"| {name} | {counts['passed']} | {counts['executed']} |" for name,counts in sorted(comparison_checks.items())]
