@@ -159,6 +159,16 @@ def evidence_report(entity, project, rows, views, operations, primary, previous)
               'Their capture timestamps identify historical snapshots; the dashboards above cover later completed campaigns. '
               'Opening a notebook launches no coding or inference work.']
     lines += [f"- [{n['title']}]({n['url']})" for n in notebooks]
+    saved=json.loads((ROOT/'forge/results/snapshot.json').read_text())
+    lines += ['', '## Bounded loops and checkpointed graphs', '',
+              '| Loop checkpoint | Mode | Stop state | Rounds | Observed interventions |',
+              '| --- | --- | --- | --- | --- |']
+    for state in saved.get('loops',[]):
+        lines.append(f"| `{state['file']}` | {state['mode']} | {state['status']} | {len(state['rounds'])} | {len(state.get('interventions',[]))} |")
+    lines += ['', '| Graph checkpoint | Kind | State | Maker attempts |', '| --- | --- | --- | --- |']
+    for state in saved.get('graphs',[]):
+        lines.append(f"| `{state['file']}` | {'Manual control-flow qualification' if state.get('qualification') else 'Pi coding graph'} | {state['node']} | {state['attempts']} |")
+    lines += ['', 'An approval state is a durable pause, not an accepted patch. Manual control-flow qualifications are excluded from Pi comparisons. The operations dashboard includes the underlying checkpoint tables.']
     unknown = sum(r['reservedEstimateUsd'] for r in ledger.get('uncertainEstimates', []))
     lines += ['', '## Accounting and limits',
               f"Charged estimate as of this report: **${ledger['spentEstimateUsd']:.6f}**, including **${unknown:.2f}** conservatively charged for unknown usage. "
@@ -239,6 +249,13 @@ def publish():
             ("Unknown-usage charges (USD)", "chargedUnknownReservationsUsd"), ("Unresolved reservations (USD)", "unresolvedReservationsUsd"),
             ("Agent Lens conversations verified", "agentLensConversationsVerified"), ("W&B trial artifacts verified", "modelsTrialArtifactsVerified"),
             ("Cleanup records verified", "cleanupRecordsVerified"), ("Active course workers", "activeCourseWorkers")])])]
+    operations.sections += [ws.Section(name='Project 07–08 execution states',is_open=True,panels=[
+        wr.ScalarChart(title=title,metric=metric,layout=wr.Layout(x=(i%2)*12,y=(i//2)*6,w=12,h=6))
+        for i,(title,metric) in enumerate([
+            ('Real two-hour timers completed','realTwoHourTimersCompleted'),('Goal loops passed','goalLoopsPassed'),
+            ('Pi graphs awaiting human approval','piGraphApprovalPauses'),('Manual graph controls awaiting approval','manualGraphApprovalPauses')])]),
+        ws.Section(name='Loop checkpoints and observed interventions',is_open=True,panels=[wr.WeavePanelSummaryTable(table_name='loopEvidence',layout=wr.Layout(x=0,y=0,w=24,h=10))],layout_settings=ReadableLayout(columns=1,rows=1)),
+        ws.Section(name='Graph checkpoints · manual controls labeled separately',is_open=True,panels=[wr.WeavePanelSummaryTable(table_name='graphEvidence',layout=wr.Layout(x=0,y=0,w=24,h=10))],layout_settings=ReadableLayout(columns=1,rows=1))]
     operations.save()
     previous.update(views=views, operations={"url":operations.url, "forgeUrl":forge_url(operations.url), "name":operations.name})
     # Preserve newly created IDs even if a later readback is unavailable.
