@@ -31,7 +31,7 @@ class ReadableLayout(ws.SectionLayoutSettings):
     """Pinned SDK adapter: expose its FlowConfig.box_height for 13 labeled bars."""
     def _to_model(self):
         model = super()._to_model()
-        model.box_height = 460
+        model.box_height = 480
         return model
 
 def forge_url(url):
@@ -231,7 +231,9 @@ def publish():
     primary.name = 'Forge course — qualified end-to-end comparisons'
     primary.runset_settings = ws.RunsetSettings(filters=[expr.Config('dashboardKind') == 'comparison-aggregate',expr.Config('primaryComparison') == True],pinned_columns=['config:label','passRate','attempts'])
     primary.settings = ws.WorkspaceSettings(max_runs=100)
-    primary.sections = [ws.Section(name='Qualified outcomes · three repeats per treatment',panels=panels(4),is_open=True,layout_settings=ReadableLayout(columns=2,rows=1)),
+    selected=[r for r in rows if r['config']['primaryComparison']]
+    headline=f"Qualified outcomes · {sum(r['metrics']['passes'] for r in selected)}/{sum(r['metrics']['attempts'] for r in selected)} passed"
+    primary.sections = [ws.Section(name=headline,panels=panels(4),is_open=True,layout_settings=ReadableLayout(columns=2,rows=1)),
                         ws.Section(name='Original trial runs, traces and artifacts',is_open=True,panels=[wr.WeavePanelSummaryTable(table_name='sourceEvidenceV2',layout=wr.Layout(x=0,y=0,w=24,h=10))],layout_settings=ReadableLayout(columns=1,rows=1))]
     primary.save()
     restored=ws.Workspace.from_url(primary.url)
