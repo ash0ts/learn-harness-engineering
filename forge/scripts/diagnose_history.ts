@@ -10,12 +10,12 @@ import {writeJson} from '../src/records.js';
 
 if(!process.argv.includes('--execute') || !process.argv[2])throw new Error('Usage: diagnose_history.ts TRIAL_JSON --execute [--checker PATH]');
 const trialFile=resolve(process.argv[2]),trial=JSON.parse(await readFile(trialFile,'utf8'));
-if(trial.project!=='project-05')throw new Error('History diagnostic requires a Project 05 trial');
+if(!['project-05','project-06'].includes(trial.project))throw new Error('Checker diagnostic requires Project 05 or 06');
 const candidate=await readFile(join(trialFile,'..','candidate.diff'));
 const c=config();await requirePrivateProject(c);
-const id=`history-diagnostic-${randomUUID()}`,root=join(courseRoot,'forge/local-results',id);
+const id=`checker-diagnostic-${randomUUID()}`,root=join(courseRoot,'forge/local-results',id);
 await mkdir(root,{recursive:true});
-const record:Record<string,unknown>={schemaVersion:1,id,sourceCommit:await sourceHead(),trialId:trial.id,
+const record:Record<string,unknown>={schemaVersion:1,id,sourceCommit:await sourceHead(),project:trial.project,trialId:trial.id,
   candidateSourceCommit:trial.sourceCommit,candidateSha256:createHash('sha256').update(candidate).digest('hex'),
   startedAt:new Date().toISOString(),passed:false,qualification:true};
 const task=await readTask(trial.project),staged=await stageTask(task,trial.variant,trial.sourceCommit);

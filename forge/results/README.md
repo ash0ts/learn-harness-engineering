@@ -58,7 +58,7 @@ A completed comparison block contains every treatment for the same project, repe
 
 The complete comparison blocks contain **78 coding attempts**, with **17 native checker passes** across separate historical cohorts. Native grades from revisions 2 and 3 do not establish visible-answer acceptance.
 
-**Qualified visible-answer acceptance: 11/24 attempts pass.** These require resolved IPC state, actual rendered answers, all service checks and Electron under Xvfb; the affected Project 05 selector cohort is excluded. Earlier native outcomes are preserved. Supplemental patch qualifications are separate and do not change original trial grades.
+**Qualified visible-answer acceptance: 11/24 attempts pass.** These require resolved IPC state, actual rendered answers, all service checks and Electron under Xvfb; the affected Project 05–06 checker cohorts are excluded. Earlier native outcomes are preserved. Supplemental patch qualifications are separate and do not change original trial grades.
 
 | Main comparison check | Passed | Executed |
 | --- | --- | --- |
@@ -73,7 +73,7 @@ The complete comparison blocks contain **78 coding attempts**, with **17 native 
 
 **29/98 attempts** reached the local input-context guard. This is a bounded execution result, not evidence that the task is impossible. Original tool/error traces and unfinished patches remain available.
 
-Project 05 at source b948c1fbac36 used an overly broad citation selector: it clicked answer prose containing "citations" instead of an expand control. Its native grades remain archived but are excluded from qualified comparisons. The corrected checker selects interactive citation controls and exercises both cancellation and acceptance of native or custom confirmation dialogs. All three role treatments are rerun from the same unfinished code and model settings.
+Project 05 at source b948c1fbac36 used an overly broad citation selector: it clicked answer prose containing "citations" instead of an expand control. Its native grades remain archived but are excluded from qualified comparisons. The corrected checker selects interactive citation controls and exercises both cancellation and acceptance of native or custom confirmation dialogs. All three role treatments are rerun from the same unfinished code and model settings. Project 06 at that source also omitted the feedback.submit argument contract while its checker assumed positional arguments. The corrected task specifies an object with question, answer, rating and optional comment; both capstone treatments are rerun.
 
 ## Independent check results
 
@@ -88,7 +88,7 @@ Project 05 at source b948c1fbac36 used an overly broad citation selector: it cli
 | single-document indexing is reflected in status | 4 | 6 |
 | strict compile and renderer build | 74 | 98 |
 
-A check omitted after compilation failed is not counted as an executed service or UI check. Shared failures can mask differences between treatments; the end-to-end outcome remains failed.
+A check omitted after compilation failed is not counted as an executed service or UI check. Shared failures can mask differences between treatments; the end-to-end outcome remains failed. Protected app checks execute the actual services with deterministic course Q&A defaults; the live Forge app adapter is qualified separately. These checks do not measure production answer quality.
 
 ## Instrumentation and execution qualification
 
@@ -121,7 +121,7 @@ Manual graph qualification candidates validate runner control flow and checker b
 
 ## Spend estimates
 
-Known/audited estimate: **$9.500945**. Conservative charges for unknown usage: **$6.000000**. Total charged estimate: **$15.500945**. Active reservations: **$8.389939**.
+Known/audited estimate: **$10.050502**. Conservative charges for unknown usage: **$6.000000**. Total charged estimate: **$16.050502**. Active reservations: **$8.389939**.
 
 The original $50 application cap was removed after the user explicitly authorized an unlimited budget. Worker concurrency and lifetimes remain bounded. Timed-out qualifications retain unknown token usage; each full $2 reservation was charged conservatively under the recorded authorization. Estimates are not provider invoices. Notebook EDIT compute is measured separately at the verified 2 CPU / 4 GiB rates ($0.3408/hour), including publication work. The durable ledger records authorizations and reconciliations. It must not be reset.
 
