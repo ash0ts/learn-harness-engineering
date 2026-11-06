@@ -157,8 +157,8 @@
       "file": "forge/notebooks/05-role-separation.py",
       "project": "project-05",
       "title": "05 \u00b7 One feature, three role arrangements",
-      "sourceCommit": "c3fa6bab9c4c714f020756f728977e5349a001cd",
-      "sha256": "17931a8da8ada558ec727772d6c960303312fd157df54eef57638c85584a16d3",
+      "sourceCommit": "904f8a5121fe3607a86d22f913a5d70f6b02029f",
+      "sha256": "90b46da2b51c17032f6a37836e49dc67bde4a3a97862464ba672cffd6e2f2c6f",
       "id": "Tm90ZWJvb2s6MTUzMTg=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTg%3D",
       "status": "published_verified",
@@ -166,22 +166,22 @@
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "05-One-feature-three-role-arrangements",
-        "versionIndex": 3,
+        "versionIndex": 6,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:44Z",
-      "expectedRemoteSha256": "17931a8da8ada558ec727772d6c960303312fd157df54eef57638c85584a16d3",
+      "expectedRemoteSha256": "90b46da2b51c17032f6a37836e49dc67bde4a3a97862464ba672cffd6e2f2c6f",
       "currentVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "05-One-feature-three-role-arrangements",
-        "versionIndex": 3,
+        "versionIndex": 6,
         "sourceFileName": "notebook.py"
       },
-      "renderedOutputSha256": "d5fb1e3ef1ab487c2be7e2002869cde3ed80a4cbc1545a93fd733c0bc399fa31",
+      "renderedOutputSha256": "a05d4f447d0a0df2cf909d9ed4092504b0c783af6cf01c9bf7f0f6e92733a013",
       "renderedCellSourceVerified": true,
-      "verifiedAggregateGroups": 3,
+      "verifiedAggregateGroups": 9,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-06T10:25:32.496440+00:00"
+      "verifiedAt": "2026-11-06T12:42:46.250318+00:00"
     },
     {
       "file": "forge/notebooks/06-capstone.py",
