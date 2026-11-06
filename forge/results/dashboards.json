@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-06T11:23:12.383578+00:00",
+  "generatedAt": "2026-11-06T11:33:27.766015+00:00",
   "views": [
     {
       "protocolRevision": 2,
@@ -45,24 +45,25 @@
         "label": "r4 01 explicit",
         "trialIds": [
           "643a867a-74e8-4987-aa56-5640b4c1982e",
+          "a09c89fc-d730-4e6c-980c-62b4e7d4993e",
           "e53c3cad-a475-4e49-a79c-e64cfc0316a9"
         ]
       },
       "metrics": {
-        "attempts": 2,
-        "passes": 2,
+        "attempts": 3,
+        "passes": 3,
         "passRate": 1.0,
         "taskFailures": 0,
         "infrastructureFailures": 0,
         "missingTelemetry": 0,
-        "uiChecksExecuted": 2,
-        "uiChecksPassed": 2,
-        "serviceChecksExecuted": 6,
-        "serviceChecksPassed": 6,
+        "uiChecksExecuted": 3,
+        "uiChecksPassed": 3,
+        "serviceChecksExecuted": 9,
+        "serviceChecksPassed": 9,
         "unknownCostAttempts": 0,
-        "knownEstimatedCostUsd": 0.19549994333333331,
-        "inputTokens": 510666,
-        "outputTokens": 14261
+        "knownEstimatedCostUsd": 0.31204345933333333,
+        "inputTokens": 858095,
+        "outputTokens": 18454
       }
     },
     {
@@ -76,25 +77,90 @@
         "variant": "minimal",
         "label": "r4 01 minimal",
         "trialIds": [
+          "3398c0d0-a9f2-4383-b64f-c7469ff9d0df",
           "71581d99-5fb7-4e57-bee4-56ec354858a2",
           "a7dcf5cb-dd20-4c3f-921b-f8a51a21f8f8"
         ]
       },
       "metrics": {
-        "attempts": 2,
-        "passes": 2,
+        "attempts": 3,
+        "passes": 3,
         "passRate": 1.0,
         "taskFailures": 0,
         "infrastructureFailures": 0,
         "missingTelemetry": 0,
+        "uiChecksExecuted": 3,
+        "uiChecksPassed": 3,
+        "serviceChecksExecuted": 9,
+        "serviceChecksPassed": 9,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.4182237006666667,
+        "inputTokens": 1159252,
+        "outputTokens": 21883
+      }
+    },
+    {
+      "id": "course-view-4d0d6fceaed93352",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 4,
+        "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+        "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+        "project": "project-02",
+        "variant": "minimal",
+        "label": "r4 02 minimal",
+        "trialIds": [
+          "22873518-2d13-475d-ba37-7b9e94c48407",
+          "b394d28a-ebed-4aba-9566-61d6cc5dbedf"
+        ]
+      },
+      "metrics": {
+        "attempts": 2,
+        "passes": 0,
+        "passRate": 0.0,
+        "taskFailures": 2,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
         "uiChecksExecuted": 2,
-        "uiChecksPassed": 2,
+        "uiChecksPassed": 0,
         "serviceChecksExecuted": 6,
         "serviceChecksPassed": 6,
         "unknownCostAttempts": 0,
-        "knownEstimatedCostUsd": 0.2704538533333333,
-        "inputTokens": 762904,
-        "outputTokens": 13924
+        "knownEstimatedCostUsd": 0.19695297933333333,
+        "inputTokens": 507686,
+        "outputTokens": 13241
+      }
+    },
+    {
+      "id": "course-view-7a4c6071de7631be",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 4,
+        "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+        "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+        "project": "project-02",
+        "variant": "workspace-docs",
+        "label": "r4 02 workspace-docs",
+        "trialIds": [
+          "6e00cd09-8cfb-495e-ab90-dc16c7938030",
+          "ec18a893-0de1-44ac-8541-7f1564e1e8d4"
+        ]
+      },
+      "metrics": {
+        "attempts": 2,
+        "passes": 0,
+        "passRate": 0.0,
+        "taskFailures": 2,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 2,
+        "uiChecksPassed": 0,
+        "serviceChecksExecuted": 6,
+        "serviceChecksPassed": 6,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.17862066199999999,
+        "inputTokens": 491822,
+        "outputTokens": 10147
       }
     },
     {
