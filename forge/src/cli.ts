@@ -29,6 +29,11 @@ if(command==='workshop'){
   const [app, output, ...fixtures] = process.argv.slice(3).filter(arg => arg !== '--live');
   if (!app || !output || !fixtures.length) throw new Error('services APP_DIR OUTPUT_JSON FIXTURE... [--live]');
   await writeJson(output, await runServices(app, fixtures, process.argv.includes('--live')));
+} else if(command==='loop') {
+  const {values}=parseArgs({args:process.argv.slice(3),options:{mode:{type:'string'},checkpoint:{type:'string'},execute:{type:'boolean'},resume:{type:'boolean'},'duration-seconds':{type:'string'},'interval-seconds':{type:'string'},'max-rounds':{type:'string'}}});
+  if(!values.mode||!values.checkpoint)throw new Error('loop requires --mode and --checkpoint');
+  const abort=new AbortController();process.once('SIGINT',()=>abort.abort());process.once('SIGTERM',()=>abort.abort());
+  console.log(JSON.stringify(await (await import('./loops.js')).runLoop({mode:values.mode as import('./loops.js').LoopMode,file:values.checkpoint,execute:!!values.execute,resume:values.resume,durationSeconds:values['duration-seconds']?Number(values['duration-seconds']):undefined,intervalSeconds:values['interval-seconds']?Number(values['interval-seconds']):undefined,maxRounds:values['max-rounds']?Number(values['max-rounds']):undefined},abort.signal),null,2));
 } else if(command==='run'||command==='compare') {
   const {values}=parseArgs({args:process.argv.slice(3),options:{project:{type:'string'},variant:{type:'string'},repeats:{type:'string'},execute:{type:'boolean'},output:{type:'string'},source:{type:'string'},'operation-id':{type:'string'}}});
   if(command==='run'&&(!values.project||!values.variant))throw new Error('run requires --project and --variant');

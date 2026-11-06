@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "id": "project-07",
+  "starter": "projects/project-04/starter",
+  "task": "Repair the long-document chunking defect and deliver a working Electron knowledge-base app. Preserve all text, verify actual import/index/retrieval/Q&A, fix preload startup if necessary, and add scripts/check-architecture.sh that rejects Node imports in the renderer. Keep session-handoff.md current. Persist progress and run checks before stopping.",
+  "variants": ["goal", "timer", "maker-checker"],
+  "repeats": 3,
+  "sessions": 1,
+  "protectedChecker": "forge/graders/check.cjs",
+  "gradeAs": "project-04",
+  "fixture": "forge/fixtures/course.txt"
+}
