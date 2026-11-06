@@ -1,3 +1,9 @@
+<script setup>
+import forgeImage0 from './assets/figures/project-04-checks.svg?url'
+import forgeImage1 from './assets/captures/agent-lens-agent-revision4.jpg?url'
+import forgeImage2 from './assets/captures/agent-lens-revision4.jpg?url'
+</script>
+
 # Debugging an index full of empty chunks
 
 The index could create chunk records, assign IDs, and report that it had indexed the document while storing an empty string in every chunk. Retrieval then had nothing to quote. A status indicator could look reassuring even though the content needed for the next operation was missing.
@@ -5,6 +11,15 @@ The index could create chunk records, assign IDs, and report that it had indexed
 That is the seeded defect in Project 04. When the complete document exceeds 1,000 characters, the starter substitutes an empty string for the text it writes into each chunk. The code is intentionally wrong. Our experiment asks whether access to runtime feedback helps Pi repair the application and finish the accompanying verification work.
 
 The runtime-feedback treatment passed 3/3 attempts; minimal instructions passed 2/3. All six submissions passed the check that indexed text was preserved. The remaining failure concerned an architecture guard. That detail changes how we should read the apparent advantage.
+
+
+<div class="forge-figure" tabindex="0" role="region" aria-label="Project 04 matrix of individual attempts and the checks they passed, failed, or did not execute.">
+
+<a :href="forgeImage0" target="_blank" rel="noopener"><img src="./assets/figures/project-04-checks.svg" alt="Project 04 matrix of individual attempts and the checks they passed, failed, or did not execute." /></a>
+
+</div>
+
+Every attempt preserved the indexed text. The single failed complete grade came from the architecture guard. [Read every grade and its evidence](./evidence?scope=primary&project=project-04#inspect-every-attempt). Open the image for full size; wide figures scroll on small screens.
 
 ## Observe the value the next operation consumes
 
@@ -32,6 +47,23 @@ Pi uses the documented [Weave extension](https://docs.coreweave.com/products/age
 The record needs enough identifiers to join the observation back to the attempt: project, task, treatment, trial, role, source revision, sandbox, and W&B run. A span called `indexing.start` becomes much easier to interpret when we know which candidate produced it and which fixture the caller supplied.
 
 Tracing does not decide whether the chunk is correct. It helps us find the operation and its returned value. The protected assertion about preserved text remains a separate piece of evidence. We also keep credentials and SDK clients in the main/service layer, outside the renderer.
+
+<div class="forge-figure" tabindex="0" role="region" aria-label="Agent Lens coding-agent conversation with nested model and tool operations.">
+
+<a :href="forgeImage1" target="_blank" rel="noopener"><img src="./assets/captures/agent-lens-agent-revision4.jpg" alt="Agent Lens coding-agent conversation with nested model and tool operations." /></a>
+
+</div>
+
+Original coding-agent trace view, conversation `01a1b0aa-ff8b-71d2-a2f0-9f7999092eed`. This is an instrumentation example, not an additional Project 04 repeat. [Open the conversation](https://forge.coreweave.com/agent-lens/wandb/learn-harness-engineering-forge/conversations/01a1b0aa-ff8b-71d2-a2f0-9f7999092eed). Open the image for full size; wide figures scroll on small screens.
+
+<div class="forge-figure" tabindex="0" role="region" aria-label="Agent Lens application conversation with four separate turns and nested import and question-answering operations.">
+
+<a :href="forgeImage2" target="_blank" rel="noopener"><img src="./assets/captures/agent-lens-revision4.jpg" alt="Agent Lens application conversation with four separate turns and nested import and question-answering operations." /></a>
+
+</div>
+
+The application qualification has its own conversation, `app-bace80b4-24a6-4c67-bc75-def5cd385a2d`. Its four turns are separate from the coding context. Both captures match archived trace records; token totals are reconciled at model spans. [Open the app conversation](https://forge.coreweave.com/agent-lens/wandb/learn-harness-engineering-forge/conversations/app-bace80b4-24a6-4c67-bc75-def5cd385a2d). Open the image for full size; wide figures scroll on small screens.
+
 
 ## A guard script can pass by failing to check anything
 
@@ -66,3 +98,5 @@ The course's deterministic Q&A defaults make this path repeatable. They do not e
 Open the [saved Project 04 notebook](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTc%3D) with private-project access and compare the failed guard with a passing one. The [public report](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-publication/forge/results/README.md) preserves the check-level outcomes. Before giving an agent more feedback, identify the observation it needs to make its next decision. In this case, “index ready” was too far removed from the text retrieval needed.
 
 Continue to [Project 05](./05-role-separation.md) for a different source of feedback: another model conversation reviewing the same candidate.
+
+[Browse the complete evidence companion](./evidence.md): original captures, all 129 attempts, source hashes, notebooks, dashboards, and private artifacts.

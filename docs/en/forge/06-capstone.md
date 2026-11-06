@@ -1,3 +1,8 @@
+<script setup>
+import forgeImage0 from './assets/captures/fd98af3b-1b52-448c-bc7b-b6cc47e785ea-grader-electron.png?url'
+import forgeImage1 from './assets/figures/project-06-checks.svg?url'
+</script>
+
 # A reset button has to clear more than the screen
 
 After a user resets a knowledge base, a new answer should not cite documents that were supposedly deleted. Clearing the document list is only part of that operation. The index can still hold text, the history can still hold answers, and a feedback store can still refer to both.
@@ -44,6 +49,15 @@ This is a bounded acceptance test. It does not prove every byte was securely era
 
 The feedback assertions also do not amount to a complete crash-recovery test for that store. They submit and read entries during the run. We can inspect a submission's persistence implementation, but we should not add a restart guarantee to the reported result merely because the task asked for persistence.
 
+
+<div class="forge-figure" tabindex="0" role="region" aria-label="Capstone Electron window still displaying the previous document and answer after reset was invoked through the typed bridge.">
+
+<a :href="forgeImage0" target="_blank" rel="noopener"><img src="./assets/captures/fd98af3b-1b52-448c-bc7b-b6cc47e785ea-grader-electron.png" alt="Capstone Electron window still displaying the previous document and answer after reset was invoked through the typed bridge." /></a>
+
+</div>
+
+This final frame from capstone repeat 1 still shows the previously rendered document and answer. The checker called reset through the bridge and verified empty stores plus zero new citations; it did not assert that the visible document list refreshed. A user-facing reset-flow test would need that additional observation. [Inspect this trial](./evidence?scope=primary&project=project-06&trial=fd98af3b-1b52-448c-bc7b-b6cc47e785ea#inspect-every-attempt). Open the image for full size; wide figures scroll on small screens.
+
 ## A benchmark command must execute the work it claims to measure
 
 The capstone asks for a script that calls actual services. A script that prints a plausible success rate teaches the wrong lesson: it creates a number without performing the operation the number describes. The Forge grading path therefore instantiates the application's compiled services and runs the import, indexing, retrieval, and Q&A sequence itself.
@@ -53,6 +67,15 @@ This also establishes a boundary on the reported pass. The protected checker doe
 Our service Q&A uses deterministic course defaults. That makes the software path repeatable and allows an answer's citation excerpt to be checked against the imported content. It does not answer whether a live model gives a correct, complete explanation of a new document. The live Forge adapter has separate qualification evidence.
 
 For a live deployment, the next evaluation would need documents and questions that test answer quality, in addition to these software assertions. Those judgments are outside this course's pass count.
+
+
+<div class="forge-figure" tabindex="0" role="region" aria-label="Project 06 matrix of individual attempts and the checks they passed, failed, or did not execute.">
+
+<a :href="forgeImage1" target="_blank" rel="noopener"><img src="./assets/figures/project-06-checks.svg" alt="Project 06 matrix of individual attempts and the checks they passed, failed, or did not execute." /></a>
+
+</div>
+
+The two failed minimal submissions stopped at compilation. The remaining four reached and passed the recorded service and Electron assertions. [Read every grade and its evidence](./evidence?scope=primary&project=project-06#inspect-every-attempt). Open the image for full size; wide figures scroll on small screens.
 
 ## What 3/3 versus 1/3 supports
 
@@ -71,3 +94,5 @@ The [Project 06 notebook](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUz
 For a local review, trace one feedback object through submission and readback, then check what the reset implementation does to each store. Compare those operations with the protected assertions. A discrepancy is a concrete candidate for the next test, even when the current submission has a passing score.
 
 The next two projects automate the decision to continue working. [Project 07](./07-bounded-loops.md) starts with the part that is easy to postpone: the conditions under which the coordinator should stop.
+
+[Browse the complete evidence companion](./evidence.md): original captures, all 129 attempts, source hashes, notebooks, dashboards, and private artifacts.

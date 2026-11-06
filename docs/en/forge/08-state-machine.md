@@ -1,3 +1,8 @@
+<script setup>
+import forgeImage0 from './assets/diagrams/graph-attempts.svg?url'
+import forgeImage1 from './assets/captures/dashboard-graph-evidence-final.jpg?url'
+</script>
+
 # Binding human approval to the patch we tested
 
 The Pi-generated patch passed on its third attempt. The protected grade passed, and separate service and Electron verification lanes passed. The graph then stopped at `approval`. It did not merge the patch or treat the passing tests as a human decision.
@@ -36,6 +41,15 @@ Rollback here means the next maker starts from the last verified patch, or the f
 
 The next attempt also receives recorded verification feedback. This lets a maker reconsider the specific failure while working from the restored source. It does not guarantee that the next patch will preserve every correct change from the discarded candidate. The compilation failure on attempt two is a reminder to inspect each result independently.
 
+
+<div class="forge-figure" tabindex="0" role="region" aria-label="Recorded graph sequence: guard failure and rollback, compile failure and rollback, then a passing third candidate stopped at approval.">
+
+<a :href="forgeImage0" target="_blank" rel="noopener"><img src="./assets/diagrams/graph-attempts.svg" alt="Recorded graph sequence: guard failure and rollback, compile failure and rollback, then a passing third candidate stopped at approval." /></a>
+
+</div>
+
+The three attempts belong to the explicit-contract graph execution. The diagram stops where the recorded Pi graph stops. The later manual approval applies to another checksum. [Inspect the transitions and candidates](./evidence.md#loops-and-approval). Open the image for full size; wide figures scroll on small screens.
+
 ## A test cannot require a path the task never named
 
 An earlier graph run had a task-contract problem. The task required an architecture guard without naming the script path the protected checker expected. A candidate implemented a Vite-based guard and failed the script-path requirement. The diagnostic feedback also omitted the expected path.
@@ -66,6 +80,15 @@ The user's later approval named that manual candidate, whose checksum begins `91
 
 The [public approval receipt](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-publication/forge/results/qualification-approval.json) records the exact checksum and checkpoint. The [saved Project 08 notebook](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjE%3D) is a pre-decision analysis snapshot; the [operations dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=l9e45ofb461) includes the later manual approval. Both Forge views require private-project access.
 
+
+<div class="forge-figure" tabindex="0" role="region" aria-label="Original Forge graph evidence table showing the Pi approval pause, candidate checksum, protected grade, and source revision.">
+
+<a :href="forgeImage1" target="_blank" rel="noopener"><img src="./assets/captures/dashboard-graph-evidence-final.jpg" alt="Original Forge graph evidence table showing the Pi approval pause, candidate checksum, protected grade, and source revision." /></a>
+
+</div>
+
+This capture predates the later approval of the original manual qualification. The [operations dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=l9e45ofb461) has that addendum; the Pi candidate remains paused. The [evidence companion](./evidence.md#loops-and-approval) separates both records. Open the image for full size; wide figures scroll on small screens.
+
 ## Review one transition at a time
 
 For this exercise, follow the passing Pi candidate from its exported patch to the protected grade, through both verification lanes, and into the waiting checkpoint. Check that every record refers to the same candidate. Then compare it with the manual approval receipt and confirm that the checksums differ.
@@ -73,3 +96,5 @@ For this exercise, follow the passing Pi candidate from its exported patch to th
 The graph has completed the automated work required to ask for a decision. The next step for that Pi candidate is still a person's approve or reject response. No PR has been merged, and nothing about the passing tests changes who owns that decision.
 
 Return to the [series overview](./index.md) or use the [runner guide](./running.md) to inspect the saved state locally before attempting a resume.
+
+[Browse the complete evidence companion](./evidence.md): original captures, all 129 attempts, source hashes, notebooks, dashboards, and private artifacts.

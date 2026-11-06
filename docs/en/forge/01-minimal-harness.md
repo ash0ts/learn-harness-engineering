@@ -1,3 +1,8 @@
+<script setup>
+import forgeImage0 from './assets/figures/project-01-checks.svg?url'
+import forgeImage1 from './assets/captures/643a867a-74e8-4987-aa56-5640b4c1982e-grader-visible-answer.png?url'
+</script>
+
 # Six passing runs, no separation
 
 The first comparison was supposed to make the role of repository instructions visible. We gave Pi an unfinished knowledge-base app and asked it to produce a usable shell: load the Electron window, show imported documents, accept a question, and preserve data. One treatment received minimal instructions. The other also received explicit repository rules and a short architecture guide.
@@ -34,6 +39,15 @@ The task may be too easy to separate these treatments under this configuration. 
 
 We also cannot use this row to explain the much weaker results in Project 02 or 03. Those projects ask for different behavior. A change in task difficulty is enough to change the outcome, even if the instructions have no effect at all.
 
+
+<div class="forge-figure" tabindex="0" role="region" aria-label="Project 01 matrix of individual attempts and the checks they passed, failed, or did not execute.">
+
+<a :href="forgeImage0" target="_blank" rel="noopener"><img src="./assets/figures/project-01-checks.svg" alt="Project 01 matrix of individual attempts and the checks they passed, failed, or did not execute." /></a>
+
+</div>
+
+All six submissions passed every recorded acceptance check. This figure establishes the observed tie on this task, not equivalence on harder tasks. [Read every grade and its evidence](./evidence?scope=primary&project=project-01#inspect-every-attempt). Open the image for full size; wide figures scroll on small screens.
+
 ## Inspect the successful patch, too
 
 When a patch passes, it is tempting to read only the green row. For this exercise, choose one passing attempt from each treatment and compare the exported diffs. Identify which files changed, which checks the agent ran, and which of the required behaviors the protected checker observed.
@@ -41,6 +55,15 @@ When a patch passes, it is tempting to read only the green row. For this exercis
 Then inspect the Agent Lens conversation. Did the explicit treatment read its instructions? Did it act on a boundary rule at a point where the minimal treatment made a different choice? A trace can support that behavioral observation. It cannot turn two passing results into evidence that one treatment improves task success.
 
 There is another distinction worth preserving. An agent may finish its allocated calls without writing a final declaration of success, yet leave a patch that passes. It may also announce completion before the checker discovers a broken window. The course records the exported result separately from the actor's completion status.
+
+
+<div class="forge-figure" tabindex="0" role="region" aria-label="Project 01 Electron window displaying a stored answer and citations for the held-out course document.">
+
+<a :href="forgeImage1" target="_blank" rel="noopener"><img src="./assets/captures/643a867a-74e8-4987-aa56-5640b4c1982e-grader-visible-answer.png" alt="Project 01 Electron window displaying a stored answer and citations for the held-out course document." /></a>
+
+</div>
+
+Original Xvfb/Electron capture from explicit-rules repeat 1. The visible answer is one recorded state; the complete grade also checks persistence and the typed bridge. [Open this trial](./evidence?scope=primary&project=project-01&trial=643a867a-74e8-4987-aa56-5640b4c1982e#inspect-every-attempt). Open the image for full size; wide figures scroll on small screens.
 
 ## A next experiment that could teach us more
 
@@ -51,3 +74,5 @@ That would be a new experiment. The task, expected behavior, and check would nee
 For the next comparison, I would carry both treatments forward and keep the explicit rules short enough to inspect.
 
 Open the [saved Project 01 notebook](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTQ%3D) with private-project access. The [public results report](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-publication/forge/results/README.md) records the qualified cohort separately from earlier UI-check cohorts. [Project 02](./02-workspace-docs.md) follows what happened when the task required a file-picker import flow across two fresh conversations.
+
+[Browse the complete evidence companion](./evidence.md): original captures, all 129 attempts, source hashes, notebooks, dashboards, and private artifacts.
