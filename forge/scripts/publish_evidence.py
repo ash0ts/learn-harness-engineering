@@ -20,7 +20,8 @@ def publish():
     sources=LOCAL/'audit-sources';sources.mkdir(exist_ok=True)
     concurrent=[json.loads(p.read_text()) for p in LOCAL.glob('concurrency-*/concurrency.json')]
     publications=json.loads((ROOT/'forge/publication-manifest.json').read_text())
-    commits=sorted({r['sourceCommit'] for r in saved['trials']+saved['qualifications']+concurrent+publications['notebooks'] if r.get('sourceCommit')})
+    supplemental=saved.get('sandboxQualifications',[])+saved.get('graphs',[])+saved.get('loops',[])
+    commits=sorted({r['sourceCommit'] for r in saved['trials']+saved['qualifications']+concurrent+supplemental+publications['notebooks'] if r.get('sourceCommit')})
     archives=[]
     for commit in commits:
         path=sources/(commit+'.tar.gz')
@@ -39,18 +40,22 @@ def publish():
             table.add_data(row['id'],'coding-trial',row['outcome'],row.get('estimatedCostUsd'),ledger['settled'].get(row['id']),row['sourceCommit'])
         run.log({'attempts':table})
         artifact=wandb.Artifact('forge-course-qualification-evidence',type='course-evidence',metadata={'schemaVersion':1,'status':'recorded-evidence','completedComparisonBlocks':blocks})
-        for row in saved['qualifications']+saved['trials']+concurrent:
+        for row in saved['qualifications']+saved['trials']+concurrent+saved.get('sandboxQualifications',[]):
             directory=LOCAL/row['id']
             for path in sorted(directory.rglob('*')):
                 if path.is_file() and path.suffix in {'.json','.diff','.txt','.log','.png'}:
                     artifact.add_file(str(path),name=str(path.relative_to(LOCAL)))
         for path in sorted(sources.iterdir()):artifact.add_file(str(path),name='source-archives/'+path.name)
-        for filename in ['budget.json','app-checks.json','notebook-validation.json','trace-audit.json','forge-tests-final.log','sandbox-final-audit.json']:
+        for filename in ['budget.json','app-checks.json','notebook-validation.json','trace-audit.json','forge-tests-final.log','sandbox-final-audit.json','local-checks.json','docs-build.log','anchors-check.log']:
             path=LOCAL/filename
             if path.exists():artifact.add_file(str(path),name=filename)
         for pattern in ['project-07-*.json','project-08-*.json','rollback-*.json','report-*.json','graph-*/*.json','graph-*/*.png','notebook-sessions/*.json','trace-readback/*.json']:
             for path in sorted(LOCAL.glob(pattern)):
                 if path.is_file():artifact.add_file(str(path),name=str(path.relative_to(LOCAL)))
+        for directory in sorted(LOCAL.glob('graph-qualification-*')):
+            for path in sorted(directory.rglob('*')):
+                if path.is_file() and path.suffix in {'.json','.diff','.png'}:
+                    artifact.add_file(str(path),name=str(path.relative_to(LOCAL)))
         for path in sorted((ROOT/'forge/results').glob('*')):
             if path.name in {'README.md','evidence-publication.json'}:continue
             if path.is_file():artifact.add_file(str(path),name='results/'+path.name)
