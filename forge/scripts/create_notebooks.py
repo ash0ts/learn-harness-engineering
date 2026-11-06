@@ -104,16 +104,19 @@ CELLS = {
     return''',
 'results': '''def _(Counter, mo, project_id, saved):
     rows = [row for row in saved.get("trials", []) if project_id == "overview" or row["project"] == project_id]
+    _verified_rows = [row for row in rows if row.get("protocolRevision", 1) >= 4]
+    _verified_status = f"**Awaited visible-answer acceptance:** {sum(row['outcome'] == 'passed' for row in _verified_rows)}/{len(_verified_rows)} revision 4 attempts passed. The table's passed column preserves native grades. Earlier revisions used unreliable asynchronous UI waits and are historical evidence; they do not establish visible-answer acceptance. Supplemental patch checks are separate qualifications."
     counts = Counter((row["project"], row["variant"], row["sourceCommit"], row["outcome"]) for row in rows)
     aggregates = []
     for _project, _variant, _source in sorted({(row["project"], row["variant"], row["sourceCommit"]) for row in rows}):
         _group = [row for row in rows if (row["project"], row["variant"], row["sourceCommit"]) == (_project, _variant, _source)]
         aggregates.append({"project": _project, "variant": _variant, "source_commit": _source, "attempts": len(_group), "passed": counts[_project, _variant, _source, "passed"], "task_failed": counts[_project, _variant, _source, "task_failed"], "infrastructure_failed": counts[_project, _variant, _source, "infrastructure_failed"], "telemetry_missing": counts[_project, _variant, _source, "telemetry_missing"], "known_estimate_usd": round(sum(row.get("reconciledEstimateUsd", row.get("estimatedCostUsd")) or 0 for row in _group), 6), "unknown_cost_attempts": sum(row.get("estimatedCostUsd") is None and row.get("reconciledEstimateUsd") is None for row in _group)})
-    mo.vstack([mo.md("## Saved results\\n\\n" + saved.get("status", "No campaign has been recorded.")), mo.ui.table(aggregates, selection=None) if aggregates else mo.md("No trials are recorded for this project. This is an explicit absence of evidence, not a zero score."), mo.md("Target: three repeats per automated variant. Show task failures, infrastructure failures and missing telemetry separately. Repeats of one task are not independent tasks. Rows are grouped by project, treatment and source revision. Cost sums include audited reconciliations where available; unknown token usage remains unknown even when a reservation is charged conservatively. Original outcomes are preserved; see the shared ledger for reservations and reconciliation evidence."), mo.ui.table(rows, selection=None) if rows else mo.md("No run rows to display."), mo.md("### Qualification and budget evidence"), mo.ui.table(saved.get("qualifications", []), selection=None), mo.md("```json\\n" + __import__("json").dumps({key: value for key, value in saved.get("budget", {}).items() if key != "settled"}, indent=2) + "\\n```")])
+    mo.vstack([mo.md("## Saved results\\n\\n" + saved.get("status", "No campaign has been recorded.")), mo.md(_verified_status), mo.ui.table(aggregates, selection=None) if aggregates else mo.md("No trials are recorded for this project. This is an explicit absence of evidence, not a zero score."), mo.md("Target: three repeats per automated variant. Show task failures, infrastructure failures and missing telemetry separately. Repeats of one task are not independent tasks. Rows are grouped by project, treatment and source revision. Cost sums include audited reconciliations where available; unknown token usage remains unknown even when a reservation is charged conservatively. Original outcomes are preserved; see the shared ledger for reservations and reconciliation evidence."), mo.ui.table(rows, selection=None) if rows else mo.md("No run rows to display."), mo.md("### Qualification and budget evidence"), mo.ui.table(saved.get("qualifications", []), selection=None), mo.md("```json\\n" + __import__("json").dumps({key: value for key, value in saved.get("budget", {}).items() if key != "settled"}, indent=2) + "\\n```")])
     return (rows,)''',
 'links': '''def _(mo, rows, saved):
     _links = [
-        "- [Revision 3 comparison dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=ssij233dnka)",
+        "- [Revision 4 comparison dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=wz8re0rb108)",
+        "- [Historical revision 3 dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=ssij233dnka)",
         "- [Original revision 2 dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=tsgaokxuthw)",
         "- [Execution and publication audit](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=l9e45ofb461)",
         "- [Evidence report with cohort denominators](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/reports/Forge-harness-course-%E2%80%94-verified-execution-and-comparison-evidence--VmlldzoxODI2MzgyOA==)",
@@ -148,6 +151,7 @@ CELLS = {
         _parts.append(mo.md("### " + _state["file"] + "\\n\\n```json\\n" + json.dumps(_state, indent=2) + "\\n```"))
     if project_id == "overview":
         _parts.append(mo.md("### Live sandbox qualification\\n\\n```json\\n" + json.dumps(saved.get("sandboxQualifications", []), indent=2) + "\\n```"))
+        _parts.append(mo.md("### Supplemental visible-answer qualification\\n\\n```json\\n" + json.dumps(saved.get("visibleUiQualifications", []), indent=2) + "\\n```"))
     mo.vstack(_parts) if _states or project_id == "overview" else None
     return''',
 'controls': '''def _(mo, os, variants):
@@ -226,9 +230,8 @@ def generate(runner_commit=None, projects=None):
             source=source.replace(' def_placeholder_'+key,cell)
         source=source.replace('__DESIGN__',repr(DESIGNS[project])).replace('__PROTOCOL__',repr((ROOT/'forge/protocol.json').read_text())).replace('__PROJECT__',repr(project)).replace('__COMMIT__',repr(commit)).replace('__VARIANTS__',repr(VARIANTS[project])).replace('__SAVED__',repr(json.dumps(evidence,ensure_ascii=False))).replace('__INTRO__',repr('# '+title+'\n\n'+description+'\n\nKeep the task, model and fixtures fixed. Inspect evidence before comparing scores.'))
         # Static Marimo exports retain only the current page of a paginated
-        # table. The course overview must preserve every aggregate group.
-        if project == 'overview':
-            source=source.replace('mo.ui.table(aggregates, selection=None)', 'mo.ui.table(aggregates, selection=None, pagination=False)')
+        # table. Every project must preserve all groups across historical cohorts.
+        source=source.replace('mo.ui.table(aggregates, selection=None)', 'mo.ui.table(aggregates, selection=None, pagination=False)')
         (ROOT/'forge/notebooks'/filename).write_text(source)
         generated.append(str(ROOT/'forge/notebooks'/filename))
     # Forge's editor serializes source with its pinned Marimo version. Normalize
