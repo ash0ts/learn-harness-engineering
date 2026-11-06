@@ -8,6 +8,7 @@ Commands: ensure (metadata only), check-remote FILE (before editing), verify FIL
 The authenticated Forge EDIT/Marimo save workflow performs the source commit.
 """
 import argparse
+import ast
 import base64
 from datetime import datetime, timezone
 import hashlib
@@ -114,6 +115,34 @@ def check_remote(manifest, row):
         raise RuntimeError('Remote edits detected; preserve and review remote source before replacing it')
     print('Remote source unchanged; normal authenticated EDIT workflow may proceed only with a reserved compute budget.')
 
+def verify_rendered_source(html, canonical):
+    """Bind outputs to canonical cell code, including when Forge omits legacy timestamps."""
+    text = html.decode()
+    def embedded(name):
+        marker = json.dumps(name) + ': '
+        return json.JSONDecoder().raw_decode(text[text.index(marker)+len(marker):])[0]
+    notebook, session = embedded('notebook'), embedded('session')
+    expected = []
+    for node in ast.parse(canonical).body:
+        if isinstance(node, ast.FunctionDef) and node.decorator_list:
+            body = node.body[:-1] if isinstance(node.body[-1], ast.Return) else node.body
+            expected.append(ast.dump(ast.Module(body=body, type_ignores=[])))
+    cells = notebook['cells']
+    actual = [ast.dump(ast.parse(cell['code'])) for cell in cells]
+    if actual != expected:
+        raise RuntimeError('Rendered cell source differs from canonical notebook')
+    outputs = {cell['id']:cell for cell in session['cells']}
+    if len(outputs) != len(cells):
+        raise RuntimeError('Rendered session has missing or duplicate cells')
+    for cell in cells:
+        code_hash = hashlib.md5(cell['code'].encode(), usedforsecurity=False).hexdigest()
+        if cell['code_hash'] != code_hash or outputs.get(cell['id'],{}).get('code_hash') != code_hash:
+            raise RuntimeError('Rendered output belongs to different cell source')
+        for output in outputs[cell['id']].get('outputs',[]):
+            if output.get('type') == 'error' or 'application/vnd.marimo+error' in output.get('data',{}):
+                raise RuntimeError('Hosted rendered output contains a cell error')
+    return session
+
 def verify(manifest, row):
     notebook = remote(row['id'])
     canonical = (ROOT/row['file']).read_bytes()
@@ -121,21 +150,15 @@ def verify(manifest, row):
         raise RuntimeError('Committed currentVersion source does not match canonical source')
     edited = notebook['lastSourceEditedAt']
     rendered = notebook['lastStaticOutputAt']
-    if not rendered or datetime.fromisoformat(rendered.replace('Z','+00:00')) < datetime.fromisoformat(edited.replace('Z','+00:00')):
-        raise RuntimeError('Rendered output is absent or predates committed source')
+    if rendered and datetime.fromisoformat(rendered.replace('Z','+00:00')) < datetime.fromisoformat(edited.replace('Z','+00:00')):
+        raise RuntimeError('Rendered output predates committed source')
     url = notebook['staticOutputUrl']
     if not url or urllib.parse.urlsplit(url).scheme != 'https':
         raise RuntimeError('Missing HTTPS rendered output')
     # The API returns a signed artifact URL. Never send the W&B credential to it.
     with urllib.request.urlopen(url, timeout=30) as response:
         html = response.read()
-    text = html.decode()
-    marker = '"session": '
-    session, _ = json.JSONDecoder().raw_decode(text[text.index(marker)+len(marker):])
-    for cell in session['cells']:
-        for output in cell.get('outputs',[]):
-            if output.get('type') == 'error' or 'application/vnd.marimo+error' in output.get('data',{}):
-                raise RuntimeError('Hosted rendered output contains a cell error')
+    session = verify_rendered_source(html, canonical)
     rendered_text = json.dumps(session,ensure_ascii=False)
     if 'Saved results' not in rendered_text or 'Not launched' not in rendered_text or row['title'] not in rendered_text:
         raise RuntimeError('Expected saved-results view and idle run control were not rendered')
@@ -143,7 +166,9 @@ def verify(manifest, row):
     committed_source = subprocess.check_output(['git','show',revision+':'+row['file']],cwd=ROOT)
     if committed_source != canonical:
         raise RuntimeError('Canonical source has uncommitted edits; commit it before recording publication')
-    row.update(sourceCommit=revision,status='published_verified',sha256=digest(canonical),currentVersion=notebook['currentVersion'],expectedRemoteVersion=notebook['currentVersion'],expectedRemoteEditedAt=edited,expectedRemoteSha256=digest(canonical),renderedOutputSha256=digest(html),verifiedAt=now())
+    if remote(row['id'])['currentVersion'] != notebook['currentVersion']:
+        raise RuntimeError('Remote source changed during verification')
+    row.update(sourceCommit=revision,status='published_verified',sha256=digest(canonical),currentVersion=notebook['currentVersion'],expectedRemoteVersion=notebook['currentVersion'],expectedRemoteEditedAt=edited,expectedRemoteSha256=digest(canonical),renderedOutputSha256=digest(html),renderedCellSourceVerified=True,lastStaticOutputAt=rendered,verifiedAt=now())
     row.pop('publicationBlocker',None)
     save(manifest)
     print(row['file'],'published_verified',row['url'])
