@@ -492,3 +492,8 @@ Most teams are currently between Level 2 and Level 3. Level 1 is the fastest pat
    - How well can you explain the code your loop most recently produced? (Comprehension rot)
    - How many times did you think "I'll look later" and never looked? (Cognitive surrender)
    - How is the loop's context size trending? Is it repeating redundant information? (Token blowout)
+
+
+## Optional Forge experiment
+
+Follow the [Forge learning path](/en/forge/) for sandbox execution, Agent Lens traces, W&B evidence and the corresponding Marimo notebook. The offline exercise remains the default.
