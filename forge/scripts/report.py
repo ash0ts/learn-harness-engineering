@@ -53,6 +53,7 @@ def build():
     sandbox_audit=read(LOCAL/'sandbox-final-audit.json') if (LOCAL/'sandbox-final-audit.json').exists() else {}
     checker_qualification=read(LOCAL/'checker-qualification-summary.json') if (LOCAL/'checker-qualification-summary.json').exists() else {}
     notebook_rerun=read(LOCAL/'notebook-rerun-qualification.json') if (LOCAL/'notebook-rerun-qualification.json').exists() else {}
+    graph_source=next((r['sourceCommit'] for r in read(ROOT/'forge/results/source-revisions.json')['frozenSources'] if r['tag']=='forge-course-graph-qualified'),None)
     local_checks=read(LOCAL/'local-checks.json') if (LOCAL/'local-checks.json').exists() else {}
     verified_ids={r['id'] for r in verified_rows}
     verified_blocks=[b for b in blocks if set(b['trialIds']).issubset(verified_ids)]
@@ -67,6 +68,7 @@ def build():
            'concurrentAppTraces':any(q['passed'] for q in saved.get('concurrencyQualifications',[])),
            'liveSandboxLifecycle':any(q['passed'] for q in saved.get('sandboxQualifications',[])),
            'graphApprovalPause':any(s.get('qualification') and any(t['to']=='approval' for t in s['transitions']) for s in saved.get('graphs',[])),
+           'protectedGraphExecution':any(not s.get('qualification') and s['sourceCommit']==graph_source and s.get('lastProtectedGrade') and len(s.get('verification',[]))==2 and s['node'] in ['approval','failed','done','rejected'] for s in saved.get('graphs',[])),
            'sandboxCleanup':bool(sandbox_audit.get('allTerminal')),'noUnsettledReservations':not ledger['reservations'] and not ledger.get('halted'),
            'documentationChecks':all(local_checks.get(k,{}).get('exitCode')==0 for k in ['anchors','docs'])}
     status='verified_delivery' if all(gates.values()) else 'verification_in_progress' 
