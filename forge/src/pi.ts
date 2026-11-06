@@ -34,7 +34,7 @@ export async function runPi(c: Config, request: AgentRequest) {
   runtime.registerProvider('forge', {
     baseUrl: c.inferenceUrl, apiKey: c.apiKey, api: 'openai-completions',
     headers: {'OpenAI-Project': `${c.entity}/${c.project}`},
-    models: [{id: c.model, name: c.model, reasoning: false, input: ['text'], contextWindow: 32768, maxTokens: c.maxOutputTokens,
+    models: [{id: c.model, name: c.model, reasoning: false, input: ['text'], contextWindow: 262144, maxTokens: c.maxOutputTokens,
       cost: {input: 0.25, output: 1.25, cacheRead: 0.25, cacheWrite: 0.25}}],
   });
   const model = runtime.getModel('forge', c.model);
@@ -43,11 +43,11 @@ export async function runPi(c: Config, request: AgentRequest) {
   const loader = new DefaultResourceLoader({cwd: directory, agentDir: directory, settingsManager,
     noExtensions: true, noSkills: true, noPromptTemplates: true, noThemes: true, noContextFiles: true,
     extensionFactories: [createOtelExtension({tracer, captureContent: true}) as ExtensionFactory],
-    systemPrompt: `You are the ${request.role} in a harness engineering exercise. Work only through the provided sandbox tools. Read AGENTS.md when present. Verify changes before claiming success. Never request secrets or access reference solutions.`,
+    systemPrompt: `You are the ${request.role} in a harness engineering exercise. All commands run in /workspace/task inside the sandbox. Use relative task paths there, and keep command output concise. Work only through the provided sandbox tools. Read AGENTS.md when present. Verify changes before claiming success. Never request secrets or access reference solutions.`,
   });
   await loader.reload();
-  const {session, modelFallbackMessage} = await createAgentSession({cwd: directory, agentDir: directory, modelRuntime: runtime, model,
-    settingsManager, resourceLoader: loader, sessionManager: SessionManager.inMemory(directory),
+  const {session, modelFallbackMessage} = await createAgentSession({cwd: '/workspace/task', agentDir: directory, modelRuntime: runtime, model,
+    settingsManager, resourceLoader: loader, sessionManager: SessionManager.inMemory('/workspace/task'),
     noTools: 'builtin', tools: request.tools.map(t => t.name), customTools: request.tools, thinkingLevel: 'off'});
   if (modelFallbackMessage) { session.dispose(); throw new Error(modelFallbackMessage); }
   // Enforce limits at the provider boundary. Extension errors are swallowed by Pi,
@@ -55,15 +55,16 @@ export async function runPi(c: Config, request: AgentRequest) {
   const stream = session.agent.streamFunction;
   let requests = 0;
   session.agent.streamFunction = (model, context, options) => {
-    if (++requests > c.maxTurns) throw new Error('Model-call budget exhausted');
-    if (Buffer.byteLength(JSON.stringify(context), 'utf8') > 28000) {
+    if (requests >= c.maxTurns) throw new Error('Model-call budget exhausted');
+    if (Buffer.byteLength(JSON.stringify(context), 'utf8') > 125000) {
       throw new Error('Frozen input byte budget exceeded');
     }
-    return stream(model, context, {...options, temperature: 0, maxTokens: c.maxOutputTokens,
+    return stream(model, context, {...options, temperature: 0, maxTokens: c.maxOutputTokens, maxRetries: 0,
       onPayload: async payload => {
         const changed = await options?.onPayload?.(payload, model);
         const final = changed ?? payload;
-        if (Buffer.byteLength(JSON.stringify(final), 'utf8') > 32768) throw new Error('Frozen provider payload byte budget exceeded');
+        if (Buffer.byteLength(JSON.stringify(final), 'utf8') > 131072) throw new Error('Frozen provider payload byte budget exceeded');
+        requests++; // Only requests that pass the local gate can incur inference cost.
         return final;
       },
     });
@@ -83,7 +84,7 @@ export async function runPi(c: Config, request: AgentRequest) {
     const errors = session.messages.filter(m => m.role === 'assistant' && (m.stopReason === 'error' || m.stopReason === 'aborted'));
     const text = session.messages.filter(m => m.role === 'assistant').flatMap(m => m.content.filter(p => p.type === 'text').map(p => p.text)).join('\n');
     const assistantMessages = session.messages.filter(m => m.role === 'assistant');
-    const telemetryComplete = assistantMessages.length > 0 && assistantMessages.every(m => m.usage.input + m.usage.output + m.usage.cacheRead + m.usage.cacheWrite > 0);
+    const telemetryComplete = assistantMessages.filter(m => m.usage.input + m.usage.output + m.usage.cacheRead + m.usage.cacheWrite > 0).length === requests;
     return {conversationId: session.sessionId, telemetryComplete, requests, inputTokens: stats.tokens.input + stats.tokens.cacheRead + stats.tokens.cacheWrite,
       outputTokens: stats.tokens.output, turns, text, completed: !exhausted && errors.length === 0 && !request.signal?.aborted,
       errors: errors.map(m => m.role === 'assistant' ? m.errorMessage : undefined)};
