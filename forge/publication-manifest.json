@@ -26,41 +26,61 @@
       "file": "forge/notebooks/01-minimal-harness.py",
       "project": "project-01",
       "title": "01 \u00b7 Minimal instructions and explicit harnesses",
-      "sourceCommit": "31b85133e7245133b8f87df2cd6a5b1c61e880f6",
-      "sha256": "8a8b4b09fb6b5f25bcd3e694591448137f9e63cd2ecf5f731b05f6c1e0c63612",
+      "sourceCommit": "0978d1c80e584e6760228265034f0f732a348211",
+      "sha256": "0dbc95954e7c1c66cc535a926014d5408feecf42c93a563bbac4c77bddd0823a",
       "id": "Tm90ZWJvb2s6MTUzMTQ=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTQ%3D",
-      "status": "created_basic_not_uploaded",
+      "status": "published_verified",
       "createdAt": "2026-11-06T08:00:36.380367+00:00",
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "01-Minimal-instructions-and-explicit-harnesses",
-        "versionIndex": 0,
+        "versionIndex": 8,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:36Z",
-      "expectedRemoteSha256": "729741bb7115805dd5b8266e3bd1bbfc3c5a8e05d08f80feb6d9489b7eb62b27",
-      "publicationBlocker": "Paid EDIT session withheld while shared budget ledger is halted; canonical source not loaded"
+      "expectedRemoteSha256": "0dbc95954e7c1c66cc535a926014d5408feecf42c93a563bbac4c77bddd0823a",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "01-Minimal-instructions-and-explicit-harnesses",
+        "versionIndex": 8,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "b2ca5ced1961a2ad1eaeb9f75890eebf4b26c5103da14536392876c1e9e2f655",
+      "renderedCellSourceVerified": true,
+      "verifiedAggregateGroups": 2,
+      "lastStaticOutputAt": null,
+      "verifiedAt": "2026-11-06T09:55:18.861660+00:00"
     },
     {
       "file": "forge/notebooks/02-workspace-docs.py",
       "project": "project-02",
       "title": "02 \u00b7 An agent-readable workspace",
-      "sourceCommit": "31b85133e7245133b8f87df2cd6a5b1c61e880f6",
-      "sha256": "ce29e87520ba9bdfd4336832a87ac65c40fd9152462228a7b15dec0af3f04e04",
+      "sourceCommit": "0978d1c80e584e6760228265034f0f732a348211",
+      "sha256": "b74724b4717dd7b454b923369834787dff08babbde12182419d5ca90f8967f1a",
       "id": "Tm90ZWJvb2s6MTUzMTU=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTU%3D",
-      "status": "created_basic_not_uploaded",
+      "status": "published_verified",
       "createdAt": "2026-11-06T08:00:38.149949+00:00",
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "02-An-agent-readable-workspace",
-        "versionIndex": 0,
+        "versionIndex": 3,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:38Z",
-      "expectedRemoteSha256": "729741bb7115805dd5b8266e3bd1bbfc3c5a8e05d08f80feb6d9489b7eb62b27",
-      "publicationBlocker": "Paid EDIT session withheld while shared budget ledger is halted; canonical source not loaded"
+      "expectedRemoteSha256": "b74724b4717dd7b454b923369834787dff08babbde12182419d5ca90f8967f1a",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "02-An-agent-readable-workspace",
+        "versionIndex": 3,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "49f4d0dfa67d59c28919ba4c05353e2f3c6aca481074e7a7fb238b881f7b883a",
+      "renderedCellSourceVerified": true,
+      "verifiedAggregateGroups": 2,
+      "lastStaticOutputAt": null,
+      "verifiedAt": "2026-11-06T09:54:15.939987+00:00"
     },
     {
       "file": "forge/notebooks/03-session-recovery.py",

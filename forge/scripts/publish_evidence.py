@@ -49,7 +49,7 @@ def publish():
         for filename in ['budget.json','app-checks.json','notebook-validation.json','trace-audit.json','models-audit.json','forge-tests-final.log','sandbox-final-audit.json','local-checks.json','docs-check.log','anchors-check.log']:
             path=LOCAL/filename
             if path.exists():artifact.add_file(str(path),name=filename)
-        for pattern in ['project-07-*.json','project-08-*.json','rollback-*.json','report-*.json','graph-*/*.json','graph-*/*.png','notebook-sessions/*.json','trace-readback/*.json','reconciliations/*.json']:
+        for pattern in ['project-07-*.json','project-08-*.json','rollback-*.json','report-*.json','graph-*/*.json','graph-*/*.png','notebook-sessions/*.json','trace-readback/*.json','reconciliations/*.json','publication/*/notebook.py','publication/*/rendered.html','publication/*-editor.jpg']:
             for path in sorted(LOCAL.glob(pattern)):
                 if path.is_file():artifact.add_file(str(path),name=str(path.relative_to(LOCAL)))
         for directory in sorted(LOCAL.glob('graph-qualification-*')):
