@@ -1,6 +1,9 @@
 name: Forge sandbox image
 on:
   workflow_dispatch:
+  push:
+    branches: [codex/forge-sandboxes]
+    paths: [forge/sandbox/**, .github/workflows/forge-image.yml]
 permissions:
   contents: read
   packages: write
