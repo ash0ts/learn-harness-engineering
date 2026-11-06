@@ -1,7 +1,7 @@
 // Independent post-patch verification lanes; no agent is running in this workspace.
 const {execFileSync}=require('node:child_process');const fs=require('node:fs');const path=require('node:path');const assert=require('node:assert/strict');
 const lane=process.argv[2],cwd='/workspace/task',checks=[];
-async function check(name,fn){try{await fn();checks.push({name,passed:true});}catch(error){checks.push({name,passed:false,error:String(error)});}}
+async function check(name,fn){try{await fn();checks.push({name,passed:true});}catch(error){checks.push({name,passed:false,error:String(error),stdout:String(error.stdout??'').slice(-6000),stderr:String(error.stderr??'').slice(-6000)});}}
 (async()=>{
  await check('build',()=>{for(const args of [['/opt/app/node_modules/typescript/bin/tsc','-p','tsconfig.node.json'],['/opt/app/node_modules/vite/bin/vite.js','build']])execFileSync('node',args,{cwd,timeout:90000});});
  if(checks[0].passed && lane==='services')await check('patch preserves long-document text and grounded citations',async()=>{
