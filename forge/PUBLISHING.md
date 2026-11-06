@@ -47,11 +47,18 @@ For each notebook:
 4. In Marimo's command palette, open **Helper panel > Files**. Upload the
    canonical `.py` file using its own filename. Open it in the text editor, copy
    its complete source, then open the existing `notebook.py` and replace its
-   source. Save through the editor. Do not replace source through an undocumented
+   source. If the embedded file chooser is unavailable, copy the canonical file
+   from its exact committed GitHub raw-source page and paste it into the same
+   Marimo file editor. Verification still requires identical bytes. Save through
+   the editor. Do not replace source through an undocumented
    notebook API or overwrite the artifact directly.
 5. Re-run the saved-analysis cells through Marimo's normal command palette.
    Leave the explicit paid-rerun button idle. Let the normal save workflow commit
-   source and rendered output.
+   source and rendered output. The deployed save worker polls every 30 seconds
+   and throttles preview-only updates to five minutes; a source version can
+   therefore appear before its corresponding rendered output. Wait for both
+   rather than weakening verification. A fresh editor session can re-render the
+   committed source if the old session's preview is stale.
 6. Run `uv run --script forge/scripts/publication.py verify FILE.py`. The verifier
    requires exact committed source bytes, the committed local source revision,
    matching rendered cell code and output hashes, error-free cells, and aggregate
