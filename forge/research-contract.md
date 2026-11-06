@@ -51,3 +51,19 @@ must pass protocol qualification first. Grade the exported patch in a fresh
 sandbox, including the same preload build adaptation. Show both revisions in
 published views; do not pool them or interpret a revision difference as an isolated
 harness-treatment effect. A passing task requires every protected assertion.
+
+## Revision 4: awaited UI observations
+
+A supplemental acceptance check on a revision 3 passing patch found that the
+asynchronous `page.waitForFunction` predicates could complete while the expected
+history entry was still absent. Revision 3 launches were halted; already-running
+attempts were allowed to finish and were retained. Revision 2 and 3 native grades
+are historical checker results, not verified visible-answer acceptance.
+
+Revision 4 waits for the resolved IPC predicate in a bounded Node poll, then waits
+for the actual answer text in the rendered UI before collecting a screenshot.
+Import completion and history clearing use the same awaited poll. Protected helper
+bytes are included in the checker checksum. A deliberately false asynchronous
+predicate must time out in the regression test. Generation settings and task code
+are unchanged from revision 3; compare treatments only within the new frozen
+cohort. Supplemental checks remain separate records and never rewrite old grades.
