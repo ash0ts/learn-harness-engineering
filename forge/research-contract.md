@@ -67,3 +67,22 @@ bytes are included in the checker checksum. A deliberately false asynchronous
 predicate must time out in the regression test. Generation settings and task code
 are unchanged from revision 3; compare treatments only within the new frozen
 cohort. Supplemental checks remain separate records and never rewrite old grades.
+
+## History and capstone checker qualification
+
+The first revision 4 source (`b948c1fbac36bca7dae458795d9bfca3f5d2b7d3`)
+used a citation text selector that could match answer prose. The saved Project 05
+patch passes when the checker clicks an interactive citation control and supports
+both native and custom confirmation dialogs. Project 06 also lacked an explicit
+feedback argument contract; a valid object-based implementation failed the assumed
+positional call. Preserve those native grades but exclude both affected cohorts
+from qualified comparisons, as recorded in `measurement-notes.json`.
+
+Rerun all three Project 05 treatments and both Project 06 treatments three times.
+Use the same application bytes, model, generation settings, image and role budgets.
+The capstone task now specifies the feedback object payload and reset semantics.
+The corrected checker verifies submitted fields, confirmation cancellation/acceptance,
+and empty retrieval after reset. Qualify the frozen checker against saved patches
+before launching the follow-up. Provider qualification is reused only while the
+protocol hash is unchanged. Compare treatments within each frozen project cohort;
+do not silently replace, relabel, or pool the original unsuccessful attempts.
