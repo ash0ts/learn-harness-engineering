@@ -43,6 +43,7 @@ export async function runGraph(file:string,execute:boolean,resume=false) {
           await stageWorkspace(sandbox,staged.archive);await sandbox.files.write('/tmp/candidate.diff',await readFile(candidate.patch));
           if((await readFile(candidate.patch)).length)await sandbox.commands.run(['git','apply','/tmp/candidate.diff'],{cwd:'/workspace/task'});
           await sandbox.files.write('/tmp/graph-lane.cjs',await readFile(join(courseRoot,'forge/graders/graph-lane.cjs')));
+          await sandbox.files.write('/tmp/poll.cjs',await readFile(join(courseRoot,'forge/graders/poll.cjs')));
           const command=await sandbox.commands.run(['xvfb-run','-a','node','/tmp/graph-lane.cjs',lane],{check:false,timeoutMs:180000,cwd:'/workspace/task'});await writeJson(join(dir,'command.json'),command);
           grade=JSON.parse(Buffer.from(await sandbox.files.read('/tmp/graph-grade.json')).toString());await writeJson(join(dir,'grade.json'),grade);
           if(lane==='electron')try{await writeFile(join(dir,'electron.png'),await sandbox.files.read('/tmp/graph-electron.png'));}catch{}
