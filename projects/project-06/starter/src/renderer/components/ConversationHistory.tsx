@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { QAHistory } from '../../../shared/types';
+import { useEffect, useState } from 'react';
+import { QAHistory } from '../../shared/types';
 
 /**
  * ConversationHistory -- starter version.
