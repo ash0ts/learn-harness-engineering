@@ -176,21 +176,31 @@
       "file": "forge/notebooks/06-capstone.py",
       "project": "project-06",
       "title": "06 \u00b7 Capstone reliability",
-      "sourceCommit": "31b85133e7245133b8f87df2cd6a5b1c61e880f6",
-      "sha256": "aa4cfa15db3b29467189e5946a0ed12210ff6ed109acfe6afc5e9885509820a0",
+      "sourceCommit": "0978d1c80e584e6760228265034f0f732a348211",
+      "sha256": "1d6012d0fc0b81e635962bc6ac11ffcaf4ef4c0003bb41490e99befe36aca1fe",
       "id": "Tm90ZWJvb2s6MTUzMTk=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTk%3D",
-      "status": "created_basic_not_uploaded",
+      "status": "published_verified",
       "createdAt": "2026-11-06T08:00:45.762888+00:00",
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "06-Capstone-reliability",
-        "versionIndex": 0,
+        "versionIndex": 3,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:45Z",
-      "expectedRemoteSha256": "729741bb7115805dd5b8266e3bd1bbfc3c5a8e05d08f80feb6d9489b7eb62b27",
-      "publicationBlocker": "Paid EDIT session withheld while shared budget ledger is halted; canonical source not loaded"
+      "expectedRemoteSha256": "1d6012d0fc0b81e635962bc6ac11ffcaf4ef4c0003bb41490e99befe36aca1fe",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "06-Capstone-reliability",
+        "versionIndex": 3,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "8cc19808a3e670154474b0e6e80548da93da4c5af35d8d42910aaf3737d3fa90",
+      "renderedCellSourceVerified": true,
+      "verifiedAggregateGroups": 2,
+      "lastStaticOutputAt": null,
+      "verifiedAt": "2026-11-06T10:09:54.636075+00:00"
     },
     {
       "file": "forge/notebooks/07-bounded-loops.py",
