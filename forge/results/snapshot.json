@@ -16,7 +16,90 @@
         "01a1afca-9cab-751c-8d3f-02d983484664"
       ],
       "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/ace2d466a1f64998",
-      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-ace2d466-a1f6-4998-bb1c-130618b52651:v0"
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-ace2d466-a1f6-4998-bb1c-130618b52651:v0",
+      "reconciledEstimateUsd": 0.010633104666666665
+    }
+  ],
+  "budget": {
+    "limitUsd": 50,
+    "spentEstimateUsd": 0.029610153333333333,
+    "reservations": {
+      "qualification-1c68ebdf-feba-4158-8192-d5be5b3e2a98": 2
+    },
+    "halted": "Missing usage for qualification-1c68ebdf-feba-4158-8192-d5be5b3e2a98",
+    "reconciliations": [
+      {
+        "id": "qualification-17b194af-b3ef-4d47-95cc-178676315b60",
+        "estimatedUsd": 0.003,
+        "evidence": "qualification.json ended at the cancellation probe before runPi; sandbox/sandbox.json confirms terminated. Charge conservative 32 seconds at 2 CPU + 4 GiB ($0.3408/hour), rounding upward. No inference launched.",
+        "at": "2026-11-06T07:32:03.996Z"
+      },
+      {
+        "id": "qualification-af9192de-dfe3-4631-934e-37729c2a4d56",
+        "estimatedUsd": 0.010988719333333332,
+        "evidence": "Both agent and app calls completed with returned token usage. Sandbox journal confirms terminated. Original accounting rejected metadata keys rather than missing billable rates. This estimate conservatively bills the entire qualification wall-clock duration as sandbox time, including app inference after termination.",
+        "at": "2026-11-06T07:34:24.698Z"
+      },
+      {
+        "id": "ace2d466-a1f6-4998-bb1c-130618b52651",
+        "estimatedUsd": 0.010633104666666665,
+        "evidence": "All eight submitted model calls returned usage (actor/phase-1.json and tool logs). The ninth attempt was refused locally before the provider due to the frozen input-byte guard. Both actor and grader sandbox journals confirm termination. Preserve the original telemetry_missing attempt; this audited estimate reclassifies only its billing uncertainty.",
+        "at": "2026-11-06T07:41:23.512Z"
+      }
+    ]
+  },
+  "qualifications": [
+    {
+      "id": "qualification-17b194af-b3ef-4d47-95cc-178676315b60",
+      "passed": false,
+      "sourceCommit": "1b316ef2aadd5f0a2d87fbaac1c2c5a505054dd7",
+      "protocolSha256": null,
+      "startedAt": "2026-11-06T07:30:28.545Z",
+      "finishedAt": "2026-11-06T07:30:53.897Z",
+      "inputTokens": null,
+      "outputTokens": null,
+      "estimatedCostUsd": null,
+      "error": "CWSandboxTransportError: Streaming command cancelled.",
+      "reconciledEstimateUsd": 0.003
+    },
+    {
+      "id": "qualification-1c68ebdf-feba-4158-8192-d5be5b3e2a98",
+      "passed": false,
+      "sourceCommit": "6907491cc07b3cad91f26bbdfaf60570fc1f246b",
+      "protocolSha256": "87e457ec9cf3716839df078fadd5cae1e5a1a1e5cc4b14eed2e06e72fe041141",
+      "startedAt": "2026-11-06T07:42:00.479Z",
+      "finishedAt": "2026-11-06T07:43:56.209Z",
+      "inputTokens": null,
+      "outputTokens": null,
+      "estimatedCostUsd": null,
+      "error": "Error: Pi capability/usage qualification failed",
+      "reconciledEstimateUsd": null
+    },
+    {
+      "id": "qualification-af9192de-dfe3-4631-934e-37729c2a4d56",
+      "passed": false,
+      "sourceCommit": "23f50a21e66e4baaf9a2c05e6298c114699865ae",
+      "protocolSha256": null,
+      "startedAt": "2026-11-06T07:32:07.987Z",
+      "finishedAt": "2026-11-06T07:33:42.624Z",
+      "inputTokens": null,
+      "outputTokens": null,
+      "estimatedCostUsd": null,
+      "error": "Error: Missing usage or pricing",
+      "reconciledEstimateUsd": 0.010988719333333332
+    },
+    {
+      "id": "qualification-ed8a8028-bb60-4eff-a678-e5e74e94d2cc",
+      "passed": true,
+      "sourceCommit": "09a716af4cdd8467729f4185081dab019d7a8e1a",
+      "protocolSha256": null,
+      "startedAt": "2026-11-06T07:34:48.721Z",
+      "finishedAt": "2026-11-06T07:35:41.927Z",
+      "inputTokens": 1439,
+      "outputTokens": 1667,
+      "estimatedCostUsd": 0.004988329333333333,
+      "error": null,
+      "reconciledEstimateUsd": 0.004988329333333333
     }
   ]
 }
