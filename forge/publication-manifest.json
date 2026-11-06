@@ -86,61 +86,91 @@
       "file": "forge/notebooks/03-session-recovery.py",
       "project": "project-03",
       "title": "03 \u00b7 Interrupted-session recovery",
-      "sourceCommit": "31b85133e7245133b8f87df2cd6a5b1c61e880f6",
-      "sha256": "5b6cfa1434fbd807d67414aec68712465dbba9fdee55292de6d87728142f268b",
+      "sourceCommit": "0978d1c80e584e6760228265034f0f732a348211",
+      "sha256": "aa25287eba35df29cb4c0c4573b81d7f1a9be5b868465fdb785be855b617b3fe",
       "id": "Tm90ZWJvb2s6MTUzMTY=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTY%3D",
-      "status": "created_basic_not_uploaded",
+      "status": "published_verified",
       "createdAt": "2026-11-06T08:00:40.125499+00:00",
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "03-Interrupted-session-recovery",
-        "versionIndex": 0,
+        "versionIndex": 3,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:40Z",
-      "expectedRemoteSha256": "729741bb7115805dd5b8266e3bd1bbfc3c5a8e05d08f80feb6d9489b7eb62b27",
-      "publicationBlocker": "Paid EDIT session withheld while shared budget ledger is halted; canonical source not loaded"
+      "expectedRemoteSha256": "aa25287eba35df29cb4c0c4573b81d7f1a9be5b868465fdb785be855b617b3fe",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "03-Interrupted-session-recovery",
+        "versionIndex": 3,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "e6b792527ec0f29cf1b50888dfed83ca6d6ff59f99c0c5179b0605feb91db60a",
+      "renderedCellSourceVerified": true,
+      "verifiedAggregateGroups": 2,
+      "lastStaticOutputAt": null,
+      "verifiedAt": "2026-11-06T10:01:25.795975+00:00"
     },
     {
       "file": "forge/notebooks/04-runtime-feedback.py",
       "project": "project-04",
       "title": "04 \u00b7 Runtime evidence and the seeded defect",
-      "sourceCommit": "31b85133e7245133b8f87df2cd6a5b1c61e880f6",
-      "sha256": "8e8da323d9db860a385bc9da1262663f0ef4ef08c7fa28e71cf03797b6113d94",
+      "sourceCommit": "0978d1c80e584e6760228265034f0f732a348211",
+      "sha256": "16b31105d6b8ac33b6f0a2153dca0504211734cb4a1010638d4ccb6198de1a2c",
       "id": "Tm90ZWJvb2s6MTUzMTc=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTc%3D",
-      "status": "created_basic_not_uploaded",
+      "status": "published_verified",
       "createdAt": "2026-11-06T08:00:42.224672+00:00",
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "04-Runtime-evidence-and-the-seeded-defect",
-        "versionIndex": 0,
+        "versionIndex": 3,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:42Z",
-      "expectedRemoteSha256": "729741bb7115805dd5b8266e3bd1bbfc3c5a8e05d08f80feb6d9489b7eb62b27",
-      "publicationBlocker": "Paid EDIT session withheld while shared budget ledger is halted; canonical source not loaded"
+      "expectedRemoteSha256": "16b31105d6b8ac33b6f0a2153dca0504211734cb4a1010638d4ccb6198de1a2c",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "04-Runtime-evidence-and-the-seeded-defect",
+        "versionIndex": 3,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "d97ad42659fb6a733784fed559b0767fd18b4727837810a27ecc50e5e75713b5",
+      "renderedCellSourceVerified": true,
+      "verifiedAggregateGroups": 2,
+      "lastStaticOutputAt": null,
+      "verifiedAt": "2026-11-06T10:03:28.315990+00:00"
     },
     {
       "file": "forge/notebooks/05-role-separation.py",
       "project": "project-05",
       "title": "05 \u00b7 One feature, three role arrangements",
-      "sourceCommit": "31b85133e7245133b8f87df2cd6a5b1c61e880f6",
-      "sha256": "2d8705309f1efecffeb075d00c53b224655c84f5f3f323d510db8f3adc997c08",
+      "sourceCommit": "0978d1c80e584e6760228265034f0f732a348211",
+      "sha256": "17931a8da8ada558ec727772d6c960303312fd157df54eef57638c85584a16d3",
       "id": "Tm90ZWJvb2s6MTUzMTg=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTg%3D",
-      "status": "created_basic_not_uploaded",
+      "status": "published_verified",
       "createdAt": "2026-11-06T08:00:43.988418+00:00",
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "05-One-feature-three-role-arrangements",
-        "versionIndex": 0,
+        "versionIndex": 3,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:44Z",
-      "expectedRemoteSha256": "729741bb7115805dd5b8266e3bd1bbfc3c5a8e05d08f80feb6d9489b7eb62b27",
-      "publicationBlocker": "Paid EDIT session withheld while shared budget ledger is halted; canonical source not loaded"
+      "expectedRemoteSha256": "17931a8da8ada558ec727772d6c960303312fd157df54eef57638c85584a16d3",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "05-One-feature-three-role-arrangements",
+        "versionIndex": 3,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "d5fb1e3ef1ab487c2be7e2002869cde3ed80a4cbc1545a93fd733c0bc399fa31",
+      "renderedCellSourceVerified": true,
+      "verifiedAggregateGroups": 3,
+      "lastStaticOutputAt": null,
+      "verifiedAt": "2026-11-06T10:07:38.964747+00:00"
     },
     {
       "file": "forge/notebooks/06-capstone.py",
