@@ -18,39 +18,51 @@ def publish():
     saved=json.loads((ROOT/'forge/results/snapshot.json').read_text())
     ledger=json.loads((LOCAL/'budget.json').read_text())
     sources=LOCAL/'audit-sources';sources.mkdir(exist_ok=True)
-    commits=sorted({r['sourceCommit'] for r in saved['trials']+saved['qualifications']})
+    concurrent=[json.loads(p.read_text()) for p in LOCAL.glob('concurrency-*/concurrency.json')]
+    publications=json.loads((ROOT/'forge/publication-manifest.json').read_text())
+    commits=sorted({r['sourceCommit'] for r in saved['trials']+saved['qualifications']+concurrent+publications['notebooks'] if r.get('sourceCommit')})
     archives=[]
     for commit in commits:
         path=sources/(commit+'.tar.gz')
         subprocess.run(['git','archive','--format=tar.gz','-o',str(path),commit,'forge','projects'],cwd=ROOT,check=True)
         archives.append({'sourceCommit':commit,'file':path.name,'sha256':hashlib.sha256(path.read_bytes()).hexdigest()})
     (sources/'manifest.json').write_text(json.dumps(archives,indent=2)+'\n')
-    with wandb.init(entity=entity,project=project,id='course-audit-20261106',resume='allow',job_type='qualification-audit',name='Forge course qualification and blocked campaign',config={'protocol':json.loads((ROOT/'forge/protocol.json').read_text()),'upstreamCommit':'a9342ff471f2c0e60be0c08b9f4a7c502df4e442'},settings=wandb.Settings(disable_git=True,disable_code=True)) as run:
-        run.log({'qualificationAttempts':len(saved['qualifications']),'qualificationPassed':sum(r['passed'] for r in saved['qualifications']),'codingTrialAttempts':len(saved['trials']),'passedCodingTrials':sum(r['outcome']=='passed' for r in saved['trials']),'completeComparisonBlocks':0,'knownEstimatedSpendUsd':ledger['spentEstimateUsd'],'unresolvedReservationsUsd':sum(ledger['reservations'].values()),'budgetHalted':bool(ledger.get('halted'))})
+    blocks=len(saved.get('completedComparisonBlocks',[]))
+    uncertain=sum(r['reservedEstimateUsd'] for r in ledger.get('uncertainEstimates',[]))
+    with wandb.init(entity=entity,project=project,id='course-audit-20261106',resume='allow',job_type='qualification-audit',name='Forge course execution and publication evidence',config={'protocol':json.loads((ROOT/'forge/protocol.json').read_text()),'upstreamCommit':'a9342ff471f2c0e60be0c08b9f4a7c502df4e442'},settings=wandb.Settings(disable_git=True,disable_code=True)) as run:
+        run.name='Forge course execution and publication evidence'
+        run.log({'qualificationAttempts':len(saved['qualifications']),'qualificationPassed':sum(r['passed'] for r in saved['qualifications']),'codingTrialAttempts':len(saved['trials']),'passedCodingTrials':sum(r['outcome']=='passed' for r in saved['trials']),'completeComparisonBlocks':blocks,'knownEstimatedSpendUsd':ledger['spentEstimateUsd']-uncertain,'chargedUnknownReservationsUsd':uncertain,'totalChargedEstimateUsd':ledger['spentEstimateUsd'],'unresolvedReservationsUsd':sum(ledger['reservations'].values()),'budgetHalted':bool(ledger.get('halted')),'notebooksPublishedVerified':sum(r['status']=='published_verified' for r in publications['notebooks'])})
         table=wandb.Table(columns=['id','kind','outcome','original_estimate_usd','audited_estimate_usd','source_commit'])
         for row in saved['qualifications']:
             table.add_data(row['id'],'qualification','passed' if row['passed'] else 'failed',row.get('estimatedCostUsd'),ledger['settled'].get(row['id']),row['sourceCommit'])
         for row in saved['trials']:
             table.add_data(row['id'],'coding-trial',row['outcome'],row.get('estimatedCostUsd'),ledger['settled'].get(row['id']),row['sourceCommit'])
         run.log({'attempts':table})
-        artifact=wandb.Artifact('forge-course-qualification-evidence',type='course-evidence',metadata={'schemaVersion':1,'status':'paid-launches-halted','completedComparisonBlocks':0})
-        for row in saved['qualifications']:
+        artifact=wandb.Artifact('forge-course-qualification-evidence',type='course-evidence',metadata={'schemaVersion':1,'status':'recorded-evidence','completedComparisonBlocks':blocks})
+        for row in saved['qualifications']+saved['trials']+concurrent:
             directory=LOCAL/row['id']
             for path in sorted(directory.rglob('*')):
-                if path.is_file() and path.suffix in {'.json','.diff','.txt'}:
+                if path.is_file() and path.suffix in {'.json','.diff','.txt','.log','.png'}:
                     artifact.add_file(str(path),name=str(path.relative_to(LOCAL)))
         for path in sorted(sources.iterdir()):artifact.add_file(str(path),name='source-archives/'+path.name)
-        for filename in ['budget.json','app-checks.json','notebook-validation.json','project-07-real-timer.json']:
+        for filename in ['budget.json','app-checks.json','notebook-validation.json','trace-audit.json','forge-tests-final.log','sandbox-final-audit.json']:
             path=LOCAL/filename
             if path.exists():artifact.add_file(str(path),name=filename)
+        for pattern in ['project-07-*.json','project-08-*.json','rollback-*.json','report-*.json','graph-*/*.json','graph-*/*.png','notebook-sessions/*.json','trace-readback/*.json']:
+            for path in sorted(LOCAL.glob(pattern)):
+                if path.is_file():artifact.add_file(str(path),name=str(path.relative_to(LOCAL)))
         for path in sorted((ROOT/'forge/results').glob('*')):
+            if path.name in {'README.md','evidence-publication.json'}:continue
             if path.is_file():artifact.add_file(str(path),name='results/'+path.name)
+        for path in sorted((ROOT/'forge/notebooks').glob('*.py')):artifact.add_file(str(path),name='notebooks/'+path.name)
         artifact.add_file(str(ROOT/'forge/publication-manifest.json'),name='publication-manifest.json')
         committed=run.log_artifact(artifact).wait()
         receipt={'schemaVersion':1,'runId':run.id,'runUrl':run.url,'artifact':f'{entity}/{project}/{committed.name}','artifactUrl':f'https://wandb.ai/{entity}/{project}/artifacts/course-evidence/{committed.name}','sourceArchives':archives}
     api=wandb.Api();remote=api.artifact(receipt['artifact'],type='course-evidence')
     receipt['artifactFileCount']=len(list(remote.files()))
     receipt['verifiedRunBudgetHalted']=api.run(f'{entity}/{project}/{receipt["runId"]}').summary.get('budgetHalted')
+    receipt['completedComparisonBlocks']=blocks
+    receipt['completedCodingAttempts']=len(saved['trials'])
     (ROOT/'forge/results/evidence-publication.json').write_text(json.dumps(receipt,indent=2)+'\n')
     print(json.dumps(receipt,indent=2))
 

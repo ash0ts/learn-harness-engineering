@@ -98,7 +98,7 @@ def ensure(manifest):
         row['expectedRemoteVersion'] = renamed['currentVersion']
         row['expectedRemoteEditedAt'] = renamed['lastSourceEditedAt']
         row['expectedRemoteSha256'] = digest(source_bytes(manifest,renamed)) if renamed['currentVersion'] else None
-        row['publicationBlocker'] = 'Paid EDIT session withheld while shared budget ledger is halted; canonical source not loaded'
+        row['publicationBlocker'] = 'Canonical source awaits a reserved authenticated EDIT session and verification'
         save(manifest); print(filename, row['status'], flush=True)
     return manifest
 
