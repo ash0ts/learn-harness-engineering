@@ -2,10 +2,36 @@ import unittest
 import json
 import hashlib
 import html
+import io
+import os
+import tarfile
+import tempfile
+from pathlib import Path
+from unittest.mock import Mock
 from unittest.mock import patch
 import publication
+from publish_evidence import add_evidence_file
 
 class PublicationGuards(unittest.TestCase):
+    def test_evidence_credentials_are_rejected_before_upload(self):
+        with tempfile.TemporaryDirectory() as directory, patch.dict(os.environ, WANDB_API_KEY='fixture-private-credential'):
+            path=Path(directory)/'evidence.json'; artifact=Mock()
+            path.write_text('safe evidence')
+            add_evidence_file(artifact,path,name='evidence.json')
+            artifact.add_file.assert_called_once()
+            artifact.reset_mock();path.write_text('fixture-private-credential')
+            with self.assertRaisesRegex(RuntimeError,'Credential detected'):
+                add_evidence_file(artifact,path,name='evidence.json')
+            artifact.add_file.assert_not_called()
+    def test_compressed_source_credentials_are_rejected(self):
+        with tempfile.TemporaryDirectory() as directory, patch.dict(os.environ, WANDB_API_KEY='fixture-private-credential'):
+            path=Path(directory)/'source.tar.gz';artifact=Mock();content=b'fixture-private-credential'
+            with tarfile.open(path,'w:gz') as archive:
+                member=tarfile.TarInfo('source.txt');member.size=len(content)
+                archive.addfile(member,io.BytesIO(content))
+            with self.assertRaisesRegex(RuntimeError,'Credential detected in source archive'):
+                add_evidence_file(artifact,path,name=path.name)
+            artifact.add_file.assert_not_called()
     def test_stale_rendered_totals_are_rejected(self):
         row={'project':'project-01','variant':'minimal','sourceCommit':'fixture','outcome':'passed','estimatedCostUsd':0.1}
         canonical=("project_id = 'overview'\nsaved = json.loads("+repr(json.dumps({'trials':[row]}))+")\n").encode()
