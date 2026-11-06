@@ -130,3 +130,8 @@ Result: less total code (800 vs 1200 lines) but more effective code. Completion 
 2. **Comparison Experiment**: Run the same project twice — once without constraints, once with enforced WIP=1. Compare verified completion rate, total lines of code, and effective code ratio.
 
 3. **Completion Evidence Audit**: Review a recent agent run's output, classifying each code change as "completed behavior," "incomplete behavior," or "scaffolding." Add missing verification commands for each incomplete behavior.
+
+
+## Optional Forge experiment
+
+Follow the [Forge learning path](/en/forge/) for sandbox execution, Agent Lens traces, W&B evidence and the corresponding Marimo notebook. The offline exercise remains the default.
