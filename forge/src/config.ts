@@ -7,6 +7,7 @@ export interface Config {
   budgetUsd: number;
   maxTurns: number;
   maxOutputTokens: number;
+  maxInputBytes: number;
 }
 
 export function config(env: NodeJS.ProcessEnv = process.env): Config {
@@ -19,7 +20,7 @@ export function config(env: NodeJS.ProcessEnv = process.env): Config {
     project: env.WANDB_PROJECT ?? 'learn-harness-engineering-forge',
     model: env.FORGE_MODEL ?? 'Qwen/Qwen3.6-35B-A3B',
     inferenceUrl: env.FORGE_INFERENCE_URL ?? 'https://api.inference.wandb.ai/v1',
-    apiKey: env.WANDB_API_KEY, budgetUsd, maxTurns: 24, maxOutputTokens: 4096,
+    apiKey: env.WANDB_API_KEY, budgetUsd, maxTurns: 24, maxOutputTokens: 4096, maxInputBytes: 524288,
   };
 }
 

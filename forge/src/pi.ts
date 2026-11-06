@@ -56,14 +56,14 @@ export async function runPi(c: Config, request: AgentRequest) {
   let requests = 0;
   session.agent.streamFunction = (model, context, options) => {
     if (requests >= c.maxTurns) throw new Error('Model-call budget exhausted');
-    if (Buffer.byteLength(JSON.stringify(context), 'utf8') > 125000) {
+    if (Buffer.byteLength(JSON.stringify(context), 'utf8') > c.maxInputBytes - 8192) {
       throw new Error('Frozen input byte budget exceeded');
     }
     return stream(model, context, {...options, temperature: 0, maxTokens: c.maxOutputTokens, maxRetries: 0,
       onPayload: async payload => {
         const changed = await options?.onPayload?.(payload, model);
         const final = changed ?? payload;
-        if (Buffer.byteLength(JSON.stringify(final), 'utf8') > 131072) throw new Error('Frozen provider payload byte budget exceeded');
+        if (Buffer.byteLength(JSON.stringify(final), 'utf8') > c.maxInputBytes) throw new Error('Frozen provider payload byte budget exceeded');
         requests++; // Only requests that pass the local gate can incur inference cost.
         return final;
       },
