@@ -201,7 +201,9 @@ def publish():
         for i,(title,metric) in enumerate([
             ("All completed coding attempts", "codingTrialAttempts"), ("Verified visible-answer passes", "verifiedUiPasses"),
             ("Verified notebooks", "notebooksPublishedVerified"), ("Charged estimate (USD)", "totalChargedEstimateUsd"),
-            ("Unknown-usage charges (USD)", "chargedUnknownReservationsUsd"), ("Unresolved reservations (USD)", "unresolvedReservationsUsd")])])]
+            ("Unknown-usage charges (USD)", "chargedUnknownReservationsUsd"), ("Unresolved reservations (USD)", "unresolvedReservationsUsd"),
+            ("Agent Lens conversations verified", "agentLensConversationsVerified"), ("W&B trial artifacts verified", "modelsTrialArtifactsVerified"),
+            ("Cleanup records verified", "cleanupRecordsVerified"), ("Active course workers", "activeCourseWorkers")])])]
     operations.save()
     previous.update(views=views, operations={"url":operations.url, "forgeUrl":forge_url(operations.url), "name":operations.name})
     # Preserve newly created IDs even if a later readback is unavailable.
