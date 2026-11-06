@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-06T10:50:06.138260+00:00",
+  "generatedAt": "2026-11-06T10:55:30.230314+00:00",
   "views": [
     {
       "protocolRevision": 2,
@@ -8,6 +8,14 @@
       "url": "https://forge.coreweave.com/wandb/learn-harness-engineering-forge?nw=tsgaokxuthw",
       "forgeUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=tsgaokxuthw",
       "name": "Forge course \u2014 revision 2 comparisons",
+      "readBackVerified": true
+    },
+    {
+      "protocolRevision": 3,
+      "sourceCommit": "7c563eb14f3999ab3e659b77c4095c883619002f",
+      "url": "https://forge.coreweave.com/wandb/learn-harness-engineering-forge?nw=ssij233dnka",
+      "forgeUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=ssij233dnka",
+      "name": "Forge course \u2014 revision 3 comparisons",
       "readBackVerified": true
     }
   ],
