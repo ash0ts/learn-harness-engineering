@@ -29,28 +29,28 @@ import marimo
 __generated_with = "0.25.2"
 app = marimo.App(width="full")
 
-@app.cell
+@app.cell(hide_code=True)
  def_placeholder_imports
 
-@app.cell
+@app.cell(hide_code=True)
  def_placeholder_constants
 
-@app.cell
+@app.cell(hide_code=True)
  def_placeholder_intro
 
-@app.cell
+@app.cell(hide_code=True)
  def_placeholder_results
 
-@app.cell
+@app.cell(hide_code=True)
  def_placeholder_links
 
-@app.cell
+@app.cell(hide_code=True)
  def_placeholder_controls
 
-@app.cell
+@app.cell(hide_code=True)
  def_placeholder_execute
 
-@app.cell
+@app.cell(hide_code=True)
  def_placeholder_status
 
 if __name__ == "__main__":
@@ -82,8 +82,8 @@ CELLS = {
     aggregates = []
     for _variant in sorted({row["variant"] for row in rows}):
         _group = [row for row in rows if row["variant"] == _variant]
-        aggregates.append({"variant": _variant, "attempts": len(_group), "passed": counts[_variant, "passed"], "task_failed": counts[_variant, "task_failed"], "infrastructure_failed": counts[_variant, "infrastructure_failed"], "telemetry_missing": counts[_variant, "telemetry_missing"], "known_estimate_usd": round(sum(row.get("estimatedCostUsd") or 0 for row in _group), 6), "unknown_cost_attempts": sum(row.get("estimatedCostUsd") is None for row in _group)})
-    mo.vstack([mo.md("## Saved results\\n\\n" + saved.get("status", "No campaign has been recorded.")), mo.ui.table(aggregates, selection=None) if aggregates else mo.md("No trials are recorded for this project. This is an explicit absence of evidence, not a zero score."), mo.md("Target: three repeats per automated variant. Show task failures, infrastructure failures and missing telemetry separately. Repeats of one task are not independent tasks. Known cost sums exclude unknown amounts; consult the shared ledger for reservations and audited reconciliations."), mo.ui.table(rows, selection=None) if rows else mo.md("No run rows to display.")])
+        aggregates.append({"variant": _variant, "attempts": len(_group), "passed": counts[_variant, "passed"], "task_failed": counts[_variant, "task_failed"], "infrastructure_failed": counts[_variant, "infrastructure_failed"], "telemetry_missing": counts[_variant, "telemetry_missing"], "known_estimate_usd": round(sum(row.get("reconciledEstimateUsd", row.get("estimatedCostUsd")) or 0 for row in _group), 6), "unknown_cost_attempts": sum(row.get("estimatedCostUsd") is None and row.get("reconciledEstimateUsd") is None for row in _group)})
+    mo.vstack([mo.md("## Saved results\\n\\n" + saved.get("status", "No campaign has been recorded.")), mo.ui.table(aggregates, selection=None) if aggregates else mo.md("No trials are recorded for this project. This is an explicit absence of evidence, not a zero score."), mo.md("Target: three repeats per automated variant. Show task failures, infrastructure failures and missing telemetry separately. Repeats of one task are not independent tasks. Cost sums include audited reconciliations where available and exclude unresolved amounts. Original outcomes are preserved; see the shared ledger for reservations and reconciliation evidence."), mo.ui.table(rows, selection=None) if rows else mo.md("No run rows to display."), mo.md("### Qualification and budget evidence"), mo.ui.table(saved.get("qualifications", []), selection=None), mo.md("```json\\n" + __import__("json").dumps(saved.get("budget", {}), indent=2) + "\\n```")])
     return (rows,)''',
 'links': '''def _(mo, rows):
     _links = []
