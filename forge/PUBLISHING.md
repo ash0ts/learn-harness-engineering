@@ -83,11 +83,23 @@ existing ledger; it does not authorize changing a ledger's limit.
 
 ## Verify delivery
 
-After all work and editing sessions finish, run `audit_traces.py` and
-`audit_sandboxes.ts`, rebuild `report.py`, and publish `publish_evidence.py` with
-the pinned W&B dependency through `uv run --script`. These read existing evidence
-and upload artifacts; they launch no inference or coding trial. The audit stores
-exact source archives for every recorded execution and notebook revision.
+After all work and editing sessions finish, rebuild `snapshot_results.py`, then
+run `audit_comparisons.py`, `audit_models.py`, `audit_traces.py`, and
+`audit_sandboxes.ts`. Validate all nine notebooks and verify their committed
+publications again. Rebuild `report.py` and inspect its completion gates before
+publishing `publish_evidence.py` with its pinned dependencies through
+`uv run --script`. The publisher rejects files or source archives containing the
+active credential before staging them. It stores exact source archives for every
+recorded execution and notebook revision and reads their checksums back.
+
+Run `uv run --script forge/scripts/dashboards.py` after publishing the final audit
+metrics. It reuses the native Forge workspace and report IDs in
+`forge/results/dashboards.json`. The primary view includes only qualified,
+complete comparison blocks; archived views retain their original grades and
+measurement limitations. Open the primary and operations dashboards to verify
+their charts, source-evidence links, accounting totals, and zero active workers.
+Rebuild `report.py` after these receipts are recorded. These audit and publication
+commands launch no inference or coding trial.
 
 The delivery report distinguishes the frozen comparison study, subsequent
 runtime qualifications, and manual graph fixtures. A graph fixture that passes
