@@ -2,15 +2,10 @@
   "schemaVersion": 1,
   "runId": "course-audit-20261106",
   "runUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/course-audit-20261106",
-  "artifact": "wandb/learn-harness-engineering-forge/forge-course-qualification-evidence:v3",
-  "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v3",
-  "publisherSourceCommit": "069c480e4e93d6044526a0decc812c7814863ee9",
+  "artifact": "wandb/learn-harness-engineering-forge/forge-course-qualification-evidence:v4",
+  "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+  "publisherSourceCommit": "21787d90f526a7359f216c5cb7cfc247eb38bda9",
   "sourceArchives": [
-    {
-      "sourceCommit": "069c480e4e93d6044526a0decc812c7814863ee9",
-      "file": "069c480e4e93d6044526a0decc812c7814863ee9.tar.gz",
-      "sha256": "538c244d8bee389c6f177a84af6b68b93a79e83b6fc02c6ac790865775dea125"
-    },
     {
       "sourceCommit": "09a716af4cdd8467729f4185081dab019d7a8e1a",
       "file": "09a716af4cdd8467729f4185081dab019d7a8e1a.tar.gz",
@@ -30,6 +25,11 @@
       "sourceCommit": "1b316ef2aadd5f0a2d87fbaac1c2c5a505054dd7",
       "file": "1b316ef2aadd5f0a2d87fbaac1c2c5a505054dd7.tar.gz",
       "sha256": "74c16981996f56ff2592ec436c90932b6a36b11772a84019db63a0362f93a49d"
+    },
+    {
+      "sourceCommit": "21787d90f526a7359f216c5cb7cfc247eb38bda9",
+      "file": "21787d90f526a7359f216c5cb7cfc247eb38bda9.tar.gz",
+      "sha256": "db3b89c243f44b323d3970809d24761e25179727754f3060d8eee0da04aa4fc1"
     },
     {
       "sourceCommit": "23f50a21e66e4baaf9a2c05e6298c114699865ae",
@@ -182,7 +182,7 @@
       "sha256": "c3f51eb052d336f6e33191acc8d86c0340abe1e2c49e75568971f538269b7e6d"
     }
   ],
-  "artifactFileCount": 8506,
+  "artifactFileCount": 8512,
   "verifiedRunSummary": {
     "qualificationAttempts": 9,
     "qualificationPassed": 4,
