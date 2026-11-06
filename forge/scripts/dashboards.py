@@ -20,6 +20,7 @@ import wandb_workspaces.expr as expr
 import wandb_workspaces.reports.v2 as wr
 import wandb_workspaces.workspaces as ws
 from models import require_private_project
+from evidence_reports import read_reports
 
 ROOT = Path(__file__).resolve().parents[2]
 LOCAL = ROOT / "forge/local-results"
@@ -38,12 +39,7 @@ def forge_url(url):
 
 def aggregates():
     groups = defaultdict(dict)
-    reports=list(LOCAL.glob("report-*.json"))
-    completed_campaigns={json.loads(path.read_text())['campaignId'] for path in reports}
-    reports += [path for path in LOCAL.glob('dashboard-progress-*.json')
-                if json.loads(path.read_text())['campaignId'] not in completed_campaigns]
-    for path in reports:
-        report = json.loads(path.read_text())
+    for report in read_reports(LOCAL):
         for block in report["blocks"]:
             project = block["project"]
             if project not in [f"project-0{i}" for i in range(1, 7)]:
