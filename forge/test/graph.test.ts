@@ -23,3 +23,15 @@ test('graph never replays an ambiguous pending operation',async()=>{
   const s={...newGraph('fixture'),pendingOperation:'make-1'};
   await assert.rejects(driveGraph('/tmp/not-written.json',s,{} as GraphDriver),/Reconcile/);
 });
+test('passing parallel lanes cannot override a failed protected grade',async()=>{
+  const dir=await mkdtemp(join(tmpdir(),'graph-protected-grade-'));let rollbacks=0;
+  const driver:GraphDriver={plan:async()=> 'frozen acceptance',
+    make:async()=>({patch:'fixture.diff',sha256:'fixture',trialId:'fixture',protectedGrade:{passed:false,evidence:'trial.json'}}),
+    verify:async(_candidate,lane)=>({lane,passed:true,evidence:'lane.json'}),
+    rollback:async()=>{rollbacks++;}};
+  try {
+    const state=await driveGraph(join(dir,'state.json'),{...newGraph('fixture'),maxAttempts:1},driver);
+    assert.equal(state.node,'failed');assert.equal(rollbacks,1);
+    assert.ok(!state.transitions.some(t=>t.to==='approval'));
+  }finally{await rm(dir,{recursive:true,force:true});}
+});

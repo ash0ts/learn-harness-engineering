@@ -3,11 +3,12 @@ import {randomUUID,createHash} from 'node:crypto';
 import {writeJson} from './records.js';
 
 export type Node='plan'|'make'|'verify'|'rollback'|'approval'|'done'|'rejected'|'failed';
-export interface Candidate {patch:string;sha256:string;trialId:string}
+export interface Candidate {patch:string;sha256:string;trialId:string;protectedGrade?:{passed:boolean;evidence:string}}
 export interface Verification {lane:'services'|'electron';passed:boolean;evidence:string;error?:string}
 export interface GraphState {
   schemaVersion:1;id:string;sourceCommit:string;node:Node;attempts:number;maxAttempts:number;
   plan?:string;candidate?:Candidate;previous?:Candidate;verification?:Verification[];
+  lastProtectedGrade?:Candidate['protectedGrade'];
   transitions:Array<{from:Node;to:Node;at:string;reason:string}>;
   pendingOperation?:string;error?:string;
   approval?:{decision:'approve'|'reject';candidateSha256:string;at:string;actor:string};
@@ -36,7 +37,8 @@ export async function driveGraph(file:string,s:GraphState,driver:GraphDriver) {
         case 'verify':
           if(!s.candidate)throw new Error('Missing candidate');
           s.verification=await Promise.all(['services','electron'].map(lane=>driver.verify(s.candidate!,lane as Verification['lane'],s)));
-          await transition(file,s,s.verification.every(v=>v.passed)?'approval':'rollback','independent parallel verification results');break;
+          s.lastProtectedGrade=s.candidate.protectedGrade;
+          await transition(file,s,s.verification.every(v=>v.passed)&&s.candidate.protectedGrade?.passed!==false?'approval':'rollback','protected grade and independent parallel verification results');break;
         case 'rollback':
           await driver.rollback(s);s.candidate=s.previous;
           await transition(file,s,s.attempts>=s.maxAttempts?'failed':'make','restore last verified patch or frozen baseline');break;
