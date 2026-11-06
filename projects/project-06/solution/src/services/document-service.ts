@@ -1,3 +1,4 @@
+import {forgeTool} from './forge-hooks';
 import * as fs from 'fs';
 import * as path from 'path';
 import { v4 as uuidv4 } from 'uuid';
@@ -27,6 +28,7 @@ export class DocumentService {
 
   /** Import a file from the given path. */
   importDocument(filePath: string): Document {
+    return forgeTool('documents.import', {filePath}, () => {
     this.log.info('Starting document import', { filePath });
 
     if (!fs.existsSync(filePath)) {
@@ -71,6 +73,7 @@ export class DocumentService {
       totalDocuments: docs.length,
     });
     return doc;
+    });
   }
 
   /** Get a single document by ID. */

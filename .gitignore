@@ -29,3 +29,5 @@ docs/.vitepress/dist/
 artifacts/
 dist/
 .workbuddy/
+forge/local-results/
+forge/.venv/
