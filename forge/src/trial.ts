@@ -20,7 +20,7 @@ async function patch(sandbox: Sandbox, baseline: string) {
 }
 export async function runTrial(input: {id?:string;project:string;variant:string;trial:number;sourceCommit:string;output:string}) {
   const c=config(), p=await protocol(), task=await readTask(input.project);
-  if(c.model!==p.model || c.inferenceUrl!==p.inferenceUrl)throw new Error('Frozen campaign model/provider mismatch');
+  if(c.model!==p.model || c.inferenceUrl!==p.inferenceUrl || c.maxInputBytes!==p.maxInputBytes)throw new Error('Frozen campaign model/provider/context mismatch');
   const id=input.id || randomUUID(); const dir=join(input.output,id);await mkdir(dir,{recursive:true});
   const record: TrialRecord & Record<string,unknown> = {schemaVersion:1,id,project:input.project,variant:input.variant,trial:input.trial,
     sourceCommit:input.sourceCommit,model:c.model,startedAt:new Date().toISOString(),outcome:'infrastructure_failed',

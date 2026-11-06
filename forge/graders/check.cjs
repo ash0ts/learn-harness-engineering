@@ -31,6 +31,7 @@ const save = () => fs.writeFileSync(path.join(output,'result.json'),JSON.stringi
       ['node','/opt/app/node_modules/typescript/bin/tsc','--noEmit','-p','tsconfig.node.json'],
       ['node','/opt/app/node_modules/typescript/bin/tsc','--noEmit','-p','tsconfig.json'],
       ['node','/opt/app/node_modules/typescript/bin/tsc','-p','tsconfig.node.json'],
+      ['node','scripts/forge-build-preload.cjs'],
       ['node','/opt/app/node_modules/vite/bin/vite.js','build'],
     ]) command(args);
   });
