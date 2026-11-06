@@ -1,9 +1,125 @@
 {
+  "forge/01-minimal-harness.md": {
+    "ids": [
+      "six-passing-runs-no-separation",
+      "the-minimal-condition-already-has-a-lot-around-it",
+      "what-had-to-work",
+      "six-attempts-on-one-task",
+      "inspect-the-successful-patch-too",
+      "a-next-experiment-that-could-teach-us-more"
+    ],
+    "locales": {
+      "en": 6
+    }
+  },
+  "forge/02-workspace-docs.md": {
+    "ids": [
+      "writing-a-repository-guide-an-agent-can-use",
+      "what-information-the-guide-adds",
+      "the-research-does-not-say-write-a-bigger-agents-md",
+      "a-service-import-is-easier-to-test-than-a-user-s-import",
+      "make-a-handoff-that-names-the-unresolved-operation"
+    ],
+    "locales": {
+      "en": 5
+    }
+  },
+  "forge/03-session-recovery.md": {
+    "ids": [
+      "what-survives-when-the-next-session-starts",
+      "there-are-several-different-things-to-remember",
+      "give-the-next-session-something-it-can-disprove",
+      "the-data-file-and-the-status-can-disagree",
+      "a-handoff-has-to-fit-the-remaining-work-allowance",
+      "read-the-continuation-from-both-ends"
+    ],
+    "locales": {
+      "en": 6
+    }
+  },
+  "forge/04-runtime-feedback.md": {
+    "ids": [
+      "debugging-an-index-full-of-empty-chunks",
+      "observe-the-value-the-next-operation-consumes",
+      "trace-the-app-without-mixing-it-into-the-coding-session",
+      "a-guard-script-can-pass-by-failing-to-check-anything",
+      "follow-one-document-all-the-way-through"
+    ],
+    "locales": {
+      "en": 5
+    }
+  },
+  "forge/05-role-separation.md": {
+    "ids": [
+      "a-reviewer-costs-turns",
+      "the-schedules-distribute-the-same-allowance-differently",
+      "the-checker-starts-a-new-conversation",
+      "more-agents-help-some-kinds-of-work",
+      "what-failed-in-the-submitted-patches",
+      "read-the-review-beside-the-revision"
+    ],
+    "locales": {
+      "en": 6
+    }
+  },
+  "forge/06-capstone.md": {
+    "ids": [
+      "a-reset-button-has-to-clear-more-than-the-screen",
+      "we-first-had-to-say-what-the-feedback-api-meant",
+      "test-deletion-through-the-operation-that-would-expose-leftover-data",
+      "a-benchmark-command-must-execute-the-work-it-claims-to-measure",
+      "what-3-3-versus-1-3-supports",
+      "review-the-delivered-state-then-choose-whether-to-rerun"
+    ],
+    "locales": {
+      "en": 6
+    }
+  },
+  "forge/07-bounded-loops.md": {
+    "ids": [
+      "two-hours-of-agent-work-with-a-stop-condition",
+      "the-coordinator-owns-the-decision-to-continue",
+      "an-interrupted-launch-needs-reconciliation",
+      "each-mode-has-a-different-reason-to-stop",
+      "wall-clock-time-and-compute-are-different-measurements",
+      "read-a-checkpoint-as-an-operational-record"
+    ],
+    "locales": {
+      "en": 6
+    }
+  },
+  "forge/08-state-machine.md": {
+    "ids": [
+      "binding-human-approval-to-the-patch-we-tested",
+      "name-the-transitions-before-automating-them",
+      "the-first-two-candidates-failed-for-different-reasons",
+      "a-test-cannot-require-a-path-the-task-never-named",
+      "approval-binds-the-decision-to-bytes",
+      "two-candidates-two-records",
+      "review-one-transition-at-a-time"
+    ],
+    "locales": {
+      "en": 7
+    }
+  },
   "forge/index.md": {
     "ids": [
-      "learn-harness-engineering-with-forge",
-      "learning-path",
+      "a-harness-course-with-results-you-can-inspect",
+      "one-application-gives-the-failures-somewhere-to-happen",
+      "a-trial-ends-after-another-process-checks-the-patch",
+      "we-had-to-repair-the-measurement",
+      "read-the-series-through-the-problem-you-have",
+      "what-the-course-leaves-open"
+    ],
+    "locales": {
+      "en": 6
+    }
+  },
+  "forge/running.md": {
+    "ids": [
+      "running-the-forge-track",
       "local-setup",
+      "plan-before-launching",
       "read-the-evidence",
       "budget-and-recovery",
       "notebooks-and-publication"

@@ -1,106 +1,71 @@
-# Learn harness engineering with Forge
+# A harness course with results you can inspect
 
-This optional track runs the eight projects as reproducible experiments. Pi edits the application inside a fresh CoreWeave Sandbox. A second sandbox grades its exported patch against real services and Electron under Xvfb. Agent Lens records the coding agent and knowledge-base app as separate conversations; W&B Models stores configurations, metrics and evidence artifacts.
+We ran a coding agent through eight projects to see what happened when we changed the instructions, workspace documentation, feedback, and control flow around it. The agent built and repaired an Electron knowledge-base app. We kept its patches, opened the app, exercised its services, and recorded the failures alongside the successful runs.
 
-The original exercises still work offline. Their mock defaults, starter gaps and lecture skeletons remain learning material. The Forge track does not use simulated benchmark scores as experimental evidence.
+The primary comparison finished with 19 passing attempts out of 39. That is enough to examine particular failures and design another experiment. It is nowhere near enough to announce the best way to build an agent.
 
-## Learning path
+This series follows the work in that order: what we asked the agent to do, what we allowed it to see, what it changed, and what survived independent checking. Each article connects to a saved notebook. You can read the results without launching a coding trial.
 
-| Project | Controlled question | Canonical notebook | Forge notebook |
-| --- | --- | --- | --- |
-| Overview | What counts as evidence, and what remains unknown? | [00 · Overview](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-notebooks/forge/notebooks/00-overview.py) | [Open in Forge](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTM%3D) |
-| 01 | Do explicit repository rules help this unfinished app? | [01 · Minimal harness](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-notebooks/forge/notebooks/01-minimal-harness.py) | [Open in Forge](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTQ%3D) |
-| 02 | Can a fresh agent use workspace documentation? | [02 · Workspace docs](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-notebooks/forge/notebooks/02-workspace-docs.py) | [Open in Forge](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTU%3D) |
-| 03 | Can another session recover from files and a patch? | [03 · Session recovery](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-notebooks/forge/notebooks/03-session-recovery.py) | [Open in Forge](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTY%3D) |
-| 04 | Does runtime feedback expose the seeded indexing defect? | [04 · Runtime feedback](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-notebooks/forge/notebooks/04-runtime-feedback.py) | [Open in Forge](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTc%3D) |
-| 05 | Does role separation improve the same history feature? | [05 · Role separation](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-notebooks/forge/notebooks/05-role-separation.py) | [Open in Forge](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTg%3D) |
-| 06 | Does the complete harness improve verified behavior? | [06 · Capstone](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-notebooks/forge/notebooks/06-capstone.py) | [Open in Forge](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTk%3D) |
-| 07 | When should a durable loop continue or stop? | [07 · Bounded loops](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-notebooks/forge/notebooks/07-bounded-loops.py) | [Open in Forge](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjA%3D) |
-| 08 | How do retries, rollback and human approval compose? | [08 · State machine](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-notebooks/forge/notebooks/08-state-machine.py) | [Open in Forge](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjE%3D) |
+## One application gives the failures somewhere to happen
 
-Start with the overview, then follow project order. Each notebook explains the experiment, displays a saved evidence snapshot, exposes configuration, and can invoke a bounded rerun through the shared TypeScript coordinator. Opening a notebook never starts an inference or coding trial. Hosted notebook runtime itself may incur compute charges.
+The application imports documents, splits their text into chunks, retrieves relevant excerpts, and answers questions with citations. An Electron main process owns the filesystem and services. A preload script exposes a typed interface to the React renderer, which draws the window and handles clicks. A document can therefore be saved correctly while the import button remains broken. An answer can exist in storage while the screen never displays it.
 
-## Local setup
+That separation gave us several kinds of failure to inspect. The course includes unfinished features, a seeded indexing defect, and opportunities for an agent to produce a convincing explanation without a working application. We preserved those starter gaps in the original offline exercises. The optional Forge track adds execution and measurement around them.
 
-From the course checkout, install Node 22.19+, Python 3.11+ and `uv`, then run:
+Pi is the coding agent. Forge inference supplies its model calls. CoreWeave Sandboxes provide fresh execution environments. Agent Lens records conversations and operations. W&B Models stores experiment configuration, outcomes, and versioned evidence; we did not train a model. Marimo notebooks load the saved records and call the shared TypeScript runner when a learner explicitly requests a rerun.
 
-```sh
-npm ci --prefix forge
-npm run build --prefix forge
-npm run forge --prefix forge -- doctor
-npm run check --prefix forge
-npm test --prefix forge
-npm run forge --prefix forge -- validate-notebooks
-```
+We also instrumented the knowledge-base app. Its conversations are separate from the conversations in which Pi edits it. Otherwise, a trace of the app answering a question could be mistaken for part of the coding agent's reasoning about a patch.
 
-For live work, supply `WANDB_API_KEY` externally and set `WANDB_ENTITY` to a writable team. `WANDB_PROJECT` defaults to `learn-harness-engineering-forge`; create it privately. This delivery uses the `wandb` team. Use sample course data only. The renderer receives neither credentials nor SDK clients.
+## A trial ends after another process checks the patch
 
-```sh
-export WANDB_ENTITY=wandb
-export WANDB_PROJECT=learn-harness-engineering-forge
-npm run forge --prefix forge -- doctor --qualify --execute
-npm run forge --prefix forge -- compare --project project-01 --repeats 3
-# Inspect the plan and reservations before this explicit paid action:
-npm run forge --prefix forge -- compare --project project-01 --repeats 3 --execute
-```
+For each treatment, we stage the same unfinished application code plus the selected instructions and support files. Reference solutions and previous scores stay outside that workspace. Pi works within a fixed model-call allowance, and the coordinator exports its patch before terminating the coding sandbox.
 
-The pinned provider is Forge's OpenAI-compatible endpoint with `Qwen/Qwen3.6-35B-A3B`. Qualification checks model availability, sandbox execution/cancellation, Pi tool use and live app inference. Provider unavailability stops the campaign; it never substitutes mock answers or another provider. Protocol revisions require another successful qualification.
+A second sandbox starts from the frozen baseline, applies that patch, and runs protected checks. Those checks import documents through the actual services, inspect stored chunks, retrieve excerpts, and exercise the Electron window under Xvfb, a virtual display. They do not accept the agent's final message as evidence that the job is finished.
 
-## Read the evidence
+This distinction has precedent. Anthropic's [agent-evaluation guide](https://www.anthropic.com/research/demystifying-evals-for-ai-agents) separates the task, trial, transcript, and grader. We use those distinctions to keep an attempted repair separate from the assertion that the repair worked. The assertions still need inspection: our graders had bugs too.
 
-Open the private [qualified comparison dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=dfs83wdpatt),
-[archived revision 4 comparison dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=wz8re0rb108),
-[historical revision 3 dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=ssij233dnka),
-[original revision 2 dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=tsgaokxuthw),
-and [execution/publication audit](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=l9e45ofb461).
-The [evidence report](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/reports/Forge-harness-course-%E2%80%94-verified-execution-and-comparison-evidence--VmlldzoxODI2MzgyOA==)
-shows exact denominators and links every treatment to original trials and artifacts.
-Dashboard aggregate runs are derived views, not additional coding attempts.
+## We had to repair the measurement
 
-Revision 3 bundles each learner preload for Electron's sandboxed module loader,
-bounds actor-visible tool output, and expands the frozen input payload limit.
-The original offline starters retain their intended gaps. These revisions are
-separate cohorts; differences between them cannot isolate any one harness change.
+Early UI checks did not reliably wait for the asynchronous application state they claimed to observe. A later history check clicked answer prose instead of an interactive citation control. The initial capstone task left the feedback API's argument format unspecified while the checker assumed a particular format.
 
-Revision 4 corrects asynchronous UI polling and requires the actual answer text to
-appear before capturing evidence. Revision 2 and 3 native grades remain recorded,
-but their UI waits do not establish visible-answer acceptance. The report separates
-those historical grades from revision 4 and from supplemental patch qualifications.
+Each defect changed what we could say about a score. We retained the earlier grades, documented the exclusions, corrected the relevant check or task contract, and ran new comparisons from frozen inputs. We did not turn yesterday's failed attempt into today's passing attempt by editing its result file.
 
-The initial revision 4 Project 05 citation selector clicked answer prose, and Project 06
-left its feedback IPC arguments unspecified. Those two source/project cohorts are
-excluded from qualified comparisons while their native grades remain archived.
-The follow-up freezes interactive citation controls, native/custom confirmation tests,
-and an explicit feedback payload shared by both capstone treatments. The primary
-dashboard selects the latest qualified complete blocks per project; the source revision
-remains visible. See `forge/measurement-notes.json` for the exclusions.
+The primary comparison selects the latest qualified complete blocks for each project. Here, *qualified* means the run belongs to a cohort whose acceptance checks met our recorded requirements. It does not mean the application has been proven correct in every situation. Each treatment has three attempts on one course task.
 
-Protected app checks execute actual services with deterministic course Q&A defaults.
-Live Forge app inference is qualified separately. These checks do not measure production
-answer quality.
+| Project | Compared treatments | Passing attempts |
+| --- | --- | --- |
+| 01: app shell | Minimal instructions; explicit rules | 3/3; 3/3 |
+| 02: import and document detail | Minimal instructions; workspace docs | 0/3; 0/3 |
+| 03: session continuity | Minimal instructions; recovery files | 0/3; 0/3 |
+| 04: indexing defect | Minimal instructions; runtime feedback | 2/3; 3/3 |
+| 05: conversation history | Single role; maker/checker; planner/maker/checker | 2/3; 2/3; 0/3 |
+| 06: capstone | Minimal instructions; complete harness | 1/3; 3/3 |
 
-Trials start from frozen, identical unfinished application code with only the selected harness files. Reference solutions and historical scores are excluded. Repeats rotate treatment order. Protected graders run after the coding sandbox terminates, in a fresh workspace with the original baseline plus the exported patch. Service success does not establish UI success: Electron runs under Xvfb and gets its own checks.
+The total is 19/39, but the rows deserve separate explanations. Different projects ask for different work, and checker corrections required different source revisions. Combining them into a league table would conceal both facts. Across historical comparisons, diagnostics, loops, and graphs, we completed 129 coding attempts. Those are a broader collection than the 39 primary attempts.
 
-Report task failures, infrastructure failures, missing telemetry and budget exhaustion separately. The target is three repeats per automated variant; incomplete blocks do not establish treatment differences. Human interventions must be observed or entered by a learner. The track makes no inferred time-saved claim and trains no models.
+## Read the series through the problem you have
 
-Pi uses its documented Weave tracing extension; application hooks use the Forge SDK in a separate process, with isolated concurrent contexts and shutdown flushes. Follow [course conversations in Agent Lens](https://forge.coreweave.com/agent-lens/wandb/learn-harness-engineering-forge/conversations) and [course runs in W&B](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge). Access requires project membership.
+The first six articles examine instructions and task execution. The last two follow what happens when a coordinator keeps starting sessions after the original interaction ends.
 
-## Budget and recovery
+| Article | The question it follows | Saved notebook |
+| --- | --- | --- |
+| [01 · Six passing runs, no separation](./01-minimal-harness.md) | When do extra rules change the outcome? | [Project 01](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTQ%3D) |
+| [02 · Writing a repository guide an agent can use](./02-workspace-docs.md) | What belongs in a context file? | [Project 02](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTU%3D) |
+| [03 · What survives a new session](./03-session-recovery.md) | Which state does the next conversation inherit? | [Project 03](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTY%3D) |
+| [04 · Debugging an index full of empty chunks](./04-runtime-feedback.md) | Which observation exposes the defect? | [Project 04](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTc%3D) |
+| [05 · A reviewer costs turns](./05-role-separation.md) | What does another role buy within a fixed allowance? | [Project 05](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTg%3D) |
+| [06 · Resetting more than the screen](./06-capstone.md) | Which persisted state does acceptance need to check? | [Project 06](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTk%3D) |
+| [07 · Two hours with a stop condition](./07-bounded-loops.md) | When should another session start? | [Project 07](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjA%3D) |
+| [08 · Approving the patch we tested](./08-state-machine.md) | Which exact candidate does a human decision authorize? | [Project 08](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjE%3D) |
 
-The default application budget is $50 including inference, sandboxes and notebook execution. It reserves estimated in-flight costs before paid launches, defaults to CPU-only sandboxes and two trial workers, and collects patches/logs/checkpoints before teardown. Unknown pricing, missing usage or uncertain cleanup halts new paid work. This is a conservative application control, not a guaranteed provider billing cap.
+The [overview notebook](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTM%3D), [comparison dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=dfs83wdpatt), and [operations dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=l9e45ofb461) require membership in the private Forge project. The [public results report](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-publication/forge/results/README.md) includes the denominators, source revisions, exclusions, and recorded approval addendum.
 
-This delivery records a later explicit unlimited-budget authorization in its ledger. `FORGE_BUDGET_USD=unlimited` must match that recorded authorization; accounting and worker bounds still apply.
+## What the course leaves open
 
-Keep the shared `forge/local-results/budget.json` ledger across launches. Do not delete it to bypass a halt. Reconcile an uncertain attempt only from billing evidence or an explicit audited user decision. Timer exercises checkpoint between sessions and release idle sandboxes; the real exercise lasts two hours. Accelerated tests are separate evidence. Graphs pause at approval and need an explicit checksum-bound approve/reject decision before resuming.
+The protected app checks use real application services with the course's deterministic Q&A defaults. We qualified live Forge inference separately. Passing these checks establishes specific software behavior; it does not establish that a live model answers arbitrary documents accurately.
 
-## Notebooks and publication
+We also did not measure developer time saved. METR's [February 2026 update](https://metr.org/blog/2026-02-24-uplift-update/) describes how task selection, participant selection, and concurrent agent use complicated its own productivity measurements. Our automated pass counts contain none of the human comparison needed to answer that question.
 
-Canonical Marimo sources live in `forge/notebooks/` with pinned Python dependencies and runner provenance. To view one locally:
+You can still make a practical decision from a small study. Inspect the failing boundary, decide what change would address it, and test that change without moving the rest of the setup. Project 04's final failure, for example, came from a guard script that accepted a prohibited import. Calling the runtime-feedback treatment the winner would skip the most actionable part of that result.
 
-```sh
-uv run --with marimo==0.25.1 marimo edit forge/notebooks/00-overview.py
-```
-
-The analysis view is self-contained. Paid reruns require a mounted coordinator checkout at the displayed runner revision, Node dependencies, external credentials and the existing budget ledger. A hosted analysis notebook without that coordinator cannot launch reruns. The Python cells call the shared runner; they do not reimplement the app.
-
-Publication creates a BASIC notebook in the private project, renames it, opens an authenticated EDIT session and loads the canonical source through the Marimo editor. The normal save workflow commits source. A notebook is only marked published after its committed `currentVersion`, source checksum and rendered output are verified. Reuse recorded notebook IDs and detect remote edits before replacing source. Consult the repository publication manifest and results report for actual completion status; the manifest records verification separately from the stable source and hosted links above.
+For commands, credentials, budget accounting, and publication details, use [Running the Forge track](./running.md). The original [offline projects](/en/projects/) remain available. If you are starting with the evidence, open [Project 01](./01-minimal-harness.md) and inspect the comparison in which both treatments passed every attempt.
