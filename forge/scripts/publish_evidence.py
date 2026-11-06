@@ -6,6 +6,8 @@
 from pathlib import Path
 import hashlib
 import json
+import os
+import tarfile
 import subprocess
 import time
 import wandb
@@ -14,6 +16,19 @@ from measurement import qualified
 
 ROOT=Path(__file__).resolve().parents[2]
 LOCAL=ROOT/'forge/local-results'
+
+def add_evidence_file(artifact, path, *, name):
+    """Reject accidental credential capture before any evidence file is staged."""
+    path=Path(path)
+    credential=os.environ['WANDB_API_KEY'].encode()
+    if credential in path.read_bytes():
+        raise RuntimeError('Credential detected in evidence file: '+name)
+    if path.name.endswith('.tar.gz'):
+        with tarfile.open(path,'r:gz') as archive:
+            for member in archive:
+                if member.isfile() and credential in archive.extractfile(member).read():
+                    raise RuntimeError('Credential detected in source archive: '+name+'/'+member.name)
+    artifact.add_file(str(path),name=name)
 
 def publish():
     entity,project=require_private_project()
@@ -59,23 +74,23 @@ def publish():
             directory=LOCAL/row['id']
             for path in sorted(directory.rglob('*')):
                 if path.is_file() and path.suffix in {'.json','.diff','.txt','.log','.png'}:
-                    artifact.add_file(str(path),name=str(path.relative_to(LOCAL)))
-        for path in sorted(sources.iterdir()):artifact.add_file(str(path),name='source-archives/'+path.name)
+                    add_evidence_file(artifact,str(path),name=str(path.relative_to(LOCAL)))
+        for path in sorted(sources.iterdir()):add_evidence_file(artifact,str(path),name='source-archives/'+path.name)
         for filename in ['budget.json','app-checks.json','notebook-validation.json','trace-audit.json','models-audit.json','comparison-audit.json','checker-qualification-summary.json','forge-tests-final.log','sandbox-final-audit.json','local-checks.json','docs-check.log','anchors-check.log']:
             path=LOCAL/filename
-            if path.exists():artifact.add_file(str(path),name=filename)
+            if path.exists():add_evidence_file(artifact,str(path),name=filename)
         for pattern in ['project-07-*.json','project-08-*.json','rollback-*.json','report-*.json','graph-*/*.json','graph-*/*.png','notebook-sessions/*.json','trace-readback/*.json','reconciliations/*.json','publication/*/notebook.py','publication/*/rendered.html','publication/*.jpg','history-diagnostic-*/*.json','history-diagnostic-*/*.png','history-diagnostic-*/*.cjs','checker-diagnostic-*/*.json','checker-diagnostic-*/*.png','checker-diagnostic-*/*.cjs','notebook-rerun-qualification.json','notebook-rerun-qualification/*','publication-guards-final.log']:
             for path in sorted(LOCAL.glob(pattern)):
-                if path.is_file():artifact.add_file(str(path),name=str(path.relative_to(LOCAL)))
+                if path.is_file():add_evidence_file(artifact,str(path),name=str(path.relative_to(LOCAL)))
         for directory in sorted(LOCAL.glob('graph-qualification-*')):
             for path in sorted(directory.rglob('*')):
                 if path.is_file() and path.suffix in {'.json','.diff','.png'}:
-                    artifact.add_file(str(path),name=str(path.relative_to(LOCAL)))
+                    add_evidence_file(artifact,str(path),name=str(path.relative_to(LOCAL)))
         for path in sorted((ROOT/'forge/results').glob('*')):
             if path.name in {'README.md','evidence-publication.json'}:continue
-            if path.is_file():artifact.add_file(str(path),name='results/'+path.name)
-        for path in sorted((ROOT/'forge/notebooks').glob('*.py')):artifact.add_file(str(path),name='notebooks/'+path.name)
-        artifact.add_file(str(ROOT/'forge/publication-manifest.json'),name='publication-manifest.json')
+            if path.is_file():add_evidence_file(artifact,str(path),name='results/'+path.name)
+        for path in sorted((ROOT/'forge/notebooks').glob('*.py')):add_evidence_file(artifact,str(path),name='notebooks/'+path.name)
+        add_evidence_file(artifact,str(ROOT/'forge/publication-manifest.json'),name='publication-manifest.json')
         committed=run.log_artifact(artifact).wait()
         receipt={'schemaVersion':1,'runId':run.id,'runUrl':run.url,'artifact':f'{entity}/{project}/{committed.name}','artifactUrl':f'https://wandb.ai/{entity}/{project}/artifacts/course-evidence/{committed.name}','publisherSourceCommit':publisher_commit,'sourceArchives':archives}
     api=wandb.Api();remote=api.artifact(receipt['artifact'],type='course-evidence')
