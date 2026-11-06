@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-06T12:02:18.963313+00:00",
+  "generatedAt": "2026-11-06T12:04:36.096659+00:00",
   "status": "verification_in_progress",
   "completionGates": {
     "nineNotebooksVerified": true,
@@ -9,6 +9,7 @@
     "realTwoHourTimer": true,
     "offlineApps": true,
     "forgeTests": true,
+    "notebookExplicitAction": false,
     "localNotebookRenders": false,
     "tracesReadBack": false,
     "modelsReadBack": false,
@@ -9671,6 +9672,16 @@
       "finishedAt": "2026-11-06T10:55:36.666Z"
     }
   ],
+  "notebookRerunQualification": {
+    "schemaVersion": 1,
+    "status": "prepared_not_launched",
+    "sourceFile": "/tmp/forge-notebook-rerun-qualification.py",
+    "sourceSha256": "b8c1ff5b0666c0802ffb8937f6844bdc32ad48869ace5628f67d79b9da1139b1",
+    "executionCellAstSha256": "adfb80139bbacdbb5d76523b852a69b0e07118343b0f61587607c39a08f02ae4",
+    "runnerCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+    "sharedCoordinator": "/Users/ashah/.codex/worktrees/forge-revision4-coordinator/learn-harness-engineering",
+    "generatorSourceCommit": "00bc16d5f978c7c7f071ab398da8451a8757195a"
+  },
   "comparisonAudit": {
     "schemaVersion": 1,
     "verifiedAt": "2026-11-06T12:02:18.926861+00:00",
