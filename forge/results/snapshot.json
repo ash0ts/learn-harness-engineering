@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "capturedAt": "2026-11-06T09:25:18.921062+00:00",
-  "status": "Recorded 56 completed coding attempts and 18 complete comparison blocks. Outcomes include unsuccessful attempts; no human time savings are inferred.",
+  "capturedAt": "2026-11-06T10:12:08.886581+00:00",
+  "status": "Recorded 59 completed coding attempts and 18 complete comparison blocks. Outcomes include unsuccessful attempts; no human time savings are inferred.",
   "trials": [
     {
       "id": "03707b50-d426-4961-b8e3-522d7f674f6c",
@@ -1070,6 +1070,73 @@
           "telemetryComplete": true,
           "errors": [
             "Model-call budget exhausted"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "3ceefbaf-7a49-4191-9c8a-3b4a39f779ed",
+      "project": "project-07",
+      "variant": "timer",
+      "trial": 1,
+      "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef",
+      "outcome": "task_failed",
+      "inputTokens": 195628,
+      "outputTokens": 4437,
+      "estimatedCostUsd": 0.06384134333333333,
+      "conversationIds": [
+        "01a1b02f-0e9b-7459-855c-6b08f2a4a3ce"
+      ],
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/3ceefbaf7a494191",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-3ceefbaf-7a49-4191-9c8a-3b4a39f779ed:v0",
+      "startedAt": "2026-11-06T09:26:57.795Z",
+      "finishedAt": "2026-11-06T09:28:37.662Z",
+      "actorCompleted": false,
+      "error": null,
+      "protocolSha256": "87e457ec9cf3716839df078fadd5cae1e5a1a1e5cc4b14eed2e06e72fe041141",
+      "grade": {
+        "schemaVersion": 1,
+        "task": "project-04",
+        "checks": [
+          {
+            "name": "strict compile and renderer build",
+            "passed": true
+          },
+          {
+            "name": "real import and persistence after reconstruction",
+            "passed": true
+          },
+          {
+            "name": "actual indexing keeps every nonempty paragraph",
+            "passed": true
+          },
+          {
+            "name": "actual retrieval and Q&A persist two turns",
+            "passed": true
+          },
+          {
+            "name": "architecture checker rejects a seeded boundary violation",
+            "passed": true
+          },
+          {
+            "name": "Electron window, preload, import, indexing and question UI under Xvfb",
+            "passed": false,
+            "error": "Error: page.evaluate: TypeError: Cannot read properties of undefined (reading 'documents')\n    at eval (eval at evaluate (:302:30), <anonymous>:1:33)\n    at UtilityScript.evaluate (<anonymous>:304:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)"
+          }
+        ],
+        "passed": false
+      },
+      "reconciledEstimateUsd": 0.06384134333333333,
+      "chargedUnknownReservationUsd": null,
+      "actorPhases": [
+        {
+          "conversationId": "01a1b02f-0e9b-7459-855c-6b08f2a4a3ce",
+          "requests": 14,
+          "turns": 15,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Frozen input byte budget exceeded"
           ]
         }
       ]
@@ -2699,6 +2766,71 @@
       ]
     },
     {
+      "id": "bc00b68c-a28a-4b94-89d7-81539505e165",
+      "project": "project-07",
+      "variant": "timer",
+      "trial": 1,
+      "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef",
+      "outcome": "task_failed",
+      "inputTokens": 346348,
+      "outputTokens": 6164,
+      "estimatedCostUsd": 0.10494891066666667,
+      "conversationIds": [
+        "01a1b04a-5ddb-73f4-a867-6a14d102de16"
+      ],
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/bc00b68ca28a4b94",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-bc00b68c-a28a-4b94-89d7-81539505e165:v0",
+      "startedAt": "2026-11-06T09:56:58.042Z",
+      "finishedAt": "2026-11-06T09:58:51.333Z",
+      "actorCompleted": true,
+      "error": null,
+      "protocolSha256": "87e457ec9cf3716839df078fadd5cae1e5a1a1e5cc4b14eed2e06e72fe041141",
+      "grade": {
+        "schemaVersion": 1,
+        "task": "project-04",
+        "checks": [
+          {
+            "name": "strict compile and renderer build",
+            "passed": true
+          },
+          {
+            "name": "real import and persistence after reconstruction",
+            "passed": true
+          },
+          {
+            "name": "actual indexing keeps every nonempty paragraph",
+            "passed": true
+          },
+          {
+            "name": "actual retrieval and Q&A persist two turns",
+            "passed": true
+          },
+          {
+            "name": "architecture checker rejects a seeded boundary violation",
+            "passed": true
+          },
+          {
+            "name": "Electron window, preload, import, indexing and question UI under Xvfb",
+            "passed": false,
+            "error": "Error: page.evaluate: TypeError: Cannot read properties of undefined (reading 'documents')\n    at eval (eval at evaluate (:302:30), <anonymous>:1:33)\n    at UtilityScript.evaluate (<anonymous>:304:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)"
+          }
+        ],
+        "passed": false
+      },
+      "reconciledEstimateUsd": 0.10494891066666667,
+      "chargedUnknownReservationUsd": null,
+      "actorPhases": [
+        {
+          "conversationId": "01a1b04a-5ddb-73f4-a867-6a14d102de16",
+          "requests": 21,
+          "turns": 21,
+          "completed": true,
+          "telemetryComplete": true,
+          "errors": []
+        }
+      ]
+    },
+    {
       "id": "bd070321-5fd7-45b6-940b-157df5f3b512",
       "project": "project-02",
       "variant": "workspace-docs",
@@ -2959,6 +3091,53 @@
           "conversationId": "01a1afec-83dc-7408-a3e3-38a18cb5a4ff",
           "requests": 23,
           "turns": 24,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Frozen input byte budget exceeded"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ca2a84d5-44c1-47da-8f29-151fbc8a9475",
+      "project": "project-07",
+      "variant": "timer",
+      "trial": 1,
+      "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef",
+      "outcome": "task_failed",
+      "inputTokens": 184105,
+      "outputTokens": 6679,
+      "estimatedCostUsd": 0.06783366533333333,
+      "conversationIds": [
+        "01a1b03c-bfd8-75e5-b4e7-df7fd4b060a9"
+      ],
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/ca2a84d544c147da",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-ca2a84d5-44c1-47da-8f29-151fbc8a9475:v0",
+      "startedAt": "2026-11-06T09:41:57.738Z",
+      "finishedAt": "2026-11-06T09:44:20.671Z",
+      "actorCompleted": false,
+      "error": null,
+      "protocolSha256": "87e457ec9cf3716839df078fadd5cae1e5a1a1e5cc4b14eed2e06e72fe041141",
+      "grade": {
+        "schemaVersion": 1,
+        "task": "project-04",
+        "checks": [
+          {
+            "name": "strict compile and renderer build",
+            "passed": false,
+            "error": "Error: Command failed: node /opt/app/node_modules/typescript/bin/tsc --noEmit -p tsconfig.json"
+          }
+        ],
+        "passed": false
+      },
+      "reconciledEstimateUsd": 0.06783366533333333,
+      "chargedUnknownReservationUsd": null,
+      "actorPhases": [
+        {
+          "conversationId": "01a1b03c-bfd8-75e5-b4e7-df7fd4b060a9",
+          "requests": 14,
+          "turns": 15,
           "completed": false,
           "telemetryComplete": true,
           "errors": [
@@ -4247,7 +4426,7 @@
       "deadlineAt": 1793959915458,
       "intervalMs": 900000,
       "maxRounds": 8,
-      "status": "running",
+      "status": "deadline",
       "rounds": [
         {
           "trialId": "1916807d-73a5-4d64-8444-0d4301c5c3fa",
@@ -4273,6 +4452,21 @@
           "trialId": "6d90a4b6-a012-4cc8-9d8c-79846c6dec22",
           "outcome": "task_failed",
           "patchSha256": "92fa5f022a7be6c488dea1bbdd2f3f65db787298f0bff0079b20c0c5fcb63ef6"
+        },
+        {
+          "trialId": "3ceefbaf-7a49-4191-9c8a-3b4a39f779ed",
+          "outcome": "task_failed",
+          "patchSha256": "92011c7a6e05ffb806a3d9a3f4bb71865119c661982d89be704d21a2115c4c50"
+        },
+        {
+          "trialId": "ca2a84d5-44c1-47da-8f29-151fbc8a9475",
+          "outcome": "task_failed",
+          "patchSha256": "8b8c6ff5d1a06d790bee88a13640ccf8f929c52171ea4a8808c7eef663002f25"
+        },
+        {
+          "trialId": "bc00b68c-a28a-4b94-89d7-81539505e165",
+          "outcome": "task_failed",
+          "patchSha256": "0288ecc567609d0e675b842bcf0032d6fa8763f5b1dde39d50d5400ffd44259e"
         }
       ],
       "interventions": [
@@ -4282,7 +4476,7 @@
           "note": "Coordinator paused at the shared budget halt caused by a separate sandbox qualification rejected locally before create. The pending trial ee84fb5c-ca0f-4c77-92ac-1f7e8770a660 has no reservation, settlement or worker directory; its campaign report has zero completed trials. Cleared this proven-unlaunched pending ID and resumed the same original two-hour deadline. No trial result was discarded."
         }
       ],
-      "candidatePatch": "/Users/ashah/.codex/worktrees/forge-experiment-coordinator/learn-harness-engineering/forge/local-results/6d90a4b6-a012-4cc8-9d8c-79846c6dec22/candidate.diff"
+      "candidatePatch": "/Users/ashah/.codex/worktrees/forge-experiment-coordinator/learn-harness-engineering/forge/local-results/bc00b68c-a28a-4b94-89d7-81539505e165/candidate.diff"
     },
     {
       "file": "project-07-real-timer.json",
@@ -4545,8 +4739,10 @@
   "budget": {
     "schemaVersion": 1,
     "limitUsd": null,
-    "spentEstimateUsd": 6.887440030666665,
-    "reservations": {},
+    "spentEstimateUsd": 7.4195139779999995,
+    "reservations": {
+      "notebook-15321-editor-1": 2
+    },
     "settled": {
       "qualification-17b194af-b3ef-4d47-95cc-178676315b60": 0.003,
       "qualification-af9192de-dfe3-4631-934e-37729c2a4d56": 0.010988719333333332,
@@ -4632,7 +4828,18 @@
       "ac047ec9-ebbc-43f8-8f21-5d47a2cb93e3": 0.10110698933333334,
       "11500f73-bc29-4c22-83f4-1e95f0a9abd1": 0.06954726466666666,
       "e375487d-4743-4f01-8c68-2e4aea50edd8": 0.080974124,
-      "98c21d2f-01ff-4684-a3c8-dd50f9e795d8": 0.08554729866666667
+      "98c21d2f-01ff-4684-a3c8-dd50f9e795d8": 0.08554729866666667,
+      "notebook-15314-editor-1": 0,
+      "3ceefbaf-7a49-4191-9c8a-3b4a39f779ed": 0.06384134333333333,
+      "ca2a84d5-44c1-47da-8f29-151fbc8a9475": 0.06783366533333333,
+      "notebook-15314-editor-2": 0.08099254,
+      "notebook-15314-editor-3": 0.02370623733333333,
+      "notebook-15315-editor-1": 0.03206378933333333,
+      "bc00b68c-a28a-4b94-89d7-81539505e165": 0.10494891066666667,
+      "notebook-15316-editor-1": 0.039289033333333334,
+      "notebook-15317-editor-1": 0.03926849066666667,
+      "notebook-15318-editor-1": 0.03842378,
+      "notebook-15319-editor-1": 0.041706157333333334
     },
     "reconciliations": [
       {
