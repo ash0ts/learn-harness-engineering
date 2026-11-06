@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "capturedAt": "2026-11-06T12:48:29.527121+00:00",
-  "status": "Recorded 123 completed coding attempts and 45 complete comparison blocks. Outcomes include unsuccessful attempts; no human time savings are inferred.",
+  "capturedAt": "2026-11-06T13:10:01.889869+00:00",
+  "status": "Recorded 129 completed coding attempts and 45 complete comparison blocks. Outcomes include unsuccessful attempts; no human time savings are inferred.",
   "trials": [
     {
       "id": "0173b789-396b-4a83-922a-644c172ff4f4",
@@ -132,6 +132,71 @@
           "errors": [
             "Model-call budget exhausted"
           ]
+        }
+      ]
+    },
+    {
+      "id": "03ca01ca-eb64-45ae-9317-824ca4a26026",
+      "project": "project-08",
+      "variant": "graph",
+      "trial": 1,
+      "sourceCommit": "24ff7909edb286b0e66faae1d78968d12aac6c0c",
+      "outcome": "passed",
+      "inputTokens": 314551,
+      "outputTokens": 9632,
+      "estimatedCostUsd": 0.10332285,
+      "conversationIds": [
+        "01a1b0f6-3819-741a-8e19-36e4d0e86733"
+      ],
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/03ca01caeb6445ae",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-03ca01ca-eb64-45ae-9317-824ca4a26026:v0",
+      "startedAt": "2026-11-06T13:04:42.629Z",
+      "finishedAt": "2026-11-06T13:06:56.825Z",
+      "actorCompleted": true,
+      "error": null,
+      "protocolRevision": 4,
+      "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+      "grade": {
+        "schemaVersion": 1,
+        "task": "project-04",
+        "checks": [
+          {
+            "name": "strict compile and renderer build",
+            "passed": true
+          },
+          {
+            "name": "real import and persistence after reconstruction",
+            "passed": true
+          },
+          {
+            "name": "actual indexing keeps every nonempty paragraph",
+            "passed": true
+          },
+          {
+            "name": "actual retrieval and Q&A persist two turns",
+            "passed": true
+          },
+          {
+            "name": "architecture checker rejects a seeded boundary violation",
+            "passed": true
+          },
+          {
+            "name": "Electron window, preload, import, indexing and question UI under Xvfb",
+            "passed": true
+          }
+        ],
+        "passed": true
+      },
+      "reconciledEstimateUsd": 0.10332285,
+      "chargedUnknownReservationUsd": null,
+      "actorPhases": [
+        {
+          "conversationId": "01a1b0f6-3819-741a-8e19-36e4d0e86733",
+          "requests": 22,
+          "turns": 22,
+          "completed": true,
+          "telemetryComplete": true,
+          "errors": []
         }
       ]
     },
@@ -1377,6 +1442,74 @@
       ]
     },
     {
+      "id": "22955029-2de6-4aed-8c35-dda6059b023d",
+      "project": "project-08",
+      "variant": "graph",
+      "trial": 1,
+      "sourceCommit": "945c5d3073026a4fea427372843ea79072221dde",
+      "outcome": "task_failed",
+      "inputTokens": 415339,
+      "outputTokens": 8083,
+      "estimatedCostUsd": 0.12844285333333333,
+      "conversationIds": [
+        "01a1b0ea-4115-778f-b948-16b9a1a4ed4d"
+      ],
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/229550292de64aed",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-22955029-2de6-4aed-8c35-dda6059b023d:v0",
+      "startedAt": "2026-11-06T12:51:37.030Z",
+      "finishedAt": "2026-11-06T12:54:10.853Z",
+      "actorCompleted": false,
+      "error": null,
+      "protocolRevision": 4,
+      "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+      "grade": {
+        "schemaVersion": 1,
+        "task": "project-04",
+        "checks": [
+          {
+            "name": "strict compile and renderer build",
+            "passed": true
+          },
+          {
+            "name": "real import and persistence after reconstruction",
+            "passed": true
+          },
+          {
+            "name": "actual indexing keeps every nonempty paragraph",
+            "passed": true
+          },
+          {
+            "name": "actual retrieval and Q&A persist two turns",
+            "passed": true
+          },
+          {
+            "name": "architecture checker rejects a seeded boundary violation",
+            "passed": false,
+            "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok(fs.existsSync(guard))\n"
+          },
+          {
+            "name": "Electron window, preload, import, indexing and question UI under Xvfb",
+            "passed": true
+          }
+        ],
+        "passed": false
+      },
+      "reconciledEstimateUsd": 0.12844285333333333,
+      "chargedUnknownReservationUsd": null,
+      "actorPhases": [
+        {
+          "conversationId": "01a1b0ea-4115-778f-b948-16b9a1a4ed4d",
+          "requests": 24,
+          "turns": 25,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
+        }
+      ]
+    },
+    {
       "id": "22fa3879-a8ff-4219-847c-c5972efedf78",
       "project": "project-03",
       "variant": "minimal",
@@ -2442,6 +2575,74 @@
       ]
     },
     {
+      "id": "3e5cd770-94e5-49f9-b478-a2043dc9a682",
+      "project": "project-08",
+      "variant": "graph",
+      "trial": 1,
+      "sourceCommit": "24ff7909edb286b0e66faae1d78968d12aac6c0c",
+      "outcome": "task_failed",
+      "inputTokens": 366028,
+      "outputTokens": 5004,
+      "estimatedCostUsd": 0.11798033866666667,
+      "conversationIds": [
+        "01a1b0f0-5fff-72da-a0dc-c0192ac02147"
+      ],
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/3e5cd77094e549f9",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-3e5cd770-94e5-49f9-b478-a2043dc9a682:v0",
+      "startedAt": "2026-11-06T12:58:18.721Z",
+      "finishedAt": "2026-11-06T13:01:52.950Z",
+      "actorCompleted": false,
+      "error": null,
+      "protocolRevision": 4,
+      "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+      "grade": {
+        "schemaVersion": 1,
+        "task": "project-04",
+        "checks": [
+          {
+            "name": "strict compile and renderer build",
+            "passed": true
+          },
+          {
+            "name": "real import and persistence after reconstruction",
+            "passed": true
+          },
+          {
+            "name": "actual indexing keeps every nonempty paragraph",
+            "passed": true
+          },
+          {
+            "name": "actual retrieval and Q&A persist two turns",
+            "passed": true
+          },
+          {
+            "name": "architecture checker rejects a seeded boundary violation",
+            "passed": false,
+            "error": "AssertionError [ERR_ASSERTION]: architecture checker accepted a Node import in the renderer"
+          },
+          {
+            "name": "Electron window, preload, import, indexing and question UI under Xvfb",
+            "passed": true
+          }
+        ],
+        "passed": false
+      },
+      "reconciledEstimateUsd": 0.11798033866666667,
+      "chargedUnknownReservationUsd": null,
+      "actorPhases": [
+        {
+          "conversationId": "01a1b0f0-5fff-72da-a0dc-c0192ac02147",
+          "requests": 24,
+          "turns": 25,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
+        }
+      ]
+    },
+    {
       "id": "3f742e3b-8f37-49bd-bfb5-d55ac89bed80",
       "project": "project-05",
       "variant": "plan-gen-eval",
@@ -2597,6 +2798,54 @@
           "completed": true,
           "telemetryComplete": true,
           "errors": []
+        }
+      ]
+    },
+    {
+      "id": "43ad509b-7eb5-4d9e-97c7-ff33567693fd",
+      "project": "project-08",
+      "variant": "graph",
+      "trial": 1,
+      "sourceCommit": "24ff7909edb286b0e66faae1d78968d12aac6c0c",
+      "outcome": "task_failed",
+      "inputTokens": 374442,
+      "outputTokens": 5462,
+      "estimatedCostUsd": 0.11004467866666667,
+      "conversationIds": [
+        "01a1b0f4-27ac-75c4-a696-3508bd27ebb3"
+      ],
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/43ad509b7eb54d9e",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-43ad509b-7eb5-4d9e-97c7-ff33567693fd:v0",
+      "startedAt": "2026-11-06T13:02:27.144Z",
+      "finishedAt": "2026-11-06T13:04:09.277Z",
+      "actorCompleted": false,
+      "error": null,
+      "protocolRevision": 4,
+      "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+      "grade": {
+        "schemaVersion": 1,
+        "task": "project-04",
+        "checks": [
+          {
+            "name": "strict compile and renderer build",
+            "passed": false,
+            "error": "Error: Command failed: node /opt/app/node_modules/typescript/bin/tsc --noEmit -p tsconfig.node.json"
+          }
+        ],
+        "passed": false
+      },
+      "reconciledEstimateUsd": 0.11004467866666667,
+      "chargedUnknownReservationUsd": null,
+      "actorPhases": [
+        {
+          "conversationId": "01a1b0f4-27ac-75c4-a696-3508bd27ebb3",
+          "requests": 24,
+          "turns": 25,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
         }
       ]
     },
@@ -3125,6 +3374,74 @@
           "conversationId": "01a1b0a6-0601-7108-afbf-356c84487306",
           "requests": 12,
           "turns": 13,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "54bb7391-48b0-47f5-9ded-36194f52a76d",
+      "project": "project-08",
+      "variant": "graph",
+      "trial": 1,
+      "sourceCommit": "945c5d3073026a4fea427372843ea79072221dde",
+      "outcome": "task_failed",
+      "inputTokens": 379038,
+      "outputTokens": 7923,
+      "estimatedCostUsd": 0.119441758,
+      "conversationIds": [
+        "01a1b0ed-1ecd-74f6-842a-87fe5e7c60eb"
+      ],
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/54bb739148b047f5",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-54bb7391-48b0-47f5-9ded-36194f52a76d:v0",
+      "startedAt": "2026-11-06T12:54:46.049Z",
+      "finishedAt": "2026-11-06T12:57:22.817Z",
+      "actorCompleted": false,
+      "error": null,
+      "protocolRevision": 4,
+      "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+      "grade": {
+        "schemaVersion": 1,
+        "task": "project-04",
+        "checks": [
+          {
+            "name": "strict compile and renderer build",
+            "passed": true
+          },
+          {
+            "name": "real import and persistence after reconstruction",
+            "passed": true
+          },
+          {
+            "name": "actual indexing keeps every nonempty paragraph",
+            "passed": true
+          },
+          {
+            "name": "actual retrieval and Q&A persist two turns",
+            "passed": true
+          },
+          {
+            "name": "architecture checker rejects a seeded boundary violation",
+            "passed": false,
+            "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok(fs.existsSync(guard))\n"
+          },
+          {
+            "name": "Electron window, preload, import, indexing and question UI under Xvfb",
+            "passed": true
+          }
+        ],
+        "passed": false
+      },
+      "reconciledEstimateUsd": 0.119441758,
+      "chargedUnknownReservationUsd": null,
+      "actorPhases": [
+        {
+          "conversationId": "01a1b0ed-1ecd-74f6-842a-87fe5e7c60eb",
+          "requests": 24,
+          "turns": 25,
           "completed": false,
           "telemetryComplete": true,
           "errors": [
@@ -8202,6 +8519,74 @@
       ]
     },
     {
+      "id": "fc80b4f3-6178-454f-a003-3e311dab6617",
+      "project": "project-08",
+      "variant": "graph",
+      "trial": 1,
+      "sourceCommit": "945c5d3073026a4fea427372843ea79072221dde",
+      "outcome": "task_failed",
+      "inputTokens": 394017,
+      "outputTokens": 7424,
+      "estimatedCostUsd": 0.12121640866666666,
+      "conversationIds": [
+        "01a1b0e7-9f72-720e-8b82-378a137f0943"
+      ],
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/fc80b4f36178454f",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-fc80b4f3-6178-454f-a003-3e311dab6617:v0",
+      "startedAt": "2026-11-06T12:48:44.190Z",
+      "finishedAt": "2026-11-06T12:51:06.726Z",
+      "actorCompleted": false,
+      "error": null,
+      "protocolRevision": 4,
+      "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+      "grade": {
+        "schemaVersion": 1,
+        "task": "project-04",
+        "checks": [
+          {
+            "name": "strict compile and renderer build",
+            "passed": true
+          },
+          {
+            "name": "real import and persistence after reconstruction",
+            "passed": true
+          },
+          {
+            "name": "actual indexing keeps every nonempty paragraph",
+            "passed": true
+          },
+          {
+            "name": "actual retrieval and Q&A persist two turns",
+            "passed": true
+          },
+          {
+            "name": "architecture checker rejects a seeded boundary violation",
+            "passed": false,
+            "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok(fs.existsSync(guard))\n"
+          },
+          {
+            "name": "Electron window, preload, import, indexing and question UI under Xvfb",
+            "passed": true
+          }
+        ],
+        "passed": false
+      },
+      "reconciledEstimateUsd": 0.12121640866666666,
+      "chargedUnknownReservationUsd": null,
+      "actorPhases": [
+        {
+          "conversationId": "01a1b0e7-9f72-720e-8b82-378a137f0943",
+          "requests": 24,
+          "turns": 25,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
+        }
+      ]
+    },
+    {
       "id": "fd1411d4-3aee-47ed-a788-5007df5047e2",
       "project": "project-05",
       "variant": "single-role",
@@ -9532,6 +9917,80 @@
       ]
     },
     {
+      "file": "project-08-control-flow-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb.json",
+      "schemaVersion": 1,
+      "id": "7cbcac1f-849c-4b2a-affb-04f142ae03fb",
+      "sourceCommit": "e76a8dfa984116bbab4b8c31570da13b11daf87e",
+      "node": "approval",
+      "attempts": 2,
+      "maxAttempts": 2,
+      "transitions": [
+        {
+          "from": "plan",
+          "to": "make",
+          "at": "2026-11-06T13:08:05.457Z",
+          "reason": "frozen task acceptance criteria"
+        },
+        {
+          "from": "make",
+          "to": "verify",
+          "at": "2026-11-06T13:08:28.517Z",
+          "reason": "candidate patch exported"
+        },
+        {
+          "from": "verify",
+          "to": "rollback",
+          "at": "2026-11-06T13:08:46.718Z",
+          "reason": "protected grade and independent parallel verification results"
+        },
+        {
+          "from": "rollback",
+          "to": "make",
+          "at": "2026-11-06T13:08:46.720Z",
+          "reason": "restore last verified patch or frozen baseline"
+        },
+        {
+          "from": "make",
+          "to": "verify",
+          "at": "2026-11-06T13:09:08.907Z",
+          "reason": "candidate patch exported"
+        },
+        {
+          "from": "verify",
+          "to": "approval",
+          "at": "2026-11-06T13:09:28.125Z",
+          "reason": "protected grade and independent parallel verification results"
+        }
+      ],
+      "qualification": "deterministic control-flow fixture; excluded from coding trial counts",
+      "plan": "Verify the seeded baseline fails, rollback, verify a documented manual repair, then pause for a human decision.",
+      "candidate": {
+        "patch": "/Users/ashah/Documents/GitHub/learn-harness-engineering/forge/local-results/graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb/candidate-2.diff",
+        "sha256": "91c4a2df7b9a65921c221b68bc86cdd40db4d5945fce16510206a405ac7516e6",
+        "trialId": "fixture-2",
+        "protectedGrade": {
+          "passed": true,
+          "evidence": "/Users/ashah/Documents/GitHub/learn-harness-engineering/forge/local-results/graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb/attempt-2-protected/grade.json"
+        }
+      },
+      "verification": [
+        {
+          "lane": "services",
+          "passed": true,
+          "evidence": "/Users/ashah/Documents/GitHub/learn-harness-engineering/forge/local-results/graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb/attempt-2-services/grade.json"
+        },
+        {
+          "lane": "electron",
+          "passed": true,
+          "evidence": "/Users/ashah/Documents/GitHub/learn-harness-engineering/forge/local-results/graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb/attempt-2-electron/grade.json"
+        }
+      ],
+      "lastProtectedGrade": {
+        "passed": true,
+        "evidence": "/Users/ashah/Documents/GitHub/learn-harness-engineering/forge/local-results/graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb/attempt-2-protected/grade.json"
+      }
+    },
+    {
       "file": "project-08-control-flow-qualification.json",
       "schemaVersion": 1,
       "id": "6fcc2091-f526-45e0-8fb1-aa0c1802aae5",
@@ -9596,6 +10055,97 @@
           "evidence": "/Users/ashah/Documents/GitHub/learn-harness-engineering/forge/local-results/graph-qualification-6fcc2091-f526-45e0-8fb1-aa0c1802aae5/attempt-2-electron/grade.json"
         }
       ]
+    },
+    {
+      "file": "project-08-graph-contract.json",
+      "schemaVersion": 1,
+      "id": "c98b8bdc-0464-4661-b5ac-fb95b1954d31",
+      "sourceCommit": "24ff7909edb286b0e66faae1d78968d12aac6c0c",
+      "node": "approval",
+      "attempts": 3,
+      "maxAttempts": 3,
+      "transitions": [
+        {
+          "from": "plan",
+          "to": "make",
+          "at": "2026-11-06T12:58:17.198Z",
+          "reason": "frozen task acceptance criteria"
+        },
+        {
+          "from": "make",
+          "to": "verify",
+          "at": "2026-11-06T13:01:59.242Z",
+          "reason": "candidate patch exported"
+        },
+        {
+          "from": "verify",
+          "to": "rollback",
+          "at": "2026-11-06T13:02:24.784Z",
+          "reason": "protected grade and independent parallel verification results"
+        },
+        {
+          "from": "rollback",
+          "to": "make",
+          "at": "2026-11-06T13:02:24.787Z",
+          "reason": "restore last verified patch or frozen baseline"
+        },
+        {
+          "from": "make",
+          "to": "verify",
+          "at": "2026-11-06T13:04:14.669Z",
+          "reason": "candidate patch exported"
+        },
+        {
+          "from": "verify",
+          "to": "rollback",
+          "at": "2026-11-06T13:04:39.183Z",
+          "reason": "protected grade and independent parallel verification results"
+        },
+        {
+          "from": "rollback",
+          "to": "make",
+          "at": "2026-11-06T13:04:39.185Z",
+          "reason": "restore last verified patch or frozen baseline"
+        },
+        {
+          "from": "make",
+          "to": "verify",
+          "at": "2026-11-06T13:07:02.138Z",
+          "reason": "candidate patch exported"
+        },
+        {
+          "from": "verify",
+          "to": "approval",
+          "at": "2026-11-06T13:07:19.499Z",
+          "reason": "protected grade and independent parallel verification results"
+        }
+      ],
+      "plan": "Deliver a patch for the knowledge-base app: repair long-document empty chunks, preserve all text, produce source-grounded citations, and make the Electron window and typed preload bridge work. Add scripts/check-architecture.sh that rejects Node imports in the renderer. Verify actual service and UI behavior. Your patch will be checked independently and paused for human approval before being accepted.",
+      "candidate": {
+        "patch": "/Users/ashah/.codex/worktrees/forge-graph-qualified-coordinator/learn-harness-engineering/forge/local-results/03ca01ca-eb64-45ae-9317-824ca4a26026/candidate.diff",
+        "sha256": "c74cf9cf37169db868996c2aa5328a527377a0c8656678d874edb4a0195c96d3",
+        "trialId": "03ca01ca-eb64-45ae-9317-824ca4a26026",
+        "protectedGrade": {
+          "passed": true,
+          "evidence": "/Users/ashah/.codex/worktrees/forge-graph-qualified-coordinator/learn-harness-engineering/forge/local-results/03ca01ca-eb64-45ae-9317-824ca4a26026/trial.json"
+        }
+      },
+      "verification": [
+        {
+          "lane": "services",
+          "passed": true,
+          "evidence": "/Users/ashah/.codex/worktrees/forge-graph-qualified-coordinator/learn-harness-engineering/forge/local-results/graph-5a3c475a-3852-4854-ba3b-ecaf7cf23dd1/grade.json"
+        },
+        {
+          "lane": "electron",
+          "passed": true,
+          "evidence": "/Users/ashah/.codex/worktrees/forge-graph-qualified-coordinator/learn-harness-engineering/forge/local-results/graph-40688e0f-33dd-4a53-bdf5-cdebec3c469b/grade.json"
+        }
+      ],
+      "lastProtectedGrade": {
+        "passed": true,
+        "evidence": "/Users/ashah/.codex/worktrees/forge-graph-qualified-coordinator/learn-harness-engineering/forge/local-results/03ca01ca-eb64-45ae-9317-824ca4a26026/trial.json"
+      }
     },
     {
       "file": "project-08-graph-diagnostic-feedback.json",
@@ -9764,12 +10314,100 @@
           "evidence": "/Users/ashah/.codex/worktrees/forge-experiment-coordinator/learn-harness-engineering/forge/local-results/graph-1155be34-4b89-4534-911a-dd47c22e322a/grade.json"
         }
       ]
+    },
+    {
+      "file": "project-08-graph-qualified.json",
+      "schemaVersion": 1,
+      "id": "1f44f07b-e4d2-4085-829f-0a9013c72f68",
+      "sourceCommit": "945c5d3073026a4fea427372843ea79072221dde",
+      "node": "failed",
+      "attempts": 3,
+      "maxAttempts": 3,
+      "transitions": [
+        {
+          "from": "plan",
+          "to": "make",
+          "at": "2026-11-06T12:48:42.566Z",
+          "reason": "frozen task acceptance criteria"
+        },
+        {
+          "from": "make",
+          "to": "verify",
+          "at": "2026-11-06T12:51:14.871Z",
+          "reason": "candidate patch exported"
+        },
+        {
+          "from": "verify",
+          "to": "rollback",
+          "at": "2026-11-06T12:51:35.692Z",
+          "reason": "protected grade and independent parallel verification results"
+        },
+        {
+          "from": "rollback",
+          "to": "make",
+          "at": "2026-11-06T12:51:35.694Z",
+          "reason": "restore last verified patch or frozen baseline"
+        },
+        {
+          "from": "make",
+          "to": "verify",
+          "at": "2026-11-06T12:54:16.221Z",
+          "reason": "candidate patch exported"
+        },
+        {
+          "from": "verify",
+          "to": "rollback",
+          "at": "2026-11-06T12:54:44.713Z",
+          "reason": "protected grade and independent parallel verification results"
+        },
+        {
+          "from": "rollback",
+          "to": "make",
+          "at": "2026-11-06T12:54:44.714Z",
+          "reason": "restore last verified patch or frozen baseline"
+        },
+        {
+          "from": "make",
+          "to": "verify",
+          "at": "2026-11-06T12:57:27.818Z",
+          "reason": "candidate patch exported"
+        },
+        {
+          "from": "verify",
+          "to": "rollback",
+          "at": "2026-11-06T12:57:45.169Z",
+          "reason": "protected grade and independent parallel verification results"
+        },
+        {
+          "from": "rollback",
+          "to": "failed",
+          "at": "2026-11-06T12:57:45.171Z",
+          "reason": "restore last verified patch or frozen baseline"
+        }
+      ],
+      "plan": "Deliver a patch for the knowledge-base app: repair long-document empty chunks, preserve all text, produce source-grounded citations, and make the Electron window and typed preload bridge work. Add an architecture check that rejects Node imports in the renderer. Verify actual service and UI behavior. Your patch will be checked independently and paused for human approval before being accepted.",
+      "verification": [
+        {
+          "lane": "services",
+          "passed": false,
+          "evidence": "/Users/ashah/.codex/worktrees/forge-graph-qualified-coordinator/learn-harness-engineering/forge/local-results/graph-4bc5a5cd-8b91-405c-9b52-2e663fe96d65/grade.json"
+        },
+        {
+          "lane": "electron",
+          "passed": true,
+          "evidence": "/Users/ashah/.codex/worktrees/forge-graph-qualified-coordinator/learn-harness-engineering/forge/local-results/graph-577d6b8a-6bf2-424d-9682-41e28d025da1/grade.json"
+        }
+      ],
+      "lastProtectedGrade": {
+        "passed": false,
+        "evidence": "/Users/ashah/.codex/worktrees/forge-graph-qualified-coordinator/learn-harness-engineering/forge/local-results/54bb7391-48b0-47f5-9ded-36194f52a76d/trial.json"
+      }
     }
   ],
   "budget": {
     "schemaVersion": 1,
     "limitUsd": null,
-    "spentEstimateUsd": 18.25149649666669,
+    "spentEstimateUsd": 19.001973120000017,
     "reservations": {},
     "settled": {
       "qualification-17b194af-b3ef-4d47-95cc-178676315b60": 0.003,
@@ -9955,7 +10593,32 @@
       "a7bc0271-d547-4534-a15d-27b70072df40": 0.159469046,
       "0cb15597-b43e-4295-985b-af7ea9c1454a": 0.176008926,
       "b8f56d80-c72c-4e31-8c88-f8fc63d76f9a": 0.15079331799999998,
-      "4eb48651-306d-44e9-a468-a6ffc322bf27": 0.14693331066666668
+      "4eb48651-306d-44e9-a468-a6ffc322bf27": 0.14693331066666668,
+      "fc80b4f3-6178-454f-a003-3e311dab6617": 0.12121640866666666,
+      "f496d257-3de4-4507-a7d6-1d2d4f4d9a92": 0.0015263106666666667,
+      "983ba1bb-86da-4900-a452-e80c2959390d": 0.001970770666666667,
+      "notebook-15319-editor-2": 0.016575470666666665,
+      "22955029-2de6-4aed-8c35-dda6059b023d": 0.12844285333333333,
+      "f0da5cdf-bad6-4e14-a246-74621916258d": 0.0016541106666666664,
+      "9ba0b694-69e2-45b6-ba8c-7826bc409a6f": 0.0026969586666666665,
+      "54bb7391-48b0-47f5-9ded-36194f52a76d": 0.119441758,
+      "4bc5a5cd-8b91-405c-9b52-2e663fe96d65": 0.001445276,
+      "577d6b8a-6bf2-424d-9682-41e28d025da1": 0.0016421826666666666,
+      "3e5cd770-94e5-49f9-b478-a2043dc9a682": 0.11798033866666667,
+      "5c57b1db-4921-4284-aa8b-8b543fc64e43": 0.002244452,
+      "e80b044a-800d-445e-a88e-ae1a0ba74bdd": 0.0024175973333333332,
+      "43ad509b-7eb5-4d9e-97c7-ff33567693fd": 0.11004467866666667,
+      "acf47e37-0067-4e43-8263-2b772e48e893": 0.0013801453333333335,
+      "02884945-e798-4762-9f50-90ada6ec5ec5": 0.0023203746666666664,
+      "03ca01ca-eb64-45ae-9317-824ca4a26026": 0.10332285,
+      "5a3c475a-3852-4854-ba3b-ecaf7cf23dd1": 0.0015864239999999997,
+      "40688e0f-33dd-4a53-bdf5-cdebec3c469b": 0.0016433186666666667,
+      "875c7e96-9dc7-4aac-9000-399f494d4095": 0.0021821613333333333,
+      "09e89bda-2798-4369-be31-e64e7374fc58": 0.0015804600000000001,
+      "e165e08f-88b0-450b-9a76-667718a225a5": 0.001722744,
+      "ff73108e-9088-432b-bc7c-a4113e3ddf3a": 0.0020997066666666665,
+      "9e0d9f9c-86a4-4f75-8277-50a33537ba22": 0.0015203466666666666,
+      "27b7d785-a76b-4cf7-aa76-091201325343": 0.001818925333333333
     },
     "reconciliations": [
       {
@@ -10112,6 +10775,11 @@
         "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
         "project": "project-06",
         "reason": "The task omitted the feedback.submit argument contract while the checker assumed positional arguments. Native grades are preserved but excluded from qualified comparisons. Both treatments are rerun with an explicit object payload contract."
+      },
+      {
+        "sourceCommit": "945c5d3073026a4fea427372843ea79072221dde",
+        "project": "project-08",
+        "reason": "The graph task did not name the required scripts/check-architecture.sh path, and its failing grade omitted that path. These native outcomes are retained as diagnostic contract-discovery evidence; the explicit-contract graph is a separate frozen execution."
       }
     ]
   },

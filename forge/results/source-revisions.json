@@ -30,6 +30,11 @@
       "tag": "forge-course-graph-contract",
       "sourceCommit": "24ff7909edb286b0e66faae1d78968d12aac6c0c",
       "url": "https://github.com/ash0ts/learn-harness-engineering/tree/forge-course-graph-contract"
+    },
+    {
+      "tag": "forge-course-full-graph-control",
+      "sourceCommit": "e76a8dfa984116bbab4b8c31570da13b11daf87e",
+      "url": "https://github.com/ash0ts/learn-harness-engineering/tree/forge-course-full-graph-control"
     }
   ]
 }
