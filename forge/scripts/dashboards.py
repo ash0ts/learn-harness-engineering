@@ -83,8 +83,8 @@ def aggregates():
                                   "trialIds": sorted(indexed)}, "metrics": metrics})
     return output
 
-def panels():
-    specs = [("End-to-end pass rate (all protected checks)", "passRate"),
+def panels(revision):
+    specs = [("End-to-end pass rate (visible answers verified)" if revision >= 4 else "Historical checker pass rate — UI wait unreliable", "passRate"),
              ("Completed attempts — denominator", "attempts"),
              ("Electron checks passed", "uiChecksPassed"),
              ("Service checks passed", "serviceChecksPassed"),
@@ -104,7 +104,8 @@ def evidence_report(entity, project, rows, views, operations, previous):
     report.title = 'Forge harness course — verified execution and comparison evidence'
     report.description = 'Frozen cohorts, protected service and Electron checks, Agent Lens traces, W&B artifacts and nine saved notebooks.'
     lines = ['# What completed, and what passed',
-             'A task passes only when every protected check passes in a fresh grading sandbox. '
+             'Revision 4 requires every protected check plus observed, rendered answers in a fresh grading sandbox. '
+             'Revision 2 and 3 have an asynchronous UI-wait defect: their native grades are preserved as historical results, not verified UI acceptance. '
              'The tables below include completed comparison blocks only. Aggregate runs are derived views, not additional trials. '
              'A service check is not UI evidence. Repeated attempts of one task do not establish a general treatment ranking.', '',
              '[Execution and publication dashboard](' + forge_url(operations.url) + ')', '',
@@ -113,9 +114,10 @@ def evidence_report(entity, project, rows, views, operations, previous):
         cohort = [r for r in rows if r['config']['protocolRevision'] == view['protocolRevision'] and r['config']['sourceCommit'] == view['sourceCommit']]
         count = sum(r['metrics']['attempts'] for r in cohort)
         passes = sum(r['metrics']['passes'] for r in cohort)
-        lines += [f"### Revision {view['protocolRevision']}: {passes}/{count} end-to-end passes", '',
+        label = 'end-to-end passes' if view['protocolRevision'] >= 4 else 'historical checker passes (UI acceptance unqualified)'
+        lines += [f"### Revision {view['protocolRevision']}: {passes}/{count} {label}", '',
                   f"Source `{view['sourceCommit']}`. [Open interactive comparison dashboard]({view['forgeUrl']}).", '',
-                  '| Project | Treatment | Pass / attempts | Electron pass / executed | Service pass / executed | Known cost (USD) |',
+                  '| Project | Treatment | Recorded grade pass / attempts | Electron check pass / executed | Service pass / executed | Known cost (USD) |',
                   '| --- | --- | --- | --- | --- | --- |']
         for row in sorted(cohort, key=lambda r:(r['config']['project'], r['config']['variant'])):
             c, m = row['config'], row['metrics']
@@ -128,6 +130,10 @@ def evidence_report(entity, project, rows, views, operations, previous):
               'the provider payload cap is 524,288 bytes. The app inference timeout is 120 seconds with no automatic retries. '
               'The model, 24-call trial budget, task assertions and image remain fixed. '
               'These changes are a new protocol cohort, not an isolated causal test of any single change.', '',
+              '## What changed in revision 4',
+              'A separate visible-answer acceptance check exposed the asynchronous polling bug. Revision 3 launches were halted; active attempts finished and remain recorded. '
+              'Revision 4 awaits resolved IPC values in Node and then requires the actual answer text in the renderer before saving screenshots. '
+              'Negative regression tests reject a predicate that resolves false. Old native grades are not rewritten or pooled with this corrected cohort.', '',
               '## Evidence navigation',
               'Open any treatment run above and its **sourceEvidence** table for original trial runs, artifacts, outcomes and conversation IDs. '
               f'[Agent Lens traces](https://forge.coreweave.com/wandb/{entity}/{project}/weave/traces) retain coding-agent and app conversations separately.', '',
@@ -179,7 +185,7 @@ def publish():
         view.runset_settings = ws.RunsetSettings(filters=[expr.Config("dashboardKind") == "comparison-aggregate", expr.Config("protocolRevision") == revision, expr.Config("sourceCommit") == source],
                                                 pinned_columns=["config:label", "passRate", "attempts"])
         view.settings = ws.WorkspaceSettings(max_runs=100)
-        view.sections = [ws.Section(name="Verified task outcomes and execution evidence", panels=panels(), is_open=True,
+        view.sections = [ws.Section(name="Verified task outcomes and execution evidence" if revision >= 4 else "Historical checker outcomes — UI acceptance unqualified", panels=panels(revision), is_open=True,
                                     layout_settings=ReadableLayout(columns=2, rows=1))]
         view.save()
         restored = ws.Workspace.from_url(view.url)
