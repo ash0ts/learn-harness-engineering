@@ -351,4 +351,4 @@ Not every task deserves a graph. Five criteria — try at least three before you
 
 ## Optional Forge experiment
 
-Follow the [Forge learning path](/en/forge/) for sandbox execution, Agent Lens traces, W&B evidence and the corresponding Marimo notebook. The offline exercise remains the default.
+The Forge article [Binding human approval to the patch we tested](/en/forge/08-state-machine) follows an executed example with recorded failures and saved results. The [Forge overview](/en/forge/) links the full series. The offline exercise remains the default.

@@ -39,4 +39,4 @@ indexing status UI, and grounded Q&A with citations.
 
 ## Optional Forge experiment
 
-Follow the [Forge learning path](/en/forge/) for sandbox execution, Agent Lens traces, W&B evidence and the corresponding Marimo notebook. The offline exercise remains the default.
+Read [What survives when the next session starts](/en/forge/03-session-recovery) for the executed Forge experiment and its saved notebook. The [Forge overview](/en/forge/) explains the shared setup. The offline exercise remains the default.
