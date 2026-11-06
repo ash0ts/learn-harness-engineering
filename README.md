@@ -750,3 +750,8 @@ Our team has also created other courses! Check them out:
 ## Acknowledgments
 
 This course was inspired by and draws ideas from [learn-claude-code](https://github.com/shareAI-lab/learn-claude-code) — a progressive guide to building an agent from scratch, from a single loop to isolated autonomous execution.
+
+
+## Optional Forge track
+
+The personal fork adds an English [Forge learning path](docs/en/forge/index.md) and [integration package](forge/README.md), with Pi coding trials, CoreWeave Sandboxes, Agent Lens, W&B Models and nine canonical Marimo notebooks. Original offline exercises remain available. See the track results report for actual execution and hosted-publication status.

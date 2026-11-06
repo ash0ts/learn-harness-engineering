@@ -1,4 +1,17 @@
 {
+  "forge/index.md": {
+    "ids": [
+      "learn-harness-engineering-with-forge",
+      "learning-path",
+      "local-setup",
+      "read-the-evidence",
+      "budget-and-recovery",
+      "notebooks-and-publication"
+    ],
+    "locales": {
+      "en": 6
+    }
+  },
   "harness-designs/claude-code/index.md": {
     "ids": [
       "breaking-down-claude-code-s-harness-design",
@@ -250,12 +263,13 @@
       "a-more-down-to-earth-example",
       "key-takeaways",
       "further-reading",
-      "exercises"
+      "exercises",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 10,
       "de": 10,
-      "en": 10,
+      "en": 11,
       "es": 10,
       "fr": 10,
       "ja": 10,
@@ -323,12 +337,13 @@
       "a-team-s-real-story",
       "key-takeaways",
       "further-reading",
-      "exercises"
+      "exercises",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 8,
       "de": 8,
-      "en": 8,
+      "en": 9,
       "es": 8,
       "fr": 8,
       "ja": 8,
@@ -398,12 +413,13 @@
       "openai-repository-knowledge-as-the-system-of-record",
       "key-takeaways",
       "further-reading",
-      "exercises"
+      "exercises",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 10,
       "de": 10,
-      "en": 10,
+      "en": 11,
       "es": 10,
       "fr": 10,
       "ja": 10,
@@ -496,12 +512,13 @@
       "openai-a-short-entry-file-and-linked-documentation",
       "key-takeaways",
       "further-reading",
-      "exercises"
+      "exercises",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 9,
       "de": 9,
-      "en": 9,
+      "en": 10,
       "es": 9,
       "fr": 9,
       "ja": 9,
@@ -597,12 +614,13 @@
       "anthropic-handoff-across-coding-sessions",
       "key-takeaways",
       "further-reading",
-      "exercises"
+      "exercises",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 11,
       "de": 11,
-      "en": 11,
+      "en": 12,
       "es": 11,
       "fr": 11,
       "ja": 11,
@@ -672,12 +690,13 @@
       "real-world-example",
       "key-takeaways",
       "further-reading",
-      "exercises"
+      "exercises",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 10,
       "de": 10,
-      "en": 10,
+      "en": 11,
       "es": 10,
       "fr": 10,
       "ja": 10,
@@ -773,12 +792,13 @@
       "real-world-case",
       "key-takeaways",
       "further-reading",
-      "exercises"
+      "exercises",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 14,
       "de": 14,
-      "en": 14,
+      "en": 15,
       "es": 14,
       "fr": 14,
       "ja": 14,
@@ -852,12 +872,13 @@
       "real-world-case",
       "key-takeaways",
       "further-reading",
-      "exercises"
+      "exercises",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 14,
       "de": 14,
-      "en": 14,
+      "en": 15,
       "es": 14,
       "fr": 14,
       "ja": 14,
@@ -933,12 +954,13 @@
       "real-world-case",
       "key-takeaways",
       "further-reading",
-      "exercises"
+      "exercises",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 16,
       "de": 16,
-      "en": 16,
+      "en": 17,
       "es": 16,
       "fr": 16,
       "ja": 16,
@@ -1035,12 +1057,13 @@
       "real-world-case",
       "key-takeaways",
       "further-reading",
-      "exercises"
+      "exercises",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 15,
       "de": 15,
-      "en": 15,
+      "en": 16,
       "es": 15,
       "fr": 15,
       "ja": 15,
@@ -1137,12 +1160,13 @@
       "anthropic-s-three-agent-architecture-experiment",
       "key-takeaways",
       "further-reading",
-      "exercises"
+      "exercises",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 17,
       "de": 17,
-      "en": 15,
+      "en": 16,
       "es": 17,
       "fr": 17,
       "ja": 17,
@@ -1240,12 +1264,13 @@
       "real-world-case",
       "key-takeaways",
       "further-reading",
-      "exercises"
+      "exercises",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 18,
       "de": 17,
-      "en": 16,
+      "en": 17,
       "es": 17,
       "fr": 18,
       "ja": 18,
@@ -1440,12 +1465,13 @@
       "the-maturity-ladder",
       "key-takeaways",
       "further-reading",
-      "exercises"
+      "exercises",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 39,
       "de": 39,
-      "en": 39,
+      "en": 40,
       "es": 39,
       "fr": 39,
       "ja": 39,
@@ -1489,12 +1515,13 @@
       "core-concepts",
       "key-takeaways",
       "further-reading",
-      "exercises"
+      "exercises",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 19,
       "de": 19,
-      "en": 19,
+      "en": 20,
       "es": 19,
       "fr": 19,
       "ja": 19,
@@ -1547,12 +1574,13 @@
       "how-to-measure-results",
       "what-to-submit",
       "experimental-framing",
-      "related-lectures"
+      "related-lectures",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 5,
       "de": 5,
-      "en": 13,
+      "en": 14,
       "es": 5,
       "fr": 5,
       "ja": 5,
@@ -1573,12 +1601,13 @@
       "what-you-do",
       "tools",
       "harness-mechanism",
-      "use-the-checked-in-project"
+      "use-the-checked-in-project",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 5,
       "de": 5,
-      "en": 5,
+      "en": 6,
       "es": 5,
       "fr": 5,
       "ja": 5,
@@ -1599,12 +1628,13 @@
       "what-you-do",
       "tools",
       "harness-mechanism",
-      "use-the-checked-in-project"
+      "use-the-checked-in-project",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 5,
       "de": 5,
-      "en": 5,
+      "en": 6,
       "es": 5,
       "fr": 5,
       "ja": 5,
@@ -1625,12 +1655,13 @@
       "what-you-do",
       "tools",
       "harness-mechanism",
-      "use-the-checked-in-project"
+      "use-the-checked-in-project",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 5,
       "de": 5,
-      "en": 5,
+      "en": 6,
       "es": 5,
       "fr": 5,
       "ja": 5,
@@ -1651,12 +1682,13 @@
       "what-you-do",
       "tools",
       "harness-mechanism",
-      "use-the-checked-in-project"
+      "use-the-checked-in-project",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 5,
       "de": 5,
-      "en": 5,
+      "en": 6,
       "es": 5,
       "fr": 5,
       "ja": 5,
@@ -1677,12 +1709,13 @@
       "what-you-do",
       "tools",
       "harness-mechanism",
-      "use-the-checked-in-project"
+      "use-the-checked-in-project",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 5,
       "de": 5,
-      "en": 5,
+      "en": 6,
       "es": 5,
       "fr": 5,
       "ja": 5,
@@ -1710,12 +1743,13 @@
       "experiment-3-maker-checker-loop-—-take-yourself-out-of-the-loop",
       "how-to-measure-results",
       "what-to-submit",
-      "related-lectures"
+      "related-lectures",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 12,
       "de": 12,
-      "en": 12,
+      "en": 13,
       "es": 12,
       "fr": 12,
       "ja": 12,
@@ -1742,12 +1776,13 @@
       "experiment-3-add-a-rollback-edge-and-a-human-approval-node",
       "how-to-measure-results",
       "what-to-submit",
-      "related-lectures"
+      "related-lectures",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 11,
       "de": 11,
-      "en": 11,
+      "en": 12,
       "es": 11,
       "fr": 11,
       "ja": 11,
