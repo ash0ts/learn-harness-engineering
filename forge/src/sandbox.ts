@@ -4,6 +4,7 @@ import {Type} from 'typebox';
 import type {ToolDefinition} from '@earendil-works/pi-coding-agent';
 import {mkdir, writeFile} from 'node:fs/promises';
 import {join} from 'node:path';
+import {randomUUID} from 'node:crypto';
 import {writeJson} from './records.js';
 import {acquireSlot} from './slots.js';
 import {type Config, requireLive} from './config.js';
@@ -78,6 +79,52 @@ export async function stageWorkspace(sandbox: Sandbox, archive: Uint8Array) {
   await sandbox.commands.run(['bash', '-lc', 'mkdir -p /workspace/task && tar -xf /tmp/task.tar -C /workspace/task && cd /workspace/task && cp -as /opt/app/node_modules . && printf "\\nnode_modules/\\ndist/\\n" >> .gitignore && git init -q && git config user.email learner@example.invalid && git config user.name Learner && git add . && git commit -qm baseline'], {timeoutMs: 60000});
 }
 
+const terminateCommandGroup = `import json,os,signal,subprocess,sys,time
+from pathlib import Path
+marker=Path(sys.argv[1])
+value=marker.read_text().strip()
+if value.startswith('done:'):
+    print(json.dumps({'terminated':True,'reason':'command already exited'}));sys.exit(0)
+group=int(value)
+def live():
+    rows=subprocess.check_output(['ps','-eo','pgid=,stat='],text=True).splitlines()
+    return [r for r in rows if len(r.split())==2 and int(r.split()[0])==group and not r.split()[1].startswith('Z')]
+for sig in [signal.SIGTERM,signal.SIGKILL]:
+    try:os.killpg(group,sig)
+    except ProcessLookupError:pass
+    for _ in range(30):
+        if not live():break
+        time.sleep(0.1)
+    if not live():break
+if live():raise RuntimeError('Remote command group remains active')
+marker.unlink(missing_ok=True)
+print(json.dumps({'terminated':True,'processGroup':group}))
+`;
+
+/** SDK cancel closes the stream only. Kill and verify our remote process group too. */
+export async function runSandboxCommand(sandbox:Sandbox,command:string,options:{timeoutMs:number;signal?:AbortSignal;cancellationEvidence?:string}) {
+  const marker=`/tmp/forge-command-${randomUUID()}.pid`;
+  await sandbox.files.write(marker,'pending');
+  const wrapper='setsid bash -lc "$2" & child=$!; echo "$child" > "$1"; wait "$child"; result=$?; echo "done:$result" > "$1"; exit "$result"';
+  const process=await sandbox.commands.start(['bash','-lc',wrapper,'forge-bounded-command',marker,command],{cwd:'/workspace/task',check:false,bufferedMaxKiB:64,timeoutMs:options.timeoutMs,signal:options.signal});
+  try {return await process.wait({timeoutMs:options.timeoutMs,signal:options.signal});}
+  catch(error) {
+    let streamError:string|undefined;
+    try {await process.cancel({timeoutMs:10000});}catch(e){streamError=String(e);}
+    // Cleanup uses a fresh deadline, never the aborted task signal.
+    try {
+      const cleanup=await sandbox.commands.run(['python3','-c',terminateCommandGroup,marker],{check:false,timeoutMs:15000});
+      if(options.cancellationEvidence)await writeJson(options.cancellationEvidence,{error:String(error),streamError,cleanup});
+      if(cleanup.exitCode!==0)throw new Error('Remote group remains active or unknown');
+    } catch(cleanupError) {
+      await sandbox.stop({missingOk:true,timeoutMs:30000});
+      await sandbox.wait({targetStatus:'terminal',timeoutMs:30000});
+      throw new Error('Remote command cancellation unverified; workspace terminated',{cause:cleanupError});
+    }
+    throw error;
+  }
+}
+
 export function sandboxTools(sandbox: Sandbox, evidenceDir: string): ToolDefinition[] {
   let sequence = 0;
   return [{name: 'sandbox_command', label: 'Sandbox command',
@@ -85,15 +132,15 @@ export function sandboxTools(sandbox: Sandbox, evidenceDir: string): ToolDefinit
     parameters: Type.Object({command: Type.String({maxLength: 20000})}),
     async execute(_id, parameters, signal) {
       const command = (parameters as {command: string}).command;
-      const process = await sandbox.commands.start(['bash', '-lc', command], {cwd: '/workspace/task', check: false, bufferedMaxKiB: 64, timeoutMs: 90000, signal});
+      const number=++sequence;
       try {
-        const result = await process.wait({timeoutMs: 90000, signal});
+        const result = await runSandboxCommand(sandbox,command,{timeoutMs:90000,signal,cancellationEvidence:join(evidenceDir,`cancel-${number}.json`)});
         const record = {command, exitCode: result.exitCode, stdout: result.stdout, stderr: result.stderr, truncated: result.stdoutTruncated || result.stderrTruncated};
         await mkdir(evidenceDir, {recursive: true});
-        await writeJson(join(evidenceDir, `tool-${++sequence}.json`), record);
+        await writeJson(join(evidenceDir, `tool-${number}.json`), record);
         return {content: [{type: 'text' as const, text: JSON.stringify(record)}], details: {exitCode: result.exitCode}};
       } catch (error) {
-        await process.cancel({timeoutMs: 10000});
+        await writeJson(join(evidenceDir,`tool-${number}.json`),{command,error:String(error)});
         throw error;
       }
     },
