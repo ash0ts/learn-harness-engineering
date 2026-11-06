@@ -43,6 +43,7 @@ def audit(entry):
     error_spans=sum(str(json.loads(s['raw_span_dump']).get('status',{}).get('code','')).upper() in {'ERROR','2'} for s in spans)
     if entry.get('expectedTurns') is not None and counts['invoke_agent']!=entry['expectedTurns']:errors.append('Unexpected turn count')
     if entry.get('expectedModelCalls') is not None and counts['chat']!=entry['expectedModelCalls']:errors.append('Unexpected model count')
+    if entry.get('expectedError') and not error_spans:errors.append('Failed inference has no recorded error span')
     return {**entry,'spanCount':len(spans),'operations':dict(counts),'observedErrorSpans':error_spans,'readbackInputTokens':input_tokens,'readbackOutputTokens':output_tokens,'verified':not errors,'errors':sorted(set(errors)),'url':'https://forge.coreweave.com/agent-lens/'+os.environ['WANDB_ENTITY']+'/'+os.environ.get('WANDB_PROJECT','learn-harness-engineering-forge')+'/conversations/'+conversation}
 
 def build():
@@ -56,10 +57,19 @@ def build():
             entries[item['conversationId']].update(sourceCommit=record['sourceCommit'],variant=record['variant'],trialId=record['id'],kind='coding-agent')
     for path in LOCAL.glob('qualification-*/qualification.json'):
         record=json.loads(path.read_text())
-        if not record.get('passed'):continue
-        agent=record['agent'];entries[agent['conversationId']]={k:agent[k] for k in ['conversationId','inputTokens','outputTokens','telemetryComplete']}
-        entries[agent['conversationId']].update(sourceCommit=record['sourceCommit'],kind='agent-qualification')
-        app=record['app'];entries[app['conversationId']]={'conversationId':app['conversationId'],**{k:app['usage'][k] for k in ['inputTokens','outputTokens']},'sourceCommit':record['sourceCommit'],'kind':'app-qualification','expectedTurns':4,'expectedModelCalls':2}
+        if not record.get('finishedAt'):continue
+        agent=record.get('agent')
+        if agent:
+            entries[agent['conversationId']]={k:agent[k] for k in ['conversationId','inputTokens','outputTokens','telemetryComplete']}
+            entries[agent['conversationId']].update(sourceCommit=record['sourceCommit'],kind='agent-qualification')
+        app=record.get('app')
+        if app:
+            entry={'conversationId':app['conversationId'],**{k:app['usage'][k] for k in ['inputTokens','outputTokens']},'sourceCommit':record['sourceCommit'],
+                   'kind':'app-qualification' if record.get('passed') else 'failed-app-qualification',
+                   'telemetryComplete':app['usage']['calls']==2,
+                   'expectedError':not record.get('passed') and 'Live app service qualification failed' in record.get('error','')}
+            if record.get('passed'):entry.update(expectedTurns=4,expectedModelCalls=2)
+            entries[app['conversationId']]=entry
     for path in LOCAL.glob('concurrency-*/concurrency.json'):
         record=json.loads(path.read_text())
         if not record.get('passed'):continue
