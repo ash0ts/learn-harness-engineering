@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-06T11:01:19.641674+00:00",
+  "generatedAt": "2026-11-06T11:05:19.633271+00:00",
   "views": [
     {
       "protocolRevision": 2,
@@ -460,6 +460,72 @@
         "knownEstimatedCostUsd": 0.24827877599999998,
         "inputTokens": 725853,
         "outputTokens": 23953
+      }
+    },
+    {
+      "id": "course-view-bc66628fcc2c85d7",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 3,
+        "protocolSha256": "b538fa6c66cf2c46dd914d0697c69cb984c9f203d71a851f8bfdfbc9b6bac90f",
+        "sourceCommit": "7c563eb14f3999ab3e659b77c4095c883619002f",
+        "project": "project-01",
+        "variant": "explicit",
+        "label": "r3 01 explicit",
+        "trialIds": [
+          "20e034ff-32bc-4225-8416-044011f5f68d",
+          "97cb6fd5-7fd6-466c-b5f1-598126cf2d52",
+          "b043a7b3-1843-4914-af0b-0504623b1059"
+        ]
+      },
+      "metrics": {
+        "attempts": 3,
+        "passes": 3,
+        "passRate": 1.0,
+        "taskFailures": 0,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 3,
+        "uiChecksPassed": 3,
+        "serviceChecksExecuted": 9,
+        "serviceChecksPassed": 9,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.335909054,
+        "inputTokens": 935745,
+        "outputTokens": 16166
+      }
+    },
+    {
+      "id": "course-view-fda7437338a58ef8",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 3,
+        "protocolSha256": "b538fa6c66cf2c46dd914d0697c69cb984c9f203d71a851f8bfdfbc9b6bac90f",
+        "sourceCommit": "7c563eb14f3999ab3e659b77c4095c883619002f",
+        "project": "project-01",
+        "variant": "minimal",
+        "label": "r3 01 minimal",
+        "trialIds": [
+          "813076fb-3550-4e34-a3a3-831c7ed43f14",
+          "ca53b79e-eab4-4b69-8c1e-072c2baff44f",
+          "d52e75ef-81cb-4fc0-b551-0884405ad2c1"
+        ]
+      },
+      "metrics": {
+        "attempts": 3,
+        "passes": 3,
+        "passRate": 1.0,
+        "taskFailures": 0,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 3,
+        "uiChecksPassed": 3,
+        "serviceChecksExecuted": 9,
+        "serviceChecksPassed": 9,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.35762799266666667,
+        "inputTokens": 1051706,
+        "outputTokens": 15781
       }
     }
   ],
