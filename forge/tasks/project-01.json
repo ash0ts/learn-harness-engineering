@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "id": "project-01",
+  "starter": "projects/project-01/starter",
+  "task": "Build a usable knowledge-base shell: the Electron window must load, show imported documents, accept a question, and persist data. Keep the typed preload bridge and renderer isolation.",
+  "variants": [
+    "minimal",
+    "explicit"
+  ],
+  "repeats": 3,
+  "sessions": 1,
+  "protectedChecker": "forge/graders/check.cjs",
+  "fixture": "forge/fixtures/course.txt"
+}
