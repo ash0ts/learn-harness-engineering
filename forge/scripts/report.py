@@ -53,7 +53,7 @@ def build():
     sandbox_audit=read(LOCAL/'sandbox-final-audit.json') if (LOCAL/'sandbox-final-audit.json').exists() else {}
     checker_qualification=read(LOCAL/'checker-qualification-summary.json') if (LOCAL/'checker-qualification-summary.json').exists() else {}
     notebook_rerun=read(LOCAL/'notebook-rerun-qualification.json') if (LOCAL/'notebook-rerun-qualification.json').exists() else {}
-    graph_source=next((r['sourceCommit'] for r in read(ROOT/'forge/results/source-revisions.json')['frozenSources'] if r['tag']=='forge-course-graph-qualified'),None)
+    graph_source=next((r['sourceCommit'] for r in read(ROOT/'forge/results/source-revisions.json')['frozenSources'] if r['tag']=='forge-course-graph-contract'),None)
     local_checks=read(LOCAL/'local-checks.json') if (LOCAL/'local-checks.json').exists() else {}
     verified_ids={r['id'] for r in verified_rows}
     verified_blocks=[b for b in blocks if set(b['trialIds']).issubset(verified_ids)]
