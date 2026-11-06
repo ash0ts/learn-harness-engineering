@@ -1,5 +1,4 @@
-import React from 'react';
-import { QAHistory } from '../../../shared/types';
+import { QAHistory } from '../../shared/types';
 
 interface Props {
   history: QAHistory[];
