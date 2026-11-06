@@ -147,4 +147,4 @@ This is the most important of the three experiments. You'll build a **complete l
 
 ## Optional Forge experiment
 
-Follow the [Forge learning path](/en/forge/) for sandbox execution, Agent Lens traces, W&B evidence and the corresponding Marimo notebook. The offline exercise remains the default.
+Read [Two hours of agent work, with a stop condition](/en/forge/07-bounded-loops) for the executed Forge experiment and its saved notebook. The [Forge overview](/en/forge/) explains the shared setup. The offline exercise remains the default.
