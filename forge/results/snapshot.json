@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "capturedAt": "2026-11-06T11:51:02.079474+00:00",
-  "status": "Recorded 89 completed coding attempts and 33 complete comparison blocks. Outcomes include unsuccessful attempts; no human time savings are inferred.",
+  "capturedAt": "2026-11-06T12:02:18.885462+00:00",
+  "status": "Recorded 98 completed coding attempts and 36 complete comparison blocks. Outcomes include unsuccessful attempts; no human time savings are inferred.",
   "trials": [
     {
       "id": "03707b50-d426-4961-b8e3-522d7f674f6c",
@@ -357,6 +357,103 @@
           "conversationId": "01a1b0aa-ff8e-77de-bb66-1f3b2cccace3",
           "requests": 24,
           "turns": 25,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "0c88671b-326d-4c20-b1b9-aaf95782c93c",
+      "project": "project-05",
+      "variant": "plan-gen-eval",
+      "trial": 2,
+      "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+      "outcome": "task_failed",
+      "inputTokens": 146910,
+      "outputTokens": 7423,
+      "estimatedCostUsd": 0.057479944666666664,
+      "conversationIds": [
+        "01a1b0b5-2712-71b0-97f6-936ef5784661",
+        "01a1b0b5-461f-71b0-97f6-9371b937e3f0",
+        "01a1b0b5-fdf9-71b0-97f6-937367b5ef89",
+        "01a1b0b6-1bd8-71b0-97f6-937457f317a3"
+      ],
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/0c88671b326d4c20",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-0c88671b-326d-4c20-b1b9-aaf95782c93c:v0",
+      "startedAt": "2026-11-06T11:53:38.234Z",
+      "finishedAt": "2026-11-06T11:55:40.567Z",
+      "actorCompleted": false,
+      "error": null,
+      "protocolRevision": 4,
+      "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+      "grade": {
+        "schemaVersion": 1,
+        "task": "project-05",
+        "checks": [
+          {
+            "name": "strict compile and renderer build",
+            "passed": true
+          },
+          {
+            "name": "real import and persistence after reconstruction",
+            "passed": true
+          },
+          {
+            "name": "actual indexing keeps every nonempty paragraph",
+            "passed": true
+          },
+          {
+            "name": "actual retrieval and Q&A persist two turns",
+            "passed": true
+          },
+          {
+            "name": "Electron window, preload, import, indexing and question UI under Xvfb",
+            "passed": false,
+            "error": "AssertionError [ERR_ASSERTION]: false == true"
+          }
+        ],
+        "passed": false
+      },
+      "reconciledEstimateUsd": 0.057479944666666664,
+      "chargedUnknownReservationUsd": null,
+      "actorPhases": [
+        {
+          "conversationId": "01a1b0b5-2712-71b0-97f6-936ef5784661",
+          "requests": 4,
+          "turns": 5,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
+        },
+        {
+          "conversationId": "01a1b0b5-461f-71b0-97f6-9371b937e3f0",
+          "requests": 8,
+          "turns": 9,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
+        },
+        {
+          "conversationId": "01a1b0b5-fdf9-71b0-97f6-937367b5ef89",
+          "requests": 4,
+          "turns": 5,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
+        },
+        {
+          "conversationId": "01a1b0b6-1bd8-71b0-97f6-937457f317a3",
+          "requests": 8,
+          "turns": 9,
           "completed": false,
           "telemetryComplete": true,
           "errors": [
@@ -1565,6 +1662,92 @@
       ]
     },
     {
+      "id": "3b7cd608-2c28-4cb8-9d4f-aeb60ac3bc7a",
+      "project": "project-05",
+      "variant": "gen-eval",
+      "trial": 1,
+      "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+      "outcome": "task_failed",
+      "inputTokens": 193061,
+      "outputTokens": 7292,
+      "estimatedCostUsd": 0.06969865533333333,
+      "conversationIds": [
+        "01a1b0b1-588b-7760-9549-b9960bdaaedb",
+        "01a1b0b2-1eb5-7760-9549-b999019ff266",
+        "01a1b0b2-389c-7760-9549-b99bb499d3a2"
+      ],
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/3b7cd6082c284cb8",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-3b7cd608-2c28-4cb8-9d4f-aeb60ac3bc7a:v0",
+      "startedAt": "2026-11-06T11:49:14.593Z",
+      "finishedAt": "2026-11-06T11:51:25.763Z",
+      "actorCompleted": false,
+      "error": null,
+      "protocolRevision": 4,
+      "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+      "grade": {
+        "schemaVersion": 1,
+        "task": "project-05",
+        "checks": [
+          {
+            "name": "strict compile and renderer build",
+            "passed": true
+          },
+          {
+            "name": "real import and persistence after reconstruction",
+            "passed": true
+          },
+          {
+            "name": "actual indexing keeps every nonempty paragraph",
+            "passed": true
+          },
+          {
+            "name": "actual retrieval and Q&A persist two turns",
+            "passed": true
+          },
+          {
+            "name": "Electron window, preload, import, indexing and question UI under Xvfb",
+            "passed": false,
+            "error": "AssertionError [ERR_ASSERTION]: false == true"
+          }
+        ],
+        "passed": false
+      },
+      "reconciledEstimateUsd": 0.06969865533333333,
+      "chargedUnknownReservationUsd": null,
+      "actorPhases": [
+        {
+          "conversationId": "01a1b0b1-588b-7760-9549-b9960bdaaedb",
+          "requests": 10,
+          "turns": 11,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
+        },
+        {
+          "conversationId": "01a1b0b2-1eb5-7760-9549-b999019ff266",
+          "requests": 4,
+          "turns": 5,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
+        },
+        {
+          "conversationId": "01a1b0b2-389c-7760-9549-b99bb499d3a2",
+          "requests": 10,
+          "turns": 11,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
+        }
+      ]
+    },
+    {
       "id": "3bf22b16-6480-4721-820a-0aaaf70155be",
       "project": "project-03",
       "variant": "minimal",
@@ -2250,6 +2433,92 @@
       ]
     },
     {
+      "id": "5609c89b-f73f-4a9e-8702-a57758c3403c",
+      "project": "project-05",
+      "variant": "gen-eval",
+      "trial": 3,
+      "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+      "outcome": "task_failed",
+      "inputTokens": 181108,
+      "outputTokens": 8115,
+      "estimatedCostUsd": 0.06756080333333334,
+      "conversationIds": [
+        "01a1b0ba-97e8-738d-9d11-43791b65768a",
+        "01a1b0bb-8513-738d-9d11-437b1c6ac073",
+        "01a1b0bb-a277-738d-9d11-437d50dc4951"
+      ],
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/5609c89bf73f4a9e",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-5609c89b-f73f-4a9e-8702-a57758c3403c:v0",
+      "startedAt": "2026-11-06T11:59:34.985Z",
+      "finishedAt": "2026-11-06T12:01:44.173Z",
+      "actorCompleted": false,
+      "error": null,
+      "protocolRevision": 4,
+      "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+      "grade": {
+        "schemaVersion": 1,
+        "task": "project-05",
+        "checks": [
+          {
+            "name": "strict compile and renderer build",
+            "passed": true
+          },
+          {
+            "name": "real import and persistence after reconstruction",
+            "passed": true
+          },
+          {
+            "name": "actual indexing keeps every nonempty paragraph",
+            "passed": true
+          },
+          {
+            "name": "actual retrieval and Q&A persist two turns",
+            "passed": true
+          },
+          {
+            "name": "Electron window, preload, import, indexing and question UI under Xvfb",
+            "passed": false,
+            "error": "AssertionError [ERR_ASSERTION]: truncated answer"
+          }
+        ],
+        "passed": false
+      },
+      "reconciledEstimateUsd": 0.06756080333333334,
+      "chargedUnknownReservationUsd": null,
+      "actorPhases": [
+        {
+          "conversationId": "01a1b0ba-97e8-738d-9d11-43791b65768a",
+          "requests": 10,
+          "turns": 11,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
+        },
+        {
+          "conversationId": "01a1b0bb-8513-738d-9d11-437b1c6ac073",
+          "requests": 4,
+          "turns": 5,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
+        },
+        {
+          "conversationId": "01a1b0bb-a277-738d-9d11-437d50dc4951",
+          "requests": 10,
+          "turns": 11,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
+        }
+      ]
+    },
+    {
       "id": "643a867a-74e8-4987-aa56-5640b4c1982e",
       "project": "project-01",
       "variant": "explicit",
@@ -2384,6 +2653,68 @@
           "errors": [
             "Model-call budget exhausted"
           ]
+        }
+      ]
+    },
+    {
+      "id": "66558826-6e1a-46e0-abe9-ef951eff0c16",
+      "project": "project-05",
+      "variant": "single-role",
+      "trial": 2,
+      "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+      "outcome": "task_failed",
+      "inputTokens": 161359,
+      "outputTokens": 5662,
+      "estimatedCostUsd": 0.056296415333333336,
+      "conversationIds": [
+        "01a1b0b7-3823-736f-b893-bf6151a6c293"
+      ],
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/665588266e1a46e0",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-66558826-6e1a-46e0-abe9-ef951eff0c16:v0",
+      "startedAt": "2026-11-06T11:55:53.818Z",
+      "finishedAt": "2026-11-06T11:57:28.501Z",
+      "actorCompleted": true,
+      "error": null,
+      "protocolRevision": 4,
+      "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+      "grade": {
+        "schemaVersion": 1,
+        "task": "project-05",
+        "checks": [
+          {
+            "name": "strict compile and renderer build",
+            "passed": true
+          },
+          {
+            "name": "real import and persistence after reconstruction",
+            "passed": true
+          },
+          {
+            "name": "actual indexing keeps every nonempty paragraph",
+            "passed": true
+          },
+          {
+            "name": "actual retrieval and Q&A persist two turns",
+            "passed": true
+          },
+          {
+            "name": "Electron window, preload, import, indexing and question UI under Xvfb",
+            "passed": false,
+            "error": "AssertionError [ERR_ASSERTION]: false == true"
+          }
+        ],
+        "passed": false
+      },
+      "reconciledEstimateUsd": 0.056296415333333336,
+      "chargedUnknownReservationUsd": null,
+      "actorPhases": [
+        {
+          "conversationId": "01a1b0b7-3823-736f-b893-bf6151a6c293",
+          "requests": 13,
+          "turns": 13,
+          "completed": true,
+          "telemetryComplete": true,
+          "errors": []
         }
       ]
     },
@@ -2641,6 +2972,87 @@
           "conversationId": "01a1b099-abf0-70d5-87cf-cae73569b86c",
           "requests": 12,
           "turns": 13,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "70336779-611e-48d8-839d-7e92aa1f63cb",
+      "project": "project-05",
+      "variant": "plan-gen-eval",
+      "trial": 1,
+      "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+      "outcome": "task_failed",
+      "inputTokens": 152700,
+      "outputTokens": 7440,
+      "estimatedCostUsd": 0.057835604,
+      "conversationIds": [
+        "01a1b0b3-5575-762f-a896-68b2ea316bbb",
+        "01a1b0b3-774c-762f-a896-68b47162b2c1",
+        "01a1b0b4-160c-762f-a896-68b6891c4a91",
+        "01a1b0b4-3d41-762f-a896-68b8c5f73c4a"
+      ],
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/70336779611e48d8",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-70336779-611e-48d8-839d-7e92aa1f63cb:v0",
+      "startedAt": "2026-11-06T11:51:37.351Z",
+      "finishedAt": "2026-11-06T11:53:27.717Z",
+      "actorCompleted": false,
+      "error": null,
+      "protocolRevision": 4,
+      "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+      "grade": {
+        "schemaVersion": 1,
+        "task": "project-05",
+        "checks": [
+          {
+            "name": "strict compile and renderer build",
+            "passed": false,
+            "error": "Error: Command failed: node /opt/app/node_modules/typescript/bin/tsc --noEmit -p tsconfig.json"
+          }
+        ],
+        "passed": false
+      },
+      "reconciledEstimateUsd": 0.057835604,
+      "chargedUnknownReservationUsd": null,
+      "actorPhases": [
+        {
+          "conversationId": "01a1b0b3-5575-762f-a896-68b2ea316bbb",
+          "requests": 4,
+          "turns": 5,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
+        },
+        {
+          "conversationId": "01a1b0b3-774c-762f-a896-68b47162b2c1",
+          "requests": 8,
+          "turns": 9,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
+        },
+        {
+          "conversationId": "01a1b0b4-160c-762f-a896-68b6891c4a91",
+          "requests": 4,
+          "turns": 5,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
+        },
+        {
+          "conversationId": "01a1b0b4-3d41-762f-a896-68b8c5f73c4a",
+          "requests": 8,
+          "turns": 9,
           "completed": false,
           "telemetryComplete": true,
           "errors": [
@@ -3724,6 +4136,68 @@
       ]
     },
     {
+      "id": "a2d447ed-75a6-4477-9308-e8eb60885b2b",
+      "project": "project-05",
+      "variant": "single-role",
+      "trial": 3,
+      "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+      "outcome": "task_failed",
+      "inputTokens": 119967,
+      "outputTokens": 5799,
+      "estimatedCostUsd": 0.046166620000000005,
+      "conversationIds": [
+        "01a1b0b8-d071-729c-9464-185444e5b1ef"
+      ],
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/a2d447ed75a64477",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-a2d447ed-75a6-4477-9308-e8eb60885b2b:v0",
+      "startedAt": "2026-11-06T11:57:37.698Z",
+      "finishedAt": "2026-11-06T11:59:13.134Z",
+      "actorCompleted": true,
+      "error": null,
+      "protocolRevision": 4,
+      "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+      "grade": {
+        "schemaVersion": 1,
+        "task": "project-05",
+        "checks": [
+          {
+            "name": "strict compile and renderer build",
+            "passed": true
+          },
+          {
+            "name": "real import and persistence after reconstruction",
+            "passed": true
+          },
+          {
+            "name": "actual indexing keeps every nonempty paragraph",
+            "passed": true
+          },
+          {
+            "name": "actual retrieval and Q&A persist two turns",
+            "passed": true
+          },
+          {
+            "name": "Electron window, preload, import, indexing and question UI under Xvfb",
+            "passed": false,
+            "error": "AssertionError [ERR_ASSERTION]: false == true"
+          }
+        ],
+        "passed": false
+      },
+      "reconciledEstimateUsd": 0.046166620000000005,
+      "chargedUnknownReservationUsd": null,
+      "actorPhases": [
+        {
+          "conversationId": "01a1b0b8-d071-729c-9464-185444e5b1ef",
+          "requests": 11,
+          "turns": 11,
+          "completed": true,
+          "telemetryComplete": true,
+          "errors": []
+        }
+      ]
+    },
+    {
       "id": "a7dcf5cb-dd20-4c3f-921b-f8a51a21f8f8",
       "project": "project-01",
       "variant": "minimal",
@@ -4197,6 +4671,68 @@
           "errors": [
             "Model-call budget exhausted"
           ]
+        }
+      ]
+    },
+    {
+      "id": "b6969def-4dd9-4763-8b73-6de7cdcb59c2",
+      "project": "project-05",
+      "variant": "single-role",
+      "trial": 1,
+      "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+      "outcome": "task_failed",
+      "inputTokens": 218350,
+      "outputTokens": 6812,
+      "estimatedCostUsd": 0.07337922933333334,
+      "conversationIds": [
+        "01a1b0b1-405a-71c3-a7fa-86de9e116bbe"
+      ],
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/b6969def4dd94763",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-b6969def-4dd9-4763-8b73-6de7cdcb59c2:v0",
+      "startedAt": "2026-11-06T11:49:14.593Z",
+      "finishedAt": "2026-11-06T11:51:04.196Z",
+      "actorCompleted": true,
+      "error": null,
+      "protocolRevision": 4,
+      "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+      "grade": {
+        "schemaVersion": 1,
+        "task": "project-05",
+        "checks": [
+          {
+            "name": "strict compile and renderer build",
+            "passed": true
+          },
+          {
+            "name": "real import and persistence after reconstruction",
+            "passed": true
+          },
+          {
+            "name": "actual indexing keeps every nonempty paragraph",
+            "passed": true
+          },
+          {
+            "name": "actual retrieval and Q&A persist two turns",
+            "passed": true
+          },
+          {
+            "name": "Electron window, preload, import, indexing and question UI under Xvfb",
+            "passed": false,
+            "error": "AssertionError [ERR_ASSERTION]: false == true"
+          }
+        ],
+        "passed": false
+      },
+      "reconciledEstimateUsd": 0.07337922933333334,
+      "chargedUnknownReservationUsd": null,
+      "actorPhases": [
+        {
+          "conversationId": "01a1b0b1-405a-71c3-a7fa-86de9e116bbe",
+          "requests": 15,
+          "turns": 15,
+          "completed": true,
+          "telemetryComplete": true,
+          "errors": []
         }
       ]
     },
@@ -4871,6 +5407,87 @@
       ]
     },
     {
+      "id": "cf87ff44-3f71-4ade-8f50-eaeb048b968a",
+      "project": "project-05",
+      "variant": "plan-gen-eval",
+      "trial": 3,
+      "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+      "outcome": "task_failed",
+      "inputTokens": 138195,
+      "outputTokens": 7077,
+      "estimatedCostUsd": 0.05308981333333333,
+      "conversationIds": [
+        "01a1b0b8-d8e1-7342-9594-2f17f6d9453f",
+        "01a1b0b8-febc-7342-9594-2f18d795c417",
+        "01a1b0b9-925c-7342-9594-2f1bbf3a9881",
+        "01a1b0b9-a897-7342-9594-2f1ddccfd3f0"
+      ],
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/cf87ff443f714ade",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-cf87ff44-3f71-4ade-8f50-eaeb048b968a:v0",
+      "startedAt": "2026-11-06T11:57:37.698Z",
+      "finishedAt": "2026-11-06T11:59:21.221Z",
+      "actorCompleted": false,
+      "error": null,
+      "protocolRevision": 4,
+      "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+      "grade": {
+        "schemaVersion": 1,
+        "task": "project-05",
+        "checks": [
+          {
+            "name": "strict compile and renderer build",
+            "passed": false,
+            "error": "Error: Command failed: node /opt/app/node_modules/typescript/bin/tsc --noEmit -p tsconfig.json"
+          }
+        ],
+        "passed": false
+      },
+      "reconciledEstimateUsd": 0.05308981333333333,
+      "chargedUnknownReservationUsd": null,
+      "actorPhases": [
+        {
+          "conversationId": "01a1b0b8-d8e1-7342-9594-2f17f6d9453f",
+          "requests": 4,
+          "turns": 5,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
+        },
+        {
+          "conversationId": "01a1b0b8-febc-7342-9594-2f18d795c417",
+          "requests": 8,
+          "turns": 9,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
+        },
+        {
+          "conversationId": "01a1b0b9-925c-7342-9594-2f1bbf3a9881",
+          "requests": 4,
+          "turns": 5,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
+        },
+        {
+          "conversationId": "01a1b0b9-a897-7342-9594-2f1ddccfd3f0",
+          "requests": 8,
+          "turns": 9,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
+        }
+      ]
+    },
+    {
       "id": "d52e75ef-81cb-4fc0-b551-0884405ad2c1",
       "project": "project-01",
       "variant": "minimal",
@@ -5034,6 +5651,76 @@
           "telemetryComplete": true,
           "errors": [
             "Frozen input byte budget exceeded"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "df461eac-d90b-489e-a230-1ecc20511585",
+      "project": "project-05",
+      "variant": "gen-eval",
+      "trial": 2,
+      "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+      "outcome": "task_failed",
+      "inputTokens": 180898,
+      "outputTokens": 7261,
+      "estimatedCostUsd": 0.064428758,
+      "conversationIds": [
+        "01a1b0b5-279b-737e-aea6-942599acca42",
+        "01a1b0b5-d408-737e-aea6-942633161d25",
+        "01a1b0b5-fac7-737e-aea6-94283f8e8ffa"
+      ],
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/df461eacd90b489e",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-df461eac-d90b-489e-a230-1ecc20511585:v0",
+      "startedAt": "2026-11-06T11:53:38.236Z",
+      "finishedAt": "2026-11-06T11:55:26.352Z",
+      "actorCompleted": false,
+      "error": null,
+      "protocolRevision": 4,
+      "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+      "grade": {
+        "schemaVersion": 1,
+        "task": "project-05",
+        "checks": [
+          {
+            "name": "strict compile and renderer build",
+            "passed": false,
+            "error": "Error: Command failed: node /opt/app/node_modules/typescript/bin/tsc --noEmit -p tsconfig.json"
+          }
+        ],
+        "passed": false
+      },
+      "reconciledEstimateUsd": 0.064428758,
+      "chargedUnknownReservationUsd": null,
+      "actorPhases": [
+        {
+          "conversationId": "01a1b0b5-279b-737e-aea6-942599acca42",
+          "requests": 10,
+          "turns": 11,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
+        },
+        {
+          "conversationId": "01a1b0b5-d408-737e-aea6-942633161d25",
+          "requests": 4,
+          "turns": 5,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
+        },
+        {
+          "conversationId": "01a1b0b5-fac7-737e-aea6-94283f8e8ffa",
+          "requests": 10,
+          "turns": 11,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
           ]
         }
       ]
@@ -6395,6 +7082,51 @@
       }
     },
     {
+      "campaignId": "3626f567-01a0-4226-8ce6-c99bd53dd305",
+      "project": "project-05",
+      "repeat": 1,
+      "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+      "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+      "trialIds": [
+        "b6969def-4dd9-4763-8b73-6de7cdcb59c2",
+        "3b7cd608-2c28-4cb8-9d4f-aeb60ac3bc7a",
+        "70336779-611e-48d8-839d-7e92aa1f63cb"
+      ],
+      "outcomes": {
+        "task_failed": 3
+      }
+    },
+    {
+      "campaignId": "3626f567-01a0-4226-8ce6-c99bd53dd305",
+      "project": "project-05",
+      "repeat": 2,
+      "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+      "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+      "trialIds": [
+        "df461eac-d90b-489e-a230-1ecc20511585",
+        "0c88671b-326d-4c20-b1b9-aaf95782c93c",
+        "66558826-6e1a-46e0-abe9-ef951eff0c16"
+      ],
+      "outcomes": {
+        "task_failed": 3
+      }
+    },
+    {
+      "campaignId": "3626f567-01a0-4226-8ce6-c99bd53dd305",
+      "project": "project-05",
+      "repeat": 3,
+      "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+      "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+      "trialIds": [
+        "cf87ff44-3f71-4ade-8f50-eaeb048b968a",
+        "a2d447ed-75a6-4477-9308-e8eb60885b2b",
+        "5609c89b-f73f-4a9e-8702-a57758c3403c"
+      ],
+      "outcomes": {
+        "task_failed": 3
+      }
+    },
+    {
       "campaignId": "44689992-6779-4465-9a7c-06f311efd8c2",
       "project": "project-01",
       "repeat": 1,
@@ -7139,12 +7871,10 @@
   "budget": {
     "schemaVersion": 1,
     "limitUsd": null,
-    "spentEstimateUsd": 14.880616995333343,
+    "spentEstimateUsd": 15.500944650666675,
     "reservations": {
-      "b6969def-4dd9-4763-8b73-6de7cdcb59c2": 4.194969599999999,
-      "3b7cd608-2c28-4cb8-9d4f-aeb60ac3bc7a": 4.194969599999999,
-      "70336779-611e-48d8-839d-7e92aa1f63cb": 4.194969599999999,
-      "notebook-15316-editor-2": 2
+      "f6edbfa3-3682-4e3b-bff2-ba4b864e2511": 4.194969599999999,
+      "216527fa-6ff5-4cde-a203-696bb1e57f06": 4.194969599999999
     },
     "settled": {
       "qualification-17b194af-b3ef-4d47-95cc-178676315b60": 0.003,
@@ -7287,7 +8017,20 @@
       "1b0a25e5-ba13-4931-9c4f-ff6100f6672a": 0.10046582266666666,
       "9feeffa8-1836-485a-a52c-2b398b40a195": 0.12556704133333335,
       "bdc971f7-1a51-437d-b46a-8ed3c268eb97": 0.12889706533333334,
-      "notebook-15315-editor-2": 0.060377926666666665
+      "notebook-15315-editor-2": 0.060377926666666665,
+      "b6969def-4dd9-4763-8b73-6de7cdcb59c2": 0.07337922933333334,
+      "3b7cd608-2c28-4cb8-9d4f-aeb60ac3bc7a": 0.06969865533333333,
+      "70336779-611e-48d8-839d-7e92aa1f63cb": 0.057835604,
+      "notebook-15316-editor-2": 0.01588696,
+      "df461eac-d90b-489e-a230-1ecc20511585": 0.064428758,
+      "0c88671b-326d-4c20-b1b9-aaf95782c93c": 0.057479944666666664,
+      "history-diagnostic-5410a71b-9980-4ad4-bc47-98e3df5b1f22": 0.003229932,
+      "66558826-6e1a-46e0-abe9-ef951eff0c16": 0.056296415333333336,
+      "cf87ff44-3f71-4ade-8f50-eaeb048b968a": 0.05308981333333333,
+      "a2d447ed-75a6-4477-9308-e8eb60885b2b": 0.046166620000000005,
+      "history-diagnostic-e8a1ea54-0fe5-4ba8-9929-76b07e2b5e29": 0.011016549333333334,
+      "notebook-15317-editor-2": 0.044258370666666665,
+      "5609c89b-f73f-4a9e-8702-a57758c3403c": 0.06756080333333334
     },
     "reconciliations": [
       {
