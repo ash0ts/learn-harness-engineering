@@ -37,3 +37,4 @@ wandb/
 __marimo__/
 __pycache__/
 docs/.vitepress/.temp/
+__pycache__/
