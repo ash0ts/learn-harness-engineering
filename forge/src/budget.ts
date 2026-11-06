@@ -6,6 +6,7 @@ export interface Ledger {
   schemaVersion: 1; limitUsd: number; spentEstimateUsd: number;
   reservations: Record<string, number>; settled: Record<string, number>;
   halted?: string;
+  reconciliations?: Array<{id:string;estimatedUsd:number;evidence:string;at:string}>;
 }
 /** Shared, fail-closed reservation ledger. A stale lock requires explicit reconciliation. */
 export class Budget {
@@ -47,6 +48,15 @@ export class Budget {
       }
       if (actual > ledger.reservations[id]) ledger.halted = `Reservation exceeded by ${id}`;
       ledger.spentEstimateUsd += actual; ledger.settled[id] = actual; delete ledger.reservations[id];
+    });
+  }
+  async reconcile(id:string, estimatedUsd:number, evidence:string) {
+    return this.change(ledger=>{
+      if(!(id in ledger.reservations)||!evidence.trim()||!Number.isFinite(estimatedUsd)||estimatedUsd<0)throw new Error('Reconciliation requires a reservation, evidence and known cost');
+      if(ledger.halted!==`Missing usage for ${id}`)throw new Error('A different halt requires separate reconciliation');
+      if(estimatedUsd>ledger.reservations[id])throw new Error('Reconciled spend exceeds reservation');
+      ledger.spentEstimateUsd+=estimatedUsd;ledger.settled[id]=estimatedUsd;delete ledger.reservations[id];delete ledger.halted;
+      (ledger.reconciliations??=[]).push({id,estimatedUsd,evidence,at:new Date().toISOString()});
     });
   }
 }
