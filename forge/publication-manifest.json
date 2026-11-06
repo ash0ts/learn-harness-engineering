@@ -226,21 +226,31 @@
       "file": "forge/notebooks/08-state-machine.py",
       "project": "project-08",
       "title": "08 \u00b7 Checkpointed graphs and human approval",
-      "sourceCommit": "31b85133e7245133b8f87df2cd6a5b1c61e880f6",
-      "sha256": "7082cbc0988ca6b29d2aec933531432867d57c4dcf30d544acbdf2a96c11614f",
+      "sourceCommit": "10968133b27ab146dda48ea6329f2296567b509b",
+      "sha256": "456521e902e5daa6c856562ea31eec160233728059c1f513620e3a07eff414a7",
       "id": "Tm90ZWJvb2s6MTUzMjE=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjE%3D",
-      "status": "created_basic_not_uploaded",
+      "status": "published_verified",
       "createdAt": "2026-11-06T08:00:49.261353+00:00",
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "08-Checkpointed-graphs-and-human-approval",
-        "versionIndex": 0,
+        "versionIndex": 3,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:49Z",
-      "expectedRemoteSha256": "729741bb7115805dd5b8266e3bd1bbfc3c5a8e05d08f80feb6d9489b7eb62b27",
-      "publicationBlocker": "Paid EDIT session withheld while shared budget ledger is halted; canonical source not loaded"
+      "expectedRemoteSha256": "456521e902e5daa6c856562ea31eec160233728059c1f513620e3a07eff414a7",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "08-Checkpointed-graphs-and-human-approval",
+        "versionIndex": 3,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "0443e9d2e28d581f050e8306d3bb0607882b4d4f87249277b94291d2442f5be7",
+      "renderedCellSourceVerified": true,
+      "verifiedAggregateGroups": 2,
+      "lastStaticOutputAt": null,
+      "verifiedAt": "2026-11-06T10:15:01.441070+00:00"
     }
   ]
 }
