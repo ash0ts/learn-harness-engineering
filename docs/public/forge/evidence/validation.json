@@ -4,7 +4,7 @@
   "browser": {
     "verified": true,
     "pageRenders": 22,
-    "uniqueLocalResources": 146,
+    "uniqueLocalResources": 149,
     "uniqueImageSources": 45,
     "viewports": [
       1440,
@@ -43,7 +43,7 @@
         "file": "03-session-recovery.md",
         "width": 1440,
         "images": 3,
-        "links": 32
+        "links": 33
       },
       {
         "file": "04-runtime-feedback.md",
@@ -73,19 +73,19 @@
         "file": "08-state-machine.md",
         "width": 1440,
         "images": 2,
-        "links": 33
+        "links": 34
       },
       {
         "file": "evidence.md",
         "width": 1440,
         "images": 59,
-        "links": 98
+        "links": 99
       },
       {
         "file": "index.md",
         "width": 1440,
         "images": 3,
-        "links": 41
+        "links": 42
       },
       {
         "file": "running.md",
@@ -109,7 +109,7 @@
         "file": "03-session-recovery.md",
         "width": 390,
         "images": 3,
-        "links": 32
+        "links": 33
       },
       {
         "file": "04-runtime-feedback.md",
@@ -139,19 +139,19 @@
         "file": "08-state-machine.md",
         "width": 390,
         "images": 2,
-        "links": 33
+        "links": 34
       },
       {
         "file": "evidence.md",
         "width": 390,
         "images": 59,
-        "links": 98
+        "links": 99
       },
       {
         "file": "index.md",
         "width": 390,
         "images": 3,
-        "links": 41
+        "links": 42
       },
       {
         "file": "running.md",
@@ -241,7 +241,7 @@
       },
       {
         "slug": "forge-evidence",
-        "sourceSha256": "7a0ef540b3ab8393b895e52fd5a04dcf4ca7326a534acef0f1ab74397f4e4543",
+        "sourceSha256": "b9d9d9c53fbe31c6cd9d92020a98322633f259809d113ce56011177ad1837d54",
         "htmlAssets": {
           "./assets/figures/primary-outcomes.svg": "c231b527cccb1407ca2f3cf0a88cfdefae29ab1c95c23378d15976e84a58e29d",
           "./assets/captures/dashboard-comparisons-final.jpg": "b5d0610852e69dcb7fb18046ae7d37042846ccf4231e4162b22630996c51b45e",

@@ -45,6 +45,8 @@ Some attempts have no retained application screenshot. A compilation failure may
 
 ## Native Forge dashboards
 
+The [visual evidence workspace](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=su19wan3xra) adds native image panels, all 129 attempt rows, and a table of 123 original captures with source paths and checksums. Its single publication run contains saved results and is excluded from coding-trial counts.
+
 The comparison dashboard filters to 13 aggregate treatment runs, each derived from three primary attempts. An aggregate run is a view of recorded evidence, not another coding attempt. The operations dashboard tracks execution and publication across the broader archive.
 
 <a :href="forgeImage1" target="_blank" rel="noopener"><img src="./assets/captures/dashboard-comparisons-final.jpg" alt="Original native Forge comparison dashboard with pass-rate and attempt-count panels." /></a>
