@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "id": "project-04",
+  "starter": "projects/project-04/starter",
+  "task": "Diagnose and repair the long-document indexing defect using runtime evidence. Add structured logs for import, indexing and failures, plus scripts/check-architecture.sh that rejects Node imports in the renderer. Preserve all document text.",
+  "variants": [
+    "minimal",
+    "runtime-feedback"
+  ],
+  "repeats": 3,
+  "sessions": 1,
+  "protectedChecker": "forge/graders/check.cjs",
+  "fixture": "forge/fixtures/course.txt"
+}
