@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "id": "project-03",
+  "starter": "projects/project-03/starter",
+  "task": "Complete indexing and grounded Q&A. Extract wordCount, lineCount, paragraphCount metadata, keep nonempty paragraph chunks, update single-document index status and total chunks, display status, and cite retrieved excerpts. Work across an interrupted session and resume from files.",
+  "variants": [
+    "minimal",
+    "recovery"
+  ],
+  "repeats": 3,
+  "sessions": 2,
+  "protectedChecker": "forge/graders/check.cjs",
+  "fixture": "forge/fixtures/course.txt"
+}
