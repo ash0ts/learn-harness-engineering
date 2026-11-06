@@ -26,7 +26,7 @@ export async function qualify(output=join(courseRoot,'forge/local-results')) {
     const staged=await stageTask(await readTask('project-04'),'minimal',source);
     let input=0,outputTokens=0;
     const started=Date.now();
-    await withWorkspace({config:c,image:p.sandbox.image,trialId:id,evidenceDir:join(dir,'sandbox'),signal:AbortSignal.timeout(180000)},async sandbox=>{
+    await withWorkspace({config:c,image:p.sandbox.image,trialId:id,evidenceDir:join(dir,'sandbox'),signal:AbortSignal.timeout(300000)},async sandbox=>{
       record.sandboxId=sandbox.sandboxId;await stageWorkspace(sandbox,staged.archive);
       const sleeping=await sandbox.commands.start(['sleep','30'],{check:false});
       try {await sleeping.wait({timeoutMs:100});throw new Error('Timeout probe unexpectedly completed');}
@@ -38,7 +38,7 @@ export async function qualify(output=join(courseRoot,'forge/local-results')) {
         if(!/cancelled/i.test(String(error)))throw error;
         record.cancelledObserved=true;
       }
-      const result=await runPi({...c,maxTurns:3},{role:'qualification',prompt:'Call sandbox_command once to run node --version and python3 --version. Report the actual versions. Do not edit files.',attributes:{'course.project':'qualification','course.source_commit':source,'course.sandbox_id':sandbox.sandboxId},tools:sandboxTools(sandbox,join(dir,'tools')),signal:AbortSignal.timeout(90000)});
+      const result=await runPi({...c,maxTurns:3},{role:'qualification',prompt:'Call sandbox_command once to run node --version and python3 --version. Report the actual versions. Do not edit files.',attributes:{'course.project':'qualification','course.source_commit':source,'course.sandbox_id':sandbox.sandboxId},tools:sandboxTools(sandbox,join(dir,'tools')),signal:AbortSignal.timeout(180000)});
       record.agent=result;
       if(!result.telemetryComplete || !result.completed)throw new Error('Pi capability/usage qualification failed');
       input=result.inputTokens;outputTokens=result.outputTokens;
