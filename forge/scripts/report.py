@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 import json
 import re
+import hashlib
 
 ROOT=Path(__file__).resolve().parents[2]
 LOCAL=ROOT/'forge/local-results'
@@ -23,7 +24,7 @@ def build():
         expected=pr['headRefName']
     rows=saved['trials'];blocks=saved.get('completedComparisonBlocks',[])
     verified_rows=[r for r in rows if r.get('protocolRevision',1)>=4]
-    published=sum(n['status']=='published_verified' for n in notebooks)
+    published=sum(n['status']=='published_verified' and n.get('sha256')==hashlib.sha256((ROOT/n['file']).read_bytes()).hexdigest() for n in notebooks)
     comparison_ids={identifier for block in blocks for identifier in block['trialIds']}
     comparison_rows=[r for r in rows if r['id'] in comparison_ids]
     comparison_checks={}
@@ -39,12 +40,16 @@ def build():
     trace_audit=read(LOCAL/'trace-audit.json') if (LOCAL/'trace-audit.json').exists() else {}
     conversations=trace_audit.get('conversations',[])
     expected_trace_ids={identifier for row in rows for identifier in row.get('conversationIds',[])}
-    expected_trace_ids.update(q[key] for q in saved['qualifications'] if q['passed'] for key in ['agentConversationId','appConversationId'] if q.get(key))
+    expected_trace_ids.update(q[key] for q in saved['qualifications'] for key in ['agentConversationId','appConversationId'] if q.get(key))
     expected_trace_ids.update(session['conversationId'] for q in saved.get('concurrencyQualifications',[]) if q['passed'] for session in q.get('sessions',[]))
     models_audit=read(LOCAL/'models-audit.json') if (LOCAL/'models-audit.json').exists() else {}
     sandbox_audit=read(LOCAL/'sandbox-final-audit.json') if (LOCAL/'sandbox-final-audit.json').exists() else {}
     local_checks=read(LOCAL/'local-checks.json') if (LOCAL/'local-checks.json').exists() else {}
-    gates={'nineNotebooksVerified':published==9,'eighteenCompleteBlocks':len(blocks)>=18,'realTwoHourTimer':real_timer,
+    verified_ids={r['id'] for r in verified_rows}
+    verified_blocks=[b for b in blocks if set(b['trialIds']).issubset(verified_ids)]
+    verified_cohorts={b['sourceCommit'] for b in verified_blocks}
+    complete_verified_cohort=any({(b['project'],b['repeat']) for b in verified_blocks if b['sourceCommit']==source}=={(f'project-0{p}',r) for p in range(1,7) for r in range(1,4)} for source in verified_cohorts)
+    gates={'nineNotebooksVerified':published==9,'eighteenCompleteBlocks':len(blocks)>=18,'correctedUiComparisonCampaign':complete_verified_cohort,'realTwoHourTimer':real_timer,
            'offlineApps':len(apps)==15 and all(a['passed'] for a in apps),'forgeTests':tests.get('fail')==0 and tests.get('pass',0)>0,
            'localNotebookRenders':len(validation['notebooks'])==9 and all(n['rendered'] for n in validation['notebooks']),
            'tracesReadBack':bool(conversations) and all(c['verified'] for c in conversations) and expected_trace_ids.issubset({c['conversationId'] for c in conversations}),
@@ -59,6 +64,7 @@ def build():
     delivery['comparisonChecks']=comparison_checks
     delivery['verifiedUiAttempts']=len(verified_rows)
     delivery['verifiedUiPasses']=sum(r['outcome']=='passed' for r in verified_rows)
+    delivery['verifiedUiComparisonBlocks']=verified_blocks
     delivery['measurementCaveat']=saved.get('measurementCaveat')
     delivery['visibleUiQualifications']=saved.get('visibleUiQualifications',[])
     (ROOT/'forge/results/delivery.json').write_text(json.dumps(delivery,indent=2)+'\n')
@@ -86,7 +92,7 @@ def build():
     lines += ['', 'Manual graph qualification candidates validate runner control flow and checker behavior. They are explicitly excluded from Pi trial counts and treatment comparisons.', '', '## Loops and graph states','']
     for state in saved.get('loops',[]): lines.append(f"- `{state['file']}`: **{state['status']}**, {len(state['rounds'])} recorded rounds; {len(state.get('interventions',[]))} entered/observed interventions.")
     for state in saved.get('graphs',[]): lines.append(f"- `{state['file']}`: **{state['node']}**, {state['attempts']} maker attempts, {len(state['transitions'])} durable transitions. An approval pause requires an explicit checksum-bound human decision.")
-    lines += ['', '## Spend estimates','',f"Known/audited estimate: **${delivery['knownAndAuditedEstimateUsd']:.6f}**. Conservative charges for unknown usage: **${uncertain:.6f}**. Total charged estimate: **${ledger['spentEstimateUsd']:.6f}**. Active reservations: **${sum(ledger['reservations'].values()):.6f}**.",'', 'The original $50 application cap was removed after the user explicitly authorized an unlimited budget. Worker concurrency and lifetimes remain bounded. The timed-out qualification retains unknown token usage; its full $2 reservation was charged conservatively. Estimates are not provider invoices. Notebook EDIT compute is measured separately at the verified 2 CPU / 4 GiB rates ($0.3408/hour), including publication work. The durable ledger records authorizations and reconciliations. It must not be reset.','',saved.get('costScope',''),'', '## Draft PRs','']
+    lines += ['', '## Spend estimates','',f"Known/audited estimate: **${delivery['knownAndAuditedEstimateUsd']:.6f}**. Conservative charges for unknown usage: **${uncertain:.6f}**. Total charged estimate: **${ledger['spentEstimateUsd']:.6f}**. Active reservations: **${sum(ledger['reservations'].values()):.6f}**.",'', 'The original $50 application cap was removed after the user explicitly authorized an unlimited budget. Worker concurrency and lifetimes remain bounded. Timed-out qualifications retain unknown token usage; each full $2 reservation was charged conservatively under the recorded authorization. Estimates are not provider invoices. Notebook EDIT compute is measured separately at the verified 2 CPU / 4 GiB rates ($0.3408/hour), including publication work. The durable ledger records authorizations and reconciliations. It must not be reset.','',saved.get('costScope',''),'', '## Draft PRs','']
     lines += [f"- [{p['title']}]({p['url']})" for p in prs]
     lines += ['', '## Notebooks','', '| Notebook | Publication status |','| --- | --- |']
     lines += [f"| [{n['title']}]({n['url']}) | {n['status']} |" for n in notebooks]
