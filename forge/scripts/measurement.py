@@ -7,13 +7,16 @@ HISTORY_SELECTOR_NOTE = (
     'Its native grades remain archived but are excluded from qualified comparisons. '
     'The corrected checker selects interactive citation controls and exercises '
     'both cancellation and acceptance of native or custom confirmation dialogs. '
-    'All three role treatments are rerun from the same unfinished code and model settings.'
+    'All three role treatments are rerun from the same unfinished code and model settings. '
+    'Project 06 at that source also omitted the feedback.submit argument contract while '
+    'its checker assumed positional arguments. The corrected task specifies an object '
+    'with question, answer, rating and optional comment; both capstone treatments are rerun.'
 )
 
 def qualified(row):
     revision = row.get('protocolRevision', row.get('protocol', {}).get('protocolRevision', 1))
     return revision >= 4 and not (
-        row['project'] == 'project-05' and row['sourceCommit'] == HISTORY_SELECTOR_SOURCE
+        row['project'] in ['project-05', 'project-06'] and row['sourceCommit'] == HISTORY_SELECTOR_SOURCE
     )
 
 def reason(row):

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-06T12:04:36.096659+00:00",
+  "generatedAt": "2026-11-06T12:10:11.664579+00:00",
   "status": "verification_in_progress",
   "completionGates": {
     "nineNotebooksVerified": true,
@@ -2233,10 +2233,10 @@
   "budget": {
     "schemaVersion": 1,
     "limitUsd": null,
-    "spentEstimateUsd": 15.500944650666675,
+    "spentEstimateUsd": 16.05050162800001,
     "reservations": {
-      "f6edbfa3-3682-4e3b-bff2-ba4b864e2511": 4.194969599999999,
-      "216527fa-6ff5-4cde-a203-696bb1e57f06": 4.194969599999999
+      "0173b789-396b-4a83-922a-644c172ff4f4": 4.194969599999999,
+      "534ab4c7-9100-4d94-a379-fbfc4ad381c7": 4.194969599999999
     },
     "settled": {
       "qualification-17b194af-b3ef-4d47-95cc-178676315b60": 0.003,
@@ -2392,7 +2392,12 @@
       "a2d447ed-75a6-4477-9308-e8eb60885b2b": 0.046166620000000005,
       "history-diagnostic-e8a1ea54-0fe5-4ba8-9929-76b07e2b5e29": 0.011016549333333334,
       "notebook-15317-editor-2": 0.044258370666666665,
-      "5609c89b-f73f-4a9e-8702-a57758c3403c": 0.06756080333333334
+      "5609c89b-f73f-4a9e-8702-a57758c3403c": 0.06756080333333334,
+      "f6edbfa3-3682-4e3b-bff2-ba4b864e2511": 0.07249340800000001,
+      "216527fa-6ff5-4cde-a203-696bb1e57f06": 0.17794718533333334,
+      "checker-diagnostic-57f14e90-d62e-4fcb-ab78-60b52a12935a": 0.010578147999999999,
+      "dd818c1d-aea4-4e7f-b2a2-a6398ac33877": 0.15102145933333333,
+      "1c1228c9-2625-4256-9aa2-694d37def359": 0.13751677666666667
     },
     "reconciliations": [
       {
@@ -2448,7 +2453,7 @@
       }
     ]
   },
-  "knownAndAuditedEstimateUsd": 9.500944650666675,
+  "knownAndAuditedEstimateUsd": 10.05050162800001,
   "chargedUnknownReservationsUsd": 6,
   "checks": {
     "forgeTests": {
@@ -10236,5 +10241,5 @@
     "verified": true,
     "note": "Matching frozen inputs establish local controls, not broad causal treatment effects."
   },
-  "historySelectorQualification": "Project 05 at source b948c1fbac36 used an overly broad citation selector: it clicked answer prose containing \"citations\" instead of an expand control. Its native grades remain archived but are excluded from qualified comparisons. The corrected checker selects interactive citation controls and exercises both cancellation and acceptance of native or custom confirmation dialogs. All three role treatments are rerun from the same unfinished code and model settings."
+  "historySelectorQualification": "Project 05 at source b948c1fbac36 used an overly broad citation selector: it clicked answer prose containing \"citations\" instead of an expand control. Its native grades remain archived but are excluded from qualified comparisons. The corrected checker selects interactive citation controls and exercises both cancellation and acceptance of native or custom confirmation dialogs. All three role treatments are rerun from the same unfinished code and model settings. Project 06 at that source also omitted the feedback.submit argument contract while its checker assumed positional arguments. The corrected task specifies an object with question, answer, rating and optional comment; both capstone treatments are rerun."
 }
