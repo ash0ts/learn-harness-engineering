@@ -7,6 +7,7 @@
   "maxInputBytes": 524288,
   "toolOutputCharactersPerStream": 12000,
   "runtimeAdaptation": "bundled-sandboxed-preload",
+  "appRequestTimeoutMs": 120000,
   "maxOutputTokens": 4096,
   "maxModelTurnsPerTrial": 24,
   "temperature": 0,
