@@ -7,7 +7,7 @@ import {createHash} from 'node:crypto';
 
 const exec = promisify(execFile);
 export const courseRoot = resolve(import.meta.dirname,'../..');
-export interface Task {schemaVersion:1; id:string; starter:string; task:string; variants:string[]; repeats:number; sessions:number; protectedChecker:string; fixture:string}
+export interface Task {schemaVersion:1; id:string; starter:string; task:string; variants:string[]; repeats:number; sessions:number; protectedChecker:string; fixture:string; gradeAs?:string}
 export async function readTask(id: string): Promise<Task> {
   if (!/^project-0[1-8]$/.test(id)) throw new Error('Unknown project');
   return JSON.parse(await readFile(join(courseRoot,'forge/tasks',`${id}.json`),'utf8'));
