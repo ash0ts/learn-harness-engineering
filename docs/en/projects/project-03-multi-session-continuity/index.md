@@ -35,3 +35,8 @@ Repository path: [`projects/project-03/`](https://github.com/walkinglabs/learn-h
 This project is not a generic "multi-session" exercise. The checked-in solution
 maps to four specific product features: document chunking, metadata extraction,
 indexing status UI, and grounded Q&A with citations.
+
+
+## Optional Forge experiment
+
+Follow the [Forge learning path](/en/forge/) for sandbox execution, Agent Lens traces, W&B evidence and the corresponding Marimo notebook. The offline exercise remains the default.
