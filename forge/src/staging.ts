@@ -42,7 +42,7 @@ export async function stageTask(task: Task, variant: string, source: string) {
       await writeFile(join(dir,'FEEDBACK.md'),'Build the app, then run node runtime-feedback.cjs. Inspect actual chunks and indexing status.\n');
     }
     const tar=join(dir,'..',`${dir.split('/').pop()}.tar`);
-    try {await exec('tar',['-cf',tar,'-C',dir,'.']); return {archive:await readFile(tar),applicationSha256:hash.digest('hex')};}
+    try {await exec('tar',['-cf',tar,'-C',dir,'.'],{env:{...process.env,COPYFILE_DISABLE:'1'}}); return {archive:await readFile(tar),applicationSha256:hash.digest('hex')};}
     finally {await rm(tar,{force:true});}
   } finally {await rm(dir,{recursive:true,force:true});}
 }
