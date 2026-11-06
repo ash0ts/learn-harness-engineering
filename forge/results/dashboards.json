@@ -1,6 +1,12 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-06T12:02:23.675541+00:00",
+  "generatedAt": "2026-11-06T12:58:18.726893+00:00",
+  "primary": {
+    "url": "https://forge.coreweave.com/wandb/learn-harness-engineering-forge?nw=dfs83wdpatt",
+    "forgeUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=dfs83wdpatt",
+    "name": "Forge course \u2014 qualified end-to-end comparisons",
+    "readBackVerified": true
+  },
   "views": [
     {
       "protocolRevision": 2,
@@ -20,6 +26,14 @@
     },
     {
       "protocolRevision": 4,
+      "sourceCommit": "b874b96b7c896004c9f261db7bd7c7de6dd78411",
+      "url": "https://forge.coreweave.com/wandb/learn-harness-engineering-forge?nw=990nzrvgjk2",
+      "forgeUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=990nzrvgjk2",
+      "name": "Forge course \u2014 revision 4 comparisons \u00b7 b874b96b",
+      "readBackVerified": true
+    },
+    {
+      "protocolRevision": 4,
       "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
       "url": "https://forge.coreweave.com/wandb/learn-harness-engineering-forge?nw=wz8re0rb108",
       "forgeUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=wz8re0rb108",
@@ -33,6 +47,191 @@
     "name": "Forge course \u2014 execution and publication audit"
   },
   "aggregateRuns": [
+    {
+      "id": "course-view-b5f6581b86a27d66",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 4,
+        "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+        "sourceCommit": "b874b96b7c896004c9f261db7bd7c7de6dd78411",
+        "project": "project-05",
+        "variant": "gen-eval",
+        "label": "r4 05 gen-eval",
+        "trialIds": [
+          "73c46965-1093-4b68-a810-a901dd78bfc0",
+          "bf9e17a2-c6a5-4a8d-b1d2-ccdff10121a3",
+          "ca16eac7-0eb5-4523-a975-638e30938a04"
+        ],
+        "acceptanceQualified": true,
+        "measurementNote": "Protected service checks and awaited visible-answer Electron acceptance.",
+        "lastTrialFinishedAt": "2026-11-06T12:38:04.774Z",
+        "primaryComparison": true
+      },
+      "metrics": {
+        "attempts": 3,
+        "passes": 2,
+        "passRate": 0.6666666666666666,
+        "taskFailures": 1,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 2,
+        "uiChecksPassed": 2,
+        "serviceChecksExecuted": 6,
+        "serviceChecksPassed": 6,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.22009050333333333,
+        "inputTokens": 563849,
+        "outputTokens": 28502
+      }
+    },
+    {
+      "id": "course-view-cf0bdfae63cd4f68",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 4,
+        "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+        "sourceCommit": "b874b96b7c896004c9f261db7bd7c7de6dd78411",
+        "project": "project-05",
+        "variant": "plan-gen-eval",
+        "label": "r4 05 plan-gen-eval",
+        "trialIds": [
+          "58ac2e5b-4ee4-4313-bbbd-4022117855bb",
+          "79398b0b-a9eb-4892-bb24-194bdc289e2f",
+          "ef04c221-aafe-4134-b9fc-0268fab0427f"
+        ],
+        "acceptanceQualified": true,
+        "measurementNote": "Protected service checks and awaited visible-answer Electron acceptance.",
+        "lastTrialFinishedAt": "2026-11-06T12:35:31.820Z",
+        "primaryComparison": true
+      },
+      "metrics": {
+        "attempts": 3,
+        "passes": 0,
+        "passRate": 0.0,
+        "taskFailures": 3,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 1,
+        "uiChecksPassed": 0,
+        "serviceChecksExecuted": 3,
+        "serviceChecksPassed": 3,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.17479736666666668,
+        "inputTokens": 438786,
+        "outputTokens": 22202
+      }
+    },
+    {
+      "id": "course-view-be5e37bc49d58601",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 4,
+        "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+        "sourceCommit": "b874b96b7c896004c9f261db7bd7c7de6dd78411",
+        "project": "project-05",
+        "variant": "single-role",
+        "label": "r4 05 single-role",
+        "trialIds": [
+          "33bdfb7f-4f5e-49b8-86c8-92d6ce0e7b0b",
+          "3dd7e4f8-1155-4ffa-9da5-98c82c24c087",
+          "d3ef30ab-0f2c-4d0e-aee1-7bdf6a8a011e"
+        ],
+        "acceptanceQualified": true,
+        "measurementNote": "Protected service checks and awaited visible-answer Electron acceptance.",
+        "lastTrialFinishedAt": "2026-11-06T12:34:45.026Z",
+        "primaryComparison": true
+      },
+      "metrics": {
+        "attempts": 3,
+        "passes": 2,
+        "passRate": 0.6666666666666666,
+        "taskFailures": 1,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 3,
+        "uiChecksPassed": 2,
+        "serviceChecksExecuted": 9,
+        "serviceChecksPassed": 9,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.20241405533333334,
+        "inputTokens": 588169,
+        "outputTokens": 19084
+      }
+    },
+    {
+      "id": "course-view-9ca93746ae3a769b",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 4,
+        "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+        "sourceCommit": "b874b96b7c896004c9f261db7bd7c7de6dd78411",
+        "project": "project-06",
+        "variant": "capstone",
+        "label": "r4 06 capstone",
+        "trialIds": [
+          "4eb48651-306d-44e9-a468-a6ffc322bf27",
+          "a7bc0271-d547-4534-a15d-27b70072df40",
+          "fd98af3b-1b52-448c-bc7b-b6cc47e785ea"
+        ],
+        "acceptanceQualified": true,
+        "measurementNote": "Protected service checks and awaited visible-answer Electron acceptance.",
+        "lastTrialFinishedAt": "2026-11-06T12:47:43.064Z",
+        "primaryComparison": true
+      },
+      "metrics": {
+        "attempts": 3,
+        "passes": 3,
+        "passRate": 1.0,
+        "taskFailures": 0,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 3,
+        "uiChecksPassed": 3,
+        "serviceChecksExecuted": 9,
+        "serviceChecksPassed": 9,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.44045745066666664,
+        "inputTokens": 1367072,
+        "outputTokens": 39428
+      }
+    },
+    {
+      "id": "course-view-87d5140377af1097",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 4,
+        "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+        "sourceCommit": "b874b96b7c896004c9f261db7bd7c7de6dd78411",
+        "project": "project-06",
+        "variant": "minimal",
+        "label": "r4 06 minimal",
+        "trialIds": [
+          "0cb15597-b43e-4295-985b-af7ea9c1454a",
+          "1fb04273-5ca5-4a79-9a9d-686149623068",
+          "b8f56d80-c72c-4e31-8c88-f8fc63d76f9a"
+        ],
+        "acceptanceQualified": true,
+        "measurementNote": "Protected service checks and awaited visible-answer Electron acceptance.",
+        "lastTrialFinishedAt": "2026-11-06T12:47:33.320Z",
+        "primaryComparison": true
+      },
+      "metrics": {
+        "attempts": 3,
+        "passes": 1,
+        "passRate": 0.3333333333333333,
+        "taskFailures": 2,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 1,
+        "uiChecksPassed": 1,
+        "serviceChecksExecuted": 3,
+        "serviceChecksPassed": 3,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.3871528633333333,
+        "inputTokens": 1193745,
+        "outputTokens": 34346
+      }
+    },
     {
       "id": "course-view-d4957f1bc84dfd7c",
       "config": {
@@ -327,6 +526,191 @@
         "knownEstimatedCostUsd": 0.39852385,
         "inputTokens": 1341786,
         "outputTokens": 24385
+      }
+    },
+    {
+      "id": "course-view-8153a0a2f06b38b8",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 4,
+        "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+        "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+        "project": "project-05",
+        "variant": "gen-eval",
+        "label": "r4 05 gen-eval",
+        "trialIds": [
+          "3b7cd608-2c28-4cb8-9d4f-aeb60ac3bc7a",
+          "5609c89b-f73f-4a9e-8702-a57758c3403c",
+          "df461eac-d90b-489e-a230-1ecc20511585"
+        ],
+        "acceptanceQualified": false,
+        "measurementNote": "The citation selector clicked answer prose rather than an interactive expand control. Native grades are preserved but excluded from qualified comparisons. The corrected checker also supports native and custom confirmation dialogs.",
+        "lastTrialFinishedAt": "2026-11-06T12:01:44.173Z",
+        "primaryComparison": false
+      },
+      "metrics": {
+        "attempts": 3,
+        "passes": 0,
+        "passRate": 0.0,
+        "taskFailures": 3,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 2,
+        "uiChecksPassed": 0,
+        "serviceChecksExecuted": 6,
+        "serviceChecksPassed": 6,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.20168821666666667,
+        "inputTokens": 555067,
+        "outputTokens": 22668
+      }
+    },
+    {
+      "id": "course-view-7355484df42e9a77",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 4,
+        "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+        "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+        "project": "project-05",
+        "variant": "plan-gen-eval",
+        "label": "r4 05 plan-gen-eval",
+        "trialIds": [
+          "0c88671b-326d-4c20-b1b9-aaf95782c93c",
+          "70336779-611e-48d8-839d-7e92aa1f63cb",
+          "cf87ff44-3f71-4ade-8f50-eaeb048b968a"
+        ],
+        "acceptanceQualified": false,
+        "measurementNote": "The citation selector clicked answer prose rather than an interactive expand control. Native grades are preserved but excluded from qualified comparisons. The corrected checker also supports native and custom confirmation dialogs.",
+        "lastTrialFinishedAt": "2026-11-06T11:59:21.221Z",
+        "primaryComparison": false
+      },
+      "metrics": {
+        "attempts": 3,
+        "passes": 0,
+        "passRate": 0.0,
+        "taskFailures": 3,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 1,
+        "uiChecksPassed": 0,
+        "serviceChecksExecuted": 3,
+        "serviceChecksPassed": 3,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.168405362,
+        "inputTokens": 437805,
+        "outputTokens": 21940
+      }
+    },
+    {
+      "id": "course-view-932655ade9f1eb08",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 4,
+        "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+        "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+        "project": "project-05",
+        "variant": "single-role",
+        "label": "r4 05 single-role",
+        "trialIds": [
+          "66558826-6e1a-46e0-abe9-ef951eff0c16",
+          "a2d447ed-75a6-4477-9308-e8eb60885b2b",
+          "b6969def-4dd9-4763-8b73-6de7cdcb59c2"
+        ],
+        "acceptanceQualified": false,
+        "measurementNote": "The citation selector clicked answer prose rather than an interactive expand control. Native grades are preserved but excluded from qualified comparisons. The corrected checker also supports native and custom confirmation dialogs.",
+        "lastTrialFinishedAt": "2026-11-06T11:59:13.134Z",
+        "primaryComparison": false
+      },
+      "metrics": {
+        "attempts": 3,
+        "passes": 0,
+        "passRate": 0.0,
+        "taskFailures": 3,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 3,
+        "uiChecksPassed": 0,
+        "serviceChecksExecuted": 9,
+        "serviceChecksPassed": 9,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.1758422646666667,
+        "inputTokens": 499676,
+        "outputTokens": 18273
+      }
+    },
+    {
+      "id": "course-view-f668f91e2a901ecc",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 4,
+        "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+        "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+        "project": "project-06",
+        "variant": "capstone",
+        "label": "r4 06 capstone",
+        "trialIds": [
+          "216527fa-6ff5-4cde-a203-696bb1e57f06",
+          "534ab4c7-9100-4d94-a379-fbfc4ad381c7",
+          "dd818c1d-aea4-4e7f-b2a2-a6398ac33877"
+        ],
+        "acceptanceQualified": false,
+        "measurementNote": "The task omitted the feedback.submit argument contract while the checker assumed positional arguments. Native grades are preserved but excluded from qualified comparisons. Both treatments are rerun with an explicit object payload contract.",
+        "lastTrialFinishedAt": "2026-11-06T12:12:41.260Z",
+        "primaryComparison": false
+      },
+      "metrics": {
+        "attempts": 3,
+        "passes": 0,
+        "passRate": 0.0,
+        "taskFailures": 3,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 3,
+        "uiChecksPassed": 0,
+        "serviceChecksExecuted": 9,
+        "serviceChecksPassed": 9,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.49508258066666666,
+        "inputTokens": 1574520,
+        "outputTokens": 36965
+      }
+    },
+    {
+      "id": "course-view-601b00b8ebc4c87a",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 4,
+        "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+        "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+        "project": "project-06",
+        "variant": "minimal",
+        "label": "r4 06 minimal",
+        "trialIds": [
+          "0173b789-396b-4a83-922a-644c172ff4f4",
+          "1c1228c9-2625-4256-9aa2-694d37def359",
+          "f6edbfa3-3682-4e3b-bff2-ba4b864e2511"
+        ],
+        "acceptanceQualified": false,
+        "measurementNote": "The task omitted the feedback.submit argument contract while the checker assumed positional arguments. Native grades are preserved but excluded from qualified comparisons. Both treatments are rerun with an explicit object payload contract.",
+        "lastTrialFinishedAt": "2026-11-06T12:12:00.478Z",
+        "primaryComparison": false
+      },
+      "metrics": {
+        "attempts": 3,
+        "passes": 1,
+        "passRate": 0.3333333333333333,
+        "taskFailures": 2,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 2,
+        "uiChecksPassed": 1,
+        "serviceChecksExecuted": 6,
+        "serviceChecksPassed": 6,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.3615295193333333,
+        "inputTokens": 1070849,
+        "outputTokens": 35948
       }
     },
     {
@@ -886,18 +1270,12 @@
     }
   ],
   "aggregateReadBackVerified": true,
+  "evidenceTableVersion": 2,
   "report": {
     "url": "https://forge.coreweave.com/wandb/learn-harness-engineering-forge/reports/Forge-harness-course-\u2014-verified-execution-and-comparison-evidence--VmlldzoxODI2MzgyOA==",
     "forgeUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/reports/Forge-harness-course-\u2014-verified-execution-and-comparison-evidence--VmlldzoxODI2MzgyOA==",
     "title": "Forge harness course \u2014 verified execution and comparison evidence",
     "readBackVerified": true
   },
-  "note": "Derived aggregate runs are not coding trials. Revisions are separate cohorts. Missing usage is not zero.",
-  "primary": {
-    "url": "https://forge.coreweave.com/wandb/learn-harness-engineering-forge?nw=dfs83wdpatt",
-    "forgeUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=dfs83wdpatt",
-    "name": "Forge course \u2014 qualified end-to-end comparisons",
-    "readBackVerified": true
-  },
-  "evidenceTableVersion": 2
+  "note": "Derived aggregate runs are not coding trials. Revisions are separate cohorts. Missing usage is not zero."
 }
