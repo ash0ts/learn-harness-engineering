@@ -3,13 +3,14 @@ import {randomUUID} from 'node:crypto';
 import {readFile,mkdir} from 'node:fs/promises';
 import {join} from 'node:path';
 import {createAppHooks} from '../src/app.js';
-import {config} from '../src/config.js';
+import {config,requirePrivateProject} from '../src/config.js';
 import {Budget,estimate} from '../src/budget.js';
 import {courseRoot,sourceHead} from '../src/staging.js';
 import {writeJson} from '../src/records.js';
 
 if(!process.argv.includes('--execute'))throw new Error('Live concurrency qualification requires --execute');
 const c=config(),id=`concurrency-${randomUUID()}`,sourceCommit=await sourceHead();
+await requirePrivateProject(c);
 const directory=join(courseRoot,'forge/local-results',id);await mkdir(directory,{recursive:true});
 const budget=new Budget(join(courseRoot,'forge/local-results/budget.json'),c.budgetUsd);
 await budget.reserve({[id]:2});
