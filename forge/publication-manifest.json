@@ -7,8 +7,8 @@
       "file": "forge/notebooks/00-overview.py",
       "project": "overview",
       "title": "Forge track: evidence before conclusions",
-      "sourceCommit": "412bf598c9091e225a92f3849c65c10a74c3d969",
-      "sha256": "5fc8c1e57229313028d2b243cb6699ea57ee9e44bb995624056d7cdd27385775",
+      "sourceCommit": "c54f248978eda1296c183ca252cfb628ac9ea47e",
+      "sha256": "a2c0c8325a86c31cbbf180de0e3ec2446fd3c1d0c40fded819f29233e85b153f",
       "id": "Tm90ZWJvb2s6MTUzMTM=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTM%3D",
       "status": "published_verified",
@@ -16,28 +16,28 @@
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "Forge-track-evidence-before-conclusions",
-        "versionIndex": 8,
+        "versionIndex": 11,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:30Z",
-      "expectedRemoteSha256": "5fc8c1e57229313028d2b243cb6699ea57ee9e44bb995624056d7cdd27385775",
+      "expectedRemoteSha256": "a2c0c8325a86c31cbbf180de0e3ec2446fd3c1d0c40fded819f29233e85b153f",
       "currentVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "Forge-track-evidence-before-conclusions",
-        "versionIndex": 8,
+        "versionIndex": 11,
         "sourceFileName": "notebook.py"
       },
-      "renderedOutputSha256": "046a2c3e64babb8d2b011b9ed2175a7c589179dc2d78f0bd1f0a6234d981da45",
+      "renderedOutputSha256": "94bc4e9aa1d4e9d3803d13e9fe3d74c1322aa331ceb49cfc2da7a1e46d4a61df",
       "renderedCellSourceVerified": true,
-      "verifiedAggregateGroups": 19,
+      "verifiedAggregateGroups": 43,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-06T10:25:25.742207+00:00"
+      "verifiedAt": "2026-11-06T13:17:18.188556+00:00"
     },
     {
       "file": "forge/notebooks/01-minimal-harness.py",
       "project": "project-01",
       "title": "01 \u00b7 Minimal instructions and explicit harnesses",
-      "sourceCommit": "4733dfa740fa175d32e66699c7206fc77a1d670f",
+      "sourceCommit": "3a1f5b1944849fdaa88451102e809c9cb48fb528",
       "sha256": "6e7dd4f1dc50289e62d3161377971fe96fbec3f1072653efc9d0fc25a3e0ca94",
       "id": "Tm90ZWJvb2s6MTUzMTQ=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTQ%3D",
@@ -61,13 +61,13 @@
       "renderedCellSourceVerified": true,
       "verifiedAggregateGroups": 6,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-06T11:28:09.424992+00:00"
+      "verifiedAt": "2026-11-06T13:17:19.674731+00:00"
     },
     {
       "file": "forge/notebooks/02-workspace-docs.py",
       "project": "project-02",
       "title": "02 \u00b7 An agent-readable workspace",
-      "sourceCommit": "f0d04129da543171b325ae8498b533e2b7094d15",
+      "sourceCommit": "c80c9c5cc4e735fe206ba511da3391446f10c395",
       "sha256": "8aa3d9dc9398d75dab2101f5d624373fcfff85e53e44339573b58a942af58f62",
       "id": "Tm90ZWJvb2s6MTUzMTU=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTU%3D",
@@ -91,13 +91,13 @@
       "renderedCellSourceVerified": true,
       "verifiedAggregateGroups": 4,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-06T11:50:58.947660+00:00"
+      "verifiedAt": "2026-11-06T13:17:21.846356+00:00"
     },
     {
       "file": "forge/notebooks/03-session-recovery.py",
       "project": "project-03",
       "title": "03 \u00b7 Interrupted-session recovery",
-      "sourceCommit": "51a5acdffea40bb5db4118b404efa6687c0d30fd",
+      "sourceCommit": "f77f1d0b365c666736b24efddd1a9b9901c62579",
       "sha256": "d621a173ddbc463acdb834c45a6b02598a5ae185aa65087f679dffa38a1b4ddc",
       "id": "Tm90ZWJvb2s6MTUzMTY=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTY%3D",
@@ -121,13 +121,13 @@
       "renderedCellSourceVerified": true,
       "verifiedAggregateGroups": 4,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-06T11:53:51.844034+00:00"
+      "verifiedAt": "2026-11-06T13:17:23.483838+00:00"
     },
     {
       "file": "forge/notebooks/04-runtime-feedback.py",
       "project": "project-04",
       "title": "04 \u00b7 Runtime evidence and the seeded defect",
-      "sourceCommit": "20100192fce9fd2c54b8dce2cf6eacd636167bdc",
+      "sourceCommit": "192f40f150b9240dc8ce38e374ec897472d9937b",
       "sha256": "93ccc0df8afca276ba03b317920813ee2b17e2e481fd4097345759881df1c8a4",
       "id": "Tm90ZWJvb2s6MTUzMTc=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTc%3D",
@@ -151,13 +151,13 @@
       "renderedCellSourceVerified": true,
       "verifiedAggregateGroups": 4,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-06T12:01:10.850365+00:00"
+      "verifiedAt": "2026-11-06T13:17:24.966559+00:00"
     },
     {
       "file": "forge/notebooks/05-role-separation.py",
       "project": "project-05",
       "title": "05 \u00b7 One feature, three role arrangements",
-      "sourceCommit": "904f8a5121fe3607a86d22f913a5d70f6b02029f",
+      "sourceCommit": "9d831288c607a8488d1cc97de1421f2ecf6829ad",
       "sha256": "90b46da2b51c17032f6a37836e49dc67bde4a3a97862464ba672cffd6e2f2c6f",
       "id": "Tm90ZWJvb2s6MTUzMTg=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTg%3D",
@@ -181,13 +181,13 @@
       "renderedCellSourceVerified": true,
       "verifiedAggregateGroups": 9,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-06T12:42:46.250318+00:00"
+      "verifiedAt": "2026-11-06T13:17:26.406007+00:00"
     },
     {
       "file": "forge/notebooks/06-capstone.py",
       "project": "project-06",
       "title": "06 \u00b7 Capstone reliability",
-      "sourceCommit": "065c5dd23b93b7e807c95f7a1c1f46a48e24ca73",
+      "sourceCommit": "3bff22b8f229f4735986c44c3aaa28b5bde5370c",
       "sha256": "ca3ebeb42b7e28f429cf3a64434d9c1e36600446c3713bf38ba4bdd779dd94c5",
       "id": "Tm90ZWJvb2s6MTUzMTk=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTk%3D",
@@ -211,13 +211,13 @@
       "renderedCellSourceVerified": true,
       "verifiedAggregateGroups": 6,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-06T12:51:55.331952+00:00"
+      "verifiedAt": "2026-11-06T13:17:27.768808+00:00"
     },
     {
       "file": "forge/notebooks/07-bounded-loops.py",
       "project": "project-07",
       "title": "07 \u00b7 Goal, timer and maker-checker loops",
-      "sourceCommit": "ece2e2e7f8d22e6d8762f3ac1e68072902944f39",
+      "sourceCommit": "d6a3b3483df641d94396c88b0f18c5bb228d043a",
       "sha256": "d58eac57cf17205e1e96c506d9e442191cbb1618c063cd63c0ec901699745f3b",
       "id": "Tm90ZWJvb2s6MTUzMjA=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjA%3D",
@@ -241,14 +241,14 @@
       "renderedCellSourceVerified": true,
       "verifiedAggregateGroups": 6,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-06T12:33:51.822220+00:00"
+      "verifiedAt": "2026-11-06T13:17:29.102548+00:00"
     },
     {
       "file": "forge/notebooks/08-state-machine.py",
       "project": "project-08",
       "title": "08 \u00b7 Checkpointed graphs and human approval",
-      "sourceCommit": "7cbb362c25c17a49b2a7b0c5cb5fde9312bb55d7",
-      "sha256": "456521e902e5daa6c856562ea31eec160233728059c1f513620e3a07eff414a7",
+      "sourceCommit": "c54f248978eda1296c183ca252cfb628ac9ea47e",
+      "sha256": "94213fb3fae0275aaed33949ace43fd2b020c1ba4f513851d66ae69e1592639d",
       "id": "Tm90ZWJvb2s6MTUzMjE=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjE%3D",
       "status": "published_verified",
@@ -256,22 +256,22 @@
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "08-Checkpointed-graphs-and-human-approval",
-        "versionIndex": 3,
+        "versionIndex": 6,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:49Z",
-      "expectedRemoteSha256": "456521e902e5daa6c856562ea31eec160233728059c1f513620e3a07eff414a7",
+      "expectedRemoteSha256": "94213fb3fae0275aaed33949ace43fd2b020c1ba4f513851d66ae69e1592639d",
       "currentVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "08-Checkpointed-graphs-and-human-approval",
-        "versionIndex": 3,
+        "versionIndex": 6,
         "sourceFileName": "notebook.py"
       },
-      "renderedOutputSha256": "0443e9d2e28d581f050e8306d3bb0607882b4d4f87249277b94291d2442f5be7",
+      "renderedOutputSha256": "740123b850674aab892e1c69888be012456db9122e538fb1f902003456dffcd5",
       "renderedCellSourceVerified": true,
-      "verifiedAggregateGroups": 2,
+      "verifiedAggregateGroups": 4,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-06T10:25:36.794203+00:00"
+      "verifiedAt": "2026-11-06T13:17:30.719102+00:00"
     }
   ]
 }
