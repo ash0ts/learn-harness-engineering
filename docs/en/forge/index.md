@@ -48,7 +48,8 @@ The pinned provider is Forge's OpenAI-compatible endpoint with `Qwen/Qwen3.6-35B
 
 ## Read the evidence
 
-Open the private [revision 4 comparison dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=wz8re0rb108),
+Open the private [qualified comparison dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=dfs83wdpatt),
+[archived revision 4 comparison dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=wz8re0rb108),
 [historical revision 3 dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=ssij233dnka),
 [original revision 2 dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=tsgaokxuthw),
 and [execution/publication audit](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=l9e45ofb461).
@@ -65,6 +66,18 @@ Revision 4 corrects asynchronous UI polling and requires the actual answer text 
 appear before capturing evidence. Revision 2 and 3 native grades remain recorded,
 but their UI waits do not establish visible-answer acceptance. The report separates
 those historical grades from revision 4 and from supplemental patch qualifications.
+
+The initial revision 4 Project 05 citation selector clicked answer prose, and Project 06
+left its feedback IPC arguments unspecified. Those two source/project cohorts are
+excluded from qualified comparisons while their native grades remain archived.
+The follow-up freezes interactive citation controls, native/custom confirmation tests,
+and an explicit feedback payload shared by both capstone treatments. The primary
+dashboard selects the latest qualified complete blocks per project; the source revision
+remains visible. See `forge/measurement-notes.json` for the exclusions.
+
+Protected app checks execute actual services with deterministic course Q&A defaults.
+Live Forge app inference is qualified separately. These checks do not measure production
+answer quality.
 
 Trials start from frozen, identical unfinished application code with only the selected harness files. Reference solutions and historical scores are excluded. Repeats rotate treatment order. Protected graders run after the coding sandbox terminates, in a fresh workspace with the original baseline plus the exported patch. Service success does not establish UI success: Electron runs under Xvfb and gets its own checks.
 
