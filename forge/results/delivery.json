@@ -1,0 +1,266 @@
+{
+  "schemaVersion": 1,
+  "status": "blocked_on_usage_and_hosted_publication",
+  "upstreamCommit": "a9342ff471f2c0e60be0c08b9f4a7c502df4e442",
+  "forkUrl": "https://github.com/ash0ts/learn-harness-engineering",
+  "targetRepeatsPerVariant": 3,
+  "trialAttempts": 1,
+  "passedTrials": 0,
+  "completedComparisonBlocks": 0,
+  "realTwoHourExerciseCompleted": false,
+  "qualifications": {
+    "attempted": 4,
+    "passed": 1
+  },
+  "budget": {
+    "schemaVersion": 1,
+    "limitUsd": 50,
+    "spentEstimateUsd": 0.029610153333333333,
+    "reservations": {
+      "qualification-1c68ebdf-feba-4158-8192-d5be5b3e2a98": 2
+    },
+    "settled": {
+      "qualification-17b194af-b3ef-4d47-95cc-178676315b60": 0.003,
+      "qualification-af9192de-dfe3-4631-934e-37729c2a4d56": 0.010988719333333332,
+      "qualification-ed8a8028-bb60-4eff-a678-e5e74e94d2cc": 0.004988329333333333,
+      "ace2d466-a1f6-4998-bb1c-130618b52651": 0.010633104666666665
+    },
+    "reconciliations": [
+      {
+        "id": "qualification-17b194af-b3ef-4d47-95cc-178676315b60",
+        "estimatedUsd": 0.003,
+        "evidence": "qualification.json ended at the cancellation probe before runPi; sandbox/sandbox.json confirms terminated. Charge conservative 32 seconds at 2 CPU + 4 GiB ($0.3408/hour), rounding upward. No inference launched.",
+        "at": "2026-11-06T07:32:03.996Z"
+      },
+      {
+        "id": "qualification-af9192de-dfe3-4631-934e-37729c2a4d56",
+        "estimatedUsd": 0.010988719333333332,
+        "evidence": "Both agent and app calls completed with returned token usage. Sandbox journal confirms terminated. Original accounting rejected metadata keys rather than missing billable rates. This estimate conservatively bills the entire qualification wall-clock duration as sandbox time, including app inference after termination.",
+        "at": "2026-11-06T07:34:24.698Z"
+      },
+      {
+        "id": "ace2d466-a1f6-4998-bb1c-130618b52651",
+        "estimatedUsd": 0.010633104666666665,
+        "evidence": "All eight submitted model calls returned usage (actor/phase-1.json and tool logs). The ninth attempt was refused locally before the provider due to the frozen input-byte guard. Both actor and grader sandbox journals confirm termination. Preserve the original telemetry_missing attempt; this audited estimate reclassifies only its billing uncertainty.",
+        "at": "2026-11-06T07:41:23.512Z"
+      }
+    ],
+    "halted": "Missing usage for qualification-1c68ebdf-feba-4158-8192-d5be5b3e2a98"
+  },
+  "checks": {
+    "offlineAppsPassed": 15,
+    "offlineAppsTotal": 15,
+    "notebooksRenderedLocally": 9,
+    "notebooksPublishedVerified": 0
+  },
+  "prs": [
+    "https://github.com/ash0ts/learn-harness-engineering/pull/1",
+    "https://github.com/ash0ts/learn-harness-engineering/pull/2",
+    "https://github.com/ash0ts/learn-harness-engineering/pull/3",
+    "https://github.com/ash0ts/learn-harness-engineering/pull/5",
+    "https://github.com/ash0ts/learn-harness-engineering/pull/6",
+    "https://github.com/ash0ts/learn-harness-engineering/pull/7",
+    "https://github.com/ash0ts/learn-harness-engineering/pull/8"
+  ],
+  "notebooks": [
+    {
+      "file": "forge/notebooks/00-overview.py",
+      "project": "overview",
+      "title": "Forge track: evidence before conclusions",
+      "sourceCommit": "31b85133e7245133b8f87df2cd6a5b1c61e880f6",
+      "sha256": "8a063ddbb6b6e59a2e78a182208551c9eeb57d1c8ddd9511a5ef82f099487cde",
+      "id": "Tm90ZWJvb2s6MTUzMTM=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTM%3D",
+      "status": "created_basic_not_uploaded",
+      "createdAt": "2026-11-06T08:00:30.706107+00:00",
+      "expectedRemoteVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "Forge-track-evidence-before-conclusions",
+        "versionIndex": 0,
+        "sourceFileName": "notebook.py"
+      },
+      "expectedRemoteEditedAt": "2026-11-06T08:00:30Z",
+      "expectedRemoteSha256": "729741bb7115805dd5b8266e3bd1bbfc3c5a8e05d08f80feb6d9489b7eb62b27",
+      "publicationBlocker": "Paid EDIT session withheld while shared budget ledger is halted; canonical source not loaded"
+    },
+    {
+      "file": "forge/notebooks/01-minimal-harness.py",
+      "project": "project-01",
+      "title": "01 \u00b7 Minimal instructions and explicit harnesses",
+      "sourceCommit": "31b85133e7245133b8f87df2cd6a5b1c61e880f6",
+      "sha256": "8a8b4b09fb6b5f25bcd3e694591448137f9e63cd2ecf5f731b05f6c1e0c63612",
+      "id": "Tm90ZWJvb2s6MTUzMTQ=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTQ%3D",
+      "status": "created_basic_not_uploaded",
+      "createdAt": "2026-11-06T08:00:36.380367+00:00",
+      "expectedRemoteVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "01-Minimal-instructions-and-explicit-harnesses",
+        "versionIndex": 0,
+        "sourceFileName": "notebook.py"
+      },
+      "expectedRemoteEditedAt": "2026-11-06T08:00:36Z",
+      "expectedRemoteSha256": "729741bb7115805dd5b8266e3bd1bbfc3c5a8e05d08f80feb6d9489b7eb62b27",
+      "publicationBlocker": "Paid EDIT session withheld while shared budget ledger is halted; canonical source not loaded"
+    },
+    {
+      "file": "forge/notebooks/02-workspace-docs.py",
+      "project": "project-02",
+      "title": "02 \u00b7 An agent-readable workspace",
+      "sourceCommit": "31b85133e7245133b8f87df2cd6a5b1c61e880f6",
+      "sha256": "ce29e87520ba9bdfd4336832a87ac65c40fd9152462228a7b15dec0af3f04e04",
+      "id": "Tm90ZWJvb2s6MTUzMTU=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTU%3D",
+      "status": "created_basic_not_uploaded",
+      "createdAt": "2026-11-06T08:00:38.149949+00:00",
+      "expectedRemoteVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "02-An-agent-readable-workspace",
+        "versionIndex": 0,
+        "sourceFileName": "notebook.py"
+      },
+      "expectedRemoteEditedAt": "2026-11-06T08:00:38Z",
+      "expectedRemoteSha256": "729741bb7115805dd5b8266e3bd1bbfc3c5a8e05d08f80feb6d9489b7eb62b27",
+      "publicationBlocker": "Paid EDIT session withheld while shared budget ledger is halted; canonical source not loaded"
+    },
+    {
+      "file": "forge/notebooks/03-session-recovery.py",
+      "project": "project-03",
+      "title": "03 \u00b7 Interrupted-session recovery",
+      "sourceCommit": "31b85133e7245133b8f87df2cd6a5b1c61e880f6",
+      "sha256": "5b6cfa1434fbd807d67414aec68712465dbba9fdee55292de6d87728142f268b",
+      "id": "Tm90ZWJvb2s6MTUzMTY=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTY%3D",
+      "status": "created_basic_not_uploaded",
+      "createdAt": "2026-11-06T08:00:40.125499+00:00",
+      "expectedRemoteVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "03-Interrupted-session-recovery",
+        "versionIndex": 0,
+        "sourceFileName": "notebook.py"
+      },
+      "expectedRemoteEditedAt": "2026-11-06T08:00:40Z",
+      "expectedRemoteSha256": "729741bb7115805dd5b8266e3bd1bbfc3c5a8e05d08f80feb6d9489b7eb62b27",
+      "publicationBlocker": "Paid EDIT session withheld while shared budget ledger is halted; canonical source not loaded"
+    },
+    {
+      "file": "forge/notebooks/04-runtime-feedback.py",
+      "project": "project-04",
+      "title": "04 \u00b7 Runtime evidence and the seeded defect",
+      "sourceCommit": "31b85133e7245133b8f87df2cd6a5b1c61e880f6",
+      "sha256": "8e8da323d9db860a385bc9da1262663f0ef4ef08c7fa28e71cf03797b6113d94",
+      "id": "Tm90ZWJvb2s6MTUzMTc=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTc%3D",
+      "status": "created_basic_not_uploaded",
+      "createdAt": "2026-11-06T08:00:42.224672+00:00",
+      "expectedRemoteVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "04-Runtime-evidence-and-the-seeded-defect",
+        "versionIndex": 0,
+        "sourceFileName": "notebook.py"
+      },
+      "expectedRemoteEditedAt": "2026-11-06T08:00:42Z",
+      "expectedRemoteSha256": "729741bb7115805dd5b8266e3bd1bbfc3c5a8e05d08f80feb6d9489b7eb62b27",
+      "publicationBlocker": "Paid EDIT session withheld while shared budget ledger is halted; canonical source not loaded"
+    },
+    {
+      "file": "forge/notebooks/05-role-separation.py",
+      "project": "project-05",
+      "title": "05 \u00b7 One feature, three role arrangements",
+      "sourceCommit": "31b85133e7245133b8f87df2cd6a5b1c61e880f6",
+      "sha256": "2d8705309f1efecffeb075d00c53b224655c84f5f3f323d510db8f3adc997c08",
+      "id": "Tm90ZWJvb2s6MTUzMTg=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTg%3D",
+      "status": "created_basic_not_uploaded",
+      "createdAt": "2026-11-06T08:00:43.988418+00:00",
+      "expectedRemoteVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "05-One-feature-three-role-arrangements",
+        "versionIndex": 0,
+        "sourceFileName": "notebook.py"
+      },
+      "expectedRemoteEditedAt": "2026-11-06T08:00:44Z",
+      "expectedRemoteSha256": "729741bb7115805dd5b8266e3bd1bbfc3c5a8e05d08f80feb6d9489b7eb62b27",
+      "publicationBlocker": "Paid EDIT session withheld while shared budget ledger is halted; canonical source not loaded"
+    },
+    {
+      "file": "forge/notebooks/06-capstone.py",
+      "project": "project-06",
+      "title": "06 \u00b7 Capstone reliability",
+      "sourceCommit": "31b85133e7245133b8f87df2cd6a5b1c61e880f6",
+      "sha256": "aa4cfa15db3b29467189e5946a0ed12210ff6ed109acfe6afc5e9885509820a0",
+      "id": "Tm90ZWJvb2s6MTUzMTk=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTk%3D",
+      "status": "created_basic_not_uploaded",
+      "createdAt": "2026-11-06T08:00:45.762888+00:00",
+      "expectedRemoteVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "06-Capstone-reliability",
+        "versionIndex": 0,
+        "sourceFileName": "notebook.py"
+      },
+      "expectedRemoteEditedAt": "2026-11-06T08:00:45Z",
+      "expectedRemoteSha256": "729741bb7115805dd5b8266e3bd1bbfc3c5a8e05d08f80feb6d9489b7eb62b27",
+      "publicationBlocker": "Paid EDIT session withheld while shared budget ledger is halted; canonical source not loaded"
+    },
+    {
+      "file": "forge/notebooks/07-bounded-loops.py",
+      "project": "project-07",
+      "title": "07 \u00b7 Goal, timer and maker-checker loops",
+      "sourceCommit": "31b85133e7245133b8f87df2cd6a5b1c61e880f6",
+      "sha256": "1c631e68d05964597fbd1f82547b456ea779693aa73ca43607b4fb35fda9c3d3",
+      "id": "Tm90ZWJvb2s6MTUzMjA=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjA%3D",
+      "status": "created_basic_not_uploaded",
+      "createdAt": "2026-11-06T08:00:47.608941+00:00",
+      "expectedRemoteVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "07-Goal-timer-and-maker-checker-loops",
+        "versionIndex": 0,
+        "sourceFileName": "notebook.py"
+      },
+      "expectedRemoteEditedAt": "2026-11-06T08:00:47Z",
+      "expectedRemoteSha256": "729741bb7115805dd5b8266e3bd1bbfc3c5a8e05d08f80feb6d9489b7eb62b27",
+      "publicationBlocker": "Paid EDIT session withheld while shared budget ledger is halted; canonical source not loaded"
+    },
+    {
+      "file": "forge/notebooks/08-state-machine.py",
+      "project": "project-08",
+      "title": "08 \u00b7 Checkpointed graphs and human approval",
+      "sourceCommit": "31b85133e7245133b8f87df2cd6a5b1c61e880f6",
+      "sha256": "7082cbc0988ca6b29d2aec933531432867d57c4dcf30d544acbdf2a96c11614f",
+      "id": "Tm90ZWJvb2s6MTUzMjE=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjE%3D",
+      "status": "created_basic_not_uploaded",
+      "createdAt": "2026-11-06T08:00:49.261353+00:00",
+      "expectedRemoteVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "08-Checkpointed-graphs-and-human-approval",
+        "versionIndex": 0,
+        "sourceFileName": "notebook.py"
+      },
+      "expectedRemoteEditedAt": "2026-11-06T08:00:49Z",
+      "expectedRemoteSha256": "729741bb7115805dd5b8266e3bd1bbfc3c5a8e05d08f80feb6d9489b7eb62b27",
+      "publicationBlocker": "Paid EDIT session withheld while shared budget ledger is halted; canonical source not loaded"
+    }
+  ],
+  "trials": [
+    {
+      "id": "ace2d466-a1f6-4998-bb1c-130618b52651",
+      "project": "project-07",
+      "variant": "timer",
+      "trial": 1,
+      "sourceCommit": "bf760399391f0862c6b642c62854c9baf4ca7523",
+      "outcome": "telemetry_missing",
+      "inputTokens": 17545,
+      "outputTokens": 876,
+      "estimatedCostUsd": null,
+      "conversationIds": [
+        "01a1afca-9cab-751c-8d3f-02d983484664"
+      ],
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/ace2d466a1f64998",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-ace2d466-a1f6-4998-bb1c-130618b52651:v0",
+      "reconciledEstimateUsd": 0.010633104666666665
+    }
+  ]
+}
