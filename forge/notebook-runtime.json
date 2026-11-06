@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "pricingCheckedAt": "2026-11-06",
+  "pricingSource": "https://www.coreweave.com/forge-pricing/inference-agents",
+  "cpuHourUsd": 0.128,
+  "memoryGiBHourUsd": 0.0212,
+  "expectedResources": {
+    "cpu": 2,
+    "memoryGiB": 4
+  },
+  "expectedHourlyUsd": 0.3408,
+  "expectedMaxLifetimeSeconds": 3600,
+  "reservationPerEditorSessionUsd": 2,
+  "resourceBasis": "Verified live EDIT sandbox 60f958e0-a6f5-4523-a6e3-247b846ed83f resource requests and limits: 2 CPU and 4 GiB. Each later session must match before use.",
+  "inferenceOnOpen": false
+}
