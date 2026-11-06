@@ -46,6 +46,7 @@ def build():
     models_audit=read(LOCAL/'models-audit.json') if (LOCAL/'models-audit.json').exists() else {}
     comparison_audit=read(LOCAL/'comparison-audit.json') if (LOCAL/'comparison-audit.json').exists() else {}
     sandbox_audit=read(LOCAL/'sandbox-final-audit.json') if (LOCAL/'sandbox-final-audit.json').exists() else {}
+    notebook_rerun=read(LOCAL/'notebook-rerun-qualification.json') if (LOCAL/'notebook-rerun-qualification.json').exists() else {}
     local_checks=read(LOCAL/'local-checks.json') if (LOCAL/'local-checks.json').exists() else {}
     verified_ids={r['id'] for r in verified_rows}
     verified_blocks=[b for b in blocks if set(b['trialIds']).issubset(verified_ids)]
@@ -53,7 +54,7 @@ def build():
     complete_verified_cohort=all(any({b['repeat'] for b in verified_blocks if b['project']==project and b['sourceCommit']==source}=={1,2,3} for source in verified_cohorts) for project in [f'project-0{p}' for p in range(1,7)])
     gates={'nineNotebooksVerified':published==9,'eighteenCompleteBlocks':len(blocks)>=18,'correctedUiComparisonCampaign':complete_verified_cohort,'realTwoHourTimer':real_timer,
            'offlineApps':len(apps)==15 and all(a['passed'] for a in apps),'forgeTests':tests.get('fail')==0 and tests.get('pass',0)>0,
-           'localNotebookRenders':len(validation['notebooks'])==9 and all(n['rendered'] for n in validation['notebooks']),
+           'notebookExplicitAction':bool(notebook_rerun.get('verified')),'localNotebookRenders':len(validation['notebooks'])==9 and all(n['rendered'] for n in validation['notebooks']),
            'tracesReadBack':bool(conversations) and all(c['verified'] for c in conversations) and expected_trace_ids.issubset({c['conversationId'] for c in conversations}),
            'modelsReadBack':bool(models_audit.get('verified')) and {r['id'] for r in rows}.issubset({r['trialId'] for r in models_audit.get('trials',[]) if r['verified']}),
            'frozenComparisonControls':bool(comparison_audit.get('verified')) and {(b['campaignId'],b['project'],b['repeat']) for b in blocks}.issubset({(b['campaignId'],b['project'],b['repeat']) for b in comparison_audit.get('blocks',[]) if b['verified']}),
@@ -70,6 +71,7 @@ def build():
     delivery['verifiedUiComparisonBlocks']=verified_blocks
     delivery['measurementCaveat']=saved.get('measurementCaveat')
     delivery['visibleUiQualifications']=saved.get('visibleUiQualifications',[])
+    delivery['notebookRerunQualification']=notebook_rerun
     delivery['comparisonAudit']=comparison_audit
     delivery['historySelectorQualification']=HISTORY_SELECTOR_NOTE
     (ROOT/'forge/results/delivery.json').write_text(json.dumps(delivery,indent=2)+'\n')
@@ -94,7 +96,7 @@ def build():
     lines += [f"W&B Models readback verified **{sum(r['verified'] for r in models_audit.get('trials',[]))}/{len(models_audit.get('trials',[]))} runs and committed trial artifacts** against the local configuration, outcomes and usage.",'']
     for q in saved.get('concurrencyQualifications',[]): lines.append(f"- Concurrent app tracing `{q['id']}`: {'passed' if q['passed'] else 'failed'}; {len(q.get('sessions',[]))} isolated conversations.")
     for q in saved.get('sandboxQualifications',[]): lines.append(f"- Sandbox lifecycle `{q['id']}`: {'passed' if q['passed'] else 'failed'}; {sum(c['passed'] for c in q.get('checks',[]))} live checks. {q.get('error','')}")
-    lines += ['', 'Manual graph qualification candidates validate runner control flow and checker behavior. They are explicitly excluded from Pi trial counts and treatment comparisons.', '', '## Loops and graph states','']
+    lines += ['', f"Notebook explicit-action qualification: **{'verified' if notebook_rerun.get('verified') else 'pending'}**. A configured local shared coordinator executes the same canonical execution cell; the hosted default has no mounted coordinator.", '', 'Manual graph qualification candidates validate runner control flow and checker behavior. They are explicitly excluded from Pi trial counts and treatment comparisons.', '', '## Loops and graph states','']
     for state in saved.get('loops',[]): lines.append(f"- `{state['file']}`: **{state['status']}**, {len(state['rounds'])} recorded rounds; {len(state.get('interventions',[]))} entered/observed interventions.")
     for state in saved.get('graphs',[]): lines.append(f"- `{state['file']}`: **{state['node']}**, {state['attempts']} maker attempts, {len(state['transitions'])} durable transitions. An approval pause requires an explicit checksum-bound human decision.")
     lines += ['', '## Spend estimates','',f"Known/audited estimate: **${delivery['knownAndAuditedEstimateUsd']:.6f}**. Conservative charges for unknown usage: **${uncertain:.6f}**. Total charged estimate: **${ledger['spentEstimateUsd']:.6f}**. Active reservations: **${sum(ledger['reservations'].values()):.6f}**.",'', 'The original $50 application cap was removed after the user explicitly authorized an unlimited budget. Worker concurrency and lifetimes remain bounded. Timed-out qualifications retain unknown token usage; each full $2 reservation was charged conservatively under the recorded authorization. Estimates are not provider invoices. Notebook EDIT compute is measured separately at the verified 2 CPU / 4 GiB rates ($0.3408/hour), including publication work. The durable ledger records authorizations and reconciliations. It must not be reset.','',saved.get('costScope',''),'', '## Draft PRs','']
