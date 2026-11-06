@@ -34,7 +34,8 @@ export async function runTrial(input: {id?:string;project:string;variant:string;
     const staged=await stageTask(task,input.variant,input.sourceCommit);
     record.applicationSha256=staged.applicationSha256;
     const checker=await readFile(join(courseRoot,task.protectedChecker));
-    record.checkerSha256=createHash('sha256').update(checker).digest('hex');
+    const checkerSupport=await readFile(join(courseRoot,'forge/graders/poll.cjs'));
+    record.checkerSha256=createHash('sha256').update(checker).update('\0').update(checkerSupport).digest('hex');
     await writeJson(join(dir,'trial.json'),record);
     const actorDir=join(dir,'actor');await mkdir(actorDir,{recursive:true});
     const actorStart=Date.now();
@@ -77,11 +78,12 @@ export async function runTrial(input: {id?:string;project:string;variant:string;
         record.graderSandboxId=sandbox.sandboxId;await stageWorkspace(sandbox,staged.archive);
         if(candidate.length){await sandbox.files.write('/tmp/candidate.diff',candidate);await sandbox.commands.run(['git','apply','--reject','/tmp/candidate.diff'],{cwd:'/workspace/task',timeoutMs:20000});}
         await sandbox.files.write('/tmp/check.cjs',checker);
+        await sandbox.files.write('/tmp/poll.cjs',checkerSupport);
         const result=await sandbox.commands.run(['xvfb-run','-a','node','/tmp/check.cjs',task.id],{cwd:'/workspace/task',check:false,timeoutMs:240000});
         await writeJson(join(graderDir,'command.json'),result);
         const grade=JSON.parse(Buffer.from(await sandbox.files.read('/tmp/grade/result.json')).toString('utf8'));
         await writeJson(join(graderDir,'result.json'),grade);record.grade=grade;
-        for(const file of ['build.log','chunks.json','qa.json','electron.png']) {
+        for(const file of ['build.log','chunks.json','qa.json','electron.png','visible-answer.png','visible-answer.json']) {
           try {await writeFile(join(graderDir,file),await sandbox.files.read(`/tmp/grade/${file}`));}catch{/* An absent artifact stays absent. */}
         }
         record.outcome=grade.passed?'passed':'task_failed';

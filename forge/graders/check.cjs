@@ -4,6 +4,7 @@ const os = require('node:os');
 const path = require('node:path');
 const assert = require('node:assert/strict');
 const {execFileSync} = require('node:child_process');
+const {poll} = require('/tmp/poll.cjs');
 const task = process.argv[2];
 const cwd = '/workspace/task';
 const output = '/tmp/grade';
@@ -99,7 +100,7 @@ const save = () => fs.writeFileSync(path.join(output,'result.json'),JSON.stringi
         const input=page.locator('input[type=file]');
         if(await input.count())await input.setInputFiles(fixture);
         else await page.getByRole('button',{name:/import/i}).first().click();
-        await page.waitForFunction(async()=> (await window.knowledgeBase.documents.list()).length>0,{},{timeout:10000});
+        await poll(()=>page.evaluate(async()=> (await window.knowledgeBase.documents.list()).length>0));
         const result=await page.evaluate(async()=>{const d=(await window.knowledgeBase.documents.list())[0];return window.knowledgeBase.documents.getContent(d.id);});
         assert.equal(result,content);
       } else await page.evaluate(file=>window.knowledgeBase.documents.import(file),fixture);
@@ -110,7 +111,11 @@ const save = () => fs.writeFileSync(path.join(output,'result.json'),JSON.stringi
       for(const q of questions){
         await page.locator('input[type=text]').first().fill(q);
         await page.getByRole('button',{name:'Ask',exact:true}).click();
-        await page.waitForFunction(async question=>(await window.knowledgeBase.qa.history()).some(h=>h.question===question),q,{timeout:10000});
+        await poll(()=>page.evaluate(async question=>(await window.knowledgeBase.qa.history()).some(h=>h.question===question),q));
+        const answer=await page.evaluate(async question=>(await window.knowledgeBase.qa.history()).find(h=>h.question===question).response.answer,q);
+        await page.getByText(answer,{exact:true}).first().waitFor({timeout:10000});
+        await page.screenshot({path:path.join(output,'visible-answer.png')});
+        fs.writeFileSync(path.join(output,'visible-answer.json'),JSON.stringify({question:q,answer,body:await page.locator('body').innerText()},null,2));
       }
       if(task==='project-05') {
         await page.getByRole('button',{name:/conversation|history/i}).first().click();
@@ -122,7 +127,7 @@ const save = () => fs.writeFileSync(path.join(output,'result.json'),JSON.stringi
         const citationControl=page.getByText(/citations?/i).first();await citationControl.click();
         assert.ok((await page.locator('body').innerText()).includes(history[0].response.citations[0].excerpt));
         page.on('dialog',d=>d.accept());await page.getByRole('button',{name:/clear.*history/i}).click();
-        await page.waitForFunction(async()=>(await window.knowledgeBase.qa.history()).length===0,{},{timeout:5000});
+        await poll(()=>page.evaluate(async()=>(await window.knowledgeBase.qa.history()).length===0),5000);
       }
       if(task==='project-06') {
         await page.evaluate(async()=>{const h=(await window.knowledgeBase.qa.history())[0];await window.knowledgeBase.feedback.submit(h.response.timestamp,h.question,'positive','sample course feedback');});
