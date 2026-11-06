@@ -2,7 +2,7 @@ import {mkdir, readFile} from 'node:fs/promises';
 import {join, resolve} from 'node:path';
 import {randomUUID,createHash} from 'node:crypto';
 import {spawn} from 'node:child_process';
-import {config, requireLive} from './config.js';
+import {config, requireLive, requirePrivateProject} from './config.js';
 import {Budget, estimate} from './budget.js';
 import {protocol} from './trial.js';
 import {courseRoot,readTask,sourceHead,stageTask} from './staging.js';
@@ -12,7 +12,7 @@ import {writeJson,redact} from './records.js';
 
 export async function qualify(output=join(courseRoot,'forge/local-results')) {
   output=resolve(output);await mkdir(output,{recursive:true});
-  const c=config();requireLive(c);const p=await protocol();const source=await sourceHead();
+  const c=config();requireLive(c);await requirePrivateProject(c);const p=await protocol();const source=await sourceHead();
   const id=`qualification-${randomUUID()}`;const dir=join(output,id);await mkdir(dir);
   const budget=new Budget(join(output,'budget.json'),c.budgetUsd);await budget.reserve({[id]:2});
   const record:Record<string,unknown>={schemaVersion:1,id,sourceCommit:source,protocolSha256:createHash('sha256').update(JSON.stringify(p)).digest('hex'),startedAt:new Date().toISOString(),passed:false};
