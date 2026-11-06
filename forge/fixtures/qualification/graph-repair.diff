@@ -1,0 +1,72 @@
+diff --git a/src/services/indexing-service.ts b/src/services/indexing-service.ts
+--- a/src/services/indexing-service.ts
++++ b/src/services/indexing-service.ts
+@@ -106,9 +106,7 @@
+ 
+     for (const para of paragraphs) {
+       if (buffer.length + para.length > CHUNK_SIZE && buffer.length > 0) {
+-        // BUG: For long documents (>1000 chars total), set chunk content to empty string.
+-        // This causes files over ~1000 chars to produce empty chunks, breaking Q&A retrieval.
+-        const chunkContent = content.length > 1000 ? '' : buffer.trim();
++        const chunkContent = buffer.trim();
+         chunks.push(this.createChunk(documentId, chunkIndex++, chunkContent));
+         buffer = para;
+       } else {
+@@ -117,7 +115,7 @@
+     }
+ 
+     if (buffer.trim()) {
+-      const chunkContent = content.length > 1000 ? '' : buffer.trim();
++      const chunkContent = buffer.trim();
+       chunks.push(this.createChunk(documentId, chunkIndex, chunkContent));
+     }
+ 
+diff --git a/src/preload/preload.ts b/src/preload/preload.ts
+--- a/src/preload/preload.ts
++++ b/src/preload/preload.ts
+@@ -1,21 +1,22 @@
+ import { contextBridge, ipcRenderer } from 'electron';
+-import { IPC_CHANNELS } from '../shared/types';
++// Electron sandboxed preloads may only require Electron and built-in shims.
++// Keep channel literals in this self-contained preload; renderer isolation stays enabled.
+ 
+ const api = {
+   documents: {
+-    list: () => ipcRenderer.invoke(IPC_CHANNELS.LIST_DOCUMENTS),
+-    import: (filePath: string) => ipcRenderer.invoke(IPC_CHANNELS.IMPORT_DOCUMENT, filePath),
+-    get: (id: string) => ipcRenderer.invoke(IPC_CHANNELS.GET_DOCUMENT, id),
+-    delete: (id: string) => ipcRenderer.invoke(IPC_CHANNELS.DELETE_DOCUMENT, id),
++    list: () => ipcRenderer.invoke('documents:list'),
++    import: (filePath: string) => ipcRenderer.invoke('documents:import', filePath),
++    get: (id: string) => ipcRenderer.invoke('documents:get', id),
++    delete: (id: string) => ipcRenderer.invoke('documents:delete', id),
+   },
+   indexing: {
+-    start: (documentId?: string) => ipcRenderer.invoke(IPC_CHANNELS.START_INDEXING, documentId),
+-    status: () => ipcRenderer.invoke(IPC_CHANNELS.GET_INDEXING_STATUS),
+-    chunks: (documentId: string) => ipcRenderer.invoke(IPC_CHANNELS.GET_CHUNKS, documentId),
++    start: (documentId?: string) => ipcRenderer.invoke('indexing:start', documentId),
++    status: () => ipcRenderer.invoke('indexing:status'),
++    chunks: (documentId: string) => ipcRenderer.invoke('indexing:chunks', documentId),
+   },
+   qa: {
+-    ask: (question: string) => ipcRenderer.invoke(IPC_CHANNELS.ASK_QUESTION, question),
+-    history: () => ipcRenderer.invoke(IPC_CHANNELS.GET_HISTORY),
++    ask: (question: string) => ipcRenderer.invoke('qa:ask', question),
++    history: () => ipcRenderer.invoke('qa:history'),
+   },
+ };
+ 
+diff --git a/scripts/check-architecture.sh b/scripts/check-architecture.sh
+new file mode 100644
+--- /dev/null
++++ b/scripts/check-architecture.sh
+@@ -0,0 +1,8 @@
++#!/usr/bin/env bash
++set -eu
++# Qualification fixture: reject privileged module imports in renderer source.
++test -d src/renderer
++if grep -REn "(from|require\()[[:space:]]*['\"](node:|fs|path|electron|child_process)" src/renderer; then
++  echo 'Privileged module import found in renderer' >&2
++  exit 1
++fi
