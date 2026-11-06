@@ -10,6 +10,7 @@ import subprocess
 import time
 import wandb
 from models import require_private_project
+from measurement import qualified
 
 ROOT=Path(__file__).resolve().parents[2]
 LOCAL=ROOT/'forge/local-results'
@@ -32,7 +33,7 @@ def publish():
     (sources/'manifest.json').write_text(json.dumps(archives,indent=2)+'\n')
     blocks=len(saved.get('completedComparisonBlocks',[]))
     uncertain=sum(r['reservedEstimateUsd'] for r in ledger.get('uncertainEstimates',[]))
-    verified_ui=[r for r in saved['trials'] if r.get('protocolRevision',1)>=4]
+    verified_ui=[r for r in saved['trials'] if qualified(r)]
     audit_metrics={'qualificationAttempts':len(saved['qualifications']),'qualificationPassed':sum(r['passed'] for r in saved['qualifications']),'codingTrialAttempts':len(saved['trials']),'passedCodingTrials':sum(r['outcome']=='passed' for r in saved['trials']),'completeComparisonBlocks':blocks,'knownEstimatedSpendUsd':ledger['spentEstimateUsd']-uncertain,'chargedUnknownReservationsUsd':uncertain,'totalChargedEstimateUsd':ledger['spentEstimateUsd'],'unresolvedReservationsUsd':sum(ledger['reservations'].values()),'budgetHalted':bool(ledger.get('halted')),'notebooksPublishedVerified':sum(r['status']=='published_verified' for r in publications['notebooks'])}
     audit_metrics.update(verifiedUiAttempts=len(verified_ui),verifiedUiPasses=sum(r['outcome']=='passed' for r in verified_ui))
     traces=json.loads((LOCAL/'trace-audit.json').read_text())
@@ -62,7 +63,7 @@ def publish():
         for filename in ['budget.json','app-checks.json','notebook-validation.json','trace-audit.json','models-audit.json','comparison-audit.json','forge-tests-final.log','sandbox-final-audit.json','local-checks.json','docs-check.log','anchors-check.log']:
             path=LOCAL/filename
             if path.exists():artifact.add_file(str(path),name=filename)
-        for pattern in ['project-07-*.json','project-08-*.json','rollback-*.json','report-*.json','graph-*/*.json','graph-*/*.png','notebook-sessions/*.json','trace-readback/*.json','reconciliations/*.json','publication/*/notebook.py','publication/*/rendered.html','publication/*.jpg']:
+        for pattern in ['project-07-*.json','project-08-*.json','rollback-*.json','report-*.json','graph-*/*.json','graph-*/*.png','notebook-sessions/*.json','trace-readback/*.json','reconciliations/*.json','publication/*/notebook.py','publication/*/rendered.html','publication/*.jpg','history-diagnostic-*/*.json','history-diagnostic-*/*.png','history-diagnostic-*/*.cjs','notebook-rerun-qualification.json','notebook-rerun-qualification/*','publication-guards-final.log']:
             for path in sorted(LOCAL.glob(pattern)):
                 if path.is_file():artifact.add_file(str(path),name=str(path.relative_to(LOCAL)))
         for directory in sorted(LOCAL.glob('graph-qualification-*')):
