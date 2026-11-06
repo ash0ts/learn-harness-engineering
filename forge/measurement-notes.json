@@ -11,6 +11,11 @@
       "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
       "project": "project-06",
       "reason": "The task omitted the feedback.submit argument contract while the checker assumed positional arguments. Native grades are preserved but excluded from qualified comparisons. Both treatments are rerun with an explicit object payload contract."
+    },
+    {
+      "sourceCommit": "945c5d3073026a4fea427372843ea79072221dde",
+      "project": "project-08",
+      "reason": "The graph task did not name the required scripts/check-architecture.sh path, and its failing grade omitted that path. These native outcomes are retained as diagnostic contract-discovery evidence; the explicit-contract graph is a separate frozen execution."
     }
   ]
 }
