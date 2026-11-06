@@ -22,14 +22,14 @@ try {
    const data=await page.evaluate(()=>({
     headings:[...document.querySelectorAll('.vp-doc h1,.vp-doc h2,.vp-doc h3')].map(e=>e.id),
     overflow:document.documentElement.scrollWidth>innerWidth,
-    images:[...document.querySelectorAll('.vp-doc img')].map(e=>({src:(e as HTMLImageElement).src,alt:(e as HTMLImageElement).alt})),
+    images:[...document.querySelectorAll('.vp-doc img')].map(e=>({link:e.closest('a')?.getAttribute('href'),src:(e as HTMLImageElement).src,alt:(e as HTMLImageElement).alt})),
     links:[...document.querySelectorAll('.vp-doc a,.VPSidebar a')].map(e=>(e as HTMLAnchorElement).href).filter(h=>h.startsWith(location.origin)),
     scrollable:[...document.querySelectorAll('.forge-figure')].map(e=>{e.scrollLeft=500;const scrolled=e.scrollLeft>0;e.scrollLeft=0;return {scrollable:e.scrollWidth>e.clientWidth,scrolled}})
    }));
    console.log(`Checked page ${file} at ${width}px`);
    assert(!data.overflow,`Page overflow ${file} ${width}`);
    assert.deepEqual(data.headings,anchorMap['forge/'+file].ids,`Headings ${file}`);
-   for(const im of data.images){assert(im.alt,`Missing alt ${file}`);images.add(im.src);if(im.src.startsWith('data:image/'))continue;if(checked.has(im.src))continue;assert.equal((await page.request.get(im.src)).status(),200,im.src);checked.add(im.src)}
+   for(const im of data.images){assert(im.alt,`Missing alt ${file}`);assert(!im.link?.startsWith('data:'),`Full-size image needs a navigable file URL: ${file}`);images.add(im.src);if(im.src.startsWith('data:image/'))continue;if(checked.has(im.src))continue;assert.equal((await page.request.get(im.src)).status(),200,im.src);checked.add(im.src)}
    for(const href of data.links){if(checked.has(href))continue;const url=new URL(href);const res=await page.request.get(url.origin+url.pathname);assert.equal(res.status(),200,href);if(url.hash){const html=await res.text();const exists=await page.evaluate(({html,id})=>!!new DOMParser().parseFromString(html,'text/html').getElementById(id),{html,id:decodeURIComponent(url.hash.slice(1))});assert(exists,href)}checked.add(href)}
    assert(data.scrollable.every(x=>!x.scrollable||x.scrolled),'Figure scroll');
    records.push({file,width,images:data.images.length,links:data.links.length});
