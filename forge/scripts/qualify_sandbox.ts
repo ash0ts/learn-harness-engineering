@@ -18,7 +18,8 @@ const budget=new Budget(join(courseRoot,'forge/local-results/budget.json'),c.bud
 const record:Record<string,unknown>={schemaVersion:1,id,sourceCommit,startedAt:new Date().toISOString(),passed:false,checks:[]};
 const checks=record.checks as Array<{name:string;passed:boolean;detail?:unknown}>;
 const staged=await stageTask(await readTask('project-01'),'minimal',sourceCommit);
-const interruptId=`${id}-interrupt`,resumeId=`${id}-resume`;
+const interruptId=randomUUID(),resumeId=randomUUID();
+record.reservationIds={interruptId,resumeId};
 await budget.reserve({[interruptId]:0.5,[resumeId]:0.5});
 let total=0;
 try {
