@@ -90,6 +90,7 @@ const enLectureItems = [
 ];
 
 const enProjectItems = [
+  { text: "Optional Forge Track", link: "/en/forge/" },
   { text: "Welcome", link: "/en/projects/" },
   { text: "Prompt-Only vs. Rules-First", link: "/en/projects/project-01-baseline-vs-minimal-harness/" },
   { text: "Agent-Readable Workspace", link: "/en/projects/project-02-agent-readable-workspace/" },
@@ -953,13 +954,14 @@ export default withMermaid(
         themeConfig: {
           nav: [
             { text: "Lectures", link: enLectureItems[1].link, activeMatch: '^/en/(lectures/.*)?$' },
-            { text: "Projects", link: enProjectItems[0].link, activeMatch: '^/en/projects/' },
+            { text: "Projects", link: "/en/projects/", activeMatch: '^/en/projects/' },
             { text: "Library", link: "/en/resources/", activeMatch: '^/en/resources/' },
             { text: "Skills", link: "/en/skills/", activeMatch: '^/en/skills/' },
             { text: "Frontier Harness Design Breakdowns", link: "/en/harness-designs/", activeMatch: '^/en/harness-designs/' },
             { text: "Try Harness ↗", link: "https://github.com/walkinglabs/learn-harness-engineering/blob/main/docs/en/resources/templates/index.md", target: "_blank", rel: "noopener noreferrer" }
           ],
           sidebar: {
+            '/en/forge/': [{ text: "Forge Learning Path", items: enProjectItems }],
             '/en/projects/': [{ text: "Projects", items: enProjectItems }],
             '/en/resources/': [{ text: "Resource Library", items: enResourceItems }],
             '/en/skills/': [{ text: "Skills", items: enSkillItems }],
