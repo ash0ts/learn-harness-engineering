@@ -1,95 +1,167 @@
-# Forge track delivery and evidence
+# Forge course delivery and evidence
 
-**Status: implementation is in dependent draft PRs; the live study and hosted notebook publication are incomplete.**
+Status: **verification in progress**. All eight PRs remain drafts; none has been merged.
 
-The frozen upstream revision is `a9342ff471f2c0e60be0c08b9f4a7c502df4e442`. The [public personal fork](https://github.com/ash0ts/learn-harness-engineering) preserves the original offline course. Results belong to the private `wandb/learn-harness-engineering-forge` project. No PR has been merged.
+The [public personal fork](https://github.com/ash0ts/learn-harness-engineering) preserves the offline course at upstream `a9342ff471f2c0e60be0c08b9f4a7c502df4e442`. Results and notebook sources belong to the private `wandb/learn-harness-engineering-forge` project.
 
-## What ran
+## Actual execution
 
-| Evidence | Actual completion |
+| Evidence | Recorded result |
 | --- | --- |
-| Offline application checks | 15/15 app copies pass existing type, build, test and available architecture checks |
-| Forge integration tests | 27 pass, including accelerated timer, graph approval/rollback and shared sandbox slots |
-| Documentation | VitePress build and English anchor validation pass |
-| Canonical notebooks | 9/9 validate and render locally without credentials |
-| Qualification | 1/4 marked passed; successful record predates protocol revision 2 |
-| Coding trials | 1 attempted; 0 passing, 0 complete comparison blocks |
-| Real two-hour exercise | Started, then halted during its first trial; not completed |
-| Live graph exercise | Not launched |
-| Hosted notebooks | 9 BASIC records created; 0/9 canonical sources uploaded and verified |
+| Existing offline app checks | 15/15 pass |
+| Forge integration tests | 36 pass; 0 fail |
+| Canonical notebooks | 9/9 render locally without inference credentials |
+| Hosted notebook verification | 7/9 |
+| Qualification attempts | 2/5 pass |
+| Coding attempts | 59 completed; {'task_failed': 58, 'telemetry_missing': 1} |
+| Complete comparison blocks | 18 |
+| Real two-hour timer | Completed |
 
-The one coding attempt was a timer trial. Its original outcome remains `telemetry_missing`. An audit found that all eight submitted calls returned usage; a ninth attempt was refused locally by the input bound. Its billing estimate was reconciled, but the failed attempt was not relabeled as a successful trial. Later fixes corrected the virtual Pi working directory, excluded macOS tar metadata and counted only submitted inference requests. The latest qualification under the revised protocol timed out with one submitted inference and no returned token usage. That unresolved attempt halted paid launches.
+A completed comparison block contains every treatment for the same project, repeat and source revision. Completion does not imply a passing patch. The independent checker executes the exported patch in a fresh sandbox and distinguishes service behavior from Xvfb/Electron behavior. Source revisions and protocol hashes remain attached to each attempt.
 
-## Budget
+## Comparison results
 
-Known/audited estimated spend: **$0.029610**. Unresolved reservations: **$2.00**. Original application budget: **$50.00**. These are estimates, not an invoice or guaranteed billing cap.
+| Project | Treatment | Source | Attempts | Pass | Task failure | Infrastructure failure | Missing telemetry |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| project-01 | explicit | `8f4521bc34bb` | 3 | 0 | 3 | 0 | 0 |
+| project-01 | minimal | `8f4521bc34bb` | 3 | 0 | 3 | 0 | 0 |
+| project-02 | minimal | `8f4521bc34bb` | 3 | 0 | 3 | 0 | 0 |
+| project-02 | workspace-docs | `8f4521bc34bb` | 3 | 0 | 3 | 0 | 0 |
+| project-03 | minimal | `8f4521bc34bb` | 3 | 0 | 3 | 0 | 0 |
+| project-03 | recovery | `8f4521bc34bb` | 3 | 0 | 3 | 0 | 0 |
+| project-04 | minimal | `8f4521bc34bb` | 3 | 0 | 3 | 0 | 0 |
+| project-04 | runtime-feedback | `8f4521bc34bb` | 3 | 0 | 3 | 0 | 0 |
+| project-05 | gen-eval | `8f4521bc34bb` | 3 | 0 | 3 | 0 | 0 |
+| project-05 | plan-gen-eval | `8f4521bc34bb` | 3 | 0 | 3 | 0 | 0 |
+| project-05 | single-role | `8f4521bc34bb` | 3 | 0 | 3 | 0 | 0 |
+| project-06 | capstone | `8f4521bc34bb` | 3 | 0 | 3 | 0 | 0 |
+| project-06 | minimal | `8f4521bc34bb` | 3 | 0 | 3 | 0 | 0 |
+| project-07 | goal | `8f4521bc34bb` | 3 | 0 | 3 | 0 | 0 |
+| project-07 | maker-checker | `8f4521bc34bb` | 2 | 0 | 2 | 0 | 0 |
+| project-07 | timer | `8f4521bc34bb` | 8 | 0 | 8 | 0 | 0 |
+| project-07 | timer | `bf760399391f` | 1 | 0 | 0 | 0 | 1 |
+| project-08 | graph | `3ebea13e2609` | 3 | 0 | 3 | 0 | 0 |
+| project-08 | graph | `8f4521bc34bb` | 3 | 0 | 3 | 0 | 0 |
 
-The unresolved $2 qualification reservation is retained. The provider billing query has returned no course-project rows, including previously observed calls; this cannot be interpreted as zero spend. No paid launch, notebook EDIT session or inference was started after this halt. Creating/renaming BASIC notebook records did not launch notebook compute. Notebook execution pricing remains unset until a runtime resource/rate check can support a reservation.
+The complete comparison blocks contain **39 coding attempts**, with **0 end-to-end passes**. If every treatment fails the full criterion, these results do not establish a treatment ranking.
 
-The ledger and its audit trail are included in `delivery.json`. It must not be reset to resume. Resume only after usage reconciliation or an explicitly recorded user exception, then qualify the frozen protocol again before comparisons.
+| Main comparison check | Passed | Executed |
+| --- | --- | --- |
+| Electron window, preload, import, indexing and question UI under Xvfb | 0 | 31 |
+| actual indexing keeps every nonempty paragraph | 31 | 31 |
+| actual retrieval and Q&A persist two turns | 31 | 31 |
+| architecture checker rejects a seeded boundary violation | 5 | 6 |
+| extracted metadata | 0 | 4 |
+| real import and persistence after reconstruction | 31 | 31 |
+| single-document indexing is reflected in status | 3 | 4 |
+| strict compile and renderer build | 31 | 39 |
 
-## Evidence links
+**29/59 attempts** reached the local input-context guard. This is a bounded execution result, not evidence that the task is impossible. Original tool/error traces and unfinished patches remain available.
 
-### Draft pull requests
+## Independent check results
 
-- [Forge runtime and Agent Lens tracing](https://github.com/ash0ts/learn-harness-engineering/pull/1)
-- [Reproducible Forge sandbox execution](https://github.com/ash0ts/learn-harness-engineering/pull/2)
-- [feat(forge): instrument real app services while preserving offline exercises](https://github.com/ash0ts/learn-harness-engineering/pull/3)
-- [feat(forge): add controlled comparisons protected graders and cost reservations](https://github.com/ash0ts/learn-harness-engineering/pull/5)
-- [feat(forge): execute checkpointed goal timer and maker-checker loops](https://github.com/ash0ts/learn-harness-engineering/pull/6)
-- [feat(forge): add durable graph routing rollback and human approval](https://github.com/ash0ts/learn-harness-engineering/pull/7)
+| Check | Passed | Executed |
+| --- | --- | --- |
+| Electron window, preload, import, indexing and question UI under Xvfb | 0 | 42 |
+| actual indexing keeps every nonempty paragraph | 39 | 42 |
+| actual retrieval and Q&A persist two turns | 39 | 42 |
+| architecture checker rejects a seeded boundary violation | 10 | 17 |
+| extracted metadata | 0 | 4 |
+| real import and persistence after reconstruction | 42 | 42 |
+| single-document indexing is reflected in status | 3 | 4 |
+| strict compile and renderer build | 42 | 59 |
+
+A check omitted after compilation failed is not counted as an executed service or UI check. Shared failures can mask differences between treatments; the end-to-end outcome remains failed.
+
+## Instrumentation and execution qualification
+
+Agent Lens readback verified **96/96 conversations**, including actual token usage and isolated span parentage. The readback includes **29 error spans**; their errors remain visible rather than being counted as successful calls.
+
+W&B Models readback verified **59/59 runs and committed trial artifacts** against the local configuration, outcomes and usage.
+
+- Concurrent app tracing `concurrency-61ad1e33-0ede-46ff-b513-1a700e9798ce`: passed; 2 isolated conversations.
+- Sandbox lifecycle `sandbox-qualification-15043cce-9df6-4cc6-9e66-44b1947ea5e2`: failed; 1 live checks. AssertionError [ERR_ASSERTION]: cancelled process must no longer exist
+
+1 !== 0
+
+- Sandbox lifecycle `sandbox-qualification-eab8e9f7-6d4d-4d1c-8582-5cbf4f41197c`: passed; 5 live checks. 
+- Sandbox lifecycle `sandbox-qualification-f566ddc3-297f-4483-98a8-47c6d15a402c`: failed; 0 live checks. CWSandboxValidationError: tags contains invalid value: sandbox-qualification-f566ddc3-297f-4483-98a8-47c6d15a402c-interrupt. tags may contain letters, numbers, '.', '_' or '-', must be 59 characters or fewer, must end with a letter or number, and may start with '.', '_' or '-'
+
+Manual graph qualification candidates validate runner control flow and checker behavior. They are explicitly excluded from Pi trial counts and treatment comparisons.
+
+## Loops and graph states
+
+- `project-07-goal-live.json`: **round_limit**, 3 recorded rounds; 0 entered/observed interventions.
+- `project-07-maker-checker-live.json`: **no_progress**, 2 recorded rounds; 0 entered/observed interventions.
+- `project-07-real-timer-qualified.json`: **deadline**, 8 recorded rounds; 1 entered/observed interventions.
+- `project-07-real-timer.json`: **blocked**, 1 recorded rounds; 0 entered/observed interventions.
+- `project-08-control-flow-qualification.json`: **approval**, 2 maker attempts, 6 durable transitions. An approval pause requires an explicit checksum-bound human decision.
+- `project-08-graph-diagnostic-feedback.json`: **failed**, 3 maker attempts, 10 durable transitions. An approval pause requires an explicit checksum-bound human decision.
+- `project-08-graph-live.json`: **failed**, 3 maker attempts, 10 durable transitions. An approval pause requires an explicit checksum-bound human decision.
+
+## Spend estimates
+
+Known/audited estimate: **$5.462867**. Conservative charges for unknown usage: **$2.000000**. Total charged estimate: **$7.462867**. Active reservations: **$4.000000**.
+
+The original $50 application cap was removed after the user explicitly authorized an unlimited budget. Worker concurrency and lifetimes remain bounded. The timed-out qualification retains unknown token usage; its full $2 reservation was charged conservatively. Estimates are not provider invoices. Notebook EDIT compute is measured separately at the verified 2 CPU / 4 GiB rates ($0.3408/hour), including publication work. The durable ledger records authorizations and reconciliations. It must not be reset.
+
+Budget snapshot as of capturedAt. Final publication/editor costs are recorded separately in the delivery report and W&B audit artifact.
+
+## Draft PRs
+
+- [Forge 1/8: Runtime and Agent Lens tracing](https://github.com/ash0ts/learn-harness-engineering/pull/1)
+- [Forge 2/8: Reproducible sandbox execution](https://github.com/ash0ts/learn-harness-engineering/pull/2)
+- [Forge 3/8: Opt-in knowledge-base app instrumentation](https://github.com/ash0ts/learn-harness-engineering/pull/3)
+- [Forge 4/8: Controlled comparisons for Projects 01–06](https://github.com/ash0ts/learn-harness-engineering/pull/5)
+- [Forge 5/8: Executable bounded Project 07 loops](https://github.com/ash0ts/learn-harness-engineering/pull/6)
+- [Forge 6/8: Durable Project 08 graphs and approval](https://github.com/ash0ts/learn-harness-engineering/pull/7)
 - [Forge 7/8: Nine Marimo notebooks and English learning path](https://github.com/ash0ts/learn-harness-engineering/pull/8)
-- [Forge 8/8: Qualification audit and guarded notebook publication](https://github.com/ash0ts/learn-harness-engineering/pull/9)
+- [Forge 8/8: Publish and verify the course track](https://github.com/ash0ts/learn-harness-engineering/pull/9)
 
-- [W&B timer trial](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/ace2d466a1f64998) · [versioned trial artifact](https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-ace2d466-a1f6-4998-bb1c-130618b52651:v0)
-- [Agent Lens coding conversation](https://forge.coreweave.com/agent-lens/wandb/learn-harness-engineering-forge/conversations/01a1afca-9cab-751c-8d3f-02d983484664)
-- [Qualification audit run](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/course-audit-20261106) · [qualification evidence and exact source archives](https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v0)
+## Notebooks
 
-Agent Lens was inspected in the authenticated UI. [Application qualification conversation](https://forge.coreweave.com/agent-lens/wandb/learn-harness-engineering-forge/conversations/app-d758b5b7-ca03-4fde-a743-5577fafe284e). The coding conversation contains nested model and tool activity. Separate application conversations show four turns (import, indexing, two Q&A calls) and twelve spans. Concurrency isolation is implemented with `runIsolated()`; a live concurrent trace qualification is still outstanding. The unsuccessful inference conversation is retained with its error.
-
-## Hosted notebook records
-
-**These links currently open BASIC placeholders, not the canonical course notebooks.** The manifest records their stable IDs, intended source revisions/checksums and original committed BASIC versions. No publication success is claimed.
-
-| Notebook | Remote record | Status |
+| Notebook | Publication status |
 | --- | --- |
-| 00-overview.py | [Forge track: evidence before conclusions](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTM%3D) | created_basic_not_uploaded |
-| 01-minimal-harness.py | [01 · Minimal instructions and explicit harnesses](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTQ%3D) | created_basic_not_uploaded |
-| 02-workspace-docs.py | [02 · An agent-readable workspace](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTU%3D) | created_basic_not_uploaded |
-| 03-session-recovery.py | [03 · Interrupted-session recovery](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTY%3D) | created_basic_not_uploaded |
-| 04-runtime-feedback.py | [04 · Runtime evidence and the seeded defect](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTc%3D) | created_basic_not_uploaded |
-| 05-role-separation.py | [05 · One feature, three role arrangements](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTg%3D) | created_basic_not_uploaded |
-| 06-capstone.py | [06 · Capstone reliability](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTk%3D) | created_basic_not_uploaded |
-| 07-bounded-loops.py | [07 · Goal, timer and maker-checker loops](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjA%3D) | created_basic_not_uploaded |
-| 08-state-machine.py | [08 · Checkpointed graphs and human approval](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjE%3D) | created_basic_not_uploaded |
+| [Forge track: evidence before conclusions](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTM%3D) | editor_workflow_verified_pending_final_results |
+| [01 · Minimal instructions and explicit harnesses](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTQ%3D) | published_verified |
+| [02 · An agent-readable workspace](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTU%3D) | published_verified |
+| [03 · Interrupted-session recovery](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTY%3D) | published_verified |
+| [04 · Runtime evidence and the seeded defect](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTc%3D) | published_verified |
+| [05 · One feature, three role arrangements](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTg%3D) | published_verified |
+| [06 · Capstone reliability](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTk%3D) | published_verified |
+| [07 · Goal, timer and maker-checker loops](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjA%3D) | created_basic_not_uploaded |
+| [08 · Checkpointed graphs and human approval](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjE%3D) | published_verified |
 
-## Reproduce and resume
+The publication manifest binds each stable notebook ID to its canonical source commit, SHA-256, committed currentVersion, and rendered-output SHA-256. Verification compares rendered cell source and output code hashes, including when Forge omits its legacy lastStaticOutputAt timestamp. Opening the notebook renders saved evidence; paid reruns require an explicit action.
 
-From this checkout:
+## Evidence and reproduction
+
+[W&B course audit](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/course-audit-20261106) · [versioned evidence and exact source archives](https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v0)
+
+Per-trial W&B runs, artifacts and Agent Lens conversation links are in `snapshot.json` and the notebooks. Original failed attempts are retained alongside later qualification and comparison runs.
 
 ```sh
 npm ci --prefix forge
-npm run build --prefix forge
 npm run check --prefix forge
 npm test --prefix forge
 python3 forge/scripts/check_apps.py
-npm ci
 npm run anchors:check
 npm run docs:build
-npm run forge --prefix forge -- validate-notebooks
+python3 forge/scripts/validate_notebooks.py
 python3 forge/scripts/report.py
 ```
 
-The coordinator uses the existing `forge/local-results/budget.json`. Supply credentials externally. After reconciliation, run `doctor --qualify --execute`, then schedule complete comparison blocks with `compare --repeats 3 --execute`. The loop and graph commands are documented in Projects 07 and 08. An ambiguous pending checkpoint requires review rather than an automatic replay.
+Supply `WANDB_ENTITY`, `WANDB_PROJECT` and credentials externally. Use the existing shared ledger. `doctor --qualify --execute` qualifies the frozen protocol; `compare --repeats 3 --execute` schedules complete blocks. The Project 07 and 08 learning pages document loop, checkpoint and approval commands.
 
-For publication, run `uv run --script forge/scripts/publication.py check-remote NOTEBOOK.py` before opening EDIT. Reserve notebook compute from the same ledger, then load canonical source through the authenticated Marimo editor and use its normal save workflow. Run `verify NOTEBOOK.py` afterward. It checks committed `currentVersion`, source SHA-256, fresh rendered output, absence of cell errors and an idle launch control. It will reject the current BASIC placeholders. Reuse manifest IDs; do not create replacements to bypass remote-edit detection.
+Notebook publication uses the normal authenticated Forge EDIT/Marimo file editor and save workflow. Reserve compute using `forge/scripts/notebook_session.ts`, check for remote edits with `publication.py check-remote`, load canonical source, run saved-analysis cells, then verify committed source and rendered output with `publication.py verify`. Terminate and account for every editing session.
 
-## Limits of the evidence
+## Limits
 
-- No treatment-effect conclusion is supported: there are no complete comparison blocks and no successful coding trial.
-- Offline build/test success is distinct from the protected service and Electron checks. The seeded Project 04 empty-chunk defect is detected; the original sandboxed preload also fails the Electron bridge check. Those exercise gaps remain for the learner/agent to fix.
-- Generation settings and model are frozen in `forge/protocol.json`; a changed protocol needs qualification. The model was listed and successfully called during earlier qualification, but the most recent request timed out.
-- The actual two-hour timer, live graph retries/rollback/approval, and concurrent trace isolation remain unqualified. Unit tests do not replace those live exercises.
-- Hosted notebooks need a mounted shared coordinator checkout for paid reruns. Analysis is self-contained; a hosted runtime without that checkout cannot execute reruns.
-- Hosted notebook source commit and rendered output remain unverified. BASIC version checksums intentionally differ from canonical sources.
-- Human-intervention time and time saved were not measured. No model training was performed.
+- These are repeated runs of one frozen task per project, not a broad benchmark. Three repeats do not establish general treatment effects.
+- A task failure is evidence about this bounded attempt. Passing offline checks is not substituted for Electron or held-out service evidence.
+- The frozen comparison study and two-hour exercise use their recorded runner revision. Later cancellation and retry-diagnostic fixes are qualified separately; historical attempts are not rewritten or rescored.
+- Original early failures and audited accounting corrections are preserved. Missing usage is never reported as zero usage.
+- Hosted saved analysis is self-contained. Paid reruns require the configured shared coordinator checkout with Node, pinned dependencies, external credentials, qualification and the existing durable ledger; a fresh hosted runtime has no mounted coordinator by default.
+- The two-hour timer status above comes from its actual wall-clock checkpoint. Accelerated tests are reported separately.
+- Graph retries and rollback may end in failure. Human approval is never inferred from a test or automatically supplied by the agent.
+- No human time savings were inferred, no model training was performed, and only sample course data was used.
