@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "project-05",
+  "starter": "projects/project-05/starter",
+  "task": "Implement the same multi-turn ConversationHistory upgrade: show full questions and answers in order, expandable citations and confidence, empty state, and a Clear history button with confirmation. Keep persisted history after restart, and refresh the view after each answer.",
+  "variants": [
+    "single-role",
+    "gen-eval",
+    "plan-gen-eval"
+  ],
+  "repeats": 3,
+  "sessions": 1,
+  "protectedChecker": "forge/graders/check.cjs",
+  "fixture": "forge/fixtures/course.txt"
+}
