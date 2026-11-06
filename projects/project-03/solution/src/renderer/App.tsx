@@ -6,28 +6,6 @@ import { ImportPanel } from './components/ImportPanel';
 import { StatusBar } from './components/StatusBar';
 import { Document, AppStatus, QAResponse } from '../shared/types';
 
-declare global {
-  interface Window {
-    knowledgeBase: {
-      documents: {
-        list: () => Promise<Document[]>;
-        import: (filePath: string) => Promise<Document>;
-        get: (id: string) => Promise<Document | null>;
-        getContent: (id: string) => Promise<string | null>;
-        delete: (id: string) => Promise<boolean>;
-      };
-      indexing: {
-        start: (documentId?: string) => Promise<AppStatus>;
-        status: () => Promise<AppStatus>;
-        chunks: (documentId: string) => Promise<Array<{ id: string; content: string; index: number; metadata: Record<string, string> }>>;
-      };
-      qa: {
-        ask: (question: string) => Promise<QAResponse>;
-        history: () => Promise<Array<{ question: string; response: QAResponse }>>;
-      };
-    };
-  }
-}
 
 export function App() {
   const [documents, setDocuments] = useState<Document[]>([]);
