@@ -119,7 +119,7 @@ def evidence_report(entity, project, rows, views, operations, primary, previous)
              'Revision 4 requires every protected check plus observed, rendered answers in a fresh grading sandbox. '
              'Revision 2 and 3 have an asynchronous UI-wait defect: their native grades are preserved as historical results, not verified UI acceptance. '
              'The tables below include completed comparison blocks only. Aggregate runs are derived views, not additional trials. '
-             'A service check is not UI evidence. Repeated attempts of one task do not establish a general treatment ranking.', '',
+             'A service check is not UI evidence. Repeated attempts of one task do not establish a general treatment ranking. Protected app checks execute the actual services with deterministic course Q&A defaults; the live Forge app adapter is qualified separately. These checks do not measure production answer quality.', '',
              '[Execution and publication dashboard](' + forge_url(operations.url) + ')', '',
              '## Qualified comparison results', '', HISTORY_SELECTOR_NOTE, '', '[Open the primary qualified dashboard](' + forge_url(primary.url) + ')', '', '| Project | Treatment | Pass / attempts | Source |', '| --- | --- | --- | --- |']
     selected=[r for r in rows if r['config']['primaryComparison']]
@@ -206,7 +206,7 @@ def publish():
         view.runset_settings = ws.RunsetSettings(filters=[expr.Config("dashboardKind") == "comparison-aggregate", expr.Config("protocolRevision") == revision, expr.Config("sourceCommit") == source],
                                                 pinned_columns=["config:label", "passRate", "attempts"])
         view.settings = ws.WorkspaceSettings(max_runs=100)
-        view.sections = [ws.Section(name=("Archived grades · Project 05 citation selector unqualified" if source==HISTORY_SELECTOR_SOURCE else "Verified task outcomes and execution evidence") if revision >= 4 else "Historical checker outcomes — UI acceptance unqualified", panels=panels(revision,source!=HISTORY_SELECTOR_SOURCE), is_open=True,
+        view.sections = [ws.Section(name=("Archived grades · Project 05–06 checker defects" if source==HISTORY_SELECTOR_SOURCE else "Verified task outcomes and execution evidence") if revision >= 4 else "Historical checker outcomes — UI acceptance unqualified", panels=panels(revision,source!=HISTORY_SELECTOR_SOURCE), is_open=True,
                                     layout_settings=ReadableLayout(columns=2, rows=1)),
                          ws.Section(name="Original trial runs, traces and artifacts", is_open=True,
                                     panels=[wr.WeavePanelSummaryTable(table_name='sourceEvidenceV2',layout=wr.Layout(x=0,y=0,w=24,h=10))],
