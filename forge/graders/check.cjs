@@ -124,18 +124,37 @@ const save = () => fs.writeFileSync(path.join(output,'result.json'),JSON.stringi
         for(const h of history){assert.ok(body.includes(h.question),'missing question');assert.ok(body.includes(h.response.answer),'truncated answer');}
         assert.ok(body.indexOf(questions[0])<body.indexOf(questions[1]),'history ordering');
         assert.match(body,/confidence|85%|0\.85/i);
-        const citationControl=page.getByText(/citations?/i).first();await citationControl.click();
+        const citationControl=page.locator('button, summary, [role="button"]').filter({hasText:/citations?/i}).first();await citationControl.click();
+        await poll(async()=> (await page.locator('body').innerText()).includes(history[0].response.citations[0].excerpt));
         assert.ok((await page.locator('body').innerText()).includes(history[0].response.citations[0].excerpt));
-        page.on('dialog',d=>d.accept());await page.getByRole('button',{name:/clear.*history/i}).click();
+        let confirmationMode='cancel', nativeConfirmation=false;
+        page.on('dialog',async d=>{assert.equal(d.type(),'confirm');nativeConfirmation=true;if(confirmationMode==='cancel')await d.dismiss();else await d.accept();});
+        const clear=page.getByRole('button',{name:/clear.*history/i}).first();
+        await clear.click();
+        const cancel=page.getByRole('button',{name:/^(cancel|no)$/i}).last();
+        if(!nativeConfirmation){await cancel.waitFor({state:'visible',timeout:5000});await cancel.click();}
+        assert.equal((await page.evaluate(()=>window.knowledgeBase.qa.history())).length,history.length,'cancel must retain history');
+        confirmationMode='accept';nativeConfirmation=false;
+        await clear.click();
+        if(!nativeConfirmation){
+          await cancel.waitFor({state:'visible',timeout:5000});
+          assert.equal((await page.evaluate(()=>window.knowledgeBase.qa.history())).length,history.length,'history must remain until confirmation');
+          await cancel.locator('..').getByRole('button',{name:/clear|confirm|yes|delete/i}).click();
+        }
         await poll(()=>page.evaluate(async()=>(await window.knowledgeBase.qa.history()).length===0),5000);
       }
       if(task==='project-06') {
-        await page.evaluate(async()=>{const h=(await window.knowledgeBase.qa.history())[0];await window.knowledgeBase.feedback.submit(h.response.timestamp,h.question,'positive','sample course feedback');});
-        assert.equal((await page.evaluate(()=>window.knowledgeBase.feedback.list())).length,1);
+        await page.evaluate(async()=>{const h=(await window.knowledgeBase.qa.history())[0];await window.knowledgeBase.feedback.submit({question:h.question,answer:h.response.answer,rating:'positive',comment:'sample course feedback'});});
+        const feedback=await page.evaluate(()=>window.knowledgeBase.feedback.list());
+        assert.equal(feedback.length,1);assert.equal(feedback[0].rating,'positive');assert.equal(feedback[0].comment,'sample course feedback');
+        const submitted=await page.evaluate(async()=>(await window.knowledgeBase.qa.history())[0]);
+        assert.equal(feedback[0].question,submitted.question);assert.equal(feedback[0].answer,submitted.response.answer);
         await page.evaluate(()=>window.knowledgeBase.app.resetData());
         assert.equal((await page.evaluate(()=>window.knowledgeBase.documents.list())).length,0);
         assert.equal((await page.evaluate(()=>window.knowledgeBase.qa.history())).length,0);
         assert.equal((await page.evaluate(()=>window.knowledgeBase.feedback.list())).length,0);
+        const afterReset=await page.evaluate(()=>window.knowledgeBase.qa.ask('What architecture is used?'));
+        assert.equal(afterReset.citations.length,0,'reset must clear retrievable index chunks');
       }
       await page.screenshot({path:path.join(output,'electron.png')});
     } finally {await app.close();}
