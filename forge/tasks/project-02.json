@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "id": "project-02",
+  "starter": "projects/project-02/starter",
+  "task": "Complete document import and full-content detail through typed IPC. Expose documents.getContent(id), persist imports across service restarts, and provide a usable file-picker import flow in Electron 33. Work across two fresh agent sessions.",
+  "variants": [
+    "minimal",
+    "workspace-docs"
+  ],
+  "repeats": 3,
+  "sessions": 2,
+  "protectedChecker": "forge/graders/check.cjs",
+  "fixture": "forge/fixtures/course.txt"
+}

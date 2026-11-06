@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "id": "project-06",
+  "starter": "projects/project-06/starter",
+  "task": "Harden the capstone. Add observable end-to-end service verification, persistent feedback via feedback.submit/list, and app.resetData through typed IPC that clears documents, index, history and feedback. Add scripts/benchmark.sh that calls real application services, a clean-state checklist and evidence-backed handoff. Do not simulate benchmark numbers. Required renderer API contract: feedback.submit({question: string, answer: string, rating: 'positive' | 'negative', comment?: string}) persists those fields; feedback.list() returns the saved entries. app.resetData() clears documents, index chunks, Q&A history and feedback so subsequent retrieval has no citations.",
+  "variants": [
+    "minimal",
+    "capstone"
+  ],
+  "repeats": 3,
+  "sessions": 1,
+  "protectedChecker": "forge/graders/check.cjs",
+  "fixture": "forge/fixtures/course.txt"
+}

@@ -1,0 +1,91 @@
+import {mkdir, readFile, rm} from 'node:fs/promises';
+import {dirname} from 'node:path';
+import {writeJson} from './records.js';
+import {setTimeout as delay} from 'node:timers/promises';
+
+export interface Ledger {
+  schemaVersion: 1; limitUsd: number | null; spentEstimateUsd: number;
+  reservations: Record<string, number>; settled: Record<string, number>;
+  halted?: string;
+  authorizations?: Array<{at:string;evidence:string;action:string}>;
+  uncertainEstimates?: Array<{id:string;reservedEstimateUsd:number;evidence:string;at:string}>;
+  reconciliations?: Array<{id:string;estimatedUsd:number;evidence:string;at:string}>;
+}
+/** Shared, fail-closed reservation ledger. A stale lock requires explicit reconciliation. */
+export class Budget {
+  constructor(readonly file: string, readonly limitUsd = 50) {
+    if (Number.isNaN(limitUsd) || limitUsd <= 0 || (Number.isFinite(limitUsd) && limitUsd > 50)) throw new Error('Invalid budget limit');
+  }
+  private async change<T>(fn: (ledger: Ledger) => T): Promise<T> {
+    await mkdir(dirname(this.file), {recursive:true});
+    const lock = `${this.file}.lock`;
+    for(let attempt=0;;attempt++) {
+      try {await mkdir(lock);break;}
+      catch(error){if((error as NodeJS.ErrnoException).code!=='EEXIST'||attempt>=100)throw error;await delay(20);}
+    } // Atomic across processes; wait for a short writer, never steal a stale lock.
+    try {
+      let ledger: Ledger;
+      try { ledger = JSON.parse(await readFile(this.file,'utf8')); }
+      catch (error) {
+        if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error;
+        ledger = {schemaVersion:1,limitUsd:Number.isFinite(this.limitUsd)?this.limitUsd:null,spentEstimateUsd:0,reservations:{},settled:{}};
+      }
+      if (ledger.limitUsd !== (Number.isFinite(this.limitUsd)?this.limitUsd:null)) throw new Error('Budget limit changed; use the original ledger');
+      const result = fn(ledger); await writeJson(this.file, ledger); return result;
+    } finally {await rm(lock, {recursive:true});}
+  }
+  async authorizeUnlimited(evidence:string) {
+    return this.change(ledger=>{
+      if(!evidence.trim())throw new Error('Explicit user authorization evidence is required');
+      ledger.limitUsd=null;
+      (ledger.authorizations??=[]).push({at:new Date().toISOString(),evidence,action:'Remove spending cap; retain accounting and bounded execution'});
+    });
+  }
+  async chargeUnknownReservation(id:string,evidence:string) {
+    return this.change(ledger=>{
+      if(ledger.halted!==`Missing usage for ${id}`||!(id in ledger.reservations)||!evidence.trim())throw new Error('Explicit authorization and the matching unresolved reservation are required');
+      const amount=ledger.reservations[id];
+      ledger.spentEstimateUsd+=amount;ledger.settled[id]=amount;delete ledger.reservations[id];delete ledger.halted;
+      (ledger.uncertainEstimates??=[]).push({id,reservedEstimateUsd:amount,evidence,at:new Date().toISOString()});
+    });
+  }
+  async reserve(block: Record<string, number>) {
+    return this.change(ledger => {
+      if (ledger.halted) throw new Error(`Budget halted: ${ledger.halted}`);
+      for (const [id, amount] of Object.entries(block)) {
+        if (!Number.isFinite(amount) || amount <= 0) throw new Error('Missing/invalid pricing');
+        if (id in ledger.reservations || id in ledger.settled) throw new Error(`Duplicate trial ${id}`);
+      }
+      const total = ledger.spentEstimateUsd + [...Object.values(ledger.reservations),...Object.values(block)].reduce((a,b)=>a+b,0);
+      if (ledger.limitUsd !== null && total > ledger.limitUsd) throw new Error('budget_exhausted: complete block does not fit');
+      Object.assign(ledger.reservations,block);
+    });
+  }
+  async settle(id: string, actual: number | null, haltReason?: string) {
+    return this.change(ledger => {
+      if (!(id in ledger.reservations)) throw new Error(`No reservation for ${id}`);
+      if (actual === null || !Number.isFinite(actual) || actual < 0 || haltReason) {
+        ledger.halted = haltReason || `Missing usage for ${id}`; return;
+      }
+      if (actual > ledger.reservations[id]) ledger.halted = `Reservation exceeded by ${id}`;
+      ledger.spentEstimateUsd += actual; ledger.settled[id] = actual; delete ledger.reservations[id];
+    });
+  }
+  async reconcile(id:string, estimatedUsd:number, evidence:string) {
+    return this.change(ledger=>{
+      if(!(id in ledger.reservations)||!evidence.trim()||!Number.isFinite(estimatedUsd)||estimatedUsd<0)throw new Error('Reconciliation requires a reservation, evidence and known cost');
+      if(ledger.halted!==`Missing usage for ${id}`)throw new Error('A different halt requires separate reconciliation');
+      if(estimatedUsd>ledger.reservations[id])throw new Error('Reconciled spend exceeds reservation');
+      ledger.spentEstimateUsd+=estimatedUsd;ledger.settled[id]=estimatedUsd;delete ledger.reservations[id];delete ledger.halted;
+      (ledger.reconciliations??=[]).push({id,estimatedUsd,evidence,at:new Date().toISOString()});
+    });
+  }
+}
+
+export function estimate(inputTokens: number, outputTokens: number, sandboxSeconds: number,
+  prices: {inputPerMillionUsd: number; outputPerMillionUsd: number; cpuHourUsd: number; memoryGiBHourUsd: number}) {
+  const values = [inputTokens,outputTokens,sandboxSeconds,prices.inputPerMillionUsd,prices.outputPerMillionUsd,prices.cpuHourUsd,prices.memoryGiBHourUsd];
+  if (values.some(v => !Number.isFinite(v) || v < 0)) throw new Error('Missing usage or pricing');
+  return (inputTokens*prices.inputPerMillionUsd + outputTokens*prices.outputPerMillionUsd)/1e6 +
+    sandboxSeconds/3600*(2*prices.cpuHourUsd+4*prices.memoryGiBHourUsd);
+}
