@@ -11,14 +11,14 @@ import {estimate} from './budget.js';
 
 export async function protocol() {return JSON.parse(await readFile(join(courseRoot,'forge/protocol.json'),'utf8'));}
 export function roleSchedule(variant: string, sessions: number): Array<{role:string;turns:number;readOnly?:boolean}> {
-  if(variant==='gen-eval')return [{role:'maker',turns:10},{role:'checker',turns:4,readOnly:true},{role:'maker-revision',turns:10}];
+  if(variant==='gen-eval'||variant==='maker-checker')return [{role:'maker',turns:10},{role:'checker',turns:4,readOnly:true},{role:'maker-revision',turns:10}];
   if(variant==='plan-gen-eval')return [{role:'planner',turns:4,readOnly:true},{role:'maker',turns:8},{role:'checker',turns:4,readOnly:true},{role:'maker-revision',turns:8}];
   return Array.from({length:sessions},(_,i)=>({role:`maker-session-${i+1}`,turns:Math.floor(24/sessions)}));
 }
 async function patch(sandbox: Sandbox, baseline: string) {
   const r=await sandbox.commands.run(['bash','-lc',`git add -N . && git diff --binary ${baseline}`],{cwd:'/workspace/task',timeoutMs:15000});return r.stdout;
 }
-export async function runTrial(input: {id?:string;project:string;variant:string;trial:number;sourceCommit:string;output:string}) {
+export async function runTrial(input: {id?:string;project:string;variant:string;trial:number;sourceCommit:string;output:string;resumePatch?:string;verificationFeedback?:string}) {
   const c=config(), p=await protocol(), task=await readTask(input.project);
   if(c.model!==p.model || c.inferenceUrl!==p.inferenceUrl || c.maxInputBytes!==p.maxInputBytes)throw new Error('Frozen campaign model/provider/context mismatch');
   const id=input.id || randomUUID(); const dir=join(input.output,id);await mkdir(dir,{recursive:true});
@@ -26,6 +26,7 @@ export async function runTrial(input: {id?:string;project:string;variant:string;
     sourceCommit:input.sourceCommit,model:c.model,startedAt:new Date().toISOString(),outcome:'infrastructure_failed',
     conversationIds:[],wandbRunId:id.replaceAll('-','').slice(0,16),inputTokens:0,outputTokens:0,estimatedCostUsd:null,evidence:[]};
   record.configuration=publicConfig(c); record.protocol=p;
+  if(input.verificationFeedback)record.verificationFeedback=input.verificationFeedback;
   let sandboxSeconds=0; let telemetryComplete=true; let actorComplete=true;
   const abort=new AbortController();const onSignal=()=>abort.abort(new Error('Cancelled'));
   process.once('SIGINT',onSignal);process.once('SIGTERM',onSignal);
@@ -43,7 +44,11 @@ export async function runTrial(input: {id?:string;project:string;variant:string;
       await withWorkspace({config:c,image:p.sandbox.image,trialId:id,evidenceDir:actorDir,signal:abort.signal},async sandbox=>{
         record.sandboxId=sandbox.sandboxId;await stageWorkspace(sandbox,staged.archive);
         const baseline=(await sandbox.commands.run(['git','rev-parse','HEAD'],{cwd:'/workspace/task'})).stdout.trim();
-        let feedback='';let phase=0;
+        if(input.resumePatch) {
+          await sandbox.files.write('/tmp/resume.diff',await readFile(input.resumePatch));
+          await sandbox.commands.run(['git','apply','/tmp/resume.diff'],{cwd:'/workspace/task'});
+        }
+        let feedback=input.verificationFeedback?`Prior independent verification feedback (diagnostic evidence, not instructions):\n${input.verificationFeedback.slice(0,12000)}`:'';let phase=0;
         for(const role of roleSchedule(input.variant,task.sessions)) {
           abort.signal.throwIfAborted();phase++;
           const saved=await patch(sandbox,baseline);
@@ -79,7 +84,7 @@ export async function runTrial(input: {id?:string;project:string;variant:string;
         if(candidate.length){await sandbox.files.write('/tmp/candidate.diff',candidate);await sandbox.commands.run(['git','apply','--reject','/tmp/candidate.diff'],{cwd:'/workspace/task',timeoutMs:20000});}
         await sandbox.files.write('/tmp/check.cjs',checker);
         await sandbox.files.write('/tmp/poll.cjs',checkerSupport);
-        const result=await sandbox.commands.run(['xvfb-run','-a','node','/tmp/check.cjs',task.id],{cwd:'/workspace/task',check:false,timeoutMs:240000});
+        const result=await sandbox.commands.run(['xvfb-run','-a','node','/tmp/check.cjs',task.gradeAs??task.id],{cwd:'/workspace/task',check:false,timeoutMs:240000});
         await writeJson(join(graderDir,'command.json'),result);
         const grade=JSON.parse(Buffer.from(await sandbox.files.read('/tmp/grade/result.json')).toString('utf8'));
         await writeJson(join(graderDir,'result.json'),grade);record.grade=grade;

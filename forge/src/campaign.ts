@@ -20,11 +20,12 @@ async function child(executable: string, args: string[], logfile?: string) {
     });
   } finally {await file?.close();}
 }
-export async function compare(options: {project?:string;variant?:string;repeats?:number;execute?:boolean;output?:string;source?:string}) {
+export async function compare(options: {project?:string;variant?:string;repeats?:number;execute?:boolean;output?:string;source?:string;resumePatch?:string;trialId?:string;verificationFeedback?:string}) {
   const c=config(),p=await protocol();
   const output=resolve(options.output??join(courseRoot,'forge/local-results'));
   const source=options.source??await sourceHead();
   const tasks=await Promise.all((options.project?[options.project]:[1,2,3,4,5,6].map(n=>`project-0${n}`)).map(readTask));
+  if(options.verificationFeedback && tasks.some(t=>!['project-07','project-08'].includes(t.id)))throw new Error('Retry feedback is restricted to the loop and graph exercises');
   const repeats=options.repeats??p.repeats;
   if(!Number.isInteger(repeats)||repeats<1||repeats>3)throw new Error('Repeats must be 1–3');
   const reserve=estimate(p.maxInputBytes*24,4096*24,1200*2,p.pricing)*1.2;
@@ -47,7 +48,7 @@ export async function compare(options: {project?:string;variant?:string;repeats?
   for(const block of plan.blocks) {
     const task=await readTask(block.project);
     if(block.variants.some(v=>!task.variants.includes(v)))throw new Error('Invalid treatment');
-    const trials=block.variants.map(variant=>({id:randomUUID(),project:block.project,variant,trial:block.repeat,sourceCommit:source,output,ledger:budget.file}));
+    const trials=block.variants.map(variant=>({id:options.trialId??randomUUID(),project:block.project,variant,trial:block.repeat,sourceCommit:source,output,ledger:budget.file,resumePatch:options.resumePatch,verificationFeedback:options.verificationFeedback}));
     try {await budget.reserve(Object.fromEntries(trials.map(t=>[t.id,reserve])));}
     catch(error){stopReason=String(error);break;}
     for(let offset=0;offset<trials.length;offset+=2) {
