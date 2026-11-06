@@ -138,7 +138,10 @@ export function sandboxTools(sandbox: Sandbox, evidenceDir: string): ToolDefinit
         const record = {command, exitCode: result.exitCode, stdout: result.stdout, stderr: result.stderr, truncated: result.stdoutTruncated || result.stderrTruncated};
         await mkdir(evidenceDir, {recursive: true});
         await writeJson(join(evidenceDir, `tool-${number}.json`), record);
-        return {content: [{type: 'text' as const, text: JSON.stringify(record)}], details: {exitCode: result.exitCode}};
+        // Preserve complete captured output in evidence; avoid consuming the model's
+        // context with repeated whole-tree reads. The actor can request narrower ranges.
+        const excerpt = (value: string) => value.length <= 12000 ? value : value.slice(0,8000) + '\n[output excerpted; inspect narrower file/line ranges]\n' + value.slice(-4000);
+        return {content: [{type: 'text' as const, text: JSON.stringify({...record, stdout:excerpt(record.stdout), stderr:excerpt(record.stderr), truncated:record.truncated || record.stdout.length>12000 || record.stderr.length>12000})}], details: {exitCode: result.exitCode}};
       } catch (error) {
         await writeJson(join(evidenceDir,`tool-${number}.json`),{command,error:String(error)});
         throw error;
