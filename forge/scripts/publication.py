@@ -196,6 +196,9 @@ def verify(manifest, row):
         raise RuntimeError('Canonical source has uncommitted edits; commit it before recording publication')
     if remote(row['id'])['currentVersion'] != notebook['currentVersion']:
         raise RuntimeError('Remote source changed during verification')
+    evidence = ROOT/'forge/local-results/publication'/hashlib.sha256(row['id'].encode()).hexdigest()[:16]
+    evidence.mkdir(parents=True, exist_ok=True)
+    (evidence/'rendered.html').write_bytes(html)
     row.update(sourceCommit=revision,status='published_verified',sha256=digest(canonical),currentVersion=notebook['currentVersion'],expectedRemoteVersion=notebook['currentVersion'],expectedRemoteEditedAt=edited,expectedRemoteSha256=digest(canonical),renderedOutputSha256=digest(html),renderedCellSourceVerified=True,verifiedAggregateGroups=aggregate_groups,lastStaticOutputAt=rendered,verifiedAt=now())
     row.pop('publicationBlocker',None)
     save(manifest)
