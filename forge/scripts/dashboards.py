@@ -31,7 +31,7 @@ class ReadableLayout(ws.SectionLayoutSettings):
     """Pinned SDK adapter: expose its FlowConfig.box_height for 13 labeled bars."""
     def _to_model(self):
         model = super()._to_model()
-        model.box_height = 520
+        model.box_height = 460
         return model
 
 def forge_url(url):
