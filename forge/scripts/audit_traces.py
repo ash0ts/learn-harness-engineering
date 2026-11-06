@@ -40,9 +40,10 @@ def audit(entry):
     if entry.get('telemetryComplete',True):
         if (input_tokens,output_tokens)!=(entry['inputTokens'],entry['outputTokens']):errors.append('Model-level usage differs from local evidence')
     counts=Counter(s['operation_name'] for s in spans)
+    error_spans=sum(str(json.loads(s['raw_span_dump']).get('status',{}).get('code','')).upper() in {'ERROR','2'} for s in spans)
     if entry.get('expectedTurns') is not None and counts['invoke_agent']!=entry['expectedTurns']:errors.append('Unexpected turn count')
     if entry.get('expectedModelCalls') is not None and counts['chat']!=entry['expectedModelCalls']:errors.append('Unexpected model count')
-    return {**entry,'spanCount':len(spans),'operations':dict(counts),'readbackInputTokens':input_tokens,'readbackOutputTokens':output_tokens,'verified':not errors,'errors':sorted(set(errors)),'url':'https://forge.coreweave.com/agent-lens/'+os.environ['WANDB_ENTITY']+'/'+os.environ.get('WANDB_PROJECT','learn-harness-engineering-forge')+'/conversations/'+conversation}
+    return {**entry,'spanCount':len(spans),'operations':dict(counts),'observedErrorSpans':error_spans,'readbackInputTokens':input_tokens,'readbackOutputTokens':output_tokens,'verified':not errors,'errors':sorted(set(errors)),'url':'https://forge.coreweave.com/agent-lens/'+os.environ['WANDB_ENTITY']+'/'+os.environ.get('WANDB_PROJECT','learn-harness-engineering-forge')+'/conversations/'+conversation}
 
 def build():
     entries={}
