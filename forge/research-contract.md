@@ -32,3 +32,22 @@ measurements in this track. UI checks establish only the asserted interactions.
 Publish denominators, paired outcomes, missing data, actual completed counts, and
 estimated spend. Three repeats support a local consistency observation, not a
 universal ranking. Pin source revisions in W&B artifacts and notebook manifests.
+
+## Revision 3 follow-up (2026-11-06)
+
+The original revision 2 campaign remains a separate cohort: 39 completed attempts,
+zero task passes, and a shared preload failure in all 31 compiled Electron checks.
+Revision 3 evaluates the same tasks and treatments after a common Forge runtime
+adaptation bundles the learner's preload with the image-pinned esbuild dependency.
+It does not repair task features or alter the original offline starter files.
+Electron's restricted preload module loader is documented at
+https://www.electronjs.org/docs/latest/tutorial/sandbox/.
+
+Revision 3 also caps actor-visible command output at 12,000 characters per stream
+(full captured logs remain in evidence) and raises the bounded provider payload
+limit to 524,288 bytes. The model, 24-call budget, role allocations, generation
+settings, fixtures, task assertions, and sandbox image remain fixed. New trials
+must pass protocol qualification first. Grade the exported patch in a fresh
+sandbox, including the same preload build adaptation. Show both revisions in
+published views; do not pool them or interpret a revision difference as an isolated
+harness-treatment effect. A passing task requires every protected assertion.
