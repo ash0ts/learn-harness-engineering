@@ -21,7 +21,7 @@ def publish():
     sources=LOCAL/'audit-sources';sources.mkdir(exist_ok=True)
     concurrent=[json.loads(p.read_text()) for p in LOCAL.glob('concurrency-*/concurrency.json')]
     publications=json.loads((ROOT/'forge/publication-manifest.json').read_text())
-    supplemental=saved.get('sandboxQualifications',[])+saved.get('graphs',[])+saved.get('loops',[])
+    supplemental=saved.get('sandboxQualifications',[])+saved.get('visibleUiQualifications',[])+saved.get('graphs',[])+saved.get('loops',[])
     publisher_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     commits=sorted({publisher_commit}|{r['sourceCommit'] for r in saved['trials']+saved['qualifications']+concurrent+supplemental+publications['notebooks'] if r.get('sourceCommit')})
     archives=[]
@@ -45,7 +45,7 @@ def publish():
             table.add_data(row['id'],'coding-trial',row['outcome'],row.get('estimatedCostUsd'),ledger['settled'].get(row['id']),row['sourceCommit'])
         run.log({'attempts':table})
         artifact=wandb.Artifact('forge-course-qualification-evidence',type='course-evidence',metadata={'schemaVersion':1,'status':'recorded-evidence','completedComparisonBlocks':blocks,'publisherSourceCommit':publisher_commit})
-        for row in saved['qualifications']+saved['trials']+concurrent+saved.get('sandboxQualifications',[]):
+        for row in saved['qualifications']+saved['trials']+concurrent+saved.get('sandboxQualifications',[])+saved.get('visibleUiQualifications',[]):
             directory=LOCAL/row['id']
             for path in sorted(directory.rglob('*')):
                 if path.is_file() and path.suffix in {'.json','.diff','.txt','.log','.png'}:
