@@ -23,23 +23,20 @@ const task=await readTask(trial.project),staged=await stageTask(task,trial.varia
 const budget=new Budget(join(courseRoot,'forge/local-results/budget.json'),c.budgetUsd);
 await budget.reserve({[id]:1});let cost:number|null=null;const start=Date.now();
 try {
-  // Reuse the protected assertions and strengthen the UI observation for this
-  // separate qualification. Never modify or rescore the original trial record.
-  const base=await readFile(join(courseRoot,task.protectedChecker),'utf8');
-  const marker="await page.waitForFunction(async question=>(await window.knowledgeBase.qa.history()).some(h=>h.question===question),q,{timeout:10000});";
-  if(!base.includes(marker))throw new Error('Unknown checker revision');
-  const checker=base.replace(marker,marker+`
-        const answer=await page.evaluate(async question=>(await window.knowledgeBase.qa.history()).find(h=>h.question===question).response.answer,q);
-        await page.getByText(answer,{exact:true}).first().waitFor({timeout:10000});
-        await page.screenshot({path:path.join(output,'visible-answer.png')});
-        fs.writeFileSync(path.join(output,'visible-answer.json'),JSON.stringify({question:q,answer,body:await page.locator('body').innerText()}));`);
-  record.checkerSha256=createHash('sha256').update(checker).digest('hex');
+  // Apply the current stronger checker as a separate qualification. Never
+  // rewrite the original frozen trial outcome or its original checker bytes.
+  const checker=await readFile(join(courseRoot,task.protectedChecker),'utf8');
+  const support=await readFile(join(courseRoot,'forge/graders/poll.cjs'));
+  if(!checker.includes('visible-answer.json'))throw new Error('Visible-answer checker required');
+  record.checkerSha256=createHash('sha256').update(checker).update('\0').update(support).digest('hex');
   await writeFile(join(root,'checker.cjs'),checker);
+  await writeFile(join(root,'poll.cjs'),support);
   await withWorkspace({config:c,image:trial.protocol.sandbox.image,trialId:id,evidenceDir:join(root,'sandbox'),signal:AbortSignal.timeout(900000)},async sandbox=>{
     record.sandboxId=sandbox.sandboxId;await stageWorkspace(sandbox,staged.archive);
     await sandbox.files.write('/tmp/candidate.diff',candidate);
     await sandbox.commands.run(['git','apply','/tmp/candidate.diff'],{cwd:'/workspace/task'});
     await sandbox.files.write('/tmp/check.cjs',checker);
+    await sandbox.files.write('/tmp/poll.cjs',support);
     const result=await sandbox.commands.run(['xvfb-run','-a','node','/tmp/check.cjs',task.gradeAs??task.id],{cwd:'/workspace/task',check:false,timeoutMs:240000});
     await writeJson(join(root,'command.json'),result);
     const grade=JSON.parse(Buffer.from(await sandbox.files.read('/tmp/grade/result.json')).toString());
