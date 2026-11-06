@@ -3,7 +3,13 @@ import assert from 'node:assert/strict';
 import {mkdtemp, readFile, rm} from 'node:fs/promises';
 import {join} from 'node:path';
 import {tmpdir} from 'node:os';
-import {Budget} from '../src/budget.js';
+import {Budget, estimate} from '../src/budget.js';
+
+test('pricing metadata does not invalidate known inference and sandbox rates',()=>{
+  const rates={inputPerMillionUsd:0.25,outputPerMillionUsd:1.25,cpuHourUsd:0.128,memoryGiBHourUsd:0.0212,notebookHourUsd:null,source:'official rate card'};
+  assert.ok(estimate(1000,1000,60,rates)>0);
+  assert.throws(()=>estimate(1000,1000,60,{...rates,cpuHourUsd:NaN}),/Missing/);
+});
 
 test('complete blocks reserve in-flight costs and unknown usage halts subsequent launches', async () => {
   const dir = await mkdtemp(join(tmpdir(),'forge-budget-')); const file=join(dir,'budget.json');
