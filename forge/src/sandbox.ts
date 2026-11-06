@@ -5,6 +5,7 @@ import type {ToolDefinition} from '@earendil-works/pi-coding-agent';
 import {mkdir, writeFile} from 'node:fs/promises';
 import {join} from 'node:path';
 import {writeJson} from './records.js';
+import {acquireSlot} from './slots.js';
 import {type Config, requireLive} from './config.js';
 
 export interface SandboxJournal {
@@ -15,7 +16,7 @@ export interface SandboxJournal {
 
 export async function withWorkspace<T>(options: {
   config: Config; image: string; trialId: string; evidenceDir: string;
-  signal?: AbortSignal; client?: SandboxClient;
+  signal?: AbortSignal; client?: SandboxClient; slotDir?: string;
 }, action: (sandbox: Sandbox) => Promise<T>): Promise<T> {
   requireLive(options.config);
   if (!/@sha256:[a-f0-9]{64}$/.test(options.image)) throw new Error('Sandbox image must be pinned by digest');
@@ -23,6 +24,8 @@ export async function withWorkspace<T>(options: {
   const journal: SandboxJournal = {trialId: options.trialId, state: 'creating'};
   const journalFile = join(options.evidenceDir, 'sandbox.json');
   await writeJson(journalFile, journal);
+  const slot = await acquireSlot(options.trialId, options.slotDir, options.signal);
+  try {
   let sandbox: Sandbox;
   try {
     sandbox = await client.create({containerImage: options.image, resources: {cpu: '2', memory: '4Gi'},
@@ -63,6 +66,10 @@ export async function withWorkspace<T>(options: {
       throw new Error(`Cleanup unverified for sandbox ${sandbox.sandboxId}; stop the campaign`, {cause: error});
     }
     await writeJson(journalFile, journal);
+  }
+  } finally {
+    // Unknown creation/cleanup retains the slot until an operator proves termination.
+    if (journal.state === 'terminated') await slot.release();
   }
 }
 
