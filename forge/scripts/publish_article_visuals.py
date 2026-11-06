@@ -28,7 +28,7 @@ class ReadableLayout(ws.SectionLayoutSettings):
 
 class SummaryLayout(ws.SectionLayoutSettings):
     def _to_model(self):
-        model=super()._to_model();model.box_height=160;return model
+        model=super()._to_model();model.box_height=240;return model
 
 def forge_url(url,entity):
     if url.startswith(f"https://forge.coreweave.com/wandb/{entity}/"):
@@ -64,7 +64,8 @@ def main():
     paths['scripts/publish_article_visuals.py.lock']=Path(__file__).with_suffix('.py.lock')
     artifact=wandb.Artifact('forge-article-visual-evidence',type='course-evidence',metadata={'sourceCommit':source,'sourceReportCommit':catalog['sourceReportCommit'],'bundleSha256':bundle_sha,'codingTrial':False,'rescore':False})
     for name,p in sorted(paths.items()):artifact.add_file(str(p),name=name)
-    with wandb.init(entity=entity,project=project,id=run_id,resume='allow',job_type='article-evidence',name='Article visuals — saved evidence, no new trials',config={'dashboardKind':'article-visual-evidence','codingTrial':False,'primaryComparison':False,'sourceCommit':source,'sourceReportCommit':catalog['sourceReportCommit'],'bundleSha256':bundle_sha},settings=wandb.Settings(disable_git=True,disable_code=True)) as run:
+    with wandb.init(entity=entity,project=project,id=run_id,resume='allow',job_type='article-evidence',name='Article visuals — saved evidence, no new trials',settings=wandb.Settings(disable_git=True,disable_code=True)) as run:
+        run.config.update({'dashboardKind':'article-visual-evidence','codingTrial':False,'primaryComparison':False,'sourceCommit':source,'sourceReportCommit':catalog['sourceReportCommit'],'bundleSha256':bundle_sha},allow_val_change=True)
         run.log({**metrics,'attempts':wandb.Table(columns=columns,data=rows),'originalCaptures':wandb.Table(columns=['originalImage','kind','trialOrQualificationId','primary','artifactPath','sha256','source'],data=captures),**{'figures/'+p.stem:wandb.Image(str(p),caption=p.stem+' · derived from frozen recorded evidence; see source catalog') for p in figures}})
         run.summary.update({**metrics,'originalCaptureCount':len(captures),'bundleSha256':bundle_sha,'evidenceBoundary':'Derived publication run; excludes new coding, inference, grading, and sandbox execution. Primary 19/39; all 129 native outcomes retained.'})
         published=run.log_artifact(artifact,aliases=['latest']).wait()
@@ -81,9 +82,10 @@ def main():
     assert sha(downloaded)==bundle_sha
     for _ in range(12):
         api.flush();stored=api.run(f'{entity}/{project}/{run_id}')
-        if stored.summary.get('recordedAttempts')==129 and stored.summary.get('originalCaptures'):break
+        if stored.summary.get('recordedAttempts')==129 and stored.summary.get('originalCaptures') and stored.summary.get('bundleSha256')==bundle_sha:break
         time.sleep(5)
     assert stored.summary['recordedAttempts']==129 and stored.summary['primaryPasses']==19
+    assert stored.config['sourceCommit']==source
     assert stored.summary['attempts']['nrows']==129
     assert stored.summary['originalCaptures']['nrows']==123
     view=ws.Workspace.from_url(previous['workspaceUrl']) if previous.get('workspaceUrl') else ws.Workspace(entity=entity,project=project)
@@ -92,8 +94,8 @@ def main():
     view.settings=ws.WorkspaceSettings(max_runs=1)
     def section(name,panels):return ws.Section(name=name,panels=panels,is_open=True,layout_settings=SummaryLayout(columns=3,rows=2) if name.startswith('Saved evidence') else ReadableLayout(columns=1,rows=1))
     view.sections=[
-        section('Saved evidence • derived publication, not another coding attempt',[wr.ScalarChart(title=title,metric=metric,layout=wr.Layout(x=(i%3)*8,y=(i//3)*5,w=8,h=5)) for i,(title,metric) in enumerate([('Completed attempts — all cohorts','recordedAttempts'),('Primary denominator','primaryAttempts'),('Primary passes','primaryPasses'),('Original captures','originalCaptureCount'),('Data figures','dataFigures'),('Source files matched to artifact','verifiedSourceFiles')])]),
-        section('39 primary attempts • individual outcomes and protected checks',[wr.MediaBrowser(title=p.stem,media_keys=['figures/'+p.stem],num_columns=1,mode='gallery',gallery_axis='index',layout=wr.Layout(x=0,y=i*12,w=24,h=12)) for i,p in enumerate(figures)]),
+        section('Saved evidence • derived publication, not another coding attempt',[wr.ScalarChart(title=title,metric=metric,legend_template='Saved evidence',layout=wr.Layout(x=(i%3)*8,y=(i//3)*5,w=8,h=5)) for i,(title,metric) in enumerate([('Completed attempts — all cohorts','recordedAttempts'),('Primary denominator','primaryAttempts'),('Primary passes','primaryPasses'),('Original captures','originalCaptureCount'),('Data figures','dataFigures'),('Source files matched to artifact','verifiedSourceFiles')])]),
+        section('Recorded figures • primary checks, role allowances, two-hour timer',[wr.MediaBrowser(title=p.stem,media_keys=['figures/'+p.stem],num_columns=1,mode='gallery',gallery_axis='index',layout=wr.Layout(x=0,y=i*12,w=24,h=12)) for i,p in enumerate(figures)]),
         section('All 129 attempts • native outcomes, primary membership, source links',[wr.WeavePanelSummaryTable(table_name='attempts',layout=wr.Layout(x=0,y=0,w=24,h=12))]),
         section('123 originals • application, dashboard, notebook, trace and diagnostic captures',[wr.WeavePanelSummaryTable(table_name='originalCaptures',layout=wr.Layout(x=0,y=0,w=24,h=14))])]
     view.save()
