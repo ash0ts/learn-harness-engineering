@@ -1,3 +1,9 @@
+<script setup>
+import forgeImage0 from './assets/diagrams/trial-evidence-chain.svg?url'
+import forgeImage1 from './assets/figures/primary-outcomes.svg?url'
+import forgeImage2 from './assets/captures/dashboard-comparisons-final.jpg?url'
+</script>
+
 # A harness course with results you can inspect
 
 We ran a coding agent through eight projects to see what happened when we changed the instructions, workspace documentation, feedback, and control flow around it. The agent built and repaired an Electron knowledge-base app. We kept its patches, opened the app, exercised its services, and recorded the failures alongside the successful runs.
@@ -24,6 +30,15 @@ A second sandbox starts from the frozen baseline, applies that patch, and runs p
 
 This distinction has precedent. Anthropic's [agent-evaluation guide](https://www.anthropic.com/research/demystifying-evals-for-ai-agents) separates the task, trial, transcript, and grader. We use those distinctions to keep an attempted repair separate from the assertion that the repair worked. The assertions still need inspection: our graders had bugs too.
 
+
+<div class="forge-figure" tabindex="0" role="region" aria-label="Five stages from frozen starter through Pi, exported patch, fresh grader, and recorded outcome.">
+
+<a :href="forgeImage0" target="_blank" rel="noopener"><img src="./assets/diagrams/trial-evidence-chain.svg" alt="Five stages from frozen starter through Pi, exported patch, fresh grader, and recorded outcome." /></a>
+
+</div>
+
+The exported patch is the handoff between the coding workspace and independent acceptance. The diagram describes the runner; it is not a captured trial. Open the image for full size; wide figures scroll on small screens.
+
 ## We had to repair the measurement
 
 Early UI checks did not reliably wait for the asynchronous application state they claimed to observe. A later history check clicked answer prose instead of an interactive citation control. The initial capstone task left the feedback API's argument format unspecified while the checker assumed a particular format.
@@ -43,6 +58,15 @@ The primary comparison selects the latest qualified complete blocks for each pro
 
 The total is 19/39, but the rows deserve separate explanations. Different projects ask for different work, and checker corrections required different source revisions. Combining them into a league table would conceal both facts. Across historical comparisons, diagnostics, loops, and graphs, we completed 129 coding attempts. Those are a broader collection than the 39 primary attempts.
 
+
+<div class="forge-figure" tabindex="0" role="region" aria-label="All 39 primary attempts, arranged as thirteen treatment rows with three repeats each. Nineteen pass and twenty fail.">
+
+<a :href="forgeImage1" target="_blank" rel="noopener"><img src="./assets/figures/primary-outcomes.svg" alt="All 39 primary attempts, arranged as thirteen treatment rows with three repeats each. Nineteen pass and twenty fail." /></a>
+
+</div>
+
+The three repeats are visible separately. Projects 02 and 03 have shared failures; Project 01 has no observed separation. [Inspect the exact attempts](./evidence#inspect-every-attempt). Open the image for full size; wide figures scroll on small screens.
+
 ## Read the series through the problem you have
 
 The first six articles examine instructions and task execution. The last two follow what happens when a coordinator keeps starting sessions after the original interaction ends.
@@ -59,6 +83,15 @@ The first six articles examine instructions and task execution. The last two fol
 | [08 · Approving the patch we tested](./08-state-machine.md) | Which exact candidate does a human decision authorize? | [Project 08](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjE%3D) |
 
 The [overview notebook](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTM%3D), [comparison dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=dfs83wdpatt), and [operations dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=l9e45ofb461) require membership in the private Forge project. The [public results report](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-publication/forge/results/README.md) includes the denominators, source revisions, exclusions, and recorded approval addendum.
+
+
+<div class="forge-figure" tabindex="0" role="region" aria-label="Original Forge comparison dashboard showing thirteen treatment groups, pass rates, and three attempts per group.">
+
+<a :href="forgeImage2" target="_blank" rel="noopener"><img src="./assets/captures/dashboard-comparisons-final.jpg" alt="Original Forge comparison dashboard showing thirteen treatment groups, pass rates, and three attempts per group." /></a>
+
+</div>
+
+The saved Forge view displays 19/39 primary passes. The sidebar’s 163 runs include derived aggregate runs; they are not 163 coding attempts. [Open the live dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=dfs83wdpatt), or use the [illustrated evidence companion](./evidence.md) without signing in. Open the image for full size; wide figures scroll on small screens.
 
 ## What the course leaves open
 

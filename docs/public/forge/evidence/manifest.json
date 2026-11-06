@@ -1,0 +1,2413 @@
+{
+  "schemaVersion": 1,
+  "sourceReportCommit": "258cf51fdc692f9be60952d8dd811de90588a0c4",
+  "inputs": {
+    "snapshot.json": "271c12e5c4c28a6a257436eab8b3e868f536b345826fd7cd46793dd516abfef5",
+    "delivery.json": "d39b525e7b4303385452d1788e5f9f116e2c9fa9206c78bc5ead9bde3ae1fb56",
+    "evidence-publication.json": "3b526be5522d6e4f0189733775efa64dc40d6e1c4cc55b5eff88324e86e2cb72",
+    "qualification-approval.json": "6687e09daa709df725a67e4df651d418d2496f5672efbe5bb41737eb5455d379"
+  },
+  "counts": {
+    "attempts": 129,
+    "primaryAttempts": 39,
+    "originalCaptures": 123,
+    "figures": 9,
+    "workflowDiagrams": 3,
+    "indexedTrialFiles": 7806
+  },
+  "privateEvidenceArtifact": {
+    "artifact": "wandb/learn-harness-engineering-forge/forge-course-qualification-evidence:v4",
+    "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+    "artifactFileCount": 8512,
+    "sourceArchives": [
+      {
+        "sourceCommit": "09a716af4cdd8467729f4185081dab019d7a8e1a",
+        "file": "09a716af4cdd8467729f4185081dab019d7a8e1a.tar.gz",
+        "sha256": "ddcb500877fff634c53ef19c649842c691d25b577c6bf9245f83a89757f8db76"
+      },
+      {
+        "sourceCommit": "0cbd4fdb330cbc1c9346b4b8a7062c2a33fcb517",
+        "file": "0cbd4fdb330cbc1c9346b4b8a7062c2a33fcb517.tar.gz",
+        "sha256": "27c51e5997e683f7d48433c2c93507d4aa37eacbb8f4e5ae9352cc9d0196b246"
+      },
+      {
+        "sourceCommit": "192f40f150b9240dc8ce38e374ec897472d9937b",
+        "file": "192f40f150b9240dc8ce38e374ec897472d9937b.tar.gz",
+        "sha256": "b3d8df454b73cf1e889f83e7714d6e08f676f00c74c98b9406f8c40d49b58c46"
+      },
+      {
+        "sourceCommit": "1b316ef2aadd5f0a2d87fbaac1c2c5a505054dd7",
+        "file": "1b316ef2aadd5f0a2d87fbaac1c2c5a505054dd7.tar.gz",
+        "sha256": "74c16981996f56ff2592ec436c90932b6a36b11772a84019db63a0362f93a49d"
+      },
+      {
+        "sourceCommit": "21787d90f526a7359f216c5cb7cfc247eb38bda9",
+        "file": "21787d90f526a7359f216c5cb7cfc247eb38bda9.tar.gz",
+        "sha256": "db3b89c243f44b323d3970809d24761e25179727754f3060d8eee0da04aa4fc1"
+      },
+      {
+        "sourceCommit": "23f50a21e66e4baaf9a2c05e6298c114699865ae",
+        "file": "23f50a21e66e4baaf9a2c05e6298c114699865ae.tar.gz",
+        "sha256": "9070170c878dce55af7c983e04a5fbeee8473f7b40ed9190d7ca7e69dbb8e11b"
+      },
+      {
+        "sourceCommit": "24ff7909edb286b0e66faae1d78968d12aac6c0c",
+        "file": "24ff7909edb286b0e66faae1d78968d12aac6c0c.tar.gz",
+        "sha256": "687af38afd21925197c9b970c83ea88d77764f9c96ddfac161637c81cc87023f"
+      },
+      {
+        "sourceCommit": "2947d9f6386cefefd1977fb2dd569a4d4226d74d",
+        "file": "2947d9f6386cefefd1977fb2dd569a4d4226d74d.tar.gz",
+        "sha256": "f69c278dfbc221cdaca84a4028d4e6d97977d6fa1938469bc6b397925dc65de0"
+      },
+      {
+        "sourceCommit": "30db3581757e79b9791b1b70262e6ac499fab87f",
+        "file": "30db3581757e79b9791b1b70262e6ac499fab87f.tar.gz",
+        "sha256": "ce2f6802aa7ee2b8b93eb0d0984c047fc7e1920d65746156bb541d83c2e7abea"
+      },
+      {
+        "sourceCommit": "3627ca6dea154b1a875ac323616284bd00d331a1",
+        "file": "3627ca6dea154b1a875ac323616284bd00d331a1.tar.gz",
+        "sha256": "5006d03e5d4abcb04cc95ee0f5a1cafa20e64876d7ac9c182ab3d5d0f5c90e55"
+      },
+      {
+        "sourceCommit": "3a1f5b1944849fdaa88451102e809c9cb48fb528",
+        "file": "3a1f5b1944849fdaa88451102e809c9cb48fb528.tar.gz",
+        "sha256": "6ddd862d89c08e7823d3ff541707de9ecbfd330242726ff5d7c4e86ba2609da7"
+      },
+      {
+        "sourceCommit": "3afbf9bf93c337492164a8c3980a8cc287eec0dd",
+        "file": "3afbf9bf93c337492164a8c3980a8cc287eec0dd.tar.gz",
+        "sha256": "e364e86f81c764868b54a6479de979312fa819f86bb827ff56cbd75f14c75ae2"
+      },
+      {
+        "sourceCommit": "3bff22b8f229f4735986c44c3aaa28b5bde5370c",
+        "file": "3bff22b8f229f4735986c44c3aaa28b5bde5370c.tar.gz",
+        "sha256": "1ded959fdc0d23ceaff615d87f6201b101e9b0bb3007cdedd745f659a095bad0"
+      },
+      {
+        "sourceCommit": "3ebea13e260921c0c231ff43b6d13bc265d25157",
+        "file": "3ebea13e260921c0c231ff43b6d13bc265d25157.tar.gz",
+        "sha256": "d27b882721db4ebd3c2ec9453b6f0b904edceea14b9fafb947228dadfb377a25"
+      },
+      {
+        "sourceCommit": "45c49b70d56e81c8fb709e2b09bd5ed51ad64772",
+        "file": "45c49b70d56e81c8fb709e2b09bd5ed51ad64772.tar.gz",
+        "sha256": "267c46d0fae894058f4a6cea19285556f697c2c13c180fbe44a277a1fd661f81"
+      },
+      {
+        "sourceCommit": "4a247914feab11d0f868ab4083146e45fc28acda",
+        "file": "4a247914feab11d0f868ab4083146e45fc28acda.tar.gz",
+        "sha256": "cd248542e4419ae35d4c877aa3cd16d4795a83cd0ab3a95b8f115f3bb688ef42"
+      },
+      {
+        "sourceCommit": "5ab40f10d6c5275815bb9962006f445800d53d6b",
+        "file": "5ab40f10d6c5275815bb9962006f445800d53d6b.tar.gz",
+        "sha256": "81c09b8568a96a7dd8e9f41c8d843b37e8de5f1517b8b75597db8bd1aef6a04d"
+      },
+      {
+        "sourceCommit": "6907491cc07b3cad91f26bbdfaf60570fc1f246b",
+        "file": "6907491cc07b3cad91f26bbdfaf60570fc1f246b.tar.gz",
+        "sha256": "b8d7dcffff39ee23b1dcdbe2a077f4f14ba8dbe80fb3e5a8369197fd01836246"
+      },
+      {
+        "sourceCommit": "71b172121b15a7625e48bae9007b7b38551f9a07",
+        "file": "71b172121b15a7625e48bae9007b7b38551f9a07.tar.gz",
+        "sha256": "2fb1a6dde89874467d9e1ee004e02e7057d60c1a52789483dd0e138ea908634f"
+      },
+      {
+        "sourceCommit": "7c563eb14f3999ab3e659b77c4095c883619002f",
+        "file": "7c563eb14f3999ab3e659b77c4095c883619002f.tar.gz",
+        "sha256": "aa2753919a8b0e1c44e5f861a01dc5e81c3b8d6b64f9cefba67d8511d6caec58"
+      },
+      {
+        "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef",
+        "file": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef.tar.gz",
+        "sha256": "744d23770f3b4ddf9a8c668c5ee38867a429b01c4a104883112c75c765f5e663"
+      },
+      {
+        "sourceCommit": "945c5d3073026a4fea427372843ea79072221dde",
+        "file": "945c5d3073026a4fea427372843ea79072221dde.tar.gz",
+        "sha256": "19b7aa0282bd597424dbdbc871ce8c3824a2989bcaed5c2e2a7e3342c07e61c5"
+      },
+      {
+        "sourceCommit": "9d831288c607a8488d1cc97de1421f2ecf6829ad",
+        "file": "9d831288c607a8488d1cc97de1421f2ecf6829ad.tar.gz",
+        "sha256": "97b2c589bcff3237184e6bf7a4d56a1025f99e047d552d60338d24528af5a84d"
+      },
+      {
+        "sourceCommit": "b874b96b7c896004c9f261db7bd7c7de6dd78411",
+        "file": "b874b96b7c896004c9f261db7bd7c7de6dd78411.tar.gz",
+        "sha256": "cf8e817a0afbc94db9493e457d40ee044ff0e4270ca016c81fa93d423651dde0"
+      },
+      {
+        "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+        "file": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3.tar.gz",
+        "sha256": "598e399d7f86b6b7dbcac0f02ca53d8b85c3cd1ac1b7c2c3a1a1b7c9d42007f8"
+      },
+      {
+        "sourceCommit": "bf760399391f0862c6b642c62854c9baf4ca7523",
+        "file": "bf760399391f0862c6b642c62854c9baf4ca7523.tar.gz",
+        "sha256": "44b7f31ece546eb1d09c785a43d538ed32fa83dd763bc68dc2db589013fbc813"
+      },
+      {
+        "sourceCommit": "c54f248978eda1296c183ca252cfb628ac9ea47e",
+        "file": "c54f248978eda1296c183ca252cfb628ac9ea47e.tar.gz",
+        "sha256": "2f99f8bc6264b87ddd95e865f633626b308100d711aa8a6c6c2fc6fbeb87509e"
+      },
+      {
+        "sourceCommit": "c80c9c5cc4e735fe206ba511da3391446f10c395",
+        "file": "c80c9c5cc4e735fe206ba511da3391446f10c395.tar.gz",
+        "sha256": "817284a49f8b590d79fa3367163a71f8f4071dc724199ca32b7b66c41b26d47e"
+      },
+      {
+        "sourceCommit": "d6a3b3483df641d94396c88b0f18c5bb228d043a",
+        "file": "d6a3b3483df641d94396c88b0f18c5bb228d043a.tar.gz",
+        "sha256": "1416604faf0b59e7c353c6bdef2184d1668439fea30a9756c5bb13c6401135a8"
+      },
+      {
+        "sourceCommit": "e76a8dfa984116bbab4b8c31570da13b11daf87e",
+        "file": "e76a8dfa984116bbab4b8c31570da13b11daf87e.tar.gz",
+        "sha256": "308eb54f0b77582d4ddff85c1e4fb7725665ad843fdbbae32ecc70b2a577f7c1"
+      },
+      {
+        "sourceCommit": "e8ce7010369b1ac87a196f1f5abfdadbbf517a1d",
+        "file": "e8ce7010369b1ac87a196f1f5abfdadbbf517a1d.tar.gz",
+        "sha256": "60d1c44f23a035281a391ea24162ca7ea51104334786a06feccf3778803a159f"
+      },
+      {
+        "sourceCommit": "f176ac0c3afe7b1cd0dc2042800a51472e422074",
+        "file": "f176ac0c3afe7b1cd0dc2042800a51472e422074.tar.gz",
+        "sha256": "289c5e692bd493391f075b4a5f0d45dd325fbdc843c3e84c2147efdf70680b5a"
+      },
+      {
+        "sourceCommit": "f3dc2cf8e55a3a58cb9d7f476d04c985fded0261",
+        "file": "f3dc2cf8e55a3a58cb9d7f476d04c985fded0261.tar.gz",
+        "sha256": "4c3c20497e6006270cc4821bf47455130fd917e34e5c5184aacddee5e0bdfa3a"
+      },
+      {
+        "sourceCommit": "f77f1d0b365c666736b24efddd1a9b9901c62579",
+        "file": "f77f1d0b365c666736b24efddd1a9b9901c62579.tar.gz",
+        "sha256": "b6e059d875404de988043e6825fa99a8bf3d9392473f4edd06cc641961e3a2c2"
+      },
+      {
+        "sourceCommit": "f9f40f862ada5fb9c355c9f2c22823072f679489",
+        "file": "f9f40f862ada5fb9c355c9f2c22823072f679489.tar.gz",
+        "sha256": "c3f51eb052d336f6e33191acc8d86c0340abe1e2c49e75568971f538269b7e6d"
+      }
+    ]
+  },
+  "artifactReadback": {
+    "artifact": "wandb/learn-harness-engineering-forge/forge-course-qualification-evidence:v4",
+    "artifactFiles": 8512,
+    "checkedFiles": 7850,
+    "verified": true
+  },
+  "captures": [
+    {
+      "file": "captures/71581d99-5fb7-4e57-bee4-56ec354858a2-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "cb1fa171e8a2a6fc0c65b955cd0bcdd838febae9ce68ccffb943687ef277cd94",
+      "bytes": 68278,
+      "originalArtifactPath": "71581d99-5fb7-4e57-bee4-56ec354858a2/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-71581d99-5fb7-4e57-bee4-56ec354858a2:v0",
+      "transformation": "none",
+      "trialId": "71581d99-5fb7-4e57-bee4-56ec354858a2",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T11:10:33.699Z"
+    },
+    {
+      "file": "captures/71581d99-5fb7-4e57-bee4-56ec354858a2-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "cb1fa171e8a2a6fc0c65b955cd0bcdd838febae9ce68ccffb943687ef277cd94",
+      "bytes": 68278,
+      "originalArtifactPath": "71581d99-5fb7-4e57-bee4-56ec354858a2/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-71581d99-5fb7-4e57-bee4-56ec354858a2:v0",
+      "transformation": "none",
+      "trialId": "71581d99-5fb7-4e57-bee4-56ec354858a2",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T11:10:33.699Z"
+    },
+    {
+      "file": "captures/ca53b79e-eab4-4b69-8c1e-072c2baff44f-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "a5ec7e758f5015a9c0f5cab1dbf3ff5540c040b36e41607fe2356cbdd58aa5cc",
+      "bytes": 29600,
+      "originalArtifactPath": "ca53b79e-eab4-4b69-8c1e-072c2baff44f/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-ca53b79e-eab4-4b69-8c1e-072c2baff44f:v0",
+      "transformation": "none",
+      "trialId": "ca53b79e-eab4-4b69-8c1e-072c2baff44f",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T10:51:16.458Z"
+    },
+    {
+      "file": "captures/a7dcf5cb-dd20-4c3f-921b-f8a51a21f8f8-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "a7dcf5cb-dd20-4c3f-921b-f8a51a21f8f8/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-a7dcf5cb-dd20-4c3f-921b-f8a51a21f8f8:v0",
+      "transformation": "none",
+      "trialId": "a7dcf5cb-dd20-4c3f-921b-f8a51a21f8f8",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T11:14:35.594Z"
+    },
+    {
+      "file": "captures/a7dcf5cb-dd20-4c3f-921b-f8a51a21f8f8-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "a7dcf5cb-dd20-4c3f-921b-f8a51a21f8f8/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-a7dcf5cb-dd20-4c3f-921b-f8a51a21f8f8:v0",
+      "transformation": "none",
+      "trialId": "a7dcf5cb-dd20-4c3f-921b-f8a51a21f8f8",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T11:14:35.594Z"
+    },
+    {
+      "file": "captures/d52e75ef-81cb-4fc0-b551-0884405ad2c1-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "cc2a7062f504669f7f202e1680836bb71c6b4f08de8bb0235cc25e37f097b698",
+      "bytes": 24935,
+      "originalArtifactPath": "d52e75ef-81cb-4fc0-b551-0884405ad2c1/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-d52e75ef-81cb-4fc0-b551-0884405ad2c1:v0",
+      "transformation": "none",
+      "trialId": "d52e75ef-81cb-4fc0-b551-0884405ad2c1",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T10:55:14.229Z"
+    },
+    {
+      "file": "captures/3398c0d0-a9f2-4383-b64f-c7469ff9d0df-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "53714078fc78f75bd5d55a5cc79c07dff5175dd1d4d35b4a75f5b1d3a7fa7ea9",
+      "bytes": 70946,
+      "originalArtifactPath": "3398c0d0-a9f2-4383-b64f-c7469ff9d0df/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-3398c0d0-a9f2-4383-b64f-c7469ff9d0df:v0",
+      "transformation": "none",
+      "trialId": "3398c0d0-a9f2-4383-b64f-c7469ff9d0df",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T11:21:41.952Z"
+    },
+    {
+      "file": "captures/3398c0d0-a9f2-4383-b64f-c7469ff9d0df-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "53714078fc78f75bd5d55a5cc79c07dff5175dd1d4d35b4a75f5b1d3a7fa7ea9",
+      "bytes": 70946,
+      "originalArtifactPath": "3398c0d0-a9f2-4383-b64f-c7469ff9d0df/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-3398c0d0-a9f2-4383-b64f-c7469ff9d0df:v0",
+      "transformation": "none",
+      "trialId": "3398c0d0-a9f2-4383-b64f-c7469ff9d0df",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T11:21:41.952Z"
+    },
+    {
+      "file": "captures/813076fb-3550-4e34-a3a3-831c7ed43f14-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "cc2a7062f504669f7f202e1680836bb71c6b4f08de8bb0235cc25e37f097b698",
+      "bytes": 24935,
+      "originalArtifactPath": "813076fb-3550-4e34-a3a3-831c7ed43f14/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-813076fb-3550-4e34-a3a3-831c7ed43f14:v0",
+      "transformation": "none",
+      "trialId": "813076fb-3550-4e34-a3a3-831c7ed43f14",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T11:00:17.011Z"
+    },
+    {
+      "file": "captures/643a867a-74e8-4987-aa56-5640b4c1982e-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "3bafb83798eaf79aeb09bd192ddedaa7e8771cde02a88272815cb216f3ca28d1",
+      "bytes": 70757,
+      "originalArtifactPath": "643a867a-74e8-4987-aa56-5640b4c1982e/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-643a867a-74e8-4987-aa56-5640b4c1982e:v0",
+      "transformation": "none",
+      "trialId": "643a867a-74e8-4987-aa56-5640b4c1982e",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T11:09:16.342Z"
+    },
+    {
+      "file": "captures/643a867a-74e8-4987-aa56-5640b4c1982e-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "3bafb83798eaf79aeb09bd192ddedaa7e8771cde02a88272815cb216f3ca28d1",
+      "bytes": 70757,
+      "originalArtifactPath": "643a867a-74e8-4987-aa56-5640b4c1982e/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-643a867a-74e8-4987-aa56-5640b4c1982e:v0",
+      "transformation": "none",
+      "trialId": "643a867a-74e8-4987-aa56-5640b4c1982e",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T11:09:16.342Z"
+    },
+    {
+      "file": "captures/b043a7b3-1843-4914-af0b-0504623b1059-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "1be5418b33f7f4dd7ea7f01e8fdfe0a36a9987b4308082b880f75d2e12971fc3",
+      "bytes": 30375,
+      "originalArtifactPath": "b043a7b3-1843-4914-af0b-0504623b1059/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-b043a7b3-1843-4914-af0b-0504623b1059:v0",
+      "transformation": "none",
+      "trialId": "b043a7b3-1843-4914-af0b-0504623b1059",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T10:50:12.499Z"
+    },
+    {
+      "file": "captures/97cb6fd5-7fd6-466c-b5f1-598126cf2d52-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "f1eb0baf7279bfcccb0b273e89e0b9fc93ba03b5c0191f0a5d1243a4720bfec2",
+      "bytes": 27290,
+      "originalArtifactPath": "97cb6fd5-7fd6-466c-b5f1-598126cf2d52/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-97cb6fd5-7fd6-466c-b5f1-598126cf2d52:v0",
+      "transformation": "none",
+      "trialId": "97cb6fd5-7fd6-466c-b5f1-598126cf2d52",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T10:55:41.713Z"
+    },
+    {
+      "file": "captures/e53c3cad-a475-4e49-a79c-e64cfc0316a9-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "e53c3cad-a475-4e49-a79c-e64cfc0316a9/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-e53c3cad-a475-4e49-a79c-e64cfc0316a9:v0",
+      "transformation": "none",
+      "trialId": "e53c3cad-a475-4e49-a79c-e64cfc0316a9",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T11:13:42.888Z"
+    },
+    {
+      "file": "captures/e53c3cad-a475-4e49-a79c-e64cfc0316a9-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "e53c3cad-a475-4e49-a79c-e64cfc0316a9/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-e53c3cad-a475-4e49-a79c-e64cfc0316a9:v0",
+      "transformation": "none",
+      "trialId": "e53c3cad-a475-4e49-a79c-e64cfc0316a9",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T11:13:42.888Z"
+    },
+    {
+      "file": "captures/20e034ff-32bc-4225-8416-044011f5f68d-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "cc2a7062f504669f7f202e1680836bb71c6b4f08de8bb0235cc25e37f097b698",
+      "bytes": 24935,
+      "originalArtifactPath": "20e034ff-32bc-4225-8416-044011f5f68d/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-20e034ff-32bc-4225-8416-044011f5f68d:v0",
+      "transformation": "none",
+      "trialId": "20e034ff-32bc-4225-8416-044011f5f68d",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T11:02:05.226Z"
+    },
+    {
+      "file": "captures/a09c89fc-d730-4e6c-980c-62b4e7d4993e-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "c27cf77b3abf4f319cf381c89d92dfc864c3866d532d1b067233f4c8fc0b3c31",
+      "bytes": 67667,
+      "originalArtifactPath": "a09c89fc-d730-4e6c-980c-62b4e7d4993e/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-a09c89fc-d730-4e6c-980c-62b4e7d4993e:v0",
+      "transformation": "none",
+      "trialId": "a09c89fc-d730-4e6c-980c-62b4e7d4993e",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T11:19:11.007Z"
+    },
+    {
+      "file": "captures/a09c89fc-d730-4e6c-980c-62b4e7d4993e-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "c27cf77b3abf4f319cf381c89d92dfc864c3866d532d1b067233f4c8fc0b3c31",
+      "bytes": 67667,
+      "originalArtifactPath": "a09c89fc-d730-4e6c-980c-62b4e7d4993e/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-a09c89fc-d730-4e6c-980c-62b4e7d4993e:v0",
+      "transformation": "none",
+      "trialId": "a09c89fc-d730-4e6c-980c-62b4e7d4993e",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T11:19:11.007Z"
+    },
+    {
+      "file": "captures/9d859517-72db-4b1a-a683-cd81b9f7ca14-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "7e3ac894326b95018bc4d8933b79a351dbeebb8101a5435f9b9d8f01b81e21d5",
+      "bytes": 65514,
+      "originalArtifactPath": "9d859517-72db-4b1a-a683-cd81b9f7ca14/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-9d859517-72db-4b1a-a683-cd81b9f7ca14:v0",
+      "transformation": "none",
+      "trialId": "9d859517-72db-4b1a-a683-cd81b9f7ca14",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T11:40:11.358Z"
+    },
+    {
+      "file": "captures/9d859517-72db-4b1a-a683-cd81b9f7ca14-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "7e3ac894326b95018bc4d8933b79a351dbeebb8101a5435f9b9d8f01b81e21d5",
+      "bytes": 65514,
+      "originalArtifactPath": "9d859517-72db-4b1a-a683-cd81b9f7ca14/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-9d859517-72db-4b1a-a683-cd81b9f7ca14:v0",
+      "transformation": "none",
+      "trialId": "9d859517-72db-4b1a-a683-cd81b9f7ca14",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T11:40:11.358Z"
+    },
+    {
+      "file": "captures/0809587e-cc59-4276-8285-02dc5072f2aa-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "0809587e-cc59-4276-8285-02dc5072f2aa/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-0809587e-cc59-4276-8285-02dc5072f2aa:v0",
+      "transformation": "none",
+      "trialId": "0809587e-cc59-4276-8285-02dc5072f2aa",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T11:42:03.192Z"
+    },
+    {
+      "file": "captures/0809587e-cc59-4276-8285-02dc5072f2aa-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "0809587e-cc59-4276-8285-02dc5072f2aa/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-0809587e-cc59-4276-8285-02dc5072f2aa:v0",
+      "transformation": "none",
+      "trialId": "0809587e-cc59-4276-8285-02dc5072f2aa",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T11:42:03.192Z"
+    },
+    {
+      "file": "captures/9c2869e2-d150-4c35-82df-9602ca48f17b-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "9c2869e2-d150-4c35-82df-9602ca48f17b/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-9c2869e2-d150-4c35-82df-9602ca48f17b:v0",
+      "transformation": "none",
+      "trialId": "9c2869e2-d150-4c35-82df-9602ca48f17b",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T11:44:18.879Z"
+    },
+    {
+      "file": "captures/9c2869e2-d150-4c35-82df-9602ca48f17b-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "9c2869e2-d150-4c35-82df-9602ca48f17b/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-9c2869e2-d150-4c35-82df-9602ca48f17b:v0",
+      "transformation": "none",
+      "trialId": "9c2869e2-d150-4c35-82df-9602ca48f17b",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T11:44:18.879Z"
+    },
+    {
+      "file": "captures/1b0a25e5-ba13-4931-9c4f-ff6100f6672a-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "1b0a25e5-ba13-4931-9c4f-ff6100f6672a/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-1b0a25e5-ba13-4931-9c4f-ff6100f6672a:v0",
+      "transformation": "none",
+      "trialId": "1b0a25e5-ba13-4931-9c4f-ff6100f6672a",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T11:46:29.784Z"
+    },
+    {
+      "file": "captures/1b0a25e5-ba13-4931-9c4f-ff6100f6672a-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "1b0a25e5-ba13-4931-9c4f-ff6100f6672a/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-1b0a25e5-ba13-4931-9c4f-ff6100f6672a:v0",
+      "transformation": "none",
+      "trialId": "1b0a25e5-ba13-4931-9c4f-ff6100f6672a",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T11:46:29.784Z"
+    },
+    {
+      "file": "captures/9feeffa8-1836-485a-a52c-2b398b40a195-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "9feeffa8-1836-485a-a52c-2b398b40a195/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-9feeffa8-1836-485a-a52c-2b398b40a195:v0",
+      "transformation": "none",
+      "trialId": "9feeffa8-1836-485a-a52c-2b398b40a195",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T11:49:00.369Z"
+    },
+    {
+      "file": "captures/9feeffa8-1836-485a-a52c-2b398b40a195-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "9feeffa8-1836-485a-a52c-2b398b40a195/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-9feeffa8-1836-485a-a52c-2b398b40a195:v0",
+      "transformation": "none",
+      "trialId": "9feeffa8-1836-485a-a52c-2b398b40a195",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T11:49:00.369Z"
+    },
+    {
+      "file": "captures/0865dc24-2666-4fda-b6ae-3f488f5339cb-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "0865dc24-2666-4fda-b6ae-3f488f5339cb/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-0865dc24-2666-4fda-b6ae-3f488f5339cb:v0",
+      "transformation": "none",
+      "trialId": "0865dc24-2666-4fda-b6ae-3f488f5339cb",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T11:44:21.540Z"
+    },
+    {
+      "file": "captures/0865dc24-2666-4fda-b6ae-3f488f5339cb-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "0865dc24-2666-4fda-b6ae-3f488f5339cb/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-0865dc24-2666-4fda-b6ae-3f488f5339cb:v0",
+      "transformation": "none",
+      "trialId": "0865dc24-2666-4fda-b6ae-3f488f5339cb",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T11:44:21.540Z"
+    },
+    {
+      "file": "captures/fadf2407-4ef3-4635-bab7-0a8d987096d8-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "fadf2407-4ef3-4635-bab7-0a8d987096d8/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-fadf2407-4ef3-4635-bab7-0a8d987096d8:v0",
+      "transformation": "none",
+      "trialId": "fadf2407-4ef3-4635-bab7-0a8d987096d8",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T11:46:39.818Z"
+    },
+    {
+      "file": "captures/fadf2407-4ef3-4635-bab7-0a8d987096d8-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "fadf2407-4ef3-4635-bab7-0a8d987096d8/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-fadf2407-4ef3-4635-bab7-0a8d987096d8:v0",
+      "transformation": "none",
+      "trialId": "fadf2407-4ef3-4635-bab7-0a8d987096d8",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T11:46:39.818Z"
+    },
+    {
+      "file": "captures/bdc971f7-1a51-437d-b46a-8ed3c268eb97-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "bdc971f7-1a51-437d-b46a-8ed3c268eb97/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-bdc971f7-1a51-437d-b46a-8ed3c268eb97:v0",
+      "transformation": "none",
+      "trialId": "bdc971f7-1a51-437d-b46a-8ed3c268eb97",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T11:48:50.586Z"
+    },
+    {
+      "file": "captures/bdc971f7-1a51-437d-b46a-8ed3c268eb97-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "bdc971f7-1a51-437d-b46a-8ed3c268eb97/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-bdc971f7-1a51-437d-b46a-8ed3c268eb97:v0",
+      "transformation": "none",
+      "trialId": "bdc971f7-1a51-437d-b46a-8ed3c268eb97",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T11:48:50.586Z"
+    },
+    {
+      "file": "captures/3dd7e4f8-1155-4ffa-9da5-98c82c24c087-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "7ea3edcc6cbdff3d6f7291567855c632813c965963dc6f7a55e90ba91d227b20",
+      "bytes": 28287,
+      "originalArtifactPath": "3dd7e4f8-1155-4ffa-9da5-98c82c24c087/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-3dd7e4f8-1155-4ffa-9da5-98c82c24c087:v0",
+      "transformation": "none",
+      "trialId": "3dd7e4f8-1155-4ffa-9da5-98c82c24c087",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T12:24:27.084Z"
+    },
+    {
+      "file": "captures/3dd7e4f8-1155-4ffa-9da5-98c82c24c087-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf",
+      "bytes": 66113,
+      "originalArtifactPath": "3dd7e4f8-1155-4ffa-9da5-98c82c24c087/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-3dd7e4f8-1155-4ffa-9da5-98c82c24c087:v0",
+      "transformation": "none",
+      "trialId": "3dd7e4f8-1155-4ffa-9da5-98c82c24c087",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T12:24:27.084Z"
+    },
+    {
+      "file": "captures/b6969def-4dd9-4763-8b73-6de7cdcb59c2-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf",
+      "bytes": 66113,
+      "originalArtifactPath": "b6969def-4dd9-4763-8b73-6de7cdcb59c2/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-b6969def-4dd9-4763-8b73-6de7cdcb59c2:v0",
+      "transformation": "none",
+      "trialId": "b6969def-4dd9-4763-8b73-6de7cdcb59c2",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T11:51:04.196Z"
+    },
+    {
+      "file": "captures/33bdfb7f-4f5e-49b8-86c8-92d6ce0e7b0b-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf",
+      "bytes": 66113,
+      "originalArtifactPath": "33bdfb7f-4f5e-49b8-86c8-92d6ce0e7b0b/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-33bdfb7f-4f5e-49b8-86c8-92d6ce0e7b0b:v0",
+      "transformation": "none",
+      "trialId": "33bdfb7f-4f5e-49b8-86c8-92d6ce0e7b0b",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T12:32:56.269Z"
+    },
+    {
+      "file": "captures/66558826-6e1a-46e0-abe9-ef951eff0c16-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf",
+      "bytes": 66113,
+      "originalArtifactPath": "66558826-6e1a-46e0-abe9-ef951eff0c16/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-66558826-6e1a-46e0-abe9-ef951eff0c16:v0",
+      "transformation": "none",
+      "trialId": "66558826-6e1a-46e0-abe9-ef951eff0c16",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T11:57:28.501Z"
+    },
+    {
+      "file": "captures/a2d447ed-75a6-4477-9308-e8eb60885b2b-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf",
+      "bytes": 66113,
+      "originalArtifactPath": "a2d447ed-75a6-4477-9308-e8eb60885b2b/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-a2d447ed-75a6-4477-9308-e8eb60885b2b:v0",
+      "transformation": "none",
+      "trialId": "a2d447ed-75a6-4477-9308-e8eb60885b2b",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T11:59:13.134Z"
+    },
+    {
+      "file": "captures/d3ef30ab-0f2c-4d0e-aee1-7bdf6a8a011e-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "c6f7521570700fa0e81befbdec5f74092970cb9ab5881d10dbcd2b5561143713",
+      "bytes": 28299,
+      "originalArtifactPath": "d3ef30ab-0f2c-4d0e-aee1-7bdf6a8a011e/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-d3ef30ab-0f2c-4d0e-aee1-7bdf6a8a011e:v0",
+      "transformation": "none",
+      "trialId": "d3ef30ab-0f2c-4d0e-aee1-7bdf6a8a011e",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T12:34:45.026Z"
+    },
+    {
+      "file": "captures/d3ef30ab-0f2c-4d0e-aee1-7bdf6a8a011e-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf",
+      "bytes": 66113,
+      "originalArtifactPath": "d3ef30ab-0f2c-4d0e-aee1-7bdf6a8a011e/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-d3ef30ab-0f2c-4d0e-aee1-7bdf6a8a011e:v0",
+      "transformation": "none",
+      "trialId": "d3ef30ab-0f2c-4d0e-aee1-7bdf6a8a011e",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T12:34:45.026Z"
+    },
+    {
+      "file": "captures/3b7cd608-2c28-4cb8-9d4f-aeb60ac3bc7a-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf",
+      "bytes": 66113,
+      "originalArtifactPath": "3b7cd608-2c28-4cb8-9d4f-aeb60ac3bc7a/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-3b7cd608-2c28-4cb8-9d4f-aeb60ac3bc7a:v0",
+      "transformation": "none",
+      "trialId": "3b7cd608-2c28-4cb8-9d4f-aeb60ac3bc7a",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T11:51:25.763Z"
+    },
+    {
+      "file": "captures/73c46965-1093-4b68-a810-a901dd78bfc0-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "e22eb15841575f5ea5e27525fd9426754ec6ae7c5f0fb7dc7953ba037e844f52",
+      "bytes": 69026,
+      "originalArtifactPath": "73c46965-1093-4b68-a810-a901dd78bfc0/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-73c46965-1093-4b68-a810-a901dd78bfc0:v0",
+      "transformation": "none",
+      "trialId": "73c46965-1093-4b68-a810-a901dd78bfc0",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T12:30:31.102Z"
+    },
+    {
+      "file": "captures/73c46965-1093-4b68-a810-a901dd78bfc0-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf",
+      "bytes": 66113,
+      "originalArtifactPath": "73c46965-1093-4b68-a810-a901dd78bfc0/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-73c46965-1093-4b68-a810-a901dd78bfc0:v0",
+      "transformation": "none",
+      "trialId": "73c46965-1093-4b68-a810-a901dd78bfc0",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T12:30:31.102Z"
+    },
+    {
+      "file": "captures/5609c89b-f73f-4a9e-8702-a57758c3403c-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf",
+      "bytes": 66113,
+      "originalArtifactPath": "5609c89b-f73f-4a9e-8702-a57758c3403c/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-5609c89b-f73f-4a9e-8702-a57758c3403c:v0",
+      "transformation": "none",
+      "trialId": "5609c89b-f73f-4a9e-8702-a57758c3403c",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T12:01:44.173Z"
+    },
+    {
+      "file": "captures/ca16eac7-0eb5-4523-a975-638e30938a04-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "4fc92e5ccdc241c3ad6aa7ae9abec02d30dc2d71dc35f25459ede393c67de92f",
+      "bytes": 68645,
+      "originalArtifactPath": "ca16eac7-0eb5-4523-a975-638e30938a04/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-ca16eac7-0eb5-4523-a975-638e30938a04:v0",
+      "transformation": "none",
+      "trialId": "ca16eac7-0eb5-4523-a975-638e30938a04",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T12:38:04.774Z"
+    },
+    {
+      "file": "captures/ca16eac7-0eb5-4523-a975-638e30938a04-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf",
+      "bytes": 66113,
+      "originalArtifactPath": "ca16eac7-0eb5-4523-a975-638e30938a04/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-ca16eac7-0eb5-4523-a975-638e30938a04:v0",
+      "transformation": "none",
+      "trialId": "ca16eac7-0eb5-4523-a975-638e30938a04",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T12:38:04.774Z"
+    },
+    {
+      "file": "captures/0c88671b-326d-4c20-b1b9-aaf95782c93c-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf",
+      "bytes": 66113,
+      "originalArtifactPath": "0c88671b-326d-4c20-b1b9-aaf95782c93c/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-0c88671b-326d-4c20-b1b9-aaf95782c93c:v0",
+      "transformation": "none",
+      "trialId": "0c88671b-326d-4c20-b1b9-aaf95782c93c",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T11:55:40.567Z"
+    },
+    {
+      "file": "captures/79398b0b-a9eb-4892-bb24-194bdc289e2f-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf",
+      "bytes": 66113,
+      "originalArtifactPath": "79398b0b-a9eb-4892-bb24-194bdc289e2f/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-79398b0b-a9eb-4892-bb24-194bdc289e2f:v0",
+      "transformation": "none",
+      "trialId": "79398b0b-a9eb-4892-bb24-194bdc289e2f",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T12:35:31.820Z"
+    },
+    {
+      "file": "captures/f6edbfa3-3682-4e3b-bff2-ba4b864e2511-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709,
+      "originalArtifactPath": "f6edbfa3-3682-4e3b-bff2-ba4b864e2511/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-f6edbfa3-3682-4e3b-bff2-ba4b864e2511:v0",
+      "transformation": "none",
+      "trialId": "f6edbfa3-3682-4e3b-bff2-ba4b864e2511",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T12:03:58.577Z"
+    },
+    {
+      "file": "captures/1c1228c9-2625-4256-9aa2-694d37def359-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709,
+      "originalArtifactPath": "1c1228c9-2625-4256-9aa2-694d37def359/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-1c1228c9-2625-4256-9aa2-694d37def359:v0",
+      "transformation": "none",
+      "trialId": "1c1228c9-2625-4256-9aa2-694d37def359",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T12:08:31.365Z"
+    },
+    {
+      "file": "captures/1c1228c9-2625-4256-9aa2-694d37def359-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709,
+      "originalArtifactPath": "1c1228c9-2625-4256-9aa2-694d37def359/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-1c1228c9-2625-4256-9aa2-694d37def359:v0",
+      "transformation": "none",
+      "trialId": "1c1228c9-2625-4256-9aa2-694d37def359",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T12:08:31.365Z"
+    },
+    {
+      "file": "captures/b8f56d80-c72c-4e31-8c88-f8fc63d76f9a-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709,
+      "originalArtifactPath": "b8f56d80-c72c-4e31-8c88-f8fc63d76f9a/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-b8f56d80-c72c-4e31-8c88-f8fc63d76f9a:v0",
+      "transformation": "none",
+      "trialId": "b8f56d80-c72c-4e31-8c88-f8fc63d76f9a",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T12:47:33.320Z"
+    },
+    {
+      "file": "captures/b8f56d80-c72c-4e31-8c88-f8fc63d76f9a-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709,
+      "originalArtifactPath": "b8f56d80-c72c-4e31-8c88-f8fc63d76f9a/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-b8f56d80-c72c-4e31-8c88-f8fc63d76f9a:v0",
+      "transformation": "none",
+      "trialId": "b8f56d80-c72c-4e31-8c88-f8fc63d76f9a",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T12:47:33.320Z"
+    },
+    {
+      "file": "captures/fd98af3b-1b52-448c-bc7b-b6cc47e785ea-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709,
+      "originalArtifactPath": "fd98af3b-1b52-448c-bc7b-b6cc47e785ea/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-fd98af3b-1b52-448c-bc7b-b6cc47e785ea:v0",
+      "transformation": "none",
+      "trialId": "fd98af3b-1b52-448c-bc7b-b6cc47e785ea",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T12:40:34.755Z"
+    },
+    {
+      "file": "captures/fd98af3b-1b52-448c-bc7b-b6cc47e785ea-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709,
+      "originalArtifactPath": "fd98af3b-1b52-448c-bc7b-b6cc47e785ea/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-fd98af3b-1b52-448c-bc7b-b6cc47e785ea:v0",
+      "transformation": "none",
+      "trialId": "fd98af3b-1b52-448c-bc7b-b6cc47e785ea",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T12:40:34.755Z"
+    },
+    {
+      "file": "captures/a7bc0271-d547-4534-a15d-27b70072df40-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709,
+      "originalArtifactPath": "a7bc0271-d547-4534-a15d-27b70072df40/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-a7bc0271-d547-4534-a15d-27b70072df40:v0",
+      "transformation": "none",
+      "trialId": "a7bc0271-d547-4534-a15d-27b70072df40",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T12:44:32.266Z"
+    },
+    {
+      "file": "captures/a7bc0271-d547-4534-a15d-27b70072df40-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709,
+      "originalArtifactPath": "a7bc0271-d547-4534-a15d-27b70072df40/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-a7bc0271-d547-4534-a15d-27b70072df40:v0",
+      "transformation": "none",
+      "trialId": "a7bc0271-d547-4534-a15d-27b70072df40",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T12:44:32.266Z"
+    },
+    {
+      "file": "captures/dd818c1d-aea4-4e7f-b2a2-a6398ac33877-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709,
+      "originalArtifactPath": "dd818c1d-aea4-4e7f-b2a2-a6398ac33877/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-dd818c1d-aea4-4e7f-b2a2-a6398ac33877:v0",
+      "transformation": "none",
+      "trialId": "dd818c1d-aea4-4e7f-b2a2-a6398ac33877",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T12:07:59.214Z"
+    },
+    {
+      "file": "captures/4eb48651-306d-44e9-a468-a6ffc322bf27-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709,
+      "originalArtifactPath": "4eb48651-306d-44e9-a468-a6ffc322bf27/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-4eb48651-306d-44e9-a468-a6ffc322bf27:v0",
+      "transformation": "none",
+      "trialId": "4eb48651-306d-44e9-a468-a6ffc322bf27",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T12:47:43.064Z"
+    },
+    {
+      "file": "captures/4eb48651-306d-44e9-a468-a6ffc322bf27-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709,
+      "originalArtifactPath": "4eb48651-306d-44e9-a468-a6ffc322bf27/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-4eb48651-306d-44e9-a468-a6ffc322bf27:v0",
+      "transformation": "none",
+      "trialId": "4eb48651-306d-44e9-a468-a6ffc322bf27",
+      "primary": true,
+      "trialFinishedAt": "2026-11-06T12:47:43.064Z"
+    },
+    {
+      "file": "captures/534ab4c7-9100-4d94-a379-fbfc4ad381c7-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709,
+      "originalArtifactPath": "534ab4c7-9100-4d94-a379-fbfc4ad381c7/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-534ab4c7-9100-4d94-a379-fbfc4ad381c7:v0",
+      "transformation": "none",
+      "trialId": "534ab4c7-9100-4d94-a379-fbfc4ad381c7",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T12:12:41.260Z"
+    },
+    {
+      "file": "captures/39c8c943-15bf-4d53-a99e-aaa4cd9ff5a3-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "035b15bcd80de52bf919e12779aee1b6db7984d73f159a8e9ed558e63c13c8bf",
+      "bytes": 41613,
+      "originalArtifactPath": "39c8c943-15bf-4d53-a99e-aaa4cd9ff5a3/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-39c8c943-15bf-4d53-a99e-aaa4cd9ff5a3:v0",
+      "transformation": "none",
+      "trialId": "39c8c943-15bf-4d53-a99e-aaa4cd9ff5a3",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T12:15:42.842Z"
+    },
+    {
+      "file": "captures/39c8c943-15bf-4d53-a99e-aaa4cd9ff5a3-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "035b15bcd80de52bf919e12779aee1b6db7984d73f159a8e9ed558e63c13c8bf",
+      "bytes": 41613,
+      "originalArtifactPath": "39c8c943-15bf-4d53-a99e-aaa4cd9ff5a3/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-39c8c943-15bf-4d53-a99e-aaa4cd9ff5a3:v0",
+      "transformation": "none",
+      "trialId": "39c8c943-15bf-4d53-a99e-aaa4cd9ff5a3",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T12:15:42.842Z"
+    },
+    {
+      "file": "captures/44762357-664b-4d30-b390-8121b6d51b07-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "035b15bcd80de52bf919e12779aee1b6db7984d73f159a8e9ed558e63c13c8bf",
+      "bytes": 41613,
+      "originalArtifactPath": "44762357-664b-4d30-b390-8121b6d51b07/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-44762357-664b-4d30-b390-8121b6d51b07:v0",
+      "transformation": "none",
+      "trialId": "44762357-664b-4d30-b390-8121b6d51b07",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T12:17:21.182Z"
+    },
+    {
+      "file": "captures/44762357-664b-4d30-b390-8121b6d51b07-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "035b15bcd80de52bf919e12779aee1b6db7984d73f159a8e9ed558e63c13c8bf",
+      "bytes": 41613,
+      "originalArtifactPath": "44762357-664b-4d30-b390-8121b6d51b07/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-44762357-664b-4d30-b390-8121b6d51b07:v0",
+      "transformation": "none",
+      "trialId": "44762357-664b-4d30-b390-8121b6d51b07",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T12:17:21.182Z"
+    },
+    {
+      "file": "captures/f5e5ab53-b1b4-4d70-af9d-5fb31516bd39-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "f5e5ab53-b1b4-4d70-af9d-5fb31516bd39/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-f5e5ab53-b1b4-4d70-af9d-5fb31516bd39:v0",
+      "transformation": "none",
+      "trialId": "f5e5ab53-b1b4-4d70-af9d-5fb31516bd39",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T12:21:48.168Z"
+    },
+    {
+      "file": "captures/f5e5ab53-b1b4-4d70-af9d-5fb31516bd39-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "f5e5ab53-b1b4-4d70-af9d-5fb31516bd39/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-f5e5ab53-b1b4-4d70-af9d-5fb31516bd39:v0",
+      "transformation": "none",
+      "trialId": "f5e5ab53-b1b4-4d70-af9d-5fb31516bd39",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T12:21:48.168Z"
+    },
+    {
+      "file": "captures/03ca01ca-eb64-45ae-9317-824ca4a26026-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "03ca01ca-eb64-45ae-9317-824ca4a26026/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-03ca01ca-eb64-45ae-9317-824ca4a26026:v0",
+      "transformation": "none",
+      "trialId": "03ca01ca-eb64-45ae-9317-824ca4a26026",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T13:06:56.825Z"
+    },
+    {
+      "file": "captures/03ca01ca-eb64-45ae-9317-824ca4a26026-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "03ca01ca-eb64-45ae-9317-824ca4a26026/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-03ca01ca-eb64-45ae-9317-824ca4a26026:v0",
+      "transformation": "none",
+      "trialId": "03ca01ca-eb64-45ae-9317-824ca4a26026",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T13:06:56.825Z"
+    },
+    {
+      "file": "captures/22955029-2de6-4aed-8c35-dda6059b023d-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "22955029-2de6-4aed-8c35-dda6059b023d/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-22955029-2de6-4aed-8c35-dda6059b023d:v0",
+      "transformation": "none",
+      "trialId": "22955029-2de6-4aed-8c35-dda6059b023d",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T12:54:10.853Z"
+    },
+    {
+      "file": "captures/22955029-2de6-4aed-8c35-dda6059b023d-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "22955029-2de6-4aed-8c35-dda6059b023d/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-22955029-2de6-4aed-8c35-dda6059b023d:v0",
+      "transformation": "none",
+      "trialId": "22955029-2de6-4aed-8c35-dda6059b023d",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T12:54:10.853Z"
+    },
+    {
+      "file": "captures/3e5cd770-94e5-49f9-b478-a2043dc9a682-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "3e5cd770-94e5-49f9-b478-a2043dc9a682/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-3e5cd770-94e5-49f9-b478-a2043dc9a682:v0",
+      "transformation": "none",
+      "trialId": "3e5cd770-94e5-49f9-b478-a2043dc9a682",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T13:01:52.950Z"
+    },
+    {
+      "file": "captures/3e5cd770-94e5-49f9-b478-a2043dc9a682-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "3e5cd770-94e5-49f9-b478-a2043dc9a682/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-3e5cd770-94e5-49f9-b478-a2043dc9a682:v0",
+      "transformation": "none",
+      "trialId": "3e5cd770-94e5-49f9-b478-a2043dc9a682",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T13:01:52.950Z"
+    },
+    {
+      "file": "captures/54bb7391-48b0-47f5-9ded-36194f52a76d-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "54bb7391-48b0-47f5-9ded-36194f52a76d/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-54bb7391-48b0-47f5-9ded-36194f52a76d:v0",
+      "transformation": "none",
+      "trialId": "54bb7391-48b0-47f5-9ded-36194f52a76d",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T12:57:22.817Z"
+    },
+    {
+      "file": "captures/54bb7391-48b0-47f5-9ded-36194f52a76d-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "54bb7391-48b0-47f5-9ded-36194f52a76d/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-54bb7391-48b0-47f5-9ded-36194f52a76d:v0",
+      "transformation": "none",
+      "trialId": "54bb7391-48b0-47f5-9ded-36194f52a76d",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T12:57:22.817Z"
+    },
+    {
+      "file": "captures/fc80b4f3-6178-454f-a003-3e311dab6617-grader-electron.png",
+      "kind": "trial-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "fc80b4f3-6178-454f-a003-3e311dab6617/grader/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-fc80b4f3-6178-454f-a003-3e311dab6617:v0",
+      "transformation": "none",
+      "trialId": "fc80b4f3-6178-454f-a003-3e311dab6617",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T12:51:06.726Z"
+    },
+    {
+      "file": "captures/fc80b4f3-6178-454f-a003-3e311dab6617-grader-visible-answer.png",
+      "kind": "trial-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "fc80b4f3-6178-454f-a003-3e311dab6617/grader/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-fc80b4f3-6178-454f-a003-3e311dab6617:v0",
+      "transformation": "none",
+      "trialId": "fc80b4f3-6178-454f-a003-3e311dab6617",
+      "primary": false,
+      "trialFinishedAt": "2026-11-06T12:51:06.726Z"
+    },
+    {
+      "file": "captures/notebook-00-overview.jpg",
+      "kind": "notebook-screenshot",
+      "sha256": "d5e25efa6b44893f0f3a15529b642ac72246be7c671748fb81a35b616c175ecf",
+      "bytes": 83589,
+      "originalArtifactPath": "publication/overview-final.jpg",
+      "sourceUrl": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTM%3D",
+      "transformation": "none",
+      "captureDate": "2026-11-06",
+      "snapshotNote": "Saved publication view; may include older cohorts. Predates the later manual graph approval."
+    },
+    {
+      "file": "captures/notebook-01.jpg",
+      "kind": "notebook-screenshot",
+      "sha256": "0f63902eecd2983be79c64a3578ede2caa730c975495b7a06949ff9a93c29a42",
+      "bytes": 95268,
+      "originalArtifactPath": "publication/project01-revision4.jpg",
+      "sourceUrl": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTQ%3D",
+      "transformation": "none",
+      "captureDate": "2026-11-06",
+      "snapshotNote": "Saved publication view; may include older cohorts. Predates the later manual graph approval."
+    },
+    {
+      "file": "captures/notebook-02.jpg",
+      "kind": "notebook-screenshot",
+      "sha256": "2cf988629d8a000c16a162cb9142cd03fd0b307109fce94b9a9caa090705e02b",
+      "bytes": 92952,
+      "originalArtifactPath": "publication/project02-revision4.jpg",
+      "sourceUrl": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTU%3D",
+      "transformation": "none",
+      "captureDate": "2026-11-06",
+      "snapshotNote": "Saved publication view; may include older cohorts. Predates the later manual graph approval."
+    },
+    {
+      "file": "captures/notebook-03.jpg",
+      "kind": "notebook-screenshot",
+      "sha256": "39bf6822ac253eb7986bf59e159c90834e05d7d63e03b626b4657f113d51a5cf",
+      "bytes": 86252,
+      "originalArtifactPath": "publication/project03-revision4.jpg",
+      "sourceUrl": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTY%3D",
+      "transformation": "none",
+      "captureDate": "2026-11-06",
+      "snapshotNote": "Saved publication view; may include older cohorts. Predates the later manual graph approval."
+    },
+    {
+      "file": "captures/notebook-04.jpg",
+      "kind": "notebook-screenshot",
+      "sha256": "fa7f4ddc925ed16ad2b69ff3cc00cdacb26fa46f448c6c3d1af9c906baca5546",
+      "bytes": 95187,
+      "originalArtifactPath": "publication/project04-revision4.jpg",
+      "sourceUrl": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTc%3D",
+      "transformation": "none",
+      "captureDate": "2026-11-06",
+      "snapshotNote": "Saved publication view; may include older cohorts. Predates the later manual graph approval."
+    },
+    {
+      "file": "captures/notebook-05.jpg",
+      "kind": "notebook-screenshot",
+      "sha256": "bf4244fa7ec320c1b27138d6549236a4514808d6b56cf3887d24eacad4e2aad7",
+      "bytes": 80670,
+      "originalArtifactPath": "publication/project05-qualified.jpg",
+      "sourceUrl": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTg%3D",
+      "transformation": "none",
+      "captureDate": "2026-11-06",
+      "snapshotNote": "Saved publication view; may include older cohorts. Predates the later manual graph approval."
+    },
+    {
+      "file": "captures/notebook-06.jpg",
+      "kind": "notebook-screenshot",
+      "sha256": "2e28df1e18e759692c4fa4bb907b2fbdb37939bd142bf667edc0cc7195595870",
+      "bytes": 77958,
+      "originalArtifactPath": "publication/project06-qualified.jpg",
+      "sourceUrl": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTk%3D",
+      "transformation": "none",
+      "captureDate": "2026-11-06",
+      "snapshotNote": "Saved publication view; may include older cohorts. Predates the later manual graph approval."
+    },
+    {
+      "file": "captures/notebook-07.jpg",
+      "kind": "notebook-screenshot",
+      "sha256": "84a4b32a4858468bd373ab751d2fb4139ff3d1ddbfc6123e8ba37baa76d40638",
+      "bytes": 93349,
+      "originalArtifactPath": "publication/project07-revision4.jpg",
+      "sourceUrl": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjA%3D",
+      "transformation": "none",
+      "captureDate": "2026-11-06",
+      "snapshotNote": "Saved publication view; may include older cohorts. Predates the later manual graph approval."
+    },
+    {
+      "file": "captures/notebook-08.jpg",
+      "kind": "notebook-screenshot",
+      "sha256": "b6240d91d1b70944ad88a5da465530ebc02623851c5284a570dc05314c79959e",
+      "bytes": 93724,
+      "originalArtifactPath": "publication/project08-final.jpg",
+      "sourceUrl": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjE%3D",
+      "transformation": "none",
+      "captureDate": "2026-11-06",
+      "snapshotNote": "Saved publication view; may include older cohorts. Predates the later manual graph approval."
+    },
+    {
+      "file": "captures/dashboard-comparisons-final.jpg",
+      "kind": "dashboard-screenshot",
+      "sha256": "b5d0610852e69dcb7fb18046ae7d37042846ccf4231e4162b22630996c51b45e",
+      "bytes": 113359,
+      "originalArtifactPath": "publication/dashboard-comparisons-final.jpg",
+      "sourceUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=dfs83wdpatt",
+      "transformation": "none",
+      "captureDate": "2026-11-06",
+      "snapshotNote": "Original saved view. Run-list counts include derived aggregate runs; they are not coding-attempt counts. Predates later manual approval."
+    },
+    {
+      "file": "captures/dashboard-operations-final.jpg",
+      "kind": "dashboard-screenshot",
+      "sha256": "1484cfc26b1d05bb4fafff8b412b50a4aa7b2ac6d3b40253b412248c37448065",
+      "bytes": 80109,
+      "originalArtifactPath": "publication/dashboard-operations-final.jpg",
+      "sourceUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=l9e45ofb461",
+      "transformation": "none",
+      "captureDate": "2026-11-06",
+      "snapshotNote": "Original saved view. Run-list counts include derived aggregate runs; they are not coding-attempt counts. Predates later manual approval."
+    },
+    {
+      "file": "captures/dashboard-source-evidence-final.jpg",
+      "kind": "dashboard-screenshot",
+      "sha256": "5581c63f8f11a1e4fa0fcf09bc9cf758a9be8b7f9ff982c0c2c0eb83ece05b5d",
+      "bytes": 108909,
+      "originalArtifactPath": "publication/dashboard-source-evidence-final.jpg",
+      "sourceUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=dfs83wdpatt",
+      "transformation": "none",
+      "captureDate": "2026-11-06",
+      "snapshotNote": "Original saved view. Run-list counts include derived aggregate runs; they are not coding-attempt counts. Predates later manual approval."
+    },
+    {
+      "file": "captures/dashboard-loop-evidence-final.jpg",
+      "kind": "dashboard-screenshot",
+      "sha256": "14c75488acecc20a968fcec25a3d5c9e2dfda419f8e6d8f61f42b4b6d23cad15",
+      "bytes": 91119,
+      "originalArtifactPath": "publication/dashboard-loop-evidence-final.jpg",
+      "sourceUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=l9e45ofb461",
+      "transformation": "none",
+      "captureDate": "2026-11-06",
+      "snapshotNote": "Original saved view. Run-list counts include derived aggregate runs; they are not coding-attempt counts. Predates later manual approval."
+    },
+    {
+      "file": "captures/dashboard-graph-evidence-final.jpg",
+      "kind": "dashboard-screenshot",
+      "sha256": "011824ad3f54f6af44dd171ffd1495bff5fdaf278b4096d25f4c325fc9254f20",
+      "bytes": 83659,
+      "originalArtifactPath": "publication/dashboard-graph-evidence-final.jpg",
+      "sourceUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=l9e45ofb461",
+      "transformation": "none",
+      "captureDate": "2026-11-06",
+      "snapshotNote": "Original saved view. Run-list counts include derived aggregate runs; they are not coding-attempt counts. Predates later manual approval."
+    },
+    {
+      "file": "captures/agent-lens-agent-revision4.jpg",
+      "kind": "trace-screenshot",
+      "sha256": "efc3a266247e3203126953e85338bf16042d8054ebe5b45ee8993838919f36bd",
+      "bytes": 79693,
+      "originalArtifactPath": "publication/agent-lens-agent-revision4.jpg",
+      "sourceUrl": "https://forge.coreweave.com/agent-lens/wandb/learn-harness-engineering-forge/conversations/01a1b0aa-ff8b-71d2-a2f0-9f7999092eed",
+      "transformation": "none",
+      "captureDate": "2026-11-06",
+      "conversationId": "01a1b0aa-ff8b-71d2-a2f0-9f7999092eed",
+      "role": "coding-agent",
+      "trialId": "9c2869e2-d150-4c35-82df-9602ca48f17b",
+      "traceReadbackVerified": true
+    },
+    {
+      "file": "captures/agent-lens-revision4.jpg",
+      "kind": "trace-screenshot",
+      "sha256": "adfffd7d27c1d84cf2eeae4d38f6786238e176d9a3badbbcf25cf8b9e084c15c",
+      "bytes": 80409,
+      "originalArtifactPath": "publication/agent-lens-revision4.jpg",
+      "sourceUrl": "https://forge.coreweave.com/agent-lens/wandb/learn-harness-engineering-forge/conversations/app-bace80b4-24a6-4c67-bc75-def5cd385a2d",
+      "transformation": "none",
+      "captureDate": "2026-11-06",
+      "conversationId": "app-bace80b4-24a6-4c67-bc75-def5cd385a2d",
+      "role": "application",
+      "trialId": null,
+      "traceReadbackVerified": true
+    },
+    {
+      "file": "captures/supplemental-checker-diagnostic-57f14e90-d62e-4fcb-ab78-60b52a12935a-electron.png",
+      "kind": "supplemental-screenshot",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709,
+      "originalArtifactPath": "checker-diagnostic-57f14e90-d62e-4fcb-ab78-60b52a12935a/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+      "transformation": "none",
+      "qualificationId": "checker-diagnostic-57f14e90-d62e-4fcb-ab78-60b52a12935a",
+      "snapshotNote": "Independent verification, manual qualification, or checker diagnostic. Excluded from coding-attempt counts; consult the adjacent archived result before interpreting the image."
+    },
+    {
+      "file": "captures/supplemental-checker-diagnostic-57f14e90-d62e-4fcb-ab78-60b52a12935a-visible-answer.png",
+      "kind": "supplemental-screenshot",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709,
+      "originalArtifactPath": "checker-diagnostic-57f14e90-d62e-4fcb-ab78-60b52a12935a/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+      "transformation": "none",
+      "qualificationId": "checker-diagnostic-57f14e90-d62e-4fcb-ab78-60b52a12935a",
+      "snapshotNote": "Independent verification, manual qualification, or checker diagnostic. Excluded from coding-attempt counts; consult the adjacent archived result before interpreting the image."
+    },
+    {
+      "file": "captures/supplemental-checker-diagnostic-d3c1c8a4-481f-4d17-b794-38f69702c9dc-electron.png",
+      "kind": "supplemental-screenshot",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709,
+      "originalArtifactPath": "checker-diagnostic-d3c1c8a4-481f-4d17-b794-38f69702c9dc/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+      "transformation": "none",
+      "qualificationId": "checker-diagnostic-d3c1c8a4-481f-4d17-b794-38f69702c9dc",
+      "snapshotNote": "Independent verification, manual qualification, or checker diagnostic. Excluded from coding-attempt counts; consult the adjacent archived result before interpreting the image."
+    },
+    {
+      "file": "captures/supplemental-checker-diagnostic-d3c1c8a4-481f-4d17-b794-38f69702c9dc-visible-answer.png",
+      "kind": "supplemental-screenshot",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709,
+      "originalArtifactPath": "checker-diagnostic-d3c1c8a4-481f-4d17-b794-38f69702c9dc/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+      "transformation": "none",
+      "qualificationId": "checker-diagnostic-d3c1c8a4-481f-4d17-b794-38f69702c9dc",
+      "snapshotNote": "Independent verification, manual qualification, or checker diagnostic. Excluded from coding-attempt counts; consult the adjacent archived result before interpreting the image."
+    },
+    {
+      "file": "captures/supplemental-checker-diagnostic-de8f9f04-3fa4-4332-b3a5-03f5fdf57808-electron.png",
+      "kind": "supplemental-screenshot",
+      "sha256": "bca51b77a7690a8e58565d9deb752d30b21c8bb0196e8e4ee20af77d311a259e",
+      "bytes": 30460,
+      "originalArtifactPath": "checker-diagnostic-de8f9f04-3fa4-4332-b3a5-03f5fdf57808/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+      "transformation": "none",
+      "qualificationId": "checker-diagnostic-de8f9f04-3fa4-4332-b3a5-03f5fdf57808",
+      "snapshotNote": "Independent verification, manual qualification, or checker diagnostic. Excluded from coding-attempt counts; consult the adjacent archived result before interpreting the image."
+    },
+    {
+      "file": "captures/supplemental-checker-diagnostic-de8f9f04-3fa4-4332-b3a5-03f5fdf57808-history-diagnostic.png",
+      "kind": "supplemental-screenshot",
+      "sha256": "bf9e597a4fbcc3fb38463e9929ebbc8dd3f1996aabba336b29207ee2584c1ad3",
+      "bytes": 122320,
+      "originalArtifactPath": "checker-diagnostic-de8f9f04-3fa4-4332-b3a5-03f5fdf57808/history-diagnostic.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+      "transformation": "none",
+      "qualificationId": "checker-diagnostic-de8f9f04-3fa4-4332-b3a5-03f5fdf57808",
+      "snapshotNote": "Independent verification, manual qualification, or checker diagnostic. Excluded from coding-attempt counts; consult the adjacent archived result before interpreting the image."
+    },
+    {
+      "file": "captures/supplemental-checker-diagnostic-de8f9f04-3fa4-4332-b3a5-03f5fdf57808-visible-answer.png",
+      "kind": "supplemental-screenshot",
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf",
+      "bytes": 66113,
+      "originalArtifactPath": "checker-diagnostic-de8f9f04-3fa4-4332-b3a5-03f5fdf57808/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+      "transformation": "none",
+      "qualificationId": "checker-diagnostic-de8f9f04-3fa4-4332-b3a5-03f5fdf57808",
+      "snapshotNote": "Independent verification, manual qualification, or checker diagnostic. Excluded from coding-attempt counts; consult the adjacent archived result before interpreting the image."
+    },
+    {
+      "file": "captures/supplemental-graph-40688e0f-33dd-4a53-bdf5-cdebec3c469b-electron.png",
+      "kind": "supplemental-screenshot",
+      "sha256": "9b615b0e297a6adac67e16dbf6d8d6f4c3a14660eb9626119a369f4b0db35b74",
+      "bytes": 44122,
+      "originalArtifactPath": "graph-40688e0f-33dd-4a53-bdf5-cdebec3c469b/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+      "transformation": "none",
+      "qualificationId": "graph-40688e0f-33dd-4a53-bdf5-cdebec3c469b",
+      "snapshotNote": "Independent verification, manual qualification, or checker diagnostic. Excluded from coding-attempt counts; consult the adjacent archived result before interpreting the image."
+    },
+    {
+      "file": "captures/supplemental-graph-577d6b8a-6bf2-424d-9682-41e28d025da1-electron.png",
+      "kind": "supplemental-screenshot",
+      "sha256": "9b615b0e297a6adac67e16dbf6d8d6f4c3a14660eb9626119a369f4b0db35b74",
+      "bytes": 44122,
+      "originalArtifactPath": "graph-577d6b8a-6bf2-424d-9682-41e28d025da1/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+      "transformation": "none",
+      "qualificationId": "graph-577d6b8a-6bf2-424d-9682-41e28d025da1",
+      "snapshotNote": "Independent verification, manual qualification, or checker diagnostic. Excluded from coding-attempt counts; consult the adjacent archived result before interpreting the image."
+    },
+    {
+      "file": "captures/supplemental-graph-983ba1bb-86da-4900-a452-e80c2959390d-electron.png",
+      "kind": "supplemental-screenshot",
+      "sha256": "9b615b0e297a6adac67e16dbf6d8d6f4c3a14660eb9626119a369f4b0db35b74",
+      "bytes": 44122,
+      "originalArtifactPath": "graph-983ba1bb-86da-4900-a452-e80c2959390d/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+      "transformation": "none",
+      "qualificationId": "graph-983ba1bb-86da-4900-a452-e80c2959390d",
+      "snapshotNote": "Independent verification, manual qualification, or checker diagnostic. Excluded from coding-attempt counts; consult the adjacent archived result before interpreting the image."
+    },
+    {
+      "file": "captures/supplemental-graph-e80b044a-800d-445e-a88e-ae1a0ba74bdd-electron.png",
+      "kind": "supplemental-screenshot",
+      "sha256": "9b615b0e297a6adac67e16dbf6d8d6f4c3a14660eb9626119a369f4b0db35b74",
+      "bytes": 44122,
+      "originalArtifactPath": "graph-e80b044a-800d-445e-a88e-ae1a0ba74bdd/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+      "transformation": "none",
+      "qualificationId": "graph-e80b044a-800d-445e-a88e-ae1a0ba74bdd",
+      "snapshotNote": "Independent verification, manual qualification, or checker diagnostic. Excluded from coding-attempt counts; consult the adjacent archived result before interpreting the image."
+    },
+    {
+      "file": "captures/supplemental-graph-f0da5cdf-bad6-4e14-a246-74621916258d-electron.png",
+      "kind": "supplemental-screenshot",
+      "sha256": "9b615b0e297a6adac67e16dbf6d8d6f4c3a14660eb9626119a369f4b0db35b74",
+      "bytes": 44122,
+      "originalArtifactPath": "graph-f0da5cdf-bad6-4e14-a246-74621916258d/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+      "transformation": "none",
+      "qualificationId": "graph-f0da5cdf-bad6-4e14-a246-74621916258d",
+      "snapshotNote": "Independent verification, manual qualification, or checker diagnostic. Excluded from coding-attempt counts; consult the adjacent archived result before interpreting the image."
+    },
+    {
+      "file": "captures/supplemental-graph-qualification-6fcc2091-f526-45e0-8fb1-aa0c1802aae5-attempt-2-electron-electron.png",
+      "kind": "supplemental-screenshot",
+      "sha256": "1286ea8de1dd56d6d58b620100577c9fc966e797f3c5d8a5b9abd40e44d46a1c",
+      "bytes": 27245,
+      "originalArtifactPath": "graph-qualification-6fcc2091-f526-45e0-8fb1-aa0c1802aae5/attempt-2-electron/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+      "transformation": "none",
+      "qualificationId": "graph-qualification-6fcc2091-f526-45e0-8fb1-aa0c1802aae5",
+      "snapshotNote": "Independent verification, manual qualification, or checker diagnostic. Excluded from coding-attempt counts; consult the adjacent archived result before interpreting the image."
+    },
+    {
+      "file": "captures/supplemental-graph-qualification-74896eb2-b69a-4e53-be6c-44a010bbf07d-attempt-1-electron-electron.png",
+      "kind": "supplemental-screenshot",
+      "sha256": "9b615b0e297a6adac67e16dbf6d8d6f4c3a14660eb9626119a369f4b0db35b74",
+      "bytes": 44122,
+      "originalArtifactPath": "graph-qualification-74896eb2-b69a-4e53-be6c-44a010bbf07d/attempt-1-electron/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+      "transformation": "none",
+      "qualificationId": "graph-qualification-74896eb2-b69a-4e53-be6c-44a010bbf07d",
+      "snapshotNote": "Independent verification, manual qualification, or checker diagnostic. Excluded from coding-attempt counts; consult the adjacent archived result before interpreting the image."
+    },
+    {
+      "file": "captures/supplemental-graph-qualification-74896eb2-b69a-4e53-be6c-44a010bbf07d-attempt-2-electron-electron.png",
+      "kind": "supplemental-screenshot",
+      "sha256": "9b615b0e297a6adac67e16dbf6d8d6f4c3a14660eb9626119a369f4b0db35b74",
+      "bytes": 44122,
+      "originalArtifactPath": "graph-qualification-74896eb2-b69a-4e53-be6c-44a010bbf07d/attempt-2-electron/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+      "transformation": "none",
+      "qualificationId": "graph-qualification-74896eb2-b69a-4e53-be6c-44a010bbf07d",
+      "snapshotNote": "Independent verification, manual qualification, or checker diagnostic. Excluded from coding-attempt counts; consult the adjacent archived result before interpreting the image."
+    },
+    {
+      "file": "captures/supplemental-graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb-attempt-1-electron-electron.png",
+      "kind": "supplemental-screenshot",
+      "sha256": "9b615b0e297a6adac67e16dbf6d8d6f4c3a14660eb9626119a369f4b0db35b74",
+      "bytes": 44122,
+      "originalArtifactPath": "graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb/attempt-1-electron/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+      "transformation": "none",
+      "qualificationId": "graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb",
+      "snapshotNote": "Independent verification, manual qualification, or checker diagnostic. Excluded from coding-attempt counts; consult the adjacent archived result before interpreting the image."
+    },
+    {
+      "file": "captures/supplemental-graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb-attempt-1-protected-electron.png",
+      "kind": "supplemental-screenshot",
+      "sha256": "035b15bcd80de52bf919e12779aee1b6db7984d73f159a8e9ed558e63c13c8bf",
+      "bytes": 41613,
+      "originalArtifactPath": "graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb/attempt-1-protected/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+      "transformation": "none",
+      "qualificationId": "graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb",
+      "snapshotNote": "Independent verification, manual qualification, or checker diagnostic. Excluded from coding-attempt counts; consult the adjacent archived result before interpreting the image."
+    },
+    {
+      "file": "captures/supplemental-graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb-attempt-1-protected-visible-answer.png",
+      "kind": "supplemental-screenshot",
+      "sha256": "035b15bcd80de52bf919e12779aee1b6db7984d73f159a8e9ed558e63c13c8bf",
+      "bytes": 41613,
+      "originalArtifactPath": "graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb/attempt-1-protected/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+      "transformation": "none",
+      "qualificationId": "graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb",
+      "snapshotNote": "Independent verification, manual qualification, or checker diagnostic. Excluded from coding-attempt counts; consult the adjacent archived result before interpreting the image."
+    },
+    {
+      "file": "captures/supplemental-graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb-attempt-2-electron-electron.png",
+      "kind": "supplemental-screenshot",
+      "sha256": "9b615b0e297a6adac67e16dbf6d8d6f4c3a14660eb9626119a369f4b0db35b74",
+      "bytes": 44122,
+      "originalArtifactPath": "graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb/attempt-2-electron/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+      "transformation": "none",
+      "qualificationId": "graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb",
+      "snapshotNote": "Independent verification, manual qualification, or checker diagnostic. Excluded from coding-attempt counts; consult the adjacent archived result before interpreting the image."
+    },
+    {
+      "file": "captures/supplemental-graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb-attempt-2-protected-electron.png",
+      "kind": "supplemental-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb/attempt-2-protected/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+      "transformation": "none",
+      "qualificationId": "graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb",
+      "snapshotNote": "Independent verification, manual qualification, or checker diagnostic. Excluded from coding-attempt counts; consult the adjacent archived result before interpreting the image."
+    },
+    {
+      "file": "captures/supplemental-graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb-attempt-2-protected-visible-answer.png",
+      "kind": "supplemental-screenshot",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468,
+      "originalArtifactPath": "graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb/attempt-2-protected/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+      "transformation": "none",
+      "qualificationId": "graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb",
+      "snapshotNote": "Independent verification, manual qualification, or checker diagnostic. Excluded from coding-attempt counts; consult the adjacent archived result before interpreting the image."
+    },
+    {
+      "file": "captures/supplemental-history-diagnostic-5410a71b-9980-4ad4-bc47-98e3df5b1f22-history-diagnostic.png",
+      "kind": "supplemental-screenshot",
+      "sha256": "a62338149bf72cb6ccb9cf7bcfe1f4b014f3ba2fad72ca3b0bcfa38d51bb1908",
+      "bytes": 121402,
+      "originalArtifactPath": "history-diagnostic-5410a71b-9980-4ad4-bc47-98e3df5b1f22/history-diagnostic.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+      "transformation": "none",
+      "qualificationId": "history-diagnostic-5410a71b-9980-4ad4-bc47-98e3df5b1f22",
+      "snapshotNote": "Independent verification, manual qualification, or checker diagnostic. Excluded from coding-attempt counts; consult the adjacent archived result before interpreting the image."
+    },
+    {
+      "file": "captures/supplemental-history-diagnostic-5410a71b-9980-4ad4-bc47-98e3df5b1f22-visible-answer.png",
+      "kind": "supplemental-screenshot",
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf",
+      "bytes": 66113,
+      "originalArtifactPath": "history-diagnostic-5410a71b-9980-4ad4-bc47-98e3df5b1f22/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+      "transformation": "none",
+      "qualificationId": "history-diagnostic-5410a71b-9980-4ad4-bc47-98e3df5b1f22",
+      "snapshotNote": "Independent verification, manual qualification, or checker diagnostic. Excluded from coding-attempt counts; consult the adjacent archived result before interpreting the image."
+    },
+    {
+      "file": "captures/supplemental-history-diagnostic-e8a1ea54-0fe5-4ba8-9929-76b07e2b5e29-electron.png",
+      "kind": "supplemental-screenshot",
+      "sha256": "bca51b77a7690a8e58565d9deb752d30b21c8bb0196e8e4ee20af77d311a259e",
+      "bytes": 30460,
+      "originalArtifactPath": "history-diagnostic-e8a1ea54-0fe5-4ba8-9929-76b07e2b5e29/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+      "transformation": "none",
+      "qualificationId": "history-diagnostic-e8a1ea54-0fe5-4ba8-9929-76b07e2b5e29",
+      "snapshotNote": "Independent verification, manual qualification, or checker diagnostic. Excluded from coding-attempt counts; consult the adjacent archived result before interpreting the image."
+    },
+    {
+      "file": "captures/supplemental-history-diagnostic-e8a1ea54-0fe5-4ba8-9929-76b07e2b5e29-history-diagnostic.png",
+      "kind": "supplemental-screenshot",
+      "sha256": "ef0ee15b565c3a29dfff68849fb7f60f230096ff2828e8f7e1a362bc7d969e5a",
+      "bytes": 122302,
+      "originalArtifactPath": "history-diagnostic-e8a1ea54-0fe5-4ba8-9929-76b07e2b5e29/history-diagnostic.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+      "transformation": "none",
+      "qualificationId": "history-diagnostic-e8a1ea54-0fe5-4ba8-9929-76b07e2b5e29",
+      "snapshotNote": "Independent verification, manual qualification, or checker diagnostic. Excluded from coding-attempt counts; consult the adjacent archived result before interpreting the image."
+    },
+    {
+      "file": "captures/supplemental-history-diagnostic-e8a1ea54-0fe5-4ba8-9929-76b07e2b5e29-visible-answer.png",
+      "kind": "supplemental-screenshot",
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf",
+      "bytes": 66113,
+      "originalArtifactPath": "history-diagnostic-e8a1ea54-0fe5-4ba8-9929-76b07e2b5e29/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+      "transformation": "none",
+      "qualificationId": "history-diagnostic-e8a1ea54-0fe5-4ba8-9929-76b07e2b5e29",
+      "snapshotNote": "Independent verification, manual qualification, or checker diagnostic. Excluded from coding-attempt counts; consult the adjacent archived result before interpreting the image."
+    },
+    {
+      "file": "captures/supplemental-visible-ui-56f1ef46-deba-48b8-8bc4-8b2169169b55-electron.png",
+      "kind": "supplemental-screenshot",
+      "sha256": "c5d1bf1668e92b809393948c01a0955dee7f6507b5782a19fc930a6d5aae8659",
+      "bytes": 71136,
+      "originalArtifactPath": "visible-ui-56f1ef46-deba-48b8-8bc4-8b2169169b55/electron.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+      "transformation": "none",
+      "qualificationId": "visible-ui-56f1ef46-deba-48b8-8bc4-8b2169169b55",
+      "snapshotNote": "Independent verification, manual qualification, or checker diagnostic. Excluded from coding-attempt counts; consult the adjacent archived result before interpreting the image."
+    },
+    {
+      "file": "captures/supplemental-visible-ui-56f1ef46-deba-48b8-8bc4-8b2169169b55-visible-answer.png",
+      "kind": "supplemental-screenshot",
+      "sha256": "c5d1bf1668e92b809393948c01a0955dee7f6507b5782a19fc930a6d5aae8659",
+      "bytes": 71136,
+      "originalArtifactPath": "visible-ui-56f1ef46-deba-48b8-8bc4-8b2169169b55/visible-answer.png",
+      "sourceUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+      "transformation": "none",
+      "qualificationId": "visible-ui-56f1ef46-deba-48b8-8bc4-8b2169169b55",
+      "snapshotNote": "Independent verification, manual qualification, or checker diagnostic. Excluded from coding-attempt counts; consult the adjacent archived result before interpreting the image."
+    }
+  ],
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 7455,
+      "sha256": "9389c4660581a3fca54ac82ee5e429383716c651636dc5235f63dc0983632400"
+    },
+    {
+      "path": "assets/captures/03ca01ca-eb64-45ae-9317-824ca4a26026-grader-electron.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/03ca01ca-eb64-45ae-9317-824ca4a26026-grader-visible-answer.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/0809587e-cc59-4276-8285-02dc5072f2aa-grader-electron.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/0809587e-cc59-4276-8285-02dc5072f2aa-grader-visible-answer.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/0865dc24-2666-4fda-b6ae-3f488f5339cb-grader-electron.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/0865dc24-2666-4fda-b6ae-3f488f5339cb-grader-visible-answer.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/0c88671b-326d-4c20-b1b9-aaf95782c93c-grader-visible-answer.png",
+      "bytes": 66113,
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf"
+    },
+    {
+      "path": "assets/captures/1b0a25e5-ba13-4931-9c4f-ff6100f6672a-grader-electron.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/1b0a25e5-ba13-4931-9c4f-ff6100f6672a-grader-visible-answer.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/1c1228c9-2625-4256-9aa2-694d37def359-grader-electron.png",
+      "bytes": 67709,
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481"
+    },
+    {
+      "path": "assets/captures/1c1228c9-2625-4256-9aa2-694d37def359-grader-visible-answer.png",
+      "bytes": 67709,
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481"
+    },
+    {
+      "path": "assets/captures/20e034ff-32bc-4225-8416-044011f5f68d-grader-electron.png",
+      "bytes": 24935,
+      "sha256": "cc2a7062f504669f7f202e1680836bb71c6b4f08de8bb0235cc25e37f097b698"
+    },
+    {
+      "path": "assets/captures/22955029-2de6-4aed-8c35-dda6059b023d-grader-electron.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/22955029-2de6-4aed-8c35-dda6059b023d-grader-visible-answer.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/3398c0d0-a9f2-4383-b64f-c7469ff9d0df-grader-electron.png",
+      "bytes": 70946,
+      "sha256": "53714078fc78f75bd5d55a5cc79c07dff5175dd1d4d35b4a75f5b1d3a7fa7ea9"
+    },
+    {
+      "path": "assets/captures/3398c0d0-a9f2-4383-b64f-c7469ff9d0df-grader-visible-answer.png",
+      "bytes": 70946,
+      "sha256": "53714078fc78f75bd5d55a5cc79c07dff5175dd1d4d35b4a75f5b1d3a7fa7ea9"
+    },
+    {
+      "path": "assets/captures/33bdfb7f-4f5e-49b8-86c8-92d6ce0e7b0b-grader-visible-answer.png",
+      "bytes": 66113,
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf"
+    },
+    {
+      "path": "assets/captures/39c8c943-15bf-4d53-a99e-aaa4cd9ff5a3-grader-electron.png",
+      "bytes": 41613,
+      "sha256": "035b15bcd80de52bf919e12779aee1b6db7984d73f159a8e9ed558e63c13c8bf"
+    },
+    {
+      "path": "assets/captures/39c8c943-15bf-4d53-a99e-aaa4cd9ff5a3-grader-visible-answer.png",
+      "bytes": 41613,
+      "sha256": "035b15bcd80de52bf919e12779aee1b6db7984d73f159a8e9ed558e63c13c8bf"
+    },
+    {
+      "path": "assets/captures/3b7cd608-2c28-4cb8-9d4f-aeb60ac3bc7a-grader-visible-answer.png",
+      "bytes": 66113,
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf"
+    },
+    {
+      "path": "assets/captures/3dd7e4f8-1155-4ffa-9da5-98c82c24c087-grader-electron.png",
+      "bytes": 28287,
+      "sha256": "7ea3edcc6cbdff3d6f7291567855c632813c965963dc6f7a55e90ba91d227b20"
+    },
+    {
+      "path": "assets/captures/3dd7e4f8-1155-4ffa-9da5-98c82c24c087-grader-visible-answer.png",
+      "bytes": 66113,
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf"
+    },
+    {
+      "path": "assets/captures/3e5cd770-94e5-49f9-b478-a2043dc9a682-grader-electron.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/3e5cd770-94e5-49f9-b478-a2043dc9a682-grader-visible-answer.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/44762357-664b-4d30-b390-8121b6d51b07-grader-electron.png",
+      "bytes": 41613,
+      "sha256": "035b15bcd80de52bf919e12779aee1b6db7984d73f159a8e9ed558e63c13c8bf"
+    },
+    {
+      "path": "assets/captures/44762357-664b-4d30-b390-8121b6d51b07-grader-visible-answer.png",
+      "bytes": 41613,
+      "sha256": "035b15bcd80de52bf919e12779aee1b6db7984d73f159a8e9ed558e63c13c8bf"
+    },
+    {
+      "path": "assets/captures/4eb48651-306d-44e9-a468-a6ffc322bf27-grader-electron.png",
+      "bytes": 67709,
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481"
+    },
+    {
+      "path": "assets/captures/4eb48651-306d-44e9-a468-a6ffc322bf27-grader-visible-answer.png",
+      "bytes": 67709,
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481"
+    },
+    {
+      "path": "assets/captures/534ab4c7-9100-4d94-a379-fbfc4ad381c7-grader-visible-answer.png",
+      "bytes": 67709,
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481"
+    },
+    {
+      "path": "assets/captures/54bb7391-48b0-47f5-9ded-36194f52a76d-grader-electron.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/54bb7391-48b0-47f5-9ded-36194f52a76d-grader-visible-answer.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/5609c89b-f73f-4a9e-8702-a57758c3403c-grader-visible-answer.png",
+      "bytes": 66113,
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf"
+    },
+    {
+      "path": "assets/captures/643a867a-74e8-4987-aa56-5640b4c1982e-grader-electron.png",
+      "bytes": 70757,
+      "sha256": "3bafb83798eaf79aeb09bd192ddedaa7e8771cde02a88272815cb216f3ca28d1"
+    },
+    {
+      "path": "assets/captures/643a867a-74e8-4987-aa56-5640b4c1982e-grader-visible-answer.png",
+      "bytes": 70757,
+      "sha256": "3bafb83798eaf79aeb09bd192ddedaa7e8771cde02a88272815cb216f3ca28d1"
+    },
+    {
+      "path": "assets/captures/66558826-6e1a-46e0-abe9-ef951eff0c16-grader-visible-answer.png",
+      "bytes": 66113,
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf"
+    },
+    {
+      "path": "assets/captures/71581d99-5fb7-4e57-bee4-56ec354858a2-grader-electron.png",
+      "bytes": 68278,
+      "sha256": "cb1fa171e8a2a6fc0c65b955cd0bcdd838febae9ce68ccffb943687ef277cd94"
+    },
+    {
+      "path": "assets/captures/71581d99-5fb7-4e57-bee4-56ec354858a2-grader-visible-answer.png",
+      "bytes": 68278,
+      "sha256": "cb1fa171e8a2a6fc0c65b955cd0bcdd838febae9ce68ccffb943687ef277cd94"
+    },
+    {
+      "path": "assets/captures/73c46965-1093-4b68-a810-a901dd78bfc0-grader-electron.png",
+      "bytes": 69026,
+      "sha256": "e22eb15841575f5ea5e27525fd9426754ec6ae7c5f0fb7dc7953ba037e844f52"
+    },
+    {
+      "path": "assets/captures/73c46965-1093-4b68-a810-a901dd78bfc0-grader-visible-answer.png",
+      "bytes": 66113,
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf"
+    },
+    {
+      "path": "assets/captures/79398b0b-a9eb-4892-bb24-194bdc289e2f-grader-visible-answer.png",
+      "bytes": 66113,
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf"
+    },
+    {
+      "path": "assets/captures/813076fb-3550-4e34-a3a3-831c7ed43f14-grader-electron.png",
+      "bytes": 24935,
+      "sha256": "cc2a7062f504669f7f202e1680836bb71c6b4f08de8bb0235cc25e37f097b698"
+    },
+    {
+      "path": "assets/captures/97cb6fd5-7fd6-466c-b5f1-598126cf2d52-grader-electron.png",
+      "bytes": 27290,
+      "sha256": "f1eb0baf7279bfcccb0b273e89e0b9fc93ba03b5c0191f0a5d1243a4720bfec2"
+    },
+    {
+      "path": "assets/captures/9c2869e2-d150-4c35-82df-9602ca48f17b-grader-electron.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/9c2869e2-d150-4c35-82df-9602ca48f17b-grader-visible-answer.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/9d859517-72db-4b1a-a683-cd81b9f7ca14-grader-electron.png",
+      "bytes": 65514,
+      "sha256": "7e3ac894326b95018bc4d8933b79a351dbeebb8101a5435f9b9d8f01b81e21d5"
+    },
+    {
+      "path": "assets/captures/9d859517-72db-4b1a-a683-cd81b9f7ca14-grader-visible-answer.png",
+      "bytes": 65514,
+      "sha256": "7e3ac894326b95018bc4d8933b79a351dbeebb8101a5435f9b9d8f01b81e21d5"
+    },
+    {
+      "path": "assets/captures/9feeffa8-1836-485a-a52c-2b398b40a195-grader-electron.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/9feeffa8-1836-485a-a52c-2b398b40a195-grader-visible-answer.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/a09c89fc-d730-4e6c-980c-62b4e7d4993e-grader-electron.png",
+      "bytes": 67667,
+      "sha256": "c27cf77b3abf4f319cf381c89d92dfc864c3866d532d1b067233f4c8fc0b3c31"
+    },
+    {
+      "path": "assets/captures/a09c89fc-d730-4e6c-980c-62b4e7d4993e-grader-visible-answer.png",
+      "bytes": 67667,
+      "sha256": "c27cf77b3abf4f319cf381c89d92dfc864c3866d532d1b067233f4c8fc0b3c31"
+    },
+    {
+      "path": "assets/captures/a2d447ed-75a6-4477-9308-e8eb60885b2b-grader-visible-answer.png",
+      "bytes": 66113,
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf"
+    },
+    {
+      "path": "assets/captures/a7bc0271-d547-4534-a15d-27b70072df40-grader-electron.png",
+      "bytes": 67709,
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481"
+    },
+    {
+      "path": "assets/captures/a7bc0271-d547-4534-a15d-27b70072df40-grader-visible-answer.png",
+      "bytes": 67709,
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481"
+    },
+    {
+      "path": "assets/captures/a7dcf5cb-dd20-4c3f-921b-f8a51a21f8f8-grader-electron.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/a7dcf5cb-dd20-4c3f-921b-f8a51a21f8f8-grader-visible-answer.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/agent-lens-agent-revision4.jpg",
+      "bytes": 79693,
+      "sha256": "efc3a266247e3203126953e85338bf16042d8054ebe5b45ee8993838919f36bd"
+    },
+    {
+      "path": "assets/captures/agent-lens-revision4.jpg",
+      "bytes": 80409,
+      "sha256": "adfffd7d27c1d84cf2eeae4d38f6786238e176d9a3badbbcf25cf8b9e084c15c"
+    },
+    {
+      "path": "assets/captures/b043a7b3-1843-4914-af0b-0504623b1059-grader-electron.png",
+      "bytes": 30375,
+      "sha256": "1be5418b33f7f4dd7ea7f01e8fdfe0a36a9987b4308082b880f75d2e12971fc3"
+    },
+    {
+      "path": "assets/captures/b6969def-4dd9-4763-8b73-6de7cdcb59c2-grader-visible-answer.png",
+      "bytes": 66113,
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf"
+    },
+    {
+      "path": "assets/captures/b8f56d80-c72c-4e31-8c88-f8fc63d76f9a-grader-electron.png",
+      "bytes": 67709,
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481"
+    },
+    {
+      "path": "assets/captures/b8f56d80-c72c-4e31-8c88-f8fc63d76f9a-grader-visible-answer.png",
+      "bytes": 67709,
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481"
+    },
+    {
+      "path": "assets/captures/bdc971f7-1a51-437d-b46a-8ed3c268eb97-grader-electron.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/bdc971f7-1a51-437d-b46a-8ed3c268eb97-grader-visible-answer.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/ca16eac7-0eb5-4523-a975-638e30938a04-grader-electron.png",
+      "bytes": 68645,
+      "sha256": "4fc92e5ccdc241c3ad6aa7ae9abec02d30dc2d71dc35f25459ede393c67de92f"
+    },
+    {
+      "path": "assets/captures/ca16eac7-0eb5-4523-a975-638e30938a04-grader-visible-answer.png",
+      "bytes": 66113,
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf"
+    },
+    {
+      "path": "assets/captures/ca53b79e-eab4-4b69-8c1e-072c2baff44f-grader-electron.png",
+      "bytes": 29600,
+      "sha256": "a5ec7e758f5015a9c0f5cab1dbf3ff5540c040b36e41607fe2356cbdd58aa5cc"
+    },
+    {
+      "path": "assets/captures/d3ef30ab-0f2c-4d0e-aee1-7bdf6a8a011e-grader-electron.png",
+      "bytes": 28299,
+      "sha256": "c6f7521570700fa0e81befbdec5f74092970cb9ab5881d10dbcd2b5561143713"
+    },
+    {
+      "path": "assets/captures/d3ef30ab-0f2c-4d0e-aee1-7bdf6a8a011e-grader-visible-answer.png",
+      "bytes": 66113,
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf"
+    },
+    {
+      "path": "assets/captures/d52e75ef-81cb-4fc0-b551-0884405ad2c1-grader-electron.png",
+      "bytes": 24935,
+      "sha256": "cc2a7062f504669f7f202e1680836bb71c6b4f08de8bb0235cc25e37f097b698"
+    },
+    {
+      "path": "assets/captures/dashboard-comparisons-final.jpg",
+      "bytes": 113359,
+      "sha256": "b5d0610852e69dcb7fb18046ae7d37042846ccf4231e4162b22630996c51b45e"
+    },
+    {
+      "path": "assets/captures/dashboard-graph-evidence-final.jpg",
+      "bytes": 83659,
+      "sha256": "011824ad3f54f6af44dd171ffd1495bff5fdaf278b4096d25f4c325fc9254f20"
+    },
+    {
+      "path": "assets/captures/dashboard-loop-evidence-final.jpg",
+      "bytes": 91119,
+      "sha256": "14c75488acecc20a968fcec25a3d5c9e2dfda419f8e6d8f61f42b4b6d23cad15"
+    },
+    {
+      "path": "assets/captures/dashboard-operations-final.jpg",
+      "bytes": 80109,
+      "sha256": "1484cfc26b1d05bb4fafff8b412b50a4aa7b2ac6d3b40253b412248c37448065"
+    },
+    {
+      "path": "assets/captures/dashboard-source-evidence-final.jpg",
+      "bytes": 108909,
+      "sha256": "5581c63f8f11a1e4fa0fcf09bc9cf758a9be8b7f9ff982c0c2c0eb83ece05b5d"
+    },
+    {
+      "path": "assets/captures/dd818c1d-aea4-4e7f-b2a2-a6398ac33877-grader-visible-answer.png",
+      "bytes": 67709,
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481"
+    },
+    {
+      "path": "assets/captures/e53c3cad-a475-4e49-a79c-e64cfc0316a9-grader-electron.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/e53c3cad-a475-4e49-a79c-e64cfc0316a9-grader-visible-answer.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/f5e5ab53-b1b4-4d70-af9d-5fb31516bd39-grader-electron.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/f5e5ab53-b1b4-4d70-af9d-5fb31516bd39-grader-visible-answer.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/f6edbfa3-3682-4e3b-bff2-ba4b864e2511-grader-visible-answer.png",
+      "bytes": 67709,
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481"
+    },
+    {
+      "path": "assets/captures/fadf2407-4ef3-4635-bab7-0a8d987096d8-grader-electron.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/fadf2407-4ef3-4635-bab7-0a8d987096d8-grader-visible-answer.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/fc80b4f3-6178-454f-a003-3e311dab6617-grader-electron.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/fc80b4f3-6178-454f-a003-3e311dab6617-grader-visible-answer.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/fd98af3b-1b52-448c-bc7b-b6cc47e785ea-grader-electron.png",
+      "bytes": 67709,
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481"
+    },
+    {
+      "path": "assets/captures/fd98af3b-1b52-448c-bc7b-b6cc47e785ea-grader-visible-answer.png",
+      "bytes": 67709,
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481"
+    },
+    {
+      "path": "assets/captures/notebook-00-overview.jpg",
+      "bytes": 83589,
+      "sha256": "d5e25efa6b44893f0f3a15529b642ac72246be7c671748fb81a35b616c175ecf"
+    },
+    {
+      "path": "assets/captures/notebook-01.jpg",
+      "bytes": 95268,
+      "sha256": "0f63902eecd2983be79c64a3578ede2caa730c975495b7a06949ff9a93c29a42"
+    },
+    {
+      "path": "assets/captures/notebook-02.jpg",
+      "bytes": 92952,
+      "sha256": "2cf988629d8a000c16a162cb9142cd03fd0b307109fce94b9a9caa090705e02b"
+    },
+    {
+      "path": "assets/captures/notebook-03.jpg",
+      "bytes": 86252,
+      "sha256": "39bf6822ac253eb7986bf59e159c90834e05d7d63e03b626b4657f113d51a5cf"
+    },
+    {
+      "path": "assets/captures/notebook-04.jpg",
+      "bytes": 95187,
+      "sha256": "fa7f4ddc925ed16ad2b69ff3cc00cdacb26fa46f448c6c3d1af9c906baca5546"
+    },
+    {
+      "path": "assets/captures/notebook-05.jpg",
+      "bytes": 80670,
+      "sha256": "bf4244fa7ec320c1b27138d6549236a4514808d6b56cf3887d24eacad4e2aad7"
+    },
+    {
+      "path": "assets/captures/notebook-06.jpg",
+      "bytes": 77958,
+      "sha256": "2e28df1e18e759692c4fa4bb907b2fbdb37939bd142bf667edc0cc7195595870"
+    },
+    {
+      "path": "assets/captures/notebook-07.jpg",
+      "bytes": 93349,
+      "sha256": "84a4b32a4858468bd373ab751d2fb4139ff3d1ddbfc6123e8ba37baa76d40638"
+    },
+    {
+      "path": "assets/captures/notebook-08.jpg",
+      "bytes": 93724,
+      "sha256": "b6240d91d1b70944ad88a5da465530ebc02623851c5284a570dc05314c79959e"
+    },
+    {
+      "path": "assets/captures/supplemental-checker-diagnostic-57f14e90-d62e-4fcb-ab78-60b52a12935a-electron.png",
+      "bytes": 67709,
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481"
+    },
+    {
+      "path": "assets/captures/supplemental-checker-diagnostic-57f14e90-d62e-4fcb-ab78-60b52a12935a-visible-answer.png",
+      "bytes": 67709,
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481"
+    },
+    {
+      "path": "assets/captures/supplemental-checker-diagnostic-d3c1c8a4-481f-4d17-b794-38f69702c9dc-electron.png",
+      "bytes": 67709,
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481"
+    },
+    {
+      "path": "assets/captures/supplemental-checker-diagnostic-d3c1c8a4-481f-4d17-b794-38f69702c9dc-visible-answer.png",
+      "bytes": 67709,
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481"
+    },
+    {
+      "path": "assets/captures/supplemental-checker-diagnostic-de8f9f04-3fa4-4332-b3a5-03f5fdf57808-electron.png",
+      "bytes": 30460,
+      "sha256": "bca51b77a7690a8e58565d9deb752d30b21c8bb0196e8e4ee20af77d311a259e"
+    },
+    {
+      "path": "assets/captures/supplemental-checker-diagnostic-de8f9f04-3fa4-4332-b3a5-03f5fdf57808-history-diagnostic.png",
+      "bytes": 122320,
+      "sha256": "bf9e597a4fbcc3fb38463e9929ebbc8dd3f1996aabba336b29207ee2584c1ad3"
+    },
+    {
+      "path": "assets/captures/supplemental-checker-diagnostic-de8f9f04-3fa4-4332-b3a5-03f5fdf57808-visible-answer.png",
+      "bytes": 66113,
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf"
+    },
+    {
+      "path": "assets/captures/supplemental-graph-40688e0f-33dd-4a53-bdf5-cdebec3c469b-electron.png",
+      "bytes": 44122,
+      "sha256": "9b615b0e297a6adac67e16dbf6d8d6f4c3a14660eb9626119a369f4b0db35b74"
+    },
+    {
+      "path": "assets/captures/supplemental-graph-577d6b8a-6bf2-424d-9682-41e28d025da1-electron.png",
+      "bytes": 44122,
+      "sha256": "9b615b0e297a6adac67e16dbf6d8d6f4c3a14660eb9626119a369f4b0db35b74"
+    },
+    {
+      "path": "assets/captures/supplemental-graph-983ba1bb-86da-4900-a452-e80c2959390d-electron.png",
+      "bytes": 44122,
+      "sha256": "9b615b0e297a6adac67e16dbf6d8d6f4c3a14660eb9626119a369f4b0db35b74"
+    },
+    {
+      "path": "assets/captures/supplemental-graph-e80b044a-800d-445e-a88e-ae1a0ba74bdd-electron.png",
+      "bytes": 44122,
+      "sha256": "9b615b0e297a6adac67e16dbf6d8d6f4c3a14660eb9626119a369f4b0db35b74"
+    },
+    {
+      "path": "assets/captures/supplemental-graph-f0da5cdf-bad6-4e14-a246-74621916258d-electron.png",
+      "bytes": 44122,
+      "sha256": "9b615b0e297a6adac67e16dbf6d8d6f4c3a14660eb9626119a369f4b0db35b74"
+    },
+    {
+      "path": "assets/captures/supplemental-graph-qualification-6fcc2091-f526-45e0-8fb1-aa0c1802aae5-attempt-2-electron-electron.png",
+      "bytes": 27245,
+      "sha256": "1286ea8de1dd56d6d58b620100577c9fc966e797f3c5d8a5b9abd40e44d46a1c"
+    },
+    {
+      "path": "assets/captures/supplemental-graph-qualification-74896eb2-b69a-4e53-be6c-44a010bbf07d-attempt-1-electron-electron.png",
+      "bytes": 44122,
+      "sha256": "9b615b0e297a6adac67e16dbf6d8d6f4c3a14660eb9626119a369f4b0db35b74"
+    },
+    {
+      "path": "assets/captures/supplemental-graph-qualification-74896eb2-b69a-4e53-be6c-44a010bbf07d-attempt-2-electron-electron.png",
+      "bytes": 44122,
+      "sha256": "9b615b0e297a6adac67e16dbf6d8d6f4c3a14660eb9626119a369f4b0db35b74"
+    },
+    {
+      "path": "assets/captures/supplemental-graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb-attempt-1-electron-electron.png",
+      "bytes": 44122,
+      "sha256": "9b615b0e297a6adac67e16dbf6d8d6f4c3a14660eb9626119a369f4b0db35b74"
+    },
+    {
+      "path": "assets/captures/supplemental-graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb-attempt-1-protected-electron.png",
+      "bytes": 41613,
+      "sha256": "035b15bcd80de52bf919e12779aee1b6db7984d73f159a8e9ed558e63c13c8bf"
+    },
+    {
+      "path": "assets/captures/supplemental-graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb-attempt-1-protected-visible-answer.png",
+      "bytes": 41613,
+      "sha256": "035b15bcd80de52bf919e12779aee1b6db7984d73f159a8e9ed558e63c13c8bf"
+    },
+    {
+      "path": "assets/captures/supplemental-graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb-attempt-2-electron-electron.png",
+      "bytes": 44122,
+      "sha256": "9b615b0e297a6adac67e16dbf6d8d6f4c3a14660eb9626119a369f4b0db35b74"
+    },
+    {
+      "path": "assets/captures/supplemental-graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb-attempt-2-protected-electron.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/supplemental-graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb-attempt-2-protected-visible-answer.png",
+      "bytes": 65468,
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666"
+    },
+    {
+      "path": "assets/captures/supplemental-history-diagnostic-5410a71b-9980-4ad4-bc47-98e3df5b1f22-history-diagnostic.png",
+      "bytes": 121402,
+      "sha256": "a62338149bf72cb6ccb9cf7bcfe1f4b014f3ba2fad72ca3b0bcfa38d51bb1908"
+    },
+    {
+      "path": "assets/captures/supplemental-history-diagnostic-5410a71b-9980-4ad4-bc47-98e3df5b1f22-visible-answer.png",
+      "bytes": 66113,
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf"
+    },
+    {
+      "path": "assets/captures/supplemental-history-diagnostic-e8a1ea54-0fe5-4ba8-9929-76b07e2b5e29-electron.png",
+      "bytes": 30460,
+      "sha256": "bca51b77a7690a8e58565d9deb752d30b21c8bb0196e8e4ee20af77d311a259e"
+    },
+    {
+      "path": "assets/captures/supplemental-history-diagnostic-e8a1ea54-0fe5-4ba8-9929-76b07e2b5e29-history-diagnostic.png",
+      "bytes": 122302,
+      "sha256": "ef0ee15b565c3a29dfff68849fb7f60f230096ff2828e8f7e1a362bc7d969e5a"
+    },
+    {
+      "path": "assets/captures/supplemental-history-diagnostic-e8a1ea54-0fe5-4ba8-9929-76b07e2b5e29-visible-answer.png",
+      "bytes": 66113,
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf"
+    },
+    {
+      "path": "assets/captures/supplemental-visible-ui-56f1ef46-deba-48b8-8bc4-8b2169169b55-electron.png",
+      "bytes": 71136,
+      "sha256": "c5d1bf1668e92b809393948c01a0955dee7f6507b5782a19fc930a6d5aae8659"
+    },
+    {
+      "path": "assets/captures/supplemental-visible-ui-56f1ef46-deba-48b8-8bc4-8b2169169b55-visible-answer.png",
+      "bytes": 71136,
+      "sha256": "c5d1bf1668e92b809393948c01a0955dee7f6507b5782a19fc930a6d5aae8659"
+    },
+    {
+      "path": "assets/diagrams/graph-attempts.svg",
+      "bytes": 2875,
+      "sha256": "7d8804a82315ac1be02f138ac5f0e6ea4463c98562248339f1857cf29eba6a84"
+    },
+    {
+      "path": "assets/diagrams/session-boundary.svg",
+      "bytes": 2335,
+      "sha256": "f870593be802f3a7d28a7ef7975dea0f6e7e8b09284eab2ead79ed99d5cd8d07"
+    },
+    {
+      "path": "assets/diagrams/trial-evidence-chain.svg",
+      "bytes": 2623,
+      "sha256": "9fccf7dfc9784a88b4920e0946eab20987e68301350be0e302b4fe93357c298c"
+    },
+    {
+      "path": "assets/figures/primary-outcomes.png",
+      "bytes": 126688,
+      "sha256": "5aed714dd40ac90cbee3322e7adc0ab11df1fe0242bdd43e07489b17b709cae2"
+    },
+    {
+      "path": "assets/figures/primary-outcomes.svg",
+      "bytes": 25854,
+      "sha256": "c231b527cccb1407ca2f3cf0a88cfdefae29ab1c95c23378d15976e84a58e29d"
+    },
+    {
+      "path": "assets/figures/project-01-checks.png",
+      "bytes": 77299,
+      "sha256": "ef79eb2dcca8f93f8f81e9deafeaefbddd300f7b4874441c2a32fd8dae7f26ee"
+    },
+    {
+      "path": "assets/figures/project-01-checks.svg",
+      "bytes": 17915,
+      "sha256": "0fd3b0d00d9c9871f26d8530e8a04b5034c6c4fa1a5608b6a1a1f9d93663f064"
+    },
+    {
+      "path": "assets/figures/project-02-checks.png",
+      "bytes": 83897,
+      "sha256": "51c26a964322ae6abb3301be9898ceb16038fb4297572f8a71c774e697f3fd8b"
+    },
+    {
+      "path": "assets/figures/project-02-checks.svg",
+      "bytes": 17915,
+      "sha256": "72d0b89aaa2c22453efc79d7a368c553a28e12988a10826edaeb61197432f90f"
+    },
+    {
+      "path": "assets/figures/project-03-checks.png",
+      "bytes": 83191,
+      "sha256": "c0a966471fbe9e6419a49fbaf7e48b8d72d66055d7db3fae341fa244d085a6cb"
+    },
+    {
+      "path": "assets/figures/project-03-checks.svg",
+      "bytes": 24534,
+      "sha256": "6e47a6f9d84c0c2e1c5189e3689832174c71eb0efdd0a884ce96c95f70141370"
+    },
+    {
+      "path": "assets/figures/project-04-checks.png",
+      "bytes": 83069,
+      "sha256": "c65bee68f45e84aa260a8c472763775533bef8194584431ba7656cc57d287d06"
+    },
+    {
+      "path": "assets/figures/project-04-checks.svg",
+      "bytes": 20878,
+      "sha256": "3208528a724ee2d9f45064ffabfea4dfde61a8ef739b27e3bf9bb4f507a389d8"
+    },
+    {
+      "path": "assets/figures/project-05-checks.png",
+      "bytes": 104117,
+      "sha256": "1045499e0b1e63e57d324e10e3f6e0616f4622b73943377931f32ada5b913b14"
+    },
+    {
+      "path": "assets/figures/project-05-checks.svg",
+      "bytes": 25381,
+      "sha256": "92e9c5c89f74a3e4f88d1120d3fb21b1bd858cd20c48b6cc9d35a131776a59e8"
+    },
+    {
+      "path": "assets/figures/project-06-checks.png",
+      "bytes": 77523,
+      "sha256": "306d8626fb2fc1c7659ce41be1fbff5c958a952206eb33dcfeac679e12dba31a"
+    },
+    {
+      "path": "assets/figures/project-06-checks.svg",
+      "bytes": 17913,
+      "sha256": "adc32767131eea7dfcdf64751f2e22eaf9c3de072e2cd973221eb56f8d4c419a"
+    },
+    {
+      "path": "assets/figures/role-allowances.png",
+      "bytes": 70170,
+      "sha256": "0b05ca9c15f02b396295911c95f8623cfbd20033659f2714de414e890944c26a"
+    },
+    {
+      "path": "assets/figures/role-allowances.svg",
+      "bytes": 10452,
+      "sha256": "85344742c1e9677402cdbec91ac9335d58f1c5ada87cb2468081ae42ed463b49"
+    },
+    {
+      "path": "assets/figures/timer-timeline.png",
+      "bytes": 86165,
+      "sha256": "73e4a96848a4f6bbb03532db67f6731ac5884cff2e0917f0d346f4354d027c81"
+    },
+    {
+      "path": "assets/figures/timer-timeline.svg",
+      "bytes": 13563,
+      "sha256": "28b63f2f16aeed28c26fc95d245cd1aec3a04a37d2a6d77f797bf44eff9a26d7"
+    },
+    {
+      "path": "catalog.json",
+      "bytes": 2400891,
+      "sha256": "50bece686adee8773ced48163c8943b030a33f5458af8321875bf6548b876564"
+    },
+    {
+      "path": "scripts/article_diagrams.py",
+      "bytes": 5005,
+      "sha256": "29d52cbd179f0981f65d3eefb6fc3038679045d0a0db76e51120558b1c4707e0"
+    },
+    {
+      "path": "scripts/article_evidence.py",
+      "bytes": 18509,
+      "sha256": "ad87b0d8670675e407e310ba8e947145a08058fabba23ecde9747a2f789165c7"
+    },
+    {
+      "path": "scripts/article_evidence.py.lock",
+      "bytes": 196708,
+      "sha256": "0954989191fbf2ed3b6d9e866b0584c15679d0e33cdbbb71a8b2ec1624ecf335"
+    },
+    {
+      "path": "scripts/package_article_evidence.py",
+      "bytes": 2877,
+      "sha256": "7ed75c73bd84f135e014e1d2f83d805e77503c99d112c6f420b67ecb5e5dc6ba"
+    },
+    {
+      "path": "scripts/validate_article_visuals.mts",
+      "bytes": 7335,
+      "sha256": "9aaed46e347e643d06f12d2cb727d379e4c7e3fb50b920f6f7a3483054b631bd"
+    },
+    {
+      "path": "trials.csv",
+      "bytes": 64609,
+      "sha256": "2fdbb9818b5e2428d48e890dd5b33bdd334d2f91dea49d3d1fa2541521e5d9b1"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 10189,
+      "sha256": "4e0b76052810ea17034f0972ce31adf51276e85c0b347763f623bd5a0b715d56"
+    }
+  ]
+}
