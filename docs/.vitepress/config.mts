@@ -902,6 +902,12 @@ const zhSourceItems = {
 export default withMermaid(
   defineConfig({
     base: docsBase,
+    vite: {
+      build: {
+        // Keep downloadable originals addressable, including the small workflow SVGs.
+        assetsInlineLimit: (file) => file.includes("/en/forge/assets/") ? false : undefined,
+      },
+    },
     title: "Learn Harness Engineering",
     description:
       "A project-based course on designing the environments, state, verification, and control systems that make Codex and Claude Code reliable.",
