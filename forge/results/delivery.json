@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-06T13:10:02.097840+00:00",
-  "status": "verification_in_progress",
+  "generatedAt": "2026-11-06T13:19:39.892554+00:00",
+  "status": "verified_delivery",
   "completionGates": {
     "nineNotebooksVerified": true,
     "eighteenCompleteBlocks": true,
@@ -11,7 +11,7 @@
     "forgeTests": true,
     "correctedCheckerQualification": true,
     "notebookExplicitAction": true,
-    "localNotebookRenders": false,
+    "localNotebookRenders": true,
     "tracesReadBack": true,
     "modelsReadBack": true,
     "frozenComparisonControls": true,
@@ -34,12 +34,28 @@
   },
   "sandboxAudit": {
     "schemaVersion": 1,
-    "verifiedAt": "2026-11-06T10:24:44.040Z",
+    "verifiedAt": "2026-11-06T13:18:34.061Z",
     "allTerminal": true,
-    "recordedWorkers": 155,
-    "remoteCourseWorkers": 142,
+    "recordedWorkers": 337,
+    "remoteCourseWorkers": 315,
     "active": [],
     "workers": [
+      {
+        "journal": "visible-ui-e493a2f0-5475-4ad9-8e2f-fcfb48c75ec9/sandbox/sandbox.json",
+        "trialId": "visible-ui-e493a2f0-5475-4ad9-8e2f-fcfb48c75ec9",
+        "sandboxId": "51242ad9-c70a-426d-be46-12cda0e031b2",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "visible-ui-56f1ef46-deba-48b8-8bc4-8b2169169b55/sandbox/sandbox.json",
+        "trialId": "visible-ui-56f1ef46-deba-48b8-8bc4-8b2169169b55",
+        "sandboxId": "0c14919f-53fb-4d0e-9995-0c367decf45c",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
       {
         "journal": "sandbox-qualification-f566ddc3-297f-4483-98a8-47c6d15a402c/interrupted/sandbox.json",
         "trialId": "sandbox-qualification-f566ddc3-297f-4483-98a8-47c6d15a402c-interrupt",
@@ -80,9 +96,41 @@
         "verified": true
       },
       {
+        "journal": "qualification-e30ebcea-2c57-4e73-99cc-9b9b10c0f82f/sandbox/sandbox.json",
+        "trialId": "qualification-e30ebcea-2c57-4e73-99cc-9b9b10c0f82f",
+        "sandboxId": "4ff30ef7-0894-4a58-9214-be567fdac4fe",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "qualification-cff12c5e-6a23-4d3b-a138-f1961945be14/sandbox/sandbox.json",
+        "trialId": "qualification-cff12c5e-6a23-4d3b-a138-f1961945be14",
+        "sandboxId": "1fa7f53f-2d37-40a1-9c6a-5e7c91728fe6",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
         "journal": "qualification-af9192de-dfe3-4631-934e-37729c2a4d56/sandbox/sandbox.json",
         "trialId": "qualification-af9192de-dfe3-4631-934e-37729c2a4d56",
         "sandboxId": "1636a38b-ca8f-47cc-b898-06bc3718e321",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "qualification-37a4f9ea-2162-45a1-8322-82c1e5259a02/sandbox/sandbox.json",
+        "trialId": "qualification-37a4f9ea-2162-45a1-8322-82c1e5259a02",
+        "sandboxId": "04963ecd-32d3-4fb0-a73e-718115c2c9e8",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "qualification-2ebe0500-a0d6-47dc-b3ae-b4ef8ba988ff/sandbox/sandbox.json",
+        "trialId": "qualification-2ebe0500-a0d6-47dc-b3ae-b4ef8ba988ff",
+        "sandboxId": "f2c67632-0726-4d88-98cd-b9b170225f8c",
         "localState": "terminated",
         "remoteStatus": "completed",
         "verified": true
@@ -107,6 +155,102 @@
         "journal": "qualification-17b194af-b3ef-4d47-95cc-178676315b60/sandbox/sandbox.json",
         "trialId": "qualification-17b194af-b3ef-4d47-95cc-178676315b60",
         "sandboxId": "d039f7d9-950f-42e1-9a7d-068accd6cb40",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "history-diagnostic-e8a1ea54-0fe5-4ba8-9929-76b07e2b5e29/sandbox/sandbox.json",
+        "trialId": "history-diagnostic-e8a1ea54-0fe5-4ba8-9929-76b07e2b5e29",
+        "sandboxId": "5ab80114-3f7e-41cb-bb98-1c1b96bd83c7",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "history-diagnostic-5410a71b-9980-4ad4-bc47-98e3df5b1f22/sandbox/sandbox.json",
+        "trialId": "history-diagnostic-5410a71b-9980-4ad4-bc47-98e3df5b1f22",
+        "sandboxId": "584c922f-c1ad-414c-9ffe-9b9263c0ca0d",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb/attempt-2-services/sandbox.json",
+        "trialId": "9e0d9f9c-86a4-4f75-8277-50a33537ba22",
+        "sandboxId": "69387848-ad53-4e76-b698-0955a7fce4bd",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb/attempt-2-protected/sandbox.json",
+        "trialId": "ff73108e-9088-432b-bc7c-a4113e3ddf3a",
+        "sandboxId": "78886f63-0e55-46d1-8eb0-47b41f090f51",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb/attempt-2-electron/sandbox.json",
+        "trialId": "27b7d785-a76b-4cf7-aa76-091201325343",
+        "sandboxId": "68b2a924-4a17-472d-ac2b-345cf66c8f56",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb/attempt-1-services/sandbox.json",
+        "trialId": "09e89bda-2798-4369-be31-e64e7374fc58",
+        "sandboxId": "37db55e5-1379-475c-952f-dfdeec54645f",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb/attempt-1-protected/sandbox.json",
+        "trialId": "875c7e96-9dc7-4aac-9000-399f494d4095",
+        "sandboxId": "40c40ddb-2810-4064-800b-45627500d875",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb/attempt-1-electron/sandbox.json",
+        "trialId": "e165e08f-88b0-450b-9a76-667718a225a5",
+        "sandboxId": "86f2cf14-16fe-419d-b9e8-c90c3198750e",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "graph-qualification-74896eb2-b69a-4e53-be6c-44a010bbf07d/attempt-2-services/sandbox.json",
+        "trialId": "c121b6fe-8826-451c-87d4-6a870ba54fbd",
+        "sandboxId": "616bdc24-f9fe-4256-89ee-fc857c9b3106",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "graph-qualification-74896eb2-b69a-4e53-be6c-44a010bbf07d/attempt-2-electron/sandbox.json",
+        "trialId": "246ff80a-d14b-403a-9ecb-81f2c90fa404",
+        "sandboxId": "e871b069-3797-4144-a320-45961036fa99",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "graph-qualification-74896eb2-b69a-4e53-be6c-44a010bbf07d/attempt-1-services/sandbox.json",
+        "trialId": "6260ba09-aa6d-4529-83b5-066df4a23a9e",
+        "sandboxId": "c2012519-58d2-4247-a658-eb924aeff48b",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "graph-qualification-74896eb2-b69a-4e53-be6c-44a010bbf07d/attempt-1-electron/sandbox.json",
+        "trialId": "8c43a910-9c22-4ac1-af63-613f12cc8ba2",
+        "sandboxId": "6608b1ea-128e-487a-8e99-1cf31e5be4cf",
         "localState": "terminated",
         "remoteStatus": "completed",
         "verified": true
@@ -144,6 +288,22 @@
         "verified": true
       },
       {
+        "journal": "graph-f496d257-3de4-4507-a7d6-1d2d4f4d9a92/sandbox.json",
+        "trialId": "f496d257-3de4-4507-a7d6-1d2d4f4d9a92",
+        "sandboxId": "5f3f51bc-998d-49bd-b797-518d0bbf09e4",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "graph-f0da5cdf-bad6-4e14-a246-74621916258d/sandbox.json",
+        "trialId": "f0da5cdf-bad6-4e14-a246-74621916258d",
+        "sandboxId": "fb0cac93-d65c-4e6a-86fb-f267bc59296d",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
         "journal": "graph-f06b8818-6754-4f4e-8f7f-d36107665dc7/sandbox.json",
         "trialId": "f06b8818-6754-4f4e-8f7f-d36107665dc7",
         "sandboxId": "38aad7f1-48ea-44ff-b583-ee0ab18083bd",
@@ -155,6 +315,14 @@
         "journal": "graph-ea2d89fd-a929-4bbd-a582-e6838e19523d/sandbox.json",
         "trialId": "ea2d89fd-a929-4bbd-a582-e6838e19523d",
         "sandboxId": "377079e5-42e7-47d1-8ba0-fa3547c1cae0",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "graph-e80b044a-800d-445e-a88e-ae1a0ba74bdd/sandbox.json",
+        "trialId": "e80b044a-800d-445e-a88e-ae1a0ba74bdd",
+        "sandboxId": "9e33949c-0593-4a56-a75d-8ad2098b4cf4",
         "localState": "terminated",
         "remoteStatus": "completed",
         "verified": true
@@ -192,9 +360,41 @@
         "verified": true
       },
       {
+        "journal": "graph-acf47e37-0067-4e43-8263-2b772e48e893/sandbox.json",
+        "trialId": "acf47e37-0067-4e43-8263-2b772e48e893",
+        "sandboxId": "c86b46a1-9711-4521-9e46-3daa8d909c11",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "graph-9ba0b694-69e2-45b6-ba8c-7826bc409a6f/sandbox.json",
+        "trialId": "9ba0b694-69e2-45b6-ba8c-7826bc409a6f",
+        "sandboxId": "de39a252-3ec9-4bbc-bc86-2865e5ec7ff9",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
         "journal": "graph-9a9d742f-a43a-43fe-95bc-d5290a6c07c5/sandbox.json",
         "trialId": "9a9d742f-a43a-43fe-95bc-d5290a6c07c5",
         "sandboxId": "35038063-6d7c-4bc4-b0b6-86b317f3b843",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "graph-983ba1bb-86da-4900-a452-e80c2959390d/sandbox.json",
+        "trialId": "983ba1bb-86da-4900-a452-e80c2959390d",
+        "sandboxId": "37870ce2-05d0-4fd1-8b48-f671235eafa0",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "graph-5c57b1db-4921-4284-aa8b-8b543fc64e43/sandbox.json",
+        "trialId": "5c57b1db-4921-4284-aa8b-8b543fc64e43",
+        "sandboxId": "1e41f577-fab4-428c-88bf-849d3b588f23",
         "localState": "terminated",
         "remoteStatus": "completed",
         "verified": true
@@ -208,6 +408,22 @@
         "verified": true
       },
       {
+        "journal": "graph-5a3c475a-3852-4854-ba3b-ecaf7cf23dd1/sandbox.json",
+        "trialId": "5a3c475a-3852-4854-ba3b-ecaf7cf23dd1",
+        "sandboxId": "3f378e6b-04cd-41c9-b715-c262b1860b27",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "graph-577d6b8a-6bf2-424d-9682-41e28d025da1/sandbox.json",
+        "trialId": "577d6b8a-6bf2-424d-9682-41e28d025da1",
+        "sandboxId": "45410389-97b8-442c-8f1d-860bc424f2df",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
         "journal": "graph-4df81aba-2c93-4281-8c74-197958708351/sandbox.json",
         "trialId": "4df81aba-2c93-4281-8c74-197958708351",
         "sandboxId": "39626eb5-d440-4c45-b155-7a43c235d4dd",
@@ -216,9 +432,25 @@
         "verified": true
       },
       {
+        "journal": "graph-4bc5a5cd-8b91-405c-9b52-2e663fe96d65/sandbox.json",
+        "trialId": "4bc5a5cd-8b91-405c-9b52-2e663fe96d65",
+        "sandboxId": "79dce044-1556-4c2d-8d80-0acc283cb084",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
         "journal": "graph-410489a4-7e8f-4473-9750-139c3bffd8ce/sandbox.json",
         "trialId": "410489a4-7e8f-4473-9750-139c3bffd8ce",
         "sandboxId": "ff206ac0-3912-4302-ae11-350db0ba3646",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "graph-40688e0f-33dd-4a53-bdf5-cdebec3c469b/sandbox.json",
+        "trialId": "40688e0f-33dd-4a53-bdf5-cdebec3c469b",
+        "sandboxId": "27e5635c-532e-4a40-9fd5-8556c57577c4",
         "localState": "terminated",
         "remoteStatus": "completed",
         "verified": true
@@ -240,6 +472,30 @@
         "verified": true
       },
       {
+        "journal": "graph-02884945-e798-4762-9f50-90ada6ec5ec5/sandbox.json",
+        "trialId": "02884945-e798-4762-9f50-90ada6ec5ec5",
+        "sandboxId": "e99642e7-52fd-4225-876d-5939b3c685a1",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "fd98af3b-1b52-448c-bc7b-b6cc47e785ea/grader/sandbox.json",
+        "trialId": "fd98af3b-1b52-448c-bc7b-b6cc47e785ea-grade",
+        "sandboxId": "02375fa2-aecc-4677-9201-1e2bdc14c24b",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "fd98af3b-1b52-448c-bc7b-b6cc47e785ea/actor/sandbox.json",
+        "trialId": "fd98af3b-1b52-448c-bc7b-b6cc47e785ea",
+        "sandboxId": "0d67e929-8edd-4ac1-88c9-a0109c936c8a",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
         "journal": "fd1411d4-3aee-47ed-a788-5007df5047e2/grader/sandbox.json",
         "trialId": "fd1411d4-3aee-47ed-a788-5007df5047e2-grade",
         "sandboxId": "fe0609cb-1df1-40fd-8b90-ee95f53cd790",
@@ -251,6 +507,22 @@
         "journal": "fd1411d4-3aee-47ed-a788-5007df5047e2/actor/sandbox.json",
         "trialId": "fd1411d4-3aee-47ed-a788-5007df5047e2",
         "sandboxId": "c2b75a5d-dbd8-43ab-9d37-c186afaec871",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "fc80b4f3-6178-454f-a003-3e311dab6617/grader/sandbox.json",
+        "trialId": "fc80b4f3-6178-454f-a003-3e311dab6617-grade",
+        "sandboxId": "acb83ab6-2132-417f-9f2a-234af65efa65",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "fc80b4f3-6178-454f-a003-3e311dab6617/actor/sandbox.json",
+        "trialId": "fc80b4f3-6178-454f-a003-3e311dab6617",
+        "sandboxId": "d32e7670-12bf-47a3-a9b4-c10b00c0aff5",
         "localState": "terminated",
         "remoteStatus": "completed",
         "verified": true
@@ -272,6 +544,38 @@
         "verified": true
       },
       {
+        "journal": "fadf2407-4ef3-4635-bab7-0a8d987096d8/grader/sandbox.json",
+        "trialId": "fadf2407-4ef3-4635-bab7-0a8d987096d8-grade",
+        "sandboxId": "fa403071-ebfc-4644-90c3-7215e4c6d43b",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "fadf2407-4ef3-4635-bab7-0a8d987096d8/actor/sandbox.json",
+        "trialId": "fadf2407-4ef3-4635-bab7-0a8d987096d8",
+        "sandboxId": "4c4bd190-3b72-4eac-9c4d-9ef552abeedf",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "f6edbfa3-3682-4e3b-bff2-ba4b864e2511/grader/sandbox.json",
+        "trialId": "f6edbfa3-3682-4e3b-bff2-ba4b864e2511-grade",
+        "sandboxId": "61a7fc81-1f81-4e80-9990-64fc89e91fe1",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "f6edbfa3-3682-4e3b-bff2-ba4b864e2511/actor/sandbox.json",
+        "trialId": "f6edbfa3-3682-4e3b-bff2-ba4b864e2511",
+        "sandboxId": "0198a72a-6215-4b47-bf24-77c06c43380b",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
         "journal": "f6ae2a06-3a5e-4cf0-88c4-80a2b0b03c2b/grader/sandbox.json",
         "trialId": "f6ae2a06-3a5e-4cf0-88c4-80a2b0b03c2b-grade",
         "sandboxId": "4f3bf38e-ee44-4ae2-8ddb-3345fb33ed25",
@@ -283,6 +587,22 @@
         "journal": "f6ae2a06-3a5e-4cf0-88c4-80a2b0b03c2b/actor/sandbox.json",
         "trialId": "f6ae2a06-3a5e-4cf0-88c4-80a2b0b03c2b",
         "sandboxId": "b9fc0166-9d54-4a5a-97c4-bd71a4321145",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "f5e5ab53-b1b4-4d70-af9d-5fb31516bd39/grader/sandbox.json",
+        "trialId": "f5e5ab53-b1b4-4d70-af9d-5fb31516bd39-grade",
+        "sandboxId": "d04203e3-7067-4ead-91ab-830a4fe8d1e4",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "f5e5ab53-b1b4-4d70-af9d-5fb31516bd39/actor/sandbox.json",
+        "trialId": "f5e5ab53-b1b4-4d70-af9d-5fb31516bd39",
+        "sandboxId": "412397cc-964b-45bb-909c-db822536df13",
         "localState": "terminated",
         "remoteStatus": "completed",
         "verified": true
@@ -320,6 +640,22 @@
         "verified": true
       },
       {
+        "journal": "ef04c221-aafe-4134-b9fc-0268fab0427f/grader/sandbox.json",
+        "trialId": "ef04c221-aafe-4134-b9fc-0268fab0427f-grade",
+        "sandboxId": "b2dab113-fc4e-4471-8eef-3c1aeecb328a",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "ef04c221-aafe-4134-b9fc-0268fab0427f/actor/sandbox.json",
+        "trialId": "ef04c221-aafe-4134-b9fc-0268fab0427f",
+        "sandboxId": "748d941a-b14c-4278-92a1-40d39198cc60",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
         "journal": "edd880ec-d379-4c91-8f32-6037f1001a94/grader/sandbox.json",
         "trialId": "edd880ec-d379-4c91-8f32-6037f1001a94-grade",
         "sandboxId": "a120e937-36ab-453e-9cdb-763c9ea43642",
@@ -331,6 +667,22 @@
         "journal": "edd880ec-d379-4c91-8f32-6037f1001a94/actor/sandbox.json",
         "trialId": "edd880ec-d379-4c91-8f32-6037f1001a94",
         "sandboxId": "4ca2b04e-1c11-459e-8d99-7d4f8ee16267",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "ec18a893-0de1-44ac-8541-7f1564e1e8d4/grader/sandbox.json",
+        "trialId": "ec18a893-0de1-44ac-8541-7f1564e1e8d4-grade",
+        "sandboxId": "fee2214f-7230-4add-8acb-f69174266980",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "ec18a893-0de1-44ac-8541-7f1564e1e8d4/actor/sandbox.json",
+        "trialId": "ec18a893-0de1-44ac-8541-7f1564e1e8d4",
+        "sandboxId": "b536ba41-8130-428e-ac49-7ea61986a81d",
         "localState": "terminated",
         "remoteStatus": "completed",
         "verified": true
@@ -400,6 +752,22 @@
         "verified": true
       },
       {
+        "journal": "e53c3cad-a475-4e49-a79c-e64cfc0316a9/grader/sandbox.json",
+        "trialId": "e53c3cad-a475-4e49-a79c-e64cfc0316a9-grade",
+        "sandboxId": "318577f3-cd5f-494a-8117-aae4cc1fa82f",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "e53c3cad-a475-4e49-a79c-e64cfc0316a9/actor/sandbox.json",
+        "trialId": "e53c3cad-a475-4e49-a79c-e64cfc0316a9",
+        "sandboxId": "be9344f1-f260-4871-b2cc-655be5eda1e1",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
         "journal": "e375487d-4743-4f01-8c68-2e4aea50edd8/grader/sandbox.json",
         "trialId": "e375487d-4743-4f01-8c68-2e4aea50edd8-grade",
         "sandboxId": "9c671ef8-2b3c-46c5-a872-c43d980f2b58",
@@ -411,6 +779,38 @@
         "journal": "e375487d-4743-4f01-8c68-2e4aea50edd8/actor/sandbox.json",
         "trialId": "e375487d-4743-4f01-8c68-2e4aea50edd8",
         "sandboxId": "57dd9cf4-88e3-4468-9221-b30ca0c6545d",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "df461eac-d90b-489e-a230-1ecc20511585/grader/sandbox.json",
+        "trialId": "df461eac-d90b-489e-a230-1ecc20511585-grade",
+        "sandboxId": "96b3334e-606b-4bc5-81bb-0d144875231d",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "df461eac-d90b-489e-a230-1ecc20511585/actor/sandbox.json",
+        "trialId": "df461eac-d90b-489e-a230-1ecc20511585",
+        "sandboxId": "0f40d6bf-a0b0-4480-882b-315608ff730f",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "dd818c1d-aea4-4e7f-b2a2-a6398ac33877/grader/sandbox.json",
+        "trialId": "dd818c1d-aea4-4e7f-b2a2-a6398ac33877-grade",
+        "sandboxId": "6fa8f6c8-21a1-4470-9809-e1c0d1638f9c",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "dd818c1d-aea4-4e7f-b2a2-a6398ac33877/actor/sandbox.json",
+        "trialId": "dd818c1d-aea4-4e7f-b2a2-a6398ac33877",
+        "sandboxId": "de089f31-15ac-4c0d-a9c8-a9158f8ce38c",
         "localState": "terminated",
         "remoteStatus": "completed",
         "verified": true
@@ -432,6 +832,110 @@
         "verified": true
       },
       {
+        "journal": "d5a939ba-ee04-422d-a681-0322111156a1/grader/sandbox.json",
+        "trialId": "d5a939ba-ee04-422d-a681-0322111156a1-grade",
+        "sandboxId": "69d75872-2b02-4286-96fa-f77441105531",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "d5a939ba-ee04-422d-a681-0322111156a1/actor/sandbox.json",
+        "trialId": "d5a939ba-ee04-422d-a681-0322111156a1",
+        "sandboxId": "9a7636c9-39da-40a5-9f5a-302000ed9365",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "d52e75ef-81cb-4fc0-b551-0884405ad2c1/grader/sandbox.json",
+        "trialId": "d52e75ef-81cb-4fc0-b551-0884405ad2c1-grade",
+        "sandboxId": "2692a7ff-316f-4790-9a67-12c561b0272c",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "d52e75ef-81cb-4fc0-b551-0884405ad2c1/actor/sandbox.json",
+        "trialId": "d52e75ef-81cb-4fc0-b551-0884405ad2c1",
+        "sandboxId": "5d0b6d09-eff3-4b44-a6cf-b509364a9f07",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "d3ef30ab-0f2c-4d0e-aee1-7bdf6a8a011e/grader/sandbox.json",
+        "trialId": "d3ef30ab-0f2c-4d0e-aee1-7bdf6a8a011e-grade",
+        "sandboxId": "9af994af-ce10-4d0e-add5-4372ad0a03b4",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "d3ef30ab-0f2c-4d0e-aee1-7bdf6a8a011e/actor/sandbox.json",
+        "trialId": "d3ef30ab-0f2c-4d0e-aee1-7bdf6a8a011e",
+        "sandboxId": "573a13b3-2c4f-4cb4-b279-b0f969174467",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "checker-diagnostic-de8f9f04-3fa4-4332-b3a5-03f5fdf57808/sandbox/sandbox.json",
+        "trialId": "checker-diagnostic-de8f9f04-3fa4-4332-b3a5-03f5fdf57808",
+        "sandboxId": "2c51ac21-2b3b-497b-9b03-bdcf185466c5",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "checker-diagnostic-d3c1c8a4-481f-4d17-b794-38f69702c9dc/sandbox/sandbox.json",
+        "trialId": "checker-diagnostic-d3c1c8a4-481f-4d17-b794-38f69702c9dc",
+        "sandboxId": "ea14d56a-faaf-4f7e-9916-4d3b90a45d46",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "checker-diagnostic-57f14e90-d62e-4fcb-ab78-60b52a12935a/sandbox/sandbox.json",
+        "trialId": "checker-diagnostic-57f14e90-d62e-4fcb-ab78-60b52a12935a",
+        "sandboxId": "81021746-93bf-474a-890c-ef4ccb10880a",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "cf87ff44-3f71-4ade-8f50-eaeb048b968a/grader/sandbox.json",
+        "trialId": "cf87ff44-3f71-4ade-8f50-eaeb048b968a-grade",
+        "sandboxId": "9fcb6feb-485b-421d-a278-d5328d6ba98a",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "cf87ff44-3f71-4ade-8f50-eaeb048b968a/actor/sandbox.json",
+        "trialId": "cf87ff44-3f71-4ade-8f50-eaeb048b968a",
+        "sandboxId": "e8746193-7108-4558-9df2-f9a879ad175b",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "ca53b79e-eab4-4b69-8c1e-072c2baff44f/grader/sandbox.json",
+        "trialId": "ca53b79e-eab4-4b69-8c1e-072c2baff44f-grade",
+        "sandboxId": "d08dd375-9dc6-48ed-bd66-cc5e8a514f90",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "ca53b79e-eab4-4b69-8c1e-072c2baff44f/actor/sandbox.json",
+        "trialId": "ca53b79e-eab4-4b69-8c1e-072c2baff44f",
+        "sandboxId": "22c78a37-2a90-4e4b-919e-cc41fa2e23f2",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
         "journal": "ca2a84d5-44c1-47da-8f29-151fbc8a9475/grader/sandbox.json",
         "trialId": "ca2a84d5-44c1-47da-8f29-151fbc8a9475-grade",
         "sandboxId": "4957f41f-95d9-4ce3-ac81-0f5a230aaa03",
@@ -443,6 +947,22 @@
         "journal": "ca2a84d5-44c1-47da-8f29-151fbc8a9475/actor/sandbox.json",
         "trialId": "ca2a84d5-44c1-47da-8f29-151fbc8a9475",
         "sandboxId": "4f2fcda0-6d93-493f-87aa-76dc6066351f",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "ca16eac7-0eb5-4523-a975-638e30938a04/grader/sandbox.json",
+        "trialId": "ca16eac7-0eb5-4523-a975-638e30938a04-grade",
+        "sandboxId": "9bb7c21f-e9f4-49ed-8c93-5b1b8e05bbd9",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "ca16eac7-0eb5-4523-a975-638e30938a04/actor/sandbox.json",
+        "trialId": "ca16eac7-0eb5-4523-a975-638e30938a04",
+        "sandboxId": "98715a92-9554-4d5b-ab16-6ebf8e24f6fb",
         "localState": "terminated",
         "remoteStatus": "completed",
         "verified": true
@@ -496,6 +1016,38 @@
         "verified": true
       },
       {
+        "journal": "bf9e17a2-c6a5-4a8d-b1d2-ccdff10121a3/grader/sandbox.json",
+        "trialId": "bf9e17a2-c6a5-4a8d-b1d2-ccdff10121a3-grade",
+        "sandboxId": "e2492d01-f152-4f0b-a2ad-a786806dc3a7",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "bf9e17a2-c6a5-4a8d-b1d2-ccdff10121a3/actor/sandbox.json",
+        "trialId": "bf9e17a2-c6a5-4a8d-b1d2-ccdff10121a3",
+        "sandboxId": "efe97269-4c8c-430a-ac58-fbbc3343227c",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "bdc971f7-1a51-437d-b46a-8ed3c268eb97/grader/sandbox.json",
+        "trialId": "bdc971f7-1a51-437d-b46a-8ed3c268eb97-grade",
+        "sandboxId": "64bf2005-c412-42a3-a46b-0f7f68262dbf",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "bdc971f7-1a51-437d-b46a-8ed3c268eb97/actor/sandbox.json",
+        "trialId": "bdc971f7-1a51-437d-b46a-8ed3c268eb97",
+        "sandboxId": "33e536fd-7e98-4236-a1c5-b7b13fe1a726",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
         "journal": "bd070321-5fd7-45b6-940b-157df5f3b512/grader/sandbox.json",
         "trialId": "bd070321-5fd7-45b6-940b-157df5f3b512-grade",
         "sandboxId": "0f85b14a-30c5-4b54-98e2-5d75c76984b7",
@@ -528,6 +1080,22 @@
         "verified": true
       },
       {
+        "journal": "b8f56d80-c72c-4e31-8c88-f8fc63d76f9a/grader/sandbox.json",
+        "trialId": "b8f56d80-c72c-4e31-8c88-f8fc63d76f9a-grade",
+        "sandboxId": "ef548818-b276-4f1e-9044-fc54138679ba",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "b8f56d80-c72c-4e31-8c88-f8fc63d76f9a/actor/sandbox.json",
+        "trialId": "b8f56d80-c72c-4e31-8c88-f8fc63d76f9a",
+        "sandboxId": "e95dc4da-144a-4fcf-8fda-27e040437256",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
         "journal": "b7f85e4f-b18a-473f-8e71-32dced0e282b/grader/sandbox.json",
         "trialId": "b7f85e4f-b18a-473f-8e71-32dced0e282b-grade",
         "sandboxId": "e6e8e82c-8ff3-409e-9963-67e2488a0dec",
@@ -555,6 +1123,70 @@
         "journal": "b6c3da9e-7fd8-474b-a79c-19cbbc62e5ba/actor/sandbox.json",
         "trialId": "b6c3da9e-7fd8-474b-a79c-19cbbc62e5ba",
         "sandboxId": "54d6e01c-c085-4cdf-98ff-e3afd4969bc8",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "b6969def-4dd9-4763-8b73-6de7cdcb59c2/grader/sandbox.json",
+        "trialId": "b6969def-4dd9-4763-8b73-6de7cdcb59c2-grade",
+        "sandboxId": "a83cc6f6-eab2-4b96-8442-6ff990a8683a",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "b6969def-4dd9-4763-8b73-6de7cdcb59c2/actor/sandbox.json",
+        "trialId": "b6969def-4dd9-4763-8b73-6de7cdcb59c2",
+        "sandboxId": "cba17826-6e63-4a56-a594-0e870b85a819",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "b394d28a-ebed-4aba-9566-61d6cc5dbedf/grader/sandbox.json",
+        "trialId": "b394d28a-ebed-4aba-9566-61d6cc5dbedf-grade",
+        "sandboxId": "edb5742b-675d-4d0b-84e8-ee7b3c3d2b14",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "b394d28a-ebed-4aba-9566-61d6cc5dbedf/actor/sandbox.json",
+        "trialId": "b394d28a-ebed-4aba-9566-61d6cc5dbedf",
+        "sandboxId": "428b1663-c62a-4720-a353-fe4efa6fe9a6",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "b043a7b3-1843-4914-af0b-0504623b1059/grader/sandbox.json",
+        "trialId": "b043a7b3-1843-4914-af0b-0504623b1059-grade",
+        "sandboxId": "9dc2d1c1-88d9-4591-95f6-6b7af8263726",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "b043a7b3-1843-4914-af0b-0504623b1059/actor/sandbox.json",
+        "trialId": "b043a7b3-1843-4914-af0b-0504623b1059",
+        "sandboxId": "39c171df-d57f-4de0-8639-582ccc57394a",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "aff27d56-36a4-4cb0-a2f4-f86301f1dc68/grader/sandbox.json",
+        "trialId": "aff27d56-36a4-4cb0-a2f4-f86301f1dc68-grade",
+        "sandboxId": "734ba6d5-de91-49b7-8c83-5f594ba5e871",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "aff27d56-36a4-4cb0-a2f4-f86301f1dc68/actor/sandbox.json",
+        "trialId": "aff27d56-36a4-4cb0-a2f4-f86301f1dc68",
+        "sandboxId": "cfc1d3fd-d5c0-4659-9a36-9898158771fd",
         "localState": "terminated",
         "remoteStatus": "completed",
         "verified": true
@@ -624,6 +1256,70 @@
         "verified": true
       },
       {
+        "journal": "a7dcf5cb-dd20-4c3f-921b-f8a51a21f8f8/grader/sandbox.json",
+        "trialId": "a7dcf5cb-dd20-4c3f-921b-f8a51a21f8f8-grade",
+        "sandboxId": "8872d732-ce5a-43fe-9bec-3baea387d7e2",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "a7dcf5cb-dd20-4c3f-921b-f8a51a21f8f8/actor/sandbox.json",
+        "trialId": "a7dcf5cb-dd20-4c3f-921b-f8a51a21f8f8",
+        "sandboxId": "c8a6eda3-0a03-472f-9764-2019bb09e2ed",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "a7bc0271-d547-4534-a15d-27b70072df40/grader/sandbox.json",
+        "trialId": "a7bc0271-d547-4534-a15d-27b70072df40-grade",
+        "sandboxId": "ac3ebeb7-69f8-4db5-a019-f43dce8cd897",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "a7bc0271-d547-4534-a15d-27b70072df40/actor/sandbox.json",
+        "trialId": "a7bc0271-d547-4534-a15d-27b70072df40",
+        "sandboxId": "5440173e-b0b1-4432-8309-d196ea81ef72",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "a2d447ed-75a6-4477-9308-e8eb60885b2b/grader/sandbox.json",
+        "trialId": "a2d447ed-75a6-4477-9308-e8eb60885b2b-grade",
+        "sandboxId": "6875b1e3-3e41-4773-b9fe-70ca70506849",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "a2d447ed-75a6-4477-9308-e8eb60885b2b/actor/sandbox.json",
+        "trialId": "a2d447ed-75a6-4477-9308-e8eb60885b2b",
+        "sandboxId": "1f1d8abf-d651-42b7-99f3-0b80659338c2",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "a09c89fc-d730-4e6c-980c-62b4e7d4993e/grader/sandbox.json",
+        "trialId": "a09c89fc-d730-4e6c-980c-62b4e7d4993e-grade",
+        "sandboxId": "8c9ccc7f-b190-41bf-82d6-bafd369d7aab",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "a09c89fc-d730-4e6c-980c-62b4e7d4993e/actor/sandbox.json",
+        "trialId": "a09c89fc-d730-4e6c-980c-62b4e7d4993e",
+        "sandboxId": "800780d8-33ff-466d-b88e-9acf8adf7366",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
         "journal": "a023c020-433a-42db-84c7-9288ae55ac21/grader/sandbox.json",
         "trialId": "a023c020-433a-42db-84c7-9288ae55ac21-grade",
         "sandboxId": "e1619405-2d2f-4258-960b-6342183b8d81",
@@ -635,6 +1331,54 @@
         "journal": "a023c020-433a-42db-84c7-9288ae55ac21/actor/sandbox.json",
         "trialId": "a023c020-433a-42db-84c7-9288ae55ac21",
         "sandboxId": "49a9677a-aed4-4124-9d77-6974b00facda",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "9feeffa8-1836-485a-a52c-2b398b40a195/grader/sandbox.json",
+        "trialId": "9feeffa8-1836-485a-a52c-2b398b40a195-grade",
+        "sandboxId": "5d558633-5627-41c6-954d-408949bab7b0",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "9feeffa8-1836-485a-a52c-2b398b40a195/actor/sandbox.json",
+        "trialId": "9feeffa8-1836-485a-a52c-2b398b40a195",
+        "sandboxId": "30762d16-7c45-4141-a057-09634fe1fada",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "9d859517-72db-4b1a-a683-cd81b9f7ca14/grader/sandbox.json",
+        "trialId": "9d859517-72db-4b1a-a683-cd81b9f7ca14-grade",
+        "sandboxId": "323d3c45-a286-423e-8459-1ab7421aa8d0",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "9d859517-72db-4b1a-a683-cd81b9f7ca14/actor/sandbox.json",
+        "trialId": "9d859517-72db-4b1a-a683-cd81b9f7ca14",
+        "sandboxId": "7caf4624-2348-40ab-90f1-f5643a7dc755",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "9c2869e2-d150-4c35-82df-9602ca48f17b/grader/sandbox.json",
+        "trialId": "9c2869e2-d150-4c35-82df-9602ca48f17b-grade",
+        "sandboxId": "26aba747-a1b4-4280-85b6-af13aaad0da7",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "9c2869e2-d150-4c35-82df-9602ca48f17b/actor/sandbox.json",
+        "trialId": "9c2869e2-d150-4c35-82df-9602ca48f17b",
+        "sandboxId": "692ad344-1b14-4203-9c59-eb72e08af8c3",
         "localState": "terminated",
         "remoteStatus": "completed",
         "verified": true
@@ -667,6 +1411,22 @@
         "journal": "98c21d2f-01ff-4684-a3c8-dd50f9e795d8/actor/sandbox.json",
         "trialId": "98c21d2f-01ff-4684-a3c8-dd50f9e795d8",
         "sandboxId": "415efc0e-6ecb-4bf4-a491-1377940343fe",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "97cb6fd5-7fd6-466c-b5f1-598126cf2d52/grader/sandbox.json",
+        "trialId": "97cb6fd5-7fd6-466c-b5f1-598126cf2d52-grade",
+        "sandboxId": "b59938ae-4216-4457-a821-29fca0474bab",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "97cb6fd5-7fd6-466c-b5f1-598126cf2d52/actor/sandbox.json",
+        "trialId": "97cb6fd5-7fd6-466c-b5f1-598126cf2d52",
+        "sandboxId": "d890fc09-b078-4b80-a5e8-defdbfc9730d",
         "localState": "terminated",
         "remoteStatus": "completed",
         "verified": true
@@ -720,6 +1480,22 @@
         "verified": true
       },
       {
+        "journal": "813076fb-3550-4e34-a3a3-831c7ed43f14/grader/sandbox.json",
+        "trialId": "813076fb-3550-4e34-a3a3-831c7ed43f14-grade",
+        "sandboxId": "0455fae4-250b-4da4-9af5-f5f9c54139bf",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "813076fb-3550-4e34-a3a3-831c7ed43f14/actor/sandbox.json",
+        "trialId": "813076fb-3550-4e34-a3a3-831c7ed43f14",
+        "sandboxId": "2c984f53-1870-44d4-9d97-9b596092f3a6",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
         "journal": "7eb6c8d1-896c-49ab-bfc3-fd4c1fd230c0/grader/sandbox.json",
         "trialId": "7eb6c8d1-896c-49ab-bfc3-fd4c1fd230c0-grade",
         "sandboxId": "284d2c62-b366-4472-941c-cf688a6fd0b9",
@@ -731,6 +1507,22 @@
         "journal": "7eb6c8d1-896c-49ab-bfc3-fd4c1fd230c0/actor/sandbox.json",
         "trialId": "7eb6c8d1-896c-49ab-bfc3-fd4c1fd230c0",
         "sandboxId": "df9eb02d-0465-4406-97ae-c5115c48d76d",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "79398b0b-a9eb-4892-bb24-194bdc289e2f/grader/sandbox.json",
+        "trialId": "79398b0b-a9eb-4892-bb24-194bdc289e2f-grade",
+        "sandboxId": "6419a85f-fab8-4e89-b296-f5cebccfa5a9",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "79398b0b-a9eb-4892-bb24-194bdc289e2f/actor/sandbox.json",
+        "trialId": "79398b0b-a9eb-4892-bb24-194bdc289e2f",
+        "sandboxId": "d89198ec-71ee-44af-8c37-a7e5fb9bea8e",
         "localState": "terminated",
         "remoteStatus": "completed",
         "verified": true
@@ -752,6 +1544,38 @@
         "verified": true
       },
       {
+        "journal": "73c46965-1093-4b68-a810-a901dd78bfc0/grader/sandbox.json",
+        "trialId": "73c46965-1093-4b68-a810-a901dd78bfc0-grade",
+        "sandboxId": "5045d477-05b4-4bab-9c39-bd513f446a4e",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "73c46965-1093-4b68-a810-a901dd78bfc0/actor/sandbox.json",
+        "trialId": "73c46965-1093-4b68-a810-a901dd78bfc0",
+        "sandboxId": "2191d00f-6c38-4b05-aa01-13ef9b2b8dfc",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "71581d99-5fb7-4e57-bee4-56ec354858a2/grader/sandbox.json",
+        "trialId": "71581d99-5fb7-4e57-bee4-56ec354858a2-grade",
+        "sandboxId": "f3f7602c-d485-4c3f-9852-d800d70cdb4f",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "71581d99-5fb7-4e57-bee4-56ec354858a2/actor/sandbox.json",
+        "trialId": "71581d99-5fb7-4e57-bee4-56ec354858a2",
+        "sandboxId": "e69436bd-66df-4842-b12c-887b5f37583b",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
         "journal": "7044390c-06be-4cd7-ae30-9b063600ead1/grader/sandbox.json",
         "trialId": "7044390c-06be-4cd7-ae30-9b063600ead1-grade",
         "sandboxId": "530bef9b-8b35-4b29-849d-447f29fe7f6f",
@@ -763,6 +1587,38 @@
         "journal": "7044390c-06be-4cd7-ae30-9b063600ead1/actor/sandbox.json",
         "trialId": "7044390c-06be-4cd7-ae30-9b063600ead1",
         "sandboxId": "7b6e61ca-fead-4a8d-9813-a20a1fb22a19",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "70336779-611e-48d8-839d-7e92aa1f63cb/grader/sandbox.json",
+        "trialId": "70336779-611e-48d8-839d-7e92aa1f63cb-grade",
+        "sandboxId": "f366b357-9ef7-44bf-9a24-7afca9e46d83",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "70336779-611e-48d8-839d-7e92aa1f63cb/actor/sandbox.json",
+        "trialId": "70336779-611e-48d8-839d-7e92aa1f63cb",
+        "sandboxId": "59ba7845-80d0-4acb-9659-684c43e3689c",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "6e00cd09-8cfb-495e-ab90-dc16c7938030/grader/sandbox.json",
+        "trialId": "6e00cd09-8cfb-495e-ab90-dc16c7938030-grade",
+        "sandboxId": "1755a515-6bf0-4852-bb79-3fc863ccf60d",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "6e00cd09-8cfb-495e-ab90-dc16c7938030/actor/sandbox.json",
+        "trialId": "6e00cd09-8cfb-495e-ab90-dc16c7938030",
+        "sandboxId": "40daf69e-7376-447d-a225-189c71cf9cc6",
         "localState": "terminated",
         "remoteStatus": "completed",
         "verified": true
@@ -784,6 +1640,22 @@
         "verified": true
       },
       {
+        "journal": "6aeae35a-525b-448d-93eb-469a22e6cedf/grader/sandbox.json",
+        "trialId": "6aeae35a-525b-448d-93eb-469a22e6cedf-grade",
+        "sandboxId": "b7251ace-2356-4487-bade-088387d7913d",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "6aeae35a-525b-448d-93eb-469a22e6cedf/actor/sandbox.json",
+        "trialId": "6aeae35a-525b-448d-93eb-469a22e6cedf",
+        "sandboxId": "bc8c571b-1a93-4537-ada7-33e9454bc546",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
         "journal": "68bb08fa-4f9b-42af-9232-dd7e50da8414/grader/sandbox.json",
         "trialId": "68bb08fa-4f9b-42af-9232-dd7e50da8414-grade",
         "sandboxId": "11bc9d61-2b43-47fd-989e-347a3b5b421e",
@@ -800,6 +1672,134 @@
         "verified": true
       },
       {
+        "journal": "66558826-6e1a-46e0-abe9-ef951eff0c16/grader/sandbox.json",
+        "trialId": "66558826-6e1a-46e0-abe9-ef951eff0c16-grade",
+        "sandboxId": "c3d07a1b-47d9-4610-bdb4-1d79813787d0",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "66558826-6e1a-46e0-abe9-ef951eff0c16/actor/sandbox.json",
+        "trialId": "66558826-6e1a-46e0-abe9-ef951eff0c16",
+        "sandboxId": "d2620524-8712-4fe7-9044-f64f43117f09",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "64419d93-5073-4632-bff0-8ccd75f2e21f/grader/sandbox.json",
+        "trialId": "64419d93-5073-4632-bff0-8ccd75f2e21f-grade",
+        "sandboxId": "58841c77-9be4-45c9-ab2e-ad92ec334207",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "64419d93-5073-4632-bff0-8ccd75f2e21f/actor/sandbox.json",
+        "trialId": "64419d93-5073-4632-bff0-8ccd75f2e21f",
+        "sandboxId": "df1d5a5c-bcb5-4d63-b584-79510ac88204",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "643a867a-74e8-4987-aa56-5640b4c1982e/grader/sandbox.json",
+        "trialId": "643a867a-74e8-4987-aa56-5640b4c1982e-grade",
+        "sandboxId": "602e5aed-9ec5-47ad-88c7-d119092b960d",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "643a867a-74e8-4987-aa56-5640b4c1982e/actor/sandbox.json",
+        "trialId": "643a867a-74e8-4987-aa56-5640b4c1982e",
+        "sandboxId": "2b7337bf-b73a-4f88-8cea-b13273cb2469",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "58ac2e5b-4ee4-4313-bbbd-4022117855bb/grader/sandbox.json",
+        "trialId": "58ac2e5b-4ee4-4313-bbbd-4022117855bb-grade",
+        "sandboxId": "6509be05-1550-406c-88bc-798dfc834b39",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "58ac2e5b-4ee4-4313-bbbd-4022117855bb/actor/sandbox.json",
+        "trialId": "58ac2e5b-4ee4-4313-bbbd-4022117855bb",
+        "sandboxId": "2fe48237-74de-4b29-8ab6-e99a1b19f462",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "5609c89b-f73f-4a9e-8702-a57758c3403c/grader/sandbox.json",
+        "trialId": "5609c89b-f73f-4a9e-8702-a57758c3403c-grade",
+        "sandboxId": "65ce5deb-c2ee-4cbd-972f-dc223cf3c247",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "5609c89b-f73f-4a9e-8702-a57758c3403c/actor/sandbox.json",
+        "trialId": "5609c89b-f73f-4a9e-8702-a57758c3403c",
+        "sandboxId": "56cf117b-a766-4256-b584-7c95fa09a424",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "54bb7391-48b0-47f5-9ded-36194f52a76d/grader/sandbox.json",
+        "trialId": "54bb7391-48b0-47f5-9ded-36194f52a76d-grade",
+        "sandboxId": "0e6e6c8a-ae80-4366-95c0-2f7195fc3f54",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "54bb7391-48b0-47f5-9ded-36194f52a76d/actor/sandbox.json",
+        "trialId": "54bb7391-48b0-47f5-9ded-36194f52a76d",
+        "sandboxId": "f4721562-1b69-4348-9208-50facffb593c",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "54b81e30-0be0-470e-ab3c-2a3783ead0f5/grader/sandbox.json",
+        "trialId": "54b81e30-0be0-470e-ab3c-2a3783ead0f5-grade",
+        "sandboxId": "d166e77f-7127-423e-9a7d-3a22491e939c",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "54b81e30-0be0-470e-ab3c-2a3783ead0f5/actor/sandbox.json",
+        "trialId": "54b81e30-0be0-470e-ab3c-2a3783ead0f5",
+        "sandboxId": "4ca18871-a38a-4eed-a0a7-e3876b3095e6",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "534ab4c7-9100-4d94-a379-fbfc4ad381c7/grader/sandbox.json",
+        "trialId": "534ab4c7-9100-4d94-a379-fbfc4ad381c7-grade",
+        "sandboxId": "63fda2f7-d790-47a0-b006-71ee83e676bc",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "534ab4c7-9100-4d94-a379-fbfc4ad381c7/actor/sandbox.json",
+        "trialId": "534ab4c7-9100-4d94-a379-fbfc4ad381c7",
+        "sandboxId": "b7a829e2-8c1e-49fa-9cdd-fdcdb9e3ab1f",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
         "journal": "532b1822-b26a-438f-ba4f-3f6f30bcf837/grader/sandbox.json",
         "trialId": "532b1822-b26a-438f-ba4f-3f6f30bcf837-grade",
         "sandboxId": "a53e45e2-ad1d-40e8-a4da-25e3092b6d1e",
@@ -811,6 +1811,22 @@
         "journal": "532b1822-b26a-438f-ba4f-3f6f30bcf837/actor/sandbox.json",
         "trialId": "532b1822-b26a-438f-ba4f-3f6f30bcf837",
         "sandboxId": "53071b3f-f9ad-4fb9-8ba1-dde987e86ca0",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "4eb48651-306d-44e9-a468-a6ffc322bf27/grader/sandbox.json",
+        "trialId": "4eb48651-306d-44e9-a468-a6ffc322bf27-grade",
+        "sandboxId": "732300e0-b5f4-4468-86bc-c9f7cd30248f",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "4eb48651-306d-44e9-a468-a6ffc322bf27/actor/sandbox.json",
+        "trialId": "4eb48651-306d-44e9-a468-a6ffc322bf27",
+        "sandboxId": "68601614-f1d0-4056-81ce-ff794905509d",
         "localState": "terminated",
         "remoteStatus": "completed",
         "verified": true
@@ -864,6 +1880,38 @@
         "verified": true
       },
       {
+        "journal": "44762357-664b-4d30-b390-8121b6d51b07/grader/sandbox.json",
+        "trialId": "44762357-664b-4d30-b390-8121b6d51b07-grade",
+        "sandboxId": "ea54a075-a7f5-4364-b6b4-ec48907ff1f8",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "44762357-664b-4d30-b390-8121b6d51b07/actor/sandbox.json",
+        "trialId": "44762357-664b-4d30-b390-8121b6d51b07",
+        "sandboxId": "c920d295-50ac-4d0d-bc2a-239527255dc9",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "43ad509b-7eb5-4d9e-97c7-ff33567693fd/grader/sandbox.json",
+        "trialId": "43ad509b-7eb5-4d9e-97c7-ff33567693fd-grade",
+        "sandboxId": "fecd44d5-f3c7-4f15-8a54-5c6cfe43848f",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "43ad509b-7eb5-4d9e-97c7-ff33567693fd/actor/sandbox.json",
+        "trialId": "43ad509b-7eb5-4d9e-97c7-ff33567693fd",
+        "sandboxId": "45a0467b-75e7-44d3-b4af-7fead9cd9a6b",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
         "journal": "41593b90-6493-4ab7-a001-1dc24878eeb0/grader/sandbox.json",
         "trialId": "41593b90-6493-4ab7-a001-1dc24878eeb0-grade",
         "sandboxId": "1e8f6d6a-b13c-451d-8acf-08027b264989",
@@ -891,6 +1939,38 @@
         "journal": "3f742e3b-8f37-49bd-bfb5-d55ac89bed80/actor/sandbox.json",
         "trialId": "3f742e3b-8f37-49bd-bfb5-d55ac89bed80",
         "sandboxId": "22f328c0-1872-4e55-b5e7-b1c2bf509b32",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "3e5cd770-94e5-49f9-b478-a2043dc9a682/grader/sandbox.json",
+        "trialId": "3e5cd770-94e5-49f9-b478-a2043dc9a682-grade",
+        "sandboxId": "5d7ca5ff-00b7-44ba-a391-50c2e4af7b41",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "3e5cd770-94e5-49f9-b478-a2043dc9a682/actor/sandbox.json",
+        "trialId": "3e5cd770-94e5-49f9-b478-a2043dc9a682",
+        "sandboxId": "24920e9c-d4f8-4165-8635-355098ed1054",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "3dd7e4f8-1155-4ffa-9da5-98c82c24c087/grader/sandbox.json",
+        "trialId": "3dd7e4f8-1155-4ffa-9da5-98c82c24c087-grade",
+        "sandboxId": "d05a04aa-ae23-4698-ba35-bfca0add2251",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "3dd7e4f8-1155-4ffa-9da5-98c82c24c087/actor/sandbox.json",
+        "trialId": "3dd7e4f8-1155-4ffa-9da5-98c82c24c087",
+        "sandboxId": "8e0d099f-2626-430b-8716-3efcef9aa792",
         "localState": "terminated",
         "remoteStatus": "completed",
         "verified": true
@@ -944,6 +2024,38 @@
         "verified": true
       },
       {
+        "journal": "3b7cd608-2c28-4cb8-9d4f-aeb60ac3bc7a/grader/sandbox.json",
+        "trialId": "3b7cd608-2c28-4cb8-9d4f-aeb60ac3bc7a-grade",
+        "sandboxId": "51e782f0-f2e9-411b-b9d1-88473720d57d",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "3b7cd608-2c28-4cb8-9d4f-aeb60ac3bc7a/actor/sandbox.json",
+        "trialId": "3b7cd608-2c28-4cb8-9d4f-aeb60ac3bc7a",
+        "sandboxId": "3a2b3f81-f46c-43bc-be63-fe0b17be9445",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "39c8c943-15bf-4d53-a99e-aaa4cd9ff5a3/grader/sandbox.json",
+        "trialId": "39c8c943-15bf-4d53-a99e-aaa4cd9ff5a3-grade",
+        "sandboxId": "b4eab352-75db-4637-bd5c-d341acffbd1c",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "39c8c943-15bf-4d53-a99e-aaa4cd9ff5a3/actor/sandbox.json",
+        "trialId": "39c8c943-15bf-4d53-a99e-aaa4cd9ff5a3",
+        "sandboxId": "25be3e26-daa8-4e4b-a1bd-ecd4cd85fc21",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
         "journal": "37ec7440-8567-4905-a12d-e1b7912474b1/grader/sandbox.json",
         "trialId": "37ec7440-8567-4905-a12d-e1b7912474b1-grade",
         "sandboxId": "0cdae438-3586-404d-b92a-01d43b1492a0",
@@ -987,6 +2099,38 @@
         "journal": "34290474-83eb-4792-9368-096c0ae83df0/actor/sandbox.json",
         "trialId": "34290474-83eb-4792-9368-096c0ae83df0",
         "sandboxId": "d110edbc-5ff4-4ace-956c-3fdf81b4a156",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "33bdfb7f-4f5e-49b8-86c8-92d6ce0e7b0b/grader/sandbox.json",
+        "trialId": "33bdfb7f-4f5e-49b8-86c8-92d6ce0e7b0b-grade",
+        "sandboxId": "8fc5f87c-2a83-4c1c-b63d-acdacd051137",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "33bdfb7f-4f5e-49b8-86c8-92d6ce0e7b0b/actor/sandbox.json",
+        "trialId": "33bdfb7f-4f5e-49b8-86c8-92d6ce0e7b0b",
+        "sandboxId": "c44ba077-84c9-4f13-ad1f-f838709abe00",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "3398c0d0-a9f2-4383-b64f-c7469ff9d0df/grader/sandbox.json",
+        "trialId": "3398c0d0-a9f2-4383-b64f-c7469ff9d0df-grade",
+        "sandboxId": "7843c7a3-e3b0-4b5c-877f-518b5546f92c",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "3398c0d0-a9f2-4383-b64f-c7469ff9d0df/actor/sandbox.json",
+        "trialId": "3398c0d0-a9f2-4383-b64f-c7469ff9d0df",
+        "sandboxId": "670fb7e4-9878-429b-9611-40838c4ea26b",
         "localState": "terminated",
         "remoteStatus": "completed",
         "verified": true
@@ -1040,6 +2184,54 @@
         "verified": true
       },
       {
+        "journal": "22fa3879-a8ff-4219-847c-c5972efedf78/grader/sandbox.json",
+        "trialId": "22fa3879-a8ff-4219-847c-c5972efedf78-grade",
+        "sandboxId": "35aa3caf-3164-4ae1-8932-c2562934efad",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "22fa3879-a8ff-4219-847c-c5972efedf78/actor/sandbox.json",
+        "trialId": "22fa3879-a8ff-4219-847c-c5972efedf78",
+        "sandboxId": "4f596402-333a-4026-aef3-61d0de0fa3bc",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "22955029-2de6-4aed-8c35-dda6059b023d/grader/sandbox.json",
+        "trialId": "22955029-2de6-4aed-8c35-dda6059b023d-grade",
+        "sandboxId": "602beb19-fdb3-44e5-93ef-15e56106b818",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "22955029-2de6-4aed-8c35-dda6059b023d/actor/sandbox.json",
+        "trialId": "22955029-2de6-4aed-8c35-dda6059b023d",
+        "sandboxId": "3f018ac3-630a-44dd-b90c-b46c28f08725",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "22873518-2d13-475d-ba37-7b9e94c48407/grader/sandbox.json",
+        "trialId": "22873518-2d13-475d-ba37-7b9e94c48407-grade",
+        "sandboxId": "5168f26b-4f45-4bc1-8035-3282135cc23d",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "22873518-2d13-475d-ba37-7b9e94c48407/actor/sandbox.json",
+        "trialId": "22873518-2d13-475d-ba37-7b9e94c48407",
+        "sandboxId": "42be0f8d-ef66-440e-9782-bb02bc25b3d1",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
         "journal": "224d57f1-4850-49a9-bd6c-47061d8d9d3d/grader/sandbox.json",
         "trialId": "224d57f1-4850-49a9-bd6c-47061d8d9d3d-grade",
         "sandboxId": "87e34fec-68fb-457b-a06b-14dd431c5e06",
@@ -1056,6 +2248,54 @@
         "verified": true
       },
       {
+        "journal": "216527fa-6ff5-4cde-a203-696bb1e57f06/grader/sandbox.json",
+        "trialId": "216527fa-6ff5-4cde-a203-696bb1e57f06-grade",
+        "sandboxId": "7f88f93f-260d-49b8-82cc-8c2e07721130",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "216527fa-6ff5-4cde-a203-696bb1e57f06/actor/sandbox.json",
+        "trialId": "216527fa-6ff5-4cde-a203-696bb1e57f06",
+        "sandboxId": "14ec23d8-a6cf-4679-82f2-362dc6294e41",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "20e034ff-32bc-4225-8416-044011f5f68d/grader/sandbox.json",
+        "trialId": "20e034ff-32bc-4225-8416-044011f5f68d-grade",
+        "sandboxId": "0db64c08-4903-4b76-b910-35d3f6d23b32",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "20e034ff-32bc-4225-8416-044011f5f68d/actor/sandbox.json",
+        "trialId": "20e034ff-32bc-4225-8416-044011f5f68d",
+        "sandboxId": "05eb18fb-9f64-4a60-aa31-22aa691cdd8c",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "1fb04273-5ca5-4a79-9a9d-686149623068/grader/sandbox.json",
+        "trialId": "1fb04273-5ca5-4a79-9a9d-686149623068-grade",
+        "sandboxId": "9139db09-8faf-4cd1-9975-5bdfd2c68bb8",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "1fb04273-5ca5-4a79-9a9d-686149623068/actor/sandbox.json",
+        "trialId": "1fb04273-5ca5-4a79-9a9d-686149623068",
+        "sandboxId": "e55e762d-6366-4051-8646-f95fabd4363d",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
         "journal": "1e7c395e-243b-4ca2-856c-c72dc8a7968b/grader/sandbox.json",
         "trialId": "1e7c395e-243b-4ca2-856c-c72dc8a7968b-grade",
         "sandboxId": "594aba1d-dbe4-4cd0-8b87-1a15e950d7b6",
@@ -1067,6 +2307,38 @@
         "journal": "1e7c395e-243b-4ca2-856c-c72dc8a7968b/actor/sandbox.json",
         "trialId": "1e7c395e-243b-4ca2-856c-c72dc8a7968b",
         "sandboxId": "e7b3dfff-d181-4a8c-b83e-82af5c776b4e",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "1c1228c9-2625-4256-9aa2-694d37def359/grader/sandbox.json",
+        "trialId": "1c1228c9-2625-4256-9aa2-694d37def359-grade",
+        "sandboxId": "0e8c6f18-2e80-45ce-8aa0-e189cee3ba51",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "1c1228c9-2625-4256-9aa2-694d37def359/actor/sandbox.json",
+        "trialId": "1c1228c9-2625-4256-9aa2-694d37def359",
+        "sandboxId": "c0734623-df79-4d15-a834-1c534008bf02",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "1b0a25e5-ba13-4931-9c4f-ff6100f6672a/grader/sandbox.json",
+        "trialId": "1b0a25e5-ba13-4931-9c4f-ff6100f6672a-grade",
+        "sandboxId": "1739fb05-9d49-445b-a14b-9f810c667a9f",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "1b0a25e5-ba13-4931-9c4f-ff6100f6672a/actor/sandbox.json",
+        "trialId": "1b0a25e5-ba13-4931-9c4f-ff6100f6672a",
+        "sandboxId": "040275da-f573-4057-adda-b40442c870b4",
         "localState": "terminated",
         "remoteStatus": "completed",
         "verified": true
@@ -1120,6 +2392,22 @@
         "verified": true
       },
       {
+        "journal": "1500360a-62ce-42cf-aa87-c82962c43655/grader/sandbox.json",
+        "trialId": "1500360a-62ce-42cf-aa87-c82962c43655-grade",
+        "sandboxId": "fcf6b924-0a00-4650-965d-d92ea2cba923",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "1500360a-62ce-42cf-aa87-c82962c43655/actor/sandbox.json",
+        "trialId": "1500360a-62ce-42cf-aa87-c82962c43655",
+        "sandboxId": "bc95d4de-1cae-4f73-b115-656cbaafc01f",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
         "journal": "11500f73-bc29-4c22-83f4-1e95f0a9abd1/grader/sandbox.json",
         "trialId": "11500f73-bc29-4c22-83f4-1e95f0a9abd1-grade",
         "sandboxId": "701de8a1-62c3-49bc-af45-169b17fe28e2",
@@ -1131,6 +2419,70 @@
         "journal": "11500f73-bc29-4c22-83f4-1e95f0a9abd1/actor/sandbox.json",
         "trialId": "11500f73-bc29-4c22-83f4-1e95f0a9abd1",
         "sandboxId": "3eb23be0-e30e-43e3-8324-2955204bfa6f",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "0cb15597-b43e-4295-985b-af7ea9c1454a/grader/sandbox.json",
+        "trialId": "0cb15597-b43e-4295-985b-af7ea9c1454a-grade",
+        "sandboxId": "9c079fa3-fdd3-4fdc-8fca-51996d848d35",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "0cb15597-b43e-4295-985b-af7ea9c1454a/actor/sandbox.json",
+        "trialId": "0cb15597-b43e-4295-985b-af7ea9c1454a",
+        "sandboxId": "93bbab85-2ccb-4414-85e4-82179832827c",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "0c88671b-326d-4c20-b1b9-aaf95782c93c/grader/sandbox.json",
+        "trialId": "0c88671b-326d-4c20-b1b9-aaf95782c93c-grade",
+        "sandboxId": "2c1b14c4-8997-4fc7-9f34-f3aee602c905",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "0c88671b-326d-4c20-b1b9-aaf95782c93c/actor/sandbox.json",
+        "trialId": "0c88671b-326d-4c20-b1b9-aaf95782c93c",
+        "sandboxId": "e4fa35e4-380e-4cb7-acbc-1347a5be6a3d",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "0865dc24-2666-4fda-b6ae-3f488f5339cb/grader/sandbox.json",
+        "trialId": "0865dc24-2666-4fda-b6ae-3f488f5339cb-grade",
+        "sandboxId": "9d130fc2-4d4a-4a9f-ae17-d2592a8679cf",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "0865dc24-2666-4fda-b6ae-3f488f5339cb/actor/sandbox.json",
+        "trialId": "0865dc24-2666-4fda-b6ae-3f488f5339cb",
+        "sandboxId": "7f410cd6-39b4-4399-8eb5-9da4057316a8",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "0809587e-cc59-4276-8285-02dc5072f2aa/grader/sandbox.json",
+        "trialId": "0809587e-cc59-4276-8285-02dc5072f2aa-grade",
+        "sandboxId": "dac0ded3-6ce0-4851-b798-02b9d6959d76",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "0809587e-cc59-4276-8285-02dc5072f2aa/actor/sandbox.json",
+        "trialId": "0809587e-cc59-4276-8285-02dc5072f2aa",
+        "sandboxId": "e87ef21d-9e6e-4042-9ca7-24dc73edcdb1",
         "localState": "terminated",
         "remoteStatus": "completed",
         "verified": true
@@ -1168,6 +2520,22 @@
         "verified": true
       },
       {
+        "journal": "03ca01ca-eb64-45ae-9317-824ca4a26026/grader/sandbox.json",
+        "trialId": "03ca01ca-eb64-45ae-9317-824ca4a26026-grade",
+        "sandboxId": "f5d827bc-0b6c-4325-bb21-e8e78ba09d76",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "03ca01ca-eb64-45ae-9317-824ca4a26026/actor/sandbox.json",
+        "trialId": "03ca01ca-eb64-45ae-9317-824ca4a26026",
+        "sandboxId": "e4d24dae-8d59-4355-9b7d-ffa3c9215a5d",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
         "journal": "03707b50-d426-4961-b8e3-522d7f674f6c/grader/sandbox.json",
         "trialId": "03707b50-d426-4961-b8e3-522d7f674f6c-grade",
         "sandboxId": "d5a9f78c-9969-4992-86cc-890f519a49a6",
@@ -1184,6 +2552,22 @@
         "verified": true
       },
       {
+        "journal": "0173b789-396b-4a83-922a-644c172ff4f4/grader/sandbox.json",
+        "trialId": "0173b789-396b-4a83-922a-644c172ff4f4-grade",
+        "sandboxId": "bbdc744e-1b05-47a9-9cef-0fb36e2eb81d",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "0173b789-396b-4a83-922a-644c172ff4f4/actor/sandbox.json",
+        "trialId": "0173b789-396b-4a83-922a-644c172ff4f4",
+        "sandboxId": "1bd31e32-d62b-4a02-8c76-b6e6654c70f1",
+        "localState": "terminated",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
         "journal": "notebook-sessions/notebook-15313-editor-1.json",
         "sandboxId": "60f958e0-a6f5-4523-a6e3-247b846ed83f",
         "remoteStatus": "completed",
@@ -1192,6 +2576,12 @@
       {
         "journal": "notebook-sessions/notebook-15313-editor-2.json",
         "sandboxId": "26c8af20-1f7b-482a-a4e5-9e1fead1b39a",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "notebook-sessions/notebook-15313-editor-3.json",
+        "sandboxId": "b0f87580-b430-4da6-bea5-c5cda0ad78f2",
         "remoteStatus": "completed",
         "verified": true
       },
@@ -1213,8 +2603,20 @@
         "verified": true
       },
       {
+        "journal": "notebook-sessions/notebook-15314-editor-4.json",
+        "sandboxId": "f4f52004-8640-4a16-8645-c4167002f5fb",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
         "journal": "notebook-sessions/notebook-15315-editor-1.json",
         "sandboxId": "efb625e8-a0b2-4091-9a26-82d1d7acd57d",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "notebook-sessions/notebook-15315-editor-2.json",
+        "sandboxId": "ce793f62-f970-4c46-b188-44ca393b89bc",
         "remoteStatus": "completed",
         "verified": true
       },
@@ -1225,8 +2627,20 @@
         "verified": true
       },
       {
+        "journal": "notebook-sessions/notebook-15316-editor-2.json",
+        "sandboxId": "80020db6-123d-4689-96ea-3229f68b81c0",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
         "journal": "notebook-sessions/notebook-15317-editor-1.json",
         "sandboxId": "61cfa9fc-cf5c-4d58-8105-c0d0a4b039fa",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "notebook-sessions/notebook-15317-editor-2.json",
+        "sandboxId": "312a299d-49b0-4155-a7e5-fa9b9e3cf73d",
         "remoteStatus": "completed",
         "verified": true
       },
@@ -1237,8 +2651,20 @@
         "verified": true
       },
       {
+        "journal": "notebook-sessions/notebook-15318-editor-2.json",
+        "sandboxId": "308f1c0c-e75b-4739-a751-2c2c927472c9",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
         "journal": "notebook-sessions/notebook-15319-editor-1.json",
         "sandboxId": "6597ac42-b25a-4f21-8999-0974d02ecf3a",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "notebook-sessions/notebook-15319-editor-2.json",
+        "sandboxId": "4c11af44-c196-4f78-bfff-ff1566416077",
         "remoteStatus": "completed",
         "verified": true
       },
@@ -1249,8 +2675,20 @@
         "verified": true
       },
       {
+        "journal": "notebook-sessions/notebook-15320-editor-2.json",
+        "sandboxId": "2f0680ed-2bd8-468f-bfba-63ab8be8ddcc",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
         "journal": "notebook-sessions/notebook-15321-editor-1.json",
         "sandboxId": "113bc337-e534-40b3-844e-eec5aee14eb2",
+        "remoteStatus": "completed",
+        "verified": true
+      },
+      {
+        "journal": "notebook-sessions/notebook-15321-editor-2.json",
+        "sandboxId": "b699c804-a47a-4ee3-aab7-40ca0ef9256d",
         "remoteStatus": "completed",
         "verified": true
       }
@@ -2696,7 +4134,7 @@
   "budget": {
     "schemaVersion": 1,
     "limitUsd": null,
-    "spentEstimateUsd": 19.001973120000017,
+    "spentEstimateUsd": 19.042266945333353,
     "reservations": {},
     "settled": {
       "qualification-17b194af-b3ef-4d47-95cc-178676315b60": 0.003,
@@ -2907,7 +4345,9 @@
       "e165e08f-88b0-450b-9a76-667718a225a5": 0.001722744,
       "ff73108e-9088-432b-bc7c-a4113e3ddf3a": 0.0020997066666666665,
       "9e0d9f9c-86a4-4f75-8277-50a33537ba22": 0.0015203466666666666,
-      "27b7d785-a76b-4cf7-aa76-091201325343": 0.001818925333333333
+      "27b7d785-a76b-4cf7-aa76-091201325343": 0.001818925333333333,
+      "notebook-15321-editor-2": 0.01681156933333333,
+      "notebook-15313-editor-3": 0.023482256
     },
     "reconciliations": [
       {
@@ -2963,7 +4403,7 @@
       }
     ]
   },
-  "knownAndAuditedEstimateUsd": 13.001973120000017,
+  "knownAndAuditedEstimateUsd": 13.042266945333353,
   "chargedUnknownReservationsUsd": 6,
   "checks": {
     "forgeTests": {
@@ -2973,7 +4413,7 @@
     },
     "offlineAppsPassed": 15,
     "offlineAppsTotal": 15,
-    "notebooksRenderedLocally": 1,
+    "notebooksRenderedLocally": 9,
     "notebooksPublishedVerified": 9
   },
   "prs": [
@@ -2991,8 +4431,8 @@
       "file": "forge/notebooks/00-overview.py",
       "project": "overview",
       "title": "Forge track: evidence before conclusions",
-      "sourceCommit": "412bf598c9091e225a92f3849c65c10a74c3d969",
-      "sha256": "5fc8c1e57229313028d2b243cb6699ea57ee9e44bb995624056d7cdd27385775",
+      "sourceCommit": "c54f248978eda1296c183ca252cfb628ac9ea47e",
+      "sha256": "a2c0c8325a86c31cbbf180de0e3ec2446fd3c1d0c40fded819f29233e85b153f",
       "id": "Tm90ZWJvb2s6MTUzMTM=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTM%3D",
       "status": "published_verified",
@@ -3000,28 +4440,28 @@
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "Forge-track-evidence-before-conclusions",
-        "versionIndex": 8,
+        "versionIndex": 11,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:30Z",
-      "expectedRemoteSha256": "5fc8c1e57229313028d2b243cb6699ea57ee9e44bb995624056d7cdd27385775",
+      "expectedRemoteSha256": "a2c0c8325a86c31cbbf180de0e3ec2446fd3c1d0c40fded819f29233e85b153f",
       "currentVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "Forge-track-evidence-before-conclusions",
-        "versionIndex": 8,
+        "versionIndex": 11,
         "sourceFileName": "notebook.py"
       },
-      "renderedOutputSha256": "046a2c3e64babb8d2b011b9ed2175a7c589179dc2d78f0bd1f0a6234d981da45",
+      "renderedOutputSha256": "94bc4e9aa1d4e9d3803d13e9fe3d74c1322aa331ceb49cfc2da7a1e46d4a61df",
       "renderedCellSourceVerified": true,
-      "verifiedAggregateGroups": 19,
+      "verifiedAggregateGroups": 43,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-06T10:25:25.742207+00:00"
+      "verifiedAt": "2026-11-06T13:17:18.188556+00:00"
     },
     {
       "file": "forge/notebooks/01-minimal-harness.py",
       "project": "project-01",
       "title": "01 \u00b7 Minimal instructions and explicit harnesses",
-      "sourceCommit": "4733dfa740fa175d32e66699c7206fc77a1d670f",
+      "sourceCommit": "3a1f5b1944849fdaa88451102e809c9cb48fb528",
       "sha256": "6e7dd4f1dc50289e62d3161377971fe96fbec3f1072653efc9d0fc25a3e0ca94",
       "id": "Tm90ZWJvb2s6MTUzMTQ=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTQ%3D",
@@ -3045,13 +4485,13 @@
       "renderedCellSourceVerified": true,
       "verifiedAggregateGroups": 6,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-06T11:28:09.424992+00:00"
+      "verifiedAt": "2026-11-06T13:17:19.674731+00:00"
     },
     {
       "file": "forge/notebooks/02-workspace-docs.py",
       "project": "project-02",
       "title": "02 \u00b7 An agent-readable workspace",
-      "sourceCommit": "f0d04129da543171b325ae8498b533e2b7094d15",
+      "sourceCommit": "c80c9c5cc4e735fe206ba511da3391446f10c395",
       "sha256": "8aa3d9dc9398d75dab2101f5d624373fcfff85e53e44339573b58a942af58f62",
       "id": "Tm90ZWJvb2s6MTUzMTU=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTU%3D",
@@ -3075,13 +4515,13 @@
       "renderedCellSourceVerified": true,
       "verifiedAggregateGroups": 4,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-06T11:50:58.947660+00:00"
+      "verifiedAt": "2026-11-06T13:17:21.846356+00:00"
     },
     {
       "file": "forge/notebooks/03-session-recovery.py",
       "project": "project-03",
       "title": "03 \u00b7 Interrupted-session recovery",
-      "sourceCommit": "51a5acdffea40bb5db4118b404efa6687c0d30fd",
+      "sourceCommit": "f77f1d0b365c666736b24efddd1a9b9901c62579",
       "sha256": "d621a173ddbc463acdb834c45a6b02598a5ae185aa65087f679dffa38a1b4ddc",
       "id": "Tm90ZWJvb2s6MTUzMTY=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTY%3D",
@@ -3105,13 +4545,13 @@
       "renderedCellSourceVerified": true,
       "verifiedAggregateGroups": 4,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-06T11:53:51.844034+00:00"
+      "verifiedAt": "2026-11-06T13:17:23.483838+00:00"
     },
     {
       "file": "forge/notebooks/04-runtime-feedback.py",
       "project": "project-04",
       "title": "04 \u00b7 Runtime evidence and the seeded defect",
-      "sourceCommit": "20100192fce9fd2c54b8dce2cf6eacd636167bdc",
+      "sourceCommit": "192f40f150b9240dc8ce38e374ec897472d9937b",
       "sha256": "93ccc0df8afca276ba03b317920813ee2b17e2e481fd4097345759881df1c8a4",
       "id": "Tm90ZWJvb2s6MTUzMTc=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTc%3D",
@@ -3135,13 +4575,13 @@
       "renderedCellSourceVerified": true,
       "verifiedAggregateGroups": 4,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-06T12:01:10.850365+00:00"
+      "verifiedAt": "2026-11-06T13:17:24.966559+00:00"
     },
     {
       "file": "forge/notebooks/05-role-separation.py",
       "project": "project-05",
       "title": "05 \u00b7 One feature, three role arrangements",
-      "sourceCommit": "904f8a5121fe3607a86d22f913a5d70f6b02029f",
+      "sourceCommit": "9d831288c607a8488d1cc97de1421f2ecf6829ad",
       "sha256": "90b46da2b51c17032f6a37836e49dc67bde4a3a97862464ba672cffd6e2f2c6f",
       "id": "Tm90ZWJvb2s6MTUzMTg=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTg%3D",
@@ -3165,13 +4605,13 @@
       "renderedCellSourceVerified": true,
       "verifiedAggregateGroups": 9,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-06T12:42:46.250318+00:00"
+      "verifiedAt": "2026-11-06T13:17:26.406007+00:00"
     },
     {
       "file": "forge/notebooks/06-capstone.py",
       "project": "project-06",
       "title": "06 \u00b7 Capstone reliability",
-      "sourceCommit": "065c5dd23b93b7e807c95f7a1c1f46a48e24ca73",
+      "sourceCommit": "3bff22b8f229f4735986c44c3aaa28b5bde5370c",
       "sha256": "ca3ebeb42b7e28f429cf3a64434d9c1e36600446c3713bf38ba4bdd779dd94c5",
       "id": "Tm90ZWJvb2s6MTUzMTk=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTk%3D",
@@ -3195,13 +4635,13 @@
       "renderedCellSourceVerified": true,
       "verifiedAggregateGroups": 6,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-06T12:51:55.331952+00:00"
+      "verifiedAt": "2026-11-06T13:17:27.768808+00:00"
     },
     {
       "file": "forge/notebooks/07-bounded-loops.py",
       "project": "project-07",
       "title": "07 \u00b7 Goal, timer and maker-checker loops",
-      "sourceCommit": "ece2e2e7f8d22e6d8762f3ac1e68072902944f39",
+      "sourceCommit": "d6a3b3483df641d94396c88b0f18c5bb228d043a",
       "sha256": "d58eac57cf17205e1e96c506d9e442191cbb1618c063cd63c0ec901699745f3b",
       "id": "Tm90ZWJvb2s6MTUzMjA=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjA%3D",
@@ -3225,14 +4665,14 @@
       "renderedCellSourceVerified": true,
       "verifiedAggregateGroups": 6,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-06T12:33:51.822220+00:00"
+      "verifiedAt": "2026-11-06T13:17:29.102548+00:00"
     },
     {
       "file": "forge/notebooks/08-state-machine.py",
       "project": "project-08",
       "title": "08 \u00b7 Checkpointed graphs and human approval",
-      "sourceCommit": "7cbb362c25c17a49b2a7b0c5cb5fde9312bb55d7",
-      "sha256": "456521e902e5daa6c856562ea31eec160233728059c1f513620e3a07eff414a7",
+      "sourceCommit": "c54f248978eda1296c183ca252cfb628ac9ea47e",
+      "sha256": "94213fb3fae0275aaed33949ace43fd2b020c1ba4f513851d66ae69e1592639d",
       "id": "Tm90ZWJvb2s6MTUzMjE=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjE%3D",
       "status": "published_verified",
@@ -3240,22 +4680,22 @@
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "08-Checkpointed-graphs-and-human-approval",
-        "versionIndex": 3,
+        "versionIndex": 6,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:49Z",
-      "expectedRemoteSha256": "456521e902e5daa6c856562ea31eec160233728059c1f513620e3a07eff414a7",
+      "expectedRemoteSha256": "94213fb3fae0275aaed33949ace43fd2b020c1ba4f513851d66ae69e1592639d",
       "currentVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "08-Checkpointed-graphs-and-human-approval",
-        "versionIndex": 3,
+        "versionIndex": 6,
         "sourceFileName": "notebook.py"
       },
-      "renderedOutputSha256": "0443e9d2e28d581f050e8306d3bb0607882b4d4f87249277b94291d2442f5be7",
+      "renderedOutputSha256": "740123b850674aab892e1c69888be012456db9122e538fb1f902003456dffcd5",
       "renderedCellSourceVerified": true,
-      "verifiedAggregateGroups": 2,
+      "verifiedAggregateGroups": 4,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-06T10:25:36.794203+00:00"
+      "verifiedAt": "2026-11-06T13:17:30.719102+00:00"
     }
   ],
   "trials": [

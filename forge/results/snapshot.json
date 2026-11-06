@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "capturedAt": "2026-11-06T13:10:01.889869+00:00",
+  "capturedAt": "2026-11-06T13:18:29.246883+00:00",
   "status": "Recorded 129 completed coding attempts and 45 complete comparison blocks. Outcomes include unsuccessful attempts; no human time savings are inferred.",
   "trials": [
     {
@@ -10407,7 +10407,7 @@
   "budget": {
     "schemaVersion": 1,
     "limitUsd": null,
-    "spentEstimateUsd": 19.001973120000017,
+    "spentEstimateUsd": 19.042266945333353,
     "reservations": {},
     "settled": {
       "qualification-17b194af-b3ef-4d47-95cc-178676315b60": 0.003,
@@ -10618,7 +10618,9 @@
       "e165e08f-88b0-450b-9a76-667718a225a5": 0.001722744,
       "ff73108e-9088-432b-bc7c-a4113e3ddf3a": 0.0020997066666666665,
       "9e0d9f9c-86a4-4f75-8277-50a33537ba22": 0.0015203466666666666,
-      "27b7d785-a76b-4cf7-aa76-091201325343": 0.001818925333333333
+      "27b7d785-a76b-4cf7-aa76-091201325343": 0.001818925333333333,
+      "notebook-15321-editor-2": 0.01681156933333333,
+      "notebook-15313-editor-3": 0.023482256
     },
     "reconciliations": [
       {

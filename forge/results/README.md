@@ -1,6 +1,6 @@
 # Forge course delivery and evidence
 
-Status: **verification in progress**. All eight PRs remain drafts; none has been merged.
+Status: **verified delivery**. All eight PRs remain drafts; none has been merged.
 
 The [public personal fork](https://github.com/ash0ts/learn-harness-engineering) preserves the offline course at upstream `a9342ff471f2c0e60be0c08b9f4a7c502df4e442`. Results and notebook sources belong to the private `wandb/learn-harness-engineering-forge` project.
 
@@ -10,7 +10,7 @@ The [public personal fork](https://github.com/ash0ts/learn-harness-engineering) 
 | --- | --- |
 | Existing offline app checks | 15/15 pass |
 | Forge integration tests | 39 pass; 0 fail |
-| Canonical notebooks | 1/9 render locally without inference credentials |
+| Canonical notebooks | 9/9 render locally without inference credentials |
 | Hosted notebook verification | 9/9 |
 | Qualification attempts | 4/9 pass |
 | Coding attempts | 129 completed; {'task_failed': 100, 'passed': 28, 'telemetry_missing': 1} |
@@ -142,7 +142,7 @@ The frozen protected-graph run predates a task-text clarification naming `script
 
 ## Spend estimates
 
-Known/audited estimate: **$13.001973**. Conservative charges for unknown usage: **$6.000000**. Total charged estimate: **$19.001973**. Active reservations: **$0.000000**.
+Known/audited estimate: **$13.042267**. Conservative charges for unknown usage: **$6.000000**. Total charged estimate: **$19.042267**. Active reservations: **$0.000000**.
 
 The original $50 application cap was removed after the user explicitly authorized an unlimited budget. Worker concurrency and lifetimes remain bounded. Timed-out qualifications retain unknown token usage; each full $2 reservation was charged conservatively under the recorded authorization. Estimates are not provider invoices. Notebook EDIT compute is measured separately at the verified 2 CPU / 4 GiB rates ($0.3408/hour), including publication work. The durable ledger records authorizations and reconciliations. It must not be reset.
 
