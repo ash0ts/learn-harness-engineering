@@ -220,6 +220,10 @@ def generate(runner_commit=None, projects=None):
         for key,cell in CELLS.items():
             source=source.replace(' def_placeholder_'+key,cell)
         source=source.replace('__DESIGN__',repr(DESIGNS[project])).replace('__PROTOCOL__',repr((ROOT/'forge/protocol.json').read_text())).replace('__PROJECT__',repr(project)).replace('__COMMIT__',repr(commit)).replace('__VARIANTS__',repr(VARIANTS[project])).replace('__SAVED__',repr(json.dumps(evidence,ensure_ascii=False))).replace('__INTRO__',repr('# '+title+'\n\n'+description+'\n\nKeep the task, model and fixtures fixed. Inspect evidence before comparing scores.'))
+        # Static Marimo exports retain only the current page of a paginated
+        # table. The course overview must preserve every aggregate group.
+        if project == 'overview':
+            source=source.replace('mo.ui.table(aggregates, selection=None)', 'mo.ui.table(aggregates, selection=None, pagination=False)')
         (ROOT/'forge/notebooks'/filename).write_text(source)
         generated.append(str(ROOT/'forge/notebooks'/filename))
     # Forge's editor serializes source with its pinned Marimo version. Normalize
