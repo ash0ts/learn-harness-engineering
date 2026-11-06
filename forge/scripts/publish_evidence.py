@@ -32,7 +32,9 @@ def publish():
     (sources/'manifest.json').write_text(json.dumps(archives,indent=2)+'\n')
     blocks=len(saved.get('completedComparisonBlocks',[]))
     uncertain=sum(r['reservedEstimateUsd'] for r in ledger.get('uncertainEstimates',[]))
+    verified_ui=[r for r in saved['trials'] if r.get('protocolRevision',1)>=4]
     audit_metrics={'qualificationAttempts':len(saved['qualifications']),'qualificationPassed':sum(r['passed'] for r in saved['qualifications']),'codingTrialAttempts':len(saved['trials']),'passedCodingTrials':sum(r['outcome']=='passed' for r in saved['trials']),'completeComparisonBlocks':blocks,'knownEstimatedSpendUsd':ledger['spentEstimateUsd']-uncertain,'chargedUnknownReservationsUsd':uncertain,'totalChargedEstimateUsd':ledger['spentEstimateUsd'],'unresolvedReservationsUsd':sum(ledger['reservations'].values()),'budgetHalted':bool(ledger.get('halted')),'notebooksPublishedVerified':sum(r['status']=='published_verified' for r in publications['notebooks'])}
+    audit_metrics.update(verifiedUiAttempts=len(verified_ui),verifiedUiPasses=sum(r['outcome']=='passed' for r in verified_ui))
     with wandb.init(entity=entity,project=project,id='course-audit-20261106',resume='allow',job_type='qualification-audit',name='Forge course execution and publication evidence',config={'protocol':json.loads((ROOT/'forge/protocol.json').read_text()),'upstreamCommit':'a9342ff471f2c0e60be0c08b9f4a7c502df4e442'},settings=wandb.Settings(disable_git=True,disable_code=True)) as run:
         run.name='Forge course execution and publication evidence'
         run.log(audit_metrics)
