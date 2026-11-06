@@ -24,6 +24,8 @@ def build():
         row.update(protocolSha256=protocol_hash(r['protocol']) if r.get('protocol') else None,
                    grade=r.get('grade'),reconciledEstimateUsd=audits.get(r['id'],r.get('estimatedCostUsd')),
                    chargedUnknownReservationUsd=uncertain.get(r['id']))
+        row['actorPhases']=[{key:phase.get(key) for key in ['conversationId','requests','turns','completed','telemetryComplete','errors']}
+                            for phase in [read(p) for p in sorted(path.parent.glob('actor/phase-*.json'))]]
         trials.append(row)
     qualifications=[]
     for path in sorted(LOCAL.glob('qualification-*/qualification.json')):
