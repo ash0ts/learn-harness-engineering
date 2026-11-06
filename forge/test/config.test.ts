@@ -12,3 +12,9 @@ test('live configuration never falls back to anonymous or an unrelated project',
 test('diagnostics redact credentials', () => {
   assert.equal(redact('Bearer token and my-secret', ['my-secret']), '[redacted authorization] and [redacted]');
 });
+
+test('unlimited budget requires an explicit configuration value',()=>{
+  assert.equal(config({FORGE_BUDGET_USD:'unlimited'}).budgetUsd,Infinity);
+  assert.equal(publicConfig(config({FORGE_BUDGET_USD:'unlimited'})).budgetUsd,'unlimited');
+  assert.throws(()=>config({FORGE_BUDGET_USD:'Infinity'}));
+});

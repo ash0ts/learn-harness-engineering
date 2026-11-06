@@ -10,9 +10,9 @@ export interface Config {
 }
 
 export function config(env: NodeJS.ProcessEnv = process.env): Config {
-  const budgetUsd = Number(env.FORGE_BUDGET_USD ?? 50);
-  if (!Number.isFinite(budgetUsd) || budgetUsd <= 0 || budgetUsd > 50) {
-    throw new Error('FORGE_BUDGET_USD must be greater than zero and at most $50');
+  const budgetUsd = env.FORGE_BUDGET_USD === 'unlimited' ? Infinity : Number(env.FORGE_BUDGET_USD ?? 50);
+  if (env.FORGE_BUDGET_USD !== 'unlimited' && (!Number.isFinite(budgetUsd) || budgetUsd <= 0 || budgetUsd > 50)) {
+    throw new Error('FORGE_BUDGET_USD must be positive and at most $50, or explicitly unlimited');
   }
   return {
     entity: env.WANDB_ENTITY ?? '',
@@ -30,5 +30,5 @@ export function requireLive(c: Config): asserts c is Config & {apiKey: string} {
 
 export function publicConfig(c: Config) {
   const {apiKey: _, ...safe} = c;
-  return safe;
+  return {...safe, budgetUsd:Number.isFinite(c.budgetUsd)?c.budgetUsd:'unlimited'};
 }
