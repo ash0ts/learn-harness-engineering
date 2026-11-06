@@ -1,3 +1,4 @@
+import {initializeForgeHooks, shutdownForgeHooks} from '../services/forge-hooks';
 import { app, BrowserWindow, ipcMain } from 'electron';
 import * as path from 'path';
 import { registerIpcHandlers } from './ipc-handlers';
@@ -64,7 +65,8 @@ function initializeServices() {
   log.info('All services initialized and IPC handlers registered');
 }
 
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
+  await initializeForgeHooks('projects/project-05/solution/gen-eval');
   const log = logger.forService('App');
   log.info('Electron app ready, initializing...');
 
@@ -86,4 +88,12 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
   }
+});
+
+// Flush only after an explicitly enabled live run.
+let forgeDrained = false;
+app.on('before-quit', (event) => {
+  if (process.env.FORGE_APP_MODE !== 'live' || forgeDrained) return;
+  event.preventDefault();
+  shutdownForgeHooks().finally(() => { forgeDrained = true; app.quit(); });
 });
