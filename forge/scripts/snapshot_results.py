@@ -44,8 +44,10 @@ def build():
             blocks.append({'campaignId':report['campaignId'],'project':block['project'],'repeat':block['repeat'],'sourceCommit':report['sourceCommit'],'protocolSha256':report['protocolSha256'],'trialIds':[r['id'] for r in rows],'outcomes':dict(Counter(r['outcome'] for r in rows))})
     loops=[dict(file=p.name,**read(p)) for p in sorted(LOCAL.glob('project-07-*.json'))]
     graphs=[dict(file=p.name,**read(p)) for p in sorted(LOCAL.glob('project-08-*.json'))]
+    concurrency=[read(p) for p in sorted(LOCAL.glob('concurrency-*/concurrency.json'))]
+    sandboxes=[read(p) for p in sorted(LOCAL.glob('sandbox-qualification-*/sandbox-qualification.json'))]
     status=f"Recorded {len(trials)} completed coding attempts and {len(blocks)} complete comparison blocks. Outcomes include unsuccessful attempts; no human time savings are inferred."
-    snapshot={'schemaVersion':1,'capturedAt':datetime.now(timezone.utc).isoformat(),'status':status,'trials':trials,'qualifications':qualifications,'completedComparisonBlocks':blocks,'loops':loops,'graphs':graphs,'budget':ledger,'costScope':'Budget snapshot as of capturedAt. Final publication/editor costs are recorded separately in the delivery report and W&B audit artifact.'}
+    snapshot={'schemaVersion':1,'capturedAt':datetime.now(timezone.utc).isoformat(),'status':status,'trials':trials,'qualifications':qualifications,'concurrencyQualifications':concurrency,'sandboxQualifications':sandboxes,'completedComparisonBlocks':blocks,'loops':loops,'graphs':graphs,'budget':ledger,'costScope':'Budget snapshot as of capturedAt. Final publication/editor costs are recorded separately in the delivery report and W&B audit artifact.'}
     (ROOT/'forge/results/snapshot.json').write_text(json.dumps(snapshot,indent=2)+'\n')
     print(status)
     return snapshot
