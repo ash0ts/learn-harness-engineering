@@ -51,6 +51,7 @@ def build():
     models_audit=read(LOCAL/'models-audit.json') if (LOCAL/'models-audit.json').exists() else {}
     comparison_audit=read(LOCAL/'comparison-audit.json') if (LOCAL/'comparison-audit.json').exists() else {}
     sandbox_audit=read(LOCAL/'sandbox-final-audit.json') if (LOCAL/'sandbox-final-audit.json').exists() else {}
+    checker_qualification=read(LOCAL/'checker-qualification-summary.json') if (LOCAL/'checker-qualification-summary.json').exists() else {}
     notebook_rerun=read(LOCAL/'notebook-rerun-qualification.json') if (LOCAL/'notebook-rerun-qualification.json').exists() else {}
     local_checks=read(LOCAL/'local-checks.json') if (LOCAL/'local-checks.json').exists() else {}
     verified_ids={r['id'] for r in verified_rows}
@@ -59,7 +60,7 @@ def build():
     complete_verified_cohort=all(any({b['repeat'] for b in verified_blocks if b['project']==project and b['sourceCommit']==source}=={1,2,3} for source in verified_cohorts) for project in [f'project-0{p}' for p in range(1,7)])
     gates={'nineNotebooksVerified':published==9,'eighteenCompleteBlocks':len(blocks)>=18,'correctedUiComparisonCampaign':complete_verified_cohort,'realTwoHourTimer':real_timer,
            'offlineApps':len(apps)==15 and all(a['passed'] for a in apps),'forgeTests':tests.get('fail')==0 and tests.get('pass',0)>0,
-           'notebookExplicitAction':bool(notebook_rerun.get('verified')),'localNotebookRenders':len(validation['notebooks'])==9 and all(n['rendered'] for n in validation['notebooks']),
+           'correctedCheckerQualification':bool(checker_qualification.get('verified')) and all(latest_sources.get(p,('',None))[1]==checker_qualification.get('sourceCommit') for p in ['project-05','project-06']),'notebookExplicitAction':bool(notebook_rerun.get('verified')),'localNotebookRenders':len(validation['notebooks'])==9 and all(n['rendered'] for n in validation['notebooks']),
            'tracesReadBack':bool(conversations) and all(c['verified'] for c in conversations) and expected_trace_ids.issubset({c['conversationId'] for c in conversations}),
            'modelsReadBack':bool(models_audit.get('verified')) and {r['id'] for r in rows}.issubset({r['trialId'] for r in models_audit.get('trials',[]) if r['verified']}),
            'frozenComparisonControls':bool(comparison_audit.get('verified')) and {(b['campaignId'],b['project'],b['repeat']) for b in blocks}.issubset({(b['campaignId'],b['project'],b['repeat']) for b in comparison_audit.get('blocks',[]) if b['verified']}),
@@ -77,6 +78,7 @@ def build():
     delivery['verifiedUiComparisonBlocks']=verified_blocks
     delivery['measurementCaveat']=saved.get('measurementCaveat')
     delivery['visibleUiQualifications']=saved.get('visibleUiQualifications',[])
+    delivery['checkerQualification']=checker_qualification
     delivery['notebookRerunQualification']=notebook_rerun
     delivery['comparisonAudit']=comparison_audit
     delivery['historySelectorQualification']=HISTORY_SELECTOR_NOTE
