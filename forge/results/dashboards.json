@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-06T11:05:19.633271+00:00",
+  "generatedAt": "2026-11-06T11:23:12.383578+00:00",
   "views": [
     {
       "protocolRevision": 2,
@@ -33,6 +33,70 @@
     "name": "Forge course \u2014 execution and publication audit"
   },
   "aggregateRuns": [
+    {
+      "id": "course-view-d4957f1bc84dfd7c",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 4,
+        "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+        "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+        "project": "project-01",
+        "variant": "explicit",
+        "label": "r4 01 explicit",
+        "trialIds": [
+          "643a867a-74e8-4987-aa56-5640b4c1982e",
+          "e53c3cad-a475-4e49-a79c-e64cfc0316a9"
+        ]
+      },
+      "metrics": {
+        "attempts": 2,
+        "passes": 2,
+        "passRate": 1.0,
+        "taskFailures": 0,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 2,
+        "uiChecksPassed": 2,
+        "serviceChecksExecuted": 6,
+        "serviceChecksPassed": 6,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.19549994333333331,
+        "inputTokens": 510666,
+        "outputTokens": 14261
+      }
+    },
+    {
+      "id": "course-view-35aee6871e63019f",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 4,
+        "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+        "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+        "project": "project-01",
+        "variant": "minimal",
+        "label": "r4 01 minimal",
+        "trialIds": [
+          "71581d99-5fb7-4e57-bee4-56ec354858a2",
+          "a7dcf5cb-dd20-4c3f-921b-f8a51a21f8f8"
+        ]
+      },
+      "metrics": {
+        "attempts": 2,
+        "passes": 2,
+        "passRate": 1.0,
+        "taskFailures": 0,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 2,
+        "uiChecksPassed": 2,
+        "serviceChecksExecuted": 6,
+        "serviceChecksPassed": 6,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.2704538533333333,
+        "inputTokens": 762904,
+        "outputTokens": 13924
+      }
+    },
     {
       "id": "course-view-ace4c95ee3a8da13",
       "config": {
