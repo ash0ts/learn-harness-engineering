@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "minimumUiProtocolRevision": 4,
+  "exclusions": [
+    {
+      "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+      "project": "project-05",
+      "reason": "The citation selector clicked answer prose rather than an interactive expand control. Native grades are preserved but excluded from qualified comparisons. The corrected checker also supports native and custom confirmation dialogs."
+    },
+    {
+      "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+      "project": "project-06",
+      "reason": "The task omitted the feedback.submit argument contract while the checker assumed positional arguments. Native grades are preserved but excluded from qualified comparisons. Both treatments are rerun with an explicit object payload contract."
+    }
+  ]
+}
