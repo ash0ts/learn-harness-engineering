@@ -13,7 +13,16 @@ async function check(name, fn) {
   try {await fn();checks.push({name,passed:true});}
   catch(error){checks.push({name,passed:false,error:String(error)});}
 }
-const command = (args) => execFileSync(args[0],args.slice(1),{cwd,timeout:90000,encoding:'utf8',stdio:'pipe'});
+const command = (args) => {
+  fs.appendFileSync(path.join(output,'build.log'),`\n$ ${args.join(' ')}\n`);
+  try {
+    const stdout=execFileSync(args[0],args.slice(1),{cwd,timeout:90000,encoding:'utf8',stdio:'pipe'});
+    fs.appendFileSync(path.join(output,'build.log'),stdout);return stdout;
+  } catch(error) {
+    fs.appendFileSync(path.join(output,'build.log'),String(error.stdout??'')+String(error.stderr??'')+'\n'+String(error));
+    throw error;
+  }
+};
 const save = () => fs.writeFileSync(path.join(output,'result.json'),JSON.stringify({schemaVersion:1,task,checks,passed:checks.every(c=>c.passed)},null,2));
 
 (async()=>{
@@ -23,7 +32,7 @@ const save = () => fs.writeFileSync(path.join(output,'result.json'),JSON.stringi
       ['node','/opt/app/node_modules/typescript/bin/tsc','--noEmit','-p','tsconfig.json'],
       ['node','/opt/app/node_modules/typescript/bin/tsc','-p','tsconfig.node.json'],
       ['node','/opt/app/node_modules/vite/bin/vite.js','build'],
-    ]) fs.appendFileSync(path.join(output,'build.log'),command(args));
+    ]) command(args);
   });
   if(!checks[0].passed){save();return;}
   const load=name=>require(path.join(cwd,'dist/services',name));
