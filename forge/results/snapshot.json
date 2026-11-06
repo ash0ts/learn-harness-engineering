@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "capturedAt": "2026-11-06T12:13:28.785493+00:00",
-  "status": "Recorded 104 completed coding attempts and 39 complete comparison blocks. Outcomes include unsuccessful attempts; no human time savings are inferred.",
+  "capturedAt": "2026-11-06T12:18:28.669907+00:00",
+  "status": "Recorded 107 completed coding attempts and 39 complete comparison blocks. Outcomes include unsuccessful attempts; no human time savings are inferred.",
   "trials": [
     {
       "id": "0173b789-396b-4a83-922a-644c172ff4f4",
@@ -1835,6 +1835,98 @@
       ]
     },
     {
+      "id": "39c8c943-15bf-4d53-a99e-aaa4cd9ff5a3",
+      "project": "project-07",
+      "variant": "maker-checker",
+      "trial": 1,
+      "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+      "outcome": "task_failed",
+      "inputTokens": 192890,
+      "outputTokens": 3142,
+      "estimatedCostUsd": 0.060162492,
+      "conversationIds": [
+        "01a1b0c8-0f2e-7164-a413-e1e6ab80f384",
+        "01a1b0c8-60cd-7164-a413-e1e9b7ad70f6",
+        "01a1b0c8-82df-7164-a413-e1ea84b3f6b9"
+      ],
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/39c8c94315bf4d53",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-39c8c943-15bf-4d53-a99e-aaa4cd9ff5a3:v0",
+      "startedAt": "2026-11-06T12:14:17.455Z",
+      "finishedAt": "2026-11-06T12:15:42.842Z",
+      "actorCompleted": false,
+      "error": null,
+      "protocolRevision": 4,
+      "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+      "grade": {
+        "schemaVersion": 1,
+        "task": "project-04",
+        "checks": [
+          {
+            "name": "strict compile and renderer build",
+            "passed": true
+          },
+          {
+            "name": "real import and persistence after reconstruction",
+            "passed": true
+          },
+          {
+            "name": "actual indexing keeps every nonempty paragraph",
+            "passed": false,
+            "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok(chunks.every(c=>c.content.trim().length))\n"
+          },
+          {
+            "name": "actual retrieval and Q&A persist two turns",
+            "passed": false,
+            "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok(responses.every(r=>r.answer.length>0 && r.citations.length>0))\n"
+          },
+          {
+            "name": "architecture checker rejects a seeded boundary violation",
+            "passed": false,
+            "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok(fs.existsSync(guard))\n"
+          },
+          {
+            "name": "Electron window, preload, import, indexing and question UI under Xvfb",
+            "passed": true
+          }
+        ],
+        "passed": false
+      },
+      "reconciledEstimateUsd": 0.060162492,
+      "chargedUnknownReservationUsd": null,
+      "actorPhases": [
+        {
+          "conversationId": "01a1b0c8-0f2e-7164-a413-e1e6ab80f384",
+          "requests": 10,
+          "turns": 11,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
+        },
+        {
+          "conversationId": "01a1b0c8-60cd-7164-a413-e1e9b7ad70f6",
+          "requests": 4,
+          "turns": 5,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
+        },
+        {
+          "conversationId": "01a1b0c8-82df-7164-a413-e1ea84b3f6b9",
+          "requests": 10,
+          "turns": 11,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
+        }
+      ]
+    },
+    {
       "id": "3b7cd608-2c28-4cb8-9d4f-aeb60ac3bc7a",
       "project": "project-05",
       "variant": "gen-eval",
@@ -2288,6 +2380,98 @@
           "completed": true,
           "telemetryComplete": true,
           "errors": []
+        }
+      ]
+    },
+    {
+      "id": "44762357-664b-4d30-b390-8121b6d51b07",
+      "project": "project-07",
+      "variant": "maker-checker",
+      "trial": 1,
+      "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+      "outcome": "task_failed",
+      "inputTokens": 177194,
+      "outputTokens": 2903,
+      "estimatedCostUsd": 0.05600771266666667,
+      "conversationIds": [
+        "01a1b0c9-8e16-739c-824d-68a901ef69ca",
+        "01a1b0c9-dbd9-739c-824d-68aa5201c77a",
+        "01a1b0c9-fa4b-739c-824d-68ad9f64a3cd"
+      ],
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/44762357664b4d30",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-44762357-664b-4d30-b390-8121b6d51b07:v0",
+      "startedAt": "2026-11-06T12:15:55.122Z",
+      "finishedAt": "2026-11-06T12:17:21.182Z",
+      "actorCompleted": false,
+      "error": null,
+      "protocolRevision": 4,
+      "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+      "grade": {
+        "schemaVersion": 1,
+        "task": "project-04",
+        "checks": [
+          {
+            "name": "strict compile and renderer build",
+            "passed": true
+          },
+          {
+            "name": "real import and persistence after reconstruction",
+            "passed": true
+          },
+          {
+            "name": "actual indexing keeps every nonempty paragraph",
+            "passed": false,
+            "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok(chunks.every(c=>c.content.trim().length))\n"
+          },
+          {
+            "name": "actual retrieval and Q&A persist two turns",
+            "passed": false,
+            "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok(responses.every(r=>r.answer.length>0 && r.citations.length>0))\n"
+          },
+          {
+            "name": "architecture checker rejects a seeded boundary violation",
+            "passed": false,
+            "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok(fs.existsSync(guard))\n"
+          },
+          {
+            "name": "Electron window, preload, import, indexing and question UI under Xvfb",
+            "passed": true
+          }
+        ],
+        "passed": false
+      },
+      "reconciledEstimateUsd": 0.05600771266666667,
+      "chargedUnknownReservationUsd": null,
+      "actorPhases": [
+        {
+          "conversationId": "01a1b0c9-8e16-739c-824d-68a901ef69ca",
+          "requests": 10,
+          "turns": 11,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
+        },
+        {
+          "conversationId": "01a1b0c9-dbd9-739c-824d-68aa5201c77a",
+          "requests": 4,
+          "turns": 5,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
+        },
+        {
+          "conversationId": "01a1b0c9-fa4b-739c-824d-68ad9f64a3cd",
+          "requests": 10,
+          "turns": 11,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
         }
       ]
     },
@@ -4769,6 +4953,54 @@
           "telemetryComplete": true,
           "errors": [
             "Frozen input byte budget exceeded"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aff27d56-36a4-4cb0-a2f4-f86301f1dc68",
+      "project": "project-07",
+      "variant": "goal",
+      "trial": 1,
+      "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+      "outcome": "task_failed",
+      "inputTokens": 446372,
+      "outputTokens": 8094,
+      "estimatedCostUsd": 0.13397646,
+      "conversationIds": [
+        "01a1b0c7-ddef-72c5-a31a-eaabecf7cb99"
+      ],
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/aff27d5636a44cb0",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-aff27d56-36a4-4cb0-a2f4-f86301f1dc68:v0",
+      "startedAt": "2026-11-06T12:14:02.952Z",
+      "finishedAt": "2026-11-06T12:16:13.541Z",
+      "actorCompleted": false,
+      "error": null,
+      "protocolRevision": 4,
+      "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+      "grade": {
+        "schemaVersion": 1,
+        "task": "project-04",
+        "checks": [
+          {
+            "name": "strict compile and renderer build",
+            "passed": false,
+            "error": "Error: Command failed: node /opt/app/node_modules/typescript/bin/tsc --noEmit -p tsconfig.node.json"
+          }
+        ],
+        "passed": false
+      },
+      "reconciledEstimateUsd": 0.13397646,
+      "chargedUnknownReservationUsd": null,
+      "actorPhases": [
+        {
+          "conversationId": "01a1b0c7-ddef-72c5-a31a-eaabecf7cb99",
+          "requests": 24,
+          "turns": 25,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
           ]
         }
       ]
@@ -7889,6 +8121,56 @@
       "candidatePatch": "/Users/ashah/.codex/worktrees/forge-experiment-coordinator/learn-harness-engineering/forge/local-results/ea29fe78-55f5-407b-9076-0bccb6e8f2e2/candidate.diff"
     },
     {
+      "file": "project-07-maker-checker-revision4.json",
+      "schemaVersion": 1,
+      "id": "9495f50a-1064-47a7-9615-6d33ecd23773",
+      "mode": "maker-checker",
+      "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+      "startedAt": 1793967255985,
+      "deadlineAt": 1793969055985,
+      "intervalMs": 900000,
+      "maxRounds": 3,
+      "status": "no_progress",
+      "rounds": [
+        {
+          "trialId": "39c8c943-15bf-4d53-a99e-aaa4cd9ff5a3",
+          "outcome": "task_failed",
+          "patchSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "trialId": "44762357-664b-4d30-b390-8121b6d51b07",
+          "outcome": "task_failed",
+          "patchSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "interventions": [],
+      "verificationFeedback": "{\"schemaVersion\":1,\"task\":\"project-04\",\"checks\":[{\"name\":\"strict compile and renderer build\",\"passed\":true},{\"name\":\"real import and persistence after reconstruction\",\"passed\":true},{\"name\":\"actual indexing keeps every nonempty paragraph\",\"passed\":false,\"error\":\"AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\\n\\n  assert.ok(chunks.every(c=>c.content.trim().length))\\n\"},{\"name\":\"actual retrieval and Q&A persist two turns\",\"passed\":false,\"error\":\"AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\\n\\n  assert.ok(responses.every(r=>r.answer.length>0 && r.citations.length>0))\\n\"},{\"name\":\"architecture checker rejects a seeded boundary violation\",\"passed\":false,\"error\":\"AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\\n\\n  assert.ok(fs.existsSync(guard))\\n\"},{\"name\":\"Electron window, preload, import, indexing and question UI under Xvfb\",\"passed\":true}],\"passed\":false}",
+      "candidatePatch": "/Users/ashah/.codex/worktrees/forge-revision4-coordinator/learn-harness-engineering/forge/local-results/44762357-664b-4d30-b390-8121b6d51b07/candidate.diff"
+    },
+    {
+      "file": "project-07-notebook-ui-qualification.json",
+      "schemaVersion": 1,
+      "id": "32dc989f-667a-4664-8de5-ffeae6d1d2ba",
+      "mode": "goal",
+      "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+      "startedAt": 1793967241440,
+      "deadlineAt": 1793967841440,
+      "intervalMs": 900000,
+      "maxRounds": 1,
+      "status": "round_limit",
+      "rounds": [
+        {
+          "trialId": "aff27d56-36a4-4cb0-a2f4-f86301f1dc68",
+          "outcome": "task_failed",
+          "patchSha256": "8c0594ee4cdc62d723cd84809b01705188b6275bbb37f54c4f4c786d85384f10"
+        }
+      ],
+      "interventions": [],
+      "verificationFeedback": "{\"schemaVersion\":1,\"task\":\"project-04\",\"checks\":[{\"name\":\"strict compile and renderer build\",\"passed\":false,\"error\":\"Error: Command failed: node /opt/app/node_modules/typescript/bin/tsc --noEmit -p tsconfig.node.json\"}],\"passed\":false}",
+      "candidatePatch": "/Users/ashah/.codex/worktrees/forge-revision4-coordinator/learn-harness-engineering/forge/local-results/aff27d56-36a4-4cb0-a2f4-f86301f1dc68/candidate.diff",
+      "qualification": "Explicit notebook button with canonical execution cell; real Pi round counted once in trial records."
+    },
+    {
       "file": "project-07-real-timer-qualified.json",
       "schemaVersion": 1,
       "id": "13fc82cb-ac5a-4322-b28a-449fdc5c80bf",
@@ -8277,7 +8559,7 @@
   "budget": {
     "schemaVersion": 1,
     "limitUsd": null,
-    "spentEstimateUsd": 16.368134898666675,
+    "spentEstimateUsd": 16.61828156333334,
     "reservations": {},
     "settled": {
       "qualification-17b194af-b3ef-4d47-95cc-178676315b60": 0.003,
@@ -8440,7 +8722,10 @@
       "dd818c1d-aea4-4e7f-b2a2-a6398ac33877": 0.15102145933333333,
       "1c1228c9-2625-4256-9aa2-694d37def359": 0.13751677666666667,
       "0173b789-396b-4a83-922a-644c172ff4f4": 0.15151933466666667,
-      "534ab4c7-9100-4d94-a379-fbfc4ad381c7": 0.16611393600000002
+      "534ab4c7-9100-4d94-a379-fbfc4ad381c7": 0.16611393600000002,
+      "39c8c943-15bf-4d53-a99e-aaa4cd9ff5a3": 0.060162492,
+      "aff27d56-36a4-4cb0-a2f4-f86301f1dc68": 0.13397646,
+      "44762357-664b-4d30-b390-8121b6d51b07": 0.05600771266666667
     },
     "reconciliations": [
       {
@@ -8584,5 +8869,21 @@
       "finishedAt": "2026-11-06T10:55:36.666Z"
     }
   ],
+  "measurementPolicy": {
+    "schemaVersion": 1,
+    "minimumUiProtocolRevision": 4,
+    "exclusions": [
+      {
+        "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+        "project": "project-05",
+        "reason": "The citation selector clicked answer prose rather than an interactive expand control. Native grades are preserved but excluded from qualified comparisons. The corrected checker also supports native and custom confirmation dialogs."
+      },
+      {
+        "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+        "project": "project-06",
+        "reason": "The task omitted the feedback.submit argument contract while the checker assumed positional arguments. Native grades are preserved but excluded from qualified comparisons. Both treatments are rerun with an explicit object payload contract."
+      }
+    ]
+  },
   "measurementCaveat": "Revision 2 and 3 native grades used unreliable asynchronous UI waits. They remain historical evidence. Revision 4 requires resolved IPC state and visible answer text; supplemental qualifications never rewrite original grades."
 }
