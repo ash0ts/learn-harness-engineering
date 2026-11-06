@@ -64,6 +64,9 @@ For each notebook:
    matching rendered cell code and output hashes, error-free cells, and aggregate
    values independently recomputed from the embedded trial evidence. It rechecks
    `currentVersion` at the end to detect concurrent edits.
+   The overview disables pagination for its aggregate table because a static
+   Marimo export otherwise contains only the current page. Every aggregate
+   group must be present in the saved output.
 7. Close the editing tab and run `notebook_session.ts stop SESSION_ID`. It waits
    for terminal runtime state and charges the measured wall-clock upper bound to
    the same ledger. Keep the receipt in `forge/local-results/notebook-sessions/`.
