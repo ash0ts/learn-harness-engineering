@@ -7,6 +7,7 @@ from pathlib import Path
 import hashlib
 import json
 import subprocess
+import time
 import wandb
 from models import require_private_project
 
@@ -31,9 +32,10 @@ def publish():
     (sources/'manifest.json').write_text(json.dumps(archives,indent=2)+'\n')
     blocks=len(saved.get('completedComparisonBlocks',[]))
     uncertain=sum(r['reservedEstimateUsd'] for r in ledger.get('uncertainEstimates',[]))
+    audit_metrics={'qualificationAttempts':len(saved['qualifications']),'qualificationPassed':sum(r['passed'] for r in saved['qualifications']),'codingTrialAttempts':len(saved['trials']),'passedCodingTrials':sum(r['outcome']=='passed' for r in saved['trials']),'completeComparisonBlocks':blocks,'knownEstimatedSpendUsd':ledger['spentEstimateUsd']-uncertain,'chargedUnknownReservationsUsd':uncertain,'totalChargedEstimateUsd':ledger['spentEstimateUsd'],'unresolvedReservationsUsd':sum(ledger['reservations'].values()),'budgetHalted':bool(ledger.get('halted')),'notebooksPublishedVerified':sum(r['status']=='published_verified' for r in publications['notebooks'])}
     with wandb.init(entity=entity,project=project,id='course-audit-20261106',resume='allow',job_type='qualification-audit',name='Forge course execution and publication evidence',config={'protocol':json.loads((ROOT/'forge/protocol.json').read_text()),'upstreamCommit':'a9342ff471f2c0e60be0c08b9f4a7c502df4e442'},settings=wandb.Settings(disable_git=True,disable_code=True)) as run:
         run.name='Forge course execution and publication evidence'
-        run.log({'qualificationAttempts':len(saved['qualifications']),'qualificationPassed':sum(r['passed'] for r in saved['qualifications']),'codingTrialAttempts':len(saved['trials']),'passedCodingTrials':sum(r['outcome']=='passed' for r in saved['trials']),'completeComparisonBlocks':blocks,'knownEstimatedSpendUsd':ledger['spentEstimateUsd']-uncertain,'chargedUnknownReservationsUsd':uncertain,'totalChargedEstimateUsd':ledger['spentEstimateUsd'],'unresolvedReservationsUsd':sum(ledger['reservations'].values()),'budgetHalted':bool(ledger.get('halted')),'notebooksPublishedVerified':sum(r['status']=='published_verified' for r in publications['notebooks'])})
+        run.log(audit_metrics)
         table=wandb.Table(columns=['id','kind','outcome','original_estimate_usd','audited_estimate_usd','source_commit'])
         for row in saved['qualifications']:
             table.add_data(row['id'],'qualification','passed' if row['passed'] else 'failed',row.get('estimatedCostUsd'),ledger['settled'].get(row['id']),row['sourceCommit'])
@@ -66,7 +68,16 @@ def publish():
         receipt={'schemaVersion':1,'runId':run.id,'runUrl':run.url,'artifact':f'{entity}/{project}/{committed.name}','artifactUrl':f'https://wandb.ai/{entity}/{project}/artifacts/course-evidence/{committed.name}','publisherSourceCommit':publisher_commit,'sourceArchives':archives}
     api=wandb.Api();remote=api.artifact(receipt['artifact'],type='course-evidence')
     receipt['artifactFileCount']=len(list(remote.files()))
-    receipt['verifiedRunBudgetHalted']=api.run(f'{entity}/{project}/{receipt["runId"]}').summary.get('budgetHalted')
+    # Run summary reads can briefly lag a successful finish. Require the final
+    # values, with bounded retries, rather than recording a stale earlier state.
+    for attempt in range(16):
+        summary=wandb.Api().run(f'{entity}/{project}/{receipt["runId"]}').summary
+        observed={key:summary.get(key) for key in audit_metrics}
+        if observed==audit_metrics:break
+        if attempt==15:raise RuntimeError('Final audit run summary does not match recorded evidence')
+        time.sleep(2)
+    receipt['verifiedRunSummary']=observed
+    receipt['verifiedRunBudgetHalted']=observed['budgetHalted']
     readback=LOCAL/'evidence-readback';readback.mkdir(exist_ok=True)
     for source in archives:
         downloaded=Path(remote.get_entry('source-archives/'+source['file']).download(root=str(readback)))
