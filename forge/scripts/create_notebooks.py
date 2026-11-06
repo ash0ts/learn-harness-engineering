@@ -104,8 +104,12 @@ CELLS = {
     return''',
 'results': '''def _(Counter, mo, project_id, saved):
     rows = [row for row in saved.get("trials", []) if project_id == "overview" or row["project"] == project_id]
-    _verified_rows = [row for row in rows if row.get("protocolRevision", 1) >= 4]
-    _verified_status = f"**Awaited visible-answer acceptance:** {sum(row['outcome'] == 'passed' for row in _verified_rows)}/{len(_verified_rows)} revision 4 attempts passed. The table's passed column preserves native grades. Earlier revisions used unreliable asynchronous UI waits and are historical evidence; they do not establish visible-answer acceptance. Supplemental patch checks are separate qualifications."
+    _excluded = {(item["project"], item["sourceCommit"]) for item in saved.get("measurementPolicy", {}).get("exclusions", [])}
+    _verified_rows = [row for row in rows if row.get("protocolRevision", 1) >= 4 and (row["project"], row["sourceCommit"]) not in _excluded]
+    _verified_status = f"**Qualified visible-answer acceptance:** {sum(row['outcome'] == 'passed' for row in _verified_rows)}/{len(_verified_rows)} qualified attempts passed. The table's passed column preserves native grades. Earlier revisions used unreliable asynchronous UI waits and are historical evidence; they do not establish visible-answer acceptance. Supplemental patch checks are separate qualifications."
+    _reasons = [item["reason"] for item in saved.get("measurementPolicy", {}).get("exclusions", []) if project_id in ["overview", item["project"]]]
+    if _reasons:
+        _verified_status += "\\n\\n" + "\\n\\n".join(_reasons)
     counts = Counter((row["project"], row["variant"], row["sourceCommit"], row["outcome"]) for row in rows)
     aggregates = []
     for _project, _variant, _source in sorted({(row["project"], row["variant"], row["sourceCommit"]) for row in rows}):
@@ -115,7 +119,8 @@ CELLS = {
     return (rows,)''',
 'links': '''def _(mo, rows, saved):
     _links = [
-        "- [Revision 4 comparison dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=wz8re0rb108)",
+        "- [Qualified end-to-end comparison dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=dfs83wdpatt)",
+        "- [Archived revision 4 comparison dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=wz8re0rb108)",
         "- [Historical revision 3 dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=ssij233dnka)",
         "- [Original revision 2 dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=tsgaokxuthw)",
         "- [Execution and publication audit](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=l9e45ofb461)",
