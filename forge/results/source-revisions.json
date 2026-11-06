@@ -20,6 +20,11 @@
       "tag": "forge-course-qualified-controls",
       "sourceCommit": "b874b96b7c896004c9f261db7bd7c7de6dd78411",
       "url": "https://github.com/ash0ts/learn-harness-engineering/tree/forge-course-qualified-controls"
+    },
+    {
+      "tag": "forge-course-graph-qualified",
+      "sourceCommit": "945c5d3073026a4fea427372843ea79072221dde",
+      "url": "https://github.com/ash0ts/learn-harness-engineering/tree/forge-course-graph-qualified"
     }
   ]
 }
