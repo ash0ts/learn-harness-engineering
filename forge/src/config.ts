@@ -28,6 +28,16 @@ export function requireLive(c: Config): asserts c is Config & {apiKey: string} {
   if (new URL(c.inferenceUrl).protocol !== 'https:') throw new Error('Live inference requires HTTPS');
 }
 
+/** Check the destination before reserving or launching paid work. */
+export async function requirePrivateProject(c:Config,request:typeof fetch=fetch) {
+  requireLive(c);
+  const response=await request('https://api.wandb.ai/graphql',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Basic '+Buffer.from('api:'+c.apiKey).toString('base64')},
+    body:JSON.stringify({query:'query($e:String!,$p:String!){project(entityName:$e,name:$p){access}}',variables:{e:c.entity,p:c.project}}),signal:AbortSignal.timeout(30000)});
+  if(!response.ok)throw new Error(`Private project preflight HTTP ${response.status}`);
+  const body=await response.json() as {errors?:unknown;data?:{project?:{access:string}|null}};
+  if(body.errors||body.data?.project?.access!=='PRIVATE')throw new Error('Paid work requires an accessible PRIVATE W&B project');
+}
+
 export function publicConfig(c: Config) {
   const {apiKey: _, ...safe} = c;
   return {...safe, budgetUsd:Number.isFinite(c.budgetUsd)?c.budgetUsd:'unlimited'};
