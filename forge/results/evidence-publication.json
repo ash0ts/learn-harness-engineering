@@ -2,48 +2,108 @@
   "schemaVersion": 1,
   "runId": "course-audit-20261106",
   "runUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/course-audit-20261106",
-  "artifact": "wandb/learn-harness-engineering-forge/forge-course-qualification-evidence:v0",
-  "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v0",
+  "artifact": "wandb/learn-harness-engineering-forge/forge-course-qualification-evidence:v2",
+  "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v2",
+  "publisherSourceCommit": "029cf3b66c526528cfd90813d7c49b65e4ec8fca",
   "sourceArchives": [
+    {
+      "sourceCommit": "029cf3b66c526528cfd90813d7c49b65e4ec8fca",
+      "file": "029cf3b66c526528cfd90813d7c49b65e4ec8fca.tar.gz",
+      "sha256": "ddd73263f9126bcc780df529bedb17c88481404e64acf74005521729fc25f501"
+    },
     {
       "sourceCommit": "09a716af4cdd8467729f4185081dab019d7a8e1a",
       "file": "09a716af4cdd8467729f4185081dab019d7a8e1a.tar.gz",
-      "sha256": "ddcb500877fff634c53ef19c649842c691d25b577c6bf9245f83a89757f8db76",
-      "downloadVerified": true
+      "sha256": "ddcb500877fff634c53ef19c649842c691d25b577c6bf9245f83a89757f8db76"
     },
     {
       "sourceCommit": "1b316ef2aadd5f0a2d87fbaac1c2c5a505054dd7",
       "file": "1b316ef2aadd5f0a2d87fbaac1c2c5a505054dd7.tar.gz",
-      "sha256": "74c16981996f56ff2592ec436c90932b6a36b11772a84019db63a0362f93a49d",
-      "downloadVerified": true
+      "sha256": "74c16981996f56ff2592ec436c90932b6a36b11772a84019db63a0362f93a49d"
     },
     {
       "sourceCommit": "23f50a21e66e4baaf9a2c05e6298c114699865ae",
       "file": "23f50a21e66e4baaf9a2c05e6298c114699865ae.tar.gz",
-      "sha256": "9070170c878dce55af7c983e04a5fbeee8473f7b40ed9190d7ca7e69dbb8e11b",
-      "downloadVerified": true
+      "sha256": "9070170c878dce55af7c983e04a5fbeee8473f7b40ed9190d7ca7e69dbb8e11b"
+    },
+    {
+      "sourceCommit": "2947d9f6386cefefd1977fb2dd569a4d4226d74d",
+      "file": "2947d9f6386cefefd1977fb2dd569a4d4226d74d.tar.gz",
+      "sha256": "f69c278dfbc221cdaca84a4028d4e6d97977d6fa1938469bc6b397925dc65de0"
+    },
+    {
+      "sourceCommit": "3ebea13e260921c0c231ff43b6d13bc265d25157",
+      "file": "3ebea13e260921c0c231ff43b6d13bc265d25157.tar.gz",
+      "sha256": "d27b882721db4ebd3c2ec9453b6f0b904edceea14b9fafb947228dadfb377a25"
+    },
+    {
+      "sourceCommit": "412bf598c9091e225a92f3849c65c10a74c3d969",
+      "file": "412bf598c9091e225a92f3849c65c10a74c3d969.tar.gz",
+      "sha256": "30f425d49b7dc9d67596c8e5e6d509a009db5c78bb29793021a6b13c1b8a335c"
+    },
+    {
+      "sourceCommit": "4a247914feab11d0f868ab4083146e45fc28acda",
+      "file": "4a247914feab11d0f868ab4083146e45fc28acda.tar.gz",
+      "sha256": "cd248542e4419ae35d4c877aa3cd16d4795a83cd0ab3a95b8f115f3bb688ef42"
+    },
+    {
+      "sourceCommit": "5ab40f10d6c5275815bb9962006f445800d53d6b",
+      "file": "5ab40f10d6c5275815bb9962006f445800d53d6b.tar.gz",
+      "sha256": "81c09b8568a96a7dd8e9f41c8d843b37e8de5f1517b8b75597db8bd1aef6a04d"
     },
     {
       "sourceCommit": "6907491cc07b3cad91f26bbdfaf60570fc1f246b",
       "file": "6907491cc07b3cad91f26bbdfaf60570fc1f246b.tar.gz",
-      "sha256": "b8d7dcffff39ee23b1dcdbe2a077f4f14ba8dbe80fb3e5a8369197fd01836246",
-      "downloadVerified": true
+      "sha256": "b8d7dcffff39ee23b1dcdbe2a077f4f14ba8dbe80fb3e5a8369197fd01836246"
+    },
+    {
+      "sourceCommit": "7cbb362c25c17a49b2a7b0c5cb5fde9312bb55d7",
+      "file": "7cbb362c25c17a49b2a7b0c5cb5fde9312bb55d7.tar.gz",
+      "sha256": "eba480dd2c8832a003ae99c5f3de9e28879691f437312e34337b00bd9f75fea3"
+    },
+    {
+      "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef",
+      "file": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef.tar.gz",
+      "sha256": "744d23770f3b4ddf9a8c668c5ee38867a429b01c4a104883112c75c765f5e663"
     },
     {
       "sourceCommit": "bf760399391f0862c6b642c62854c9baf4ca7523",
       "file": "bf760399391f0862c6b642c62854c9baf4ca7523.tar.gz",
-      "sha256": "44b7f31ece546eb1d09c785a43d538ed32fa83dd763bc68dc2db589013fbc813",
-      "downloadVerified": true
+      "sha256": "44b7f31ece546eb1d09c785a43d538ed32fa83dd763bc68dc2db589013fbc813"
+    },
+    {
+      "sourceCommit": "c3fa6bab9c4c714f020756f728977e5349a001cd",
+      "file": "c3fa6bab9c4c714f020756f728977e5349a001cd.tar.gz",
+      "sha256": "37b2d5f4ab7ccd0a69a418e283918e1af1da384a44d587827d1173d8832daf98"
+    },
+    {
+      "sourceCommit": "f176ac0c3afe7b1cd0dc2042800a51472e422074",
+      "file": "f176ac0c3afe7b1cd0dc2042800a51472e422074.tar.gz",
+      "sha256": "289c5e692bd493391f075b4a5f0d45dd325fbdc843c3e84c2147efdf70680b5a"
+    },
+    {
+      "sourceCommit": "f3dc2cf8e55a3a58cb9d7f476d04c985fded0261",
+      "file": "f3dc2cf8e55a3a58cb9d7f476d04c985fded0261.tar.gz",
+      "sha256": "4c3c20497e6006270cc4821bf47455130fd917e34e5c5184aacddee5e0bdfa3a"
     }
   ],
-  "artifactFileCount": 32,
-  "verifiedRunBudgetHalted": true,
-  "verifiedRunCounts": {
-    "codingTrialAttempts": 1,
-    "completeComparisonBlocks": 0,
-    "qualificationAttempts": 4,
-    "qualificationPassed": 1,
-    "knownEstimatedSpendUsd": 0.029610153333333333,
-    "unresolvedReservationsUsd": 2
-  }
+  "artifactFileCount": 3774,
+  "verifiedRunSummary": {
+    "qualificationAttempts": 5,
+    "qualificationPassed": 2,
+    "codingTrialAttempts": 59,
+    "passedCodingTrials": 0,
+    "completeComparisonBlocks": 18,
+    "knownEstimatedSpendUsd": 5.563527916666666,
+    "chargedUnknownReservationsUsd": 2,
+    "totalChargedEstimateUsd": 7.563527916666666,
+    "unresolvedReservationsUsd": 0,
+    "budgetHalted": false,
+    "notebooksPublishedVerified": 9
+  },
+  "verifiedRunBudgetHalted": false,
+  "sourceArchivesReadBackVerified": true,
+  "publicationManifestReadBackVerified": true,
+  "completedComparisonBlocks": 18,
+  "completedCodingAttempts": 59
 }
