@@ -1,6 +1,6 @@
 # Forge course delivery and evidence
 
-Status: **verified delivery**. All eight PRs remain drafts; none has been merged.
+Status: **verification in progress**. All eight PRs remain drafts; none has been merged.
 
 The [public personal fork](https://github.com/ash0ts/learn-harness-engineering) preserves the offline course at upstream `a9342ff471f2c0e60be0c08b9f4a7c502df4e442`. Results and notebook sources belong to the private `wandb/learn-harness-engineering-forge` project.
 
@@ -9,12 +9,12 @@ The [public personal fork](https://github.com/ash0ts/learn-harness-engineering) 
 | Evidence | Recorded result |
 | --- | --- |
 | Existing offline app checks | 15/15 pass |
-| Forge integration tests | 36 pass; 0 fail |
+| Forge integration tests | 38 pass; 0 fail |
 | Canonical notebooks | 9/9 render locally without inference credentials |
 | Hosted notebook verification | 9/9 |
-| Qualification attempts | 2/5 pass |
-| Coding attempts | 59 completed; {'task_failed': 58, 'telemetry_missing': 1} |
-| Complete comparison blocks | 18 |
+| Qualification attempts | 4/9 pass |
+| Coding attempts | 71 completed; {'task_failed': 58, 'passed': 12, 'telemetry_missing': 1} |
+| Complete comparison blocks | 24 |
 | Real two-hour timer | Completed |
 
 A completed comparison block contains every treatment for the same project, repeat and source revision. Completion does not imply a passing patch. The independent checker executes the exported patch in a fresh sandbox and distinguishes service behavior from Xvfb/Electron behavior. Source revisions and protocol hashes remain attached to each attempt.
@@ -23,8 +23,12 @@ A completed comparison block contains every treatment for the same project, repe
 
 | Project | Treatment | Source | Attempts | Pass | Task failure | Infrastructure failure | Missing telemetry |
 | --- | --- | --- | --- | --- | --- | --- | --- |
+| project-01 | explicit | `7c563eb14f39` | 3 | 3 | 0 | 0 | 0 |
 | project-01 | explicit | `8f4521bc34bb` | 3 | 0 | 3 | 0 | 0 |
+| project-01 | explicit | `b948c1fbac36` | 3 | 3 | 0 | 0 | 0 |
+| project-01 | minimal | `7c563eb14f39` | 3 | 3 | 0 | 0 | 0 |
 | project-01 | minimal | `8f4521bc34bb` | 3 | 0 | 3 | 0 | 0 |
+| project-01 | minimal | `b948c1fbac36` | 3 | 3 | 0 | 0 | 0 |
 | project-02 | minimal | `8f4521bc34bb` | 3 | 0 | 3 | 0 | 0 |
 | project-02 | workspace-docs | `8f4521bc34bb` | 3 | 0 | 3 | 0 | 0 |
 | project-03 | minimal | `8f4521bc34bb` | 3 | 0 | 3 | 0 | 0 |
@@ -43,41 +47,43 @@ A completed comparison block contains every treatment for the same project, repe
 | project-08 | graph | `3ebea13e2609` | 3 | 0 | 3 | 0 | 0 |
 | project-08 | graph | `8f4521bc34bb` | 3 | 0 | 3 | 0 | 0 |
 
-The complete comparison blocks contain **39 coding attempts**, with **0 end-to-end passes**. If every treatment fails the full criterion, these results do not establish a treatment ranking.
+The complete comparison blocks contain **51 coding attempts**, with **12 native checker passes** across separate historical cohorts. Native grades from revisions 2 and 3 do not establish visible-answer acceptance.
+
+**Awaited visible-answer acceptance (revision 4): 6/6 attempts pass.** These require resolved IPC state, actual rendered answers, all service checks and Electron under Xvfb. Earlier native outcomes are preserved. Supplemental patch qualifications are separate and do not change original trial grades.
 
 | Main comparison check | Passed | Executed |
 | --- | --- | --- |
-| Electron window, preload, import, indexing and question UI under Xvfb | 0 | 31 |
-| actual indexing keeps every nonempty paragraph | 31 | 31 |
-| actual retrieval and Q&A persist two turns | 31 | 31 |
+| Electron window, preload, import, indexing and question UI under Xvfb | 12 | 43 |
+| actual indexing keeps every nonempty paragraph | 43 | 43 |
+| actual retrieval and Q&A persist two turns | 43 | 43 |
 | architecture checker rejects a seeded boundary violation | 5 | 6 |
 | extracted metadata | 0 | 4 |
-| real import and persistence after reconstruction | 31 | 31 |
+| real import and persistence after reconstruction | 43 | 43 |
 | single-document indexing is reflected in status | 3 | 4 |
-| strict compile and renderer build | 31 | 39 |
+| strict compile and renderer build | 43 | 51 |
 
-**29/59 attempts** reached the local input-context guard. This is a bounded execution result, not evidence that the task is impossible. Original tool/error traces and unfinished patches remain available.
+**29/71 attempts** reached the local input-context guard. This is a bounded execution result, not evidence that the task is impossible. Original tool/error traces and unfinished patches remain available.
 
 ## Independent check results
 
 | Check | Passed | Executed |
 | --- | --- | --- |
-| Electron window, preload, import, indexing and question UI under Xvfb | 0 | 42 |
-| actual indexing keeps every nonempty paragraph | 39 | 42 |
-| actual retrieval and Q&A persist two turns | 39 | 42 |
+| Electron window, preload, import, indexing and question UI under Xvfb | 12 | 54 |
+| actual indexing keeps every nonempty paragraph | 51 | 54 |
+| actual retrieval and Q&A persist two turns | 51 | 54 |
 | architecture checker rejects a seeded boundary violation | 10 | 17 |
 | extracted metadata | 0 | 4 |
-| real import and persistence after reconstruction | 42 | 42 |
+| real import and persistence after reconstruction | 54 | 54 |
 | single-document indexing is reflected in status | 3 | 4 |
-| strict compile and renderer build | 42 | 59 |
+| strict compile and renderer build | 54 | 71 |
 
 A check omitted after compilation failed is not counted as an executed service or UI check. Shared failures can mask differences between treatments; the end-to-end outcome remains failed.
 
 ## Instrumentation and execution qualification
 
-Agent Lens readback verified **96/96 conversations**, including actual token usage and isolated span parentage. The readback includes **29 error spans**; their errors remain visible rather than being counted as successful calls.
+Agent Lens readback verified **117/117 conversations**, including actual token usage and isolated span parentage. The readback includes **33 error spans**; their errors remain visible rather than being counted as successful calls.
 
-W&B Models readback verified **59/59 runs and committed trial artifacts** against the local configuration, outcomes and usage.
+W&B Models readback verified **61/61 runs and committed trial artifacts** against the local configuration, outcomes and usage.
 
 - Concurrent app tracing `concurrency-61ad1e33-0ede-46ff-b513-1a700e9798ce`: passed; 2 isolated conversations.
 - Sandbox lifecycle `sandbox-qualification-15043cce-9df6-4cc6-9e66-44b1947ea5e2`: failed; 1 live checks. AssertionError [ERR_ASSERTION]: cancelled process must no longer exist
@@ -95,15 +101,16 @@ Manual graph qualification candidates validate runner control flow and checker b
 - `project-07-maker-checker-live.json`: **no_progress**, 2 recorded rounds; 0 entered/observed interventions.
 - `project-07-real-timer-qualified.json`: **deadline**, 8 recorded rounds; 1 entered/observed interventions.
 - `project-07-real-timer.json`: **blocked**, 1 recorded rounds; 0 entered/observed interventions.
+- `project-08-control-flow-qualification-74896eb2-b69a-4e53-be6c-44a010bbf07d.json`: **approval**, 2 maker attempts, 6 durable transitions. An approval pause requires an explicit checksum-bound human decision.
 - `project-08-control-flow-qualification.json`: **approval**, 2 maker attempts, 6 durable transitions. An approval pause requires an explicit checksum-bound human decision.
 - `project-08-graph-diagnostic-feedback.json`: **failed**, 3 maker attempts, 10 durable transitions. An approval pause requires an explicit checksum-bound human decision.
 - `project-08-graph-live.json`: **failed**, 3 maker attempts, 10 durable transitions. An approval pause requires an explicit checksum-bound human decision.
 
 ## Spend estimates
 
-Known/audited estimate: **$5.563528**. Conservative charges for unknown usage: **$2.000000**. Total charged estimate: **$7.563528**. Active reservations: **$0.000000**.
+Known/audited estimate: **$7.042669**. Conservative charges for unknown usage: **$6.000000**. Total charged estimate: **$13.042669**. Active reservations: **$8.389939**.
 
-The original $50 application cap was removed after the user explicitly authorized an unlimited budget. Worker concurrency and lifetimes remain bounded. The timed-out qualification retains unknown token usage; its full $2 reservation was charged conservatively. Estimates are not provider invoices. Notebook EDIT compute is measured separately at the verified 2 CPU / 4 GiB rates ($0.3408/hour), including publication work. The durable ledger records authorizations and reconciliations. It must not be reset.
+The original $50 application cap was removed after the user explicitly authorized an unlimited budget. Worker concurrency and lifetimes remain bounded. Timed-out qualifications retain unknown token usage; each full $2 reservation was charged conservatively under the recorded authorization. Estimates are not provider invoices. Notebook EDIT compute is measured separately at the verified 2 CPU / 4 GiB rates ($0.3408/hour), including publication work. The durable ledger records authorizations and reconciliations. It must not be reset.
 
 Budget snapshot as of capturedAt. Final publication/editor costs are recorded separately in the delivery report and W&B audit artifact.
 
@@ -135,6 +142,13 @@ Budget snapshot as of capturedAt. Final publication/editor costs are recorded se
 The publication manifest binds each stable notebook ID to its canonical source commit, SHA-256, committed currentVersion, and rendered-output SHA-256. Verification compares rendered cell source and output code hashes, including when Forge omits its legacy lastStaticOutputAt timestamp. Opening the notebook renders saved evidence; paid reruns require an explicit action.
 
 ## Evidence and reproduction
+
+[Private evidence report](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/reports/Forge-harness-course-—-verified-execution-and-comparison-evidence--VmlldzoxODI2MzgyOA==)
+
+- [Revision 2 dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=tsgaokxuthw) — historical checker grades; UI waits unqualified.
+- [Revision 3 dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=ssij233dnka) — historical checker grades; UI waits unqualified.
+- [Revision 4 dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=wz8re0rb108) — visible-answer acceptance.
+- [Execution and publication audit](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=l9e45ofb461)
 
 [W&B course audit](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/course-audit-20261106) · [versioned evidence and exact source archives](https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v2)
 
