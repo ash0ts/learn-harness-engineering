@@ -38,7 +38,11 @@ def forge_url(url):
 
 def aggregates():
     groups = defaultdict(dict)
-    for path in LOCAL.glob("report-*.json"):
+    reports=list(LOCAL.glob("report-*.json"))
+    completed_campaigns={json.loads(path.read_text())['campaignId'] for path in reports}
+    reports += [path for path in LOCAL.glob('dashboard-progress-*.json')
+                if json.loads(path.read_text())['campaignId'] not in completed_campaigns]
+    for path in reports:
         report = json.loads(path.read_text())
         for block in report["blocks"]:
             project = block["project"]
