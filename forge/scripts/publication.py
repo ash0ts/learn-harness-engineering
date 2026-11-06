@@ -12,6 +12,7 @@ import ast
 import base64
 from datetime import datetime, timezone
 import hashlib
+from html.parser import HTMLParser
 import json
 import os
 from pathlib import Path
@@ -143,6 +144,32 @@ def verify_rendered_source(html, canonical):
                 raise RuntimeError('Hosted rendered output contains a cell error')
     return session
 
+def verify_rendered_aggregates(session, canonical):
+    assignments={n.targets[0].id:n.value for n in ast.walk(ast.parse(canonical)) if isinstance(n,ast.Assign) and isinstance(n.targets[0],ast.Name)}
+    saved=json.loads(ast.literal_eval(assignments['saved'].args[0]))
+    project=ast.literal_eval(assignments['project_id'])
+    rows=[r for r in saved['trials'] if project=='overview' or r['project']==project]
+    groups={}
+    for row in rows:groups.setdefault((row['project'],row['variant'],row['sourceCommit']),[]).append(row)
+    expected=[]
+    for (task,variant,source),group in sorted(groups.items()):
+        counts={outcome:sum(r['outcome']==outcome for r in group) for outcome in ['passed','task_failed','infrastructure_failed','telemetry_missing']}
+        expected.append({'project':task,'variant':variant,'source_commit':source,'attempts':len(group),**counts,'known_estimate_usd':round(sum(r.get('reconciledEstimateUsd',r.get('estimatedCostUsd')) or 0 for r in group),6),'unknown_cost_attempts':sum(r.get('estimatedCostUsd') is None and r.get('reconciledEstimateUsd') is None for r in group)})
+    class Tables(HTMLParser):
+        tables=[]
+        def handle_starttag(self,tag,attrs):
+            if tag=='marimo-table':
+                value=json.loads(dict(attrs)['data-data'])
+                if isinstance(value,str):value=json.loads(value)
+                if isinstance(value,list):self.tables.append(value)
+    parser=Tables()
+    for cell in session['cells']:
+        for output in cell.get('outputs',[]):parser.feed(output.get('data',{}).get('text/html',''))
+    aggregates=[table for table in parser.tables if table and isinstance(table[0],dict) and 'attempts' in table[0] and 'variant' in table[0]]
+    if (expected and aggregates!=[expected]) or (not expected and aggregates):
+        raise RuntimeError('Displayed aggregates do not reproduce the recorded trial evidence')
+    return len(expected)
+
 def verify(manifest, row):
     notebook = remote(row['id'])
     canonical = (ROOT/row['file']).read_bytes()
@@ -159,6 +186,7 @@ def verify(manifest, row):
     with urllib.request.urlopen(url, timeout=30) as response:
         html = response.read()
     session = verify_rendered_source(html, canonical)
+    aggregate_groups=verify_rendered_aggregates(session,canonical)
     rendered_text = json.dumps(session,ensure_ascii=False)
     if 'Saved results' not in rendered_text or 'Not launched' not in rendered_text or row['title'] not in rendered_text:
         raise RuntimeError('Expected saved-results view and idle run control were not rendered')
@@ -168,7 +196,7 @@ def verify(manifest, row):
         raise RuntimeError('Canonical source has uncommitted edits; commit it before recording publication')
     if remote(row['id'])['currentVersion'] != notebook['currentVersion']:
         raise RuntimeError('Remote source changed during verification')
-    row.update(sourceCommit=revision,status='published_verified',sha256=digest(canonical),currentVersion=notebook['currentVersion'],expectedRemoteVersion=notebook['currentVersion'],expectedRemoteEditedAt=edited,expectedRemoteSha256=digest(canonical),renderedOutputSha256=digest(html),renderedCellSourceVerified=True,lastStaticOutputAt=rendered,verifiedAt=now())
+    row.update(sourceCommit=revision,status='published_verified',sha256=digest(canonical),currentVersion=notebook['currentVersion'],expectedRemoteVersion=notebook['currentVersion'],expectedRemoteEditedAt=edited,expectedRemoteSha256=digest(canonical),renderedOutputSha256=digest(html),renderedCellSourceVerified=True,verifiedAggregateGroups=aggregate_groups,lastStaticOutputAt=rendered,verifiedAt=now())
     row.pop('publicationBlocker',None)
     save(manifest)
     print(row['file'],'published_verified',row['url'])
