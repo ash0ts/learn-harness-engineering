@@ -21,12 +21,13 @@ export async function publishTrial(output:string,id:string){
   await updateOperation(output,id,op=>{op.publication=verified?'verified':'failed';op.evidence.trial=ref;op.phase=op.cleanup==='verified'&&op.telemetry==='complete'?(verified?'completed':'recoverable'):'blocked_unknown';op.events.push({at:new Date().toISOString(),event:verified?'publication_verified':'publication_retry_required'});});
   return verified;
 }
-export async function compare(options: {project?:string;variant?:string;repeats?:number;execute?:boolean;output?:string;source?:string;operationId?:string;resumePatch?:string;trialId?:string}) {
+export async function compare(options: {project?:string;variant?:string;repeats?:number;execute?:boolean;output?:string;source?:string;operationId?:string;resumePatch?:string;trialId?:string;verificationFeedback?:string}) {
   options.operationId??=options.trialId;
   const c=config(),p=await protocol();
   const output=resolve(options.output??process.env.FORGE_RESULTS_DIR??join(courseRoot,'forge/local-results'));
   const source=options.source??await sourceHead();
   const tasks=await Promise.all((options.project?[options.project]:[1,2,3,4,5,6].map(n=>`project-0${n}`)).map(id=>readTask(id,source)));
+  if(options.verificationFeedback && tasks.some(t=>!['project-07','project-08'].includes(t.id)))throw new Error('Retry feedback is restricted to the loop and graph exercises');
   const repeats=options.repeats??p.repeats;
   const incremental=process.env.FORGE_BUDGET_MODE==='incremental';
   if(options.operationId&&(!options.project||!options.variant||repeats!==1))throw new Error('A stable operation ID requires exactly one selected treatment');
@@ -56,7 +57,7 @@ export async function compare(options: {project?:string;variant?:string;repeats?
   for(const block of plan.blocks) {
     const task=await readTask(block.project,source);
     if(block.variants.some(v=>!task.variants.includes(v)))throw new Error('Invalid treatment');
-    const trials=block.variants.map(variant=>({id:options.operationId??randomUUID(),project:block.project,variant,trial:block.repeat,sourceCommit:source,output,ledger:budget.file,resumePatch:options.resumePatch}));
+    const trials=block.variants.map(variant=>({id:options.operationId??randomUUID(),project:block.project,variant,trial:block.repeat,sourceCommit:source,output,ledger:budget.file,resumePatch:options.resumePatch,verificationFeedback:options.verificationFeedback}));
     try {await budget.reserve(incremental?{}:Object.fromEntries(trials.map(t=>[t.id,reserve])));}
     catch(error){stopReason=String(error);break;}
     for(let offset=0;offset<trials.length;offset+=2) {
