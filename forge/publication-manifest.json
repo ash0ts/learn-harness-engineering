@@ -206,21 +206,31 @@
       "file": "forge/notebooks/07-bounded-loops.py",
       "project": "project-07",
       "title": "07 \u00b7 Goal, timer and maker-checker loops",
-      "sourceCommit": "31b85133e7245133b8f87df2cd6a5b1c61e880f6",
-      "sha256": "1c631e68d05964597fbd1f82547b456ea779693aa73ca43607b4fb35fda9c3d3",
+      "sourceCommit": "412bf598c9091e225a92f3849c65c10a74c3d969",
+      "sha256": "9a73005b34212d67e7e772fe5635d617d801df7ec77f8ea8e9d8dd12e822a33b",
       "id": "Tm90ZWJvb2s6MTUzMjA=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjA%3D",
-      "status": "created_basic_not_uploaded",
+      "status": "published_verified",
       "createdAt": "2026-11-06T08:00:47.608941+00:00",
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "07-Goal-timer-and-maker-checker-loops",
-        "versionIndex": 0,
+        "versionIndex": 2,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:47Z",
-      "expectedRemoteSha256": "729741bb7115805dd5b8266e3bd1bbfc3c5a8e05d08f80feb6d9489b7eb62b27",
-      "publicationBlocker": "Paid EDIT session withheld while shared budget ledger is halted; canonical source not loaded"
+      "expectedRemoteSha256": "9a73005b34212d67e7e772fe5635d617d801df7ec77f8ea8e9d8dd12e822a33b",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "07-Goal-timer-and-maker-checker-loops",
+        "versionIndex": 2,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "4d7b535b0096d0b26a6e560464b122546a4146b67eea3a7feb36ba7bcf5e23e1",
+      "renderedCellSourceVerified": true,
+      "verifiedAggregateGroups": 4,
+      "lastStaticOutputAt": null,
+      "verifiedAt": "2026-11-06T10:21:31.920926+00:00"
     },
     {
       "file": "forge/notebooks/08-state-machine.py",
