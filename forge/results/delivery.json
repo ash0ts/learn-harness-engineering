@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-06T12:18:28.721993+00:00",
+  "generatedAt": "2026-11-06T12:22:43.188839+00:00",
   "status": "verification_in_progress",
   "completionGates": {
     "nineNotebooksVerified": true,
@@ -9,7 +9,8 @@
     "realTwoHourTimer": true,
     "offlineApps": true,
     "forgeTests": true,
-    "notebookExplicitAction": false,
+    "correctedCheckerQualification": false,
+    "notebookExplicitAction": true,
     "localNotebookRenders": false,
     "tracesReadBack": false,
     "modelsReadBack": false,
@@ -1256,7 +1257,7 @@
   "upstreamCommit": "a9342ff471f2c0e60be0c08b9f4a7c502df4e442",
   "forkUrl": "https://github.com/ash0ts/learn-harness-engineering",
   "targetRepeatsPerVariant": 3,
-  "trialAttempts": 107,
+  "trialAttempts": 108,
   "comparisonTrialAttempts": 84,
   "comparisonOutcomes": {
     "task_failed": 66,
@@ -1264,10 +1265,10 @@
   },
   "outcomes": {
     "task_failed": 88,
-    "passed": 18,
+    "passed": 19,
     "telemetry_missing": 1
   },
-  "passedTrials": 18,
+  "passedTrials": 19,
   "completedComparisonBlocks": [
     {
       "campaignId": "3626f567-01a0-4226-8ce6-c99bd53dd305",
@@ -1858,6 +1859,28 @@
       "candidatePatch": "/Users/ashah/.codex/worktrees/forge-experiment-coordinator/learn-harness-engineering/forge/local-results/05beeb69-67d8-4b7a-b47b-ec8bfe2ab6ae/candidate.diff"
     },
     {
+      "file": "project-07-goal-revision4.json",
+      "schemaVersion": 1,
+      "id": "c25e6eaf-84be-4e89-b15c-4ba192b5cc6a",
+      "mode": "goal",
+      "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+      "startedAt": 1793967534951,
+      "deadlineAt": 1793969334951,
+      "intervalMs": 900000,
+      "maxRounds": 3,
+      "status": "passed",
+      "rounds": [
+        {
+          "trialId": "f5e5ab53-b1b4-4d70-af9d-5fb31516bd39",
+          "outcome": "passed",
+          "patchSha256": "1afe8f007a8f70f99114b5616ae216728af66ebc2088a3dfae26ed926ce807f4"
+        }
+      ],
+      "interventions": [],
+      "verificationFeedback": "{\"schemaVersion\":1,\"task\":\"project-04\",\"checks\":[{\"name\":\"strict compile and renderer build\",\"passed\":true},{\"name\":\"real import and persistence after reconstruction\",\"passed\":true},{\"name\":\"actual indexing keeps every nonempty paragraph\",\"passed\":true},{\"name\":\"actual retrieval and Q&A persist two turns\",\"passed\":true},{\"name\":\"architecture checker rejects a seeded boundary violation\",\"passed\":true},{\"name\":\"Electron window, preload, import, indexing and question UI under Xvfb\",\"passed\":true}],\"passed\":true}",
+      "candidatePatch": "/Users/ashah/.codex/worktrees/forge-revision4-coordinator/learn-harness-engineering/forge/local-results/f5e5ab53-b1b4-4d70-af9d-5fb31516bd39/candidate.diff"
+    },
+    {
       "file": "project-07-maker-checker-live.json",
       "schemaVersion": 1,
       "id": "47a23340-9c7d-4760-bba8-19b8b9ca9976",
@@ -2326,7 +2349,7 @@
   "budget": {
     "schemaVersion": 1,
     "limitUsd": null,
-    "spentEstimateUsd": 16.61828156333334,
+    "spentEstimateUsd": 16.765131958666675,
     "reservations": {},
     "settled": {
       "qualification-17b194af-b3ef-4d47-95cc-178676315b60": 0.003,
@@ -2492,7 +2515,10 @@
       "534ab4c7-9100-4d94-a379-fbfc4ad381c7": 0.16611393600000002,
       "39c8c943-15bf-4d53-a99e-aaa4cd9ff5a3": 0.060162492,
       "aff27d56-36a4-4cb0-a2f4-f86301f1dc68": 0.13397646,
-      "44762357-664b-4d30-b390-8121b6d51b07": 0.05600771266666667
+      "44762357-664b-4d30-b390-8121b6d51b07": 0.05600771266666667,
+      "checker-diagnostic-de8f9f04-3fa4-4332-b3a5-03f5fdf57808": 0.002372725333333333,
+      "checker-diagnostic-d3c1c8a4-481f-4d17-b794-38f69702c9dc": 0.002311286666666667,
+      "f5e5ab53-b1b4-4d70-af9d-5fb31516bd39": 0.14216638333333334
     },
     "reconciliations": [
       {
@@ -2548,12 +2574,12 @@
       }
     ]
   },
-  "knownAndAuditedEstimateUsd": 10.61828156333334,
+  "knownAndAuditedEstimateUsd": 10.765131958666675,
   "chargedUnknownReservationsUsd": 6,
   "checks": {
     "forgeTests": {
-      "tests": 33,
-      "pass": 33,
+      "tests": 38,
+      "pass": 38,
       "fail": 0
     },
     "offlineAppsPassed": 15,
@@ -9764,6 +9790,73 @@
       ]
     },
     {
+      "id": "f5e5ab53-b1b4-4d70-af9d-5fb31516bd39",
+      "project": "project-07",
+      "variant": "goal",
+      "trial": 1,
+      "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+      "outcome": "passed",
+      "inputTokens": 462118,
+      "outputTokens": 8361,
+      "estimatedCostUsd": 0.14216638333333334,
+      "conversationIds": [
+        "01a1b0cc-5790-757c-880a-c5a36053c68c"
+      ],
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/f5e5ab53b1b44d70",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-f5e5ab53-b1b4-4d70-af9d-5fb31516bd39:v0",
+      "startedAt": "2026-11-06T12:18:56.504Z",
+      "finishedAt": "2026-11-06T12:21:48.168Z",
+      "actorCompleted": false,
+      "error": null,
+      "protocolRevision": 4,
+      "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+      "grade": {
+        "schemaVersion": 1,
+        "task": "project-04",
+        "checks": [
+          {
+            "name": "strict compile and renderer build",
+            "passed": true
+          },
+          {
+            "name": "real import and persistence after reconstruction",
+            "passed": true
+          },
+          {
+            "name": "actual indexing keeps every nonempty paragraph",
+            "passed": true
+          },
+          {
+            "name": "actual retrieval and Q&A persist two turns",
+            "passed": true
+          },
+          {
+            "name": "architecture checker rejects a seeded boundary violation",
+            "passed": true
+          },
+          {
+            "name": "Electron window, preload, import, indexing and question UI under Xvfb",
+            "passed": true
+          }
+        ],
+        "passed": true
+      },
+      "reconciledEstimateUsd": 0.14216638333333334,
+      "chargedUnknownReservationUsd": null,
+      "actorPhases": [
+        {
+          "conversationId": "01a1b0cc-5790-757c-880a-c5a36053c68c",
+          "requests": 24,
+          "turns": 25,
+          "completed": false,
+          "telemetryComplete": true,
+          "errors": [
+            "Model-call budget exhausted"
+          ]
+        }
+      ]
+    },
+    {
       "id": "f6ae2a06-3a5e-4cf0-88c4-80a2b0b03c2b",
       "project": "project-08",
       "variant": "graph",
@@ -10142,8 +10235,8 @@
       "executed": 12
     }
   },
-  "verifiedUiAttempts": 27,
-  "verifiedUiPasses": 11,
+  "verifiedUiAttempts": 28,
+  "verifiedUiPasses": 12,
   "verifiedUiComparisonBlocks": [
     {
       "campaignId": "3626f567-01a0-4226-8ce6-c99bd53dd305",
@@ -10403,6 +10496,33 @@
       "finishedAt": "2026-11-06T10:55:36.666Z"
     }
   ],
+  "checkerQualification": {
+    "schemaVersion": 1,
+    "verified": true,
+    "verifiedAt": "2026-11-06T12:21:51.784Z",
+    "sourceCommit": "b874b96b7c896004c9f261db7bd7c7de6dd78411",
+    "checkerSha256": "36e80ff098dce2b276d54279252a575e1c5e0e891affb22f313dd82362ec4b57",
+    "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+    "projects": [
+      {
+        "project": "project-05",
+        "qualificationId": "checker-diagnostic-de8f9f04-3fa4-4332-b3a5-03f5fdf57808",
+        "trialId": "b6969def-4dd9-4763-8b73-6de7cdcb59c2",
+        "candidateSha256": "5248b4745685e645fa935d216e075b22dde9069022781971f06b38d193d176f1",
+        "applicationSha256": "4ade1135d03b9b15e679d7ee5ad2a1c89455acd7643bcd3e61e89873689ce1e6",
+        "passed": true
+      },
+      {
+        "project": "project-06",
+        "qualificationId": "checker-diagnostic-d3c1c8a4-481f-4d17-b794-38f69702c9dc",
+        "trialId": "f6edbfa3-3682-4e3b-bff2-ba4b864e2511",
+        "candidateSha256": "951bb3251800738c6acf820a957ada0e876e4f6f8c2d97c7ef6fe8fc1763f3ea",
+        "applicationSha256": "728846314ded66ce92e26bc7fe3bb3be380937742e224fb8b4aaebb3ceb0b2e5",
+        "passed": true
+      }
+    ],
+    "note": "Only diagnostic capture and error stacks differ in the replay; all protected assertions and original candidate bytes match."
+  },
   "notebookRerunQualification": {
     "schemaVersion": 1,
     "status": "runner_finished",
@@ -10416,7 +10536,15 @@
     "buttonClickCount": 1,
     "exitCode": 0,
     "screenshot": "/Users/ashah/Documents/GitHub/learn-harness-engineering/forge/local-results/notebook-rerun-qualification/runner-finished.jpg",
-    "uiResult": "/Users/ashah/Documents/GitHub/learn-harness-engineering/forge/local-results/notebook-rerun-qualification/ui-result.json"
+    "uiResult": "/Users/ashah/Documents/GitHub/learn-harness-engineering/forge/local-results/notebook-rerun-qualification/ui-result.json",
+    "verified": true,
+    "verifiedAt": "2026-11-06T12:19:47.520165+00:00",
+    "trialIds": [
+      "aff27d56-36a4-4cb0-a2f4-f86301f1dc68"
+    ],
+    "stopReason": "round_limit",
+    "screenshotSha256": "ddfb0e943acd4718b9ad2bec86a8135ae0dc43b9a6edd0378331bae222be06c7",
+    "limitation": "Executed through the notebook UI with an explicitly configured local shared coordinator; the hosted default has no mounted coordinator."
   },
   "comparisonAudit": {
     "schemaVersion": 1,
