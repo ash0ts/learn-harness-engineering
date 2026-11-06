@@ -1,6 +1,6 @@
 import {mkdir, readFile} from 'node:fs/promises';
 import {join, resolve} from 'node:path';
-import {randomUUID} from 'node:crypto';
+import {randomUUID,createHash} from 'node:crypto';
 import {spawn} from 'node:child_process';
 import {config, requireLive} from './config.js';
 import {Budget, estimate} from './budget.js';
@@ -15,7 +15,7 @@ export async function qualify(output=join(courseRoot,'forge/local-results')) {
   const c=config();requireLive(c);const p=await protocol();const source=await sourceHead();
   const id=`qualification-${randomUUID()}`;const dir=join(output,id);await mkdir(dir);
   const budget=new Budget(join(output,'budget.json'),c.budgetUsd);await budget.reserve({[id]:2});
-  const record:Record<string,unknown>={schemaVersion:1,id,sourceCommit:source,startedAt:new Date().toISOString(),passed:false};
+  const record:Record<string,unknown>={schemaVersion:1,id,sourceCommit:source,protocolSha256:createHash('sha256').update(JSON.stringify(p)).digest('hex'),startedAt:new Date().toISOString(),passed:false};
   let spend:number|null=null;
   try {
     const response=await fetch(`${c.inferenceUrl}/models`,{headers:{Authorization:`Bearer ${c.apiKey}`,'OpenAI-Project':`${c.entity}/${c.project}`},signal:AbortSignal.timeout(30000)});

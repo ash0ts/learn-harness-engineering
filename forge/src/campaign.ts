@@ -1,5 +1,5 @@
 import {spawn} from 'node:child_process';
-import {readFile, mkdir} from 'node:fs/promises';
+import {readFile, mkdir, readdir} from 'node:fs/promises';
 import {resolve, join} from 'node:path';
 import {randomUUID, createHash} from 'node:crypto';
 import {Budget, estimate} from './budget.js';
@@ -27,7 +27,7 @@ export async function compare(options: {project?:string;variant?:string;repeats?
   const tasks=await Promise.all((options.project?[options.project]:[1,2,3,4,5,6].map(n=>`project-0${n}`)).map(readTask));
   const repeats=options.repeats??p.repeats;
   if(!Number.isInteger(repeats)||repeats<1||repeats>3)throw new Error('Repeats must be 1–3');
-  const reserve=estimate(32768*24,4096*24,1200*2,p.pricing)*1.2;
+  const reserve=estimate(p.maxInputBytes*24,4096*24,1200*2,p.pricing)*1.2;
   const campaignId=randomUUID();
   const plan={schemaVersion:1,campaignId,sourceCommit:source,protocol:p,protocolSha256:createHash('sha256').update(JSON.stringify(p)).digest('hex'),reservationPerTrialUsd:reserve,
     blocks:tasks.flatMap(task=>Array.from({length:repeats},(_,r)=>({project:task.id,repeat:r+1,
@@ -35,6 +35,10 @@ export async function compare(options: {project?:string;variant?:string;repeats?
   if(!options.execute)return plan;
   requireLive(c);
   await mkdir(output,{recursive:true});
+  const qualifications=await Promise.all((await readdir(output)).filter(name=>name.startsWith('qualification-')).map(async name=>{
+    try{return JSON.parse(await readFile(join(output,name,'qualification.json'),'utf8'));}catch{return null;}
+  }));
+  if(!qualifications.some(q=>q?.passed && q.protocolSha256===plan.protocolSha256))throw new Error('Run doctor --qualify --execute for the frozen protocol before paid comparisons');
   await writeJson(join(output,`campaign-${campaignId}.json`),plan);
   const budget=new Budget(join(output,'budget.json'),c.budgetUsd);
   const completed:TrialRecord[]=[];
