@@ -13,8 +13,8 @@ The [public personal fork](https://github.com/ash0ts/learn-harness-engineering) 
 | Canonical notebooks | 1/9 render locally without inference credentials |
 | Hosted notebook verification | 8/9 |
 | Qualification attempts | 4/9 pass |
-| Coding attempts | 85 completed; {'task_failed': 70, 'passed': 14, 'telemetry_missing': 1} |
-| Complete comparison blocks | 31 |
+| Coding attempts | 89 completed; {'task_failed': 71, 'passed': 17, 'telemetry_missing': 1} |
+| Complete comparison blocks | 33 |
 | Real two-hour timer | Completed |
 
 A completed comparison block contains every treatment for the same project, repeat and source revision. Completion does not imply a passing patch. The independent checker executes the exported patch in a fresh sandbox and distinguishes service behavior from Xvfb/Electron behavior. Source revisions and protocol hashes remain attached to each attempt.
@@ -38,9 +38,9 @@ A completed comparison block contains every treatment for the same project, repe
 | project-03 | recovery | `8f4521bc34bb` | 3 | 0 | 3 | 0 | 0 |
 | project-03 | recovery | `b948c1fbac36` | 3 | 0 | 3 | 0 | 0 |
 | project-04 | minimal | `8f4521bc34bb` | 3 | 0 | 3 | 0 | 0 |
-| project-04 | minimal | `b948c1fbac36` | 1 | 1 | 0 | 0 | 0 |
+| project-04 | minimal | `b948c1fbac36` | 3 | 2 | 1 | 0 | 0 |
 | project-04 | runtime-feedback | `8f4521bc34bb` | 3 | 0 | 3 | 0 | 0 |
-| project-04 | runtime-feedback | `b948c1fbac36` | 1 | 1 | 0 | 0 | 0 |
+| project-04 | runtime-feedback | `b948c1fbac36` | 3 | 3 | 0 | 0 | 0 |
 | project-05 | gen-eval | `8f4521bc34bb` | 3 | 0 | 3 | 0 | 0 |
 | project-05 | plan-gen-eval | `8f4521bc34bb` | 3 | 0 | 3 | 0 | 0 |
 | project-05 | single-role | `8f4521bc34bb` | 3 | 0 | 3 | 0 | 0 |
@@ -53,35 +53,35 @@ A completed comparison block contains every treatment for the same project, repe
 | project-08 | graph | `3ebea13e2609` | 3 | 0 | 3 | 0 | 0 |
 | project-08 | graph | `8f4521bc34bb` | 3 | 0 | 3 | 0 | 0 |
 
-The complete comparison blocks contain **65 coding attempts**, with **14 native checker passes** across separate historical cohorts. Native grades from revisions 2 and 3 do not establish visible-answer acceptance.
+The complete comparison blocks contain **69 coding attempts**, with **17 native checker passes** across separate historical cohorts. Native grades from revisions 2 and 3 do not establish visible-answer acceptance.
 
-**Awaited visible-answer acceptance (revision 4): 8/20 attempts pass.** These require resolved IPC state, actual rendered answers, all service checks and Electron under Xvfb. Earlier native outcomes are preserved. Supplemental patch qualifications are separate and do not change original trial grades.
+**Awaited visible-answer acceptance (revision 4): 11/24 attempts pass.** These require resolved IPC state, actual rendered answers, all service checks and Electron under Xvfb. Earlier native outcomes are preserved. Supplemental patch qualifications are separate and do not change original trial grades.
 
 | Main comparison check | Passed | Executed |
 | --- | --- | --- |
-| Electron window, preload, import, indexing and question UI under Xvfb | 16 | 53 |
-| actual indexing keeps every nonempty paragraph | 53 | 53 |
-| actual retrieval and Q&A persist two turns | 53 | 53 |
-| architecture checker rejects a seeded boundary violation | 7 | 8 |
+| Electron window, preload, import, indexing and question UI under Xvfb | 20 | 57 |
+| actual indexing keeps every nonempty paragraph | 57 | 57 |
+| actual retrieval and Q&A persist two turns | 57 | 57 |
+| architecture checker rejects a seeded boundary violation | 10 | 12 |
 | extracted metadata | 0 | 6 |
-| real import and persistence after reconstruction | 53 | 53 |
+| real import and persistence after reconstruction | 57 | 57 |
 | single-document indexing is reflected in status | 4 | 6 |
-| strict compile and renderer build | 53 | 65 |
+| strict compile and renderer build | 57 | 69 |
 
-**29/85 attempts** reached the local input-context guard. This is a bounded execution result, not evidence that the task is impossible. Original tool/error traces and unfinished patches remain available.
+**29/89 attempts** reached the local input-context guard. This is a bounded execution result, not evidence that the task is impossible. Original tool/error traces and unfinished patches remain available.
 
 ## Independent check results
 
 | Check | Passed | Executed |
 | --- | --- | --- |
-| Electron window, preload, import, indexing and question UI under Xvfb | 16 | 64 |
-| actual indexing keeps every nonempty paragraph | 61 | 64 |
-| actual retrieval and Q&A persist two turns | 61 | 64 |
-| architecture checker rejects a seeded boundary violation | 12 | 19 |
+| Electron window, preload, import, indexing and question UI under Xvfb | 20 | 68 |
+| actual indexing keeps every nonempty paragraph | 65 | 68 |
+| actual retrieval and Q&A persist two turns | 65 | 68 |
+| architecture checker rejects a seeded boundary violation | 15 | 23 |
 | extracted metadata | 0 | 6 |
-| real import and persistence after reconstruction | 64 | 64 |
+| real import and persistence after reconstruction | 68 | 68 |
 | single-document indexing is reflected in status | 4 | 6 |
-| strict compile and renderer build | 64 | 85 |
+| strict compile and renderer build | 68 | 89 |
 
 A check omitted after compilation failed is not counted as an executed service or UI check. Shared failures can mask differences between treatments; the end-to-end outcome remains failed.
 
@@ -114,7 +114,7 @@ Manual graph qualification candidates validate runner control flow and checker b
 
 ## Spend estimates
 
-Known/audited estimate: **$8.324424**. Conservative charges for unknown usage: **$6.000000**. Total charged estimate: **$14.324424**. Active reservations: **$10.389939**.
+Known/audited estimate: **$8.880617**. Conservative charges for unknown usage: **$6.000000**. Total charged estimate: **$14.880617**. Active reservations: **$14.584909**.
 
 The original $50 application cap was removed after the user explicitly authorized an unlimited budget. Worker concurrency and lifetimes remain bounded. Timed-out qualifications retain unknown token usage; each full $2 reservation was charged conservatively under the recorded authorization. Estimates are not provider invoices. Notebook EDIT compute is measured separately at the verified 2 CPU / 4 GiB rates ($0.3408/hour), including publication work. The durable ledger records authorizations and reconciliations. It must not be reset.
 
