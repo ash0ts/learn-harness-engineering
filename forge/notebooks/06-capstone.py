@@ -9,7 +9,7 @@ import marimo
 __generated_with = "0.25.2"
 app = marimo.App(width="full")
 
-@app.cell
+@app.cell(hide_code=True)
 def _():
     import marimo as mo
     import json
@@ -20,31 +20,31 @@ def _():
     from collections import Counter
     return Counter, Path, json, mo, os, subprocess, uuid
 
-@app.cell
+@app.cell(hide_code=True)
 def _(json):
     project_id = 'project-06'
-    runner_commit = '35f2438de849313d5025960e2e63fe6f66c04178'
-    saved = json.loads('{"schemaVersion": 1, "status": "Preliminary evidence. One timer attempt halted on a local input bound; paid launches are now paused after a separate qualification request returned no usage. No complete comparison blocks or real two-hour exercise are claimed.", "trials": [{"id": "ace2d466-a1f6-4998-bb1c-130618b52651", "project": "project-07", "variant": "timer", "trial": 1, "sourceCommit": "bf760399391f0862c6b642c62854c9baf4ca7523", "outcome": "telemetry_missing", "inputTokens": 17545, "outputTokens": 876, "estimatedCostUsd": null, "conversationIds": ["01a1afca-9cab-751c-8d3f-02d983484664"], "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/ace2d466a1f64998", "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-ace2d466-a1f6-4998-bb1c-130618b52651:v0"}]}')
+    runner_commit = 'fa335584219f8bfb55092fd729b57b3e05f1933a'
+    saved = json.loads('{"schemaVersion": 1, "status": "Preliminary evidence. One timer attempt halted on a local input bound; paid launches are now paused after a separate qualification request returned no usage. No complete comparison blocks or real two-hour exercise are claimed.", "trials": [{"id": "ace2d466-a1f6-4998-bb1c-130618b52651", "project": "project-07", "variant": "timer", "trial": 1, "sourceCommit": "bf760399391f0862c6b642c62854c9baf4ca7523", "outcome": "telemetry_missing", "inputTokens": 17545, "outputTokens": 876, "estimatedCostUsd": null, "conversationIds": ["01a1afca-9cab-751c-8d3f-02d983484664"], "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/ace2d466a1f64998", "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-ace2d466-a1f6-4998-bb1c-130618b52651:v0", "reconciledEstimateUsd": 0.010633104666666665}], "budget": {"limitUsd": 50, "spentEstimateUsd": 0.029610153333333333, "reservations": {"qualification-1c68ebdf-feba-4158-8192-d5be5b3e2a98": 2}, "halted": "Missing usage for qualification-1c68ebdf-feba-4158-8192-d5be5b3e2a98", "reconciliations": [{"id": "qualification-17b194af-b3ef-4d47-95cc-178676315b60", "estimatedUsd": 0.003, "evidence": "qualification.json ended at the cancellation probe before runPi; sandbox/sandbox.json confirms terminated. Charge conservative 32 seconds at 2 CPU + 4 GiB ($0.3408/hour), rounding upward. No inference launched.", "at": "2026-11-06T07:32:03.996Z"}, {"id": "qualification-af9192de-dfe3-4631-934e-37729c2a4d56", "estimatedUsd": 0.010988719333333332, "evidence": "Both agent and app calls completed with returned token usage. Sandbox journal confirms terminated. Original accounting rejected metadata keys rather than missing billable rates. This estimate conservatively bills the entire qualification wall-clock duration as sandbox time, including app inference after termination.", "at": "2026-11-06T07:34:24.698Z"}, {"id": "ace2d466-a1f6-4998-bb1c-130618b52651", "estimatedUsd": 0.010633104666666665, "evidence": "All eight submitted model calls returned usage (actor/phase-1.json and tool logs). The ninth attempt was refused locally before the provider due to the frozen input-byte guard. Both actor and grader sandbox journals confirm termination. Preserve the original telemetry_missing attempt; this audited estimate reclassifies only its billing uncertainty.", "at": "2026-11-06T07:41:23.512Z"}]}, "qualifications": [{"id": "qualification-17b194af-b3ef-4d47-95cc-178676315b60", "passed": false, "sourceCommit": "1b316ef2aadd5f0a2d87fbaac1c2c5a505054dd7", "protocolSha256": null, "startedAt": "2026-11-06T07:30:28.545Z", "finishedAt": "2026-11-06T07:30:53.897Z", "inputTokens": null, "outputTokens": null, "estimatedCostUsd": null, "error": "CWSandboxTransportError: Streaming command cancelled.", "reconciledEstimateUsd": 0.003}, {"id": "qualification-1c68ebdf-feba-4158-8192-d5be5b3e2a98", "passed": false, "sourceCommit": "6907491cc07b3cad91f26bbdfaf60570fc1f246b", "protocolSha256": "87e457ec9cf3716839df078fadd5cae1e5a1a1e5cc4b14eed2e06e72fe041141", "startedAt": "2026-11-06T07:42:00.479Z", "finishedAt": "2026-11-06T07:43:56.209Z", "inputTokens": null, "outputTokens": null, "estimatedCostUsd": null, "error": "Error: Pi capability/usage qualification failed", "reconciledEstimateUsd": null}, {"id": "qualification-af9192de-dfe3-4631-934e-37729c2a4d56", "passed": false, "sourceCommit": "23f50a21e66e4baaf9a2c05e6298c114699865ae", "protocolSha256": null, "startedAt": "2026-11-06T07:32:07.987Z", "finishedAt": "2026-11-06T07:33:42.624Z", "inputTokens": null, "outputTokens": null, "estimatedCostUsd": null, "error": "Error: Missing usage or pricing", "reconciledEstimateUsd": 0.010988719333333332}, {"id": "qualification-ed8a8028-bb60-4eff-a678-e5e74e94d2cc", "passed": true, "sourceCommit": "09a716af4cdd8467729f4185081dab019d7a8e1a", "protocolSha256": null, "startedAt": "2026-11-06T07:34:48.721Z", "finishedAt": "2026-11-06T07:35:41.927Z", "inputTokens": 1439, "outputTokens": 1667, "estimatedCostUsd": 0.004988329333333333, "error": null, "reconciledEstimateUsd": 0.004988329333333333}]}')
     variants = ['minimal', 'capstone']
     return project_id, runner_commit, saved, variants
 
-@app.cell
+@app.cell(hide_code=True)
 def _(mo, runner_commit):
     mo.md('# 06 · Capstone reliability\n\nVerify import, indexing, Q&A, feedback and reset with real services and Electron. Historical simulated benchmarks are not evidence in this track.\n\nKeep the task, model and fixtures fixed. Inspect evidence before comparing scores.' + f"\n\nRunner revision: `{runner_commit}`. Opening this notebook displays saved evidence and launches no inference or coding work.")
     return
 
-@app.cell
+@app.cell(hide_code=True)
 def _(Counter, mo, project_id, saved):
     rows = [row for row in saved.get("trials", []) if project_id == "overview" or row["project"] == project_id]
     counts = Counter((row["variant"], row["outcome"]) for row in rows)
     aggregates = []
     for _variant in sorted({row["variant"] for row in rows}):
         _group = [row for row in rows if row["variant"] == _variant]
-        aggregates.append({"variant": _variant, "attempts": len(_group), "passed": counts[_variant, "passed"], "task_failed": counts[_variant, "task_failed"], "infrastructure_failed": counts[_variant, "infrastructure_failed"], "telemetry_missing": counts[_variant, "telemetry_missing"], "known_estimate_usd": round(sum(row.get("estimatedCostUsd") or 0 for row in _group), 6), "unknown_cost_attempts": sum(row.get("estimatedCostUsd") is None for row in _group)})
-    mo.vstack([mo.md("## Saved results\n\n" + saved.get("status", "No campaign has been recorded.")), mo.ui.table(aggregates, selection=None) if aggregates else mo.md("No trials are recorded for this project. This is an explicit absence of evidence, not a zero score."), mo.md("Target: three repeats per automated variant. Show task failures, infrastructure failures and missing telemetry separately. Repeats of one task are not independent tasks. Known cost sums exclude unknown amounts; consult the shared ledger for reservations and audited reconciliations."), mo.ui.table(rows, selection=None) if rows else mo.md("No run rows to display.")])
+        aggregates.append({"variant": _variant, "attempts": len(_group), "passed": counts[_variant, "passed"], "task_failed": counts[_variant, "task_failed"], "infrastructure_failed": counts[_variant, "infrastructure_failed"], "telemetry_missing": counts[_variant, "telemetry_missing"], "known_estimate_usd": round(sum(row.get("reconciledEstimateUsd", row.get("estimatedCostUsd")) or 0 for row in _group), 6), "unknown_cost_attempts": sum(row.get("estimatedCostUsd") is None and row.get("reconciledEstimateUsd") is None for row in _group)})
+    mo.vstack([mo.md("## Saved results\n\n" + saved.get("status", "No campaign has been recorded.")), mo.ui.table(aggregates, selection=None) if aggregates else mo.md("No trials are recorded for this project. This is an explicit absence of evidence, not a zero score."), mo.md("Target: three repeats per automated variant. Show task failures, infrastructure failures and missing telemetry separately. Repeats of one task are not independent tasks. Cost sums include audited reconciliations where available and exclude unresolved amounts. Original outcomes are preserved; see the shared ledger for reservations and reconciliation evidence."), mo.ui.table(rows, selection=None) if rows else mo.md("No run rows to display."), mo.md("### Qualification and budget evidence"), mo.ui.table(saved.get("qualifications", []), selection=None), mo.md("```json\n" + __import__("json").dumps(saved.get("budget", {}), indent=2) + "\n```")])
     return (rows,)
 
-@app.cell
+@app.cell(hide_code=True)
 def _(mo, rows):
     _links = []
     for _row in rows:
@@ -57,7 +57,7 @@ def _(mo, rows):
     mo.md("## Evidence links\n\n" + ("\n".join(_links) if _links else "Links appear only for recorded runs. No synthetic run URLs are generated."))
     return
 
-@app.cell
+@app.cell(hide_code=True)
 def _(mo, os, variants):
     runner_root = mo.ui.text(value=os.environ.get("FORGE_RUNNER_ROOT", ""), label="Shared coordinator checkout (absolute path)", full_width=True)
     entity = mo.ui.text(value="wandb", label="W&B team")
@@ -69,7 +69,7 @@ def _(mo, os, variants):
     mo.vstack([mo.md("## Bounded rerun\n\nPaid work requires this explicit button. The coordinator needs Node, installed pinned dependencies, external credentials, a successful qualification, and the existing durable budget ledger. Hosted analysis works without that coordinator. Configure its mounted checkout to enable execution; this notebook never creates a fresh $50 ledger on opening. A failed or uncertain request stays recorded."), runner_root, mo.hstack([entity, result_project]), mo.hstack([treatment, repetitions]), launch])
     return entity, get_execution, launch, repetitions, result_project, runner_root, set_execution, treatment
 
-@app.cell
+@app.cell(hide_code=True)
 def _(Path, entity, get_execution, launch, mo, os, project_id, repetitions, result_project, runner_commit, runner_root, set_execution, subprocess, treatment, uuid):
     mo.stop(launch.value <= get_execution()["click"])
     set_execution({"click": launch.value, "status": "Starting explicit request"})
@@ -100,7 +100,7 @@ def _(Path, entity, get_execution, launch, mo, os, project_id, repetitions, resu
         set_execution({"click": launch.value, "status": "Not completed", "error": str(_error)})
     return
 
-@app.cell
+@app.cell(hide_code=True)
 def _(get_execution, mo):
     mo.md("## Last explicit action\n\n```json\n" + __import__("json").dumps(get_execution(), indent=2) + "\n```")
     return
