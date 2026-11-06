@@ -104,6 +104,8 @@ W&B Models readback verified **73/73 runs and committed trial artifacts** agains
 - Sandbox lifecycle `sandbox-qualification-eab8e9f7-6d4d-4d1c-8582-5cbf4f41197c`: passed; 5 live checks. 
 - Sandbox lifecycle `sandbox-qualification-f566ddc3-297f-4483-98a8-47c6d15a402c`: failed; 0 live checks. CWSandboxValidationError: tags contains invalid value: sandbox-qualification-f566ddc3-297f-4483-98a8-47c6d15a402c-interrupt. tags may contain letters, numbers, '.', '_' or '-', must be 59 characters or fewer, must end with a letter or number, and may start with '.', '_' or '-'
 
+Notebook explicit-action qualification: **pending**. A configured local shared coordinator executes the same canonical execution cell; the hosted default has no mounted coordinator.
+
 Manual graph qualification candidates validate runner control flow and checker behavior. They are explicitly excluded from Pi trial counts and treatment comparisons.
 
 ## Loops and graph states
