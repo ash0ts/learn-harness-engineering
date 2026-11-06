@@ -1,10 +1,10 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { DocumentList } from './components/DocumentList';
 import { QuestionPanel } from './components/QuestionPanel';
 import { DocumentDetail } from './components/DocumentDetail';
 import { ConversationHistory } from './components/ConversationHistory';
 import { StatusBar } from './components/StatusBar';
-import { Document, AppStatus, QAResponse } from '../../shared/types';
+import { Document, AppStatus, QAResponse } from '../shared/types';
 
 export function App() {
   const [documents, setDocuments] = useState<Document[]>([]);

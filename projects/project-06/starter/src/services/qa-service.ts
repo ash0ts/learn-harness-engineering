@@ -1,4 +1,5 @@
-import { QAResponse, QAHistory, Citation, Chunk } from '../shared/types';
+import {forgeAnswer, forgeEnabled, forgeTurn, forgeTool} from './forge-hooks';
+import { QAResponse, QAHistory, Citation } from '../shared/types';
 import { PersistenceService } from './persistence-service';
 import { IndexingService } from './indexing-service';
 import { logger } from './logger';
@@ -60,11 +61,12 @@ export class QaService {
 
   /** Ask a question and get a grounded answer with citations. */
   async ask(question: string): Promise<QAResponse> {
+    return forgeTurn(question, async () => {
     logger.info(SERVICE, 'Processing question', { question });
     // Simulate processing delay
-    await new Promise(resolve => setTimeout(resolve, 100 + Math.random() * 400));
+    if (!forgeEnabled()) await new Promise(resolve => setTimeout(resolve, 100 + Math.random() * 400));
 
-    const chunks = this.indexingService.getAllChunks();
+    const chunks = forgeTool('retrieval.chunks', {question}, () => this.indexingService.getAllChunks());
     const citations: Citation[] = [];
 
     if (chunks.length > 0) {
@@ -100,7 +102,8 @@ export class QaService {
     }
 
     // Generate answer from mock patterns or use fallback
-    const answer = this.generateAnswer(question, citations);
+    forgeTool('retrieval.ranked', {question}, () => citations);
+    const answer = await forgeAnswer(question, citations, () => this.generateAnswer(question, citations));
 
     const response: QAResponse = {
       answer,
@@ -117,6 +120,7 @@ export class QaService {
       citationCount: citations.length,
     });
     return response;
+    });
   }
 
   /** Get the Q&A history. */

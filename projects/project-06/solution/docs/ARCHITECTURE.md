@@ -206,3 +206,11 @@ Log levels:
 - **INFO**: Significant events (import, indexing, Q&A, feedback, reset)
 - **WARN**: Missing but non-critical data (skipped documents, content not found)
 - **ERROR**: Failures (file not found, parse errors)
+
+## Optional Forge runtime
+
+The main process may explicitly load `FORGE_APP_ADAPTER` when `FORGE_APP_MODE=live`.
+Service hooks trace import, indexing, retrieval, and Q&A; answer generation delegates
+to the adapter before history is saved. Offline launches retain mock answers and
+all starter gaps. The renderer and preload never receive credentials or SDKs.
+See the repository `forge/README.md` for setup and headless service execution.

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Document, Chunk } from '../../../shared/types';
+import { useEffect, useState } from 'react';
+import { Document, Chunk } from '../../shared/types';
 
 interface Props {
   document: Document;
@@ -9,7 +9,7 @@ interface Props {
 export function DocumentDetail({ document, onDelete }: Props) {
   const [chunks, setChunks] = useState<Chunk[]>([]);
   const [showChunks, setShowChunks] = useState(false);
-  const [content, setContent] = useState<string | null>(null);
+  const [content] = useState<string | null>(null);
 
   useEffect(() => {
     window.knowledgeBase.indexing.chunks(document.id).then(setChunks);

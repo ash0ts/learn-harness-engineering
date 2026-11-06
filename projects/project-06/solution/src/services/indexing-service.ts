@@ -1,3 +1,4 @@
+import {forgeTool} from './forge-hooks';
 import { v4 as uuidv4 } from 'uuid';
 import { Chunk, Document } from '../shared/types';
 import { PersistenceService } from './persistence-service';
@@ -25,6 +26,7 @@ export class IndexingService {
 
   /** Start indexing documents. If documentId is provided, index only that document. */
   async startIndexing(documentId?: string): Promise<IndexStatus> {
+    return forgeTool('indexing.start', {documentId}, async () => {
     const startTime = Date.now();
     this.log.info('Indexing started', { documentId: documentId ?? 'all' });
 
@@ -105,6 +107,7 @@ export class IndexingService {
       throughput: totalChunks > 0 ? `${(totalChunks / (duration / 1000)).toFixed(1)} chunks/sec` : 'N/A',
     });
     return this.getStatus();
+    });
   }
 
   /** Get current indexing status. */
