@@ -2396,8 +2396,8 @@
     },
     {
       "path": "scripts/validate_article_visuals.mts",
-      "bytes": 7335,
-      "sha256": "9aaed46e347e643d06f12d2cb727d379e4c7e3fb50b920f6f7a3483054b631bd"
+      "bytes": 7469,
+      "sha256": "bc4139119c80145b804af608f120f3a5f0b8cc336783333606f594474d709a3f"
     },
     {
       "path": "trials.csv",
@@ -2407,7 +2407,7 @@
     {
       "path": "validation.json",
       "bytes": 10189,
-      "sha256": "4e0b76052810ea17034f0972ce31adf51276e85c0b347763f623bd5a0b715d56"
+      "sha256": "e7c48f39f47815cd71bcfa0917dab1751ee97039c17df52fcf5f6ff57f585fab"
     }
   ]
 }
