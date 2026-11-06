@@ -52,6 +52,11 @@ def publish():
     verified_ui=[r for r in saved['trials'] if qualified(r)]
     audit_metrics={'qualificationAttempts':len(saved['qualifications']),'qualificationPassed':sum(r['passed'] for r in saved['qualifications']),'codingTrialAttempts':len(saved['trials']),'passedCodingTrials':sum(r['outcome']=='passed' for r in saved['trials']),'completeComparisonBlocks':blocks,'knownEstimatedSpendUsd':ledger['spentEstimateUsd']-uncertain,'chargedUnknownReservationsUsd':uncertain,'totalChargedEstimateUsd':ledger['spentEstimateUsd'],'unresolvedReservationsUsd':sum(ledger['reservations'].values()),'budgetHalted':bool(ledger.get('halted')),'notebooksPublishedVerified':sum(r['status']=='published_verified' for r in publications['notebooks'])}
     audit_metrics.update(verifiedUiAttempts=len(verified_ui),verifiedUiPasses=sum(r['outcome']=='passed' for r in verified_ui))
+    loops=saved.get('loops',[]);graphs=saved.get('graphs',[])
+    audit_metrics.update(realTwoHourTimersCompleted=sum(s['mode']=='timer' and s['status']=='deadline' and s['deadlineAt']-s['startedAt']>=7200000 for s in loops),
+                         goalLoopsPassed=sum(s['mode']=='goal' and s['status']=='passed' for s in loops),
+                         piGraphApprovalPauses=sum(not s.get('qualification') and s['node']=='approval' for s in graphs),
+                         manualGraphApprovalPauses=sum(bool(s.get('qualification')) and s['node']=='approval' for s in graphs))
     traces=json.loads((LOCAL/'trace-audit.json').read_text())
     models=json.loads((LOCAL/'models-audit.json').read_text())
     cleanup=json.loads((LOCAL/'sandbox-final-audit.json').read_text())
@@ -69,6 +74,13 @@ def publish():
         for row in saved['trials']:
             table.add_data(row['id'],'coding-trial',row['outcome'],row.get('estimatedCostUsd'),ledger['settled'].get(row['id']),row['sourceCommit'])
         run.log({'attempts':table})
+        loop_table=wandb.Table(columns=['checkpoint','mode','status','rounds','observed_interventions','duration_limit_seconds','source_commit'],data=[])
+        for state in loops:
+            loop_table.add_data(state['file'],state['mode'],state['status'],len(state['rounds']),len(state.get('interventions',[])),(state['deadlineAt']-state['startedAt'])/1000,state['sourceCommit'])
+        graph_table=wandb.Table(columns=['checkpoint','manual_qualification','node','maker_attempts','transitions','candidate_sha256','source_commit'],data=[])
+        for state in graphs:
+            graph_table.add_data(state['file'],bool(state.get('qualification')),state['node'],state['attempts'],len(state['transitions']),state.get('candidate',{}).get('sha256'),state['sourceCommit'])
+        run.log({'loopEvidence':loop_table,'graphEvidence':graph_table})
         artifact=wandb.Artifact('forge-course-qualification-evidence',type='course-evidence',metadata={'schemaVersion':1,'status':'recorded-evidence','completedComparisonBlocks':blocks,'publisherSourceCommit':publisher_commit})
         for row in saved['qualifications']+saved['trials']+concurrent+saved.get('sandboxQualifications',[])+saved.get('visibleUiQualifications',[]):
             directory=LOCAL/row['id']
@@ -100,7 +112,7 @@ def publish():
     for attempt in range(16):
         summary=wandb.Api().run(f'{entity}/{project}/{receipt["runId"]}').summary
         observed={key:summary.get(key) for key in audit_metrics}
-        if observed==audit_metrics:break
+        if observed==audit_metrics and summary.get('loopEvidence') and summary.get('graphEvidence'):break
         if attempt==15:raise RuntimeError('Final audit run summary does not match recorded evidence')
         time.sleep(2)
     receipt['verifiedRunSummary']=observed
