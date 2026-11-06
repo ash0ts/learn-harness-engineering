@@ -30,11 +30,22 @@ The ledger and its audit trail are included in `delivery.json`. It must not be r
 
 ## Evidence links
 
+### Draft pull requests
+
+- [Forge runtime and Agent Lens tracing](https://github.com/ash0ts/learn-harness-engineering/pull/1)
+- [Reproducible Forge sandbox execution](https://github.com/ash0ts/learn-harness-engineering/pull/2)
+- [feat(forge): instrument real app services while preserving offline exercises](https://github.com/ash0ts/learn-harness-engineering/pull/3)
+- [feat(forge): add controlled comparisons protected graders and cost reservations](https://github.com/ash0ts/learn-harness-engineering/pull/5)
+- [feat(forge): execute checkpointed goal timer and maker-checker loops](https://github.com/ash0ts/learn-harness-engineering/pull/6)
+- [feat(forge): add durable graph routing rollback and human approval](https://github.com/ash0ts/learn-harness-engineering/pull/7)
+- [Forge 7/8: Nine Marimo notebooks and English learning path](https://github.com/ash0ts/learn-harness-engineering/pull/8)
+- [Forge 8/8: Qualification audit and guarded notebook publication](https://github.com/ash0ts/learn-harness-engineering/pull/9)
+
 - [W&B timer trial](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/ace2d466a1f64998) · [versioned trial artifact](https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-ace2d466-a1f6-4998-bb1c-130618b52651:v0)
 - [Agent Lens coding conversation](https://forge.coreweave.com/agent-lens/wandb/learn-harness-engineering-forge/conversations/01a1afca-9cab-751c-8d3f-02d983484664)
 - [Qualification audit run](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/course-audit-20261106) · [qualification evidence and exact source archives](https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v0)
 
-Agent Lens was inspected in the authenticated UI. The coding conversation contains nested model and tool activity. Separate application conversations show four turns (import, indexing, two Q&A calls) and twelve spans. Concurrency isolation is implemented with `runIsolated()`; a live concurrent trace qualification is still outstanding. The unsuccessful inference conversation is retained with its error.
+Agent Lens was inspected in the authenticated UI. [Application qualification conversation](https://forge.coreweave.com/agent-lens/wandb/learn-harness-engineering-forge/conversations/app-d758b5b7-ca03-4fde-a743-5577fafe284e). The coding conversation contains nested model and tool activity. Separate application conversations show four turns (import, indexing, two Q&A calls) and twelve spans. Concurrency isolation is implemented with `runIsolated()`; a live concurrent trace qualification is still outstanding. The unsuccessful inference conversation is retained with its error.
 
 ## Hosted notebook records
 
