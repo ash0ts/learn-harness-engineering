@@ -46,10 +46,10 @@ def publish():
                 if path.is_file() and path.suffix in {'.json','.diff','.txt','.log','.png'}:
                     artifact.add_file(str(path),name=str(path.relative_to(LOCAL)))
         for path in sorted(sources.iterdir()):artifact.add_file(str(path),name='source-archives/'+path.name)
-        for filename in ['budget.json','app-checks.json','notebook-validation.json','trace-audit.json','forge-tests-final.log','sandbox-final-audit.json','local-checks.json','docs-build.log','anchors-check.log']:
+        for filename in ['budget.json','app-checks.json','notebook-validation.json','trace-audit.json','forge-tests-final.log','sandbox-final-audit.json','local-checks.json','docs-check.log','anchors-check.log']:
             path=LOCAL/filename
             if path.exists():artifact.add_file(str(path),name=filename)
-        for pattern in ['project-07-*.json','project-08-*.json','rollback-*.json','report-*.json','graph-*/*.json','graph-*/*.png','notebook-sessions/*.json','trace-readback/*.json']:
+        for pattern in ['project-07-*.json','project-08-*.json','rollback-*.json','report-*.json','graph-*/*.json','graph-*/*.png','notebook-sessions/*.json','trace-readback/*.json','reconciliations/*.json']:
             for path in sorted(LOCAL.glob(pattern)):
                 if path.is_file():artifact.add_file(str(path),name=str(path.relative_to(LOCAL)))
         for directory in sorted(LOCAL.glob('graph-qualification-*')):
