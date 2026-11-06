@@ -1,6 +1,6 @@
 # Forge course delivery and evidence
 
-Status: **verification in progress**. All eight PRs remain drafts; none has been merged.
+Status: **verified delivery**. All eight PRs remain drafts; none has been merged.
 
 The [public personal fork](https://github.com/ash0ts/learn-harness-engineering) preserves the offline course at upstream `a9342ff471f2c0e60be0c08b9f4a7c502df4e442`. Results and notebook sources belong to the private `wandb/learn-harness-engineering-forge` project.
 
@@ -11,7 +11,7 @@ The [public personal fork](https://github.com/ash0ts/learn-harness-engineering) 
 | Existing offline app checks | 15/15 pass |
 | Forge integration tests | 36 pass; 0 fail |
 | Canonical notebooks | 9/9 render locally without inference credentials |
-| Hosted notebook verification | 7/9 |
+| Hosted notebook verification | 9/9 |
 | Qualification attempts | 2/5 pass |
 | Coding attempts | 59 completed; {'task_failed': 58, 'telemetry_missing': 1} |
 | Complete comparison blocks | 18 |
@@ -101,7 +101,7 @@ Manual graph qualification candidates validate runner control flow and checker b
 
 ## Spend estimates
 
-Known/audited estimate: **$5.462867**. Conservative charges for unknown usage: **$2.000000**. Total charged estimate: **$7.462867**. Active reservations: **$4.000000**.
+Known/audited estimate: **$5.563528**. Conservative charges for unknown usage: **$2.000000**. Total charged estimate: **$7.563528**. Active reservations: **$0.000000**.
 
 The original $50 application cap was removed after the user explicitly authorized an unlimited budget. Worker concurrency and lifetimes remain bounded. The timed-out qualification retains unknown token usage; its full $2 reservation was charged conservatively. Estimates are not provider invoices. Notebook EDIT compute is measured separately at the verified 2 CPU / 4 GiB rates ($0.3408/hour), including publication work. The durable ledger records authorizations and reconciliations. It must not be reset.
 
@@ -122,14 +122,14 @@ Budget snapshot as of capturedAt. Final publication/editor costs are recorded se
 
 | Notebook | Publication status |
 | --- | --- |
-| [Forge track: evidence before conclusions](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTM%3D) | editor_workflow_verified_pending_final_results |
+| [Forge track: evidence before conclusions](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTM%3D) | published_verified |
 | [01 · Minimal instructions and explicit harnesses](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTQ%3D) | published_verified |
 | [02 · An agent-readable workspace](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTU%3D) | published_verified |
 | [03 · Interrupted-session recovery](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTY%3D) | published_verified |
 | [04 · Runtime evidence and the seeded defect](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTc%3D) | published_verified |
 | [05 · One feature, three role arrangements](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTg%3D) | published_verified |
 | [06 · Capstone reliability](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTk%3D) | published_verified |
-| [07 · Goal, timer and maker-checker loops](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjA%3D) | created_basic_not_uploaded |
+| [07 · Goal, timer and maker-checker loops](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjA%3D) | published_verified |
 | [08 · Checkpointed graphs and human approval](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjE%3D) | published_verified |
 
 The publication manifest binds each stable notebook ID to its canonical source commit, SHA-256, committed currentVersion, and rendered-output SHA-256. Verification compares rendered cell source and output code hashes, including when Forge omits its legacy lastStaticOutputAt timestamp. Opening the notebook renders saved evidence; paid reruns require an explicit action.
