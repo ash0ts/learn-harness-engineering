@@ -1,6 +1,7 @@
 {
   "schemaVersion": 1,
-  "protocolRevision": 3,
+  "protocolRevision": 4,
+  "uiAcceptance": "await-async-ipc-and-visible-answer",
   "model": "Qwen/Qwen3.6-35B-A3B",
   "inferenceUrl": "https://api.inference.wandb.ai/v1",
   "contextWindow": 262144,
