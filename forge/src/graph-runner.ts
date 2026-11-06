@@ -20,8 +20,12 @@ export async function runGraph(file:string,execute:boolean,resume=false) {
   return driveGraph(file,state,{
     async plan(){return task.task;},
     async make(s){
+      const verification=s.verification?await Promise.all(s.verification.map(async lane=>({
+        lane:lane.lane,passed:lane.passed,error:lane.error,
+        grade:JSON.parse(await readFile(lane.evidence,'utf8')),
+      }))):undefined;
       const result=await compare({project:'project-08',variant:'graph',repeats:1,execute:true,source:s.sourceCommit,output,resumePatch:s.previous?.patch,
-        verificationFeedback:s.verification?JSON.stringify({attempt:s.attempts,verification:s.verification,rollback:'The previous failing candidate was discarded; start from the frozen baseline or last verified patch.'}):undefined});
+        verificationFeedback:verification?JSON.stringify({attempt:s.attempts,verification,rollback:'The previous failing candidate was discarded; start from the frozen baseline or last verified patch.'}):undefined});
       const record=(result as {completed?:TrialRecord[]}).completed?.[0];
       if(!record||['infrastructure_failed','telemetry_missing'].includes(record.outcome))throw new Error('Maker unavailable; retain trial evidence');
       const patch=join(output,record.id,'candidate.diff');const sha256=createHash('sha256').update(await readFile(patch)).digest('hex');
