@@ -112,7 +112,12 @@ CELLS = {
     mo.vstack([mo.md("## Saved results\\n\\n" + saved.get("status", "No campaign has been recorded.")), mo.ui.table(aggregates, selection=None) if aggregates else mo.md("No trials are recorded for this project. This is an explicit absence of evidence, not a zero score."), mo.md("Target: three repeats per automated variant. Show task failures, infrastructure failures and missing telemetry separately. Repeats of one task are not independent tasks. Rows are grouped by project, treatment and source revision. Cost sums include audited reconciliations where available; unknown token usage remains unknown even when a reservation is charged conservatively. Original outcomes are preserved; see the shared ledger for reservations and reconciliation evidence."), mo.ui.table(rows, selection=None) if rows else mo.md("No run rows to display."), mo.md("### Qualification and budget evidence"), mo.ui.table(saved.get("qualifications", []), selection=None), mo.md("```json\\n" + __import__("json").dumps({key: value for key, value in saved.get("budget", {}).items() if key != "settled"}, indent=2) + "\\n```")])
     return (rows,)''',
 'links': '''def _(mo, rows, saved):
-    _links = []
+    _links = [
+        "- [Revision 3 comparison dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=ssij233dnka)",
+        "- [Original revision 2 dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=tsgaokxuthw)",
+        "- [Execution and publication audit](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=l9e45ofb461)",
+        "- [Evidence report with cohort denominators](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/reports/Forge-harness-course-%E2%80%94-verified-execution-and-comparison-evidence--VmlldzoxODI2MzgyOA==)",
+    ]
     for _row in rows:
         if _row.get("wandbRunUrl"):
             _links.append(f"- [{_row['id']} · W&B run]({_row['wandbRunUrl']})")
