@@ -24,7 +24,7 @@ export async function createAppHooks(variant: string, options:{conversationId?:s
   requireLive(config);
   const releaseTracing=await lifecycle.retain(JSON.stringify([config.entity,config.project,config.apiKey]));
   const client = new OpenAI({apiKey: config.apiKey, baseURL: config.inferenceUrl, maxRetries: 0,
-    timeout: 30000, defaultHeaders: {'OpenAI-Project': `${config.entity}/${config.project}`}});
+    timeout: 120000, defaultHeaders: {'OpenAI-Project': `${config.entity}/${config.project}`}});
   const conversationId = options.conversationId || process.env.FORGE_CONVERSATION_ID || `app-${randomUUID()}`;
   const evidencePath=options.evidencePath || process.env.FORGE_APP_EVIDENCE;
   const attributes: Record<string, string> = {'course.app_variant': variant, 'course.role': 'knowledge-base'};
