@@ -18,6 +18,18 @@ TITLES = [
 ]
 VARIANTS = {'overview':['minimal','explicit'],'project-01':['minimal','explicit'],'project-02':['minimal','workspace-docs'],'project-03':['minimal','recovery'],'project-04':['minimal','runtime-feedback'],'project-05':['single-role','gen-eval','plan-gen-eval'],'project-06':['minimal','capstone'],'project-07':['goal','timer','maker-checker'],'project-08':['graph']}
 
+DESIGNS = {
+'overview': ('Which harness changes improve a bounded coding attempt?', 'Hold application code, fixture, model and generation settings fixed. Vary only the staged harness treatment.', 'Inspect complete treatment blocks, exported patches, protected service checks, Xvfb/Electron evidence, usage and traces. A completed trial can still fail.', 'Start with qualification, inspect one project, compare all three repeats, then follow the loop and graph checkpoints. Never treat historical simulated scores as live evidence.'),
+'project-01': ('Do explicit acceptance criteria help the agent finish a usable shell?', 'Compare minimal instructions with explicit harness guidance from the same unfinished starter.', 'Check compilation, import persistence, indexing, grounded Q&A and an actual Electron window with a working typed preload bridge.', 'Open both patches and their Agent Lens tool calls. A service pass with a broken preload remains a failed application task.'),
+'project-02': ('Can workspace documentation support a fresh coding session?', 'Compare minimal and workspace-docs treatments. Each attempt gets two fresh sessions sharing files, with the same total model-call allowance.', 'Check actual document import through the Electron UI, persisted contents, indexing and Q&A. Inspect whether session two discovers the relevant workspace files.', 'Treat each two-session attempt as one trial. Do not count its sessions as independent repeats or infer time saved.'),
+'project-03': ('Does a written handoff preserve progress after context is discarded?', 'Compare minimal instructions with the recovery harness on identical unfinished code; persist the patch between two fresh Pi sessions.', 'Check document metadata, single-document indexing status, grounded citations, durable history and Electron behavior.', 'Read the checkpoint and handoff before inspecting the resumed conversation. Verify recovered behavior from held-out checks, not the final agent claim.'),
+'project-04': ('Does runtime evidence expose a defect that superficial checks miss?', 'Compare minimal instructions with runtime-feedback guidance on the same seeded long-document chunking defect.', 'Import a document exceeding the defect threshold, inspect every nonempty chunk, retrieve source text and exercise Electron. The architecture guard must reject a seeded Node import.', 'Separate compilation, service and UI failures. A test script that prints success without executing these paths is not a passing result.'),
+'project-05': ('Does role separation improve the same ConversationHistory feature?', 'Compare single-role, generator/evaluator and planner/generator/evaluator treatments from the same starter. Split the same 24-call allowance across roles; checker edits are discarded.', 'Check ordered full answers, confidence, expandable citations, clearing history and preserved app behavior under Electron.', 'Inspect what information crosses role boundaries. Extra roles receive a smaller share of the fixed allowance, not additional compute.'),
+'project-06': ('Can the full harness deliver a reliable capstone workflow?', 'Compare minimal instructions with capstone guidance using identical unfinished code and fixtures.', 'Execute import, indexing, grounded Q&A, persisted feedback and reset. Verify services and Electron independently.', 'Use the exported patch and versioned evidence to reproduce failures. Keep this live study separate from the original lecture simulated benchmark examples.'),
+'project-07': ('How do goal, timer and maker-checker stop conditions change execution?', 'Run bounded exercises with durable patches and checkpoints. Goal and maker-checker stop on success, no progress or a round bound; timer schedules bounded sessions over a real wall-clock window.', 'Inspect each round, isolated review context, recorded intervention and stop reason. Accelerated timer tests validate scheduling; they are not the real two-hour exercise.', 'Rounds depend on prior patches and are not independent repeats. A pending ambiguous launch requires reconciliation before resume. No human time savings are inferred.'),
+'project-08': ('Can a durable graph route a real patch through verification and review?', 'Follow explicit plan, make, parallel verification, rollback/retry and approval states. Failed candidates are retained as evidence and discarded before the next attempt.', 'Grade services and Electron in separate fresh workspaces. Inspect checkpoint transitions, retry feedback, patch checksums and the maximum-attempt stop.', 'A passing candidate pauses at approval. Review the exact patch and evidence, then submit an explicit checksum-bound approve or reject decision. The runner never supplies that human decision.'),
+}
+
 TEMPLATE = '''# /// script
 # requires-python = ">=3.11"
 # dependencies = [
@@ -40,6 +52,9 @@ app = marimo.App(width="full")
 
 @app.cell(hide_code=True)
  def_placeholder_intro
+
+@app.cell(hide_code=True)
+ def_placeholder_design
 
 @app.cell(hide_code=True)
  def_placeholder_results
@@ -78,6 +93,11 @@ CELLS = {
     return project_id, runner_commit, saved, variants''',
 'intro': '''def _(mo, runner_commit):
     mo.md(__INTRO__ + f"\\n\\nRunner revision: `{runner_commit}`. Opening this notebook displays saved evidence and launches no inference or coding work.")
+    return''',
+'design': '''def _(json, mo):
+    _question, _control, _checks, _reading = __DESIGN__
+    _protocol = json.loads(__PROTOCOL__)
+    mo.vstack([mo.md("## Experiment design\\n\\n" + _question + "\\n\\n**Control and treatment.** " + _control + "\\n\\n**Evidence to inspect.** " + _checks + "\\n\\n**How to read the result.** " + _reading), mo.md("### Frozen execution settings"), mo.ui.table([{"model": _protocol["model"], "temperature": _protocol["temperature"], "maximum_model_calls": _protocol["maxModelTurnsPerTrial"], "maximum_output_tokens_per_call": _protocol["maxOutputTokens"], "target_repeats": _protocol["repeats"], "sandbox_image": _protocol["sandbox"]["image"]}], selection=None)])
     return''',
 'results': '''def _(Counter, mo, project_id, saved):
     rows = [row for row in saved.get("trials", []) if project_id == "overview" or row["project"] == project_id]
@@ -151,7 +171,7 @@ def generate(runner_commit=None):
         source=TEMPLATE.replace('__FILE__',filename)
         for key,cell in CELLS.items():
             source=source.replace(' def_placeholder_'+key,cell)
-        source=source.replace('__PROJECT__',repr(project)).replace('__COMMIT__',repr(commit)).replace('__VARIANTS__',repr(VARIANTS[project])).replace('__SAVED__',repr(json.dumps(saved,ensure_ascii=False))).replace('__INTRO__',repr('# '+title+'\n\n'+description+'\n\nKeep the task, model and fixtures fixed. Inspect evidence before comparing scores.'))
+        source=source.replace('__DESIGN__',repr(DESIGNS[project])).replace('__PROTOCOL__',repr((ROOT/'forge/protocol.json').read_text())).replace('__PROJECT__',repr(project)).replace('__COMMIT__',repr(commit)).replace('__VARIANTS__',repr(VARIANTS[project])).replace('__SAVED__',repr(json.dumps(saved,ensure_ascii=False))).replace('__INTRO__',repr('# '+title+'\n\n'+description+'\n\nKeep the task, model and fixtures fixed. Inspect evidence before comparing scores.'))
         (ROOT/'forge/notebooks'/filename).write_text(source)
     # Forge's editor serializes source with its pinned Marimo version. Normalize
     # locally so the ordinary editor save retains the canonical byte checksum.
