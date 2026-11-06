@@ -8,29 +8,42 @@
     {
       "sourceCommit": "09a716af4cdd8467729f4185081dab019d7a8e1a",
       "file": "09a716af4cdd8467729f4185081dab019d7a8e1a.tar.gz",
-      "sha256": "ddcb500877fff634c53ef19c649842c691d25b577c6bf9245f83a89757f8db76"
+      "sha256": "ddcb500877fff634c53ef19c649842c691d25b577c6bf9245f83a89757f8db76",
+      "downloadVerified": true
     },
     {
       "sourceCommit": "1b316ef2aadd5f0a2d87fbaac1c2c5a505054dd7",
       "file": "1b316ef2aadd5f0a2d87fbaac1c2c5a505054dd7.tar.gz",
-      "sha256": "74c16981996f56ff2592ec436c90932b6a36b11772a84019db63a0362f93a49d"
+      "sha256": "74c16981996f56ff2592ec436c90932b6a36b11772a84019db63a0362f93a49d",
+      "downloadVerified": true
     },
     {
       "sourceCommit": "23f50a21e66e4baaf9a2c05e6298c114699865ae",
       "file": "23f50a21e66e4baaf9a2c05e6298c114699865ae.tar.gz",
-      "sha256": "9070170c878dce55af7c983e04a5fbeee8473f7b40ed9190d7ca7e69dbb8e11b"
+      "sha256": "9070170c878dce55af7c983e04a5fbeee8473f7b40ed9190d7ca7e69dbb8e11b",
+      "downloadVerified": true
     },
     {
       "sourceCommit": "6907491cc07b3cad91f26bbdfaf60570fc1f246b",
       "file": "6907491cc07b3cad91f26bbdfaf60570fc1f246b.tar.gz",
-      "sha256": "b8d7dcffff39ee23b1dcdbe2a077f4f14ba8dbe80fb3e5a8369197fd01836246"
+      "sha256": "b8d7dcffff39ee23b1dcdbe2a077f4f14ba8dbe80fb3e5a8369197fd01836246",
+      "downloadVerified": true
     },
     {
       "sourceCommit": "bf760399391f0862c6b642c62854c9baf4ca7523",
       "file": "bf760399391f0862c6b642c62854c9baf4ca7523.tar.gz",
-      "sha256": "44b7f31ece546eb1d09c785a43d538ed32fa83dd763bc68dc2db589013fbc813"
+      "sha256": "44b7f31ece546eb1d09c785a43d538ed32fa83dd763bc68dc2db589013fbc813",
+      "downloadVerified": true
     }
   ],
   "artifactFileCount": 32,
-  "verifiedRunBudgetHalted": null
+  "verifiedRunBudgetHalted": true,
+  "verifiedRunCounts": {
+    "codingTrialAttempts": 1,
+    "completeComparisonBlocks": 0,
+    "qualificationAttempts": 4,
+    "qualificationPassed": 1,
+    "knownEstimatedSpendUsd": 0.029610153333333333,
+    "unresolvedReservationsUsd": 2
+  }
 }
