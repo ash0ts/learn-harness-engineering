@@ -48,6 +48,18 @@ The pinned provider is Forge's OpenAI-compatible endpoint with `Qwen/Qwen3.6-35B
 
 ## Read the evidence
 
+Open the private [revision 3 comparison dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=ssij233dnka),
+[original revision 2 dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=tsgaokxuthw),
+and [execution/publication audit](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=l9e45ofb461).
+The [evidence report](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/reports/Forge-harness-course-%E2%80%94-verified-execution-and-comparison-evidence--VmlldzoxODI2MzgyOA==)
+shows exact denominators and links every treatment to original trials and artifacts.
+Dashboard aggregate runs are derived views, not additional coding attempts.
+
+Revision 3 bundles each learner preload for Electron's sandboxed module loader,
+bounds actor-visible tool output, and expands the frozen input payload limit.
+The original offline starters retain their intended gaps. The two revisions are
+separate cohorts; differences between them cannot isolate any one harness change.
+
 Trials start from frozen, identical unfinished application code with only the selected harness files. Reference solutions and historical scores are excluded. Repeats rotate treatment order. Protected graders run after the coding sandbox terminates, in a fresh workspace with the original baseline plus the exported patch. Service success does not establish UI success: Electron runs under Xvfb and gets its own checks.
 
 Report task failures, infrastructure failures, missing telemetry and budget exhaustion separately. The target is three repeats per automated variant; incomplete blocks do not establish treatment differences. Human interventions must be observed or entered by a learner. The track makes no inferred time-saved claim and trains no models.
