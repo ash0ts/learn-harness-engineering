@@ -29,6 +29,7 @@ const notebookClient=createSandboxClient({apiKey:c.apiKey,entity:c.entity,projec
 for(const name of await readdir(join(root,'notebook-sessions'))) {
   if(!name.endsWith('.json'))continue;
   const receipt=JSON.parse(await readFile(join(root,'notebook-sessions',name),'utf8'));
+  if(receipt.status==='cancelled_before_open'&&receipt.noRuntimeLaunched&&ledger.settled[receipt.id]===0){rows.push({journal:'notebook-sessions/'+name,verified:true,evidence:receipt.evidence});continue;}
   if(!receipt.sandboxId){rows.push({journal:'notebook-sessions/'+name,verified:false,evidence:'Editor receipt has no attached remote ID'});continue;}
   const remote=await notebookClient.get(receipt.sandboxId,{timeoutMs:30000});
   rows.push({journal:'notebook-sessions/'+name,sandboxId:receipt.sandboxId,remoteStatus:remote.status,verified:terminal(remote.status)});
