@@ -24,14 +24,17 @@ export async function runGraph(file:string,execute:boolean,resume=false) {
         lane:lane.lane,passed:lane.passed,error:lane.error,
         grade:JSON.parse(await readFile(lane.evidence,'utf8')),
       }))):undefined;
+      const protectedGrade=s.lastProtectedGrade?JSON.parse(await readFile(s.lastProtectedGrade.evidence,'utf8')).grade:undefined;
       const result=await compare({project:'project-08',variant:'graph',repeats:1,execute:true,source:s.sourceCommit,output,resumePatch:s.previous?.patch,
-        verificationFeedback:verification?JSON.stringify({attempt:s.attempts,verification,rollback:'The previous failing candidate was discarded; start from the frozen baseline or last verified patch.'}):undefined});
+        verificationFeedback:verification||protectedGrade?JSON.stringify({attempt:s.attempts,verification,protectedGrade,rollback:'The previous failing candidate was discarded; start from the frozen baseline or last verified patch.'}):undefined});
       const record=(result as {completed?:TrialRecord[]}).completed?.[0];
       if(!record||['infrastructure_failed','telemetry_missing'].includes(record.outcome))throw new Error('Maker unavailable; retain trial evidence');
       const patch=join(output,record.id,'candidate.diff');const sha256=createHash('sha256').update(await readFile(patch)).digest('hex');
       laneIds={services:randomUUID(),electron:randomUUID()};const maximum=estimate(0,0,1200,p.pricing)*1.3;
       await budget.reserve(Object.fromEntries(Object.values(laneIds).map(id=>[id,maximum])));
-      return {patch,sha256,trialId:record.id};
+      const evidence=join(output,record.id,'trial.json');
+      const protectedRecord=JSON.parse(await readFile(evidence,'utf8'));
+      return {patch,sha256,trialId:record.id,protectedGrade:{passed:record.outcome==='passed'&&protectedRecord.grade?.passed===true,evidence}};
     },
     async verify(candidate,lane,s){
       const id=laneIds[lane];if(!id)throw new Error('Resume requires fresh verification reservations');
