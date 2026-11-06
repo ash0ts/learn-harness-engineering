@@ -6,10 +6,11 @@ import hashlib
 import json
 import os
 import subprocess
+from create_notebooks import project_snapshot,TITLES
 
 ROOT = Path(__file__).resolve().parents[2]
 
-def validate(export=True):
+def validate(export=True,projects=None):
     sources = sorted((ROOT / 'forge/notebooks').glob('*.py'))
     if len(sources) != 9:
         raise RuntimeError('Expected overview plus eight project notebooks')
@@ -21,8 +22,19 @@ def validate(export=True):
         assignments = {node.targets[0].id: node.value for node in ast.walk(tree)
                        if isinstance(node, ast.Assign) and isinstance(node.targets[0], ast.Name)}
         saved = json.loads(ast.literal_eval(assignments['saved'].args[0]))
-        if saved != json.loads((ROOT / 'forge/results/snapshot.json').read_text()):
-            raise RuntimeError(f'{source.name}: stale embedded evidence; regenerate notebooks')
+        project=ast.literal_eval(assignments['project_id'])
+        if projects and project not in projects:continue
+        master=json.loads((ROOT / 'forge/results/snapshot.json').read_text())
+        expected=project_snapshot(master,project)
+        for key in ['trials','completedComparisonBlocks','loops','graphs','qualifications','concurrencyQualifications','sandboxQualifications']:
+            if saved.get(key,[])!=expected.get(key,[]):
+                raise RuntimeError(f'{source.name}: stale {key}; regenerate this notebook')
+        # Earlier completed projects may be published while the timer runs.
+        # Their budget snapshot retains its capture time; prior settlements must
+        # still agree with the final ledger rather than being silently rewritten.
+        for identifier,amount in saved.get('budget',{}).get('settled',{}).items():
+            if master.get('budget',{}).get('settled',{}).get(identifier)!=amount:
+                raise RuntimeError(f'{source.name}: historical budget settlement changed')
         subprocess.run(['uv', 'run', '--with', 'marimo==0.25.1', 'marimo', 'check', str(source)], check=True, cwd=ROOT)
         row = {'file': str(source.relative_to(ROOT)), 'sha256': hashlib.sha256(source.read_bytes()).hexdigest(),
                'runnerCommit': ast.literal_eval(assignments['runner_commit']), 'syntaxValidated': True, 'rendered': False}
@@ -49,4 +61,5 @@ def validate(export=True):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--syntax-only', action='store_true')
-    validate(not parser.parse_args().syntax_only)
+    parser.add_argument('--project',action='append',choices=[r[1] for r in TITLES])
+    args=parser.parse_args();validate(not args.syntax_only,args.project)
