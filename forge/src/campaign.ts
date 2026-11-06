@@ -3,7 +3,7 @@ import {readFile, mkdir, readdir} from 'node:fs/promises';
 import {resolve, join} from 'node:path';
 import {randomUUID, createHash} from 'node:crypto';
 import {Budget, estimate} from './budget.js';
-import {config, requireLive} from './config.js';
+import {config, requireLive, requirePrivateProject} from './config.js';
 import {courseRoot, readTask, sourceHead} from './staging.js';
 import {protocol} from './trial.js';
 import {writeJson, type TrialRecord} from './records.js';
@@ -34,6 +34,7 @@ export async function compare(options: {project?:string;variant?:string;repeats?
       variants:options.variant?[options.variant]:balancedOrder(task.variants,r+1)})))};
   if(!options.execute)return plan;
   requireLive(c);
+  await requirePrivateProject(c);
   await mkdir(output,{recursive:true});
   const qualifications=await Promise.all((await readdir(output)).filter(name=>name.startsWith('qualification-')).map(async name=>{
     try{return JSON.parse(await readFile(join(output,name,'qualification.json'),'utf8'));}catch{return null;}
