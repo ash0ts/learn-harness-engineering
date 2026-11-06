@@ -92,3 +92,8 @@ This is a comparison experiment, not a requirement that both agent runs produce 
 - [Lecture 01. Strong Models Don't Mean Reliable Execution](./../../lectures/lecture-01-why-capable-agents-still-fail/index.md)
 - [Lecture 02. What a Harness Actually Is](./../../lectures/lecture-02-what-a-harness-actually-is/index.md)
 - [Lecture 06. Make the Agent Initialize Before Every Work Session](./../../lectures/lecture-06-why-initialization-needs-its-own-phase/index.md)
+
+
+## Optional Forge experiment
+
+Follow the [Forge learning path](/en/forge/) for sandbox execution, Agent Lens traces, W&B evidence and the corresponding Marimo notebook. The offline exercise remains the default.
