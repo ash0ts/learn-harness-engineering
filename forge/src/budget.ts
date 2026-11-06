@@ -1,6 +1,7 @@
 import {mkdir, readFile, rm} from 'node:fs/promises';
 import {dirname} from 'node:path';
 import {writeJson} from './records.js';
+import {setTimeout as delay} from 'node:timers/promises';
 
 export interface Ledger {
   schemaVersion: 1; limitUsd: number; spentEstimateUsd: number;
@@ -16,7 +17,10 @@ export class Budget {
   private async change<T>(fn: (ledger: Ledger) => T): Promise<T> {
     await mkdir(dirname(this.file), {recursive:true});
     const lock = `${this.file}.lock`;
-    await mkdir(lock); // atomic across processes; never silently steal an uncertain reservation
+    for(let attempt=0;;attempt++) {
+      try {await mkdir(lock);break;}
+      catch(error){if((error as NodeJS.ErrnoException).code!=='EEXIST'||attempt>=100)throw error;await delay(20);}
+    } // Atomic across processes; wait for a short writer, never steal a stale lock.
     try {
       let ledger: Ledger;
       try { ledger = JSON.parse(await readFile(this.file,'utf8')); }
