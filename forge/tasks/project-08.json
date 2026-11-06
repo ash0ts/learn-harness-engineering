@@ -2,8 +2,10 @@
   "schemaVersion": 1,
   "id": "project-08",
   "starter": "projects/project-04/starter",
-  "task": "Deliver a patch for the knowledge-base app: repair long-document empty chunks, preserve all text, produce source-grounded citations, and make the Electron window and typed preload bridge work. Add an architecture check that rejects Node imports in the renderer. Verify actual service and UI behavior. Your patch will be checked independently and paused for human approval before being accepted.",
-  "variants": ["graph"],
+  "task": "Deliver a patch for the knowledge-base app: repair long-document empty chunks, preserve all text, produce source-grounded citations, and make the Electron window and typed preload bridge work. Add scripts/check-architecture.sh that rejects Node imports in the renderer. Verify actual service and UI behavior. Your patch will be checked independently and paused for human approval before being accepted.",
+  "variants": [
+    "graph"
+  ],
   "repeats": 3,
   "sessions": 1,
   "protectedChecker": "forge/graders/check.cjs",
