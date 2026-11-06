@@ -25,3 +25,16 @@ test('complete blocks reserve in-flight costs and unknown usage halts subsequent
     assert.equal(l.reservations.b,1); assert.equal(l.spentEstimateUsd,0.1);
   } finally {await rm(dir,{recursive:true,force:true});}
 });
+
+test('explicit unlimited authorization retains uncertain costs instead of inventing usage',async()=>{
+  const dir=await mkdtemp(join(tmpdir(),'unlimited-budget-'));const file=join(dir,'budget.json');
+  const limited=new Budget(file,50);await limited.reserve({timeout:2});await limited.settle('timeout',null);
+  await limited.authorizeUnlimited('User replied unlimited budget to the reservation question');
+  const unlimited=new Budget(file,Infinity);
+  await unlimited.chargeUnknownReservation('timeout','Authorized full reservation charge; token usage remains unknown');
+  await unlimited.reserve({large:100});
+  const ledger=JSON.parse(await readFile(file,'utf8'));
+  assert.equal(ledger.limitUsd,null);assert.equal(ledger.spentEstimateUsd,2);assert.equal(ledger.uncertainEstimates.length,1);
+  assert.equal(ledger.reservations.large,100);
+  await assert.rejects(new Budget(file,50).reserve({wrong:1}),/limit changed/);
+});
