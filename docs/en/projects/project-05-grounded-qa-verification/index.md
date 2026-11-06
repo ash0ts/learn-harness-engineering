@@ -38,4 +38,4 @@ constant across all three variants so the only variable is role separation.
 
 ## Optional Forge experiment
 
-Follow the [Forge learning path](/en/forge/) for sandbox execution, Agent Lens traces, W&B evidence and the corresponding Marimo notebook. The offline exercise remains the default.
+Read [A reviewer costs turns](/en/forge/05-role-separation) for the executed Forge experiment and its saved notebook. The [Forge overview](/en/forge/) explains the shared setup. The offline exercise remains the default.

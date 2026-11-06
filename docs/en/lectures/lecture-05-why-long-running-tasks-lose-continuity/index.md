@@ -182,4 +182,4 @@ LangChain reports an actual harness improvement using the same gpt-5.2-codex mod
 
 ## Optional Forge experiment
 
-Follow the [Forge learning path](/en/forge/) for sandbox execution, Agent Lens traces, W&B evidence and the corresponding Marimo notebook. The offline exercise remains the default.
+The Forge article [What survives when the next session starts](/en/forge/03-session-recovery) follows an executed example with recorded failures and saved results. The [Forge overview](/en/forge/) links the full series. The offline exercise remains the default.
