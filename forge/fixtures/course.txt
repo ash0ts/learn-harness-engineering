@@ -1,0 +1,15 @@
+Section 1: The knowledge base uses a layered architecture with an Electron main process, a typed preload bridge, and a React renderer. Documents are indexed into paragraph chunks. The retrieval pipeline ranks keyword matches and cites source excerpts. Durable history preserves questions and answers. Measurement marker 1.
+
+Section 2: The knowledge base uses a layered architecture with an Electron main process, a typed preload bridge, and a React renderer. Documents are indexed into paragraph chunks. The retrieval pipeline ranks keyword matches and cites source excerpts. Durable history preserves questions and answers. Measurement marker 2.
+
+Section 3: The knowledge base uses a layered architecture with an Electron main process, a typed preload bridge, and a React renderer. Documents are indexed into paragraph chunks. The retrieval pipeline ranks keyword matches and cites source excerpts. Durable history preserves questions and answers. Measurement marker 3.
+
+Section 4: The knowledge base uses a layered architecture with an Electron main process, a typed preload bridge, and a React renderer. Documents are indexed into paragraph chunks. The retrieval pipeline ranks keyword matches and cites source excerpts. Durable history preserves questions and answers. Measurement marker 4.
+
+Section 5: The knowledge base uses a layered architecture with an Electron main process, a typed preload bridge, and a React renderer. Documents are indexed into paragraph chunks. The retrieval pipeline ranks keyword matches and cites source excerpts. Durable history preserves questions and answers. Measurement marker 5.
+
+Section 6: The knowledge base uses a layered architecture with an Electron main process, a typed preload bridge, and a React renderer. Documents are indexed into paragraph chunks. The retrieval pipeline ranks keyword matches and cites source excerpts. Durable history preserves questions and answers. Measurement marker 6.
+
+Section 7: The knowledge base uses a layered architecture with an Electron main process, a typed preload bridge, and a React renderer. Documents are indexed into paragraph chunks. The retrieval pipeline ranks keyword matches and cites source excerpts. Durable history preserves questions and answers. Measurement marker 7.
+
+Section 8: The knowledge base uses a layered architecture with an Electron main process, a typed preload bridge, and a React renderer. Documents are indexed into paragraph chunks. The retrieval pipeline ranks keyword matches and cites source excerpts. Durable history preserves questions and answers. Measurement marker 8.
