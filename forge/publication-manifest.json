@@ -11,17 +11,16 @@
       "sha256": "8a063ddbb6b6e59a2e78a182208551c9eeb57d1c8ddd9511a5ef82f099487cde",
       "id": "Tm90ZWJvb2s6MTUzMTM=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTM%3D",
-      "status": "created_basic_not_uploaded",
+      "status": "editor_workflow_verified_pending_final_results",
       "createdAt": "2026-11-06T08:00:30.706107+00:00",
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "Forge-track-evidence-before-conclusions",
-        "versionIndex": 0,
+        "versionIndex": 4,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:30Z",
-      "expectedRemoteSha256": "729741bb7115805dd5b8266e3bd1bbfc3c5a8e05d08f80feb6d9489b7eb62b27",
-      "publicationBlocker": "Paid EDIT session withheld while shared budget ledger is halted; canonical source not loaded"
+      "expectedRemoteSha256": "094b90f0a495fddccd0f61324466338198a861dc28193e4663619aa2e23ba1af"
     },
     {
       "file": "forge/notebooks/01-minimal-harness.py",
