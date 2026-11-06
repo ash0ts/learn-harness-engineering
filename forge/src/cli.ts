@@ -29,6 +29,13 @@ if(command==='workshop'){
   const [app, output, ...fixtures] = process.argv.slice(3).filter(arg => arg !== '--live');
   if (!app || !output || !fixtures.length) throw new Error('services APP_DIR OUTPUT_JSON FIXTURE... [--live]');
   await writeJson(output, await runServices(app, fixtures, process.argv.includes('--live')));
+} else if(command==='graph') {
+  const {values}=parseArgs({args:process.argv.slice(3),options:{checkpoint:{type:'string'},execute:{type:'boolean'},resume:{type:'boolean'},decision:{type:'string'},actor:{type:'string'},sha256:{type:'string'}}});
+  if(!values.checkpoint)throw new Error('graph requires --checkpoint');
+  if(values.decision) {
+    if(!['approve','reject'].includes(values.decision)||!values.actor||!values.sha256)throw new Error('Decision requires approve/reject, --actor and reviewed --sha256');
+    console.log(JSON.stringify(await (await import('./graph.js')).decideGraph(values.checkpoint,values.decision as 'approve'|'reject',values.actor,values.sha256),null,2));
+  } else console.log(JSON.stringify(await (await import('./graph-runner.js')).runGraph(values.checkpoint,!!values.execute,values.resume),null,2));
 } else if(command==='loop') {
   const {values}=parseArgs({args:process.argv.slice(3),options:{mode:{type:'string'},checkpoint:{type:'string'},execute:{type:'boolean'},resume:{type:'boolean'},'duration-seconds':{type:'string'},'interval-seconds':{type:'string'},'max-rounds':{type:'string'},output:{type:'string'},'operation-id':{type:'string'}}});
   if(!values.mode||!values.checkpoint)throw new Error('loop requires --mode and --checkpoint');
