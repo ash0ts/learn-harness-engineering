@@ -22,7 +22,8 @@ def publish():
     sources=LOCAL/'audit-sources';sources.mkdir(exist_ok=True)
     concurrent=[json.loads(p.read_text()) for p in LOCAL.glob('concurrency-*/concurrency.json')]
     publications=json.loads((ROOT/'forge/publication-manifest.json').read_text())
-    supplemental=saved.get('sandboxQualifications',[])+saved.get('visibleUiQualifications',[])+saved.get('graphs',[])+saved.get('loops',[])
+    diagnostics=[json.loads(p.read_text()) for p in LOCAL.glob('*-diagnostic-*/diagnostic.json')]
+    supplemental=diagnostics+saved.get('sandboxQualifications',[])+saved.get('visibleUiQualifications',[])+saved.get('graphs',[])+saved.get('loops',[])
     publisher_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     commits=sorted({publisher_commit}|{r['sourceCommit'] for r in saved['trials']+saved['qualifications']+concurrent+supplemental+publications['notebooks'] if r.get('sourceCommit')})
     archives=[]

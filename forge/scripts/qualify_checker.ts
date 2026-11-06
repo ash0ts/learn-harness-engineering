@@ -1,4 +1,4 @@
-/** Replay an unchanged saved patch with extra history diagnostics; never rewrites a trial grade. */
+/** Qualify an unchanged saved patch with extra checker diagnostics; never rewrites a trial grade. */
 import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import {join,resolve} from 'node:path';
 import {randomUUID,createHash} from 'node:crypto';
@@ -8,7 +8,7 @@ import {courseRoot,sourceHead,readTask,stageTask} from '../src/staging.js';
 import {withWorkspace,stageWorkspace} from '../src/sandbox.js';
 import {writeJson} from '../src/records.js';
 
-if(!process.argv.includes('--execute') || !process.argv[2])throw new Error('Usage: diagnose_history.ts TRIAL_JSON --execute [--checker PATH]');
+if(!process.argv.includes('--execute') || !process.argv[2])throw new Error('Usage: qualify_checker.ts TRIAL_JSON --execute [--checker PATH]');
 const trialFile=resolve(process.argv[2]),trial=JSON.parse(await readFile(trialFile,'utf8'));
 if(!['project-05','project-06'].includes(trial.project))throw new Error('Checker diagnostic requires Project 05 or 06');
 const candidate=await readFile(join(trialFile,'..','candidate.diff'));
