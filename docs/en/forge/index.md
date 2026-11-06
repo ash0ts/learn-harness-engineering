@@ -48,7 +48,8 @@ The pinned provider is Forge's OpenAI-compatible endpoint with `Qwen/Qwen3.6-35B
 
 ## Read the evidence
 
-Open the private [revision 3 comparison dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=ssij233dnka),
+Open the private [revision 4 comparison dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=wz8re0rb108),
+[historical revision 3 dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=ssij233dnka),
 [original revision 2 dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=tsgaokxuthw),
 and [execution/publication audit](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=l9e45ofb461).
 The [evidence report](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/reports/Forge-harness-course-%E2%80%94-verified-execution-and-comparison-evidence--VmlldzoxODI2MzgyOA==)
@@ -57,8 +58,13 @@ Dashboard aggregate runs are derived views, not additional coding attempts.
 
 Revision 3 bundles each learner preload for Electron's sandboxed module loader,
 bounds actor-visible tool output, and expands the frozen input payload limit.
-The original offline starters retain their intended gaps. The two revisions are
+The original offline starters retain their intended gaps. These revisions are
 separate cohorts; differences between them cannot isolate any one harness change.
+
+Revision 4 corrects asynchronous UI polling and requires the actual answer text to
+appear before capturing evidence. Revision 2 and 3 native grades remain recorded,
+but their UI waits do not establish visible-answer acceptance. The report separates
+those historical grades from revision 4 and from supplemental patch qualifications.
 
 Trials start from frozen, identical unfinished application code with only the selected harness files. Reference solutions and historical scores are excluded. Repeats rotate treatment order. Protected graders run after the coding sandbox terminates, in a fresh workspace with the original baseline plus the exported patch. Service success does not establish UI success: Electron runs under Xvfb and gets its own checks.
 
