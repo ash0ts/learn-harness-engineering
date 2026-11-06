@@ -35,3 +35,8 @@ Repository path: [`projects/project-06/`](https://github.com/walkinglabs/learn-h
 
 Unlike earlier projects, the capstone starter is not mostly missing product
 features. The main gap is the operating harness around the app.
+
+
+## Optional Forge experiment
+
+Read [A reset button has to clear more than the screen](/en/forge/06-capstone) for the executed Forge experiment and its saved notebook. The [Forge overview](/en/forge/) explains the shared setup. The offline exercise remains the default.

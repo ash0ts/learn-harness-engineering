@@ -1,4 +1,148 @@
 {
+  "forge/01-minimal-harness.md": {
+    "ids": [
+      "six-passing-runs-no-separation",
+      "the-minimal-condition-already-has-a-lot-around-it",
+      "what-had-to-work",
+      "six-attempts-on-one-task",
+      "inspect-the-successful-patch-too",
+      "a-next-experiment-that-could-teach-us-more"
+    ],
+    "locales": {
+      "en": 6
+    }
+  },
+  "forge/02-workspace-docs.md": {
+    "ids": [
+      "writing-a-repository-guide-an-agent-can-use",
+      "what-information-the-guide-adds",
+      "the-research-does-not-say-write-a-bigger-agents-md",
+      "a-service-import-is-easier-to-test-than-a-user-s-import",
+      "make-a-handoff-that-names-the-unresolved-operation"
+    ],
+    "locales": {
+      "en": 5
+    }
+  },
+  "forge/03-session-recovery.md": {
+    "ids": [
+      "what-survives-when-the-next-session-starts",
+      "there-are-several-different-things-to-remember",
+      "give-the-next-session-something-it-can-disprove",
+      "the-data-file-and-the-status-can-disagree",
+      "a-handoff-has-to-fit-the-remaining-work-allowance",
+      "read-the-continuation-from-both-ends"
+    ],
+    "locales": {
+      "en": 6
+    }
+  },
+  "forge/04-runtime-feedback.md": {
+    "ids": [
+      "debugging-an-index-full-of-empty-chunks",
+      "observe-the-value-the-next-operation-consumes",
+      "trace-the-app-without-mixing-it-into-the-coding-session",
+      "a-guard-script-can-pass-by-failing-to-check-anything",
+      "follow-one-document-all-the-way-through"
+    ],
+    "locales": {
+      "en": 5
+    }
+  },
+  "forge/05-role-separation.md": {
+    "ids": [
+      "a-reviewer-costs-turns",
+      "the-schedules-distribute-the-same-allowance-differently",
+      "the-checker-starts-a-new-conversation",
+      "more-agents-help-some-kinds-of-work",
+      "what-failed-in-the-submitted-patches",
+      "read-the-review-beside-the-revision"
+    ],
+    "locales": {
+      "en": 6
+    }
+  },
+  "forge/06-capstone.md": {
+    "ids": [
+      "a-reset-button-has-to-clear-more-than-the-screen",
+      "we-first-had-to-say-what-the-feedback-api-meant",
+      "test-deletion-through-the-operation-that-would-expose-leftover-data",
+      "a-benchmark-command-must-execute-the-work-it-claims-to-measure",
+      "what-3-3-versus-1-3-supports",
+      "review-the-delivered-state-then-choose-whether-to-rerun"
+    ],
+    "locales": {
+      "en": 6
+    }
+  },
+  "forge/07-bounded-loops.md": {
+    "ids": [
+      "two-hours-of-agent-work-with-a-stop-condition",
+      "the-coordinator-owns-the-decision-to-continue",
+      "an-interrupted-launch-needs-reconciliation",
+      "each-mode-has-a-different-reason-to-stop",
+      "wall-clock-time-and-compute-are-different-measurements",
+      "read-a-checkpoint-as-an-operational-record"
+    ],
+    "locales": {
+      "en": 6
+    }
+  },
+  "forge/08-state-machine.md": {
+    "ids": [
+      "binding-human-approval-to-the-patch-we-tested",
+      "name-the-transitions-before-automating-them",
+      "the-first-two-candidates-failed-for-different-reasons",
+      "a-test-cannot-require-a-path-the-task-never-named",
+      "approval-binds-the-decision-to-bytes",
+      "two-candidates-two-records",
+      "review-one-transition-at-a-time"
+    ],
+    "locales": {
+      "en": 7
+    }
+  },
+  "forge/evidence.md": {
+    "ids": [
+      "see-the-runs-then-inspect-the-evidence",
+      "start-with-the-complete-comparison",
+      "inspect-every-attempt",
+      "native-forge-dashboards",
+      "separate-coding-and-application-conversations",
+      "all-nine-notebook-views",
+      "loops-and-approval",
+      "download-and-verify"
+    ],
+    "locales": {
+      "en": 8
+    }
+  },
+  "forge/index.md": {
+    "ids": [
+      "a-harness-course-with-results-you-can-inspect",
+      "one-application-gives-the-failures-somewhere-to-happen",
+      "a-trial-ends-after-another-process-checks-the-patch",
+      "we-had-to-repair-the-measurement",
+      "read-the-series-through-the-problem-you-have",
+      "what-the-course-leaves-open"
+    ],
+    "locales": {
+      "en": 6
+    }
+  },
+  "forge/running.md": {
+    "ids": [
+      "running-the-forge-track",
+      "local-setup",
+      "plan-before-launching",
+      "read-the-evidence",
+      "budget-and-recovery",
+      "notebooks-and-publication"
+    ],
+    "locales": {
+      "en": 6
+    }
+  },
   "harness-designs/claude-code/index.md": {
     "ids": [
       "breaking-down-claude-code-s-harness-design",
@@ -250,12 +394,13 @@
       "a-more-down-to-earth-example",
       "key-takeaways",
       "further-reading",
-      "exercises"
+      "exercises",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 10,
       "de": 10,
-      "en": 10,
+      "en": 11,
       "es": 10,
       "fr": 10,
       "ja": 10,
@@ -323,12 +468,13 @@
       "a-team-s-real-story",
       "key-takeaways",
       "further-reading",
-      "exercises"
+      "exercises",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 8,
       "de": 8,
-      "en": 8,
+      "en": 9,
       "es": 8,
       "fr": 8,
       "ja": 8,
@@ -398,12 +544,13 @@
       "openai-repository-knowledge-as-the-system-of-record",
       "key-takeaways",
       "further-reading",
-      "exercises"
+      "exercises",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 10,
       "de": 10,
-      "en": 10,
+      "en": 11,
       "es": 10,
       "fr": 10,
       "ja": 10,
@@ -496,12 +643,13 @@
       "openai-a-short-entry-file-and-linked-documentation",
       "key-takeaways",
       "further-reading",
-      "exercises"
+      "exercises",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 9,
       "de": 9,
-      "en": 9,
+      "en": 10,
       "es": 9,
       "fr": 9,
       "ja": 9,
@@ -597,12 +745,13 @@
       "anthropic-handoff-across-coding-sessions",
       "key-takeaways",
       "further-reading",
-      "exercises"
+      "exercises",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 11,
       "de": 11,
-      "en": 11,
+      "en": 12,
       "es": 11,
       "fr": 11,
       "ja": 11,
@@ -672,12 +821,13 @@
       "real-world-example",
       "key-takeaways",
       "further-reading",
-      "exercises"
+      "exercises",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 10,
       "de": 10,
-      "en": 10,
+      "en": 11,
       "es": 10,
       "fr": 10,
       "ja": 10,
@@ -773,12 +923,13 @@
       "real-world-case",
       "key-takeaways",
       "further-reading",
-      "exercises"
+      "exercises",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 14,
       "de": 14,
-      "en": 14,
+      "en": 15,
       "es": 14,
       "fr": 14,
       "ja": 14,
@@ -852,12 +1003,13 @@
       "real-world-case",
       "key-takeaways",
       "further-reading",
-      "exercises"
+      "exercises",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 14,
       "de": 14,
-      "en": 14,
+      "en": 15,
       "es": 14,
       "fr": 14,
       "ja": 14,
@@ -933,12 +1085,13 @@
       "real-world-case",
       "key-takeaways",
       "further-reading",
-      "exercises"
+      "exercises",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 16,
       "de": 16,
-      "en": 16,
+      "en": 17,
       "es": 16,
       "fr": 16,
       "ja": 16,
@@ -1035,12 +1188,13 @@
       "real-world-case",
       "key-takeaways",
       "further-reading",
-      "exercises"
+      "exercises",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 15,
       "de": 15,
-      "en": 15,
+      "en": 16,
       "es": 15,
       "fr": 15,
       "ja": 15,
@@ -1137,12 +1291,13 @@
       "anthropic-s-three-agent-architecture-experiment",
       "key-takeaways",
       "further-reading",
-      "exercises"
+      "exercises",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 17,
       "de": 17,
-      "en": 15,
+      "en": 16,
       "es": 17,
       "fr": 17,
       "ja": 17,
@@ -1240,12 +1395,13 @@
       "real-world-case",
       "key-takeaways",
       "further-reading",
-      "exercises"
+      "exercises",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 18,
       "de": 17,
-      "en": 16,
+      "en": 17,
       "es": 17,
       "fr": 18,
       "ja": 18,
@@ -1440,12 +1596,13 @@
       "the-maturity-ladder",
       "key-takeaways",
       "further-reading",
-      "exercises"
+      "exercises",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 39,
       "de": 39,
-      "en": 39,
+      "en": 40,
       "es": 39,
       "fr": 39,
       "ja": 39,
@@ -1489,12 +1646,13 @@
       "core-concepts",
       "key-takeaways",
       "further-reading",
-      "exercises"
+      "exercises",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 19,
       "de": 19,
-      "en": 19,
+      "en": 20,
       "es": 19,
       "fr": 19,
       "ja": 19,
@@ -1547,12 +1705,13 @@
       "how-to-measure-results",
       "what-to-submit",
       "experimental-framing",
-      "related-lectures"
+      "related-lectures",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 5,
       "de": 5,
-      "en": 13,
+      "en": 14,
       "es": 5,
       "fr": 5,
       "ja": 5,
@@ -1573,12 +1732,13 @@
       "what-you-do",
       "tools",
       "harness-mechanism",
-      "use-the-checked-in-project"
+      "use-the-checked-in-project",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 5,
       "de": 5,
-      "en": 5,
+      "en": 6,
       "es": 5,
       "fr": 5,
       "ja": 5,
@@ -1599,12 +1759,13 @@
       "what-you-do",
       "tools",
       "harness-mechanism",
-      "use-the-checked-in-project"
+      "use-the-checked-in-project",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 5,
       "de": 5,
-      "en": 5,
+      "en": 6,
       "es": 5,
       "fr": 5,
       "ja": 5,
@@ -1625,12 +1786,13 @@
       "what-you-do",
       "tools",
       "harness-mechanism",
-      "use-the-checked-in-project"
+      "use-the-checked-in-project",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 5,
       "de": 5,
-      "en": 5,
+      "en": 6,
       "es": 5,
       "fr": 5,
       "ja": 5,
@@ -1651,12 +1813,13 @@
       "what-you-do",
       "tools",
       "harness-mechanism",
-      "use-the-checked-in-project"
+      "use-the-checked-in-project",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 5,
       "de": 5,
-      "en": 5,
+      "en": 6,
       "es": 5,
       "fr": 5,
       "ja": 5,
@@ -1677,12 +1840,13 @@
       "what-you-do",
       "tools",
       "harness-mechanism",
-      "use-the-checked-in-project"
+      "use-the-checked-in-project",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 5,
       "de": 5,
-      "en": 5,
+      "en": 6,
       "es": 5,
       "fr": 5,
       "ja": 5,
@@ -1710,12 +1874,13 @@
       "experiment-3-maker-checker-loop-—-take-yourself-out-of-the-loop",
       "how-to-measure-results",
       "what-to-submit",
-      "related-lectures"
+      "related-lectures",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 12,
       "de": 12,
-      "en": 12,
+      "en": 13,
       "es": 12,
       "fr": 12,
       "ja": 12,
@@ -1742,12 +1907,13 @@
       "experiment-3-add-a-rollback-edge-and-a-human-approval-node",
       "how-to-measure-results",
       "what-to-submit",
-      "related-lectures"
+      "related-lectures",
+      "optional-forge-experiment"
     ],
     "locales": {
       "ar": 11,
       "de": 11,
-      "en": 11,
+      "en": 12,
       "es": 11,
       "fr": 11,
       "ja": 11,

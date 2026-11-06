@@ -89,3 +89,8 @@ This is the most important of the three experiments. You'll add two kinds of nod
 - [Lecture 13 — From Manual Prompting to Autonomous Loops](../../lectures/lecture-13-loop-engineering/index.md) (your loop is a node in a graph; this project unfolds that node's internal structure)
 - [Lecture 09 — Why Agents Declare Victory Too Early](../../lectures/lecture-09-why-agents-declare-victory-too-early/index.md) (why the verify node must be independent of the implement node — a structural problem, not a prompt problem)
 - [Lecture 11 — Why Observability Belongs Inside the Harness](../../lectures/lecture-11-why-observability-belongs-inside-the-harness/index.md) (the more complex the graph, the more you need to see what each node is doing)
+
+
+## Optional Forge experiment
+
+Read [Binding human approval to the patch we tested](/en/forge/08-state-machine) for the executed Forge experiment and its saved notebook. The [Forge overview](/en/forge/) explains the shared setup. The offline exercise remains the default.

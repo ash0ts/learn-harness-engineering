@@ -178,3 +178,8 @@ LangChain reports an actual harness improvement using the same gpt-5.2-codex mod
 2. **Handoff template design**: Design a minimal handoff template with four fields: repo state (commit hash), runtime state (test pass rate), blockers, next actions. Let a completely fresh agent session restore project state using only this template. Record ambiguities encountered during restoration, iterate to improve the template.
 
 3. **Mixed strategy experiment**: In a 5-session development task, compare three strategies: (a) always start fresh sessions + progress files, (b) do as much as possible in one session (context compaction), (c) mixed strategy (short tasks in-session, long tasks across sessions + progress files). Compare rebuild time, feature completion rate, and decision consistency.
+
+
+## Optional Forge experiment
+
+The Forge article [What survives when the next session starts](/en/forge/03-session-recovery) follows an executed example with recorded failures and saved results. The [Forge overview](/en/forge/) links the full series. The offline exercise remains the default.

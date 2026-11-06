@@ -171,3 +171,8 @@ The evaluator wasn't always this sharp. Early versions would identify reasonable
 2. **Sprint Contract Practice**: Write a sprint contract for a real task. Have the agent execute according to the contract, and compare efficiency and quality with and without the contract.
 
 3. **Task Trace Construction**: Record every step an agent takes during a complete coding task. Annotate using OpenTelemetry semantic conventions. Analyze the trace for information bottlenecks — which steps lack sufficient signal support for their decisions.
+
+
+## Optional Forge experiment
+
+The Forge article [Debugging an index full of empty chunks](/en/forge/04-runtime-feedback) follows an executed example with recorded failures and saved results. The [Forge overview](/en/forge/) links the full series. The offline exercise remains the default.

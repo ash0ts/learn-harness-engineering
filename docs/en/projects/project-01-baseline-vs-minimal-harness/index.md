@@ -92,3 +92,8 @@ This is a comparison experiment, not a requirement that both agent runs produce 
 - [Lecture 01. Strong Models Don't Mean Reliable Execution](./../../lectures/lecture-01-why-capable-agents-still-fail/index.md)
 - [Lecture 02. What a Harness Actually Is](./../../lectures/lecture-02-what-a-harness-actually-is/index.md)
 - [Lecture 06. Make the Agent Initialize Before Every Work Session](./../../lectures/lecture-06-why-initialization-needs-its-own-phase/index.md)
+
+
+## Optional Forge experiment
+
+Read [Six passing runs, no separation](/en/forge/01-minimal-harness) for the executed Forge experiment and its saved notebook. The [Forge overview](/en/forge/) explains the shared setup. The offline exercise remains the default.

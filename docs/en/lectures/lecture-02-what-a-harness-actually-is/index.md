@@ -107,3 +107,8 @@ Four iterations, the model did not change at all, and success rate went from 20%
 2. **Controlled variable exclusion test**: Pick one model and one challenging task. Sequentially remove instructions (delete AGENTS.md), remove feedback (do not provide verification commands), remove state (no progress files) — removing only one at a time, and measure the performance drop. Use the results to rank each subsystem's marginal value for the current task. If you want to find the bottleneck, you must also record failure logs and do root-cause attribution alongside the ablation.
 
 3. **Affordance analysis**: Find a scenario in your project where the agent "wants to do something but can't" (e.g., knows it should use parameterized queries but does not know your project's ORM patterns). Analyze whether this is a Gulf of Execution (does not know how to operate) or a Gulf of Evaluation (does not know whether it did things right), then design a harness improvement to bridge the gap.
+
+
+## Optional Forge experiment
+
+The Forge article [Six passing runs, no separation](/en/forge/01-minimal-harness) follows an executed example with recorded failures and saved results. The [Forge overview](/en/forge/) links the full series. The offline exercise remains the default.

@@ -35,3 +35,8 @@ Repository path: [`projects/project-03/`](https://github.com/walkinglabs/learn-h
 This project is not a generic "multi-session" exercise. The checked-in solution
 maps to four specific product features: document chunking, metadata extraction,
 indexing status UI, and grounded Q&A with citations.
+
+
+## Optional Forge experiment
+
+Read [What survives when the next session starts](/en/forge/03-session-recovery) for the executed Forge experiment and its saved notebook. The [Forge overview](/en/forge/) explains the shared setup. The offline exercise remains the default.
