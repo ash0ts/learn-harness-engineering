@@ -1,3 +1,4 @@
+import {initializeForgeHooks, shutdownForgeHooks} from '../services/forge-hooks';
 import { app, BrowserWindow, ipcMain } from 'electron';
 import * as path from 'path';
 import { registerIpcHandlers } from './ipc-handlers';
@@ -52,7 +53,8 @@ function initializeServices() {
   });
 }
 
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
+  await initializeForgeHooks('projects/project-04/starter');
   initializeServices();
   createWindow();
 
@@ -67,4 +69,12 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
   }
+});
+
+// Flush only after an explicitly enabled live run.
+let forgeDrained = false;
+app.on('before-quit', (event) => {
+  if (process.env.FORGE_APP_MODE !== 'live' || forgeDrained) return;
+  event.preventDefault();
+  shutdownForgeHooks().finally(() => { forgeDrained = true; app.quit(); });
 });

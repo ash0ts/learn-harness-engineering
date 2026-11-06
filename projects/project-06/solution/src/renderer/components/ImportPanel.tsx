@@ -1,5 +1,5 @@
 interface Props {
-  onImport: (file: File) => void;
+  onImport: (filePath: string) => void;
 }
 
 export function ImportPanel({ onImport }: Props) {
@@ -23,7 +23,7 @@ export function ImportPanel({ onImport }: Props) {
         accept=".txt,.md"
         onChange={e => {
           const file = e.target.files?.[0];
-          if (file) onImport(file);
+          if (file) onImport((file as File & {path?: string}).path ?? '');
         }}
         style={{ marginTop: '10px' }}
       />

@@ -190,3 +190,11 @@ knowledge-base-data/
 1. `tsc -p tsconfig.node.json` compiles main, preload, shared, and services to `dist/`.
 2. `vite build` bundles the renderer React app to `dist/renderer/`.
 3. Electron loads `dist/main/main.js` as the entry point.
+
+## Optional Forge runtime
+
+The main process may explicitly load `FORGE_APP_ADAPTER` when `FORGE_APP_MODE=live`.
+Service hooks trace import, indexing, retrieval, and Q&A; answer generation delegates
+to the adapter before history is saved. Offline launches retain mock answers and
+all starter gaps. The renderer and preload never receive credentials or SDKs.
+See the repository `forge/README.md` for setup and headless service execution.
