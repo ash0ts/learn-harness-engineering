@@ -1,0 +1,458 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-06T10:50:06.138260+00:00",
+  "views": [
+    {
+      "protocolRevision": 2,
+      "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef",
+      "url": "https://forge.coreweave.com/wandb/learn-harness-engineering-forge?nw=tsgaokxuthw",
+      "forgeUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=tsgaokxuthw",
+      "name": "Forge course \u2014 revision 2 comparisons",
+      "readBackVerified": true
+    }
+  ],
+  "operations": {
+    "url": "https://forge.coreweave.com/wandb/learn-harness-engineering-forge?nw=l9e45ofb461",
+    "forgeUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=l9e45ofb461",
+    "name": "Forge course \u2014 execution and publication audit"
+  },
+  "aggregateRuns": [
+    {
+      "id": "course-view-ace4c95ee3a8da13",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 2,
+        "protocolSha256": "87e457ec9cf3716839df078fadd5cae1e5a1a1e5cc4b14eed2e06e72fe041141",
+        "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef",
+        "project": "project-01",
+        "variant": "explicit",
+        "label": "r2 01 explicit",
+        "trialIds": [
+          "174cab45-166d-42e2-b60d-4fe6d7d1916e",
+          "68bb08fa-4f9b-42af-9232-dd7e50da8414",
+          "edd880ec-d379-4c91-8f32-6037f1001a94"
+        ]
+      },
+      "metrics": {
+        "attempts": 3,
+        "passes": 0,
+        "passRate": 0.0,
+        "taskFailures": 3,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 3,
+        "uiChecksPassed": 0,
+        "serviceChecksExecuted": 9,
+        "serviceChecksPassed": 9,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.32988839533333336,
+        "inputTokens": 1031831,
+        "outputTokens": 18640
+      }
+    },
+    {
+      "id": "course-view-3495f78cfdb3926f",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 2,
+        "protocolSha256": "87e457ec9cf3716839df078fadd5cae1e5a1a1e5cc4b14eed2e06e72fe041141",
+        "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef",
+        "project": "project-01",
+        "variant": "minimal",
+        "label": "r2 01 minimal",
+        "trialIds": [
+          "2e7a67cd-96cb-46e0-92d5-1099b69ea31b",
+          "362291eb-95fb-4738-bb3e-225d4d2cca9b",
+          "c8a5365b-8cfa-4566-b28e-6577ce081948"
+        ]
+      },
+      "metrics": {
+        "attempts": 3,
+        "passes": 0,
+        "passRate": 0.0,
+        "taskFailures": 3,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 2,
+        "uiChecksPassed": 0,
+        "serviceChecksExecuted": 6,
+        "serviceChecksPassed": 6,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.26289023866666666,
+        "inputTokens": 792583,
+        "outputTokens": 19609
+      }
+    },
+    {
+      "id": "course-view-773956e3d79758a9",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 2,
+        "protocolSha256": "87e457ec9cf3716839df078fadd5cae1e5a1a1e5cc4b14eed2e06e72fe041141",
+        "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef",
+        "project": "project-02",
+        "variant": "minimal",
+        "label": "r2 02 minimal",
+        "trialIds": [
+          "051868b4-ba7f-4727-acd6-7265657fb2c9",
+          "a023c020-433a-42db-84c7-9288ae55ac21",
+          "aac13172-183d-49ee-b15c-514b2eb552ed"
+        ]
+      },
+      "metrics": {
+        "attempts": 3,
+        "passes": 0,
+        "passRate": 0.0,
+        "taskFailures": 3,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 2,
+        "uiChecksPassed": 0,
+        "serviceChecksExecuted": 6,
+        "serviceChecksPassed": 6,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.281548272,
+        "inputTokens": 835611,
+        "outputTokens": 26051
+      }
+    },
+    {
+      "id": "course-view-07c2bb919be6d8f6",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 2,
+        "protocolSha256": "87e457ec9cf3716839df078fadd5cae1e5a1a1e5cc4b14eed2e06e72fe041141",
+        "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef",
+        "project": "project-02",
+        "variant": "workspace-docs",
+        "label": "r2 02 workspace-docs",
+        "trialIds": [
+          "745b1def-40ac-4900-96c9-b189c6b2e6f0",
+          "9502dff3-7f5a-4b62-a067-e2d884ddfa21",
+          "bd070321-5fd7-45b6-940b-157df5f3b512"
+        ]
+      },
+      "metrics": {
+        "attempts": 3,
+        "passes": 0,
+        "passRate": 0.0,
+        "taskFailures": 3,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 3,
+        "uiChecksPassed": 0,
+        "serviceChecksExecuted": 9,
+        "serviceChecksPassed": 9,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.2541476146666667,
+        "inputTokens": 766597,
+        "outputTokens": 18695
+      }
+    },
+    {
+      "id": "course-view-15201f8cfcfdb0ea",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 2,
+        "protocolSha256": "87e457ec9cf3716839df078fadd5cae1e5a1a1e5cc4b14eed2e06e72fe041141",
+        "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef",
+        "project": "project-03",
+        "variant": "minimal",
+        "label": "r2 03 minimal",
+        "trialIds": [
+          "1e7c395e-243b-4ca2-856c-c72dc8a7968b",
+          "224d57f1-4850-49a9-bd6c-47061d8d9d3d",
+          "3bf22b16-6480-4721-820a-0aaaf70155be"
+        ]
+      },
+      "metrics": {
+        "attempts": 3,
+        "passes": 0,
+        "passRate": 0.0,
+        "taskFailures": 3,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 1,
+        "uiChecksPassed": 0,
+        "serviceChecksExecuted": 3,
+        "serviceChecksPassed": 3,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.23629910799999998,
+        "inputTokens": 696863,
+        "outputTokens": 21707
+      }
+    },
+    {
+      "id": "course-view-a88d1d37e1802878",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 2,
+        "protocolSha256": "87e457ec9cf3716839df078fadd5cae1e5a1a1e5cc4b14eed2e06e72fe041141",
+        "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef",
+        "project": "project-03",
+        "variant": "recovery",
+        "label": "r2 03 recovery",
+        "trialIds": [
+          "03707b50-d426-4961-b8e3-522d7f674f6c",
+          "3db63440-2515-400f-87d9-f742a5d72925",
+          "b7f85e4f-b18a-473f-8e71-32dced0e282b"
+        ]
+      },
+      "metrics": {
+        "attempts": 3,
+        "passes": 0,
+        "passRate": 0.0,
+        "taskFailures": 3,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 3,
+        "uiChecksPassed": 0,
+        "serviceChecksExecuted": 9,
+        "serviceChecksPassed": 9,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.24517159,
+        "inputTokens": 701552,
+        "outputTokens": 18081
+      }
+    },
+    {
+      "id": "course-view-2d06f85c1ed8f8aa",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 2,
+        "protocolSha256": "87e457ec9cf3716839df078fadd5cae1e5a1a1e5cc4b14eed2e06e72fe041141",
+        "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef",
+        "project": "project-04",
+        "variant": "minimal",
+        "label": "r2 04 minimal",
+        "trialIds": [
+          "34290474-83eb-4792-9368-096c0ae83df0",
+          "adda1977-924d-4adb-9bb7-250219b5d2be",
+          "b6c3da9e-7fd8-474b-a79c-19cbbc62e5ba"
+        ]
+      },
+      "metrics": {
+        "attempts": 3,
+        "passes": 0,
+        "passRate": 0.0,
+        "taskFailures": 3,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 3,
+        "uiChecksPassed": 0,
+        "serviceChecksExecuted": 9,
+        "serviceChecksPassed": 9,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.27182352666666665,
+        "inputTokens": 762286,
+        "outputTokens": 20982
+      }
+    },
+    {
+      "id": "course-view-8ef2daae110ad13c",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 2,
+        "protocolSha256": "87e457ec9cf3716839df078fadd5cae1e5a1a1e5cc4b14eed2e06e72fe041141",
+        "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef",
+        "project": "project-04",
+        "variant": "runtime-feedback",
+        "label": "r2 04 runtime-feedback",
+        "trialIds": [
+          "7eb6c8d1-896c-49ab-bfc3-fd4c1fd230c0",
+          "ea192f25-ea5e-4a06-b166-8b136156f040",
+          "f02c6078-1953-4544-bcc0-f877c849f6d7"
+        ]
+      },
+      "metrics": {
+        "attempts": 3,
+        "passes": 0,
+        "passRate": 0.0,
+        "taskFailures": 3,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 3,
+        "uiChecksPassed": 0,
+        "serviceChecksExecuted": 9,
+        "serviceChecksPassed": 9,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.28321435,
+        "inputTokens": 813618,
+        "outputTokens": 19453
+      }
+    },
+    {
+      "id": "course-view-6e7dce20a5f83ef5",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 2,
+        "protocolSha256": "87e457ec9cf3716839df078fadd5cae1e5a1a1e5cc4b14eed2e06e72fe041141",
+        "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef",
+        "project": "project-05",
+        "variant": "gen-eval",
+        "label": "r2 05 gen-eval",
+        "trialIds": [
+          "37ec7440-8567-4905-a12d-e1b7912474b1",
+          "4cb6d584-ecfc-4f41-a0f3-86a1bdcf3556",
+          "c64948bf-1452-41af-b95f-58648e67e496"
+        ]
+      },
+      "metrics": {
+        "attempts": 3,
+        "passes": 0,
+        "passRate": 0.0,
+        "taskFailures": 3,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 2,
+        "uiChecksPassed": 0,
+        "serviceChecksExecuted": 6,
+        "serviceChecksPassed": 6,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.240378402,
+        "inputTokens": 573025,
+        "outputTokens": 27128
+      }
+    },
+    {
+      "id": "course-view-fe656ce98e08de52",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 2,
+        "protocolSha256": "87e457ec9cf3716839df078fadd5cae1e5a1a1e5cc4b14eed2e06e72fe041141",
+        "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef",
+        "project": "project-05",
+        "variant": "plan-gen-eval",
+        "label": "r2 05 plan-gen-eval",
+        "trialIds": [
+          "2ca8dcd3-e132-4296-8755-e9722cfa003b",
+          "3f742e3b-8f37-49bd-bfb5-d55ac89bed80",
+          "86cc7a68-d9b8-42b7-abb6-735c757a1ebc"
+        ]
+      },
+      "metrics": {
+        "attempts": 3,
+        "passes": 0,
+        "passRate": 0.0,
+        "taskFailures": 3,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 2,
+        "uiChecksPassed": 0,
+        "serviceChecksExecuted": 6,
+        "serviceChecksPassed": 6,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.18875243533333336,
+        "inputTokens": 442080,
+        "outputTokens": 23469
+      }
+    },
+    {
+      "id": "course-view-63b4a2dc3b31a2e8",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 2,
+        "protocolSha256": "87e457ec9cf3716839df078fadd5cae1e5a1a1e5cc4b14eed2e06e72fe041141",
+        "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef",
+        "project": "project-05",
+        "variant": "single-role",
+        "label": "r2 05 single-role",
+        "trialIds": [
+          "41593b90-6493-4ab7-a001-1dc24878eeb0",
+          "7044390c-06be-4cd7-ae30-9b063600ead1",
+          "fd1411d4-3aee-47ed-a788-5007df5047e2"
+        ]
+      },
+      "metrics": {
+        "attempts": 3,
+        "passes": 0,
+        "passRate": 0.0,
+        "taskFailures": 3,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 3,
+        "uiChecksPassed": 0,
+        "serviceChecksExecuted": 9,
+        "serviceChecksPassed": 9,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.20796110933333334,
+        "inputTokens": 573636,
+        "outputTokens": 21366
+      }
+    },
+    {
+      "id": "course-view-4c5f146f87bf2c2d",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 2,
+        "protocolSha256": "87e457ec9cf3716839df078fadd5cae1e5a1a1e5cc4b14eed2e06e72fe041141",
+        "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef",
+        "project": "project-06",
+        "variant": "capstone",
+        "label": "r2 06 capstone",
+        "trialIds": [
+          "98c21d2f-01ff-4684-a3c8-dd50f9e795d8",
+          "ac047ec9-ebbc-43f8-8f21-5d47a2cb93e3",
+          "dae011e2-5055-4a64-ad78-460ec8bac773"
+        ]
+      },
+      "metrics": {
+        "attempts": 3,
+        "passes": 0,
+        "passRate": 0.0,
+        "taskFailures": 3,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 2,
+        "uiChecksPassed": 0,
+        "serviceChecksExecuted": 6,
+        "serviceChecksPassed": 6,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.282305868,
+        "inputTokens": 752659,
+        "outputTokens": 23579
+      }
+    },
+    {
+      "id": "course-view-3506786bf59f9b32",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 2,
+        "protocolSha256": "87e457ec9cf3716839df078fadd5cae1e5a1a1e5cc4b14eed2e06e72fe041141",
+        "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef",
+        "project": "project-06",
+        "variant": "minimal",
+        "label": "r2 06 minimal",
+        "trialIds": [
+          "11500f73-bc29-4c22-83f4-1e95f0a9abd1",
+          "8bdd0310-17ca-4722-a527-b2960d08ef3b",
+          "e375487d-4743-4f01-8c68-2e4aea50edd8"
+        ]
+      },
+      "metrics": {
+        "attempts": 3,
+        "passes": 0,
+        "passRate": 0.0,
+        "taskFailures": 3,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 2,
+        "uiChecksPassed": 0,
+        "serviceChecksExecuted": 6,
+        "serviceChecksPassed": 6,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.24827877599999998,
+        "inputTokens": 725853,
+        "outputTokens": 23953
+      }
+    }
+  ],
+  "aggregateReadBackVerified": true,
+  "report": {
+    "url": "https://forge.coreweave.com/wandb/learn-harness-engineering-forge/reports/Forge-harness-course-\u2014-verified-execution-and-comparison-evidence--VmlldzoxODI2MzgyOA==",
+    "forgeUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/reports/Forge-harness-course-\u2014-verified-execution-and-comparison-evidence--VmlldzoxODI2MzgyOA==",
+    "title": "Forge harness course \u2014 verified execution and comparison evidence",
+    "readBackVerified": true
+  },
+  "note": "Derived aggregate runs are not coding trials. Revisions are separate cohorts. Missing usage is not zero."
+}
