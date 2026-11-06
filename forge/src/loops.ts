@@ -10,7 +10,7 @@ export type LoopMode='goal'|'timer'|'maker-checker';
 export interface LoopState {
   schemaVersion:1;id:string;mode:LoopMode;sourceCommit:string;startedAt:number;deadlineAt:number;
   intervalMs:number;maxRounds:number;status:'running'|'passed'|'deadline'|'round_limit'|'no_progress'|'blocked'|'cancelled';
-  rounds:Array<{trialId:string;outcome:string;patchSha256?:string}>;pendingTrialId?:string;candidatePatch?:string;
+  rounds:Array<{trialId:string;outcome:string;patchSha256?:string}>;pendingTrialId?:string;candidatePatch?:string;verificationFeedback?:string;
   interventions:Array<{at:string;note:string;source:'learner'|'observed'}>;error?:string;
 }
 export interface LoopDriver {
@@ -33,6 +33,7 @@ export async function driveLoop(file:string,state:LoopState,driver:LoopDriver,si
       const id=randomUUID();state.pendingTrialId=id;await writeJson(file,state);
       const result=await driver.run(id,state);
       state.rounds.push({trialId:id,outcome:result.record.outcome,patchSha256:result.patchSha256});
+      state.verificationFeedback=JSON.stringify((result.record as TrialRecord & {grade?:unknown}).grade??{outcome:result.record.outcome,error:result.record.error});
       delete state.pendingTrialId;
       if(result.patch)state.candidatePatch=result.patch;
       if(['infrastructure_failed','telemetry_missing','budget_exhausted'].includes(result.record.outcome)){state.status='blocked';state.error=result.record.error;break;}
@@ -59,7 +60,7 @@ export async function runLoop(options:{mode:LoopMode;file:string;execute:boolean
   const output=resolve(options.output??join(courseRoot,'forge/local-results'));
   return driveLoop(options.file,state,{now:Date.now,sleep:(ms,signal)=>delay(ms,undefined,{signal}),
     async run(id,s) {
-      const result=await compare({project:'project-07',variant:s.mode,repeats:1,execute:true,source:s.sourceCommit,output,resumePatch:s.candidatePatch,trialId:id});
+      const result=await compare({project:'project-07',variant:s.mode,repeats:1,execute:true,source:s.sourceCommit,output,resumePatch:s.candidatePatch,trialId:id,verificationFeedback:s.verificationFeedback});
       const record=(result as {completed?:TrialRecord[]}).completed?.[0];
       if(!record)throw new Error('No trial launched: budget exhausted or qualification unavailable');
       const patch=join(output,id,'candidate.diff');
