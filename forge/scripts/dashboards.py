@@ -167,7 +167,12 @@ def publish():
                                trial["outcome"], json.dumps(trial["conversationIds"]))
             run.log({"sourceEvidence": table})
     views = []
-    for revision, source in sorted({(r["config"]["protocolRevision"], r["config"]["sourceCommit"]) for r in rows}):
+    cohorts = {(r["config"]["protocolRevision"], r["config"]["sourceCommit"]) for r in rows}
+    for plan_file in LOCAL.glob('campaign-*.json'):
+        plan = json.loads(plan_file.read_text())
+        if plan['protocol'].get('protocolRevision', 1) >= 3 and len(plan['blocks']) == 18 and len({b['project'] for b in plan['blocks']}) == 6:
+            cohorts.add((plan['protocol']['protocolRevision'], plan['sourceCommit']))
+    for revision, source in sorted(cohorts):
         prior = next((v for v in previous.get("views", []) if v.get("protocolRevision") == revision and v.get("sourceCommit", source) == source), None)
         view = ws.Workspace.from_url(prior["url"]) if prior else ws.Workspace(entity=entity, project=project)
         view.name = f"Forge course — revision {revision} comparisons"
