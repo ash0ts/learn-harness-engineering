@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-06T11:33:27.766015+00:00",
+  "generatedAt": "2026-11-06T12:02:23.675541+00:00",
   "views": [
     {
       "protocolRevision": 2,
       "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef",
       "url": "https://forge.coreweave.com/wandb/learn-harness-engineering-forge?nw=tsgaokxuthw",
       "forgeUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=tsgaokxuthw",
-      "name": "Forge course \u2014 revision 2 comparisons",
+      "name": "Forge course \u2014 revision 2 comparisons \u00b7 8f4521bc",
       "readBackVerified": true
     },
     {
@@ -15,7 +15,7 @@
       "sourceCommit": "7c563eb14f3999ab3e659b77c4095c883619002f",
       "url": "https://forge.coreweave.com/wandb/learn-harness-engineering-forge?nw=ssij233dnka",
       "forgeUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=ssij233dnka",
-      "name": "Forge course \u2014 revision 3 comparisons",
+      "name": "Forge course \u2014 revision 3 comparisons \u00b7 7c563eb1",
       "readBackVerified": true
     },
     {
@@ -23,7 +23,7 @@
       "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
       "url": "https://forge.coreweave.com/wandb/learn-harness-engineering-forge?nw=wz8re0rb108",
       "forgeUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=wz8re0rb108",
-      "name": "Forge course \u2014 revision 4 comparisons",
+      "name": "Forge course \u2014 revision 4 comparisons \u00b7 b948c1fb",
       "readBackVerified": true
     }
   ],
@@ -47,7 +47,11 @@
           "643a867a-74e8-4987-aa56-5640b4c1982e",
           "a09c89fc-d730-4e6c-980c-62b4e7d4993e",
           "e53c3cad-a475-4e49-a79c-e64cfc0316a9"
-        ]
+        ],
+        "acceptanceQualified": true,
+        "measurementNote": "Protected service checks and awaited visible-answer Electron acceptance.",
+        "lastTrialFinishedAt": "2026-11-06T11:19:11.007Z",
+        "primaryComparison": true
       },
       "metrics": {
         "attempts": 3,
@@ -80,7 +84,11 @@
           "3398c0d0-a9f2-4383-b64f-c7469ff9d0df",
           "71581d99-5fb7-4e57-bee4-56ec354858a2",
           "a7dcf5cb-dd20-4c3f-921b-f8a51a21f8f8"
-        ]
+        ],
+        "acceptanceQualified": true,
+        "measurementNote": "Protected service checks and awaited visible-answer Electron acceptance.",
+        "lastTrialFinishedAt": "2026-11-06T11:21:41.952Z",
+        "primaryComparison": true
       },
       "metrics": {
         "attempts": 3,
@@ -111,24 +119,29 @@
         "label": "r4 02 minimal",
         "trialIds": [
           "22873518-2d13-475d-ba37-7b9e94c48407",
+          "6aeae35a-525b-448d-93eb-469a22e6cedf",
           "b394d28a-ebed-4aba-9566-61d6cc5dbedf"
-        ]
+        ],
+        "acceptanceQualified": true,
+        "measurementNote": "Protected service checks and awaited visible-answer Electron acceptance.",
+        "lastTrialFinishedAt": "2026-11-06T11:35:34.903Z",
+        "primaryComparison": true
       },
       "metrics": {
-        "attempts": 2,
+        "attempts": 3,
         "passes": 0,
         "passRate": 0.0,
-        "taskFailures": 2,
+        "taskFailures": 3,
         "infrastructureFailures": 0,
         "missingTelemetry": 0,
-        "uiChecksExecuted": 2,
+        "uiChecksExecuted": 3,
         "uiChecksPassed": 0,
-        "serviceChecksExecuted": 6,
-        "serviceChecksPassed": 6,
+        "serviceChecksExecuted": 9,
+        "serviceChecksPassed": 9,
         "unknownCostAttempts": 0,
-        "knownEstimatedCostUsd": 0.19695297933333333,
-        "inputTokens": 507686,
-        "outputTokens": 13241
+        "knownEstimatedCostUsd": 0.291704132,
+        "inputTokens": 769298,
+        "outputTokens": 19654
       }
     },
     {
@@ -142,25 +155,178 @@
         "variant": "workspace-docs",
         "label": "r4 02 workspace-docs",
         "trialIds": [
+          "64419d93-5073-4632-bff0-8ccd75f2e21f",
           "6e00cd09-8cfb-495e-ab90-dc16c7938030",
           "ec18a893-0de1-44ac-8541-7f1564e1e8d4"
-        ]
+        ],
+        "acceptanceQualified": true,
+        "measurementNote": "Protected service checks and awaited visible-answer Electron acceptance.",
+        "lastTrialFinishedAt": "2026-11-06T11:35:45.288Z",
+        "primaryComparison": true
       },
       "metrics": {
-        "attempts": 2,
+        "attempts": 3,
         "passes": 0,
         "passRate": 0.0,
-        "taskFailures": 2,
+        "taskFailures": 3,
         "infrastructureFailures": 0,
         "missingTelemetry": 0,
-        "uiChecksExecuted": 2,
+        "uiChecksExecuted": 3,
         "uiChecksPassed": 0,
-        "serviceChecksExecuted": 6,
-        "serviceChecksPassed": 6,
+        "serviceChecksExecuted": 9,
+        "serviceChecksPassed": 9,
         "unknownCostAttempts": 0,
-        "knownEstimatedCostUsd": 0.17862066199999999,
-        "inputTokens": 491822,
-        "outputTokens": 10147
+        "knownEstimatedCostUsd": 0.269551678,
+        "inputTokens": 736216,
+        "outputTokens": 16161
+      }
+    },
+    {
+      "id": "course-view-8091c6bd03f8429b",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 4,
+        "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+        "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+        "project": "project-03",
+        "variant": "minimal",
+        "label": "r4 03 minimal",
+        "trialIds": [
+          "22fa3879-a8ff-4219-847c-c5972efedf78",
+          "54b81e30-0be0-470e-ab3c-2a3783ead0f5",
+          "9d859517-72db-4b1a-a683-cd81b9f7ca14"
+        ],
+        "acceptanceQualified": true,
+        "measurementNote": "Protected service checks and awaited visible-answer Electron acceptance.",
+        "lastTrialFinishedAt": "2026-11-06T11:42:19.715Z",
+        "primaryComparison": true
+      },
+      "metrics": {
+        "attempts": 3,
+        "passes": 0,
+        "passRate": 0.0,
+        "taskFailures": 3,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 1,
+        "uiChecksPassed": 1,
+        "serviceChecksExecuted": 3,
+        "serviceChecksPassed": 3,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.22671216,
+        "inputTokens": 669170,
+        "outputTokens": 21126
+      }
+    },
+    {
+      "id": "course-view-c8a751b9e5503980",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 4,
+        "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+        "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+        "project": "project-03",
+        "variant": "recovery",
+        "label": "r4 03 recovery",
+        "trialIds": [
+          "0809587e-cc59-4276-8285-02dc5072f2aa",
+          "1500360a-62ce-42cf-aa87-c82962c43655",
+          "d5a939ba-ee04-422d-a681-0322111156a1"
+        ],
+        "acceptanceQualified": true,
+        "measurementNote": "Protected service checks and awaited visible-answer Electron acceptance.",
+        "lastTrialFinishedAt": "2026-11-06T11:42:03.192Z",
+        "primaryComparison": true
+      },
+      "metrics": {
+        "attempts": 3,
+        "passes": 0,
+        "passRate": 0.0,
+        "taskFailures": 3,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 1,
+        "uiChecksPassed": 1,
+        "serviceChecksExecuted": 3,
+        "serviceChecksPassed": 3,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.23770934800000001,
+        "inputTokens": 739356,
+        "outputTokens": 17464
+      }
+    },
+    {
+      "id": "course-view-824d908633aa93ec",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 4,
+        "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+        "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+        "project": "project-04",
+        "variant": "minimal",
+        "label": "r4 04 minimal",
+        "trialIds": [
+          "1b0a25e5-ba13-4931-9c4f-ff6100f6672a",
+          "9c2869e2-d150-4c35-82df-9602ca48f17b",
+          "9feeffa8-1836-485a-a52c-2b398b40a195"
+        ],
+        "acceptanceQualified": true,
+        "measurementNote": "Protected service checks and awaited visible-answer Electron acceptance.",
+        "lastTrialFinishedAt": "2026-11-06T11:49:00.369Z",
+        "primaryComparison": true
+      },
+      "metrics": {
+        "attempts": 3,
+        "passes": 2,
+        "passRate": 0.6666666666666666,
+        "taskFailures": 1,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 3,
+        "uiChecksPassed": 3,
+        "serviceChecksExecuted": 9,
+        "serviceChecksPassed": 9,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.33691097200000003,
+        "inputTokens": 1084528,
+        "outputTokens": 26766
+      }
+    },
+    {
+      "id": "course-view-89ab9a16bd17259c",
+      "config": {
+        "dashboardKind": "comparison-aggregate",
+        "protocolRevision": 4,
+        "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467",
+        "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+        "project": "project-04",
+        "variant": "runtime-feedback",
+        "label": "r4 04 runtime-feedback",
+        "trialIds": [
+          "0865dc24-2666-4fda-b6ae-3f488f5339cb",
+          "bdc971f7-1a51-437d-b46a-8ed3c268eb97",
+          "fadf2407-4ef3-4635-bab7-0a8d987096d8"
+        ],
+        "acceptanceQualified": true,
+        "measurementNote": "Protected service checks and awaited visible-answer Electron acceptance.",
+        "lastTrialFinishedAt": "2026-11-06T11:48:50.586Z",
+        "primaryComparison": true
+      },
+      "metrics": {
+        "attempts": 3,
+        "passes": 3,
+        "passRate": 1.0,
+        "taskFailures": 0,
+        "infrastructureFailures": 0,
+        "missingTelemetry": 0,
+        "uiChecksExecuted": 3,
+        "uiChecksPassed": 3,
+        "serviceChecksExecuted": 9,
+        "serviceChecksPassed": 9,
+        "unknownCostAttempts": 0,
+        "knownEstimatedCostUsd": 0.39852385,
+        "inputTokens": 1341786,
+        "outputTokens": 24385
       }
     },
     {
@@ -177,7 +343,11 @@
           "174cab45-166d-42e2-b60d-4fe6d7d1916e",
           "68bb08fa-4f9b-42af-9232-dd7e50da8414",
           "edd880ec-d379-4c91-8f32-6037f1001a94"
-        ]
+        ],
+        "acceptanceQualified": false,
+        "measurementNote": "Historical asynchronous UI waits do not establish visible-answer acceptance.",
+        "lastTrialFinishedAt": "2026-11-06T08:21:01.991Z",
+        "primaryComparison": false
       },
       "metrics": {
         "attempts": 3,
@@ -210,7 +380,11 @@
           "2e7a67cd-96cb-46e0-92d5-1099b69ea31b",
           "362291eb-95fb-4738-bb3e-225d4d2cca9b",
           "c8a5365b-8cfa-4566-b28e-6577ce081948"
-        ]
+        ],
+        "acceptanceQualified": false,
+        "measurementNote": "Historical asynchronous UI waits do not establish visible-answer acceptance.",
+        "lastTrialFinishedAt": "2026-11-06T08:20:49.477Z",
+        "primaryComparison": false
       },
       "metrics": {
         "attempts": 3,
@@ -243,7 +417,11 @@
           "051868b4-ba7f-4727-acd6-7265657fb2c9",
           "a023c020-433a-42db-84c7-9288ae55ac21",
           "aac13172-183d-49ee-b15c-514b2eb552ed"
-        ]
+        ],
+        "acceptanceQualified": false,
+        "measurementNote": "Historical asynchronous UI waits do not establish visible-answer acceptance.",
+        "lastTrialFinishedAt": "2026-11-06T08:29:04.176Z",
+        "primaryComparison": false
       },
       "metrics": {
         "attempts": 3,
@@ -276,7 +454,11 @@
           "745b1def-40ac-4900-96c9-b189c6b2e6f0",
           "9502dff3-7f5a-4b62-a067-e2d884ddfa21",
           "bd070321-5fd7-45b6-940b-157df5f3b512"
-        ]
+        ],
+        "acceptanceQualified": false,
+        "measurementNote": "Historical asynchronous UI waits do not establish visible-answer acceptance.",
+        "lastTrialFinishedAt": "2026-11-06T08:28:58.856Z",
+        "primaryComparison": false
       },
       "metrics": {
         "attempts": 3,
@@ -309,7 +491,11 @@
           "1e7c395e-243b-4ca2-856c-c72dc8a7968b",
           "224d57f1-4850-49a9-bd6c-47061d8d9d3d",
           "3bf22b16-6480-4721-820a-0aaaf70155be"
-        ]
+        ],
+        "acceptanceQualified": false,
+        "measurementNote": "Historical asynchronous UI waits do not establish visible-answer acceptance.",
+        "lastTrialFinishedAt": "2026-11-06T08:37:51.064Z",
+        "primaryComparison": false
       },
       "metrics": {
         "attempts": 3,
@@ -342,7 +528,11 @@
           "03707b50-d426-4961-b8e3-522d7f674f6c",
           "3db63440-2515-400f-87d9-f742a5d72925",
           "b7f85e4f-b18a-473f-8e71-32dced0e282b"
-        ]
+        ],
+        "acceptanceQualified": false,
+        "measurementNote": "Historical asynchronous UI waits do not establish visible-answer acceptance.",
+        "lastTrialFinishedAt": "2026-11-06T08:38:22.544Z",
+        "primaryComparison": false
       },
       "metrics": {
         "attempts": 3,
@@ -375,7 +565,11 @@
           "34290474-83eb-4792-9368-096c0ae83df0",
           "adda1977-924d-4adb-9bb7-250219b5d2be",
           "b6c3da9e-7fd8-474b-a79c-19cbbc62e5ba"
-        ]
+        ],
+        "acceptanceQualified": false,
+        "measurementNote": "Historical asynchronous UI waits do not establish visible-answer acceptance.",
+        "lastTrialFinishedAt": "2026-11-06T08:49:10.400Z",
+        "primaryComparison": false
       },
       "metrics": {
         "attempts": 3,
@@ -408,7 +602,11 @@
           "7eb6c8d1-896c-49ab-bfc3-fd4c1fd230c0",
           "ea192f25-ea5e-4a06-b166-8b136156f040",
           "f02c6078-1953-4544-bcc0-f877c849f6d7"
-        ]
+        ],
+        "acceptanceQualified": false,
+        "measurementNote": "Historical asynchronous UI waits do not establish visible-answer acceptance.",
+        "lastTrialFinishedAt": "2026-11-06T08:50:26.705Z",
+        "primaryComparison": false
       },
       "metrics": {
         "attempts": 3,
@@ -441,7 +639,11 @@
           "37ec7440-8567-4905-a12d-e1b7912474b1",
           "4cb6d584-ecfc-4f41-a0f3-86a1bdcf3556",
           "c64948bf-1452-41af-b95f-58648e67e496"
-        ]
+        ],
+        "acceptanceQualified": false,
+        "measurementNote": "Historical asynchronous UI waits do not establish visible-answer acceptance.",
+        "lastTrialFinishedAt": "2026-11-06T09:11:29.624Z",
+        "primaryComparison": false
       },
       "metrics": {
         "attempts": 3,
@@ -474,7 +676,11 @@
           "2ca8dcd3-e132-4296-8755-e9722cfa003b",
           "3f742e3b-8f37-49bd-bfb5-d55ac89bed80",
           "86cc7a68-d9b8-42b7-abb6-735c757a1ebc"
-        ]
+        ],
+        "acceptanceQualified": false,
+        "measurementNote": "Historical asynchronous UI waits do not establish visible-answer acceptance.",
+        "lastTrialFinishedAt": "2026-11-06T09:07:27.221Z",
+        "primaryComparison": false
       },
       "metrics": {
         "attempts": 3,
@@ -507,7 +713,11 @@
           "41593b90-6493-4ab7-a001-1dc24878eeb0",
           "7044390c-06be-4cd7-ae30-9b063600ead1",
           "fd1411d4-3aee-47ed-a788-5007df5047e2"
-        ]
+        ],
+        "acceptanceQualified": false,
+        "measurementNote": "Historical asynchronous UI waits do not establish visible-answer acceptance.",
+        "lastTrialFinishedAt": "2026-11-06T09:07:00.440Z",
+        "primaryComparison": false
       },
       "metrics": {
         "attempts": 3,
@@ -540,7 +750,11 @@
           "98c21d2f-01ff-4684-a3c8-dd50f9e795d8",
           "ac047ec9-ebbc-43f8-8f21-5d47a2cb93e3",
           "dae011e2-5055-4a64-ad78-460ec8bac773"
-        ]
+        ],
+        "acceptanceQualified": false,
+        "measurementNote": "Historical asynchronous UI waits do not establish visible-answer acceptance.",
+        "lastTrialFinishedAt": "2026-11-06T09:23:41.027Z",
+        "primaryComparison": false
       },
       "metrics": {
         "attempts": 3,
@@ -573,7 +787,11 @@
           "11500f73-bc29-4c22-83f4-1e95f0a9abd1",
           "8bdd0310-17ca-4722-a527-b2960d08ef3b",
           "e375487d-4743-4f01-8c68-2e4aea50edd8"
-        ]
+        ],
+        "acceptanceQualified": false,
+        "measurementNote": "Historical asynchronous UI waits do not establish visible-answer acceptance.",
+        "lastTrialFinishedAt": "2026-11-06T09:23:18.901Z",
+        "primaryComparison": false
       },
       "metrics": {
         "attempts": 3,
@@ -606,7 +824,11 @@
           "20e034ff-32bc-4225-8416-044011f5f68d",
           "97cb6fd5-7fd6-466c-b5f1-598126cf2d52",
           "b043a7b3-1843-4914-af0b-0504623b1059"
-        ]
+        ],
+        "acceptanceQualified": false,
+        "measurementNote": "Historical asynchronous UI waits do not establish visible-answer acceptance.",
+        "lastTrialFinishedAt": "2026-11-06T11:02:05.226Z",
+        "primaryComparison": false
       },
       "metrics": {
         "attempts": 3,
@@ -639,7 +861,11 @@
           "813076fb-3550-4e34-a3a3-831c7ed43f14",
           "ca53b79e-eab4-4b69-8c1e-072c2baff44f",
           "d52e75ef-81cb-4fc0-b551-0884405ad2c1"
-        ]
+        ],
+        "acceptanceQualified": false,
+        "measurementNote": "Historical asynchronous UI waits do not establish visible-answer acceptance.",
+        "lastTrialFinishedAt": "2026-11-06T11:00:17.011Z",
+        "primaryComparison": false
       },
       "metrics": {
         "attempts": 3,
@@ -666,5 +892,12 @@
     "title": "Forge harness course \u2014 verified execution and comparison evidence",
     "readBackVerified": true
   },
-  "note": "Derived aggregate runs are not coding trials. Revisions are separate cohorts. Missing usage is not zero."
+  "note": "Derived aggregate runs are not coding trials. Revisions are separate cohorts. Missing usage is not zero.",
+  "primary": {
+    "url": "https://forge.coreweave.com/wandb/learn-harness-engineering-forge?nw=dfs83wdpatt",
+    "forgeUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=dfs83wdpatt",
+    "name": "Forge course \u2014 qualified end-to-end comparisons",
+    "readBackVerified": true
+  },
+  "evidenceTableVersion": 2
 }

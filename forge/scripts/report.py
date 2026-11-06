@@ -5,6 +5,7 @@ from pathlib import Path
 import json
 import re
 import hashlib
+from measurement import qualified, HISTORY_SELECTOR_NOTE
 
 ROOT=Path(__file__).resolve().parents[2]
 LOCAL=ROOT/'forge/local-results'
@@ -23,7 +24,7 @@ def build():
         if not pr['isDraft'] or pr['baseRefName']!=expected: raise RuntimeError('Incorrect draft PR chain')
         expected=pr['headRefName']
     rows=saved['trials'];blocks=saved.get('completedComparisonBlocks',[])
-    verified_rows=[r for r in rows if r.get('protocolRevision',1)>=4]
+    verified_rows=[r for r in rows if qualified(r)]
     published=sum(n['status']=='published_verified' and n.get('sha256')==hashlib.sha256((ROOT/n['file']).read_bytes()).hexdigest() for n in notebooks)
     comparison_ids={identifier for block in blocks for identifier in block['trialIds']}
     comparison_rows=[r for r in rows if r['id'] in comparison_ids]
@@ -49,7 +50,7 @@ def build():
     verified_ids={r['id'] for r in verified_rows}
     verified_blocks=[b for b in blocks if set(b['trialIds']).issubset(verified_ids)]
     verified_cohorts={b['sourceCommit'] for b in verified_blocks}
-    complete_verified_cohort=any({(b['project'],b['repeat']) for b in verified_blocks if b['sourceCommit']==source}=={(f'project-0{p}',r) for p in range(1,7) for r in range(1,4)} for source in verified_cohorts)
+    complete_verified_cohort=all(any({b['repeat'] for b in verified_blocks if b['project']==project and b['sourceCommit']==source}=={1,2,3} for source in verified_cohorts) for project in [f'project-0{p}' for p in range(1,7)])
     gates={'nineNotebooksVerified':published==9,'eighteenCompleteBlocks':len(blocks)>=18,'correctedUiComparisonCampaign':complete_verified_cohort,'realTwoHourTimer':real_timer,
            'offlineApps':len(apps)==15 and all(a['passed'] for a in apps),'forgeTests':tests.get('fail')==0 and tests.get('pass',0)>0,
            'localNotebookRenders':len(validation['notebooks'])==9 and all(n['rendered'] for n in validation['notebooks']),
@@ -70,18 +71,19 @@ def build():
     delivery['measurementCaveat']=saved.get('measurementCaveat')
     delivery['visibleUiQualifications']=saved.get('visibleUiQualifications',[])
     delivery['comparisonAudit']=comparison_audit
+    delivery['historySelectorQualification']=HISTORY_SELECTOR_NOTE
     (ROOT/'forge/results/delivery.json').write_text(json.dumps(delivery,indent=2)+'\n')
     lines=['# Forge course delivery and evidence','',f"Status: **{status.replace('_',' ')}**. All eight PRs remain drafts; none has been merged.",'',f"The [public personal fork]({delivery['forkUrl']}) preserves the offline course at upstream `{delivery['upstreamCommit']}`. Results and notebook sources belong to the private `wandb/learn-harness-engineering-forge` project.",'','## Actual execution','', '| Evidence | Recorded result |','| --- | --- |',f"| Existing offline app checks | {sum(a['passed'] for a in apps)}/{len(apps)} pass |",f"| Forge integration tests | {tests.get('pass','unavailable')} pass; {tests.get('fail','unavailable')} fail |",f"| Canonical notebooks | {sum(n['rendered'] for n in validation['notebooks'])}/9 render locally without inference credentials |",f"| Hosted notebook verification | {published}/9 |",f"| Qualification attempts | {delivery['qualifications']['passed']}/{delivery['qualifications']['attempted']} pass |",f"| Coding attempts | {len(rows)} completed; {delivery['outcomes']} |",f"| Complete comparison blocks | {len(blocks)} |",f"| Real two-hour timer | {'Completed' if real_timer else 'Not yet completed'} |",'', 'A completed comparison block contains every treatment for the same project, repeat and source revision. Completion does not imply a passing patch. The independent checker executes the exported patch in a fresh sandbox and distinguishes service behavior from Xvfb/Electron behavior. Source revisions and protocol hashes remain attached to each attempt.','', '## Comparison results','', '| Project | Treatment | Source | Attempts | Pass | Task failure | Infrastructure failure | Missing telemetry |','| --- | --- | --- | --- | --- | --- | --- | --- |']
     for key in sorted({(r['project'],r['variant'],r['sourceCommit']) for r in rows}):
         group=[r for r in rows if (r['project'],r['variant'],r['sourceCommit'])==key];c=Counter(r['outcome'] for r in group)
         lines.append(f"| {key[0]} | {key[1]} | `{key[2][:12]}` | {len(group)} | {c['passed']} | {c['task_failed']} | {c['infrastructure_failed']} | {c['telemetry_missing']} |")
     lines += ['',f"The complete comparison blocks contain **{len(comparison_rows)} coding attempts**, with **{sum(r['outcome']=='passed' for r in comparison_rows)} native checker passes** across separate historical cohorts. Native grades from revisions 2 and 3 do not establish visible-answer acceptance.", '',
-              f"**Awaited visible-answer acceptance (revision 4): {delivery['verifiedUiPasses']}/{delivery['verifiedUiAttempts']} attempts pass.** These require resolved IPC state, actual rendered answers, all service checks and Electron under Xvfb. Earlier native outcomes are preserved. Supplemental patch qualifications are separate and do not change original trial grades."]
+              f"**Qualified visible-answer acceptance: {delivery['verifiedUiPasses']}/{delivery['verifiedUiAttempts']} attempts pass.** These require resolved IPC state, actual rendered answers, all service checks and Electron under Xvfb; the affected Project 05 selector cohort is excluded. Earlier native outcomes are preserved. Supplemental patch qualifications are separate and do not change original trial grades."]
     lines += ['', '| Main comparison check | Passed | Executed |', '| --- | --- | --- |']
     lines += [f"| {name} | {counts['passed']} | {counts['executed']} |" for name,counts in sorted(comparison_checks.items())]
     input_bound=sum(any('Frozen input byte budget' in str(phase.get('errors',[])) for phase in row.get('actorPhases',[])) for row in rows)
     lines += ['',f'**{input_bound}/{len(rows)} attempts** reached the local input-context guard. This is a bounded execution result, not evidence that the task is impossible. Original tool/error traces and unfinished patches remain available.']
-    lines += ['', '## Independent check results','', '| Check | Passed | Executed |','| --- | --- | --- |']
+    lines += ['', HISTORY_SELECTOR_NOTE, '', '## Independent check results','', '| Check | Passed | Executed |','| --- | --- | --- |']
     checks={}
     for row in rows:
         for check in (row.get('grade') or {}).get('checks',[]):
