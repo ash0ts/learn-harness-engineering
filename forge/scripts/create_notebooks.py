@@ -109,7 +109,7 @@ CELLS = {
     for _project, _variant, _source in sorted({(row["project"], row["variant"], row["sourceCommit"]) for row in rows}):
         _group = [row for row in rows if (row["project"], row["variant"], row["sourceCommit"]) == (_project, _variant, _source)]
         aggregates.append({"project": _project, "variant": _variant, "source_commit": _source, "attempts": len(_group), "passed": counts[_project, _variant, _source, "passed"], "task_failed": counts[_project, _variant, _source, "task_failed"], "infrastructure_failed": counts[_project, _variant, _source, "infrastructure_failed"], "telemetry_missing": counts[_project, _variant, _source, "telemetry_missing"], "known_estimate_usd": round(sum(row.get("reconciledEstimateUsd", row.get("estimatedCostUsd")) or 0 for row in _group), 6), "unknown_cost_attempts": sum(row.get("estimatedCostUsd") is None and row.get("reconciledEstimateUsd") is None for row in _group)})
-    mo.vstack([mo.md("## Saved results\\n\\n" + saved.get("status", "No campaign has been recorded.")), mo.ui.table(aggregates, selection=None) if aggregates else mo.md("No trials are recorded for this project. This is an explicit absence of evidence, not a zero score."), mo.md("Target: three repeats per automated variant. Show task failures, infrastructure failures and missing telemetry separately. Repeats of one task are not independent tasks. Rows are grouped by project, treatment and source revision. Cost sums include audited reconciliations where available; unknown token usage remains unknown even when a reservation is charged conservatively. Original outcomes are preserved; see the shared ledger for reservations and reconciliation evidence."), mo.ui.table(rows, selection=None) if rows else mo.md("No run rows to display."), mo.md("### Qualification and budget evidence"), mo.ui.table(saved.get("qualifications", []), selection=None), mo.md("```json\\n" + __import__("json").dumps(saved.get("budget", {}), indent=2) + "\\n```")])
+    mo.vstack([mo.md("## Saved results\\n\\n" + saved.get("status", "No campaign has been recorded.")), mo.ui.table(aggregates, selection=None) if aggregates else mo.md("No trials are recorded for this project. This is an explicit absence of evidence, not a zero score."), mo.md("Target: three repeats per automated variant. Show task failures, infrastructure failures and missing telemetry separately. Repeats of one task are not independent tasks. Rows are grouped by project, treatment and source revision. Cost sums include audited reconciliations where available; unknown token usage remains unknown even when a reservation is charged conservatively. Original outcomes are preserved; see the shared ledger for reservations and reconciliation evidence."), mo.ui.table(rows, selection=None) if rows else mo.md("No run rows to display."), mo.md("### Qualification and budget evidence"), mo.ui.table(saved.get("qualifications", []), selection=None), mo.md("```json\\n" + __import__("json").dumps({key: value for key, value in saved.get("budget", {}).items() if key != "settled"}, indent=2) + "\\n```")])
     return (rows,)''',
 'links': '''def _(mo, rows, saved):
     _links = []
@@ -195,22 +195,41 @@ CELLS = {
     return'''
 }
 
-def generate(runner_commit=None):
+def project_snapshot(snapshot, project):
+    saved=json.loads(json.dumps(snapshot))
+    saved['scope']=project
+    saved['trials']=[r for r in snapshot.get('trials',[]) if project=='overview' or r['project']==project]
+    saved['completedComparisonBlocks']=[b for b in snapshot.get('completedComparisonBlocks',[]) if project=='overview' or b['project']==project]
+    saved['loops']=snapshot.get('loops',[]) if project in ['overview','project-07'] else []
+    saved['graphs']=snapshot.get('graphs',[]) if project in ['overview','project-08'] else []
+    for key in ['qualifications','concurrencyQualifications','sandboxQualifications']:saved.setdefault(key,[])
+    saved['status']=f"Saved at {snapshot.get('capturedAt','the recorded source revision')}: {len(saved['trials'])} completed coding attempts for {project}. Outcomes include unsuccessful attempts. No human time savings are inferred."
+    if project not in ['project-07','project-08']:
+        saved['status']+=f" Complete comparison blocks: {len(saved['completedComparisonBlocks'])}."
+    return saved
+
+def generate(runner_commit=None, projects=None):
     snapshot = ROOT / 'forge/results/snapshot.json'
     saved = json.loads(snapshot.read_text()) if snapshot.exists() else {'schemaVersion':1,'status':'Qualification in progress; no completed comparison campaign.','trials':[]}
     commit = runner_commit or subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
+    generated=[]
     for filename,project,title,description in TITLES:
+        if projects and project not in projects:continue
+        evidence=project_snapshot(saved,project)
         source=TEMPLATE.replace('__FILE__',filename)
         for key,cell in CELLS.items():
             source=source.replace(' def_placeholder_'+key,cell)
-        source=source.replace('__DESIGN__',repr(DESIGNS[project])).replace('__PROTOCOL__',repr((ROOT/'forge/protocol.json').read_text())).replace('__PROJECT__',repr(project)).replace('__COMMIT__',repr(commit)).replace('__VARIANTS__',repr(VARIANTS[project])).replace('__SAVED__',repr(json.dumps(saved,ensure_ascii=False))).replace('__INTRO__',repr('# '+title+'\n\n'+description+'\n\nKeep the task, model and fixtures fixed. Inspect evidence before comparing scores.'))
+        source=source.replace('__DESIGN__',repr(DESIGNS[project])).replace('__PROTOCOL__',repr((ROOT/'forge/protocol.json').read_text())).replace('__PROJECT__',repr(project)).replace('__COMMIT__',repr(commit)).replace('__VARIANTS__',repr(VARIANTS[project])).replace('__SAVED__',repr(json.dumps(evidence,ensure_ascii=False))).replace('__INTRO__',repr('# '+title+'\n\n'+description+'\n\nKeep the task, model and fixtures fixed. Inspect evidence before comparing scores.'))
         (ROOT/'forge/notebooks'/filename).write_text(source)
+        generated.append(str(ROOT/'forge/notebooks'/filename))
     # Forge's editor serializes source with its pinned Marimo version. Normalize
     # locally so the ordinary editor save retains the canonical byte checksum.
-    subprocess.run(['uv', 'run', '--with', 'marimo==0.25.1', 'marimo', 'check', '--fix', str(ROOT/'forge/notebooks')], check=True, cwd=ROOT)
-    print('Generated nine canonical notebooks at runner revision',commit)
+    subprocess.run(['uv', 'run', '--with', 'marimo==0.25.1', 'marimo', 'check', '--fix', *generated], check=True, cwd=ROOT)
+    print('Generated',len(generated),'canonical notebooks at runner revision',commit)
 
 if __name__=='__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--runner-commit', help='Freeze runner revision when refreshing saved results')
-    generate(parser.parse_args().runner_commit)
+    parser.add_argument('--project',action='append',choices=[r[1] for r in TITLES],help='Refresh only these project notebooks; other snapshots retain their capture time')
+    args=parser.parse_args()
+    generate(args.runner_commit,args.project)
