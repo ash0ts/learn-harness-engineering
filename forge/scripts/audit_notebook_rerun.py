@@ -40,7 +40,10 @@ def build():
                 or row['sourceCommit'] != receipt['runnerCommit']
                 or row['outcome'] != round['outcome'] or row['id'] not in ledger['settled']):
             raise RuntimeError('Notebook checkpoint lacks completed, uploaded, settled trial evidence')
-        ids.append(row['trialId'] if 'trialId' in row else row['id'])
+        ids.append(row['id'])
+    ui = json.loads(Path(receipt['uiResult']).read_text())
+    if ui.get('click') != 1 or ui.get('status') != 'Runner finished' or ui.get('exit_code') != 0 or not all(identifier in ui.get('stdout','') for identifier in ids):
+        raise RuntimeError('Observed notebook UI result differs from trial evidence')
     screenshot = Path(receipt['screenshot']).read_bytes()
     receipt.update(verified=True, verifiedAt=datetime.now(timezone.utc).isoformat(),
                    trialIds=ids, stopReason=checkpoint['status'],

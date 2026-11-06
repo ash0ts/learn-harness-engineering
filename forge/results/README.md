@@ -9,11 +9,11 @@ The [public personal fork](https://github.com/ash0ts/learn-harness-engineering) 
 | Evidence | Recorded result |
 | --- | --- |
 | Existing offline app checks | 15/15 pass |
-| Forge integration tests | 38 pass; 0 fail |
+| Forge integration tests | 33 pass; 0 fail |
 | Canonical notebooks | 1/9 render locally without inference credentials |
 | Hosted notebook verification | 9/9 |
 | Qualification attempts | 4/9 pass |
-| Coding attempts | 104 completed; {'task_failed': 85, 'passed': 18, 'telemetry_missing': 1} |
+| Coding attempts | 107 completed; {'task_failed': 88, 'passed': 18, 'telemetry_missing': 1} |
 | Complete comparison blocks | 39 |
 | Real two-hour timer | Completed |
 
@@ -52,7 +52,9 @@ A completed comparison block contains every treatment for the same project, repe
 | project-06 | minimal | `8f4521bc34bb` | 3 | 0 | 3 | 0 | 0 |
 | project-06 | minimal | `b948c1fbac36` | 3 | 1 | 2 | 0 | 0 |
 | project-07 | goal | `8f4521bc34bb` | 3 | 0 | 3 | 0 | 0 |
+| project-07 | goal | `b948c1fbac36` | 1 | 0 | 1 | 0 | 0 |
 | project-07 | maker-checker | `8f4521bc34bb` | 2 | 0 | 2 | 0 | 0 |
+| project-07 | maker-checker | `b948c1fbac36` | 2 | 0 | 2 | 0 | 0 |
 | project-07 | timer | `8f4521bc34bb` | 8 | 0 | 8 | 0 | 0 |
 | project-07 | timer | `bf760399391f` | 1 | 0 | 0 | 0 | 1 |
 | project-08 | graph | `3ebea13e2609` | 3 | 0 | 3 | 0 | 0 |
@@ -62,7 +64,7 @@ A completed comparison block contains every treatment for the same project, repe
 
 The complete comparison blocks contain **84 coding attempts**, with **18 native checker passes** across separate historical cohorts. Native grades from revisions 2 and 3 do not establish visible-answer acceptance.
 
-**Qualified visible-answer acceptance: 11/24 attempts pass.** These require resolved IPC state, actual rendered answers, all service checks and Electron under Xvfb; the affected Project 05–06 checker cohorts are excluded. Earlier native outcomes are preserved. Supplemental patch qualifications are separate and do not change original trial grades.
+**Qualified visible-answer acceptance: 11/27 attempts pass.** These require resolved IPC state, actual rendered answers, all service checks and Electron under Xvfb; the affected Project 05–06 checker cohorts are excluded. Earlier native outcomes are preserved. Supplemental patch qualifications are separate and do not change original trial grades.
 
 | Main comparison check | Passed | Executed |
 | --- | --- | --- |
@@ -75,22 +77,22 @@ The complete comparison blocks contain **84 coding attempts**, with **18 native 
 | single-document indexing is reflected in status | 4 | 6 |
 | strict compile and renderer build | 68 | 84 |
 
-**29/104 attempts** reached the local input-context guard. This is a bounded execution result, not evidence that the task is impossible. Original tool/error traces and unfinished patches remain available.
+**29/107 attempts** reached the local input-context guard. This is a bounded execution result, not evidence that the task is impossible. Original tool/error traces and unfinished patches remain available.
 
-Project 05 at source b948c1fbac36 used an overly broad citation selector: it clicked answer prose containing "citations" instead of an expand control. Its native grades remain archived but are excluded from qualified comparisons. The corrected checker selects interactive citation controls and exercises both cancellation and acceptance of native or custom confirmation dialogs. All three role treatments are rerun from the same unfinished code and model settings. Project 06 at that source also omitted the feedback.submit argument contract while its checker assumed positional arguments. The corrected task specifies an object with question, answer, rating and optional comment; both capstone treatments are rerun.
+The citation selector clicked answer prose rather than an interactive expand control. Native grades are preserved but excluded from qualified comparisons. The corrected checker also supports native and custom confirmation dialogs. The task omitted the feedback.submit argument contract while the checker assumed positional arguments. Native grades are preserved but excluded from qualified comparisons. Both treatments are rerun with an explicit object payload contract.
 
 ## Independent check results
 
 | Check | Passed | Executed |
 | --- | --- | --- |
-| Electron window, preload, import, indexing and question UI under Xvfb | 21 | 79 |
-| actual indexing keeps every nonempty paragraph | 76 | 79 |
-| actual retrieval and Q&A persist two turns | 76 | 79 |
-| architecture checker rejects a seeded boundary violation | 15 | 23 |
+| Electron window, preload, import, indexing and question UI under Xvfb | 23 | 81 |
+| actual indexing keeps every nonempty paragraph | 76 | 81 |
+| actual retrieval and Q&A persist two turns | 76 | 81 |
+| architecture checker rejects a seeded boundary violation | 15 | 25 |
 | extracted metadata | 0 | 6 |
-| real import and persistence after reconstruction | 79 | 79 |
+| real import and persistence after reconstruction | 81 | 81 |
 | single-document indexing is reflected in status | 4 | 6 |
-| strict compile and renderer build | 79 | 104 |
+| strict compile and renderer build | 81 | 107 |
 
 A check omitted after compilation failed is not counted as an executed service or UI check. Shared failures can mask differences between treatments; the end-to-end outcome remains failed. Protected app checks execute the actual services with deterministic course Q&A defaults; the live Forge app adapter is qualified separately. These checks do not measure production answer quality.
 
@@ -116,6 +118,8 @@ Manual graph qualification candidates validate runner control flow and checker b
 
 - `project-07-goal-live.json`: **round_limit**, 3 recorded rounds; 0 entered/observed interventions.
 - `project-07-maker-checker-live.json`: **no_progress**, 2 recorded rounds; 0 entered/observed interventions.
+- `project-07-maker-checker-revision4.json`: **no_progress**, 2 recorded rounds; 0 entered/observed interventions.
+- `project-07-notebook-ui-qualification.json`: **round_limit**, 1 recorded rounds; 0 entered/observed interventions.
 - `project-07-real-timer-qualified.json`: **deadline**, 8 recorded rounds; 1 entered/observed interventions.
 - `project-07-real-timer.json`: **blocked**, 1 recorded rounds; 0 entered/observed interventions.
 - `project-08-control-flow-qualification-74896eb2-b69a-4e53-be6c-44a010bbf07d.json`: **approval**, 2 maker attempts, 6 durable transitions. An approval pause requires an explicit checksum-bound human decision.
@@ -125,7 +129,7 @@ Manual graph qualification candidates validate runner control flow and checker b
 
 ## Spend estimates
 
-Known/audited estimate: **$10.368135**. Conservative charges for unknown usage: **$6.000000**. Total charged estimate: **$16.368135**. Active reservations: **$0.000000**.
+Known/audited estimate: **$10.618282**. Conservative charges for unknown usage: **$6.000000**. Total charged estimate: **$16.618282**. Active reservations: **$0.000000**.
 
 The original $50 application cap was removed after the user explicitly authorized an unlimited budget. Worker concurrency and lifetimes remain bounded. Timed-out qualifications retain unknown token usage; each full $2 reservation was charged conservatively under the recorded authorization. Estimates are not provider invoices. Notebook EDIT compute is measured separately at the verified 2 CPU / 4 GiB rates ($0.3408/hour), including publication work. The durable ledger records authorizations and reconciliations. It must not be reset.
 
