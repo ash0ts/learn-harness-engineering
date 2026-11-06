@@ -53,6 +53,7 @@ def build():
     status=f"Recorded {len(trials)} completed coding attempts and {len(blocks)} complete comparison blocks. Outcomes include unsuccessful attempts; no human time savings are inferred."
     snapshot={'schemaVersion':1,'capturedAt':datetime.now(timezone.utc).isoformat(),'status':status,'trials':trials,'qualifications':qualifications,'concurrencyQualifications':concurrency,'sandboxQualifications':sandboxes,'completedComparisonBlocks':blocks,'loops':loops,'graphs':graphs,'budget':ledger,'costScope':'Budget snapshot as of capturedAt. Final publication/editor costs are recorded separately in the delivery report and W&B audit artifact.'}
     snapshot['visibleUiQualifications']=visible_ui
+    snapshot['measurementPolicy']=read(ROOT/'forge/measurement-notes.json')
     snapshot['measurementCaveat']='Revision 2 and 3 native grades used unreliable asynchronous UI waits. They remain historical evidence. Revision 4 requires resolved IPC state and visible answer text; supplemental qualifications never rewrite original grades.'
     (ROOT/'forge/results/snapshot.json').write_text(json.dumps(snapshot,indent=2)+'\n')
     print(status)
