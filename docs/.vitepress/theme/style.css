@@ -834,3 +834,22 @@ html.has-mermaid-viewer body {
   text-decoration: underline;
   text-underline-offset: 2px;
 }
+/* Evidence figures remain readable at phone widths; the article never overflows. */
+.vp-doc .forge-figure {
+  margin: 24px 0 10px;
+  overflow-x: auto;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 6px;
+  background: #faf9f6;
+}
+.vp-doc .forge-figure img {
+  display: block;
+  width: 100%;
+  min-width: 620px;
+  max-width: none;
+}
+.vp-doc .forge-figure p { margin: 0; }
+.vp-doc .forge-figure:focus-visible {
+  outline: 3px solid var(--vp-c-brand-1);
+  outline-offset: 3px;
+}

@@ -102,6 +102,21 @@
       "en": 7
     }
   },
+  "forge/evidence.md": {
+    "ids": [
+      "see-the-runs-then-inspect-the-evidence",
+      "start-with-the-complete-comparison",
+      "inspect-every-attempt",
+      "native-forge-dashboards",
+      "separate-coding-and-application-conversations",
+      "all-nine-notebook-views",
+      "loops-and-approval",
+      "download-and-verify"
+    ],
+    "locales": {
+      "en": 8
+    }
+  },
   "forge/index.md": {
     "ids": [
       "a-harness-course-with-results-you-can-inspect",
