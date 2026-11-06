@@ -1,3 +1,9 @@
+<script setup>
+import forgeImage0 from './assets/figures/role-allowances.svg?url'
+import forgeImage1 from './assets/captures/73c46965-1093-4b68-a810-a901dd78bfc0-grader-electron.png?url'
+import forgeImage2 from './assets/figures/project-05-checks.svg?url'
+</script>
+
 # A reviewer costs turns
 
 We asked Pi to upgrade the same conversation-history feature in three ways: one coding role, a maker followed by a checker and revision, and a planner followed by that maker/checker sequence. The application had to display complete questions and answers in order, expose citations and confidence, preserve history, and confirm before clearing it.
@@ -20,6 +26,15 @@ The role treatments also receive the associated repository guidance. The single-
 
 Both role separation and a call allowance can be reasonable design choices. What we cannot do is give a team of agents more total work, call its success a coordination benefit, and leave the extra compute out of the explanation. Our fixed ceiling exposes a different question: does spending part of the available work on another perspective pay for itself on this feature?
 
+
+<div class="forge-figure" tabindex="0" role="region" aria-label="Three stacked role schedules divide twenty-four model calls among maker, planner, checker, and revision.">
+
+<a :href="forgeImage0" target="_blank" rel="noopener"><img src="./assets/figures/role-allowances.svg" alt="Three stacked role schedules divide twenty-four model calls among maker, planner, checker, and revision." /></a>
+
+</div>
+
+The planner and checker use calls that the single-role treatment can spend editing. The figure shows ceilings, not actual tokens or prices. Open the image for full size; wide figures scroll on small screens.
+
 ## The checker starts a new conversation
 
 The maker edits the workspace. The checker then gets the task and the current workspace in a fresh Pi conversation. It does not inherit the maker's full conversation history. This creates an opportunity to inspect the code without relying on the maker's account of what it intended to do.
@@ -38,6 +53,15 @@ The [Agentless paper](https://arxiv.org/abs/2407.01489v2) is a useful counterexa
 
 For this feature, the planner has four calls to produce something the maker would not otherwise discover quickly. The checker has four calls to find a defect that the revision phase can still repair. We can inspect whether that happened by reading the feedback beside the subsequent edit.
 
+
+<div class="forge-figure" tabindex="0" role="region" aria-label="Project 05 application showing History zero and no conversation history after confirmed clearing.">
+
+<a :href="forgeImage1" target="_blank" rel="noopener"><img src="./assets/captures/73c46965-1093-4b68-a810-a901dd78bfc0-grader-electron.png" alt="Project 05 application showing History zero and no conversation history after confirmed clearing." /></a>
+
+</div>
+
+Maker/checker repeat 2, captured after the history-clear checks. The checker first canceled deletion and verified that history remained, then confirmed deletion. This frame shows only the final cleared state. [Inspect both checks and the patch](./evidence?scope=primary&project=project-05&trial=73c46965-1093-4b68-a810-a901dd78bfc0#inspect-every-attempt). Open the image for full size; wide figures scroll on small screens.
+
 ## What failed in the submitted patches
 
 Of the five unsuccessful submissions, three failed compilation. The remaining two reached the history UI check and failed because the displayed answer was truncated. One was a single-role submission; the other used the planner/maker/checker treatment.
@@ -48,6 +72,15 @@ The checker also exercises citation expansion, turn order, confidence display, a
 
 We had to correct our own citation selector before using these results. It originally matched answer prose containing the word “citation” instead of the interactive control. The corrected cohort uses an interactive element and supports both native and custom confirmation dialogs. Earlier outcomes remain archived and excluded from this comparison.
 
+
+<div class="forge-figure" tabindex="0" role="region" aria-label="Project 05 matrix of individual attempts and the checks they passed, failed, or did not execute.">
+
+<a :href="forgeImage2" target="_blank" rel="noopener"><img src="./assets/figures/project-05-checks.svg" alt="Project 05 matrix of individual attempts and the checks they passed, failed, or did not execute." /></a>
+
+</div>
+
+Three submissions failed compilation. Two others reached Electron but failed the full-answer requirement. Planning and review share the same call ceiling. [Read every grade and its evidence](./evidence?scope=primary&project=project-05#inspect-every-attempt). Open the image for full size; wide figures scroll on small screens.
+
 ## Read the review beside the revision
 
 In the [Project 05 notebook](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTg%3D), choose one maker/checker attempt and compare three artifacts: the patch before review, the review text, and the final patch. Private-project membership is required for the linked run evidence.
@@ -57,3 +90,5 @@ Look for a named defect and a corresponding edit. If the reviewer says “improv
 The [public results report](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-publication/forge/results/README.md) records the 2/3, 2/3, and 0/3 outcomes. Three attempts on one feature do not establish that planners are harmful or reviewers are redundant. They do leave us without evidence that either extra role improved success here. I would inspect the review-to-edit chain before increasing the role count again.
 
 In [Project 06](./06-capstone.md), we keep the focus on the delivered behavior and ask whether the app can verify its services, preserve feedback, and return to a clean state.
+
+[Browse the complete evidence companion](./evidence.md): original captures, all 129 attempts, source hashes, notebooks, dashboards, and private artifacts.

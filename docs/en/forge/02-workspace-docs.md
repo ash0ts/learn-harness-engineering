@@ -1,3 +1,8 @@
+<script setup>
+import forgeImage0 from './assets/figures/project-02-checks.svg?url'
+import forgeImage1 from './assets/captures/notebook-02.jpg?url'
+</script>
+
 # Writing a repository guide an agent can use
 
 A new coding session opens a repository and has to decide where to start. A short guide can name the test command, explain an unusual boundary, or point to unfinished work. It can also give the agent another document to read while the import button stays broken.
@@ -5,6 +10,15 @@ A new coding session opens a repository and has to decide where to start. A shor
 In Project 02, we compared minimal instructions with a workspace-docs treatment. The task required document import, full-content detail, persistence across service reconstruction, and a file-picker flow in Electron. Both treatments worked across two fresh Pi conversations. Neither passed any of its three qualified attempts.
 
 The failures were narrower than that score suggests. All six submissions passed the recorded compile, import/persistence, indexing, and Q&A service checks. All six timed out during the Electron acceptance stage. A repository guide had not been enough to complete the UI flow.
+
+
+<div class="forge-figure" tabindex="0" role="region" aria-label="Project 02 matrix of individual attempts and the checks they passed, failed, or did not execute.">
+
+<a :href="forgeImage0" target="_blank" rel="noopener"><img src="./assets/figures/project-02-checks.svg" alt="Project 02 matrix of individual attempts and the checks they passed, failed, or did not execute." /></a>
+
+</div>
+
+All six attempts reached Electron acceptance after passing build and service checks. Each then failed the UI stage; the recorded timeout does not identify its root cause. [Read every grade and its evidence](./evidence?scope=primary&project=project-02#inspect-every-attempt). Open the image for full size; wide figures scroll on small screens.
 
 ## What information the guide adds
 
@@ -45,6 +59,15 @@ The recorded timeout tells us the UI acceptance stage did not reach an expected 
 
 This is where the all-zero score becomes less satisfying and more instructive. There is working service behavior to preserve. There is an end-to-end path that still fails. Rewriting the architecture guide before locating that failure risks spending another six trials on the wrong intervention.
 
+
+<div class="forge-figure" tabindex="0" role="region" aria-label="Published Project 02 notebook showing frozen execution settings and a saved table that retains historical source cohorts.">
+
+<a :href="forgeImage1" target="_blank" rel="noopener"><img src="./assets/captures/notebook-02.jpg" alt="Published Project 02 notebook showing frozen execution settings and a saved table that retains historical source cohorts." /></a>
+
+</div>
+
+The hosted notebook keeps older runs beside the later qualified attempts. No application screenshot was retained for the six primary UI timeouts. Their logs and grades remain in the [trial explorer](./evidence?scope=primary&project=project-02#inspect-every-attempt); this notebook view is not a substitute for a successful import screen. Open the image for full size; wide figures scroll on small screens.
+
 ## Make a handoff that names the unresolved operation
 
 For a learner reviewing these runs, start with one failed UI attempt and write a small handoff from its evidence. Name the last operation confirmed to work, the next state the checker waited for, the relevant files, and the exact command needed to reproduce the failure. Mark an unverified explanation as a hypothesis.
@@ -54,3 +77,5 @@ For example, “import works” is too broad if only the service method was test
 Then compare that handoff with what the agent left on disk. A next session should be able to spend its first few calls reproducing the unresolved operation. If it instead repeats every completed service check, the handoff may be carrying history without carrying the next decision.
 
 Use the [Project 02 notebook](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTU%3D) to select the saved attempts; it requires private-project access. The [public report](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-publication/forge/results/README.md) preserves their grades. [Project 03](./03-session-recovery.md) examines the state that survives when the next conversation starts.
+
+[Browse the complete evidence companion](./evidence.md): original captures, all 129 attempts, source hashes, notebooks, dashboards, and private artifacts.
