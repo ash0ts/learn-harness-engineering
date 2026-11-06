@@ -43,6 +43,7 @@ def build():
     expected_trace_ids.update(q[key] for q in saved['qualifications'] for key in ['agentConversationId','appConversationId'] if q.get(key))
     expected_trace_ids.update(session['conversationId'] for q in saved.get('concurrencyQualifications',[]) if q['passed'] for session in q.get('sessions',[]))
     models_audit=read(LOCAL/'models-audit.json') if (LOCAL/'models-audit.json').exists() else {}
+    comparison_audit=read(LOCAL/'comparison-audit.json') if (LOCAL/'comparison-audit.json').exists() else {}
     sandbox_audit=read(LOCAL/'sandbox-final-audit.json') if (LOCAL/'sandbox-final-audit.json').exists() else {}
     local_checks=read(LOCAL/'local-checks.json') if (LOCAL/'local-checks.json').exists() else {}
     verified_ids={r['id'] for r in verified_rows}
@@ -54,6 +55,7 @@ def build():
            'localNotebookRenders':len(validation['notebooks'])==9 and all(n['rendered'] for n in validation['notebooks']),
            'tracesReadBack':bool(conversations) and all(c['verified'] for c in conversations) and expected_trace_ids.issubset({c['conversationId'] for c in conversations}),
            'modelsReadBack':bool(models_audit.get('verified')) and {r['id'] for r in rows}.issubset({r['trialId'] for r in models_audit.get('trials',[]) if r['verified']}),
+           'frozenComparisonControls':bool(comparison_audit.get('verified')) and {(b['campaignId'],b['project'],b['repeat']) for b in blocks}.issubset({(b['campaignId'],b['project'],b['repeat']) for b in comparison_audit.get('blocks',[]) if b['verified']}),
            'concurrentAppTraces':any(q['passed'] for q in saved.get('concurrencyQualifications',[])),
            'liveSandboxLifecycle':any(q['passed'] for q in saved.get('sandboxQualifications',[])),
            'graphApprovalPause':any(s.get('qualification') and any(t['to']=='approval' for t in s['transitions']) for s in saved.get('graphs',[])),
@@ -67,6 +69,7 @@ def build():
     delivery['verifiedUiComparisonBlocks']=verified_blocks
     delivery['measurementCaveat']=saved.get('measurementCaveat')
     delivery['visibleUiQualifications']=saved.get('visibleUiQualifications',[])
+    delivery['comparisonAudit']=comparison_audit
     (ROOT/'forge/results/delivery.json').write_text(json.dumps(delivery,indent=2)+'\n')
     lines=['# Forge course delivery and evidence','',f"Status: **{status.replace('_',' ')}**. All eight PRs remain drafts; none has been merged.",'',f"The [public personal fork]({delivery['forkUrl']}) preserves the offline course at upstream `{delivery['upstreamCommit']}`. Results and notebook sources belong to the private `wandb/learn-harness-engineering-forge` project.",'','## Actual execution','', '| Evidence | Recorded result |','| --- | --- |',f"| Existing offline app checks | {sum(a['passed'] for a in apps)}/{len(apps)} pass |",f"| Forge integration tests | {tests.get('pass','unavailable')} pass; {tests.get('fail','unavailable')} fail |",f"| Canonical notebooks | {sum(n['rendered'] for n in validation['notebooks'])}/9 render locally without inference credentials |",f"| Hosted notebook verification | {published}/9 |",f"| Qualification attempts | {delivery['qualifications']['passed']}/{delivery['qualifications']['attempted']} pass |",f"| Coding attempts | {len(rows)} completed; {delivery['outcomes']} |",f"| Complete comparison blocks | {len(blocks)} |",f"| Real two-hour timer | {'Completed' if real_timer else 'Not yet completed'} |",'', 'A completed comparison block contains every treatment for the same project, repeat and source revision. Completion does not imply a passing patch. The independent checker executes the exported patch in a fresh sandbox and distinguishes service behavior from Xvfb/Electron behavior. Source revisions and protocol hashes remain attached to each attempt.','', '## Comparison results','', '| Project | Treatment | Source | Attempts | Pass | Task failure | Infrastructure failure | Missing telemetry |','| --- | --- | --- | --- | --- | --- | --- | --- |']
     for key in sorted({(r['project'],r['variant'],r['sourceCommit']) for r in rows}):
