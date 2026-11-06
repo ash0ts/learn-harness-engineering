@@ -36,3 +36,4 @@ wandb/
 # Marimo and VitePress generated session state
 __marimo__/
 docs/.vitepress/.temp/
+__pycache__/

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "runId": "course-audit-20261106",
+  "runUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/course-audit-20261106",
+  "artifact": "wandb/learn-harness-engineering-forge/forge-qualification-human-approval:v0",
+  "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-qualification-human-approval:v0",
+  "fileChecksums": {
+    "qualification-approval.json": "6687e09daa709df725a67e4df651d418d2496f5672efbe5bb41737eb5455d379",
+    "checkpoint-before.json": "31cb3c8cfa5eee791c3a75a9bd2057c80a2e1129509b6e454f9b7915a707724f",
+    "checkpoint-after.json": "add50a87195744f1e16a64c24b743afb4576796e322571f2dacd214f153653e3",
+    "candidate.diff": "91c4a2df7b9a65921c221b68bc86cdd40db4d5945fce16510206a405ac7516e6",
+    "services-grade.json": "2210efdf7a35fe04fdfb1f751b2ea411787b7274b856f2290a2500d2acc11777",
+    "electron-grade.json": "dd0a90c2c0457aa01a749e9f3882e7504586577eeb24eee4c9523b4ad6ef1975"
+  },
+  "artifactReadBackVerified": true,
+  "graphTableReadBackVerified": true,
+  "trialCountsUnchanged": true,
+  "newPaidLaunches": 0
+}
