@@ -166,11 +166,13 @@ def publish():
                         config=row["config"], allow_val_change=True,
                         settings=wandb.Settings(disable_git=True, disable_code=True)) as run:
             run.log(row["metrics"])
-            table = wandb.Table(columns=["trial_id", "run", "artifact", "outcome", "trace_ids"], data=[])
+            table = wandb.Table(columns=["project", "treatment", "repeat", "outcome", "run", "artifact", "agent_lens", "other_trace_ids", "trial_id"], data=[])
             for trial_id in row["config"]["trialIds"]:
                 trial = json.loads((LOCAL / trial_id / "trial.json").read_text())
-                table.add_data(trial_id, trial.get("wandbRunUrl"), trial.get("artifactUrl"),
-                               trial["outcome"], json.dumps(trial["conversationIds"]))
+                traces=trial['conversationIds']
+                trace_url=f'https://forge.coreweave.com/agent-lens/{entity}/{project}/conversations/{traces[0]}' if traces else None
+                table.add_data(trial['project'],trial['variant'],trial['trial'],trial['outcome'],
+                               trial.get("wandbRunUrl"),trial.get("artifactUrl"),trace_url,json.dumps(traces[1:]),trial_id)
             run.log({"sourceEvidence": table})
     views = []
     cohorts = {(r["config"]["protocolRevision"], r["config"]["sourceCommit"]) for r in rows}
