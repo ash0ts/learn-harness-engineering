@@ -21,6 +21,7 @@ import wandb_workspaces.reports.v2 as wr
 import wandb_workspaces.workspaces as ws
 from models import require_private_project
 from evidence_reports import read_reports
+from measurement import qualified, reason, HISTORY_SELECTOR_NOTE, HISTORY_SELECTOR_SOURCE
 
 ROOT = Path(__file__).resolve().parents[2]
 LOCAL = ROOT / "forge/local-results"
@@ -80,11 +81,22 @@ def aggregates():
                        "config": {"dashboardKind": "comparison-aggregate", "protocolRevision": revision,
                                   "protocolSha256": protocol, "sourceCommit": source, "project": project,
                                   "variant": treatment, "label": f"r{revision} {project[8:]} {treatment}",
-                                  "trialIds": sorted(indexed)}, "metrics": metrics})
+                                  "trialIds": sorted(indexed), "acceptanceQualified": all(qualified(r) for r in rows),
+                                  "measurementNote": reason(rows[0]), "lastTrialFinishedAt": max(r["finishedAt"] for r in rows)}, "metrics": metrics})
+    latest = {}
+    for row in output:
+        c = row['config']
+        if c['acceptanceQualified']:
+            prior = latest.get(c['project'])
+            if prior is None or c['lastTrialFinishedAt'] > prior[0]:
+                latest[c['project']] = (c['lastTrialFinishedAt'], c['sourceCommit'])
+    for row in output:
+        c = row['config']
+        c['primaryComparison'] = c['acceptanceQualified'] and latest.get(c['project'], (None,None))[1] == c['sourceCommit']
     return output
 
-def panels(revision):
-    specs = [("End-to-end pass rate (visible answers verified)" if revision >= 4 else "Historical checker pass rate — UI wait unreliable", "passRate"),
+def panels(revision, acceptance_qualified=True):
+    specs = [("End-to-end pass rate (visible answers verified)" if revision >= 4 and acceptance_qualified else "Recorded native pass rate — see qualification notes", "passRate"),
              ("Completed attempts — denominator", "attempts"),
              ("Electron checks passed", "uiChecksPassed"),
              ("Service checks passed", "serviceChecksPassed"),
@@ -96,7 +108,7 @@ def panels(revision):
                        layout=wr.Layout(x=(i % 2) * 12, y=(i // 2) * 10, w=12, h=10))
             for i, (title, metric) in enumerate(specs)]
 
-def evidence_report(entity, project, rows, views, operations, previous):
+def evidence_report(entity, project, rows, views, operations, primary, previous):
     notebooks = json.loads((ROOT / 'forge/publication-manifest.json').read_text())['notebooks']
     ledger = json.loads((LOCAL / 'budget.json').read_text())
     old = previous.get('report')
@@ -109,12 +121,17 @@ def evidence_report(entity, project, rows, views, operations, previous):
              'The tables below include completed comparison blocks only. Aggregate runs are derived views, not additional trials. '
              'A service check is not UI evidence. Repeated attempts of one task do not establish a general treatment ranking.', '',
              '[Execution and publication dashboard](' + forge_url(operations.url) + ')', '',
-             '## Frozen comparison cohorts']
+             '## Qualified comparison results', '', HISTORY_SELECTOR_NOTE, '', '[Open the primary qualified dashboard](' + forge_url(primary.url) + ')', '', '| Project | Treatment | Pass / attempts | Source |', '| --- | --- | --- | --- |']
+    selected=[r for r in rows if r['config']['primaryComparison']]
+    for row in sorted(selected,key=lambda r:(r['config']['project'],r['config']['variant'])):
+        c,m=row['config'],row['metrics']
+        lines.append(f"| {c['project']} | {c['variant']} | {m['passes']}/{m['attempts']} | `{c['sourceCommit'][:12]}` |")
+    lines += ['', f"Qualified complete-block attempts: **{sum(r['metrics']['passes'] for r in selected)}/{sum(r['metrics']['attempts'] for r in selected)} pass**. Source revisions differ only where a checker correction required a new frozen comparison; compare treatments within each project, not across projects.", '', '## Archived frozen comparison cohorts']
     for view in views:
         cohort = [r for r in rows if r['config']['protocolRevision'] == view['protocolRevision'] and r['config']['sourceCommit'] == view['sourceCommit']]
         count = sum(r['metrics']['attempts'] for r in cohort)
         passes = sum(r['metrics']['passes'] for r in cohort)
-        label = 'end-to-end passes' if view['protocolRevision'] >= 4 else 'historical checker passes (UI acceptance unqualified)'
+        label = 'native checker passes; see qualification notes above'
         lines += [f"### Revision {view['protocolRevision']}: {passes}/{count} {label}", '',
                   f"Source `{view['sourceCommit']}`. [Open interactive comparison dashboard]({view['forgeUrl']}).", '',
                   '| Project | Treatment | Recorded grade pass / attempts | Electron check pass / executed | Service pass / executed | Known cost (USD) |',
@@ -135,7 +152,7 @@ def evidence_report(entity, project, rows, views, operations, previous):
               'Revision 4 awaits resolved IPC values in Node and then requires the actual answer text in the renderer before saving screenshots. '
               'Negative regression tests reject a predicate that resolves false. Old native grades are not rewritten or pooled with this corrected cohort.', '',
               '## Evidence navigation',
-              'Open any treatment run above and its **sourceEvidence** table for original trial runs, artifacts, outcomes and conversation IDs. '
+              'Open any treatment run above and its **sourceEvidenceV2** table for original trial runs, artifacts, outcomes and conversation IDs. '
               f'[Agent Lens traces](https://forge.coreweave.com/wandb/{entity}/{project}/weave/traces) retain coding-agent and app conversations separately.', '',
               '## Saved course notebooks',
               'These nine source-verified notebooks retain the evidence snapshot recorded in their committed source. '
@@ -160,7 +177,9 @@ def publish():
     entity, project = require_private_project()
     previous = json.loads(MANIFEST.read_text()) if MANIFEST.exists() else {}
     rows = aggregates()
-    for row in ([] if '--views-only' in sys.argv else rows):
+    recorded = {r['id']:r for r in previous.get('aggregateRuns',[])}
+    pending = [r for r in rows if previous.get('evidenceTableVersion')!=2 or recorded.get(r['id'])!=r]
+    for row in ([] if '--views-only' in sys.argv else pending):
         with wandb.init(entity=entity, project=project, id=row["id"], resume="allow",
                         job_type="course-dashboard-aggregate", name=row["config"]["label"],
                         config=row["config"], allow_val_change=True,
@@ -173,7 +192,7 @@ def publish():
                 trace_url=f'https://forge.coreweave.com/agent-lens/{entity}/{project}/conversations/{traces[0]}' if traces else None
                 table.add_data(trial['project'],trial['variant'],trial['trial'],trial['outcome'],
                                trial.get("wandbRunUrl"),trial.get("artifactUrl"),trace_url,json.dumps(traces[1:]),trial_id)
-            run.log({"sourceEvidence": table})
+            run.log({"sourceEvidenceV2": table})
     views = []
     cohorts = {(r["config"]["protocolRevision"], r["config"]["sourceCommit"]) for r in rows}
     for plan_file in LOCAL.glob('campaign-*.json'):
@@ -183,20 +202,31 @@ def publish():
     for revision, source in sorted(cohorts):
         prior = next((v for v in previous.get("views", []) if v.get("protocolRevision") == revision and v.get("sourceCommit", source) == source), None)
         view = ws.Workspace.from_url(prior["url"]) if prior else ws.Workspace(entity=entity, project=project)
-        view.name = f"Forge course — revision {revision} comparisons"
+        view.name = f"Forge course — revision {revision} comparisons · {source[:8]}"
         view.runset_settings = ws.RunsetSettings(filters=[expr.Config("dashboardKind") == "comparison-aggregate", expr.Config("protocolRevision") == revision, expr.Config("sourceCommit") == source],
                                                 pinned_columns=["config:label", "passRate", "attempts"])
         view.settings = ws.WorkspaceSettings(max_runs=100)
-        view.sections = [ws.Section(name="Verified task outcomes and execution evidence" if revision >= 4 else "Historical checker outcomes — UI acceptance unqualified", panels=panels(revision), is_open=True,
+        view.sections = [ws.Section(name=("Archived grades · Project 05 citation selector unqualified" if source==HISTORY_SELECTOR_SOURCE else "Verified task outcomes and execution evidence") if revision >= 4 else "Historical checker outcomes — UI acceptance unqualified", panels=panels(revision,source!=HISTORY_SELECTOR_SOURCE), is_open=True,
                                     layout_settings=ReadableLayout(columns=2, rows=1)),
                          ws.Section(name="Original trial runs, traces and artifacts", is_open=True,
-                                    panels=[wr.WeavePanelSummaryTable(table_name='sourceEvidence',layout=wr.Layout(x=0,y=0,w=24,h=10))],
+                                    panels=[wr.WeavePanelSummaryTable(table_name='sourceEvidenceV2',layout=wr.Layout(x=0,y=0,w=24,h=10))],
                                     layout_settings=ReadableLayout(columns=1,rows=1))]
         view.save()
         restored = ws.Workspace.from_url(view.url)
         if restored.name != view.name or len(restored.sections)!=2 or len(restored.sections[0].panels) != 6 or len(restored.sections[1].panels)!=1:
             raise RuntimeError("Dashboard readback mismatch")
         views.append({"protocolRevision": revision, "sourceCommit": source, "url": view.url, "forgeUrl": forge_url(view.url), "name": view.name, "readBackVerified": True})
+    prior = previous.get('primary')
+    primary = ws.Workspace.from_url(prior['url']) if prior else ws.Workspace(entity=entity,project=project)
+    primary.name = 'Forge course — qualified end-to-end comparisons'
+    primary.runset_settings = ws.RunsetSettings(filters=[expr.Config('dashboardKind') == 'comparison-aggregate',expr.Config('primaryComparison') == True],pinned_columns=['config:label','passRate','attempts'])
+    primary.settings = ws.WorkspaceSettings(max_runs=100)
+    primary.sections = [ws.Section(name='Qualified outcomes · three repeats per treatment',panels=panels(4),is_open=True,layout_settings=ReadableLayout(columns=2,rows=1)),
+                        ws.Section(name='Original trial runs, traces and artifacts',is_open=True,panels=[wr.WeavePanelSummaryTable(table_name='sourceEvidenceV2',layout=wr.Layout(x=0,y=0,w=24,h=10))],layout_settings=ReadableLayout(columns=1,rows=1))]
+    primary.save()
+    restored=ws.Workspace.from_url(primary.url)
+    if restored.name!=primary.name or len(restored.sections)!=2: raise RuntimeError('Primary dashboard readback mismatch')
+    previous['primary']={'url':primary.url,'forgeUrl':forge_url(primary.url),'name':primary.name,'readBackVerified':True}
     prior = previous.get("operations")
     operations = ws.Workspace.from_url(prior["url"]) if prior else ws.Workspace(entity=entity, project=project)
     operations.name = "Forge course — execution and publication audit"
@@ -218,15 +248,17 @@ def publish():
         api = wandb.Api()
         verified = True
         for row in rows:
-            summary = api.run(f"{entity}/{project}/{row['id']}").summary
-            verified &= all(summary.get(k) == v for k, v in row["metrics"].items())
+            run = api.run(f"{entity}/{project}/{row['id']}")
+            verified &= all(run.summary.get(k) == v for k, v in row["metrics"].items())
+            verified &= all(run.config.get(k) == v for k, v in row["config"].items())
+            verified &= bool(run.summary.get("sourceEvidenceV2"))
         if verified: break
         time.sleep(2)
     if not verified: raise RuntimeError("Dashboard aggregate readback mismatch")
-    report = evidence_report(entity, project, rows, views, operations, previous)
+    report = evidence_report(entity, project, rows, views, operations, primary, previous)
     result = {"schemaVersion": 1, "generatedAt": datetime.now(timezone.utc).isoformat(),
-              "views": views, "operations": {"url": operations.url, "forgeUrl": forge_url(operations.url), "name": operations.name},
-              "aggregateRuns": rows, "aggregateReadBackVerified": True,
+              "primary": previous["primary"], "views": views, "operations": {"url": operations.url, "forgeUrl": forge_url(operations.url), "name": operations.name},
+              "aggregateRuns": rows, "aggregateReadBackVerified": True, "evidenceTableVersion": 2,
               "report": report,
               "note": "Derived aggregate runs are not coding trials. Revisions are separate cohorts. Missing usage is not zero."}
     MANIFEST.write_text(json.dumps(result, indent=2) + "\n")
