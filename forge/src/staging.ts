@@ -30,6 +30,15 @@ export async function stageTask(task: Task, variant: string, source: string) {
       hash.update(rel+'\0'+content+'\0');
       const destination=join(dir,rel); await mkdir(dirname(destination),{recursive:true}); await writeFile(destination,content);
     }
+    // Shared build compatibility, not a task solution. Preserve offline starters.
+    // Include both the adaptation and its package changes in the baseline hash.
+    const {stdout:bundler}=await exec('git',['show',`${source}:forge/fixtures/build-preload.cjs`],{cwd:courseRoot});
+    await mkdir(join(dir,'scripts'),{recursive:true});
+    await writeFile(join(dir,'scripts/forge-build-preload.cjs'),bundler);
+    const pkg=JSON.parse(await readFile(join(dir,'package.json'),'utf8'));
+    pkg.scripts.build='tsc -p tsconfig.node.json && node scripts/forge-build-preload.cjs && vite build';
+    const packageSource=JSON.stringify(pkg,null,2)+'\n';await writeFile(join(dir,'package.json'),packageSource);
+    hash.update('forge-runtime-overlay\0'+bundler+'\0'+packageSource+'\0');
     await mkdir(join(dir,'fixtures')); await writeFile(join(dir,'fixtures/course.txt'),await readFile(join(courseRoot,task.fixture)));
     await writeFile(join(dir,'TASK.md'),task.task+'\n');
     if (!['minimal','single-role'].includes(variant)) {
