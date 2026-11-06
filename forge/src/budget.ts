@@ -63,7 +63,7 @@ export class Budget {
 
 export function estimate(inputTokens: number, outputTokens: number, sandboxSeconds: number,
   prices: {inputPerMillionUsd: number; outputPerMillionUsd: number; cpuHourUsd: number; memoryGiBHourUsd: number}) {
-  const values = [inputTokens,outputTokens,sandboxSeconds,...Object.values(prices)];
+  const values = [inputTokens,outputTokens,sandboxSeconds,prices.inputPerMillionUsd,prices.outputPerMillionUsd,prices.cpuHourUsd,prices.memoryGiBHourUsd];
   if (values.some(v => !Number.isFinite(v) || v < 0)) throw new Error('Missing usage or pricing');
   return (inputTokens*prices.inputPerMillionUsd + outputTokens*prices.outputPerMillionUsd)/1e6 +
     sandboxSeconds/3600*(2*prices.cpuHourUsd+4*prices.memoryGiBHourUsd);
