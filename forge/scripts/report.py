@@ -116,7 +116,9 @@ def build():
     if dashboard_path.exists():
         dashboards=read(dashboard_path)
         lines += [f"[Private evidence report]({dashboards['report']['forgeUrl']})",'']
-        lines += [f"- [Revision {v['protocolRevision']} dashboard]({v['forgeUrl']}) — {'visible-answer acceptance' if v['protocolRevision']>=4 else 'historical checker grades; UI waits unqualified'}." for v in dashboards['views']]
+        if dashboards.get('primary'):
+            lines += [f"- [Primary qualified comparisons]({dashboards['primary']['forgeUrl']}) — latest complete qualified cohort per project, with source revisions retained."]
+        lines += [f"- [Archived revision {v['protocolRevision']} dashboard]({v['forgeUrl']}) — {'native grades; affected Project 05–06 checker cohorts excluded from primary comparisons' if v['protocolRevision']>=4 else 'historical checker grades; UI waits unqualified'}." for v in dashboards['views']]
         lines += [f"- [Execution and publication audit]({dashboards['operations']['forgeUrl']})",'']
     receipt_path=ROOT/'forge/results/evidence-publication.json'
     if receipt_path.exists():
