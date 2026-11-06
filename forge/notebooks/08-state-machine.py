@@ -43,6 +43,14 @@ def _(mo, runner_commit):
 
 
 @app.cell(hide_code=True)
+def _(json, mo):
+    _question, _control, _checks, _reading = ('Can a durable graph route a real patch through verification and review?', 'Follow explicit plan, make, parallel verification, rollback/retry and approval states. Failed candidates are retained as evidence and discarded before the next attempt.', 'Grade services and Electron in separate fresh workspaces. Inspect checkpoint transitions, retry feedback, patch checksums and the maximum-attempt stop.', 'A passing candidate pauses at approval. Review the exact patch and evidence, then submit an explicit checksum-bound approve or reject decision. The runner never supplies that human decision.')
+    _protocol = json.loads('{\n  "schemaVersion": 1,\n  "protocolRevision": 2,\n  "model": "Qwen/Qwen3.6-35B-A3B",\n  "inferenceUrl": "https://api.inference.wandb.ai/v1",\n  "contextWindow": 262144,\n  "maxInputBytes": 131072,\n  "maxOutputTokens": 4096,\n  "maxModelTurnsPerTrial": 24,\n  "temperature": 0,\n  "thinkingLevel": "off",\n  "repeats": 3,\n  "concurrency": 2,\n  "sandbox": {\n    "image": "ghcr.io/ash0ts/learn-harness-forge@sha256:461479203f6ce3e600ab17cfd15388f99766006336b4d9ff375580b56ad5bf51",\n    "cpu": 2,\n    "memoryGiB": 4,\n    "maxLifetimeSeconds": 1200,\n    "agentTimeoutSeconds": 600\n  },\n  "pricing": {\n    "verifiedAt": "2026-11-06",\n    "source": "https://coreweave.com/forge-pricing/inference-agents",\n    "inputPerMillionUsd": 0.25,\n    "outputPerMillionUsd": 1.25,\n    "cpuHourUsd": 0.128,\n    "memoryGiBHourUsd": 0.0212,\n    "notebookHourUsd": null\n  }\n}\n')
+    mo.vstack([mo.md("## Experiment design\n\n" + _question + "\n\n**Control and treatment.** " + _control + "\n\n**Evidence to inspect.** " + _checks + "\n\n**How to read the result.** " + _reading), mo.md("### Frozen execution settings"), mo.ui.table([{"model": _protocol["model"], "temperature": _protocol["temperature"], "maximum_model_calls": _protocol["maxModelTurnsPerTrial"], "maximum_output_tokens_per_call": _protocol["maxOutputTokens"], "target_repeats": _protocol["repeats"], "sandbox_image": _protocol["sandbox"]["image"]}], selection=None)])
+    return
+
+
+@app.cell(hide_code=True)
 def _(Counter, mo, project_id, saved):
     rows = [row for row in saved.get("trials", []) if project_id == "overview" or row["project"] == project_id]
     counts = Counter((row["project"], row["variant"], row["sourceCommit"], row["outcome"]) for row in rows)
