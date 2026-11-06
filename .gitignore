@@ -31,3 +31,4 @@ dist/
 .workbuddy/
 forge/local-results/
 forge/.venv/
+wandb/
