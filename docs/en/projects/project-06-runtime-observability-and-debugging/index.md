@@ -35,3 +35,8 @@ Repository path: [`projects/project-06/`](https://github.com/walkinglabs/learn-h
 
 Unlike earlier projects, the capstone starter is not mostly missing product
 features. The main gap is the operating harness around the app.
+
+
+## Optional Forge experiment
+
+Follow the [Forge learning path](/en/forge/) for sandbox execution, Agent Lens traces, W&B evidence and the corresponding Marimo notebook. The offline exercise remains the default.

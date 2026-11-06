@@ -34,3 +34,8 @@ Repository path: [`projects/project-05/`](https://github.com/walkinglabs/learn-h
 
 The checked-in feature is multi-turn Q&A conversation history. Keep that feature
 constant across all three variants so the only variable is role separation.
+
+
+## Optional Forge experiment
+
+Follow the [Forge learning path](/en/forge/) for sandbox execution, Agent Lens traces, W&B evidence and the corresponding Marimo notebook. The offline exercise remains the default.
