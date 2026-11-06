@@ -187,8 +187,8 @@
       "file": "forge/notebooks/06-capstone.py",
       "project": "project-06",
       "title": "06 \u00b7 Capstone reliability",
-      "sourceCommit": "c3fa6bab9c4c714f020756f728977e5349a001cd",
-      "sha256": "1d6012d0fc0b81e635962bc6ac11ffcaf4ef4c0003bb41490e99befe36aca1fe",
+      "sourceCommit": "065c5dd23b93b7e807c95f7a1c1f46a48e24ca73",
+      "sha256": "ca3ebeb42b7e28f429cf3a64434d9c1e36600446c3713bf38ba4bdd779dd94c5",
       "id": "Tm90ZWJvb2s6MTUzMTk=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTk%3D",
       "status": "published_verified",
@@ -196,22 +196,22 @@
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "06-Capstone-reliability",
-        "versionIndex": 3,
+        "versionIndex": 6,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:45Z",
-      "expectedRemoteSha256": "1d6012d0fc0b81e635962bc6ac11ffcaf4ef4c0003bb41490e99befe36aca1fe",
+      "expectedRemoteSha256": "ca3ebeb42b7e28f429cf3a64434d9c1e36600446c3713bf38ba4bdd779dd94c5",
       "currentVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "06-Capstone-reliability",
-        "versionIndex": 3,
+        "versionIndex": 6,
         "sourceFileName": "notebook.py"
       },
-      "renderedOutputSha256": "8cc19808a3e670154474b0e6e80548da93da4c5af35d8d42910aaf3737d3fa90",
+      "renderedOutputSha256": "49a0fec7954b16149ff1572922255142c9e6a122f37cf27cd082c7153619901e",
       "renderedCellSourceVerified": true,
-      "verifiedAggregateGroups": 2,
+      "verifiedAggregateGroups": 6,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-06T10:25:33.913921+00:00"
+      "verifiedAt": "2026-11-06T12:51:55.331952+00:00"
     },
     {
       "file": "forge/notebooks/07-bounded-loops.py",
