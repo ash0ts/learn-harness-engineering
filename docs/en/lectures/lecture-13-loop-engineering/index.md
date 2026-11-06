@@ -496,4 +496,4 @@ Most teams are currently between Level 2 and Level 3. Level 1 is the fastest pat
 
 ## Optional Forge experiment
 
-Follow the [Forge learning path](/en/forge/) for sandbox execution, Agent Lens traces, W&B evidence and the corresponding Marimo notebook. The offline exercise remains the default.
+The Forge article [Two hours of agent work, with a stop condition](/en/forge/07-bounded-loops) follows an executed example with recorded failures and saved results. The [Forge overview](/en/forge/) links the full series. The offline exercise remains the default.

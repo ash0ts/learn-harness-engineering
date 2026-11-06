@@ -89,6 +89,19 @@ const enLectureItems = [
   { text: "From Single Loops to Graph Engineering", link: "/en/lectures/lecture-14-graph-engineering/" }
 ];
 
+const enForgeItems = [
+  { text: "Overview: results you can inspect", link: "/en/forge/" },
+  { text: "01 · Six passing runs, no separation", link: "/en/forge/01-minimal-harness" },
+  { text: "02 · Repository guides", link: "/en/forge/02-workspace-docs" },
+  { text: "03 · What survives a new session", link: "/en/forge/03-session-recovery" },
+  { text: "04 · Empty index chunks", link: "/en/forge/04-runtime-feedback" },
+  { text: "05 · A reviewer costs turns", link: "/en/forge/05-role-separation" },
+  { text: "06 · Resetting the app", link: "/en/forge/06-capstone" },
+  { text: "07 · Two hours with a stop condition", link: "/en/forge/07-bounded-loops" },
+  { text: "08 · Approving the tested patch", link: "/en/forge/08-state-machine" },
+  { text: "Setup and running the track", link: "/en/forge/running" }
+];
+
 const enProjectItems = [
   { text: "Optional Forge Track", link: "/en/forge/" },
   { text: "Welcome", link: "/en/projects/" },
@@ -961,7 +974,7 @@ export default withMermaid(
             { text: "Try Harness ↗", link: "https://github.com/walkinglabs/learn-harness-engineering/blob/main/docs/en/resources/templates/index.md", target: "_blank", rel: "noopener noreferrer" }
           ],
           sidebar: {
-            '/en/forge/': [{ text: "Forge Learning Path", items: enProjectItems }],
+            '/en/forge/': [{ text: "Forge articles", items: enForgeItems }, { text: "Offline projects", items: enProjectItems.slice(1) }],
             '/en/projects/': [{ text: "Projects", items: enProjectItems }],
             '/en/resources/': [{ text: "Resource Library", items: enResourceItems }],
             '/en/skills/': [{ text: "Skills", items: enSkillItems }],
