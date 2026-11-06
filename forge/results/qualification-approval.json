@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "kind": "manual-qualification-human-decision",
+  "checkpointId": "6fcc2091-f526-45e0-8fb1-aa0c1802aae5",
+  "checkpointFile": "project-08-control-flow-qualification.json",
+  "sourceCommit": "f3dc2cf8e55a3a58cb9d7f476d04c985fded0261",
+  "decisionRecorderCommit": "047ff9e1039f1f14b772a48cc280f212122d8129",
+  "previousNode": "approval",
+  "node": "done",
+  "approval": {
+    "decision": "approve",
+    "actor": "Anish Shah (explicit chat approval)",
+    "candidateSha256": "91c4a2df7b9a65921c221b68bc86cdd40db4d5945fce16510206a405ac7516e6",
+    "at": "2026-11-06T15:38:48.234Z"
+  },
+  "authorization": {
+    "questionItemId": "[\"request_user_input_async\",\"call_DlG0K3bVGzgbMy2RI23zAL50\",0]",
+    "answer": "Approve qualification candidate"
+  },
+  "beforeSha256": "31cb3c8cfa5eee791c3a75a9bd2057c80a2e1129509b6e454f9b7915a707724f",
+  "afterSha256": "add50a87195744f1e16a64c24b743afb4576796e322571f2dacd214f153653e3",
+  "verifiedLanes": [
+    "services",
+    "electron"
+  ],
+  "protectedGradeInOriginalCheckpoint": false,
+  "excludedFromCodingTrialCounts": true,
+  "newPaidLaunches": 0,
+  "piGraphNode": "approval",
+  "piCandidateSha256": "c74cf9cf37169db868996c2aa5328a527377a0c8656678d874edb4a0195c96d3",
+  "priorEvidenceArtifact": "wandb/learn-harness-engineering-forge/forge-course-qualification-evidence:v4",
+  "note": "Approval applies only to the original manual control-flow qualification. Later qualification checkpoints and the different Pi candidate are unchanged. Published notebooks and the v4 evidence bundle remain snapshots from before this decision."
+}

@@ -132,13 +132,21 @@ Manual graph qualification candidates validate runner control flow and checker b
 - `project-07-real-timer.json`: **blocked**, 1 recorded rounds; 0 entered/observed interventions.
 - `project-08-control-flow-qualification-74896eb2-b69a-4e53-be6c-44a010bbf07d.json`: **approval**, 2 maker attempts, 6 durable transitions. An approval pause requires an explicit checksum-bound human decision.
 - `project-08-control-flow-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb.json`: **approval**, 2 maker attempts, 6 durable transitions. An approval pause requires an explicit checksum-bound human decision.
-- `project-08-control-flow-qualification.json`: **approval**, 2 maker attempts, 6 durable transitions. An approval pause requires an explicit checksum-bound human decision.
+- `project-08-control-flow-qualification.json`: **done**, 2 maker attempts, 7 durable transitions. The user explicitly approved the original manual qualification candidate after publication; see the decision addendum below.
 - `project-08-graph-contract.json`: **approval**, 3 maker attempts, 9 durable transitions. An approval pause requires an explicit checksum-bound human decision.
 - `project-08-graph-diagnostic-feedback.json`: **failed**, 3 maker attempts, 10 durable transitions. An approval pause requires an explicit checksum-bound human decision.
 - `project-08-graph-live.json`: **failed**, 3 maker attempts, 10 durable transitions. An approval pause requires an explicit checksum-bound human decision.
 - `project-08-graph-qualified.json`: **failed**, 3 maker attempts, 10 durable transitions. An approval pause requires an explicit checksum-bound human decision.
 
 The frozen protected-graph run predates a task-text clarification naming `scripts/check-architecture.sh`. Its first candidate implemented a Vite architecture plugin and failed the required script-path check. That outcome is preserved as contract-discovery evidence; the retry received the protected grade. The current task names the required path explicitly. This is not a controlled comparison of model ability.
+
+### Human decision addendum
+
+On November 6, 2026, the user explicitly approved manual qualification candidate `91c4a2df7b9a65921c221b68bc86cdd40db4d5945fce16510206a405ac7516e6`. The original checkpoint `6fcc2091-f526-45e0-8fb1-aa0c1802aae5` verified the unchanged patch checksum and transitioned from `approval` to `done`. Both recorded service and Xvfb/Electron verification lanes passed. This original qualification predates the additional full protected-grade qualification; approval does not add or imply that missing historical check.
+
+The [decision receipt](qualification-approval.json) and [publication receipt](qualification-approval-publication.json) bind the explicit response to the before/after checkpoint checksums. The [private approval artifact](https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-qualification-human-approval:v0) includes both checkpoints, the patch, and both verification results; its bytes and the updated operations-dashboard graph table were read back. The nine notebooks, `snapshot.json`, and evidence artifact `v4` remain snapshots from before this decision.
+
+Only the original manual qualification checkpoint changed. Later qualification checkpoints and the different Pi-generated candidate remain paused. No PR was merged, no new inference or sandbox was launched, and coding-trial counts and scores are unchanged.
 
 ## Spend estimates
 
