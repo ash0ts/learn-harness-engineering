@@ -22,6 +22,7 @@ def build():
         if not pr['isDraft'] or pr['baseRefName']!=expected: raise RuntimeError('Incorrect draft PR chain')
         expected=pr['headRefName']
     rows=saved['trials'];blocks=saved.get('completedComparisonBlocks',[])
+    verified_rows=[r for r in rows if r.get('protocolRevision',1)>=4]
     published=sum(n['status']=='published_verified' for n in notebooks)
     comparison_ids={identifier for block in blocks for identifier in block['trialIds']}
     comparison_rows=[r for r in rows if r['id'] in comparison_ids]
@@ -56,12 +57,17 @@ def build():
     status='verified_delivery' if all(gates.values()) else 'verification_in_progress' 
     delivery={'schemaVersion':1,'generatedAt':datetime.now(timezone.utc).isoformat(),'status':status,'completionGates':gates,'traceAudit':{'conversations':len(conversations),'verified':sum(c['verified'] for c in conversations)},'modelsAudit':{'trials':len(models_audit.get('trials',[])),'verified':sum(r['verified'] for r in models_audit.get('trials',[]))},'sandboxAudit':sandbox_audit,'upstreamCommit':'a9342ff471f2c0e60be0c08b9f4a7c502df4e442','forkUrl':'https://github.com/ash0ts/learn-harness-engineering','targetRepeatsPerVariant':3,'trialAttempts':len(rows),'comparisonTrialAttempts':len(comparison_rows),'comparisonOutcomes':dict(Counter(r['outcome'] for r in comparison_rows)),'outcomes':dict(Counter(r['outcome'] for r in rows)),'passedTrials':sum(r['outcome']=='passed' for r in rows),'completedComparisonBlocks':blocks,'realTwoHourExerciseCompleted':real_timer,'loopStates':saved.get('loops',[]),'graphStates':saved.get('graphs',[]),'qualifications':{'attempted':len(saved['qualifications']),'passed':sum(r['passed'] for r in saved['qualifications'])},'budget':ledger,'knownAndAuditedEstimateUsd':ledger['spentEstimateUsd']-uncertain,'chargedUnknownReservationsUsd':uncertain,'checks':{'forgeTests':tests,'offlineAppsPassed':sum(a['passed'] for a in apps),'offlineAppsTotal':len(apps),'notebooksRenderedLocally':sum(n['rendered'] for n in validation['notebooks']),'notebooksPublishedVerified':published},'prs':[p['url'] for p in prs],'notebooks':notebooks,'trials':rows}
     delivery['comparisonChecks']=comparison_checks
+    delivery['verifiedUiAttempts']=len(verified_rows)
+    delivery['verifiedUiPasses']=sum(r['outcome']=='passed' for r in verified_rows)
+    delivery['measurementCaveat']=saved.get('measurementCaveat')
+    delivery['visibleUiQualifications']=saved.get('visibleUiQualifications',[])
     (ROOT/'forge/results/delivery.json').write_text(json.dumps(delivery,indent=2)+'\n')
     lines=['# Forge course delivery and evidence','',f"Status: **{status.replace('_',' ')}**. All eight PRs remain drafts; none has been merged.",'',f"The [public personal fork]({delivery['forkUrl']}) preserves the offline course at upstream `{delivery['upstreamCommit']}`. Results and notebook sources belong to the private `wandb/learn-harness-engineering-forge` project.",'','## Actual execution','', '| Evidence | Recorded result |','| --- | --- |',f"| Existing offline app checks | {sum(a['passed'] for a in apps)}/{len(apps)} pass |",f"| Forge integration tests | {tests.get('pass','unavailable')} pass; {tests.get('fail','unavailable')} fail |",f"| Canonical notebooks | {sum(n['rendered'] for n in validation['notebooks'])}/9 render locally without inference credentials |",f"| Hosted notebook verification | {published}/9 |",f"| Qualification attempts | {delivery['qualifications']['passed']}/{delivery['qualifications']['attempted']} pass |",f"| Coding attempts | {len(rows)} completed; {delivery['outcomes']} |",f"| Complete comparison blocks | {len(blocks)} |",f"| Real two-hour timer | {'Completed' if real_timer else 'Not yet completed'} |",'', 'A completed comparison block contains every treatment for the same project, repeat and source revision. Completion does not imply a passing patch. The independent checker executes the exported patch in a fresh sandbox and distinguishes service behavior from Xvfb/Electron behavior. Source revisions and protocol hashes remain attached to each attempt.','', '## Comparison results','', '| Project | Treatment | Source | Attempts | Pass | Task failure | Infrastructure failure | Missing telemetry |','| --- | --- | --- | --- | --- | --- | --- | --- |']
     for key in sorted({(r['project'],r['variant'],r['sourceCommit']) for r in rows}):
         group=[r for r in rows if (r['project'],r['variant'],r['sourceCommit'])==key];c=Counter(r['outcome'] for r in group)
         lines.append(f"| {key[0]} | {key[1]} | `{key[2][:12]}` | {len(group)} | {c['passed']} | {c['task_failed']} | {c['infrastructure_failed']} | {c['telemetry_missing']} |")
-    lines += ['',f"The complete comparison blocks contain **{len(comparison_rows)} coding attempts**, with **{sum(r['outcome']=='passed' for r in comparison_rows)} end-to-end passes**. If every treatment fails the full criterion, these results do not establish a treatment ranking."]
+    lines += ['',f"The complete comparison blocks contain **{len(comparison_rows)} coding attempts**, with **{sum(r['outcome']=='passed' for r in comparison_rows)} native checker passes** across separate historical cohorts. Native grades from revisions 2 and 3 do not establish visible-answer acceptance.", '',
+              f"**Awaited visible-answer acceptance (revision 4): {delivery['verifiedUiPasses']}/{delivery['verifiedUiAttempts']} attempts pass.** These require resolved IPC state, actual rendered answers, all service checks and Electron under Xvfb. Earlier native outcomes are preserved. Supplemental patch qualifications are separate and do not change original trial grades."]
     lines += ['', '| Main comparison check | Passed | Executed |', '| --- | --- | --- |']
     lines += [f"| {name} | {counts['passed']} | {counts['executed']} |" for name,counts in sorted(comparison_checks.items())]
     input_bound=sum(any('Frozen input byte budget' in str(phase.get('errors',[])) for phase in row.get('actorPhases',[])) for row in rows)
@@ -85,6 +91,12 @@ def build():
     lines += ['', '## Notebooks','', '| Notebook | Publication status |','| --- | --- |']
     lines += [f"| [{n['title']}]({n['url']}) | {n['status']} |" for n in notebooks]
     lines += ['', 'The publication manifest binds each stable notebook ID to its canonical source commit, SHA-256, committed currentVersion, and rendered-output SHA-256. Verification compares rendered cell source and output code hashes, including when Forge omits its legacy lastStaticOutputAt timestamp. Opening the notebook renders saved evidence; paid reruns require an explicit action.','', '## Evidence and reproduction','']
+    dashboard_path=ROOT/'forge/results/dashboards.json'
+    if dashboard_path.exists():
+        dashboards=read(dashboard_path)
+        lines += [f"[Private evidence report]({dashboards['report']['forgeUrl']})",'']
+        lines += [f"- [Revision {v['protocolRevision']} dashboard]({v['forgeUrl']}) — {'visible-answer acceptance' if v['protocolRevision']>=4 else 'historical checker grades; UI waits unqualified'}." for v in dashboards['views']]
+        lines += [f"- [Execution and publication audit]({dashboards['operations']['forgeUrl']})",'']
     receipt_path=ROOT/'forge/results/evidence-publication.json'
     if receipt_path.exists():
         receipt=read(receipt_path);lines += [f"[W&B course audit]({receipt['runUrl']}) · [versioned evidence and exact source archives]({receipt['artifactUrl']})",'']
