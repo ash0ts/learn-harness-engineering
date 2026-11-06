@@ -63,7 +63,7 @@ def _(Counter, mo, project_id, saved):
 
 
 @app.cell(hide_code=True)
-def _(mo, rows):
+def _(mo, rows, saved):
     _links = []
     for _row in rows:
         if _row.get("wandbRunUrl"):
@@ -72,7 +72,33 @@ def _(mo, rows):
             _links.append(f"- Agent Lens conversation [`{_conversation}`](https://forge.coreweave.com/agent-lens/wandb/learn-harness-engineering-forge/conversations/{_conversation})")
         if _row.get("artifactUrl"):
             _links.append(f"- [Versioned trial evidence]({_row['artifactUrl']})")
+    for _qualification in saved.get("qualifications", []):
+        for _kind in ["agentConversationId", "appConversationId"]:
+            _conversation = _qualification.get(_kind)
+            if _conversation:
+                _links.append(f"- Protocol qualification · {_kind}: [Agent Lens `{_conversation}`](https://forge.coreweave.com/agent-lens/wandb/learn-harness-engineering-forge/conversations/{_conversation})")
+    for _qualification in saved.get("concurrencyQualifications", []):
+        for _session in _qualification.get("sessions", []):
+            _conversation = _session.get("conversationId")
+            if _conversation:
+                _links.append(f"- Concurrent app qualification: [Agent Lens `{_conversation}`](https://forge.coreweave.com/agent-lens/wandb/learn-harness-engineering-forge/conversations/{_conversation})")
     mo.md("## Evidence links\n\n" + ("\n".join(_links) if _links else "Links appear only for recorded runs. No synthetic run URLs are generated."))
+    return
+
+
+@app.cell(hide_code=True)
+def _(json, mo, project_id, saved):
+    _states = []
+    if project_id in ["overview", "project-07"]:
+        _states += saved.get("loops", [])
+    if project_id in ["overview", "project-08"]:
+        _states += saved.get("graphs", [])
+    _parts = [mo.md("## Durable execution evidence\n\nLoop rounds are dependent attempts. Manual graph qualification candidates verify control flow and are excluded from Pi scores. Human decisions and observed interventions retain their original timestamps.")]
+    for _state in _states:
+        _parts.append(mo.md("### " + _state["file"] + "\n\n```json\n" + json.dumps(_state, indent=2) + "\n```"))
+    if project_id == "overview":
+        _parts.append(mo.md("### Live sandbox qualification\n\n```json\n" + json.dumps(saved.get("sandboxQualifications", []), indent=2) + "\n```"))
+    mo.vstack(_parts) if _states or project_id == "overview" else None
     return
 
 
@@ -103,6 +129,7 @@ def _(
     Path,
     entity,
     get_execution,
+    json,
     launch,
     mo,
     os,
@@ -128,7 +155,13 @@ def _(
         _ledger = _root / "forge/local-results/budget.json"
         if not _ledger.exists():
             raise RuntimeError("A qualified, durable shared budget ledger is required; no new ledger is created here.")
-        _env = dict(os.environ, WANDB_ENTITY=entity.value, WANDB_PROJECT=result_project.value)
+        _budget = json.loads(_ledger.read_text())
+        if _budget.get("halted"):
+            raise RuntimeError("The shared ledger is halted; reconcile its recorded reason before launching.")
+        _authorized_limit = _budget.get("limitUsd")
+        if _authorized_limit is None and not _budget.get("authorizations"):
+            raise RuntimeError("An unlimited ledger requires its recorded explicit authorization.")
+        _env = dict(os.environ, WANDB_ENTITY=entity.value, WANDB_PROJECT=result_project.value, FORGE_BUDGET_USD="unlimited" if _authorized_limit is None else str(_authorized_limit))
         if not _env.get("WANDB_API_KEY"):
             raise RuntimeError("Supply credentials through the coordinator environment, never a notebook cell.")
         _command = ["node", "--import", str(_root / "forge/node_modules/tsx/dist/loader.mjs"), str(_root / "forge/src/cli.ts")]
