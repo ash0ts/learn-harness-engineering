@@ -3,7 +3,7 @@ import {readFile} from 'node:fs/promises';
 import {join} from 'node:path';
 import {createSandboxClient} from '@coreweave/cwsandbox/wandb';
 import {Budget} from '../src/budget.js';
-import {config,requireLive} from '../src/config.js';
+import {config,requireLive,requirePrivateProject} from '../src/config.js';
 import {courseRoot} from '../src/staging.js';
 import {writeJson} from '../src/records.js';
 
@@ -15,6 +15,7 @@ const file=join(courseRoot,'forge/local-results/notebook-sessions',`${id}.json`)
 const budget=new Budget(join(courseRoot,'forge/local-results/budget.json'),c.budgetUsd);
 if(action==='reserve') {
   if(!value)throw new Error('Notebook ID required');
+  await requirePrivateProject(c);
   await budget.reserve({[id]:rates.reservationPerEditorSessionUsd});
   await writeJson(file,{id,notebookId:value,reservedUsd:rates.reservationPerEditorSessionUsd,startedAt:new Date().toISOString(),status:'reserved'});
   console.log('Reserved notebook EDIT compute',id);
