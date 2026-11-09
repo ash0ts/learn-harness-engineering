@@ -29,7 +29,7 @@ PREPARE = '''def _(get_prepare_click, learner, learner_budget, mo, prepare_works
 CONNECT = '''def _(mo):
     connect_sandbox = mo.ui.button(value=0, on_click=lambda value: value + 1, label="Connect my sandbox access")
     get_connect_click, set_connect_click = mo.state(0)
-    mo.vstack([mo.md("**Connect sandbox access for this session.** Forge's injected notebook credential can save progress and use inference, but the Sandbox API currently requires your own W&B API key. Click below for a masked prompt. Use your own key from [API key settings](https://wandb.ai/authorize), never an instructor's key. It stays in this session's memory and is excluded from source, progress artifacts and downloads. Reconnect after opening a fresh runtime."), connect_sandbox])
+    mo.vstack([mo.md("**Connect sandbox access for this session.** Forge's injected notebook credential can save progress and use inference, but the Sandbox API currently requires your own W&B API key. Stay in **Edit** view, click below, and enter your key in the masked prompt beneath the running code cell. If the prompt is hidden, switch from Preview back to Edit. Use your own key from [API key settings](https://wandb.ai/authorize), never an instructor's key. It stays in this session's memory and is excluded from source, progress artifacts and downloads. Reconnect after opening a fresh runtime."), connect_sandbox])
     return connect_sandbox, get_connect_click, set_connect_click'''
 
 AUTHENTICATE = '''def _(connect_sandbox, get_connect_click, learner, mo, set_connect_click):
