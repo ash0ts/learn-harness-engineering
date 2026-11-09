@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "primaryTrialIds": [
+    "0809587e-cc59-4276-8285-02dc5072f2aa",
+    "0865dc24-2666-4fda-b6ae-3f488f5339cb",
+    "0cb15597-b43e-4295-985b-af7ea9c1454a",
+    "1500360a-62ce-42cf-aa87-c82962c43655",
+    "1b0a25e5-ba13-4931-9c4f-ff6100f6672a",
+    "1fb04273-5ca5-4a79-9a9d-686149623068",
+    "22873518-2d13-475d-ba37-7b9e94c48407",
+    "22fa3879-a8ff-4219-847c-c5972efedf78",
+    "3398c0d0-a9f2-4383-b64f-c7469ff9d0df",
+    "33bdfb7f-4f5e-49b8-86c8-92d6ce0e7b0b",
+    "3dd7e4f8-1155-4ffa-9da5-98c82c24c087",
+    "4eb48651-306d-44e9-a468-a6ffc322bf27",
+    "54b81e30-0be0-470e-ab3c-2a3783ead0f5",
+    "58ac2e5b-4ee4-4313-bbbd-4022117855bb",
+    "643a867a-74e8-4987-aa56-5640b4c1982e",
+    "64419d93-5073-4632-bff0-8ccd75f2e21f",
+    "6aeae35a-525b-448d-93eb-469a22e6cedf",
+    "6e00cd09-8cfb-495e-ab90-dc16c7938030",
+    "71581d99-5fb7-4e57-bee4-56ec354858a2",
+    "73c46965-1093-4b68-a810-a901dd78bfc0",
+    "79398b0b-a9eb-4892-bb24-194bdc289e2f",
+    "9c2869e2-d150-4c35-82df-9602ca48f17b",
+    "9d859517-72db-4b1a-a683-cd81b9f7ca14",
+    "9feeffa8-1836-485a-a52c-2b398b40a195",
+    "a09c89fc-d730-4e6c-980c-62b4e7d4993e",
+    "a7bc0271-d547-4534-a15d-27b70072df40",
+    "a7dcf5cb-dd20-4c3f-921b-f8a51a21f8f8",
+    "b394d28a-ebed-4aba-9566-61d6cc5dbedf",
+    "b8f56d80-c72c-4e31-8c88-f8fc63d76f9a",
+    "bdc971f7-1a51-437d-b46a-8ed3c268eb97",
+    "bf9e17a2-c6a5-4a8d-b1d2-ccdff10121a3",
+    "ca16eac7-0eb5-4523-a975-638e30938a04",
+    "d3ef30ab-0f2c-4d0e-aee1-7bdf6a8a011e",
+    "d5a939ba-ee04-422d-a681-0322111156a1",
+    "e53c3cad-a475-4e49-a79c-e64cfc0316a9",
+    "ec18a893-0de1-44ac-8541-7f1564e1e8d4",
+    "ef04c221-aafe-4134-b9fc-0268fab0427f",
+    "fadf2407-4ef3-4635-bab7-0a8d987096d8",
+    "fd98af3b-1b52-448c-bc7b-b6cc47e785ea"
+  ],
+  "assets": {
+    "overview": [
+      {
+        "file": "primary-outcomes.png",
+        "caption": "Frozen primary study: 39 attempts, 19 passes. Each row is a different task; compare treatments within a project. Three repeats on one task do not establish a general advantage.",
+        "sha256": "5aed714dd40ac90cbee3322e7adc0ab11df1fe0242bdd43e07489b17b709cae2",
+        "source": "docs/en/forge/assets/figures/primary-outcomes.png",
+        "sourceCommit": "f0acbdb773f3a935477f146a546a42e71ef2d161"
+      }
+    ],
+    "project-01": [
+      {
+        "file": "project-01-checks.png",
+        "caption": "Individual protected checks in the frozen primary cohort. A check not executed after an earlier failure is not a pass. Original grades are preserved.",
+        "sha256": "ef79eb2dcca8f93f8f81e9deafeaefbddd300f7b4874441c2a32fd8dae7f26ee",
+        "source": "docs/en/forge/assets/figures/project-01-checks.png",
+        "sourceCommit": "f0acbdb773f3a935477f146a546a42e71ef2d161"
+      },
+      {
+        "file": "643a867a-74e8-4987-aa56-5640b4c1982e-grader-visible-answer.png",
+        "caption": "Actual Xvfb/Electron capture: Project 01 explicit repeat 1, trial 643a867a-74e8-4987-aa56-5640b4c1982e. The visible answer is one state; the full grade separately checks persistence and the typed bridge.",
+        "sha256": "3bafb83798eaf79aeb09bd192ddedaa7e8771cde02a88272815cb216f3ca28d1",
+        "source": "docs/en/forge/assets/captures/643a867a-74e8-4987-aa56-5640b4c1982e-grader-visible-answer.png",
+        "sourceCommit": "f0acbdb773f3a935477f146a546a42e71ef2d161"
+      }
+    ],
+    "project-02": [
+      {
+        "file": "project-02-checks.png",
+        "caption": "Individual protected checks in the frozen primary cohort. A check not executed after an earlier failure is not a pass. Original grades are preserved.",
+        "sha256": "51c26a964322ae6abb3301be9898ceb16038fb4297572f8a71c774e697f3fd8b",
+        "source": "docs/en/forge/assets/figures/project-02-checks.png",
+        "sourceCommit": "f0acbdb773f3a935477f146a546a42e71ef2d161"
+      }
+    ],
+    "project-03": [
+      {
+        "file": "project-03-checks.png",
+        "caption": "Individual protected checks in the frozen primary cohort. A check not executed after an earlier failure is not a pass. Original grades are preserved.",
+        "sha256": "c0a966471fbe9e6419a49fbaf7e48b8d72d66055d7db3fae341fa244d085a6cb",
+        "source": "docs/en/forge/assets/figures/project-03-checks.png",
+        "sourceCommit": "f0acbdb773f3a935477f146a546a42e71ef2d161"
+      },
+      {
+        "file": "9d859517-72db-4b1a-a683-cd81b9f7ca14-grader-visible-answer.png",
+        "caption": "Actual Project 03 capture from trial 9d859517-72db-4b1a-a683-cd81b9f7ca14. An answer appeared, but the submission failed the full acceptance grade. This image is not success evidence for metadata.",
+        "sha256": "7e3ac894326b95018bc4d8933b79a351dbeebb8101a5435f9b9d8f01b81e21d5",
+        "source": "docs/en/forge/assets/captures/9d859517-72db-4b1a-a683-cd81b9f7ca14-grader-visible-answer.png",
+        "sourceCommit": "f0acbdb773f3a935477f146a546a42e71ef2d161"
+      }
+    ],
+    "project-04": [
+      {
+        "file": "project-04-checks.png",
+        "caption": "Individual protected checks in the frozen primary cohort. A check not executed after an earlier failure is not a pass. Original grades are preserved.",
+        "sha256": "c65bee68f45e84aa260a8c472763775533bef8194584431ba7656cc57d287d06",
+        "source": "docs/en/forge/assets/figures/project-04-checks.png",
+        "sourceCommit": "f0acbdb773f3a935477f146a546a42e71ef2d161"
+      },
+      {
+        "file": "agent-lens-agent-revision4.jpg",
+        "caption": "Recorded Agent Lens coding-agent conversation. This shows agent activity; application traces and protected grades are separate evidence.",
+        "sha256": "efc3a266247e3203126953e85338bf16042d8054ebe5b45ee8993838919f36bd",
+        "source": "docs/en/forge/assets/captures/agent-lens-agent-revision4.jpg",
+        "sourceCommit": "f0acbdb773f3a935477f146a546a42e71ef2d161"
+      }
+    ],
+    "project-05": [
+      {
+        "file": "role-allowances.png",
+        "caption": "The same 24-call allowance is divided differently across roles. Role-specific documentation also changes, so this is not a pure role-count ablation.",
+        "sha256": "0b05ca9c15f02b396295911c95f8623cfbd20033659f2714de414e890944c26a",
+        "source": "docs/en/forge/assets/figures/role-allowances.png",
+        "sourceCommit": "f0acbdb773f3a935477f146a546a42e71ef2d161"
+      },
+      {
+        "file": "project-05-checks.png",
+        "caption": "Individual protected checks in the frozen primary cohort. A check not executed after an earlier failure is not a pass. Original grades are preserved.",
+        "sha256": "1045499e0b1e63e57d324e10e3f6e0616f4622b73943377931f32ada5b913b14",
+        "source": "docs/en/forge/assets/figures/project-05-checks.png",
+        "sourceCommit": "f0acbdb773f3a935477f146a546a42e71ef2d161"
+      },
+      {
+        "file": "73c46965-1093-4b68-a810-a901dd78bfc0-grader-electron.png",
+        "caption": "Actual Project 05 Electron capture from trial 73c46965-1093-4b68-a810-a901dd78bfc0. Inspect full-answer and clearing checks separately in the trial grade.",
+        "sha256": "e22eb15841575f5ea5e27525fd9426754ec6ae7c5f0fb7dc7953ba037e844f52",
+        "source": "docs/en/forge/assets/captures/73c46965-1093-4b68-a810-a901dd78bfc0-grader-electron.png",
+        "sourceCommit": "f0acbdb773f3a935477f146a546a42e71ef2d161"
+      }
+    ],
+    "project-06": [
+      {
+        "file": "project-06-checks.png",
+        "caption": "Individual protected checks in the frozen primary cohort. A check not executed after an earlier failure is not a pass. Original grades are preserved.",
+        "sha256": "306d8626fb2fc1c7659ce41be1fbff5c958a952206eb33dcfeac679e12dba31a",
+        "source": "docs/en/forge/assets/figures/project-06-checks.png",
+        "sourceCommit": "f0acbdb773f3a935477f146a546a42e71ef2d161"
+      },
+      {
+        "file": "fd98af3b-1b52-448c-bc7b-b6cc47e785ea-grader-electron.png",
+        "caption": "Acceptance gap: Project 06 trial fd98af3b-1b52-448c-bc7b-b6cc47e785ea still displays old content after service reset. The recorded grade did not assert complete UI refresh.",
+        "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+        "source": "docs/en/forge/assets/captures/fd98af3b-1b52-448c-bc7b-b6cc47e785ea-grader-electron.png",
+        "sourceCommit": "f0acbdb773f3a935477f146a546a42e71ef2d161"
+      }
+    ],
+    "project-07": [
+      {
+        "file": "timer-timeline.png",
+        "caption": "Real two-hour timer evidence: eight dependent failed rounds, one recorded intervention, deadline stop. This is a repair loop, not the original monitoring comparison.",
+        "sha256": "73e4a96848a4f6bbb03532db67f6731ac5884cff2e0917f0d346f4354d027c81",
+        "source": "docs/en/forge/assets/figures/timer-timeline.png",
+        "sourceCommit": "f0acbdb773f3a935477f146a546a42e71ef2d161"
+      }
+    ],
+    "project-08": [
+      {
+        "file": "graph-attempts.svg",
+        "caption": "Recorded graph candidates fail the architecture guard, fail compilation, then pass checks and pause for human approval. The manual qualification approval belongs to a different patch.",
+        "sha256": "7d8804a82315ac1be02f138ac5f0e6ea4463c98562248339f1857cf29eba6a84",
+        "source": "docs/en/forge/assets/diagrams/graph-attempts.svg",
+        "sourceCommit": "f0acbdb773f3a935477f146a546a42e71ef2d161"
+      }
+    ]
+  },
+  "sourceReportCommit": "258cf51fdc692f9be60952d8dd811de90588a0c4"
+}
