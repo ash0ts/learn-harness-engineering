@@ -4,6 +4,8 @@ from pathlib import Path
 import sys
 import tarfile
 import tempfile
+import textwrap
+from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
 
@@ -35,6 +37,24 @@ class LearnerWorkspaceTests(unittest.TestCase):
             w = LessonWorkspace("a" * 40, "project-01", self.env, self.temp.name)
             self.assertEqual(w.view()["status"], "Not launched")
             self.assertFalse(w.base.exists())
+
+    def test_embedded_progress_save_is_valid_python(self):
+        # Marimo embeds the entire helper two function levels deep. Exercise
+        # that representation, which differs from importing the helper module.
+        source = (Path(__file__).resolve().parents[1] / "scripts/learner_workspace.py").read_text()
+        namespace = {}
+        exec("def cell():\n    def load():\n" + textwrap.indent(source, "        ") +
+             "\n        return LessonWorkspace\n    return load()\n", namespace)
+        self.w = namespace["cell"]()("a" * 40, "project-01", self.env, self.temp.name)
+        self.seed()
+        def save_process(args, **kwargs):
+            compile(args[2], "<isolated-progress-save>", "exec")
+            self.assertNotIn("WANDB_SERVICE", kwargs["env"])
+            return SimpleNamespace(returncode=0, stdout='{"progressUrl":"https://wandb.ai/test"}', stderr="")
+        self.w.env["WANDB_SERVICE"] = "stale-service-handle"
+        with patch("subprocess.run", side_effect=save_process):
+            self.w.persist()
+        self.assertEqual(self.w.state["progressUrl"], "https://wandb.ai/test")
 
     def test_identity_isolated_by_owner_notebook_and_destination(self):
         for key in ["WANDB_PROJECT", "WANDB_NOTEBOOK_COLLECTION", "WANDB_NOTEBOOK_USER_ID"]:
