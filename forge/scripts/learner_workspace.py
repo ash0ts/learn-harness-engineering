@@ -186,7 +186,8 @@ class LessonWorkspace:
         checkpoint.write_bytes(self.bundle())
         # W&B owns a background service. Give each save its own process so a
         # completed coding child cannot invalidate the notebook's service handle.
-        script = '''import json,sys,wandb
+        script = '''
+import json,sys,wandb
 from pathlib import Path
 base=Path(sys.argv[1]); state=json.loads((base/'learner.json').read_text()); identity=state['identity']
 key=sys.argv[2]; ledger=json.loads((base/'course/forge/local-results/budget.json').read_text())
