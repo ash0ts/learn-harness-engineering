@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "status": "local_passed_live_auth_blocked",
+  "sourceCommit": "82ea824962c724b68b66f2ff56f51a2a096ba8da",
+  "localNotebooksValidated": 9,
+  "regressionTestsPassed": 16,
+  "historicalEvidenceUnchanged": true,
+  "publishedMastersUnchanged": true,
+  "scratchRuntime": {
+    "id": "Tm90ZWJvb2s6MTU1OTg=",
+    "reservation": "notebook-student-preflight-1",
+    "startedAt": "2026-11-09T18:14:05.021397+00:00",
+    "sandboxId": "fa7f8d0c-39ce-40fb-ac2e-30b56fe42840",
+    "endedAt": "2026-11-09T18:35:36.482Z",
+    "status": "terminated",
+    "estimatedNotebookUsd": 0.122258308,
+    "paidModelOrWorkerUsd": 0,
+    "liveTrialPassed": false
+  },
+  "qualification": {
+    "passed": false,
+    "stage": "Sandbox API authentication",
+    "modelCalls": 0,
+    "matchingWorkerSandboxes": 0
+  },
+  "nextCheck": "Explicitly authorize the learner-owned key test or enter the key through the masked prompt; then qualify, run a graded exercise, verify saved progress across runtimes, and publish all nine sources."
+}

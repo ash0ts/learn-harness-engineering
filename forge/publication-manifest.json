@@ -340,5 +340,72 @@
         "packetFiles": 9
       }
     }
-  ]
+  ],
+  "pendingRollout": {
+    "name": "Self-service classroom lessons",
+    "sourceCommit": "82ea824962c724b68b66f2ff56f51a2a096ba8da",
+    "status": "awaiting_learner_key_live_qualification",
+    "publishedMastersUnchanged": true,
+    "blockers": [
+      "Injected notebook credential is rejected by the Sandbox API; learner-owned session key flow needs live verification.",
+      "Full graded trial, isolated completion save and fresh-runtime restore remain unverified.",
+      "All nine updated sources must pass normal editor publication and source/output verification before rollout."
+    ],
+    "notebooks": [
+      {
+        "file": "forge/notebooks/00-overview.py",
+        "id": "Tm90ZWJvb2s6MTUzMTM=",
+        "pendingSha256": "b7aee9b776c5399f7ddee29b7c5762dbad3ad66a17966dc4d1e9569ee21fe002",
+        "publishedSha256": "e8b56265a85de16d39a173cdabae24870a60f38680c79dcb417f64ee6863718f"
+      },
+      {
+        "file": "forge/notebooks/01-minimal-harness.py",
+        "id": "Tm90ZWJvb2s6MTUzMTQ=",
+        "pendingSha256": "14f2a1af81942695e58769c2567ce44af4ca595bee971488f59c2065246514d6",
+        "publishedSha256": "5b62357146bcf17ea951a015ea35544845aa444c2220bddd024c17fcfc8fb60f"
+      },
+      {
+        "file": "forge/notebooks/02-workspace-docs.py",
+        "id": "Tm90ZWJvb2s6MTUzMTU=",
+        "pendingSha256": "d45c56a2c3df3c65cb5eda4127496996eb3fe5891c411f3f47bf0d3c7dd25c7b",
+        "publishedSha256": "8520bf2ace569e22238338d17b5b21e9f7b83c9cc415aacd08c86b1c3800350c"
+      },
+      {
+        "file": "forge/notebooks/03-session-recovery.py",
+        "id": "Tm90ZWJvb2s6MTUzMTY=",
+        "pendingSha256": "2e4e946ec981e240fceda38a39f875058a9048bcda6b3708ebce46bb9a92a489",
+        "publishedSha256": "ed1d1a4f6f1291bebb974c56b992d52ff1ac8e9177ee1b15140b31c86186d11f"
+      },
+      {
+        "file": "forge/notebooks/04-runtime-feedback.py",
+        "id": "Tm90ZWJvb2s6MTUzMTc=",
+        "pendingSha256": "10c0a51b397b28400ace64dbee5927a6922a40d4b31925052ec754bd8ef4da6c",
+        "publishedSha256": "1ded0949912e7d7c95c6ad77203236bbf531e45192ccb264732681fa0f42eccf"
+      },
+      {
+        "file": "forge/notebooks/05-role-separation.py",
+        "id": "Tm90ZWJvb2s6MTUzMTg=",
+        "pendingSha256": "d92fd97c0b244706ad0112e3349222101568868acb1af59600ad541da1d211ce",
+        "publishedSha256": "8aac04bd002647357b006bfe198653d867bfedcd1172578285e5890b9a0fab51"
+      },
+      {
+        "file": "forge/notebooks/06-capstone.py",
+        "id": "Tm90ZWJvb2s6MTUzMTk=",
+        "pendingSha256": "25824ef918b4f254f3c5918679a834d6aa5bd541e5bdcb7831385f1efad0160e",
+        "publishedSha256": "1af69a0bca4291dd7b74987a9e430627f8a53e4d4461da3c0c24224c52c7e3f4"
+      },
+      {
+        "file": "forge/notebooks/07-bounded-loops.py",
+        "id": "Tm90ZWJvb2s6MTUzMjA=",
+        "pendingSha256": "39e78bbd5a7b5fc91dca12c9d39990c202dd0c7ef848ed5178305393964c33b1",
+        "publishedSha256": "ed25cd9d99f0551b9d7ab5dfde8418f197403290c0e6cb127704d9053959fd3a"
+      },
+      {
+        "file": "forge/notebooks/08-state-machine.py",
+        "id": "Tm90ZWJvb2s6MTUzMjE=",
+        "pendingSha256": "18d780091788e254ff2475882bb17eb31ba49a14866389e8b44a23503fa55fa6",
+        "publishedSha256": "473221d40e7b1f6c1118fba6fb517bd774b39a6aaa689f7509c638ca71f296ec"
+      }
+    ]
+  }
 }

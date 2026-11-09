@@ -1,5 +1,10 @@
 # Course notebook revision
 
+The verified publication below is the previous native-lesson release. A newer
+[self-service revision](../lessons/self-service-validation.md) is in the draft PR
+and has not replaced the published masters. `pendingRollout` in the publication
+manifest records its source hashes and remaining live checks.
+
 The notebooks now teach the original eight-project progression, with a separate
 recorded Forge case in each lesson. The comparison against the frozen upstream
 briefs is recorded in [the lesson source guide](../lessons/README.md).
