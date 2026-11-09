@@ -1,27 +1,191 @@
 {
   "schemaVersion": 1,
-  "status": "local_passed_live_auth_blocked",
-  "sourceCommit": "82ea824962c724b68b66f2ff56f51a2a096ba8da",
+  "status": "live_and_restore_passed_publication_pending",
+  "sourceCommit": "c3af27674dc5a4272ded84fc7cc0a2ccf7ad9e99",
   "localNotebooksValidated": 9,
-  "regressionTestsPassed": 16,
+  "regressionTestsPassed": 17,
   "historicalEvidenceUnchanged": true,
   "publishedMastersUnchanged": true,
-  "scratchRuntime": {
-    "id": "Tm90ZWJvb2s6MTU1OTg=",
-    "reservation": "notebook-student-preflight-1",
-    "startedAt": "2026-11-09T18:14:05.021397+00:00",
-    "sandboxId": "fa7f8d0c-39ce-40fb-ac2e-30b56fe42840",
-    "endedAt": "2026-11-09T18:35:36.482Z",
-    "status": "terminated",
-    "estimatedNotebookUsd": 0.122258308,
-    "paidModelOrWorkerUsd": 0,
-    "liveTrialPassed": false
+  "liveTest": {
+    "notebookId": "Tm90ZWJvb2s6MTU1OTg=",
+    "runnerRevision": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+    "nativeControlsVerified": [
+      "prepare",
+      "masked-key connection",
+      "paid qualification",
+      "save observations"
+    ],
+    "qualifications": [
+      {
+        "id": "qualification-06bc8f0c-495b-4361-b3f7-f13c1d9680ad",
+        "passed": false,
+        "estimatedCostUsd": null,
+        "agentConversationId": null,
+        "appConversationId": null
+      },
+      {
+        "id": "qualification-f361f7fa-a4bd-4bbe-98e5-8a4865943a25",
+        "passed": true,
+        "estimatedCostUsd": 0.004733254,
+        "agentConversationId": "01a1c1a8-4570-74e3-a7d0-cee41464e835",
+        "appConversationId": "app-e606cf04-1311-42ff-98b9-37c698e5f320"
+      },
+      {
+        "id": "qualification-09328c8b-509c-4c86-8879-593ba7d3c49a",
+        "passed": true,
+        "estimatedCostUsd": 0.0034453279999999997,
+        "agentConversationId": "01a1c1b1-47b7-7089-a1e7-314e766f2a1e",
+        "appConversationId": "app-db5494a0-8453-4978-96b9-c581aacf71d4"
+      }
+    ],
+    "trials": [
+      {
+        "id": "c547bb71-3edb-49cc-a60c-9a727b62c4c5",
+        "variant": "minimal",
+        "outcome": "passed",
+        "actorCompleted": false,
+        "grade": {
+          "schemaVersion": 1,
+          "task": "project-01",
+          "checks": [
+            {
+              "name": "strict compile and renderer build",
+              "passed": true
+            },
+            {
+              "name": "real import and persistence after reconstruction",
+              "passed": true
+            },
+            {
+              "name": "actual indexing keeps every nonempty paragraph",
+              "passed": true
+            },
+            {
+              "name": "actual retrieval and Q&A persist two turns",
+              "passed": true
+            },
+            {
+              "name": "Electron window, preload, import, indexing and question UI under Xvfb",
+              "passed": true
+            }
+          ],
+          "passed": true
+        },
+        "inputTokens": 342897,
+        "outputTokens": 2514,
+        "estimatedCostUsd": 0.09807639666666666,
+        "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/c547bb713edb49cc",
+        "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-c547bb71-3edb-49cc-a60c-9a727b62c4c5:v0",
+        "conversationIds": [
+          "01a1c1a9-25a8-7358-9abf-8fb4828faa49"
+        ]
+      }
+    ],
+    "traceAudit": {
+      "conversations": 5,
+      "verified": true
+    },
+    "modelsAudit": {
+      "trialId": "c547bb71-3edb-49cc-a60c-9a727b62c4c5",
+      "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+      "verified": true,
+      "errors": [],
+      "runId": "c547bb713edb49cc",
+      "runUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/c547bb713edb49cc",
+      "artifact": "wandb/learn-harness-engineering-forge/trial-c547bb71-3edb-49cc-a60c-9a727b62c4c5:v0",
+      "committedTrialSha256": "a1bb8258155b25d0d6994e9b168cde6ef037a4561750bc6dbfa9ae405b899de1",
+      "evidenceFiles": [
+        "candidate.diff",
+        "grader/electron.png",
+        "grader/result.json",
+        "trial.json"
+      ]
+    },
+    "credentialScan": {
+      "filesChecked": 3190,
+      "credentialMatches": []
+    },
+    "workerCleanup": {
+      "statuses": [
+        {
+          "id": "e5532915-3c77-4771-84bd-d6656cdc6a9b",
+          "status": "completed"
+        },
+        {
+          "id": "ddda2fc2-5505-4d4c-bca4-0f1ead876801",
+          "status": "completed"
+        },
+        {
+          "id": "f397f930-2598-4fec-bf1d-09501830ad6d",
+          "status": "completed"
+        },
+        {
+          "id": "84c8c1d0-6b2a-4e05-897d-309c65ca9fab",
+          "status": "completed"
+        }
+      ],
+      "estimatedWorkerAndInferenceUsd": 0.10625497866666667
+    },
+    "notebookSession": {
+      "id": "notebook-student-e2e-2",
+      "notebookId": "Tm90ZWJvb2s6MTU1OTg=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-09T18:48:52.170Z",
+      "status": "terminated",
+      "sandboxId": "cf6804eb-d630-4a62-b5f5-74385ab25492",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-09T19:07:28.996Z",
+      "secondsUpperBound": 1116.826,
+      "estimatedCostUsd": 0.10572619466666666
+    },
+    "checkpointSha256": "593569b31dde40b9a86e8fcbf0602c60d2210c6a17afa8a57b3e196e78d0fb0b",
+    "restore": {
+      "sandboxId": "1a68bd81-7438-4373-82c7-656eb7b9ecc5",
+      "sessionId": "90732",
+      "workspaceAbsentBeforeExplicitAction": true,
+      "trialRestored": "c547bb71-3edb-49cc-a60c-9a727b62c4c5",
+      "notesMatch": true,
+      "budgetHistoryPreserved": true,
+      "accountKeyConnected": false,
+      "session": {
+        "id": "notebook-student-restore-3",
+        "notebookId": "Tm90ZWJvb2s6MTU1OTg=",
+        "reservedUsd": 2,
+        "startedAt": "2026-11-09T19:07:29.403Z",
+        "status": "terminated",
+        "sandboxId": "1a68bd81-7438-4373-82c7-656eb7b9ecc5",
+        "resourceRequests": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "resourceLimits": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "cpu": 2,
+        "memoryGiB": 4,
+        "estimatedHourlyUsd": 0.3408,
+        "endedAt": "2026-11-09T19:13:52.075Z",
+        "secondsUpperBound": 382.672,
+        "estimatedCostUsd": 0.036226282666666665
+      }
+    }
   },
-  "qualification": {
-    "passed": false,
-    "stage": "Sandbox API authentication",
-    "modelCalls": 0,
-    "matchingWorkerSandboxes": 0
-  },
-  "nextCheck": "Explicitly authorize the learner-owned key test or enter the key through the masked prompt; then qualify, run a graded exercise, verify saved progress across runtimes, and publish all nine sources."
+  "limitations": [
+    "One owner-account trial validates the shared workflow; student entitlements need a classroom rehearsal.",
+    "The Pi actor reached its bound (actorCompleted=false); its exported patch passed all five independent checks.",
+    "This is the adapted Forge task, not certification of every original-course deliverable.",
+    "CPU sandboxes and hosted inference were used; no GPU training was run."
+  ],
+  "nextCheck": "Publish and verify all nine canonical sources through the normal editor."
 }
