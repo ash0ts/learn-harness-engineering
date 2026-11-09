@@ -77,7 +77,10 @@ def generate(runner_commit=None, projects=None, refresh_evidence=False):
         replacements={'__PROJECT__':repr(project),'__COMMIT__':repr(commit),'__SAVED__':repr(json.dumps(saved,ensure_ascii=False)),'__VARIANTS__':repr(VARIANTS[project]),'__PRIMARY__':repr(evidence['primaryTrialIds']),'__PACKET__':repr(json.dumps(packet(index,lesson),ensure_ascii=False))}
         text='''# /// script
 # requires-python = ">=3.11"
-# dependencies = ["marimo==0.25.1", "wandb==0.31.0"]
+# dependencies = [
+#     "marimo==0.25.1",
+#     "wandb==0.31.0",
+# ]
 # ///
 # Canonical course notebook. Edit forge/lessons/*.md and shared native cells.
 # Generate with forge/scripts/create_notebooks.py; evidence refresh is explicit.
