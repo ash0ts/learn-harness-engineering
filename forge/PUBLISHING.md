@@ -18,13 +18,20 @@ revision, then validate their unpaid analysis view:
 
 ```sh
 python3 forge/scripts/snapshot_results.py
-python3 forge/scripts/create_notebooks.py --runner-commit EXACT_COMMIT
+python3 forge/scripts/create_notebooks.py --refresh-evidence --runner-commit EXACT_COMMIT
 python3 forge/scripts/validate_notebooks.py
 ```
 
 Commit canonical sources before publication. Marimo is pinned to the version
 used by the authenticated editor, including its normal source formatting. A
 source change requires a new source checksum and another verification.
+
+For lesson-only changes, omit `--refresh-evidence` and `--runner-commit`:
+generation preserves each notebook's saved trial data and coordinator revision.
+Edit `forge/lessons/*.md` and the native shared cells. Do not import an HTML
+website into the notebook. The lesson, images, worksheets, and evidence browser
+must remain native Marimo output. Hosted verification also checks the primary
+cohort, embedded visuals, and downloadable lab material.
 
 ## Use the existing editor workflow
 
@@ -52,7 +59,11 @@ For each notebook:
    Marimo file editor. Verification still requires identical bytes. Save through
    the editor. Do not replace source through an undocumented
    notebook API or overwrite the artifact directly.
-5. Re-run the saved-analysis cells through Marimo's normal command palette.
+5. After a full-file replacement is saved, reload the editor and use its normal
+   **Restart Kernel** action before rerunning the saved-analysis cells. This
+   avoids mixing old kernel cell registrations with the new source. Confirm
+   that the new lesson headings and images render without cell errors.
+   Re-run the saved-analysis cells through Marimo's normal command palette.
    Leave the explicit paid-rerun button idle. Let the normal save workflow commit
    source and rendered output. The deployed save worker polls every 30 seconds
    and throttles preview-only updates to five minutes; a source version can

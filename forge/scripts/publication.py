@@ -17,10 +17,12 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import textwrap
 import urllib.parse
 import urllib.request
 
 from create_notebooks import TITLES
+from validate_notebooks import validate_course_view
 
 ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = ROOT / 'forge/publication-manifest.json'
@@ -124,10 +126,17 @@ def verify_rendered_source(html, canonical):
         return json.JSONDecoder().raw_decode(text[text.index(marker)+len(marker):])[0]
     notebook, session = embedded('notebook'), embedded('session')
     expected = []
+    source_lines = canonical.decode().splitlines(keepends=True)
     for node in ast.parse(canonical).body:
         if isinstance(node, ast.FunctionDef) and node.decorator_list:
             body = node.body[:-1] if isinstance(node.body[-1], ast.Return) else node.body
-            expected.append(ast.dump(ast.Module(body=body, type_ignores=[])))
+            # Marimo stores editor cells outside the generated function wrapper.
+            # Dedent that source before parsing, including multiline Markdown
+            # literals. Parsing the indented function first preserves four
+            # wrapper spaces inside those literals and falsely rejects the
+            # editor's normal serialization. Source bytes are checked separately.
+            cell_source = textwrap.dedent(''.join(source_lines[body[0].lineno-1:body[-1].end_lineno])) if body else ''
+            expected.append(ast.dump(ast.parse(cell_source)))
     cells = notebook['cells']
     actual = [ast.dump(ast.parse(cell['code'])) for cell in cells]
     if actual != expected:
@@ -187,6 +196,7 @@ def verify(manifest, row):
         html = response.read()
     session = verify_rendered_source(html, canonical)
     aggregate_groups=verify_rendered_aggregates(session,canonical)
+    course_view=validate_course_view(session,ast.parse(canonical))
     rendered_text = json.dumps(session,ensure_ascii=False)
     if 'Saved results' not in rendered_text or 'Not launched' not in rendered_text or row['title'] not in rendered_text:
         raise RuntimeError('Expected saved-results view and idle run control were not rendered')
@@ -201,6 +211,7 @@ def verify(manifest, row):
     (evidence/'rendered.html').write_bytes(html)
     row.update(sourceCommit=revision,status='published_verified',sha256=digest(canonical),currentVersion=notebook['currentVersion'],expectedRemoteVersion=notebook['currentVersion'],expectedRemoteEditedAt=edited,expectedRemoteSha256=digest(canonical),renderedOutputSha256=digest(html),renderedCellSourceVerified=True,verifiedAggregateGroups=aggregate_groups,lastStaticOutputAt=rendered,verifiedAt=now())
     row.pop('publicationBlocker',None)
+    row['verifiedCourseView'] = course_view
     save(manifest)
     print(row['file'],'published_verified',row['url'])
 
