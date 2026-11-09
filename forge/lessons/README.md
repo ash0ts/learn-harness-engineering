@@ -2,7 +2,9 @@
 
 The nine Markdown files are the canonical lesson text. `course_packets.py`
 adds editable submission scaffolds; `lesson_cells.py` supplies native Marimo
-evidence tables, selectors, images, worksheets, downloads, and guarded reruns.
+evidence tables, selectors, images, worksheets, and downloads. `learner_cells.py`
+and `learner_workspace.py` add native self-service setup, execution, progress,
+and explicit graph decisions.
 `create_notebooks.py` embeds these into self-contained `.py` notebooks. There is
 no website/HTML import layer and no remote image dependency.
 
@@ -40,7 +42,11 @@ requires native embedded images and downloadable lab material. Image hashes and
 source provenance are in `evidence.json`. Hosted publication still requires the
 normal authenticated Marimo editor save and exact committed-source/render checks.
 
-The paid rerun control stays disabled without a configured, pinned coordinator,
-external credential, dependencies, and an existing ledger. It reruns the Forge
-adaptation; it does not stand in for the original-course assignment. Notebook
-runtime compute is distinct from inference/coding work.
+Each learner copies a lesson to a writable private project and opens Edit.
+Prepare installs Git, checksum-verified Node 22.19.0, the exact runner commit,
+and lockfile dependencies. Forge injects the session identity and credential;
+keys never belong in notebook source. Sandbox access currently needs the learner's own key through a masked,
+session-memory prompt. A separate explicit action qualifies live access before paid trials. Progress artifacts retain the ledger, observations,
+patches, grades and checkpoints across runtimes. A pending action on restore
+blocks automatic retries. These controls run the Forge adaptation; the original
+assignment's additional work remains explicit. See [self-service setup](../../docs/en/forge/classroom.md).
