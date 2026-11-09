@@ -1,6 +1,9 @@
 # /// script
 # requires-python = ">=3.11"
-# dependencies = ["marimo==0.25.1", "wandb==0.31.0"]
+# dependencies = [
+#     "marimo==0.25.1",
+#     "wandb==0.31.0",
+# ]
 # ///
 # Canonical course notebook. Edit forge/lessons/*.md and shared native cells.
 # Generate with forge/scripts/create_notebooks.py; evidence refresh is explicit.
