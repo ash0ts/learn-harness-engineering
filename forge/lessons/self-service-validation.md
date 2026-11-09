@@ -1,8 +1,14 @@
 # Self-service lesson validation
 
 The shared learner workflow passed live validation in a private Forge notebook on
-2026-11-09. The nine master notebooks are being updated through the normal Marimo
-editor; the publication manifest is authoritative for each committed version.
+2026-11-09. All nine master notebooks are published at their existing IDs. Their
+committed source, rendered cell source, historical aggregates, figures, and
+downloads match the canonical files. The publication manifest records each version.
+
+[Open the course](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTM%3D)
+· [Student and classroom instructions](../../docs/en/forge/classroom.md)
+
+![Published native course overview in Forge](./assets/self-service-overview.png)
 
 ## What ran
 
@@ -27,6 +33,11 @@ editor; the publication manifest is authoritative for each committed version.
 · [Private progress run](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/lesson-88850bc3b9d59dbe46d7)
 
 ![Native learner results in Forge](./assets/self-service-result.png)
+
+![The actual Electron application after import and a question, captured by the protected grader](./assets/self-service-electron.png)
+
+The Electron check uses the fixed model fixture to grade application behavior.
+The separate qualifications exercise live hosted inference in both Pi and the app.
 
 ## Failures found and retained
 
@@ -57,9 +68,15 @@ pinned runner revisions remain unchanged.
 Worker compute and inference for the two successful qualifications and one trial
 are estimated at **$0.106255**. The key-bearing and restore-only notebook sessions
 add **$0.141952**. The earlier rejected-credential session adds **$0.122258**.
-These are application estimates, not provider billing totals; publication sessions
-are accounted separately. The restored learner ledger conservatively charges a
+Fourteen publication sessions add an estimated **$0.433773**; all are terminated.
+These are application estimates, not provider billing totals. The restored learner ledger conservatively charges a
 full $0.3408 allowance per notebook session, so it is intentionally higher.
+
+Sources were loaded through Marimo's native file editor. For four lagging previews,
+the runtime's installed, unmodified save worker performed its documented one-cycle
+flush after all display cells were rerun. No HTML was imported into a lesson.
+Final readback after teardown passed for all nine notebooks. No reservations or
+usage halt remain in the accounting ledger.
 
 ## Limits
 
