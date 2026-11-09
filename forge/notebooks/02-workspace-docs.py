@@ -784,7 +784,7 @@ def _(mo, project_id, variants):
     mo.vstack([
         mo.md("**3. Check access, then run an exercise.** Qualification checks inference, Pi tools, app tracing, sandbox cancellation, and cleanup. It can incur charges. Once it passes, choose a treatment and **Run exercise**. A failed task is still useful evidence.\n\nThese controls execute the Forge adaptation described in this lesson. Project 07 runs a bounded one-round, ten-minute exercise; its original two-hour assignment needs a longer-lived coordinator. Project 08 stops for your checksum-bound approval. Notebook execution remains bounded to 50 minutes.\n\nOne copy supports one action at a time and at most two worker sandboxes. This is a per-copy application budget, not an organization-wide billing cap."),
         learner_action, learner_variant, learner_repeats,
-        mo.accordion({"Project 08: explicit review decision": mo.vstack([learner_decision, learner_digest])}) if project_id == "project-08" else None,
+        mo.accordion({"Project 08: explicit review decision": mo.vstack([learner_decision, learner_digest])}) if project_id == "project-08" else mo.md(""),
         learner_consent, learner_launch, learner_cancel
     ])
     return (
@@ -866,8 +866,8 @@ def _(json, learner, learner_refresh, mo):
         mo.md("## My work\n\n**Status:** " + my_progress["status"] + "\n\nDestination: `" + (my_progress["destination"] if my_progress["destination"] != "/" else "Open your own Forge copy in Edit") + "`. These are your attempts; the historical tables above stay frozen."),
         mo.md(f"Budget: ${_budget.get('limitUsd', 0)} · accounted estimate: ${_budget.get('spentEstimateUsd', 0):.4f}. Sandbox access: " + ("connected for this session. " if my_progress["sandboxConnected"] else "not connected. ") + ("**Stopped:** " + _budget["halted"] if _budget.get("halted") else "")),
         mo.ui.table(_rows, selection=None, pagination=False, show_column_summaries=False) if _rows else mo.md("No personal trials yet. Prepare your workspace and check live access first."),
-        mo.md("\n\n".join(_links)) if _links else None,
-        mo.md(f"[Saved progress and dashboard]({my_progress['progressUrl']})") if my_progress.get("progressUrl") else None,
+        mo.md("\n\n".join(_links)) if _links else mo.md(""),
+        mo.md(f"[Saved progress and dashboard]({my_progress['progressUrl']})") if my_progress.get("progressUrl") else mo.md(""),
         mo.accordion({"Qualification results": mo.md("```json\n" + json.dumps(my_progress["qualifications"], indent=2) + "\n```"), "Checkpoints and approval candidate": mo.md("```json\n" + json.dumps(my_progress["checkpoints"], indent=2) + "\n```"), "Latest action log": mo.md("```text\n" + my_progress["log"] + "\n```"), "Saved observations": mo.md("```json\n" + json.dumps(my_progress["notes"], indent=2) + "\n```")}),
         mo.md("**4. Explain what happened.** Fill in the observation worksheet, save it below, and download your checkpoint before leaving. Return to this same notebook copy and choose **Prepare or restore my workspace** to recover the ledger, evidence and notes. A lost session with unfinished paid work stops for reconciliation; it never silently starts over.")
     ])
