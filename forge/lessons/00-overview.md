@@ -38,7 +38,7 @@ Give each student or pair a clean course checkout and an evidence folder. Use th
 <!-- cell -->
 ## What runs here, and what needs a workspace
 
-Opening a notebook shows saved lessons, figures, and results. Starting a Forge notebook runtime enables the evidence selector, worksheet, and downloads; notebook compute can incur cost. None of these actions starts inference or a coding trial.
+Forge can open these links in its editor when you have edit permission. Before teaching, open Marimo's command palette, choose **Run all stale cells**, and use the **preview** button to show the lesson. These cells load the saved evidence and enable the selector, worksheet, and downloads; they do not start inference or a coding trial. Notebook runtime compute can incur cost. The saved static output is verified separately from the live editor.
 
 The original course lab runs in a student workspace with an editor, Git, Node, Electron, and the selected coding agent. The optional paid Forge rerun uses the existing TypeScript coordinator. It requires a qualified checkout, externally supplied credentials, and its durable budget ledger. A fresh hosted notebook does not have that coordinator mounted automatically. The advanced control below is disabled until those prerequisites are present.
 
