@@ -100,7 +100,8 @@ const enForgeItems = [
   { text: "06 · Resetting the app", link: "/en/forge/06-capstone" },
   { text: "07 · Two hours with a stop condition", link: "/en/forge/07-bounded-loops" },
   { text: "08 · Approving the tested patch", link: "/en/forge/08-state-machine" },
-  { text: "Setup and running the track", link: "/en/forge/running" }
+  { text: "Setup and running the track", link: "/en/forge/running" },
+  { text: "Run a lesson yourself", link: "/en/forge/classroom" }
 ];
 
 const enProjectItems = [
