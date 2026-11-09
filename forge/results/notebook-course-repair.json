@@ -1,0 +1,825 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-11-09T17:16:18.678581+00:00",
+  "scope": "Native course notebook revision; no new coding or inference trials",
+  "originalCourseRevision": "a9342ff471f2c0e60be0c08b9f4a7c502df4e442",
+  "preservedEvidenceComparedWith": "2763962fda6dda9177e0e8405a4bf7de6e0b2b93",
+  "historicalSnapshotsAndRunnerRevisionsUnchanged": true,
+  "notebooks": [
+    {
+      "file": "forge/notebooks/00-overview.py",
+      "id": "Tm90ZWJvb2s6MTUzMTM=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTM%3D",
+      "sourceCommit": "5aa4d1a41f26161556d55cc460a360f85a874bfa",
+      "sha256": "e8b56265a85de16d39a173cdabae24870a60f38680c79dcb417f64ee6863718f",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "Forge-track-evidence-before-conclusions",
+        "versionIndex": 22,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "bef08e5df140fc3569bbefe78903a5d02f98c14fae6085b3ade0f41a859393f7",
+      "verifiedAt": "2026-11-09T17:16:13.299969+00:00",
+      "verifiedAggregateGroups": 43,
+      "verifiedCourseView": {
+        "primaryGroups": 13,
+        "nativeImages": 1,
+        "packetFiles": 5
+      }
+    },
+    {
+      "file": "forge/notebooks/01-minimal-harness.py",
+      "id": "Tm90ZWJvb2s6MTUzMTQ=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTQ%3D",
+      "sourceCommit": "0613e4356fef806fa52a7b3ca7ce5a3f7b662381",
+      "sha256": "5b62357146bcf17ea951a015ea35544845aa444c2220bddd024c17fcfc8fb60f",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "01-Minimal-instructions-and-explicit-harnesses",
+        "versionIndex": 16,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "63a9bb0f211f0f0af35efafb42e01758ede4b4a6beda82da2dbf3cdeae44c797",
+      "verifiedAt": "2026-11-09T16:30:35.550076+00:00",
+      "verifiedAggregateGroups": 6,
+      "verifiedCourseView": {
+        "primaryGroups": 2,
+        "nativeImages": 2,
+        "packetFiles": 14
+      }
+    },
+    {
+      "file": "forge/notebooks/02-workspace-docs.py",
+      "id": "Tm90ZWJvb2s6MTUzMTU=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTU%3D",
+      "sourceCommit": "0613e4356fef806fa52a7b3ca7ce5a3f7b662381",
+      "sha256": "8520bf2ace569e22238338d17b5b21e9f7b83c9cc415aacd08c86b1c3800350c",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "02-An-agent-readable-workspace",
+        "versionIndex": 14,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "2931183579d3786efeefee022f698d2d3c37b6a5dda4071dbe5eb285892550b9",
+      "verifiedAt": "2026-11-09T16:47:18.239658+00:00",
+      "verifiedAggregateGroups": 4,
+      "verifiedCourseView": {
+        "primaryGroups": 2,
+        "nativeImages": 1,
+        "packetFiles": 13
+      }
+    },
+    {
+      "file": "forge/notebooks/03-session-recovery.py",
+      "id": "Tm90ZWJvb2s6MTUzMTY=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTY%3D",
+      "sourceCommit": "0613e4356fef806fa52a7b3ca7ce5a3f7b662381",
+      "sha256": "ed1d1a4f6f1291bebb974c56b992d52ff1ac8e9177ee1b15140b31c86186d11f",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "03-Interrupted-session-recovery",
+        "versionIndex": 13,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "7e0cdcc538069be770b8ddb525a23285a7d3530dfa7547cc3c1ca334b3f3a45e",
+      "verifiedAt": "2026-11-09T16:47:29.791534+00:00",
+      "verifiedAggregateGroups": 4,
+      "verifiedCourseView": {
+        "primaryGroups": 2,
+        "nativeImages": 2,
+        "packetFiles": 13
+      }
+    },
+    {
+      "file": "forge/notebooks/04-runtime-feedback.py",
+      "id": "Tm90ZWJvb2s6MTUzMTc=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTc%3D",
+      "sourceCommit": "0613e4356fef806fa52a7b3ca7ce5a3f7b662381",
+      "sha256": "1ded0949912e7d7c95c6ad77203236bbf531e45192ccb264732681fa0f42eccf",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "04-Runtime-evidence-and-the-seeded-defect",
+        "versionIndex": 13,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "f32e0a0ce5cda7588ec44993abf860172881cf0e08463457ee694da15da757f6",
+      "verifiedAt": "2026-11-09T17:10:06.018146+00:00",
+      "verifiedAggregateGroups": 4,
+      "verifiedCourseView": {
+        "primaryGroups": 2,
+        "nativeImages": 2,
+        "packetFiles": 6
+      }
+    },
+    {
+      "file": "forge/notebooks/05-role-separation.py",
+      "id": "Tm90ZWJvb2s6MTUzMTg=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTg%3D",
+      "sourceCommit": "0613e4356fef806fa52a7b3ca7ce5a3f7b662381",
+      "sha256": "8aac04bd002647357b006bfe198653d867bfedcd1172578285e5890b9a0fab51",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "05-One-feature-three-role-arrangements",
+        "versionIndex": 12,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "6d8895cdec7cd961ffc2969115afd17b372fb20ac43ab2cae4e6f8a186c0a3b9",
+      "verifiedAt": "2026-11-09T17:10:32.720631+00:00",
+      "verifiedAggregateGroups": 9,
+      "verifiedCourseView": {
+        "primaryGroups": 3,
+        "nativeImages": 3,
+        "packetFiles": 8
+      }
+    },
+    {
+      "file": "forge/notebooks/06-capstone.py",
+      "id": "Tm90ZWJvb2s6MTUzMTk=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTk%3D",
+      "sourceCommit": "0613e4356fef806fa52a7b3ca7ce5a3f7b662381",
+      "sha256": "1af69a0bca4291dd7b74987a9e430627f8a53e4d4461da3c0c24224c52c7e3f4",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "06-Capstone-reliability",
+        "versionIndex": 12,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "27eb64ca9c4e6afd7fce0885b1b8d1fd9948605b436d715d385963ce96d81ee3",
+      "verifiedAt": "2026-11-09T17:14:29.470222+00:00",
+      "verifiedAggregateGroups": 6,
+      "verifiedCourseView": {
+        "primaryGroups": 2,
+        "nativeImages": 2,
+        "packetFiles": 17
+      }
+    },
+    {
+      "file": "forge/notebooks/07-bounded-loops.py",
+      "id": "Tm90ZWJvb2s6MTUzMjA=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjA%3D",
+      "sourceCommit": "0613e4356fef806fa52a7b3ca7ce5a3f7b662381",
+      "sha256": "ed25cd9d99f0551b9d7ab5dfde8418f197403290c0e6cb127704d9053959fd3a",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "07-Goal-timer-and-maker-checker-loops",
+        "versionIndex": 12,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "57060aeb573cc36b2978ea6c04ba51445e46dadf1e6f250634520916ef94c0f3",
+      "verifiedAt": "2026-11-09T17:15:08.988072+00:00",
+      "verifiedAggregateGroups": 6,
+      "verifiedCourseView": {
+        "primaryGroups": 0,
+        "nativeImages": 1,
+        "packetFiles": 13
+      }
+    },
+    {
+      "file": "forge/notebooks/08-state-machine.py",
+      "id": "Tm90ZWJvb2s6MTUzMjE=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjE%3D",
+      "sourceCommit": "0613e4356fef806fa52a7b3ca7ce5a3f7b662381",
+      "sha256": "473221d40e7b1f6c1118fba6fb517bd774b39a6aaa689f7509c638ca71f296ec",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "08-Checkpointed-graphs-and-human-approval",
+        "versionIndex": 11,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "2d502600fb6328a2d15fb5335bc45b79754827e2c866c709583b41b7efeda6d0",
+      "verifiedAt": "2026-11-09T17:16:00.810168+00:00",
+      "verifiedAggregateGroups": 4,
+      "verifiedCourseView": {
+        "primaryGroups": 0,
+        "nativeImages": 1,
+        "packetFiles": 9
+      }
+    }
+  ],
+  "localValidation": {
+    "schemaVersion": 1,
+    "notebooks": [
+      {
+        "file": "forge/notebooks/00-overview.py",
+        "sha256": "e8b56265a85de16d39a173cdabae24870a60f38680c79dcb417f64ee6863718f",
+        "runnerCommit": "b874b96b7c896004c9f261db7bd7c7de6dd78411",
+        "syntaxValidated": true,
+        "rendered": true,
+        "htmlSha256": "cdf4b5bc4c8fe8190a0364617575e3d512b52e32e3b08ebdb93ca914e3b1ccf7",
+        "courseView": {
+          "primaryGroups": 13,
+          "nativeImages": 1,
+          "packetFiles": 5
+        }
+      },
+      {
+        "file": "forge/notebooks/01-minimal-harness.py",
+        "sha256": "5b62357146bcf17ea951a015ea35544845aa444c2220bddd024c17fcfc8fb60f",
+        "runnerCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+        "syntaxValidated": true,
+        "rendered": true,
+        "htmlSha256": "6423dfd5da91a03b21c026c9e10b2590f369434a8d4851abf997bd6cb35958c9",
+        "courseView": {
+          "primaryGroups": 2,
+          "nativeImages": 2,
+          "packetFiles": 14
+        }
+      },
+      {
+        "file": "forge/notebooks/02-workspace-docs.py",
+        "sha256": "8520bf2ace569e22238338d17b5b21e9f7b83c9cc415aacd08c86b1c3800350c",
+        "runnerCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+        "syntaxValidated": true,
+        "rendered": true,
+        "htmlSha256": "24b0e81e201cd4b8afcc406053689a08aacd22e557e5e22d72ee3337e5cd793c",
+        "courseView": {
+          "primaryGroups": 2,
+          "nativeImages": 1,
+          "packetFiles": 13
+        }
+      },
+      {
+        "file": "forge/notebooks/03-session-recovery.py",
+        "sha256": "ed1d1a4f6f1291bebb974c56b992d52ff1ac8e9177ee1b15140b31c86186d11f",
+        "runnerCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+        "syntaxValidated": true,
+        "rendered": true,
+        "htmlSha256": "2dbcccc4d3c6f1b7b2b38eff8fb8d12034a06990c907423f91ebedc284b117e1",
+        "courseView": {
+          "primaryGroups": 2,
+          "nativeImages": 2,
+          "packetFiles": 13
+        }
+      },
+      {
+        "file": "forge/notebooks/04-runtime-feedback.py",
+        "sha256": "1ded0949912e7d7c95c6ad77203236bbf531e45192ccb264732681fa0f42eccf",
+        "runnerCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+        "syntaxValidated": true,
+        "rendered": true,
+        "htmlSha256": "95955b9a1a9a1591559968c102ebc479d3ef6a99b4978e91a80610a96c9ae43e",
+        "courseView": {
+          "primaryGroups": 2,
+          "nativeImages": 2,
+          "packetFiles": 6
+        }
+      },
+      {
+        "file": "forge/notebooks/05-role-separation.py",
+        "sha256": "8aac04bd002647357b006bfe198653d867bfedcd1172578285e5890b9a0fab51",
+        "runnerCommit": "b874b96b7c896004c9f261db7bd7c7de6dd78411",
+        "syntaxValidated": true,
+        "rendered": true,
+        "htmlSha256": "92199577ff115ebab49b31849e809bf7e130fa5aaa74907451256e855d85e667",
+        "courseView": {
+          "primaryGroups": 3,
+          "nativeImages": 3,
+          "packetFiles": 8
+        }
+      },
+      {
+        "file": "forge/notebooks/06-capstone.py",
+        "sha256": "1af69a0bca4291dd7b74987a9e430627f8a53e4d4461da3c0c24224c52c7e3f4",
+        "runnerCommit": "b874b96b7c896004c9f261db7bd7c7de6dd78411",
+        "syntaxValidated": true,
+        "rendered": true,
+        "htmlSha256": "283d9e52cd1ff0c5d526c42aa6ba6b37d2e378e46b57a0c37b4e55291b6e5d5c",
+        "courseView": {
+          "primaryGroups": 2,
+          "nativeImages": 2,
+          "packetFiles": 17
+        }
+      },
+      {
+        "file": "forge/notebooks/07-bounded-loops.py",
+        "sha256": "ed25cd9d99f0551b9d7ab5dfde8418f197403290c0e6cb127704d9053959fd3a",
+        "runnerCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+        "syntaxValidated": true,
+        "rendered": true,
+        "htmlSha256": "d6b2f825ad8b618be8c5cd2fe670aa7d4f45c113a44bd93b113344924e8c75cb",
+        "courseView": {
+          "primaryGroups": 0,
+          "nativeImages": 1,
+          "packetFiles": 13
+        }
+      },
+      {
+        "file": "forge/notebooks/08-state-machine.py",
+        "sha256": "473221d40e7b1f6c1118fba6fb517bd774b39a6aaa689f7509c638ca71f296ec",
+        "runnerCommit": "24ff7909edb286b0e66faae1d78968d12aac6c0c",
+        "syntaxValidated": true,
+        "rendered": true,
+        "htmlSha256": "0dde2a1956c21b82989f2060b9807625d13379409dedbb32c8eaf18a05c32254",
+        "courseView": {
+          "primaryGroups": 0,
+          "nativeImages": 1,
+          "packetFiles": 9
+        }
+      }
+    ]
+  },
+  "publicationGuardRegressionTests": {
+    "passed": 3
+  },
+  "documentationBuild": "passed; existing bundle-size warning",
+  "nativeImages": 15,
+  "packetFiles": 98,
+  "editorSessions": [
+    {
+      "id": "notebook-15313-course-render-4",
+      "notebookId": "Tm90ZWJvb2s6MTUzMTM=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-09T17:09:15.084Z",
+      "status": "terminated",
+      "sandboxId": "2b724fa6-ea8a-4ce3-996b-f469960491df",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-09T17:16:05.785Z",
+      "secondsUpperBound": 410.701,
+      "estimatedCostUsd": 0.03887969466666667
+    },
+    {
+      "id": "notebook-15313-course-repair-1",
+      "notebookId": "Tm90ZWJvb2s6MTUzMTM=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-09T16:26:08.593Z",
+      "status": "terminated",
+      "sandboxId": "9a253c8c-c94d-4066-9910-7504e4e8ca43",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-09T16:31:31.775Z",
+      "secondsUpperBound": 323.182,
+      "estimatedCostUsd": 0.03059456266666667
+    },
+    {
+      "id": "notebook-15313-course-repair-3",
+      "notebookId": "Tm90ZWJvb2s6MTUzMTM=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-09T17:06:07.423Z",
+      "status": "terminated",
+      "sandboxId": "8f7b6235-6d89-456b-8f9a-bed98a2dac05",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-09T17:08:22.446Z",
+      "secondsUpperBound": 135.023,
+      "estimatedCostUsd": 0.012782177333333332
+    },
+    {
+      "id": "notebook-15314-course-repair-1",
+      "notebookId": "Tm90ZWJvb2s6MTUzMTQ=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-09T16:22:43.420Z",
+      "status": "terminated",
+      "sandboxId": "23817d62-c7a8-4d47-b684-fe118eb39207",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-09T16:31:24.619Z",
+      "secondsUpperBound": 521.199,
+      "estimatedCostUsd": 0.04934017199999999
+    },
+    {
+      "id": "notebook-15315-course-render-2",
+      "notebookId": "Tm90ZWJvb2s6MTUzMTU=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-09T16:39:51.853Z",
+      "status": "terminated",
+      "sandboxId": "aa9fa063-1bc6-43c7-9875-7472983fee7b",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-09T16:47:14.877Z",
+      "secondsUpperBound": 443.024,
+      "estimatedCostUsd": 0.04193960533333333
+    },
+    {
+      "id": "notebook-15315-course-repair-1",
+      "notebookId": "Tm90ZWJvb2s6MTUzMTU=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-09T16:31:32.331Z",
+      "status": "terminated",
+      "sandboxId": "2b0ea1ec-144a-4ad0-b0b7-c3dd157bbef4",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-09T16:39:43.040Z",
+      "secondsUpperBound": 490.709,
+      "estimatedCostUsd": 0.04645378533333333
+    },
+    {
+      "id": "notebook-15316-course-render-2",
+      "notebookId": "Tm90ZWJvb2s6MTUzMTY=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-09T16:39:52.273Z",
+      "status": "terminated",
+      "sandboxId": "06320c1b-3973-4d5b-9833-0c62bd907e7d",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-09T16:47:27.442Z",
+      "secondsUpperBound": 455.169,
+      "estimatedCostUsd": 0.043089332
+    },
+    {
+      "id": "notebook-15316-course-repair-1",
+      "notebookId": "Tm90ZWJvb2s6MTUzMTY=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-09T16:31:33.071Z",
+      "status": "terminated",
+      "sandboxId": "bb22ac08-fb9e-4343-a6d5-048760a1aae5",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-09T16:39:51.337Z",
+      "secondsUpperBound": 498.266,
+      "estimatedCostUsd": 0.04716918133333334
+    },
+    {
+      "id": "notebook-15317-course-render-2",
+      "notebookId": "Tm90ZWJvb2s6MTUzMTc=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-09T16:55:41.997Z",
+      "status": "terminated",
+      "sandboxId": "f9a62018-b4d4-4c03-9a2b-87615eee175a",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-09T16:57:34.558Z",
+      "secondsUpperBound": 112.561,
+      "estimatedCostUsd": 0.010655774666666666
+    },
+    {
+      "id": "notebook-15317-course-render-3",
+      "notebookId": "Tm90ZWJvb2s6MTUzMTc=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-09T17:00:14.621Z",
+      "status": "terminated",
+      "sandboxId": "5b849a9f-ddec-48ac-9ce7-59b36618002e",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-09T17:09:11.894Z",
+      "secondsUpperBound": 537.273,
+      "estimatedCostUsd": 0.050861843999999996
+    },
+    {
+      "id": "notebook-15317-course-repair-1",
+      "notebookId": "Tm90ZWJvb2s6MTUzMTc=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-09T16:49:20.055Z",
+      "status": "terminated",
+      "sandboxId": "c4b712f9-7ed2-41f7-8a27-2675d0bca8ba",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-09T16:54:29.427Z",
+      "secondsUpperBound": 309.372,
+      "estimatedCostUsd": 0.029287216
+    },
+    {
+      "id": "notebook-15318-course-render-2",
+      "notebookId": "Tm90ZWJvb2s6MTUzMTg=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-09T16:55:42.410Z",
+      "status": "terminated",
+      "sandboxId": "52ec8ee8-9861-4ab8-a0d1-ee041c2d7a65",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-09T16:57:52.084Z",
+      "secondsUpperBound": 129.674,
+      "estimatedCostUsd": 0.012275805333333334
+    },
+    {
+      "id": "notebook-15318-course-render-3",
+      "notebookId": "Tm90ZWJvb2s6MTUzMTg=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-09T17:00:15.170Z",
+      "status": "terminated",
+      "sandboxId": "81cb608c-7a05-43a7-b0df-d96df6c99ba2",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-09T17:09:17.853Z",
+      "secondsUpperBound": 542.683,
+      "estimatedCostUsd": 0.05137399066666666
+    },
+    {
+      "id": "notebook-15318-course-repair-1",
+      "notebookId": "Tm90ZWJvb2s6MTUzMTg=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-09T16:49:20.564Z",
+      "status": "terminated",
+      "sandboxId": "0194dbf2-154a-40c0-8bd8-54178f62864a",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-09T16:54:45.036Z",
+      "secondsUpperBound": 324.472,
+      "estimatedCostUsd": 0.030716682666666665
+    },
+    {
+      "id": "notebook-15319-course-render-2",
+      "notebookId": "Tm90ZWJvb2s6MTUzMTk=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-09T17:06:35.532Z",
+      "status": "terminated",
+      "sandboxId": "4b07ef5b-9f21-4d2b-860a-0afc8d2d2b54",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-09T17:14:19.579Z",
+      "secondsUpperBound": 464.047,
+      "estimatedCostUsd": 0.04392978266666667
+    },
+    {
+      "id": "notebook-15319-course-repair-1",
+      "notebookId": "Tm90ZWJvb2s6MTUzMTk=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-09T17:00:15.667Z",
+      "status": "terminated",
+      "sandboxId": "d3685678-cfd5-48ab-93d8-0f62e3698a7a",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-09T17:05:25.360Z",
+      "secondsUpperBound": 309.693,
+      "estimatedCostUsd": 0.029317603999999997
+    },
+    {
+      "id": "notebook-15320-course-render-2",
+      "notebookId": "Tm90ZWJvb2s6MTUzMjA=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-09T17:06:38.329Z",
+      "status": "terminated",
+      "sandboxId": "d71de8e4-fb02-46bf-be3b-e32b6423d27b",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-09T17:14:30.899Z",
+      "secondsUpperBound": 472.57,
+      "estimatedCostUsd": 0.04473662666666666
+    },
+    {
+      "id": "notebook-15320-course-repair-1",
+      "notebookId": "Tm90ZWJvb2s6MTUzMjA=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-09T17:00:16.167Z",
+      "status": "terminated",
+      "sandboxId": "21076dc5-f09a-440c-a05d-8852613add45",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-09T17:05:28.254Z",
+      "secondsUpperBound": 312.087,
+      "estimatedCostUsd": 0.029544235999999998
+    },
+    {
+      "id": "notebook-15321-course-render-2",
+      "notebookId": "Tm90ZWJvb2s6MTUzMjE=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-09T17:09:11.537Z",
+      "status": "terminated",
+      "sandboxId": "0b715b9e-57a5-47e2-b731-8140ede7ecde",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-09T17:15:50.297Z",
+      "secondsUpperBound": 398.76,
+      "estimatedCostUsd": 0.037749279999999996
+    },
+    {
+      "id": "notebook-15321-course-repair-1",
+      "notebookId": "Tm90ZWJvb2s6MTUzMjE=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-09T17:06:03.693Z",
+      "status": "terminated",
+      "sandboxId": "2125db1e-95fd-4ab3-8f3b-d9932730eb0b",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-09T17:08:17.694Z",
+      "secondsUpperBound": 134.001,
+      "estimatedCostUsd": 0.012685427999999999
+    }
+  ],
+  "editorCostUpperBoundEstimateUsd": 0.6933827813333333,
+  "ledgerSpentEstimateUsd": 19.735649726666686,
+  "ledgerUncertainUsageEstimateUsd": 6,
+  "activeRevisionSessions": 0,
+  "unsettledReservations": 0,
+  "localScreenshots": [
+    {
+      "file": "forge/local-results/notebook-review/overview-forge.png",
+      "sha256": "fe6504a575c6ba0e1a75dce2721ef71ed104719cf9ed9032a7648c7086508360"
+    },
+    {
+      "file": "forge/local-results/notebook-review/overview-results-forge.png",
+      "sha256": "38e179e8c296fcc207e8b9ee0129cd962e55eace7b593cdb75e1bbbfdfb4ac5b"
+    },
+    {
+      "file": "forge/local-results/notebook-review/project-01-forge.png",
+      "sha256": "166b8851a29e00b6d309df4befb89b68adf5b488495a9017f8bde6ebb85e0dd1"
+    },
+    {
+      "file": "forge/local-results/notebook-review/project-02-forge.png",
+      "sha256": "2e52cb0dfcd9bd0555ada76b125daa0bf0d0ee9154ba13f988f61780af2f3b49"
+    },
+    {
+      "file": "forge/local-results/notebook-review/project-03-forge.png",
+      "sha256": "ef2041301b9eca9922803009df7ad434646c16abd76596980b126c5737bf57b7"
+    },
+    {
+      "file": "forge/local-results/notebook-review/project-04-forge.png",
+      "sha256": "010b84d309f42dfc7c33f717ba9ddf60f4edb726f1dd2eaf85a525a6b4bc24d7"
+    },
+    {
+      "file": "forge/local-results/notebook-review/project-05-forge.png",
+      "sha256": "e37fc0ef43dd5578431bed6652c895723135b05d7f823126a14fe7dc5a5c90ba"
+    },
+    {
+      "file": "forge/local-results/notebook-review/project-06-forge.png",
+      "sha256": "1dfedcb4603de42a475a2d8b9737bbe40a85008dbd324e393343c36c2474fa4a"
+    },
+    {
+      "file": "forge/local-results/notebook-review/project-07-forge.png",
+      "sha256": "376f9d68b88159e8b0dafbf9367f7aae035560c1840a475e7d715a93cfe9070b"
+    },
+    {
+      "file": "forge/local-results/notebook-review/project-08-forge.png",
+      "sha256": "73916d996df8e3ef761813b9c95f927485e38d8d96a70875a64e57f37f1a0616"
+    }
+  ],
+  "limitations": [
+    "Private project access is required; a notebook link does not grant access.",
+    "Editable views may require Run all stale cells then preview; notebook runtime compute can incur cost.",
+    "Hosted coding reruns require a configured pinned coordinator and ledger; disabled by default.",
+    "Saved experiments adapt several original assignments and do not certify full course completion.",
+    "No GPU training, provisioning or utilization evidence was executed.",
+    "Download ZIP payloads verified; browser download-event probe timed out.",
+    "Runtime estimates are wall-clock upper bounds, not billing invoices."
+  ]
+}

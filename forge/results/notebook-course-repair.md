@@ -39,8 +39,34 @@ A successful live view alone does not mark publication complete. The publication
 manifest records success only after committed source and saved output agree.
 Editor resources and termination receipts use the existing budget ledger.
 
-Publication status, notebook URLs, source revisions, checksums, and rendered
-verification counts are authoritative in
-[`publication-manifest.json`](../publication-manifest.json). Session accounting
-and the final revision receipt will be recorded alongside this report when all
-nine publications are verified.
+All nine existing Forge notebooks now pass committed-source and saved-output
+verification. The final checks ran after their editor runtimes were terminated.
+The [publication manifest](../publication-manifest.json) records their stable
+URLs, source revisions, checksums, versions, and rendered verification counts.
+The [revision receipt](notebook-course-repair.json) contains the matching local
+validation results, screenshot checksums, and every revision-session receipt.
+
+| Revision check | Result |
+| --- | --- |
+| Native local notebook exports | 9/9 |
+| Exact hosted source and saved output | 9/9 |
+| Embedded native images | 15 |
+| Downloadable lab packets | 9, containing 98 files |
+| Source/output binding regression tests | 3/3 |
+| Documentation build | Passed; existing bundle-size warning |
+| Historical data and pinned runner revisions | Unchanged across all nine |
+| New coding or inference trials | 0 |
+| Revision CPU editor sessions | 20, all terminated and accounted |
+| Active revision sessions / unsettled reservations | 0 / 0 |
+
+The revision's notebook compute estimate is **$0.693383**. The ledger total is
+now **$19.735650**, including the existing **$6.00** conservative charges for
+unknown usage. These are estimates, not invoices. Failed preview attempts are
+included in the session accounting.
+
+For teaching, share the [overview](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTM%3D)
+and give students access to the private project. The overview links to all eight
+lessons. Users with edit permission may land in the editor: choose **Run all
+stale cells**, then **preview**. This enables the saved-data selector, worksheet,
+and downloads without launching coding or inference. Notebook CPU compute can
+incur cost; paid coding reruns require the separately configured coordinator.

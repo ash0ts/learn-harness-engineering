@@ -118,6 +118,17 @@ def check_remote(manifest, row):
         raise RuntimeError('Remote edits detected; preserve and review remote source before replacing it')
     print('Remote source unchanged; normal authenticated EDIT workflow may proceed only with a reserved compute budget.')
 
+def check_source(manifest, row):
+    """Read back source after the edit runtime's final flush, before a clean render."""
+    notebook = remote(row['id'])
+    canonical = (ROOT/row['file']).read_bytes()
+    revision = subprocess.check_output(['git','log','-1','--format=%H','--',row['file']],cwd=ROOT,text=True).strip()
+    if subprocess.check_output(['git','show',revision+':'+row['file']],cwd=ROOT) != canonical:
+        raise RuntimeError('Commit canonical source before publication')
+    if source_bytes(manifest,notebook) != canonical:
+        raise RuntimeError('Committed currentVersion source does not match canonical source')
+    print(row['file'],'committed_source_verified','version',notebook['currentVersion']['versionIndex'],digest(canonical))
+
 def verify_rendered_source(html, canonical):
     """Bind outputs to canonical cell code, including when Forge omits legacy timestamps."""
     text = html.decode()
@@ -217,9 +228,10 @@ def verify(manifest, row):
 
 if __name__ == '__main__':
     parser=argparse.ArgumentParser()
-    parser.add_argument('command',choices=['ensure','check-remote','verify'])
+    parser.add_argument('command',choices=['ensure','check-remote','check-source','verify'])
     parser.add_argument('file',nargs='?')
     args=parser.parse_args(); manifest=load()
     if args.command=='ensure': ensure(manifest)
     elif args.command=='check-remote': check_remote(manifest,select(manifest,args.file or ''))
+    elif args.command=='check-source': check_source(manifest,select(manifest,args.file or ''))
     else: verify(manifest,select(manifest,args.file or ''))

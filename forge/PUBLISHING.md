@@ -51,36 +51,43 @@ For each notebook:
    Attach its observed runtime ID with `notebook_session.ts attach SESSION_ID
    SANDBOX_ID`. This verifies the actual 2 CPU / 4 GiB resource shape against the
    recorded rates.
-4. In Marimo's command palette, open **Helper panel > Files**. Upload the
-   canonical `.py` file using its own filename. Open it in the text editor, copy
-   its complete source, then open the existing `notebook.py` and replace its
-   source. If the embedded file chooser is unavailable, copy the canonical file
-   from its exact committed GitHub raw-source page and paste it into the same
-   Marimo file editor. Verification still requires identical bytes. Save through
+4. In Marimo's command palette, open **Helper panel > Files**. Open the existing
+   `notebook.py` with **More options > Open file** and replace its text with the
+   complete committed canonical Python source. You can paste those exact bytes
+   from the local canonical file, or upload the canonical `.py` under its own
+   filename and copy its source through the file editor. Do not paste an HTML
+   export. Verification requires identical Python source bytes. Save through
    the editor. Do not replace source through an undocumented
    notebook API or overwrite the artifact directly.
-5. After a full-file replacement is saved, reload the editor and use its normal
-   **Restart Kernel** action before rerunning the saved-analysis cells. This
-   avoids mixing old kernel cell registrations with the new source. Confirm
-   that the new lesson headings and images render without cell errors.
-   Re-run the saved-analysis cells through Marimo's normal command palette.
-   Leave the explicit paid-rerun button idle. Let the normal save workflow commit
-   source and rendered output. The deployed save worker polls every 30 seconds
-   and throttles preview-only updates to five minutes; a source version can
-   therefore appear before its corresponding rendered output. Wait for both
-   rather than weakening verification. A fresh editor session can re-render the
-   committed source if the old session's preview is stale.
-6. Run `uv run --script forge/scripts/publication.py verify FILE.py`. The verifier
-   requires exact committed source bytes, the committed local source revision,
-   matching rendered cell code and output hashes, error-free cells, and aggregate
-   values independently recomputed from the embedded trial evidence. It rechecks
-   `currentVersion` at the end to detect concurrent edits.
-   The overview disables pagination for its aggregate table because a static
-   Marimo export otherwise contains only the current page. Every aggregate
-   group must be present in the saved output.
-7. Close the editing tab and run `notebook_session.ts stop SESSION_ID`. It waits
-   for terminal runtime state and charges the measured wall-clock upper bound to
-   the same ledger. Keep the receipt in `forge/local-results/notebook-sessions/`.
+5. Save the complete source, then stop that editor runtime while its browser
+   session is still connected. The normal shutdown flush commits the source.
+   Run `uv run --script forge/scripts/publication.py check-source FILE.py` to
+   require an exact match with the committed local canonical file. Close the tab
+   after this check. A source-only match does not mark publication complete.
+6. Reserve a fresh render session and reopen the same notebook ID. Attach and
+   verify its CPU resources. It loads the committed source without the old
+   editor's cell registrations. Choose **Run all stale cells** in Marimo's
+   command palette. Wait for the images, results, and both download links to
+   appear, then choose **Save file**. Leave the paid-rerun button idle.
+7. Keep the fresh browser/runtime session open until its saved preview updates.
+   The worker polls every 30 seconds and can throttle preview-only uploads for
+   five minutes. A shutdown flush is attempted, but is not sufficient evidence
+   that complete output was committed. Do not stop the render runtime early.
+8. Run `uv run --script forge/scripts/publication.py verify FILE.py` while the
+   runtime is active. It requires
+   exact committed Python bytes, the local source commit, matching rendered cell
+   source and output hashes, error-free cells, independently recomputed historical
+   and primary aggregates, embedded images, and downloadable packets. It rechecks
+   `currentVersion` to detect concurrent edits. Every aggregate group must be
+   present in the saved output, so the aggregate tables disable pagination.
+9. After verification, run `notebook_session.ts stop SESSION_ID` while the browser
+   remains connected. It verifies terminal state and accounts for the wall-clock
+   upper bound. Verify the final publication again, then close the tab. If source
+   and output differ, leave publication pending and investigate. Do not weaken
+   checks or upload an HTML artifact directly to force success. A live editor
+   view alone is insufficient. Notebook publication concurrency is accounted
+   separately from the two-concurrent-trial experiment protocol; no coding trial
+   is launched by this workflow.
 
 Run the TypeScript session commands from the course root using:
 
@@ -117,7 +124,10 @@ runtime qualifications, and manual graph fixtures. A graph fixture that passes
 both verification lanes remains paused until an explicit checksum-bound human
 decision. It is never counted as a successful Pi coding attempt.
 
-Opening a hosted notebook displays saved analysis. A paid rerun additionally
-requires a mounted coordinator checkout at the displayed revision, installed
-dependencies, external credentials and the existing durable ledger. A fresh
-hosted runtime has no such coordinator mounted by default.
+Users with edit permission can land in the Marimo editor. Choose **Run all stale
+cells**, then **preview** to teach from the native lesson. This loads recorded
+data and enables the evidence selector, worksheet, and downloads. Notebook
+runtime compute can incur cost; these cells do not start inference or coding
+trials. A paid rerun additionally requires a mounted coordinator checkout at the
+displayed revision, installed dependencies, external credentials and the existing
+durable ledger. A fresh hosted runtime has no such coordinator mounted by default.

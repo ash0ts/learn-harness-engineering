@@ -2,6 +2,14 @@
 
 Status: **verified delivery**. All eight PRs remain drafts; none has been merged.
 
+**Notebook revision, November 9:** the nine native Marimo lessons now restore
+the original assignments and student submissions, with embedded figures,
+evidence inspection, worksheets, and lab downloads. The [revision report](notebook-course-repair.md)
+and [verification receipt](notebook-course-repair.json) record the current sources,
+saved outputs, and additional notebook CPU costs. Historical experiment snapshots
+and outcomes below are unchanged. These experiments adapted several original
+assignments; they do not establish full original-course completion or GPU training.
+
 The [public personal fork](https://github.com/ash0ts/learn-harness-engineering) preserves the offline course at upstream `a9342ff471f2c0e60be0c08b9f4a7c502df4e442`. Results and notebook sources belong to the private `wandb/learn-harness-engineering-forge` project.
 
 ## Actual execution
@@ -150,7 +158,10 @@ Only the original manual qualification checkpoint changed. Later qualification c
 
 ## Spend estimates
 
-Known/audited estimate: **$13.042267**. Conservative charges for unknown usage: **$6.000000**. Total charged estimate: **$19.042267**. Active reservations: **$0.000000**.
+At the original delivery audit: known/audited estimate **$13.042267**; conservative
+charges for unknown usage **$6.000000**; total charged estimate **$19.042267**;
+active reservations **$0.000000**. The later notebook revision's additional CPU
+estimate and current ledger total are recorded in the [revision receipt](notebook-course-repair.json).
 
 The original $50 application cap was removed after the user explicitly authorized an unlimited budget. Worker concurrency and lifetimes remain bounded. Timed-out qualifications retain unknown token usage; each full $2 reservation was charged conservatively under the recorded authorization. Estimates are not provider invoices. Notebook EDIT compute is measured separately at the verified 2 CPU / 4 GiB rates ($0.3408/hour), including publication work. The durable ledger records authorizations and reconciliations. It must not be reset.
 
@@ -181,7 +192,7 @@ Budget snapshot as of capturedAt. Final publication/editor costs are recorded se
 | [07 · Goal, timer and maker-checker loops](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjA%3D) | published_verified |
 | [08 · Checkpointed graphs and human approval](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjE%3D) | published_verified |
 
-The publication manifest binds each stable notebook ID to its canonical source commit, SHA-256, committed currentVersion, and rendered-output SHA-256. Verification compares rendered cell source and output code hashes, including when Forge omits its legacy lastStaticOutputAt timestamp. Opening the notebook renders saved evidence; paid reruns require an explicit action.
+The publication manifest binds each stable notebook ID to its canonical source commit, SHA-256, committed currentVersion, and rendered-output SHA-256. Verification compares rendered cell source and output code hashes, including when Forge omits its legacy lastStaticOutputAt timestamp. Users with edit permission may need **Run all stale cells → preview** to present the native lesson. This loads saved data and enables its controls; it does not launch coding or inference. Notebook runtime compute can incur cost. Paid reruns require an explicit action and a configured coordinator.
 
 ## Evidence and reproduction
 
