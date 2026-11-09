@@ -7,7 +7,9 @@ import hashlib
 import json
 import subprocess
 import urllib.parse
+import textwrap
 import lesson_cells as lc
+import learner_cells as learner
 from course_packets import ORIGINAL, SLUGS, packet
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -59,7 +61,7 @@ def generate(runner_commit=None, projects=None, refresh_evidence=False):
         sections=lesson.split('<!-- cell -->')
         nav=' · '.join(f'[{"Overview" if i==0 else f"{i:02}"}](https://forge.coreweave.com/notebooks/'+urllib.parse.quote('Tm90ZWJvb2s6MTUz'+['MTM=','MTQ=','MTU=','MTY=','MTc=','MTg=','MTk=','MjA=','MjE='][i],safe='')+')' for i in range(9))
         # Notebook IDs are stable; no notebook creation or HTML import is involved.
-        intro='# '+title+'\n\n'+nav+'\n\n**Course lab + recorded Forge case.** Read and inspect saved evidence first. Coding trials require an explicit paid action; notebook runtime compute is separate.\n\n'+description
+        intro='# '+title+'\n\n'+nav+'\n\n**Course lab + recorded Forge case.** Read and inspect saved evidence first. Coding trials require an explicit paid action; notebook runtime compute is separate.\n\n'+description+'\n\n[Prepare my workspace](#run-this-lesson-yourself) · [Inspect my results](#my-work) · [Write my observations](#your-observation-worksheet)'
         cells=[lc.IMPORTS,lc.CONSTANTS,markdown_cell(intro)]
         cells += [markdown_cell(part.strip()) for part in sections[:-1]]
         for image in evidence['assets'][project]:
@@ -73,7 +75,9 @@ def generate(runner_commit=None, projects=None, refresh_evidence=False):
         original='https://github.com/walkinglabs/learn-harness-engineering/blob/'+ORIGINAL+'/docs/en/projects/'+(SLUGS[index]+'/' if index else '')+'index.md'
         article='https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-publication/docs/en/forge/'+('index.md' if index==0 else filename.replace('.py','.md'))
         resources='## Sources and further inspection\n\n- [Frozen original course brief]('+original+') · upstream revision `'+ORIGINAL+'`.\n- [Long-form Forge case study]('+article+').\n- [Visual evidence workspace](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=su19wan3xra).\n- [Primary comparison dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=dfs83wdpatt).\n- [Execution and publication audit](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=l9e45ofb461).\n\nSaved-case runner revision: `'+commit+'`. Figures and captures are embedded native images with source checksums in `forge/lessons/evidence.json`; no website import is needed. Original records remain unchanged.'
-        cells += [markdown_cell(resources),lc.CONTROLS,lc.EXECUTE,lc.STATUS]
+        helper=(ROOT/'forge/scripts/learner_workspace.py').read_text()
+        helper_cell='def _():\n    def _load_learner():\n'+textwrap.indent(helper,'        ')+'\n        return LessonWorkspace\n    LessonWorkspace = _load_learner()\n    return (LessonWorkspace,)'
+        cells += [markdown_cell(resources),helper_cell,*learner.CELLS]
         replacements={'__PROJECT__':repr(project),'__COMMIT__':repr(commit),'__SAVED__':repr(json.dumps(saved,ensure_ascii=False)),'__VARIANTS__':repr(VARIANTS[project]),'__PRIMARY__':repr(evidence['primaryTrialIds']),'__PACKET__':repr(json.dumps(packet(index,lesson),ensure_ascii=False))}
         text='''# /// script
 # requires-python = ">=3.11"
