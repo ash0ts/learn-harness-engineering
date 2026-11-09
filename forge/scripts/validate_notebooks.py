@@ -6,9 +6,46 @@ import hashlib
 import json
 import os
 import subprocess
+from html.parser import HTMLParser
+from collections import Counter
 from create_notebooks import project_snapshot,TITLES
 
 ROOT = Path(__file__).resolve().parents[2]
+
+def validate_course_view(session, tree):
+    """Check the visible cohort independently and require native course assets."""
+    assignments = {n.targets[0].id:n.value for n in ast.walk(tree)
+                   if isinstance(n,ast.Assign) and isinstance(n.targets[0],ast.Name)}
+    saved=json.loads(ast.literal_eval(assignments['saved'].args[0]))
+    primary_ids=ast.literal_eval(assignments['primary_ids'])
+    files=json.loads(ast.literal_eval(assignments['lesson_files'].args[0]))
+    if 'LAB.md' not in files or 'observations.csv' not in files or 'comparison.md' not in files:
+        raise RuntimeError('Missing downloadable course submission material')
+    class Content(HTMLParser):
+        def __init__(self):
+            super().__init__(); self.tables=[]; self.images=[]; self.downloads=[]
+        def handle_starttag(self,tag,attrs):
+            attrs=dict(attrs)
+            if tag=='marimo-table':
+                value=json.loads(attrs['data-data'])
+                if isinstance(value,str):value=json.loads(value)
+                self.tables.append(value)
+            elif tag=='img':self.images.append(attrs)
+            elif tag=='marimo-download':self.downloads.append(attrs)
+    content=Content()
+    for cell in session['cells']:
+        for output in cell.get('outputs',[]):content.feed(output.get('data',{}).get('text/html',''))
+    rows=[r for r in saved['trials'] if r['id'] in primary_ids]
+    expected=[]
+    for task,variant in sorted({(r['project'],r['variant']) for r in rows}):
+        group=[r for r in rows if (r['project'],r['variant'])==(task,variant)]
+        expected.append({'Project':task,'Treatment':variant,'Passed':sum(r['outcome']=='passed' for r in group),'Attempts':len(group),'Other outcomes':', '.join(f'{v} {k}' for k,v in Counter(r['outcome'] for r in group if r['outcome']!='passed').items()) or 'None'})
+    actual=[t for t in content.tables if isinstance(t,list) and t and isinstance(t[0],dict) and 'Treatment' in t[0]]
+    if actual != ([expected] if expected else []):raise RuntimeError('Primary displayed cohort does not match recorded evidence')
+    if not content.images or any(not i.get('alt') or not i.get('src','').startswith('data:image/') for i in content.images):
+        raise RuntimeError('Native self-contained figures and alt text are required')
+    if len(content.downloads)<2:raise RuntimeError('Worksheet and lab packet downloads were not rendered')
+    return {'primaryGroups':len(expected),'nativeImages':len(content.images),'packetFiles':len(files)}
 
 def validate(export=True,projects=None):
     sources = sorted((ROOT / 'forge/notebooks').glob('*.py'))
@@ -52,7 +89,7 @@ def validate(export=True,projects=None):
                 raise RuntimeError(f'{source.name}: rendering errors: {errors}')
             if 'Not launched' not in html or 'Saved results' not in html:
                 raise RuntimeError(f'{source.name}: missing expected saved view')
-            row.update(rendered=True, htmlSha256=hashlib.sha256(dest.read_bytes()).hexdigest())
+            row.update(rendered=True, htmlSha256=hashlib.sha256(dest.read_bytes()).hexdigest(),courseView=validate_course_view(session,tree))
         rows.append(row)
         print(source.name, 'passed', flush=True)
     (ROOT / 'forge/local-results/notebook-validation.json').write_text(json.dumps({'schemaVersion': 1, 'notebooks': rows}, indent=2) + '\n')
