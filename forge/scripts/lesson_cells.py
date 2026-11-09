@@ -97,32 +97,3 @@ DOWNLOADS = r'''def _(io, json, lesson_files, limitation, measured_minutes, mo, 
             _zip.writestr(_name, _content)
     mo.vstack([mo.download(data=json.dumps(_notes, indent=2).encode(), filename=project_id + "-observations.json", mimetype="application/json", label="Download my observations"), mo.download(data=_buffer.getvalue(), filename=project_id + "-lab-packet.zip", mimetype="application/zip", label="Download lab brief and submission templates")])
     return'''
-
-CONTROLS = r'''def _(Path, mo, os, runner_commit, subprocess, variants):
-    _configured = os.environ.get("FORGE_RUNNER_ROOT", "")
-    _ready = False
-    _reason = "No shared coordinator is configured in this runtime."
-    if _configured and Path(_configured).is_absolute():
-        try:
-            _actual = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=_configured, text=True, stderr=subprocess.DEVNULL).strip()
-            _ready = _actual == runner_commit and bool(os.environ.get("WANDB_API_KEY")) and (Path(_configured) / "forge/local-results/budget.json").exists() and (Path(_configured) / "forge/node_modules/tsx/dist/loader.mjs").exists()
-            _reason = "Coordinator prerequisites found; the runner will recheck qualification and the ledger before work." if _ready else "Coordinator revision, credential, pinned dependencies, or durable ledger is missing."
-        except (OSError, subprocess.CalledProcessError):
-            _reason = "The configured coordinator cannot be read."
-    runner_root = mo.ui.text(value=_configured, disabled=True, label="Coordinator set by FORGE_RUNNER_ROOT", full_width=True)
-    entity = mo.ui.text(value=os.environ.get("WANDB_ENTITY", "wandb"), label="W&B team")
-    result_project = mo.ui.text(value=os.environ.get("WANDB_PROJECT", "learn-harness-engineering-forge"), label="Private results project")
-    treatment = mo.ui.dropdown(options=variants, value=variants[0], label="Adapted Forge treatment")
-    repetitions = mo.ui.number(start=1, stop=3, value=1, label="Repeats (Projects 01–06)")
-    launch = mo.ui.button(value=0, on_click=lambda value: value + 1, disabled=not _ready, label="Launch paid adapted rerun")
-    get_execution, set_execution = mo.state({"click": 0, "status": "Not launched"})
-    mo.accordion({"Optional paid rerun · instructor coordinator required": mo.vstack([
-        mo.md("This reruns the recorded Forge adaptation, not all of the original course lab. A fresh hosted notebook has no coordinator mounted by default. Set FORGE_RUNNER_ROOT and external credentials before starting this notebook to enable the button. The shared ledger, exact pinned revision, and qualification are required.\n\nProject 07 uses a one-round demonstration, not the two-hour/five-round assignment. Project 08 pauses at human approval; this notebook does not submit a decision.\n\n**Readiness:** " + _reason), runner_root, entity, result_project, treatment, repetitions, launch
-    ])})
-    return entity, get_execution, launch, repetitions, result_project, runner_root, set_execution, treatment'''
-
-STATUS = r'''def _(get_execution, mo):
-    mo.accordion({"Last paid action": mo.md("```json\n" + __import__("json").dumps(get_execution(), indent=2) + "\n```")})
-    return'''
-
-EXECUTE = 'def _(Path, entity, get_execution, json, launch, mo, os, project_id, repetitions, result_project, runner_commit, runner_root, set_execution, subprocess, treatment, uuid):\n    mo.stop(launch.value <= get_execution()["click"])\n    set_execution({"click": launch.value, "status": "Starting explicit request"})\n    try:\n        _root = Path(runner_root.value)\n        if not runner_root.value or not _root.is_absolute():\n            raise RuntimeError("Configure an absolute shared coordinator checkout first.")\n        _actual = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=_root, text=True).strip()\n        if _actual != runner_commit:\n            raise RuntimeError("The coordinator revision must match the pinned runner revision shown above.")\n        _ledger = _root / "forge/local-results/budget.json"\n        if not _ledger.exists():\n            raise RuntimeError("A qualified, durable shared budget ledger is required; no new ledger is created here.")\n        _budget = json.loads(_ledger.read_text())\n        if _budget.get("halted"):\n            raise RuntimeError("The shared ledger is halted; reconcile its recorded reason before launching.")\n        _authorized_limit = _budget.get("limitUsd")\n        if _authorized_limit is None and not _budget.get("authorizations"):\n            raise RuntimeError("An unlimited ledger requires its recorded explicit authorization.")\n        _env = dict(os.environ, WANDB_ENTITY=entity.value, WANDB_PROJECT=result_project.value, FORGE_BUDGET_USD="unlimited" if _authorized_limit is None else str(_authorized_limit))\n        if not _env.get("WANDB_API_KEY"):\n            raise RuntimeError("Supply credentials through the coordinator environment, never a notebook cell.")\n        _command = ["node", "--import", str(_root / "forge/node_modules/tsx/dist/loader.mjs"), str(_root / "forge/src/cli.ts")]\n        _checkpoint = str(_root / "forge/local-results" / ("notebook-" + uuid.uuid4().hex + ".json"))\n        if project_id == "project-07":\n            _command += ["loop", "--mode", treatment.value, "--checkpoint", _checkpoint, "--duration-seconds", "600", "--max-rounds", "1", "--execute"]\n        elif project_id == "project-08":\n            _command += ["graph", "--checkpoint", _checkpoint, "--execute"]\n        else:\n            _command += ["compare", "--project", "project-01" if project_id == "overview" else project_id, "--variant", treatment.value, "--repeats", str(int(repetitions.value)), "--source", runner_commit, "--execute"]\n        _completed = subprocess.run(_command, cwd=_root, env=_env, text=True, capture_output=True, timeout=3500)\n        set_execution({"click": launch.value, "status": "Runner finished", "exit_code": _completed.returncode, "stdout": _completed.stdout[-16000:], "stderr": _completed.stderr[-4000:]})\n    except Exception as _error:\n        set_execution({"click": launch.value, "status": "Not completed", "error": str(_error)})\n    return'
