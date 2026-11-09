@@ -1,9 +1,9 @@
 # Run the Forge lessons yourself
 
-::: info Rollout status
-This guide describes the self-service revision in the draft notebook PR. The nine
-published masters retain their previous controls until a complete live student
-run and progress restore pass. See the [validation record](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-notebooks/forge/lessons/self-service-validation.md).
+::: info Verified release
+All nine master notebooks have matching committed source and saved output. The
+shared learner workflow passed a live owner-account rehearsal and fresh-runtime
+progress restore. See the [validation record](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-notebooks/forge/lessons/self-service-validation.md).
 :::
 
 Open the [overview](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTM%3D),
@@ -13,8 +13,9 @@ your own copy so your work and budget have a stable home.
 1. Choose **Copy to project** in the notebook menu. Select a **private** Forge
    project where you can create notebooks, runs, artifacts, sandboxes, and use
    hosted inference. Your team must have the relevant entitlements.
-2. Open the copy in **Edit** and run the stale cells. The lesson displays the
-   saved examples without starting a model call or coding trial.
+2. Open the copy in **Edit**. In Marimo's **Config → Command palette**, choose
+   **Re-run all cells** to initialize the lesson before preparing or launching an
+   action. This displays the saved examples without starting a model call or coding trial.
 3. Under **Run this lesson yourself**, choose a budget and click **Prepare or
    restore my workspace**. Setup installs the exact course revision and pinned
    Node dependencies inside the notebook. Forge supplies the session credential;
