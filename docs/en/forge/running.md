@@ -66,7 +66,7 @@ The [canonical Marimo sources](https://github.com/ash0ts/learn-harness-engineeri
 uv run --with marimo==0.25.1 marimo edit forge/notebooks/00-overview.py
 ```
 
-Saved analysis is self-contained. Paid reruns require the displayed coordinator revision, Node dependencies, external credentials, and the existing shared budget ledger. A new hosted analysis runtime has no mounted coordinator by default. Notebook cells call the shared TypeScript runner; they do not reproduce the app in Python.
+Saved analysis is self-contained. For a student-owned Forge copy, **Prepare or restore my workspace** installs the displayed runner revision and dependencies, uses the injected session credential, and restores the copy's budget ledger and progress. A separate explicit action qualifies live access before paid reruns. Follow [the self-service lesson workflow](./classroom.md). Notebook cells call the shared TypeScript runner; they do not reproduce the app in Python.
 
 Publication creates a BASIC notebook, renames it, opens an authenticated EDIT session, and loads canonical source through the Marimo editor. Normal saving commits the source. Verification checks the committed `currentVersion`, source checksum, and rendered output before marking publication successful.
 
