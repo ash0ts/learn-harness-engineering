@@ -22,7 +22,8 @@ your own copy so your work and budget have a stable home.
    progress. It requires outbound access to GitHub, Node's official distribution,
    Debian package repositories, npm and W&B.
 4. Click **Connect my sandbox access** and enter your own W&B API key in the
-   masked prompt. The injected notebook credential currently cannot authenticate
+   masked prompt beneath the running code cell. Keep Marimo in **Edit** view;
+   Preview hides this prompt. The injected notebook credential currently cannot authenticate
    to the Sandbox API. Your key remains in session memory, never in source or
    progress artifacts. Reconnect after starting a fresh runtime.
 5. Choose **Check live access**, authorize the action, and click **Run selected

@@ -478,7 +478,8 @@ def _():
                 checkpoint.write_bytes(self.bundle())
                 # W&B owns a background service. Give each save its own process so a
                 # completed coding child cannot invalidate the notebook's service handle.
-                script = '''import json,sys,wandb
+                script = '''
+        import json,sys,wandb
         from pathlib import Path
         base=Path(sys.argv[1]); state=json.loads((base/'learner.json').read_text()); identity=state['identity']
         key=sys.argv[2]; ledger=json.loads((base/'course/forge/local-results/budget.json').read_text())
@@ -763,7 +764,7 @@ def _(
 def _(mo):
     connect_sandbox = mo.ui.button(value=0, on_click=lambda value: value + 1, label="Connect my sandbox access")
     get_connect_click, set_connect_click = mo.state(0)
-    mo.vstack([mo.md("**Connect sandbox access for this session.** Forge's injected notebook credential can save progress and use inference, but the Sandbox API currently requires your own W&B API key. Click below for a masked prompt. Use your own key from [API key settings](https://wandb.ai/authorize), never an instructor's key. It stays in this session's memory and is excluded from source, progress artifacts and downloads. Reconnect after opening a fresh runtime."), connect_sandbox])
+    mo.vstack([mo.md("**Connect sandbox access for this session.** Forge's injected notebook credential can save progress and use inference, but the Sandbox API currently requires your own W&B API key. Stay in **Edit** view, click below, and enter your key in the masked prompt beneath the running code cell. If the prompt is hidden, switch from Preview back to Edit. Use your own key from [API key settings](https://wandb.ai/authorize), never an instructor's key. It stays in this session's memory and is excluded from source, progress artifacts and downloads. Reconnect after opening a fresh runtime."), connect_sandbox])
     return connect_sandbox, get_connect_click, set_connect_click
 
 
