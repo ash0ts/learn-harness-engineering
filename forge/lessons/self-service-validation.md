@@ -1,65 +1,71 @@
 # Self-service lesson validation
 
-The self-service revision is implemented in the canonical notebook sources. It
-has **not replaced the nine published master notebooks** while live qualification
-is incomplete.
+The shared learner workflow passed live validation in a private Forge notebook on
+2026-11-09. The nine master notebooks are being updated through the normal Marimo
+editor; the publication manifest is authoritative for each committed version.
 
-## Verified on 2026-11-09
+## What ran
 
-- All nine native Marimo notebooks pass saved-view execution without credentials.
-  The validator recomputes historical aggregates and checks images and downloads.
-- Historical embedded evidence and each notebook's exact runner revision are
-  unchanged from the previous notebook PR head.
-- Sixteen regression checks pass for initialization without side effects, owner
-  isolation, checkpoint round trips, unsafe archive rejection, redaction, explicit
-  graph decisions, bounded loops, and fail-closed launch/budget behavior.
-- The documentation builds successfully with the existing large-bundle warning.
-- A fresh private Forge notebook received its own session identity and credential.
-  The credential could read the private project and the selected inference model.
-- Automatic setup installed Git and checksum-verified Node 22.19.0, fetched the
-  pinned course revision, installed lockfile dependencies, compiled the shared
-  services, and saved a learner-specific W&B progress artifact.
-- Project 01's native controls were loaded through the normal Marimo source
-  editor and inspected in Forge preview. No HTML import was used.
+- Two successful live qualifications: one from the coordinator and one from the
+  actual notebook button after masked key entry. Each exercised Pi tools, hosted
+  inference, app tracing, cancellation, and sandbox cleanup.
+- One Project 01 minimal-treatment trial,
+  `c547bb71-3edb-49cc-a60c-9a727b62c4c5`, passed all five independent checks:
+  compilation, persisted import, indexing, retrieval/Q&A, and Electron under Xvfb.
+  Pi reached its bound (`actorCompleted=false`); the exported patch passed.
+- All five Agent Lens conversations were read back. Model-level token totals,
+  parent links, source metadata, and conversation boundaries matched the records.
+- W&B run configuration and metrics matched the committed evidence artifact,
+  including the patch, grade, and Electron screenshot.
+- Native setup, masked connection, qualification, and observation saving were
+  exercised in Forge. The completed coding trial used the same coordinator.
+- After terminating that runtime, a fresh runtime opened idle with no workspace.
+  Clicking Prepare restored the trial, observations, and budget history. Account
+  key access remained disconnected. The restore-only runtime was then terminated.
 
-![Native student setup in the private Forge scratch notebook](./assets/self-service-preview.png)
+[Trial and metrics](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/c547bb713edb49cc)
+· [Private progress run](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/lesson-88850bc3b9d59dbe46d7)
 
-## Live boundary found
+![Native learner results in Forge](./assets/self-service-result.png)
 
-The notebook-injected runtime credential is rejected by the Sandbox API. The
-qualification stopped before calling Pi or an inference model. An inventory read
-using the account's normal credential found no sandbox matching the qualification
-ID. Its learner ledger retains the missing-usage halt until an operator records
-that reconciliation. No successful coding trial is claimed for this revision.
+## Failures found and retained
 
-The implementation now offers **Connect my sandbox access**, using Marimo's masked
-`getpass` prompt. It verifies that the supplied key belongs to the notebook session
-owner and can access the Sandbox API. The key stays in process memory and is
-redacted from logs and exports. This path still needs a full live qualification.
+Forge's injected notebook credential can save progress and use inference, but the
+Sandbox API rejected it before a model or worker launched. An authenticated
+inventory found no worker for that attempt. Its zero-cost reconciliation is
+recorded; the failed qualification remains in the learner's evidence.
 
-The test also exposed a W&B background-service connection loss on the completion
-save. Progress writes now use isolated Python processes, and child coding
-processes do not inherit a W&B service handle. The updated completion-save path
-still needs live verification.
+The user then explicitly approved testing their existing account key in the
+private runtime. The key was held in memory, owner-checked, and entered through
+Marimo's masked prompt. That prompt is visible in **Edit**, not Preview. A scan of
+3,190 workspace files and checkpoint contents found neither the account key nor
+the injected credential. The key-bearing runtime and all four workers were
+confirmed terminal.
 
-Automatic approval review rejected transferring the existing account key into
-the private scratch runtime because that specific credential transfer was not
-authorized. The user has been asked to approve the transfer or enter the key.
-Publication remains pending that test, including a complete graded trial and a
-fresh-runtime restore of the saved progress. Local checks do not substitute for
-those live checks.
+The live test exposed a background W&B service failure and an indentation bug in
+the helper's embedded save script. Saves now run in isolated Python processes,
+and the nested Marimo representation has a regression check. Native saving and
+fresh-runtime restoration passed after the fixes.
 
-The scratch notebook runtime was terminated and its terminal state verified.
-Its CPU estimate is **$0.122258308**. There were **zero** model calls and no
-worker sandbox found for the rejected qualification. The global test reservation
-was settled at zero worker/inference cost; the retained student checkpoint still
-records the failed authentication and requires operator reconciliation. The local
-accounting ledger has no outstanding reservation for this test.
+## Local checks and cost
 
-## Scope that remains explicit
+All nine saved views execute without credentials and reproduce the historical
+aggregates, images, and downloads. Seventeen regression checks pass. The docs
+build passes with its existing large-bundle warning. Historical evidence and the
+pinned runner revisions remain unchanged.
 
-These controls run the existing adapted Forge tasks. They do not certify the
-additional original-course deliverables. Project 07 uses the bounded ten-minute,
-one-round exercise; a one-hour notebook runtime cannot host the original two-hour
-monitor. Project 08 preserves explicit candidate-bound approval. An actual student
-account rehearsal and team billing/access setup remain instructor responsibilities.
+Worker compute and inference for the two successful qualifications and one trial
+are estimated at **$0.106255**. The key-bearing and restore-only notebook sessions
+add **$0.141952**. The earlier rejected-credential session adds **$0.122258**.
+These are application estimates, not provider billing totals; publication sessions
+are accounted separately. The restored learner ledger conservatively charges a
+full $0.3408 allowance per notebook session, so it is intentionally higher.
+
+## Limits
+
+This is one owner-account rehearsal of the shared workflow, not nine new live
+campaigns or a test of student entitlements. Before class, repeat setup with an
+actual student account and its private destination. A passed preset run does not
+complete every original assignment. Project 07 uses the bounded ten-minute,
+one-round adaptation; Project 08 still requires candidate-bound approval.
+CPU sandboxes and hosted inference were used. No GPU training was run.
