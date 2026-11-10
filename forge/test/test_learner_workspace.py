@@ -1,3 +1,4 @@
+import contextlib
 import base64
 import hashlib
 import io
@@ -375,6 +376,30 @@ class LearnerWorkspaceTests(unittest.TestCase):
         operation["requests"]["agent-1"]["inputTokens"]=-1;path.write_text(json.dumps(operation))
         with self.assertRaisesRegex(RuntimeError, "constraint"):
             self.w.operation_records()
+
+    def test_first_private_save_handles_absent_artifact_type(self):
+        self.seed()
+        uploaded=[]
+        remote=SimpleNamespace(qualified_name='class/private-labs/learner:v0',get_entry=lambda name:SimpleNamespace(download=lambda root:str(self.w.base/'checkpoint.tar.gz')))
+        class Run:
+            url='https://wandb.ai/class/private-labs/runs/lesson'
+            summary={}
+            def __enter__(self):return self
+            def __exit__(self,*args):pass
+            def log_artifact(self,artifact,aliases):
+                uploaded.append(artifact)
+                return SimpleNamespace(wait=lambda:remote)
+        fake=SimpleNamespace(Api=lambda **kwargs:object(),init=lambda **kwargs:Run(),Settings=lambda **kwargs:kwargs,
+            Artifact=lambda *args,**kwargs:SimpleNamespace(add_file=lambda *args,**kwargs:None))
+        def child(args,**kwargs):
+            output=io.StringIO()
+            response={'data':{'project':{'access':'PRIVATE','artifactType':None}}}
+            with patch.dict(sys.modules,{'wandb':fake}),patch.object(sys,'argv',args[2:]),patch.dict('os.environ',{'WANDB_API_KEY':'test-only'}),patch('urllib.request.urlopen',return_value=io.BytesIO(json.dumps(response).encode())),contextlib.redirect_stdout(output):
+                exec(args[2],{})
+            return SimpleNamespace(returncode=0,stdout=output.getvalue(),stderr='')
+        with patch('subprocess.run',side_effect=child):self.w.persist()
+        self.assertEqual(len(uploaded),1)
+        self.assertIsInstance(self.w.cached_checkpoint_bytes(),bytes)
 
 
 if __name__ == "__main__":
