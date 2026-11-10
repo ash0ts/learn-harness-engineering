@@ -205,11 +205,21 @@ with wandb.init(entity=identity['WANDB_ENTITY'],project=identity['WANDB_PROJECT'
         self.state["progressUrl"] = json.loads(result.stdout.strip().splitlines()[-1])["progressUrl"]
         self.write()
 
+    def blocked(self):
+        """Why nothing new can start in this copy, or None."""
+        if not self.state.get("prepared"):
+            return "Prepare your workspace first (step 2)."
+        if self.state.get("pending"):
+            if self.process and self.process.poll() is None:
+                return "An action is still running. Wait until My work shows it has finished."
+            return "This copy is stopped because an earlier action was interrupted. It will not start anything new until your instructor has checked it."
+        return None
+
     def connect(self, api_key):
         """Accept only a masked, session-memory credential; never save it."""
         with self.lock:
-            if not self.state.get("prepared") or self.state.get("pending"):
-                raise RuntimeError("Prepare your workspace and finish the current action first")
+            if self.blocked():
+                raise RuntimeError(self.blocked())
             if not api_key.strip():
                 raise ValueError("A learner-owned Sandbox-capable API key is required")
             previous = self.env.get("WANDB_API_KEY", "")
@@ -255,12 +265,14 @@ with wandb.init(entity=identity['WANDB_ENTITY'],project=identity['WANDB_PROJECT'
         if self.state.get("identity") != self.identity or self.state.get("revision") != self.revision:
             raise RuntimeError("Saved identity or revision differs; keep the original copy for its progress")
         if self.state.get("pending"):
-            raise RuntimeError("An earlier action was interrupted. Its paid work may still exist. Download the checkpoint and ask your instructor to reconcile it; setup will not reset your budget.")
+            if not (self.process and self.process.poll() is None):
+                self.state["status"] = "Stopped: an earlier action was interrupted. This copy will not start anything new."
+            raise RuntimeError("An earlier action was interrupted, usually because the notebook session ended while it was running. Its paid work may still exist, so this copy will not start anything new and setup will not reset your budget. Your earlier results are still listed under My work. Tell your instructor, who has to check what was left running before this copy can continue.")
         existing = self.ledger()
         if existing and existing.get("limitUsd") != limit:
             raise RuntimeError(f"This copy already has a ${existing.get('limitUsd')} budget. Keep that value when resuming.")
         if existing.get("halted") or existing.get("reservations"):
-            raise RuntimeError("The saved ledger needs reconciliation before another launch")
+            raise RuntimeError("This copy has stopped because the cost of an earlier action is uncertain: it was cancelled, it failed, or it did not report its usage. It will not start anything new until your instructor has checked it.")
         self.results.mkdir(parents=True, exist_ok=True)
         ledger = existing or {"schemaVersion": 1, "limitUsd": limit, "spentEstimateUsd": 0, "reservations": {}, "settled": {}}
         session = "notebook-" + self.env.get("WANDB_NOTEBOOK_SESSION_ID", "")
@@ -319,12 +331,12 @@ with wandb.init(entity=identity['WANDB_ENTITY'],project=identity['WANDB_PROJECT'
             args = ["graph", "--checkpoint", checkpoint, "--execute"]
         else:
             if action == "resume":
-                raise ValueError("Projects 01–06 start fresh trials; choose Run exercise")
+                raise ValueError("Projects 01 to 06 always start a fresh attempt; choose the run action")
             args = ["compare", "--project", task, "--variant", variant, "--repeats", str(repeats), "--source", self.revision, "--execute"]
         if task in ["project-07", "project-08"]:
             exists = Path(checkpoint).exists()
             if exists and action != "resume":
-                raise ValueError("A checkpoint already exists. Inspect it and choose Resume checkpoint.")
+                raise ValueError("This copy has already run this treatment once, and a finished loop or graph cannot be started again in the same copy. Read where it stopped under My work, in Details: checkpoints and approval candidate. To run it again, make a fresh copy of the notebook.")
             if action == "resume":
                 if not exists:
                     raise ValueError("No checkpoint exists to resume")
@@ -333,13 +345,17 @@ with wandb.init(entity=identity['WANDB_ENTITY'],project=identity['WANDB_PROJECT'
 
     def start(self, action, variant, repeats=1, decision=None, sha256=None):
         with self.lock:
-            if not self.state.get("prepared") or self.state.get("pending"):
-                raise RuntimeError("Prepare your workspace and finish the current action first")
+            if self.blocked():
+                raise RuntimeError(self.blocked())
             if action != "decision" and not self.connected:
-                raise RuntimeError("Connect your own sandbox access for this session first")
+                raise RuntimeError("Connect your sandbox access first (step 3). It has to be done again in every new notebook session.")
             ledger = self.ledger()
             if ledger.get("halted") or ledger.get("reservations"):
-                raise RuntimeError("Budget or cleanup needs reconciliation; paid launches stopped")
+                raise RuntimeError("This copy has stopped because the cost of an earlier action is uncertain: it was cancelled, it failed, or it did not report its usage. It will not start anything new until your instructor has checked it.")
+            if action in ("run", "resume") and not any(q.get("passed") for q in self.view()["qualifications"]):
+                # The runner refuses without one, and in Projects 07 and 08 a refused
+                # launch still leaves a checkpoint that blocks the copy for good.
+                raise RuntimeError("Choose Check that everything works first, and wait for it to pass.")
             args = self.command(action, variant, repeats, decision, sha256)
             self.env["FORGE_BUDGET_USD"] = str(ledger["limitUsd"])
             action_id = str(time.time_ns())
@@ -391,12 +407,34 @@ with wandb.init(entity=identity['WANDB_ENTITY'],project=identity['WANDB_PROJECT'
                 self.write()
         return self.view()
 
-    def save_notes(self, prediction, observation, limitation):
+    def save_notes(self, prediction, observation, limitation, minutes=""):
         with self.lock:
-            if self.state.get("pending") or not self.state.get("prepared"):
-                raise RuntimeError("Prepare the workspace and wait for the current action to finish before saving notes")
-            self.state["notes"] = {"prediction": prediction, "observation": observation, "limitation": limitation}
+            if self.blocked():
+                raise RuntimeError(self.blocked())
+            # A fresh runtime shows an empty worksheet. An empty field must not
+            # erase the prediction or notes saved in an earlier session.
+            notes = dict(self.state.get("notes") or {})
+            entries = {"prediction": prediction, "observation": observation, "limitation": limitation, "observedHumanMinutes": minutes}
+            for name, value in entries.items():
+                if str(value or "").strip():
+                    notes[name] = str(value).strip()
+            self.state["notes"] = notes
             self.persist()
+
+    def capture_path(self, trial_id):
+        """Locate the protected grader's own screenshot of a learner attempt."""
+        if not re.fullmatch(r"[a-f0-9-]{36}", str(trial_id)):
+            return None
+        names = ("electron.png", "visible-answer.png") if self.project in ("project-05", "project-06") else ("visible-answer.png", "electron.png")
+        for name in names:
+            path = self.results / str(trial_id) / "grader" / name
+            if path.is_file() and not path.is_symlink() and path.stat().st_size <= 5_000_000:
+                return path
+        return None
+
+    def capture(self, trial_id):
+        path = self.capture_path(trial_id)
+        return path.read_bytes() if path else None
 
     def view(self):
         trials = []
@@ -413,8 +451,13 @@ with wandb.init(entity=identity['WANDB_ENTITY'],project=identity['WANDB_PROJECT'
         for path in self.results.glob("qualification-*/qualification.json") if self.results.exists() else []:
             qualifications.append(json.loads(path.read_text()))
         logs = sorted(self.results.glob("lesson-action-*.log")) if self.results.exists() else []
+        qualifications.sort(key=lambda item: str(item.get("finishedAt") or item.get("startedAt") or ""))
+        # "active" is a process in this runtime. "pending" can also be a marker
+        # restored from a runtime that disappeared; that state must stay downloadable.
+        active = bool(self.process and self.process.poll() is None)
         return {"status": self.state["status"], "destination": "/".join(self.identity[k] for k in ["WANDB_ENTITY", "WANDB_PROJECT"]),
                 "prepared": self.state.get("prepared", False), "sandboxConnected": self.connected, "pending": self.state.get("pending"), "revision": self.revision,
+                "active": active, "captures": [r["id"] for r in trials if isinstance(r.get("id"), str) and self.capture_path(r["id"])],
                 "budget": self.ledger(), "trials": trials, "checkpoints": checkpoints, "qualifications": qualifications,
                 "notes": self.state.get("notes", {}), "progressUrl": self.state.get("progressUrl"),
                 "log": self.redact(logs[-1].read_text(errors="replace")[-12000:]) if logs else ""}

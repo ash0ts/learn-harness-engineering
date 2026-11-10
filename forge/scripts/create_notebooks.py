@@ -14,16 +14,53 @@ from course_packets import ORIGINAL, SLUGS, packet
 
 ROOT = Path(__file__).resolve().parents[2]
 TITLES = [
-    ('00-overview.py', 'overview', 'Forge track: evidence before conclusions', 'Follow all eight projects from a frozen task to a sandbox patch, independent grading, Agent Lens conversation and W&B artifact.'),
-    ('01-minimal-harness.py', 'project-01', '01 · Minimal instructions and explicit harnesses', 'Compare prompt-only work with explicit repository rules on identical application code. Verify the Electron shell and real service pipeline.'),
-    ('02-workspace-docs.py', 'project-02', '02 · An agent-readable workspace', 'Compare two fresh coding sessions with and without workspace documentation. Measure recovered behavior, not inferred time saved.'),
-    ('03-session-recovery.py', 'project-03', '03 · Interrupted-session recovery', 'Persist a patch, discard conversational context, and resume indexing and grounded Q&A from files. Inspect the handoff and held-out evidence.'),
-    ('04-runtime-feedback.py', 'project-04', '04 · Runtime evidence and the seeded defect', 'Find the long-document empty-chunk defect using actual import, indexing and retrieval. Check architecture guardrails and Electron independently.'),
-    ('05-role-separation.py', 'project-05', '05 · One feature, three role arrangements', 'Compare single role, generator/evaluator, and planner/generator/evaluator on the same ConversationHistory upgrade and total model-turn budget.'),
-    ('06-capstone.py', 'project-06', '06 · Capstone reliability', 'Verify import, indexing, Q&A, feedback and reset with real services and Electron. Historical simulated benchmarks are not evidence in this track.'),
-    ('07-bounded-loops.py', 'project-07', '07 · Goal, timer and maker-checker loops', 'Inspect durable checkpoints, separate review contexts, interventions and stop conditions. Accelerated timer tests are distinct from the real two-hour exercise.'),
-    ('08-state-machine.py', 'project-08', '08 · Checkpointed graphs and human approval', 'Follow conditional routing, parallel verification, rollback and retry. A passing patch pauses at approval until a human submits a checksum-bound decision.'),
+    ('00-overview.py', 'overview', 'Forge track: evidence before conclusions', 'In each of eight projects on one small app, you change what surrounds a coding agent, then check what it delivered.'),
+    ('01-minimal-harness.py', 'project-01', '01 · Minimal instructions and explicit harnesses', 'Ask an agent to build the app shell twice, once with only the task and once with a small harness, and compare what you get.'),
+    ('02-workspace-docs.py', 'project-02', '02 · An agent-readable workspace', 'Give an agent one task across two sessions, with and without workspace docs, and see what the second session can recover from the files.'),
+    ('03-session-recovery.py', 'project-03', '03 · Interrupted-session recovery', 'Break the work into one feature, one check and one commit at a time, then restart from a clean state.'),
+    ('04-runtime-feedback.py', 'project-04', '04 · Runtime evidence and the seeded defect', 'Find a planted indexing defect, with and without feedback from the running app, and repair only what is broken.'),
+    ('05-role-separation.py', 'project-05', '05 · One feature, three role arrangements', 'Build one feature three ways on the same budget: with one agent, with a maker and a checker, and with a planner, maker and checker.'),
+    ('06-capstone.py', 'project-06', '06 · Capstone reliability', 'Run a fixed set of tasks with your full harness, clean up, rerun, then remove one piece at a time to see what each is for.'),
+    ('07-bounded-loops.py', 'project-07', '07 · Goal, timer and maker-checker loops', 'Let a loop keep the agent working: a goal loop, a two-hour monitor, and a maker and checker run by a controller.'),
+    ('08-state-machine.py', 'project-08', '08 · Checkpointed graphs and human approval', 'Turn the loop into an explicit graph with saved state, parallel checks, rollback, and a pause for a human decision.'),
 ]
+# What each treatment actually stages; see forge/src/staging.ts and trial.ts.
+NOTES = {
+    'minimal': 'the agent gets the task and the unfinished app, with no instructions file.',
+    'explicit': 'adds a short `AGENTS.md` and a one-paragraph architecture note. The rules include: inspect before editing, keep the main, preload and renderer boundaries, work one acceptance criterion at a time, test the real services and Electron, and record unfinished work honestly.',
+    'workspace-docs': 'adds `AGENTS.md`, an architecture note, and a rule to write `session-handoff.md` before a session ends and read it first on resume.',
+    'recovery': 'adds `AGENTS.md`, an architecture note, and a rule to write `session-handoff.md` before a session ends and read it first on resume.',
+    'runtime-feedback': 'adds `AGENTS.md`, an architecture note, and a small script the agent can run to see the real chunks and indexing status.',
+    'single-role': 'one agent plans, edits and checks with all 24 model calls, and no instructions file.',
+    'gen-eval': 'a maker (10 model calls), a read-only checker (4), then a maker revision (10), with `AGENTS.md` and an architecture note.',
+    'plan-gen-eval': 'a read-only planner (4 model calls), a maker (8), a read-only checker (4), then a maker revision (8), with `AGENTS.md` and an architecture note.',
+    'capstone': 'adds `AGENTS.md`, an architecture note, and a rule to write `session-handoff.md` before a session ends and read it first on resume.',
+    'goal': 'one attempt by the agent. In the lab a goal loop retries until the check passes or a limit is reached; here it stops after this one round.',
+    'timer': 'the same single attempt as goal, after which the loop waits for its ten-minute deadline before it finishes.',
+    'maker-checker': 'one round of a maker (10 model calls), a read-only checker (4), then a maker revision (10).',
+    'graph': 'a planned, checkpointed route with up to three candidates. Each is graded, then verified in two separate sandboxes, one for the services and one for the app window. The graph pauses for your approval when a candidate passes.',
+}
+TWO_SESSIONS = {'project-02', 'project-03'}
+
+def run_facts(saved, primary):
+    """Observed duration and estimated cost of this lesson's recorded attempts."""
+    from datetime import datetime
+    rows = [r for r in saved.get('trials', []) if r['id'] in primary] or saved.get('trials', [])
+    # Attempts that stopped early or lack usage data do not describe a typical run.
+    rows = [r for r in rows if r.get('outcome') in ('passed', 'task_failed')]
+    minutes, costs = [], []
+    for row in rows:
+        try:
+            minutes.append((datetime.fromisoformat(row['finishedAt'].replace('Z', '+00:00')) - datetime.fromisoformat(row['startedAt'].replace('Z', '+00:00'))).total_seconds() / 60)
+        except (KeyError, TypeError, ValueError, AttributeError):
+            pass
+        cost = row.get('reconciledEstimateUsd') or row.get('estimatedCostUsd')
+        if cost:
+            costs.append(cost)
+    if not minutes or not costs:
+        return None
+    return {'attempts': len(rows), 'minMinutes': max(1, round(min(minutes))), 'maxMinutes': max(1, round(max(minutes) + 0.5)), 'minUsd': round(min(costs), 2), 'maxUsd': round(max(costs) + 0.005, 2)}
+
 VARIANTS = {'overview':['minimal','explicit'],'project-01':['minimal','explicit'],'project-02':['minimal','workspace-docs'],'project-03':['minimal','recovery'],'project-04':['minimal','runtime-feedback'],'project-05':['single-role','gen-eval','plan-gen-eval'],'project-06':['minimal','capstone'],'project-07':['goal','timer','maker-checker'],'project-08':['graph']}
 
 def project_snapshot(snapshot, project):
@@ -61,7 +98,13 @@ def generate(runner_commit=None, projects=None, refresh_evidence=False):
         sections=lesson.split('<!-- cell -->')
         nav=' · '.join(f'[{"Overview" if i==0 else f"{i:02}"}](https://forge.coreweave.com/notebooks/'+urllib.parse.quote('Tm90ZWJvb2s6MTUz'+['MTM=','MTQ=','MTU=','MTY=','MTc=','MTg=','MTk=','MjA=','MjE='][i],safe='')+')' for i in range(9))
         # Notebook IDs are stable; no notebook creation or HTML import is involved.
-        intro='# '+title+'\n\n'+nav+'\n\n**Course lab + recorded Forge case.** Read and inspect saved evidence first. Coding trials require an explicit paid action; notebook runtime compute is separate.\n\n'+description+'\n\n[Prepare my workspace](#run-this-lesson-yourself) · [Inspect my results](#my-work) · [Write my observations](#your-observation-worksheet)'
+        start=('**Start here**\n\n'
+               '1. **Make your own copy.** Open the **⋯** menu at the top right, choose **Copy to project**, and pick a private project you can write to. Your copy opens by itself.\n'
+               '2. **Load the page.** In your copy, click the yellow **▶** button at the bottom right of the editor. The figures, tables and controls below appear only after the cells have run. This makes no model call and starts no coding attempt.\n'
+               '3. **Read, inspect, run.** Read the lab, open a recorded attempt in Agent Lens to see what the agent did, then run an attempt of your own.\n\n'
+               'Jump to [recorded attempts](#inspect-one-attempt) · [run this lesson yourself](#run-this-lesson-yourself) · [my work](#my-work) · [my observations](#your-observation-worksheet). These links work once the cells have run.\n\n'
+               'Each lesson is a separate notebook with its own copy and spending limit. The lesson links above open the course originals.')
+        intro='# '+title+'\n\n'+nav+'\n\n'+description+'\n\n'+start
         cells=[lc.IMPORTS,lc.CONSTANTS,markdown_cell(intro)]
         cells += [markdown_cell(part.strip()) for part in sections[:-1]]
         for image in evidence['assets'][project]:
@@ -71,14 +114,25 @@ def generate(runner_commit=None, projects=None, refresh_evidence=False):
             mime='image/svg+xml' if path.suffix=='.svg' else 'image/jpeg' if path.suffix=='.jpg' else 'image/png'
             uri='data:'+mime+';base64,'+base64.b64encode(data).decode()
             cells.append('def _(mo):\n    mo.image('+repr(uri)+', alt='+repr(image['caption'])+', caption='+repr(image['caption'])+', width="100%")\n    return')
-        cells += [lc.RESULTS,lc.SELECTOR,lc.DETAIL,lc.LIFECYCLE,markdown_cell(sections[-1].strip()),lc.WORKSHEET,lc.DOWNLOADS]
         original='https://github.com/walkinglabs/learn-harness-engineering/blob/'+ORIGINAL+'/docs/en/projects/'+(SLUGS[index]+'/' if index else '')+'index.md'
         article='https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-publication/docs/en/forge/'+('index.md' if index==0 else filename.replace('.py','.md'))
-        resources='## Sources and further inspection\n\n- [Frozen original course brief]('+original+') · upstream revision `'+ORIGINAL+'`.\n- [Long-form Forge case study]('+article+').\n- [Visual evidence workspace](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=su19wan3xra).\n- [Primary comparison dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=dfs83wdpatt).\n- [Execution and publication audit](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=l9e45ofb461).\n\nSaved-case runner revision: `'+commit+'`. Figures and captures are embedded native images with source checksums in `forge/lessons/evidence.json`; no website import is needed. Original records remain unchanged.'
+        guide='https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-publication/docs/en/forge/classroom.md'
+        workspace='https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge'
+        resources=('## Sources and further reading\n\n'
+                   '- [Step-by-step guide to running these lessons]('+guide+'), including costs and what to do if a session is interrupted.\n'
+                   '- [All recorded agent conversations in Agent Lens](https://forge.coreweave.com/agent-lens/wandb/learn-harness-engineering-forge/conversations).\n'
+                   '- [The original course brief for this project]('+original+'), frozen at upstream revision `'+ORIGINAL[:12]+'`.\n'
+                   '- [The long-form write-up of the recorded Forge case]('+article+').\n'
+                   '- Dashboards for the recorded attempts: [evidence]('+workspace+'?nw=su19wan3xra) · [main comparison]('+workspace+'?nw=dfs83wdpatt) · [execution audit]('+workspace+'?nw=l9e45ofb461).\n\n'
+                   'The Agent Lens and dashboard links open the course\'s private project, so you need view access to it. Your own attempts in this copy run with course runner revision `'+commit[:12]+'`. Each recorded attempt shows its own source revision under **Inspect one attempt**.')
         helper=(ROOT/'forge/scripts/learner_workspace.py').read_text()
         helper_cell='def _():\n    def _load_learner():\n'+textwrap.indent(helper,'        ')+'\n        return LessonWorkspace\n    LessonWorkspace = _load_learner()\n    return (LessonWorkspace,)'
-        cells += [markdown_cell(resources),helper_cell,*learner.CELLS]
-        replacements={'__PROJECT__':repr(project),'__COMMIT__':repr(commit),'__SAVED__':repr(json.dumps(saved,ensure_ascii=False)),'__VARIANTS__':repr(VARIANTS[project]),'__PRIMARY__':repr(evidence['primaryTrialIds']),'__PACKET__':repr(json.dumps(packet(index,lesson),ensure_ascii=False))}
+        # Reading order: lab, recorded attempts, then the learner's own run with
+        # the prediction before it and the explanation after it.
+        cells += [lc.RESULTS,lc.SELECTOR,lc.DETAIL,lc.LIFECYCLE,helper_cell,*learner.SETUP_CELLS,lc.PREDICTION,*learner.RUN_CELLS,
+                  lc.WORKSHEET,*learner.SAVE_CELLS,lc.DOWNLOADS,learner.DOWNLOAD,markdown_cell(sections[-1].strip()),markdown_cell(resources)]
+        notes={name:(('two fresh sessions; ' if project in TWO_SESSIONS else '')+NOTES[name]) for name in VARIANTS[project]}
+        replacements={'__PROJECT__':repr(project),'__COMMIT__':repr(commit),'__SAVED__':repr(json.dumps(saved,ensure_ascii=False)),'__VARIANTS__':repr(VARIANTS[project]),'__PRIMARY__':repr(evidence['primaryTrialIds']),'__PACKET__':repr(json.dumps(packet(index,lesson),ensure_ascii=False)),'__NOTES__':repr(notes),'__FACTS__':repr(run_facts(saved,evidence['primaryTrialIds']))}
         text='''# /// script
 # requires-python = ">=3.11"
 # dependencies = [
