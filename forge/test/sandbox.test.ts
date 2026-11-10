@@ -4,8 +4,18 @@ import {mkdtemp, readFile} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import type {SandboxClient, Sandbox} from '@coreweave/cwsandbox';
-import {withWorkspace,runSandboxCommand,disposeSandboxClient} from '../src/sandbox.js';
+import {withWorkspace,runSandboxCommand,disposeSandboxClient,sandboxLookupTag} from '../src/sandbox.js';
 import {config} from '../src/config.js';
+
+test('long control IDs use bounded stable lookup tags and retain their full identity',async()=>{
+ const id='control-project-01-baseline-43c63357-a96b-437a-aa01-c832eebace8e',tag=sandboxLookupTag(id);
+ assert.ok(tag.length<=59);assert.match(tag,/^[A-Za-z0-9._-]+$/);assert.equal(tag,sandboxLookupTag(id));assert.notEqual(tag,sandboxLookupTag(id+'x'));
+ const dir=await mkdtemp(join(tmpdir(),'forge-tag-'));let created:any;
+ const sandbox={sandboxId:'tag-test',wait:async()=>{},commands:{run:async()=>({stdout:''})},stop:async()=>{}} as unknown as Sandbox;
+ await withWorkspace({config:config({WANDB_ENTITY:'test',WANDB_API_KEY:'test'}),image:`image@sha256:${'a'.repeat(64)}`,trialId:id,evidenceDir:dir,slotDir:join(dir,'slots'),client:{create:async(options:any)=>{created=options;return sandbox;}} as unknown as SandboxClient},async()=>{});
+ assert.deepEqual(created.tags,['harness-course',tag]);assert.equal(created.annotations['course.trial'],id);
+ assert.equal(JSON.parse(await readFile(join(dir,'sandbox.json'),'utf8')).lookupTag,tag);
+});
 
 test('failed tasks still collect patches and confirm termination', async () => {
   const evidenceDir = await mkdtemp(join(tmpdir(), 'forge-test-'));
