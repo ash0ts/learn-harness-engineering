@@ -14,6 +14,26 @@ export interface Operation {
   requests:Record<string,{status:'reserved'|'reported'|'unknown';inputTokens?:number;outputTokens?:number;payloadBytes:number}>;
   events:Array<{at:string;event:string;detail?:string}>;
 }
+/** The Python coordinator reads this same schema from the pinned checkout. */
+let schemaPromise:Promise<any>|undefined;
+export async function validateOperation(value:unknown){
+  schemaPromise??=readFile(new URL('../operation.schema.json',import.meta.url),'utf8').catch(error=>{if(error.code!=='ENOENT')throw error;return readFile(new URL('../../operation.schema.json',import.meta.url),'utf8');}).then(JSON.parse);
+  const schema=await schemaPromise;
+  function validate(rule:any,item:any,path:string){
+    if('const'in rule&&item!==rule.const||rule.enum&&!rule.enum.includes(item))throw new Error(`Invalid operation value at ${path}`);
+    if(rule.type){const valid=rule.type==='object'?item!==null&&typeof item==='object'&&!Array.isArray(item):rule.type==='array'?Array.isArray(item):rule.type==='integer'?Number.isInteger(item):typeof item===rule.type;if(!valid)throw new Error(`Invalid operation type at ${path}`);}
+    if(rule.minimum!=null&&item<rule.minimum||rule.pattern&&!new RegExp(rule.pattern).test(item))throw new Error(`Invalid operation constraint at ${path}`);
+    if(rule.type==='object'){
+      for(const key of rule.required??[])if(!(key in item))throw new Error(`Missing operation field ${path}.${key}`);
+      for(const [key,child]of Object.entries(item)){if(child===undefined&&!rule.required?.includes(key))continue;const definition=rule.properties?.[key]??(typeof rule.additionalProperties==='object'?rule.additionalProperties:undefined);if(definition)validate(definition,child,`${path}.${key}`);}
+    }
+    if(rule.items)item.forEach((child:any,index:number)=>validate(rule.items,child,`${path}[${index}]`));
+  }
+  validate(schema,value,'operation');
+  const op=value as Operation;
+  for(const request of Object.values(op.requests))if(request.status==='reported'&&(request.inputTokens===undefined||request.outputTokens===undefined))throw new Error('Reported usage requires both token counts');
+}
+
 export function operationFile(root:string,id:string) {
   if(!/^[a-zA-Z0-9][a-zA-Z0-9_-]{0,100}$/.test(id))throw new Error('Invalid operation ID');
   return join(root,'operations',`${id}.json`);
@@ -21,7 +41,7 @@ export function operationFile(root:string,id:string) {
 export async function updateOperation(root:string,id:string,change:(op:Operation)=>void) {
   const file=operationFile(root,id),lock=file+'.lock';await mkdir(join(root,'operations'),{recursive:true});
   for(let i=0;;i++){try{await mkdir(lock);break;}catch(e){if((e as NodeJS.ErrnoException).code!=='EEXIST'||i===100)throw e;await delay(20);}}
-  try {const op:Operation=JSON.parse(await readFile(file,'utf8'));if(op.schemaVersion!==2)throw new Error('Unsupported operation version');change(op);op.updatedAt=new Date().toISOString();await writeJson(file,op);return op;}
+  try {const op:Operation=JSON.parse(await readFile(file,'utf8'));await validateOperation(op);change(op);op.updatedAt=new Date().toISOString();await validateOperation(op);await writeJson(file,op);return op;}
   finally {await rm(lock,{recursive:true});}
 }
 export async function createOperation(root:string,seed:Pick<Operation,'id'|'kind'|'sourceCommit'|'protocolSha256'|'identity'>) {
@@ -31,7 +51,7 @@ export async function createOperation(root:string,seed:Pick<Operation,'id'|'kind
   const op:Operation={schemaVersion:2,...seed,phase:'prepared',createdAt:now,updatedAt:now,cleanup:'pending',telemetry:'pending',publication:seed.kind==='qualification'?'not_required':'pending',sandboxIds:[],reservationIds:[],requests:{},evidence:{},events:[]};
   // Exclusive creation survives checkpoint archives, which need not retain empty
   // lock directories. An interrupted creation blocks recovery rather than replay.
-  const handle=await open(file,'wx',0o600);
+  await validateOperation(op);const handle=await open(file,'wx',0o600);
   try {await handle.writeFile(JSON.stringify(op,null,2)+'\n');await handle.sync();}finally{await handle.close();}
   return op;
 }

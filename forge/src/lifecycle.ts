@@ -1,5 +1,6 @@
 import {spawn} from 'node:child_process';
 import {open} from 'node:fs/promises';
+import {setTimeout as delay} from 'node:timers/promises';
 import {writeJson} from './records.js';
 
 export async function deadline<T>(work:Promise<T>,ms:number,label:string):Promise<T> {
@@ -8,7 +9,7 @@ export async function deadline<T>(work:Promise<T>,ms:number,label:string):Promis
   finally {clearTimeout(timer);}
 }
 
-export interface ChildResult {exitCode:number;signal:string|null;forced:boolean;startedAt:string;finishedAt:string}
+export interface ChildResult {exitCode:number;signal:string|null;forced:boolean;startedAt:string;finishedAt:string;cleanupVerified?:boolean;error?:string}
 /** Bound both the work and its shutdown; a forced exit is always evidence. */
 export async function boundedChild(executable:string,args:string[],options:{cwd:string;log?:string;receipt?:string;timeoutMs:number;graceMs?:number;env?:NodeJS.ProcessEnv;signal?:AbortSignal}):Promise<ChildResult> {
   const file=options.log?await open(options.log,'a',0o600):undefined;
@@ -20,11 +21,20 @@ export async function boundedChild(executable:string,args:string[],options:{cwd:
   options.signal?.addEventListener('abort',stop,{once:true});
   try {
     const result=await new Promise<ChildResult>((resolve,reject)=>{
-      child.once('error',reject);
+      child.once('error',error=>resolve({exitCode:1,signal:null,forced:false,startedAt,finishedAt:new Date().toISOString(),cleanupVerified:!child.pid,error:String(error)}));
       child.once('close',(code,signal)=>resolve({exitCode:code??1,signal,forced,startedAt,finishedAt:new Date().toISOString()}));
       timer=setTimeout(stop,options.timeoutMs);
       if(options.signal?.aborted)stop();
     });
+    clearTimeout(timer);clearTimeout(killTimer);
+    const alive=()=>{if(!child.pid)return false;try{process.kill(-child.pid,0);return true;}catch(error){if((error as NodeJS.ErrnoException).code==='ESRCH')return false;throw error;}};
+    if(alive()){
+      result.forced=true;kill('SIGTERM');const until=Date.now()+(options.graceMs??15000);
+      while(alive()&&Date.now()<until)await delay(25);
+      if(alive()){kill('SIGKILL');const end=Date.now()+2000;while(alive()&&Date.now()<end)await delay(25);}
+    }
+    result.cleanupVerified=!alive();result.finishedAt=new Date().toISOString();
+    if(!result.cleanupVerified){result.forced=true;result.error='Child process group termination is unverified';}
     if(options.receipt)await writeJson(options.receipt,result);
     return result;
   } finally {clearTimeout(timer);clearTimeout(killTimer);options.signal?.removeEventListener('abort',stop);await file?.close();}

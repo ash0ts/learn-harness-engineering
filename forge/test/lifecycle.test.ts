@@ -4,7 +4,7 @@ import {mkdtemp,readFile,rm,writeFile,symlink} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {boundedChild,deadline} from '../src/lifecycle.js';
-import {createOperation,evidenceReference,verifyEvidence} from '../src/operations.js';
+import {createOperation,evidenceReference,verifyEvidence,validateOperation} from '../src/operations.js';
 
 test('a lingering child is bounded and its forced shutdown remains explicit',async()=>{
   const dir=await mkdtemp(join(tmpdir(),'course-shutdown-'));
@@ -21,4 +21,13 @@ test('operation IDs cannot launch twice and evidence is portable but immutable',
     await writeFile(file,'changed');await assert.rejects(verifyEvidence(dir,ref),/checksum/);
     await symlink(file,join(dir,'link'));await assert.rejects(evidenceReference(dir,join(dir,'link')),/symlink/);await assert.rejects(verifyEvidence(dir,{path:'../outside',sha256:''}),/Unsafe/);
   } finally {await rm(dir,{recursive:true,force:true});}
+});
+
+test('a spawn failure has a receipt rather than a missing child outcome',async()=>{
+ const dir=await mkdtemp(join(tmpdir(),'course-spawn-'));
+ try{const result=await boundedChild('/does-not-exist',[],{cwd:dir,receipt:join(dir,'child.json'),timeoutMs:100});assert.equal(result.exitCode,1);assert.equal(result.cleanupVerified,true);assert.match(result.error??'',/ENOENT/);assert.equal(JSON.parse(await readFile(join(dir,'child.json'),'utf8')).exitCode,1);}finally{await rm(dir,{recursive:true});}
+});
+test('operation contract rejects malformed usage and source revisions',async()=>{
+ const dir=await mkdtemp(join(tmpdir(),'course-contract-'));
+ try{const op=await createOperation(dir,{id:'contract',kind:'trial',sourceCommit:'a'.repeat(40),protocolSha256:'b'.repeat(64),identity:{entity:'class',project:'private'}});op.requests.bad={status:'reported',payloadBytes:10,inputTokens:-1,outputTokens:1};await assert.rejects(validateOperation(op),/constraint/);delete op.requests.bad;op.sourceCommit='HEAD';await assert.rejects(validateOperation(op),/constraint/);}finally{await rm(dir,{recursive:true});}
 });

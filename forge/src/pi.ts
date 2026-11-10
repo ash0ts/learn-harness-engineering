@@ -87,7 +87,7 @@ export async function runPi(c: Config, request: AgentRequest) {
     settlement=response.result().then(async message=>{
       if(!dispatched)return;
       const inputTokens=message.usage.input+message.usage.cacheRead+message.usage.cacheWrite,outputTokens=message.usage.output;
-      await request.afterRequest?.({request:dispatched,payloadBytes,inputTokens,outputTokens,complete:inputTokens+outputTokens>0});
+      await request.afterRequest?.({request:dispatched,payloadBytes,inputTokens,outputTokens,complete:[inputTokens,outputTokens].every(n=>Number.isFinite(n)&&n>=0)&&inputTokens+outputTokens>0});
     });
     // Keep the rejection observed while Pi consumes the stream. It is rethrown
     // at the next request or final settlement, never swallowed by an extension.
@@ -115,12 +115,13 @@ export async function runPi(c: Config, request: AgentRequest) {
       errors: errors.map(m => m.role === 'assistant' ? m.errorMessage : undefined)};
   } finally {
     request.signal?.removeEventListener('abort', abort);
+    const cleanup:PromiseSettledResult<unknown>[]=await Promise.allSettled([deadline(session.extensionRunner.emit({type:'session_shutdown',reason:'quit'}),30000,'Pi session shutdown')]);
     session.dispose();
-    const cleanup=await Promise.allSettled([
+    cleanup.push(...await Promise.allSettled([
       deadline(settlement,30000,'request settlement'),
       deadline(flushOTel(),30000,'Pi trace flush'),
       deadline(flush(),30000,'Pi Weave flush'),
-    ]);
+    ]));
     const provider=getWeaveTracerProvider();
     if(provider)cleanup.push(...await Promise.allSettled([deadline(provider.shutdown(),30000,'Pi trace shutdown')]));
     clearWeaveTracerProvider();
