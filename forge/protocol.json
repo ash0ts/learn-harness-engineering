@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "protocolRevision": 4,
-  "uiAcceptance": "await-async-ipc-and-visible-answer",
+  "protocolRevision": 5,
+  "uiAcceptance": "button-file-picker-restart-and-visible-reset",
   "model": "Qwen/Qwen3.6-35B-A3B",
   "inferenceUrl": "https://api.inference.wandb.ai/v1",
   "contextWindow": 262144,
@@ -23,12 +23,16 @@
     "agentTimeoutSeconds": 600
   },
   "pricing": {
-    "verifiedAt": "2026-11-06",
+    "verifiedAt": "2026-11-10",
     "source": "https://coreweave.com/forge-pricing/inference-agents",
     "inputPerMillionUsd": 0.25,
     "outputPerMillionUsd": 1.25,
     "cpuHourUsd": 0.128,
     "memoryGiBHourUsd": 0.0212,
     "notebookHourUsd": null
-  }
+  },
+  "publication": "idempotent-stable-operation-and-artifact",
+  "controlsRequired": true,
+  "referenceRepairsVisibleToAgents": false,
+  "roleDeliverable": "final-call-within-original-allowance"
 }
