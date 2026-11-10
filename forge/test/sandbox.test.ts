@@ -1,10 +1,13 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdtemp, readFile} from 'node:fs/promises';
+import {mkdtemp, readFile, writeFile, access} from 'node:fs/promises';
+import {execFile} from 'node:child_process';
+import {promisify} from 'node:util';
+import {setTimeout as delay} from 'node:timers/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import type {SandboxClient, Sandbox} from '@coreweave/cwsandbox';
-import {withWorkspace,runSandboxCommand,disposeSandboxClient,sandboxLookupTag} from '../src/sandbox.js';
+import {withWorkspace,runSandboxCommand,disposeSandboxClient,sandboxLookupTag,commandSupervisor,terminateCommandGroup,SandboxCommandError} from '../src/sandbox.js';
 import {config} from '../src/config.js';
 
 test('long control IDs use bounded stable lookup tags and retain their full identity',async()=>{
@@ -32,16 +35,54 @@ test('failed tasks still collect patches and confirm termination', async () => {
 
 test('a timed-out stream also terminates its remote process group with an independent deadline',async()=>{
   const calls:string[]=[];
-  const sandbox={files:{write:async()=>{}},commands:{start:async()=>({wait:async()=>{throw new Error('wait timed out');},cancel:async()=>{calls.push('stream cancel');}}),run:async(command:string[],options:{signal?:AbortSignal})=>{calls.push(command[0]);assert.equal(options.signal,undefined);return {exitCode:0};}}} as unknown as Sandbox;
+  const sandbox={files:{write:async()=>{},read:async()=>Buffer.from('{"state":"running","processGroup":42}')},commands:{start:async()=>({wait:async()=>{throw new Error('wait timed out');},cancel:async()=>{calls.push('stream cancel');}}),run:async(command:string[],options:{signal?:AbortSignal})=>{calls.push(command[0]);assert.equal(options.signal,undefined);return {exitCode:0,stdout:'{"terminated":true}'};}}} as unknown as Sandbox;
   await assert.rejects(runSandboxCommand(sandbox,'sleep 60',{timeoutMs:1}),/wait timed out/);
   assert.deepEqual(calls,['stream cancel','python3']);
 });
 
 test('failed remote cancellation cannot be reported as a completed command',async()=>{
   const calls:string[]=[];
-  const sandbox={files:{write:async()=>{}},commands:{start:async()=>({wait:async()=>{throw new Error('timeout');},cancel:async()=>{}}),run:async()=>({exitCode:1})},stop:async()=>{calls.push('stop');},wait:async()=>{calls.push('terminal');}} as unknown as Sandbox;
+  const sandbox={files:{write:async()=>{},read:async()=>Buffer.from('{"state":"running","processGroup":42}')},commands:{start:async()=>({wait:async()=>{throw new Error('timeout');},cancel:async()=>{}}),run:async()=>({exitCode:1})},stop:async()=>{calls.push('stop');},wait:async()=>{calls.push('terminal');}} as unknown as Sandbox;
   await assert.rejects(runSandboxCommand(sandbox,'sleep 60',{timeoutMs:1}),/cancellation unverified/);
   assert.deepEqual(calls,['stop','terminal']);
+});
+
+test('execution deadline waits for the remote PID; slow gateway startup is not execution',async()=>{
+ let reads=0;const waits:Array<any>=[];
+ const sandbox={files:{write:async()=>{},read:async()=>Buffer.from(JSON.stringify(++reads===1?{state:'pending'}:{state:'running',processGroup:42}))},commands:{start:async(_command:any,options:any)=>{assert.ok(options.timeoutMs>30000);return {status:'running',wait:async(options:any)=>{waits.push(options);if(options)assert.equal(reads,2);return {exitCode:0};}};}}} as unknown as Sandbox;
+ assert.equal((await runSandboxCommand(sandbox,'true',{timeoutMs:500})).exitCode,0);
+ assert.equal(waits[1].timeoutMs,500);
+});
+
+test('ambiguous start failure still cancels the durable pending launch',async()=>{
+ let cleaned=false;
+ const sandbox={files:{write:async()=>{}},commands:{start:async()=>{throw new Error('gateway unavailable');},run:async()=>{cleaned=true;return {exitCode:0,stdout:'{"terminated":true,"started":false}'};}}} as unknown as Sandbox;
+ await assert.rejects(runSandboxCommand(sandbox,'sleep 60',{timeoutMs:500}),e=>e instanceof SandboxCommandError&&!e.started&&e.cancellationVerified);
+ assert.equal(cleaned,true);
+});
+
+const python=promisify(execFile);
+test('pending cancellation prevents a delayed real supervisor from launching',async()=>{
+ const root=await mkdtemp(join(tmpdir(),'forge-pending-')),marker=join(root,'marker'),proof=join(root,'launched');
+ await writeFile(marker,JSON.stringify({state:'pending'}));
+ const cleanup=await python('python3',['-c',terminateCommandGroup,marker]);
+ assert.equal(JSON.parse(cleanup.stdout).started,false);
+ await assert.rejects(python('python3',['-c',commandSupervisor,marker,`touch '${proof}'`]),(e:any)=>e.code===125);
+ await assert.rejects(access(proof));
+});
+
+test('real running command and descendants terminate and repeated cleanup is safe',async()=>{
+ const root=await mkdtemp(join(tmpdir(),'forge-running-')),marker=join(root,'marker');
+ await writeFile(marker,JSON.stringify({state:'pending'}));
+ const child=python('python3',['-c',commandSupervisor,marker,'sleep 60 & wait']).then(()=>null,e=>e);
+ try{
+  for(let i=0;i<100&&JSON.parse(await readFile(marker,'utf8')).state==='pending';i++)await delay(20);
+  assert.equal(JSON.parse(await readFile(marker,'utf8')).state,'running');
+  const cleanup=await python('python3',['-c',terminateCommandGroup,marker]);
+  assert.equal(JSON.parse(cleanup.stdout).started,true);
+  assert.equal(JSON.parse(cleanup.stdout).terminated,true);
+  assert.equal(JSON.parse((await python('python3',['-c',terminateCommandGroup,marker])).stdout).terminated,true);
+ }finally{await python('python3',['-c',terminateCommandGroup,marker]);await child;}
 });
 
 test('unverified cleanup overrides a successful task', async () => {
