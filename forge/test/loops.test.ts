@@ -33,3 +33,13 @@ test('a retry receives durable independent checker feedback without carrying con
     assert.equal(result.status,'passed');assert.equal(result.rounds.length,2);
   }finally{await rm(dir,{recursive:true,force:true});}
 });
+
+test('restart recovers completed work without replay and retains the original two-hour deadline',async()=>{
+  const dir=await mkdtemp(join(tmpdir(),'loop-resume-'));const s={...state('timer'),status:'blocked' as const,pendingTrialId:'completed-before-notebook-loss'};
+  let runs=0;
+  try{
+    const result=await driveLoop(join(dir,'checkpoint.json'),s,{now:()=>7200001,sleep:async()=>{throw new Error('expired timer must not sleep');},recover:async id=>{assert.equal(id,'completed-before-notebook-loss');return {record:{outcome:'passed'} as TrialRecord,patch:'prior/candidate.diff',patchSha256:'checksum'};},run:async()=>{runs++;throw new Error('paid replay forbidden');}});
+    assert.equal(result.status,'deadline');assert.equal(result.deadlineAt,7200000);assert.equal(result.rounds.length,1);assert.equal(result.candidatePatch,'prior/candidate.diff');assert.equal(runs,0);
+    assert.equal(result.interventions[0].source,'observed');
+  }finally{await rm(dir,{recursive:true,force:true});}
+});
