@@ -1,53 +1,53 @@
-## Leave a workspace someone else can understand
+## Leave a workspace someone else can pick up
 
-An agent returns for session two with no memory of session one. The files are still there. Is that enough to finish the feature without you retelling the story?
+An agent comes back for a second session with no memory of the first, but the files are still there. Can it finish the feature from the files alone, or do you have to retell the story?
 
-Extend the knowledge-base app so a user can import a document, inspect its details, and find it again after a restart. The exercise compares a thin workspace with one containing useful architecture and product documentation, a feature list, and a session handoff.
+In this project you give an agent the same task in two workspaces: make the app import a document, show its details, and still have it after a restart. One workspace is thin, and the other has architecture and product notes, a feature list, and a handoff written at the end of the first session.
 
-**Your deliverable:** the same import/detail/persistence task across two fresh sessions in each condition, plus the files that let session two find the unfinished work. Predict which fact the fresh session will struggle to recover.
+**What you hand in:** the same task done across two fresh sessions in each workspace, plus the files that let the second session find the unfinished work. Before you start, predict which fact the second session will have the most trouble recovering.
 
 <!-- cell -->
-## Make documentation answer operational questions
+## The lab: write docs that answer a newcomer's questions
 
-Start from identical Project 02 application code in isolated workspaces. Keep the task and total allowance fixed across the two conditions. The second session must be a new conversation; retaining a chat summary in hidden context would answer the question you are trying to test.
+Start both workspaces from the same Project 02 app code, the starter linked from the original course brief under **Sources and further reading**, and keep them separate. Give each the same task and the same total allowance across both sessions, and decide now where session one will stop. The second session has to be a brand-new conversation, because if a summary of the first chat is still in the agent's context, you are no longer testing the files alone.
 
-In the documented condition, write the smallest useful answers to these questions:
+In the documented workspace, write the shortest answers you can to these:
 
 - Where does import enter the app, and which service owns persistence?
-- What does the renderer receive through preload? What must stay out of renderer code?
-- What should a document detail view display?
+- What does the renderer get through the preload bridge? What has to stay out of renderer code?
+- What should the document detail view show?
 - Which feature is unfinished, and which exact command checks it?
-- What changed in session one? What failed? What should session two inspect first?
+- What changed in session one? What failed? What should session two look at first?
 
-Put stable facts in architecture/product docs, acceptance state in the feature list, and recent observations in the handoff. Copying the entire transcript into every file makes the next session search the same story three times. Record paths and evidence that another process can actually open.
-
-<!-- cell -->
-## Break the conversation deliberately
-
-1. Run session one against the frozen import/detail/persistence task. Stop at the predeclared boundary, even if it leaves a partially completed feature.
-2. Save the workspace and exported patch. In the documented condition, require an honest handoff identifying incomplete work and failed checks.
-3. Discard conversational context. Start a fresh agent in the same saved workspace, with the original task and only the condition's allowed files.
-4. Observe what it reads before editing. Does it find the entry point? Does it repeat completed work? Does it verify the prior session's claims?
-5. Grade the final exported patch in a fresh environment. Import through the actual file-picker flow, inspect the detail view, restart, and verify persisted content.
-
-One two-session attempt is one trial. Session one and session two are dependent observations, not two independent repeats. If a human supplies missing context, record the intervention and its content.
+Put facts that stay true in the architecture and product notes, what has and hasn't been accepted in the feature list, and what just happened in the handoff. Don't paste the whole transcript into all three, or the next session has to search the same story three times. Wherever you point to evidence, give a path another process can open.
 
 <!-- cell -->
-## Services can pass while the user is stuck
+## The lab: break the conversation on purpose
 
-In the recorded Forge adaptation, both treatments received two fresh sessions and the same total model-call allowance. The documented treatment used a generic workspace guide, rather than the original exercise's complete documentation package.
+1. Run session one on the import, detail and persistence task. Stop at the point you decided on beforehand, even if a feature is half done.
+2. Save the workspace and export the patch. In the documented workspace, have the agent write an honest handoff that names the unfinished work and the checks that failed.
+3. Throw the conversation away. Start a fresh agent in the saved workspace with the original task and only the files that workspace is allowed.
+4. Watch what it reads before it edits. Does it find the entry point? Does it redo finished work? Does it check what session one claimed?
+5. Grade the final patch in a clean environment. Import through the real file picker, open the detail view, restart, and check the content is still there.
 
-All six qualified attempts passed the recorded service checks. All six failed the Electron import-flow check by timeout. The observed outcome was 0/3 versus 0/3. There is no successful primary Project 02 app capture to show; a notebook screenshot would not fill that gap.
-
-The result narrows what we know. Import and persistence worked through the exercised service path, while the tested UI interaction did not complete. A timeout alone does not distinguish every possible cause: a modal, locator, event, or application defect may need further diagnosis. It is a failed end-to-end acceptance check, not proof that all import code is broken.
-
-Inspect one grade and its corresponding trace. Find the last observation before the timeout. Propose a diagnostic that distinguishes two plausible causes without changing the task or retroactively rewriting the score.
+Count one two-session run as one attempt. Session two depends on session one, so they aren't two independent tries. If you supply something the files were missing, write down that you did and what you said.
 
 <!-- cell -->
-## Submit the handoff, not just the finished code
+## What happened when we ran it
 
-Submit both session transcripts, the boundary patch, the final patch, the documentation package, and the independent UI/service evidence. Include a short list of facts session two recovered from files and facts a person had to provide.
+Our main comparison is six attempts, three per treatment, where a treatment is the setup the agent starts with. Each attempt got two fresh sessions and 24 model calls, 12 per session. `minimal` had only the task. `workspace-docs` also had a short general-purpose `AGENTS.md`, a one-paragraph architecture note, and a rule to write `session-handoff.md` before each session ends, which is a lot thinner than the documentation the lab asks you to write. Every session was stopped when its model calls ran out, and no `workspace-docs` session wrote that file, so we never tested a second session that had a handoff to read.
 
-Ask a partner to start from the boundary state using only your handoff. If they need an explanation from you, write down the missing fact before fixing the document. That is a directly observed weakness in the workspace.
+All six attempts passed the checks that call the app's services directly and then failed the check that imports a document through the Electron window, each time with a timeout. Both treatments scored 0 of 3, and we have no screenshot of a working Project 02 app to show you.
 
-**Discussion:** which information belongs in a stable architecture document, which belongs in the feature ledger, and which expires after the next session? Explain one edit that makes the workspace easier to resume without making it longer.
+From this we know that the app's import and persistence services, which no attempt changed, still worked when called directly, and that the same import driven through the window did not finish. We can't tell why from a timeout alone: it could be a dialog that never closed, a button the check clicked that doesn't start the import, an event that never fired, or a defect in the app. So we can say the import failed the end-to-end check, but not that the import code is broken.
+
+Under **Inspect one attempt**, choose 6e00cd09, a `workspace-docs` attempt from the main comparison, and read its checks. The timeout is the only detail the grader recorded for the failed check. Then propose one diagnostic that would tell two of those causes apart, without changing the task and without going back to edit the score. Also open **Session 2** in Agent Lens, find where the agent looks for `session-handoff.md` and what comes back, and count the commands before its first edit. In five of the six attempts the second session's first edit was among its last two commands, and in 6aeae35a it made none.
+
+<!-- cell -->
+## Hand in the handoff as well as the code
+
+For the lab, hand in from each workspace both session transcripts, the patch at the break and the final patch, together with your documentation, your handoff, and the UI and service evidence from your own check. Add a short list of the facts session two got from the files and the facts a person had to supply, and say whether your prediction held.
+
+Then ask a partner to start from the break using only your handoff. If they have to ask you something, that's a gap you watched happen, so write down the missing fact as evidence before you fix the document.
+
+**Discuss:** what belongs in the architecture note, what belongs in the feature list, and what goes stale after the next session? Describe one edit that makes the workspace easier to resume without making it longer.
