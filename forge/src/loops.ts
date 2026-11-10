@@ -5,7 +5,7 @@ import {setTimeout as delay} from 'node:timers/promises';
 import {writeJson,type TrialRecord} from './records.js';
 import {compare} from './campaign.js';
 import {sourceHead,courseRoot} from './staging.js';
-import {evidenceReference,verifyEvidence,updateOperation} from './operations.js';
+import {evidenceReference,verifyEvidence,updateOperation,operationFile} from './operations.js';
 import {Execution} from './execution.js';
 import {protocol} from './trial.js';
 
@@ -22,6 +22,7 @@ export interface LoopDriver {
   run(id:string,state:LoopState):Promise<{record:TrialRecord;patch?:string;patchSha256?:string}>;
   recover?:(id:string,state:LoopState)=>Promise<{record:TrialRecord;patch?:string;patchSha256?:string}|null>;
 }
+export class NoTrialLaunchedError extends Error {}
 /** A persisted pending ID never automatically retries an ambiguous paid launch. */
 export async function driveLoop(file:string,state:LoopState,driver:LoopDriver,signal?:AbortSignal) {
   if(state.pendingTrialId){
@@ -60,7 +61,7 @@ export async function driveLoop(file:string,state:LoopState,driver:LoopDriver,si
     // The real timer exercise covers the full wall-clock window without idle sandboxes.
     if(state.mode==='timer' && state.status==='running' && driver.now()<state.deadlineAt)await driver.sleep(state.deadlineAt-driver.now(),signal);
     if(state.status==='running')state.status=driver.now()>=state.deadlineAt?'deadline':'round_limit';
-  } catch(error) {state.status=signal?.aborted?'cancelled':'blocked';state.error=String(error);}
+  } catch(error) {state.status=signal?.aborted?'cancelled':'blocked';state.error=String(error);if(error instanceof NoTrialLaunchedError){delete state.pendingTrialId;state.interventions.push({at:new Date().toISOString(),source:'observed',note:'Budget stopped the round before any worker launch'});}}
   finally {await writeJson(file,state);}
   return state;
 }
@@ -92,14 +93,17 @@ export async function runLoop(options:{mode:LoopMode;file:string;execute:boolean
       const resumePatch=candidate?await verifyEvidence(output,{path:candidate,sha256:s.candidateSha256??s.rounds.at(-1)?.patchSha256??''}):undefined;
       const result=await compare({project:'project-07',variant:s.mode,repeats:1,execute:true,source:s.sourceCommit,output,resumePatch,trialId:id,verificationFeedback:s.verificationFeedback});
       const record=(result as {completed?:TrialRecord[]}).completed?.[0];
-      if(!record)throw new Error('No trial launched: budget exhausted or qualification unavailable');
+      if(!record){if((result as {completed?:unknown[]}).completed?.length===0){await writeJson(join(output,id,'not-launched.json'),{id,externalLaunch:false,reason:(result as {stopReason?:string}).stopReason});throw new NoTrialLaunchedError('No trial launched: budget stopped before dispatch');}throw new Error('Existing trial needs recovery; refusing replay');}
       const patch=join(output,id,'candidate.diff');
       try {const ref=await evidenceReference(output,patch);return {record,patch:ref.path,patchSha256:ref.sha256};}
       catch{return {record};}
     },
   },signal);
   const ref=await evidenceReference(output,options.file);
-  await updateOperation(output,state.id,op=>{op.evidence.checkpoint=ref;op.publication='not_required';op.executionOutcome=result.status;op.phase=result.pendingTrialId?'recoverable':'completed';op.cleanup=result.pendingTrialId?'unknown':'verified';op.telemetry=result.pendingTrialId?'missing':'complete';});
+  const children=await Promise.all(result.rounds.map(r=>readFile(operationFile(output,r.trialId),'utf8').then(JSON.parse).catch(()=>null)));
+  const unknown=result.pendingTrialId||children.some(child=>!child||child.cleanup!=='verified'||child.telemetry!=='complete');
+  const unpublished=children.some(child=>child&&child.publication!=='verified');
+  await updateOperation(output,state.id,op=>{op.evidence.checkpoint=ref;op.publication='not_required';op.executionOutcome=result.status;op.phase=unknown?'blocked_unknown':unpublished?'recoverable':'completed';op.cleanup=unknown?'unknown':'verified';op.telemetry=unknown?'missing':'complete';});
   return result;
 }
 export async function addIntervention(file:string,note:string) {
