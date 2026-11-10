@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Forge course durable operation",
+  "type": "object",
+  "required": ["schemaVersion", "id", "kind", "sourceCommit", "protocolSha256", "identity", "phase", "cleanup", "telemetry", "publication", "sandboxIds", "reservationIds", "requests", "evidence", "events"],
+  "properties": {
+    "schemaVersion": {"const": 2},
+    "id": {"type": "string", "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,100}$"},
+    "kind": {"enum": ["qualification", "trial", "loop", "graph"]},
+    "phase": {"enum": ["prepared", "running", "grading", "finalizing", "completed", "recoverable", "blocked_unknown"]},
+    "cleanup": {"enum": ["pending", "verified", "unknown"]},
+    "telemetry": {"enum": ["pending", "complete", "missing"]},
+    "publication": {"enum": ["pending", "verified", "failed", "not_required"]},
+    "identity": {"type": "object", "required": ["entity", "project"]},
+    "sandboxIds": {"type": "array", "items": {"type": "string"}},
+    "reservationIds": {"type": "array", "items": {"type": "string"}},
+    "requests": {"type": "object"},
+    "evidence": {"type": "object"},
+    "events": {"type": "array"}
+  }
+}

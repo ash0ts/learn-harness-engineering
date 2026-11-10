@@ -1,4 +1,4 @@
-import {mkdir, writeFile, rename} from 'node:fs/promises';
+import {mkdir, open, rename} from 'node:fs/promises';
 import {dirname} from 'node:path';
 import {randomUUID} from 'node:crypto';
 
@@ -27,7 +27,9 @@ export interface TrialRecord {
 export async function writeJson(file: string, data: unknown) {
   await mkdir(dirname(file), {recursive: true});
   const temporary = `${file}.${randomUUID()}.tmp`;
-  await writeFile(temporary, JSON.stringify(data, null, 2) + '\n', {mode: 0o600});
+  const handle=await open(temporary,'wx',0o600);
+  try {await handle.writeFile(JSON.stringify(data,null,2)+'\n');await handle.sync();}
+  finally {await handle.close();}
   await rename(temporary, file);
 }
 
