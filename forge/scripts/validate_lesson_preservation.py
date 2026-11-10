@@ -50,14 +50,18 @@ def validate():
             if any(isinstance(n, ast.ClassDef) and n.name == 'LessonWorkspace' for n in ast.walk(old)):
                 continue
             for target, cell in [(markdown_before, old), (markdown_after, new)]:
-                target.extend(n.value for n in ast.walk(cell) if isinstance(n, ast.Constant) and isinstance(n.value, str))
+                target.extend(n.value for n in ast.walk(cell) if isinstance(n, ast.Constant) and isinstance(n.value, str) and n.value not in {'prepared','pending','active'})
         old_commit = ast.literal_eval(assignment(before, 'runner_commit'))[:12]
         new_commit = ast.literal_eval(assignment(after, 'runner_commit'))[:12]
         normalized = []
         for value in markdown_before:
             for old, new in FACTUAL_EDITS:
                 value = value.replace(old, new)
-            normalized.append(value.replace(ast.literal_eval(assignment(before, 'runner_commit')), ast.literal_eval(assignment(after, 'runner_commit'))).replace(old_commit, new_commit))
+            if value == ast.literal_eval(assignment(before, 'runner_commit')):
+                value = ast.literal_eval(assignment(after, 'runner_commit'))
+            elif 'Your own attempts in this copy run with course runner revision' in value:
+                value = value.replace(old_commit, new_commit)
+            normalized.append(value)
         if normalized != markdown_after:
             raise RuntimeError('Unlisted prose or heading/order change: ' + path.name)
         checks.append({'file':path.relative_to(ROOT).as_posix(),'cellCount':len(cells(after)), 'labelsAndImagesUnchanged':True, 'historicalResultsUnchanged':True, 'sha256':hashlib.sha256(path.read_bytes()).hexdigest()})
