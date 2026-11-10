@@ -9,7 +9,7 @@ import {protocol} from './trial.js';
 import {withWorkspace,stageWorkspace} from './sandbox.js';
 import {Execution} from './execution.js';
 import {writeJson} from './records.js';
-import {updateOperation} from './operations.js';
+import {updateOperation,evidenceReference} from './operations.js';
 import {requirePrivateProject,config} from './config.js';
 const exec=promisify(execFile);
 
@@ -69,11 +69,11 @@ export async function controlPatch(project:string,source:string){
   }finally{await rm(directory,{recursive:true,force:true});}
 }
 
-export async function qualifyControl(project:string,source:string,output:string,kind:'baseline'|'reference'|'regression'){
+export async function qualifyControl(project:string,source:string,output:string,kind:'baseline'|'reference'|'regression',operationId?:string){
   await requirePrivateProject(config());
   const p=await protocol(),task=await readTask(project,source),staged=await stageTask(task,task.variants[0],source);
-  const id=`control-${project}-${kind}-${randomUUID()}`,dir=join(output,id);await mkdir(dir,{recursive:true});
-  const execution=new Execution(output,id,p);await execution.begin('trial',source);await execution.budget.reserve({[id]:1});
+  const id=operationId??`control-${project}-${kind}-${randomUUID()}`,dir=join(output,id);await mkdir(dir,{recursive:true});
+  const execution=new Execution(output,id,p);await execution.begin('trial',source);if(!execution.incremental)await execution.budget.reserve({[id]:1});
   let grade:any=null,error:string|undefined;
   const candidate=kind==='baseline'?'':await controlPatch(project,source);await writeFile(join(dir,'candidate.diff'),candidate);
   try{
@@ -95,9 +95,9 @@ export async function qualifyControl(project:string,source:string,output:string,
       for(const name of ['result.json','build.log','ui-events.json','ui-failure.png','electron.png','logs.json','benchmark.json'])try{await writeFile(join(dir,name),await sandbox.files.read('/tmp/grade/'+name));}catch{}
     });
   }catch(e){error=String(e);}
-  const accounting=await execution.finish(grade?.passed?'passed':'task_failed');await execution.budget.settle(id,accounting.estimatedCostUsd);
+  const accounting=await execution.finish(grade?.passed?'passed':'task_failed');if(!execution.incremental)await execution.budget.settle(id,accounting.estimatedCostUsd);
   const intended=kind==='regression'&&project==='project-03'?'actual indexing':project==='project-03'?'extracted metadata':['project-04','project-07','project-08'].includes(project)?'actual indexing':'Electron window';
   const target=grade?.checks.find((check:any)=>check.name.startsWith(intended));
   const result={schemaVersion:1,id,project,kind,sourceCommit:source,inputsSha256:await controlFingerprint(project,source),protocolSha256:createHash('sha256').update(JSON.stringify(p)).digest('hex'),candidateSha256:createHash('sha256').update(candidate).digest('hex'),applicationSha256:staged.applicationSha256,grade,error,...accounting,qualified:grade!=null&&grade.checks[0]?.passed&&(kind==='reference'?grade.passed:target?.passed===false)};
-  await writeJson(join(dir,'control.json'),result);await updateOperation(output,id,op=>{op.publication='not_required';op.phase=accounting.cleanupVerified?'completed':'blocked_unknown';});return result;
+  await writeJson(join(dir,'control.json'),result);const ref=await evidenceReference(output,join(dir,'control.json'));await updateOperation(output,id,op=>{op.evidence.control=ref;op.publication='not_required';op.phase=accounting.cleanupVerified&&accounting.usageComplete?'completed':'blocked_unknown';});return result;
 }
