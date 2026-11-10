@@ -25,6 +25,14 @@ test('unknown, negative or nonfinite usage never becomes zero',async()=>{
 test('ambiguous creation and incomplete cancellation retain accounting block',async()=>{
  const {root,op}=await fixture();try{for(const state of ['creation_unknown','cleanup_failed']){await writeJson(join(root,'test/qualification/sandbox.json'),{state,requestedAt:'2026-11-10T00:00:00Z'});assert.equal((await recoverAccounting(root,op)).known,false);}}finally{await rm(root,{recursive:true});}
 });
+test('known usage does not clear an unverified local child',async()=>{
+ const {root,op}=await fixture();try{
+  op.events.push({at:'2026-11-10T00:00:00Z',event:'child_launch',detail:'test/app-child.json'});
+  assert.equal((await recoverAccounting(root,op)).known,false);
+  await writeJson(join(root,'test/app-child.json'),{exitCode:0,cleanupVerified:false});assert.equal((await recoverAccounting(root,op)).known,false);
+  await writeJson(join(root,'test/app-child.json'),{exitCode:0,cleanupVerified:true});assert.equal((await recoverAccounting(root,op)).known,true);
+ }finally{await rm(root,{recursive:true});}
+});
 test('no-dispatch journal proves an unused reservation, but symlinks are refused',async()=>{
  const {root,op}=await fixture();try{op.sandboxIds=[];await writeJson(join(root,'test/qualification/sandbox.json'),{state:'creating'});const r=await recoverAccounting(root,op);assert.equal(r.known,true);if(r.known)assert.equal(r.sandboxSeconds,0);op.events[0].detail='../escape';await assert.rejects(recoverAccounting(root,op),/Unsafe/);}finally{await rm(root,{recursive:true});}
 });
