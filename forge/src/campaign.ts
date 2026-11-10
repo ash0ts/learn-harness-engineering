@@ -60,7 +60,7 @@ export async function compare(options: {project?:string;variant?:string;repeats?
     catch(error){stopReason=String(error);break;}
     for(let offset=0;offset<trials.length;offset+=2) {
       const batch=trials.slice(offset,offset+2);
-      const results=await Promise.all(batch.map(async trial=>{
+      const settledResults=await Promise.allSettled(batch.map(async trial=>{
         await mkdir(join(output,trial.id),{recursive:true});
         await createOperation(output,{id:trial.id,kind:'trial',sourceCommit:source,protocolSha256:plan.protocolSha256,identity:{entity:c.entity,project:c.project,owner:process.env.FORGE_NOTEBOOK_OWNER,notebook:process.env.FORGE_NOTEBOOK_ID}});
         const result=await boundedChild(process.execPath,['--import',join(courseRoot,'forge/node_modules/tsx/dist/loader.mjs'),join(courseRoot,'forge/src/worker.ts'),JSON.stringify(trial)],{cwd:courseRoot,log:join(output,trial.id,'worker.log'),receipt:join(output,trial.id,'child.json'),timeoutMs:1500000});
@@ -72,9 +72,10 @@ export async function compare(options: {project?:string;variant?:string;repeats?
         }
         catch {return {schemaVersion:1,...trial,model:c.model,startedAt:new Date().toISOString(),outcome:'infrastructure_failed',conversationIds:[],inputTokens:null,outputTokens:null,estimatedCostUsd:null,evidence:[],error:`Worker exited ${result.exitCode} without complete finalization evidence`} as TrialRecord;}
       }));
+      const results=settledResults.map((result,index)=>result.status==='fulfilled'?result.value:{schemaVersion:1,...batch[index],model:c.model,startedAt:new Date().toISOString(),outcome:'infrastructure_failed',conversationIds:[],inputTokens:null,outputTokens:null,estimatedCostUsd:null,evidence:[],error:String(result.reason)} as TrialRecord);
       for(const record of results) {
         if(!incremental)await budget.settle(record.id,record.estimatedCostUsd);
-        const trialFile=join(output,record.id,'trial.json');await writeJson(trialFile,record);
+        const trialFile=join(output,record.id,'trial.json');await writeJson(trialFile,record);const trialRef=await evidenceReference(output,trialFile);await updateOperation(output,record.id,op=>{op.evidence.trial=trialRef;});
         if(record.wandbRunId) {
           if(!await publishTrial(output,record.id))stopReason='Missing Models telemetry; recover publication without rerunning the agent';
         }
@@ -82,7 +83,13 @@ export async function compare(options: {project?:string;variant?:string;repeats?
         console.log(JSON.stringify({id:record.id,project:record.project,variant:record.variant,outcome:record.outcome,cost:record.estimatedCostUsd}));
         if(record.estimatedCostUsd===null)stopReason='Unknown usage or infrastructure state; paid launches stopped';
       }
-      if(stopReason)break;
+      if(stopReason){
+        // Reservations for later members of this block have no child or external
+        // dispatch. Release only those IDs and record that proof explicitly.
+        const unlaunched=trials.slice(offset+batch.length);
+        for(const trial of unlaunched){await writeJson(join(output,trial.id,'not-launched.json'),{id:trial.id,reason:stopReason,externalLaunch:false});if(!incremental)await budget.settle(trial.id,0);}
+        break;
+      }
     }
     if(stopReason)break;
   }

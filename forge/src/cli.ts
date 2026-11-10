@@ -7,12 +7,12 @@ const command = process.argv[2] ?? 'help';
 if (command === 'doctor' && process.argv.includes('--qualify')) {
   if(!process.argv.includes('--execute'))throw new Error('Qualification requires --execute');
   const {values}=parseArgs({args:process.argv.slice(3),options:{qualify:{type:'boolean'},execute:{type:'boolean'},output:{type:'string'},'operation-id':{type:'string'}}});
-  console.log(JSON.stringify(await (await import('./qualification.js')).qualify(values.output,values['operation-id']),null,2));
+  const result=await (await import('./qualification.js')).qualify(values.output,values['operation-id']);console.log(JSON.stringify(result,null,2));if(!result.passed)process.exitCode=1;
 } else if(command==='controls'){
-  const {values}=parseArgs({args:process.argv.slice(3),options:{output:{type:'string'},project:{type:'string'},kind:{type:'string'},execute:{type:'boolean'},source:{type:'string'}}});
+  const {values}=parseArgs({args:process.argv.slice(3),options:{output:{type:'string'},project:{type:'string'},kind:{type:'string'},execute:{type:'boolean'},source:{type:'string'},'operation-id':{type:'string'}}});
   if(!values.execute||!values.project||!['baseline','reference','regression'].includes(values.kind??''))throw new Error('controls --project project-NN --kind baseline|reference|regression --execute');
   const source=values.source??await (await import('./staging.js')).sourceHead();
-  console.log(JSON.stringify(await (await import('./controls.js')).qualifyControl(values.project,source,values.output??process.env.FORGE_RESULTS_DIR??'forge/local-results',values.kind as 'baseline'|'reference'|'regression'),null,2));
+  const result=await (await import('./controls.js')).qualifyControl(values.project,source,values.output??process.env.FORGE_RESULTS_DIR??'forge/local-results',values.kind as 'baseline'|'reference'|'regression',values['operation-id']);console.log(JSON.stringify(result,null,2));if(!result.qualified)process.exitCode=1;
 } else if(['recovery-report','recover','reconcile'].includes(command)){
   const {values}=parseArgs({args:process.argv.slice(3),options:{output:{type:'string'},operation:{type:'string'},evidence:{type:'string'},publish:{type:'boolean'}}});
   const root=values.output??process.env.FORGE_RESULTS_DIR??'forge/local-results';
