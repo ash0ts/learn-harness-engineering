@@ -1,6 +1,6 @@
 import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
-import {mkdtemp,mkdir,readFile,writeFile,rm} from 'node:fs/promises';
+import {mkdtemp,mkdir,readFile,writeFile,rm,readdir} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join,dirname} from 'node:path';
 import {createHash,randomUUID} from 'node:crypto';
@@ -12,6 +12,20 @@ import {writeJson} from './records.js';
 import {updateOperation} from './operations.js';
 import {requirePrivateProject,config} from './config.js';
 const exec=promisify(execFile);
+
+export async function controlFingerprint(project:string,source:string){
+  const task=await readTask(project,source),hash=createHash('sha256');
+  const staged=await stageTask(task,task.variants[0],source);hash.update(staged.applicationSha256).update(staged.fixtureSha256);
+  for(const file of [`forge/tasks/${project}.json`,task.protectedChecker,'forge/graders/poll.cjs','forge/graders/benchmark-probe.cjs','forge/graders/controls/App.tsx','forge/graders/controls/benchmark.cjs','forge/src/staging.ts','forge/src/controls.ts'])hash.update(file).update(await frozenFile(source,file));
+  hash.update(JSON.stringify(await protocol()));return hash.digest('hex');
+}
+export async function requireControls(output:string,projects:string[],source:string){
+  const candidates=await readdir(output).catch(()=>[]),proofs:any[]=[];
+  for(const name of candidates.filter(n=>n.startsWith('control-')))try{proofs.push(JSON.parse(await readFile(join(output,name,'control.json'),'utf8')));}catch{}
+  for(const project of projects){const fingerprint=await controlFingerprint(project,source);
+    for(const kind of ['baseline','reference','regression'])if(!proofs.some(p=>p.project===project&&p.kind===kind&&p.qualified&&p.inputsSha256===fingerprint))throw new Error(`Missing qualified ${kind} control for ${project}; paid agent trials are blocked`);
+  }
+}
 
 export async function controlPatch(project:string,source:string){
   const task=await readTask(project,source),staged=await stageTask(task,task.variants[0],source);
@@ -42,7 +56,7 @@ export async function controlPatch(project:string,source:string){
     if(!bridge.includes('getContent:'))bridge=bridge.replace('documents: {',"documents: {\n    getContent:(id:string)=>ipcRenderer.invoke('control:content',id),");
     bridge=bridge.replace('qa: {',"qa: {\n    clear:()=>ipcRenderer.invoke('control:clear'),");
     if(bridge.includes('app: {'))bridge=bridge.replace('app: {',"app: {\n    reset:()=>ipcRenderer.invoke('control:reset'),");else bridge=bridge.replace('const api = {',"const api = {\n  app:{reset:()=>ipcRenderer.invoke('control:reset')},");
-    if(project==='project-06')bridge=bridge.replace(/submit:[^\n]+/,"submit:(...args:unknown[])=>ipcRenderer.invoke(IPC_CHANNELS.SUBMIT_FEEDBACK,...args),");
+    if(project==='project-06')bridge=bridge.replace(/submit:[\s\S]*?ipcRenderer\.invoke\(IPC_CHANNELS.SUBMIT_FEEDBACK[^;]*?\),/,"submit:(...args:unknown[])=>ipcRenderer.invoke(IPC_CHANNELS.SUBMIT_FEEDBACK,...args),");
     await writeFile(preload,bridge);
     if(['project-04','project-07','project-08'].includes(project)){
       await mkdir(join(directory,'scripts'),{recursive:true});await writeFile(join(directory,'scripts/check-architecture.sh'),"#!/usr/bin/env bash\nset -eu\nif grep -REn \"(from|require[[:space:]]*\\()?[[:space:]]*['\\\"](node:|fs['\\\"]|path['\\\"]|electron['\\\"])\" src/renderer; then exit 1; fi\n");
@@ -84,6 +98,6 @@ export async function qualifyControl(project:string,source:string,output:string,
   const accounting=await execution.finish(grade?.passed?'passed':'task_failed');await execution.budget.settle(id,accounting.estimatedCostUsd);
   const intended=kind==='regression'&&project==='project-03'?'actual indexing':project==='project-03'?'extracted metadata':['project-04','project-07','project-08'].includes(project)?'actual indexing':'Electron window';
   const target=grade?.checks.find((check:any)=>check.name.startsWith(intended));
-  const result={schemaVersion:1,id,project,kind,sourceCommit:source,protocolSha256:createHash('sha256').update(JSON.stringify(p)).digest('hex'),candidateSha256:createHash('sha256').update(candidate).digest('hex'),applicationSha256:staged.applicationSha256,grade,error,...accounting,qualified:grade!=null&&grade.checks[0]?.passed&&(kind==='reference'?grade.passed:target?.passed===false)};
+  const result={schemaVersion:1,id,project,kind,sourceCommit:source,inputsSha256:await controlFingerprint(project,source),protocolSha256:createHash('sha256').update(JSON.stringify(p)).digest('hex'),candidateSha256:createHash('sha256').update(candidate).digest('hex'),applicationSha256:staged.applicationSha256,grade,error,...accounting,qualified:grade!=null&&grade.checks[0]?.passed&&(kind==='reference'?grade.passed:target?.passed===false)};
   await writeJson(join(dir,'control.json'),result);await updateOperation(output,id,op=>{op.publication='not_required';op.phase=accounting.cleanupVerified?'completed':'blocked_unknown';});return result;
 }
