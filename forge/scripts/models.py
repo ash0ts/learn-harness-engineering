@@ -42,7 +42,7 @@ def payload(file):
     for path in sorted(file.parent.rglob('*')):
         if path.is_symlink():
             raise RuntimeError('Evidence symlink rejected')
-        if not path.is_file() or path.name in {'trial.json', 'models.log', 'publication.json', 'publication-child.json'}:
+        if not path.is_file() or path.name in {'trial.json', 'models.log', 'publication.json', 'publication-child.json', 'recovery-accounting.json'}:
             continue
         entries[path.relative_to(file.parent).as_posix()] = path.read_bytes()
     secret = os.environ.get('WANDB_API_KEY', '').encode()
@@ -90,6 +90,8 @@ def log_trial(file):
             metrics['completedChecks'] = sum(c['passed'] for c in record.get('grade', {}).get('checks', []))
             # Summary replacement is idempotent; retries never append another row.
             run.summary.update(metrics)
+            run.summary['acceptance_checks'] = wandb.Table(columns=['check', 'passed', 'error'], data=[
+                [c.get('name'), bool(c.get('passed')), c.get('error')] for c in record.get('grade', {}).get('checks', [])])
             if artifact is None:
                 artifact = wandb.Artifact(name, type='course-evidence', metadata={'schemaVersion': 2, 'sourceCommit': record['sourceCommit'], 'evidenceSha256': fingerprint})
                 with tempfile.TemporaryDirectory() as directory:
