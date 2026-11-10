@@ -1,4 +1,4 @@
-import {readFile, writeFile, mkdir} from 'node:fs/promises';
+import {readFile, writeFile, mkdir,readdir} from 'node:fs/promises';
 import {join} from 'node:path';
 import {randomUUID, createHash} from 'node:crypto';
 import type {Sandbox} from '@coreweave/cwsandbox';
@@ -36,6 +36,7 @@ export async function runTrial(input: {id?:string;project:string;variant:string;
   try {
     const staged=await stageTask(task,input.variant,input.sourceCommit);
     record.applicationSha256=staged.applicationSha256;record.fixtureSha256=staged.fixtureSha256;
+    record.frozenInputs={files:staged.filesSha256,taskSha256:createHash('sha256').update(JSON.stringify(task)).digest('hex'),modelSettingsSha256:createHash('sha256').update(JSON.stringify({model:p.model,temperature:p.temperature,maxInputBytes:p.maxInputBytes,maxOutputTokens:p.maxOutputTokens,thinkingLevel:p.thinkingLevel})).digest('hex'),image:p.sandbox.image};
     const checker=await frozenFile(input.sourceCommit,task.protectedChecker);
     const checkerSupport=await frozenFile(input.sourceCommit,'forge/graders/poll.cjs');
     const benchmarkProbe=await frozenFile(input.sourceCommit,'forge/graders/benchmark-probe.cjs');
@@ -51,6 +52,7 @@ export async function runTrial(input: {id?:string;project:string;variant:string;
         for(const role of roleSchedule(input.variant,task.sessions)) {
           abort.signal.throwIfAborted();phase++;
           const saved=await patch(sandbox,baseline);
+          let priorHandoff='';try{priorHandoff=Buffer.from(await sandbox.files.read('/workspace/task/session-handoff.md')).toString('utf8');}catch{}
           const result=await runPi({...c,maxTurns:role.turns},{role:role.role,
             prompt:`${task.task}\nRead TASK.md and AGENTS.md if present. You have ${role.turns} model turns. ${role.readOnly?'Inspect and return a concrete plan or review; your filesystem changes will be discarded.':'Implement and verify the task.'}\n${feedback}`,
             attributes:{'course.project':task.id,'course.task':task.id,'course.variant':input.variant,'course.trial':input.trial,'course.source_commit':input.sourceCommit,'course.sandbox_id':sandbox.sandboxId,'course.wandb_run_id':record.wandbRunId!},
@@ -63,6 +65,9 @@ export async function runTrial(input: {id?:string;project:string;variant:string;
           if(!result.telemetryComplete)telemetryComplete=false;
           actorComplete &&= result.completed;
           await writeJson(join(actorDir,`phase-${phase}.json`),result);
+          const toolFiles=(await readdir(join(actorDir,`phase-${phase}`)).catch(()=>[])).filter(f=>/^tool-.*\.json$/.test(f));
+          const toolRecords=await Promise.all(toolFiles.map(async f=>JSON.parse(await readFile(join(actorDir,`phase-${phase}`,f),'utf8'))));
+          await writeJson(join(actorDir,`recovery-use-${phase}.json`),{priorHandoffSha256:priorHandoff?createHash('sha256').update(priorHandoff).digest('hex'):null,observedHandoffRead:Boolean(priorHandoff.trim()&&toolRecords.some(r=>r.stdout?.includes(priorHandoff.trim()))),patchBeforeSha256:createHash('sha256').update(saved).digest('hex'),patchAfterSha256:createHash('sha256').update(await patch(sandbox,baseline)).digest('hex')});
           await writeJson(join(actorDir,`deliverable-${phase}.json`),{role:role.role,produced:Boolean(result.finalText.trim()),text:result.finalText});
           if(task.sessions>1&&['workspace-docs','recovery'].includes(input.variant)&&result.finalText.trim())await sandbox.files.write('/workspace/task/session-handoff.md',result.finalText+'\n');
           if(role.readOnly) {
