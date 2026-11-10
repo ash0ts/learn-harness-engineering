@@ -616,11 +616,34 @@ with wandb.init(entity=entity,project=project,id='lesson-'+key,resume='allow',jo
         self.write()
         threading.Thread(target=self.finish, args=(self.process, commands, index, log_path), daemon=True).start()
 
+    def wait_for_worker(self, process, operation_id):
+        started = time.monotonic()
+        completed_at = None
+        operation = self.safe_path(self.results, "operations/" + operation_id + ".json")
+        while True:
+            try:
+                return process.wait(timeout=1)
+            except subprocess.TimeoutExpired:
+                now = time.monotonic()
+                if now - started >= 3000:
+                    raise
+                # A terminal operation has finished grading and publication.
+                # Give owned transports time to close, then make a lingering
+                # process an explicit recovery event rather than a long stall.
+                record = json.loads(operation.read_text()) if operation.exists() else {}
+                if record.get("phase") == "completed":
+                    if completed_at is None:
+                        completed_at = now
+                    elif now - completed_at >= 30:
+                        raise
+                else:
+                    completed_at = None
+
     def finish(self, process, commands, index, log_path):
         forced = False
         try:
             try:
-                code = process.wait(timeout=3000)
+                code = self.wait_for_worker(process, self.state["pending"]["operationIds"][index])
             except subprocess.TimeoutExpired:
                 forced = True
                 os.killpg(process.pid, signal.SIGTERM)
@@ -632,6 +655,13 @@ with wandb.init(entity=entity,project=project,id='lesson-'+key,resume='allow',jo
             with self.lock:
                 pending = self.state["pending"]
                 record = {**pending, "exitCode": code, "forced": forced}
+                if forced:
+                    receipt = {"schemaVersion": 1, "operationId": pending["operationIds"][index], "pid": process.pid,
+                        "forced": True, "exitCode": code, "reason": "Worker execution or finalization deadline exceeded", "at": time.time()}
+                    destination = self.results / receipt["operationId"] / "coordinator-finalization.json"
+                    destination.parent.mkdir(parents=True, exist_ok=True)
+                    destination.write_text(json.dumps(receipt, indent=2))
+                    record["finalizationReceipt"] = str(destination.relative_to(self.results))
                 self.state["actions"].append(record)
                 log_path.write_text(self.redact(log_path.read_text(errors="replace")))
                 ledger = self.ledger()

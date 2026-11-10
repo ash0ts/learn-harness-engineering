@@ -202,6 +202,18 @@ class LearnerWorkspaceTests(unittest.TestCase):
         self.assertAlmostEqual(self.w.ledger()["spentEstimateUsd"], 1 + self.w.NOTEBOOK_ALLOWANCE)
         self.assertIn("Connect", self.w.state["status"])
 
+    def test_completed_worker_has_a_separate_thirty_second_finalization_bound(self):
+        self.seed()
+        operation = self.w.results / "operations/done.json"
+        operation.parent.mkdir()
+        operation.write_text(json.dumps({"phase": "completed"}))
+        def waiting(**kwargs):
+            raise subprocess.TimeoutExpired(["node", "course"], kwargs["timeout"])
+        with patch("time.monotonic", side_effect=[0, 1, 32]):
+            with self.assertRaises(subprocess.TimeoutExpired):
+                self.w.wait_for_worker(SimpleNamespace(wait=waiting), "done")
+        self.assertEqual(self.w.wait_for_worker(SimpleNamespace(wait=lambda **kwargs: 0), "done"), 0)
+
     def test_blank_worksheet_never_erases_saved_notes(self):
         # A fresh runtime shows an empty worksheet; saving must merge, not replace.
         self.seed()
