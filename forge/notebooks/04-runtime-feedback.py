@@ -33,7 +33,7 @@ def _():
 @app.cell(hide_code=True)
 def _(json):
     project_id = 'project-04'
-    runner_commit = 'b948c1fbac36bca7dae458795d9bfca3f5d2b7d3'
+    runner_commit = '1d207c2da0b71264afd43523b6c3f4770322d2db'
     saved = json.loads('{"schemaVersion": 1, "capturedAt": "2026-11-06T11:51:02.079474+00:00", "status": "Saved at 2026-11-06T11:51:02.079474+00:00: 12 completed coding attempts for project-04. Outcomes include unsuccessful attempts. No human time savings are inferred. Complete comparison blocks: 6.", "trials": [{"id": "0865dc24-2666-4fda-b6ae-3f488f5339cb", "project": "project-04", "variant": "runtime-feedback", "trial": 1, "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3", "outcome": "passed", "inputTokens": 432815, "outputTokens": 8263, "estimatedCostUsd": 0.12874192133333334, "conversationIds": ["01a1b0aa-ff8e-77de-bb66-1f3b2cccace3"], "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/0865dc2426664fda", "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-0865dc24-2666-4fda-b6ae-3f488f5339cb:v0", "startedAt": "2026-11-06T11:42:32.647Z", "finishedAt": "2026-11-06T11:44:21.540Z", "actorCompleted": false, "error": null, "protocolRevision": 4, "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467", "grade": {"schemaVersion": 1, "task": "project-04", "checks": [{"name": "strict compile and renderer build", "passed": true}, {"name": "real import and persistence after reconstruction", "passed": true}, {"name": "actual indexing keeps every nonempty paragraph", "passed": true}, {"name": "actual retrieval and Q&A persist two turns", "passed": true}, {"name": "architecture checker rejects a seeded boundary violation", "passed": true}, {"name": "Electron window, preload, import, indexing and question UI under Xvfb", "passed": true}], "passed": true}, "reconciledEstimateUsd": 0.12874192133333334, "chargedUnknownReservationUsd": null, "actorPhases": [{"conversationId": "01a1b0aa-ff8e-77de-bb66-1f3b2cccace3", "requests": 24, "turns": 25, "completed": false, "telemetryComplete": true, "errors": ["Model-call budget exhausted"]}]}, {"id": "1b0a25e5-ba13-4931-9c4f-ff6100f6672a", "project": "project-04", "variant": "minimal", "trial": 2, "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3", "outcome": "passed", "inputTokens": 313292, "outputTokens": 9054, "estimatedCostUsd": 0.10046582266666666, "conversationIds": ["01a1b0ac-dc20-71af-9ccc-5c1584b51186"], "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/1b0a25e5ba134931", "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-1b0a25e5-ba13-4931-9c4f-ff6100f6672a:v0", "startedAt": "2026-11-06T11:44:34.536Z", "finishedAt": "2026-11-06T11:46:29.784Z", "actorCompleted": true, "error": null, "protocolRevision": 4, "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467", "grade": {"schemaVersion": 1, "task": "project-04", "checks": [{"name": "strict compile and renderer build", "passed": true}, {"name": "real import and persistence after reconstruction", "passed": true}, {"name": "actual indexing keeps every nonempty paragraph", "passed": true}, {"name": "actual retrieval and Q&A persist two turns", "passed": true}, {"name": "architecture checker rejects a seeded boundary violation", "passed": true}, {"name": "Electron window, preload, import, indexing and question UI under Xvfb", "passed": true}], "passed": true}, "reconciledEstimateUsd": 0.10046582266666666, "chargedUnknownReservationUsd": null, "actorPhases": [{"conversationId": "01a1b0ac-dc20-71af-9ccc-5c1584b51186", "requests": 18, "turns": 18, "completed": true, "telemetryComplete": true, "errors": []}]}, {"id": "34290474-83eb-4792-9368-096c0ae83df0", "project": "project-04", "variant": "minimal", "trial": 3, "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef", "outcome": "task_failed", "inputTokens": 225588, "outputTokens": 7399, "estimatedCostUsd": 0.07926355, "conversationIds": ["01a1b00a-1d08-7368-af2c-cb45fd8688aa"], "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/3429047483eb4792", "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-34290474-83eb-4792-9368-096c0ae83df0:v0", "startedAt": "2026-11-06T08:46:45.952Z", "finishedAt": "2026-11-06T08:49:10.400Z", "actorCompleted": false, "error": null, "protocolRevision": 2, "protocolSha256": "87e457ec9cf3716839df078fadd5cae1e5a1a1e5cc4b14eed2e06e72fe041141", "grade": {"schemaVersion": 1, "task": "project-04", "checks": [{"name": "strict compile and renderer build", "passed": true}, {"name": "real import and persistence after reconstruction", "passed": true}, {"name": "actual indexing keeps every nonempty paragraph", "passed": true}, {"name": "actual retrieval and Q&A persist two turns", "passed": true}, {"name": "architecture checker rejects a seeded boundary violation", "passed": true}, {"name": "Electron window, preload, import, indexing and question UI under Xvfb", "passed": false, "error": "Error: page.evaluate: TypeError: Cannot read properties of undefined (reading \'documents\')\\n    at eval (eval at evaluate (:302:30), <anonymous>:1:33)\\n    at UtilityScript.evaluate (<anonymous>:304:16)\\n    at UtilityScript.<anonymous> (<anonymous>:1:44)"}], "passed": false}, "reconciledEstimateUsd": 0.07926355, "chargedUnknownReservationUsd": null, "actorPhases": [{"conversationId": "01a1b00a-1d08-7368-af2c-cb45fd8688aa", "requests": 16, "turns": 17, "completed": false, "telemetryComplete": true, "errors": ["Frozen input byte budget exceeded"]}]}, {"id": "7eb6c8d1-896c-49ab-bfc3-fd4c1fd230c0", "project": "project-04", "variant": "runtime-feedback", "trial": 3, "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef", "outcome": "task_failed", "inputTokens": 249336, "outputTokens": 6936, "estimatedCostUsd": 0.09184524533333333, "conversationIds": ["01a1b00b-b982-760a-8742-931aa3728a9c"], "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/7eb6c8d1896c49ab", "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-7eb6c8d1-896c-49ab-bfc3-fd4c1fd230c0:v0", "startedAt": "2026-11-06T08:46:45.952Z", "finishedAt": "2026-11-06T08:50:26.705Z", "actorCompleted": false, "error": null, "protocolRevision": 2, "protocolSha256": "87e457ec9cf3716839df078fadd5cae1e5a1a1e5cc4b14eed2e06e72fe041141", "grade": {"schemaVersion": 1, "task": "project-04", "checks": [{"name": "strict compile and renderer build", "passed": true}, {"name": "real import and persistence after reconstruction", "passed": true}, {"name": "actual indexing keeps every nonempty paragraph", "passed": true}, {"name": "actual retrieval and Q&A persist two turns", "passed": true}, {"name": "architecture checker rejects a seeded boundary violation", "passed": true}, {"name": "Electron window, preload, import, indexing and question UI under Xvfb", "passed": false, "error": "Error: page.evaluate: TypeError: Cannot read properties of undefined (reading \'documents\')\\n    at eval (eval at evaluate (:302:30), <anonymous>:1:33)\\n    at UtilityScript.evaluate (<anonymous>:304:16)\\n    at UtilityScript.<anonymous> (<anonymous>:1:44)"}], "passed": false}, "reconciledEstimateUsd": 0.09184524533333333, "chargedUnknownReservationUsd": null, "actorPhases": [{"conversationId": "01a1b00b-b982-760a-8742-931aa3728a9c", "requests": 18, "turns": 19, "completed": false, "telemetryComplete": true, "errors": ["Frozen input byte budget exceeded"]}]}, {"id": "9c2869e2-d150-4c35-82df-9602ca48f17b", "project": "project-04", "variant": "minimal", "trial": 1, "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3", "outcome": "passed", "inputTokens": 363927, "outputTokens": 7951, "estimatedCostUsd": 0.110878108, "conversationIds": ["01a1b0aa-ff8b-71d2-a2f0-9f7999092eed"], "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/9c2869e2d1504c35", "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-9c2869e2-d150-4c35-82df-9602ca48f17b:v0", "startedAt": "2026-11-06T11:42:32.647Z", "finishedAt": "2026-11-06T11:44:18.879Z", "actorCompleted": true, "error": null, "protocolRevision": 4, "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467", "grade": {"schemaVersion": 1, "task": "project-04", "checks": [{"name": "strict compile and renderer build", "passed": true}, {"name": "real import and persistence after reconstruction", "passed": true}, {"name": "actual indexing keeps every nonempty paragraph", "passed": true}, {"name": "actual retrieval and Q&A persist two turns", "passed": true}, {"name": "architecture checker rejects a seeded boundary violation", "passed": true}, {"name": "Electron window, preload, import, indexing and question UI under Xvfb", "passed": true}], "passed": true}, "reconciledEstimateUsd": 0.110878108, "chargedUnknownReservationUsd": null, "actorPhases": [{"conversationId": "01a1b0aa-ff8b-71d2-a2f0-9f7999092eed", "requests": 21, "turns": 21, "completed": true, "telemetryComplete": true, "errors": []}]}, {"id": "9feeffa8-1836-485a-a52c-2b398b40a195", "project": "project-04", "variant": "minimal", "trial": 3, "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3", "outcome": "task_failed", "inputTokens": 407309, "outputTokens": 9761, "estimatedCostUsd": 0.12556704133333335, "conversationIds": ["01a1b0af-0a1b-7193-8533-24c913433add"], "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/9feeffa81836485a", "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-9feeffa8-1836-485a-a52c-2b398b40a195:v0", "startedAt": "2026-11-06T11:46:57.507Z", "finishedAt": "2026-11-06T11:49:00.369Z", "actorCompleted": true, "error": null, "protocolRevision": 4, "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467", "grade": {"schemaVersion": 1, "task": "project-04", "checks": [{"name": "strict compile and renderer build", "passed": true}, {"name": "real import and persistence after reconstruction", "passed": true}, {"name": "actual indexing keeps every nonempty paragraph", "passed": true}, {"name": "actual retrieval and Q&A persist two turns", "passed": true}, {"name": "architecture checker rejects a seeded boundary violation", "passed": false, "error": "AssertionError [ERR_ASSERTION]: architecture checker accepted a Node import in the renderer"}, {"name": "Electron window, preload, import, indexing and question UI under Xvfb", "passed": true}], "passed": false}, "reconciledEstimateUsd": 0.12556704133333335, "chargedUnknownReservationUsd": null, "actorPhases": [{"conversationId": "01a1b0af-0a1b-7193-8533-24c913433add", "requests": 22, "turns": 22, "completed": true, "telemetryComplete": true, "errors": []}]}, {"id": "adda1977-924d-4adb-9bb7-250219b5d2be", "project": "project-04", "variant": "minimal", "trial": 2, "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef", "outcome": "task_failed", "inputTokens": 328173, "outputTokens": 6464, "estimatedCostUsd": 0.10302612733333333, "conversationIds": ["01a1b007-c5f9-735a-a385-0d1d277aaaa8"], "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/adda1977924d4adb", "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-adda1977-924d-4adb-9bb7-250219b5d2be:v0", "startedAt": "2026-11-06T08:44:01.380Z", "finishedAt": "2026-11-06T08:46:18.774Z", "actorCompleted": false, "error": null, "protocolRevision": 2, "protocolSha256": "87e457ec9cf3716839df078fadd5cae1e5a1a1e5cc4b14eed2e06e72fe041141", "grade": {"schemaVersion": 1, "task": "project-04", "checks": [{"name": "strict compile and renderer build", "passed": true}, {"name": "real import and persistence after reconstruction", "passed": true}, {"name": "actual indexing keeps every nonempty paragraph", "passed": true}, {"name": "actual retrieval and Q&A persist two turns", "passed": true}, {"name": "architecture checker rejects a seeded boundary violation", "passed": true}, {"name": "Electron window, preload, import, indexing and question UI under Xvfb", "passed": false, "error": "Error: page.evaluate: TypeError: Cannot read properties of undefined (reading \'documents\')\\n    at eval (eval at evaluate (:302:30), <anonymous>:1:33)\\n    at UtilityScript.evaluate (<anonymous>:304:16)\\n    at UtilityScript.<anonymous> (<anonymous>:1:44)"}], "passed": false}, "reconciledEstimateUsd": 0.10302612733333333, "chargedUnknownReservationUsd": null, "actorPhases": [{"conversationId": "01a1b007-c5f9-735a-a385-0d1d277aaaa8", "requests": 20, "turns": 21, "completed": false, "telemetryComplete": true, "errors": ["Frozen input byte budget exceeded"]}]}, {"id": "b6c3da9e-7fd8-474b-a79c-19cbbc62e5ba", "project": "project-04", "variant": "minimal", "trial": 1, "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef", "outcome": "task_failed", "inputTokens": 208525, "outputTokens": 7119, "estimatedCostUsd": 0.08953384933333333, "conversationIds": ["01a1b002-9c83-7299-b8c3-54c0e03af952"], "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/b6c3da9e7fd8474b", "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-b6c3da9e-7fd8-474b-a79c-19cbbc62e5ba:v0", "startedAt": "2026-11-06T08:38:37.737Z", "finishedAt": "2026-11-06T08:43:39.504Z", "actorCompleted": false, "error": null, "protocolRevision": 2, "protocolSha256": "87e457ec9cf3716839df078fadd5cae1e5a1a1e5cc4b14eed2e06e72fe041141", "grade": {"schemaVersion": 1, "task": "project-04", "checks": [{"name": "strict compile and renderer build", "passed": true}, {"name": "real import and persistence after reconstruction", "passed": true}, {"name": "actual indexing keeps every nonempty paragraph", "passed": true}, {"name": "actual retrieval and Q&A persist two turns", "passed": true}, {"name": "architecture checker rejects a seeded boundary violation", "passed": false, "error": "Error: Command failed: bash /workspace/task/scripts/check-architecture.sh"}, {"name": "Electron window, preload, import, indexing and question UI under Xvfb", "passed": false, "error": "Error: page.evaluate: TypeError: Cannot read properties of undefined (reading \'documents\')\\n    at eval (eval at evaluate (:302:30), <anonymous>:1:33)\\n    at UtilityScript.evaluate (<anonymous>:304:16)\\n    at UtilityScript.<anonymous> (<anonymous>:1:44)"}], "passed": false}, "reconciledEstimateUsd": 0.08953384933333333, "chargedUnknownReservationUsd": null, "actorPhases": [{"conversationId": "01a1b002-9c83-7299-b8c3-54c0e03af952", "requests": 16, "turns": 17, "completed": false, "telemetryComplete": true, "errors": ["Frozen input byte budget exceeded"]}]}, {"id": "bdc971f7-1a51-437d-b46a-8ed3c268eb97", "project": "project-04", "variant": "runtime-feedback", "trial": 3, "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3", "outcome": "passed", "inputTokens": 434477, "outputTokens": 7733, "estimatedCostUsd": 0.12889706533333334, "conversationIds": ["01a1b0af-0a3c-7565-8850-eb3c7934935e"], "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/bdc971f71a51437d", "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-bdc971f7-1a51-437d-b46a-8ed3c268eb97:v0", "startedAt": "2026-11-06T11:46:57.506Z", "finishedAt": "2026-11-06T11:48:50.586Z", "actorCompleted": false, "error": null, "protocolRevision": 4, "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467", "grade": {"schemaVersion": 1, "task": "project-04", "checks": [{"name": "strict compile and renderer build", "passed": true}, {"name": "real import and persistence after reconstruction", "passed": true}, {"name": "actual indexing keeps every nonempty paragraph", "passed": true}, {"name": "actual retrieval and Q&A persist two turns", "passed": true}, {"name": "architecture checker rejects a seeded boundary violation", "passed": true}, {"name": "Electron window, preload, import, indexing and question UI under Xvfb", "passed": true}], "passed": true}, "reconciledEstimateUsd": 0.12889706533333334, "chargedUnknownReservationUsd": null, "actorPhases": [{"conversationId": "01a1b0af-0a3c-7565-8850-eb3c7934935e", "requests": 24, "turns": 25, "completed": false, "telemetryComplete": true, "errors": ["Model-call budget exhausted"]}]}, {"id": "ea192f25-ea5e-4a06-b166-8b136156f040", "project": "project-04", "variant": "runtime-feedback", "trial": 1, "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef", "outcome": "task_failed", "inputTokens": 337507, "outputTokens": 6110, "estimatedCostUsd": 0.11259213266666668, "conversationIds": ["01a1b003-5819-7000-be81-336f9ea03b15"], "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/ea192f25ea5e4a06", "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-ea192f25-ea5e-4a06-b166-8b136156f040:v0", "startedAt": "2026-11-06T08:38:37.737Z", "finishedAt": "2026-11-06T08:42:15.797Z", "actorCompleted": false, "error": null, "protocolRevision": 2, "protocolSha256": "87e457ec9cf3716839df078fadd5cae1e5a1a1e5cc4b14eed2e06e72fe041141", "grade": {"schemaVersion": 1, "task": "project-04", "checks": [{"name": "strict compile and renderer build", "passed": true}, {"name": "real import and persistence after reconstruction", "passed": true}, {"name": "actual indexing keeps every nonempty paragraph", "passed": true}, {"name": "actual retrieval and Q&A persist two turns", "passed": true}, {"name": "architecture checker rejects a seeded boundary violation", "passed": true}, {"name": "Electron window, preload, import, indexing and question UI under Xvfb", "passed": false, "error": "Error: page.evaluate: TypeError: Cannot read properties of undefined (reading \'documents\')\\n    at eval (eval at evaluate (:302:30), <anonymous>:1:33)\\n    at UtilityScript.evaluate (<anonymous>:304:16)\\n    at UtilityScript.<anonymous> (<anonymous>:1:44)"}], "passed": false}, "reconciledEstimateUsd": 0.11259213266666668, "chargedUnknownReservationUsd": null, "actorPhases": [{"conversationId": "01a1b003-5819-7000-be81-336f9ea03b15", "requests": 22, "turns": 23, "completed": false, "telemetryComplete": true, "errors": ["Frozen input byte budget exceeded"]}]}, {"id": "f02c6078-1953-4544-bcc0-f877c849f6d7", "project": "project-04", "variant": "runtime-feedback", "trial": 2, "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef", "outcome": "task_failed", "inputTokens": 226775, "outputTokens": 6407, "estimatedCostUsd": 0.078776972, "conversationIds": ["01a1b007-efce-7611-bc4a-4281978def16"], "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/f02c607819534544", "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-f02c6078-1953-4544-bcc0-f877c849f6d7:v0", "startedAt": "2026-11-06T08:44:01.380Z", "finishedAt": "2026-11-06T08:46:31.161Z", "actorCompleted": false, "error": null, "protocolRevision": 2, "protocolSha256": "87e457ec9cf3716839df078fadd5cae1e5a1a1e5cc4b14eed2e06e72fe041141", "grade": {"schemaVersion": 1, "task": "project-04", "checks": [{"name": "strict compile and renderer build", "passed": true}, {"name": "real import and persistence after reconstruction", "passed": true}, {"name": "actual indexing keeps every nonempty paragraph", "passed": true}, {"name": "actual retrieval and Q&A persist two turns", "passed": true}, {"name": "architecture checker rejects a seeded boundary violation", "passed": true}, {"name": "Electron window, preload, import, indexing and question UI under Xvfb", "passed": false, "error": "Error: page.evaluate: TypeError: Cannot read properties of undefined (reading \'documents\')\\n    at eval (eval at evaluate (:302:30), <anonymous>:1:33)\\n    at UtilityScript.evaluate (<anonymous>:304:16)\\n    at UtilityScript.<anonymous> (<anonymous>:1:44)"}], "passed": false}, "reconciledEstimateUsd": 0.078776972, "chargedUnknownReservationUsd": null, "actorPhases": [{"conversationId": "01a1b007-efce-7611-bc4a-4281978def16", "requests": 17, "turns": 18, "completed": false, "telemetryComplete": true, "errors": ["Frozen input byte budget exceeded"]}]}, {"id": "fadf2407-4ef3-4635-bab7-0a8d987096d8", "project": "project-04", "variant": "runtime-feedback", "trial": 2, "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3", "outcome": "passed", "inputTokens": 474494, "outputTokens": 8389, "estimatedCostUsd": 0.14088486333333333, "conversationIds": ["01a1b0ac-e18d-76fc-9a0e-bc7d2f08f4de"], "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/fadf24074ef34635", "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-fadf2407-4ef3-4635-bab7-0a8d987096d8:v0", "startedAt": "2026-11-06T11:44:34.535Z", "finishedAt": "2026-11-06T11:46:39.818Z", "actorCompleted": false, "error": null, "protocolRevision": 4, "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467", "grade": {"schemaVersion": 1, "task": "project-04", "checks": [{"name": "strict compile and renderer build", "passed": true}, {"name": "real import and persistence after reconstruction", "passed": true}, {"name": "actual indexing keeps every nonempty paragraph", "passed": true}, {"name": "actual retrieval and Q&A persist two turns", "passed": true}, {"name": "architecture checker rejects a seeded boundary violation", "passed": true}, {"name": "Electron window, preload, import, indexing and question UI under Xvfb", "passed": true}], "passed": true}, "reconciledEstimateUsd": 0.14088486333333333, "chargedUnknownReservationUsd": null, "actorPhases": [{"conversationId": "01a1b0ac-e18d-76fc-9a0e-bc7d2f08f4de", "requests": 24, "turns": 25, "completed": false, "telemetryComplete": true, "errors": ["Model-call budget exhausted"]}]}], "qualifications": [{"id": "qualification-17b194af-b3ef-4d47-95cc-178676315b60", "passed": false, "sourceCommit": "1b316ef2aadd5f0a2d87fbaac1c2c5a505054dd7", "protocolSha256": null, "startedAt": "2026-11-06T07:30:28.545Z", "finishedAt": "2026-11-06T07:30:53.897Z", "inputTokens": null, "outputTokens": null, "estimatedCostUsd": null, "error": "CWSandboxTransportError: Streaming command cancelled.", "reconciledEstimateUsd": 0.003, "chargedUnknownReservationUsd": null, "agentConversationId": null, "appConversationId": null}, {"id": "qualification-19560d68-131a-4318-8dd8-ed73a1219d2e", "passed": true, "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef", "protocolSha256": "87e457ec9cf3716839df078fadd5cae1e5a1a1e5cc4b14eed2e06e72fe041141", "startedAt": "2026-11-06T08:10:36.582Z", "finishedAt": "2026-11-06T08:11:12.699Z", "inputTokens": 1379, "outputTokens": 1712, "estimatedCostUsd": 0.0047544779999999995, "error": null, "reconciledEstimateUsd": 0.0047544779999999995, "chargedUnknownReservationUsd": null, "agentConversationId": "01a1afe9-18f7-7426-9438-0a5ce055a5df", "appConversationId": "app-2e8a1266-70a9-4cc6-8baf-0b0d82729e8e"}, {"id": "qualification-1c68ebdf-feba-4158-8192-d5be5b3e2a98", "passed": false, "sourceCommit": "6907491cc07b3cad91f26bbdfaf60570fc1f246b", "protocolSha256": "87e457ec9cf3716839df078fadd5cae1e5a1a1e5cc4b14eed2e06e72fe041141", "startedAt": "2026-11-06T07:42:00.479Z", "finishedAt": "2026-11-06T07:43:56.209Z", "inputTokens": null, "outputTokens": null, "estimatedCostUsd": null, "error": "Error: Pi capability/usage qualification failed", "reconciledEstimateUsd": null, "chargedUnknownReservationUsd": 2, "agentConversationId": "01a1afce-f833-7499-9384-ce63ee41a908", "appConversationId": null}, {"id": "qualification-2ebe0500-a0d6-47dc-b3ae-b4ef8ba988ff", "passed": true, "sourceCommit": "30db3581757e79b9791b1b70262e6ac499fab87f", "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467", "startedAt": "2026-11-06T11:00:52.920Z", "finishedAt": "2026-11-06T11:02:12.857Z", "inputTokens": 1383, "outputTokens": 1699, "estimatedCostUsd": 0.004789874666666666, "error": null, "reconciledEstimateUsd": 0.004789874666666666, "chargedUnknownReservationUsd": null, "agentConversationId": "01a1b084-dd29-729e-b8d4-d0ee042d8f1b", "appConversationId": "app-bace80b4-24a6-4c67-bc75-def5cd385a2d"}, {"id": "qualification-37a4f9ea-2162-45a1-8322-82c1e5259a02", "passed": false, "sourceCommit": "e8ce7010369b1ac87a196f1f5abfdadbbf517a1d", "protocolSha256": "7b58c62370e7491386e1b3aff9caf6c750057aef77c4e50e269f72327b8ff9fb", "startedAt": "2026-11-06T10:39:59.601Z", "finishedAt": "2026-11-06T10:41:16.869Z", "inputTokens": null, "outputTokens": null, "estimatedCostUsd": null, "error": "Error: Live app service qualification failed", "reconciledEstimateUsd": null, "chargedUnknownReservationUsd": 2, "agentConversationId": "01a1b071-c165-75d3-abb7-47c1466a65d1", "appConversationId": "app-16d1c9fd-33ba-4a00-98dd-7e982e078409"}, {"id": "qualification-af9192de-dfe3-4631-934e-37729c2a4d56", "passed": false, "sourceCommit": "23f50a21e66e4baaf9a2c05e6298c114699865ae", "protocolSha256": null, "startedAt": "2026-11-06T07:32:07.987Z", "finishedAt": "2026-11-06T07:33:42.624Z", "inputTokens": null, "outputTokens": null, "estimatedCostUsd": null, "error": "Error: Missing usage or pricing", "reconciledEstimateUsd": 0.010988719333333332, "chargedUnknownReservationUsd": null, "agentConversationId": "01a1afc5-f26c-76f0-acd4-e04997acccae", "appConversationId": "app-bfc6a439-47d1-4283-bce9-67f87dd15754"}, {"id": "qualification-cff12c5e-6a23-4d3b-a138-f1961945be14", "passed": false, "sourceCommit": "3afbf9bf93c337492164a8c3980a8cc287eec0dd", "protocolSha256": "7b58c62370e7491386e1b3aff9caf6c750057aef77c4e50e269f72327b8ff9fb", "startedAt": "2026-11-06T10:41:52.740Z", "finishedAt": "2026-11-06T10:43:01.815Z", "inputTokens": null, "outputTokens": null, "estimatedCostUsd": null, "error": "Error: Live app service qualification failed", "reconciledEstimateUsd": null, "chargedUnknownReservationUsd": 2, "agentConversationId": "01a1b073-7d9f-77b2-97cc-558ae35acc9e", "appConversationId": "app-e618ce51-bff4-49f1-97c3-5683585feb0d"}, {"id": "qualification-e30ebcea-2c57-4e73-99cc-9b9b10c0f82f", "passed": true, "sourceCommit": "3627ca6dea154b1a875ac323616284bd00d331a1", "protocolSha256": "b538fa6c66cf2c46dd914d0697c69cb984c9f203d71a851f8bfdfbc9b6bac90f", "startedAt": "2026-11-06T10:44:27.761Z", "finishedAt": "2026-11-06T10:45:31.532Z", "inputTokens": 1387, "outputTokens": 1683, "estimatedCostUsd": 0.00512862, "error": null, "reconciledEstimateUsd": 0.00512862, "chargedUnknownReservationUsd": null, "agentConversationId": "01a1b075-dd3f-7068-8b45-88e2dc995650", "appConversationId": "app-e2986e15-9d75-4525-bdf3-d66d49017d88"}, {"id": "qualification-ed8a8028-bb60-4eff-a678-e5e74e94d2cc", "passed": true, "sourceCommit": "09a716af4cdd8467729f4185081dab019d7a8e1a", "protocolSha256": null, "startedAt": "2026-11-06T07:34:48.721Z", "finishedAt": "2026-11-06T07:35:41.927Z", "inputTokens": 1439, "outputTokens": 1667, "estimatedCostUsd": 0.004988329333333333, "error": null, "reconciledEstimateUsd": 0.004988329333333333, "chargedUnknownReservationUsd": null, "agentConversationId": "01a1afc8-6119-75c3-af09-4339c5f7c94f", "appConversationId": "app-d758b5b7-ca03-4fde-a743-5577fafe284e"}], "concurrencyQualifications": [{"schemaVersion": 1, "id": "concurrency-61ad1e33-0ede-46ff-b513-1a700e9798ce", "sourceCommit": "2947d9f6386cefefd1977fb2dd569a4d4226d74d", "startedAt": "2026-11-06T08:30:35.081Z", "passed": true, "sessions": [{"conversationId": "app-concurrency-61ad1e33-0ede-46ff-b513-1a700e9798ce-alpha", "usage": {"inputTokens": 186, "outputTokens": 1008, "calls": 2}, "attributes": {"course.app_variant": "concurrency-alpha", "course.role": "knowledge-base", "course.project": "qualification", "course.task": "concurrent-app-traces", "course.variant": "alpha", "course.trial": "concurrency-61ad1e33-0ede-46ff-b513-1a700e9798ce", "course.source_commit": "2947d9f6386cefefd1977fb2dd569a4d4226d74d", "course.sandbox_id": "local-app-process", "course.wandb_run_id": "course-audit-20261106"}}, {"conversationId": "app-concurrency-61ad1e33-0ede-46ff-b513-1a700e9798ce-beta", "usage": {"inputTokens": 186, "outputTokens": 635, "calls": 2}, "attributes": {"course.app_variant": "concurrency-beta", "course.role": "knowledge-base", "course.project": "qualification", "course.task": "concurrent-app-traces", "course.variant": "beta", "course.trial": "concurrency-61ad1e33-0ede-46ff-b513-1a700e9798ce", "course.source_commit": "2947d9f6386cefefd1977fb2dd569a4d4226d74d", "course.sandbox_id": "local-app-process", "course.wandb_run_id": "course-audit-20261106"}}], "results": [{"status": "fulfilled"}, {"status": "fulfilled"}], "inputTokens": 372, "outputTokens": 1643, "estimatedCostUsd": 0.00214675, "finishedAt": "2026-11-06T08:30:44.097Z"}], "sandboxQualifications": [{"schemaVersion": 1, "id": "sandbox-qualification-15043cce-9df6-4cc6-9e66-44b1947ea5e2", "sourceCommit": "f176ac0c3afe7b1cd0dc2042800a51472e422074", "startedAt": "2026-11-06T08:57:13.844Z", "passed": false, "checks": [{"name": "bounded command wait times out", "passed": true}], "reservationIds": {"interruptId": "304a61f2-46ea-442c-a1bd-d0ac41a6c21d", "resumeId": "3458c1a0-5de4-416b-81a9-1757d2093ef1"}, "error": "AssertionError [ERR_ASSERTION]: cancelled process must no longer exist\\n\\n1 !== 0\\n", "finishedAt": "2026-11-06T08:57:28.932Z", "estimatedCostUsd": null}, {"schemaVersion": 1, "id": "sandbox-qualification-eab8e9f7-6d4d-4d1c-8582-5cbf4f41197c", "sourceCommit": "4a247914feab11d0f868ab4083146e45fc28acda", "startedAt": "2026-11-06T09:01:55.766Z", "passed": true, "checks": [{"name": "bounded command wait times out", "passed": true}, {"name": "cancelled remote process group is no longer running", "passed": true}, {"name": "interrupted session exports patch and checkpoint before termination", "passed": true}, {"name": "fresh workspace resumes exact exported progress", "passed": true}, {"name": "both distinct sandboxes confirm terminal state", "passed": true}], "reservationIds": {"interruptId": "c0fbc6d2-2c3a-4337-82cf-6fa25e5c7403", "resumeId": "40a0261f-7f59-4c1d-982e-8632252a65b3"}, "finishedAt": "2026-11-06T09:03:14.081Z", "estimatedCostUsd": 0.007330418666666666}, {"schemaVersion": 1, "id": "sandbox-qualification-f566ddc3-297f-4483-98a8-47c6d15a402c", "sourceCommit": "5ab40f10d6c5275815bb9962006f445800d53d6b", "startedAt": "2026-11-06T08:55:51.478Z", "passed": false, "checks": [], "error": "CWSandboxValidationError: tags contains invalid value: sandbox-qualification-f566ddc3-297f-4483-98a8-47c6d15a402c-interrupt. tags may contain letters, numbers, \'.\', \'_\' or \'-\', must be 59 characters or fewer, must end with a letter or number, and may start with \'.\', \'_\' or \'-\'", "finishedAt": "2026-11-06T08:55:52.563Z", "estimatedCostUsd": null}], "completedComparisonBlocks": [{"campaignId": "3626f567-01a0-4226-8ce6-c99bd53dd305", "project": "project-04", "repeat": 1, "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3", "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467", "trialIds": ["9c2869e2-d150-4c35-82df-9602ca48f17b", "0865dc24-2666-4fda-b6ae-3f488f5339cb"], "outcomes": {"passed": 2}}, {"campaignId": "3626f567-01a0-4226-8ce6-c99bd53dd305", "project": "project-04", "repeat": 2, "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3", "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467", "trialIds": ["fadf2407-4ef3-4635-bab7-0a8d987096d8", "1b0a25e5-ba13-4931-9c4f-ff6100f6672a"], "outcomes": {"passed": 2}}, {"campaignId": "3626f567-01a0-4226-8ce6-c99bd53dd305", "project": "project-04", "repeat": 3, "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3", "protocolSha256": "64b1c08c477caf830124842e192ffeeadaa0142b5f3bdb5dc2f81d68e4420467", "trialIds": ["9feeffa8-1836-485a-a52c-2b398b40a195", "bdc971f7-1a51-437d-b46a-8ed3c268eb97"], "outcomes": {"task_failed": 1, "passed": 1}}, {"campaignId": "44689992-6779-4465-9a7c-06f311efd8c2", "project": "project-04", "repeat": 1, "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef", "protocolSha256": "87e457ec9cf3716839df078fadd5cae1e5a1a1e5cc4b14eed2e06e72fe041141", "trialIds": ["b6c3da9e-7fd8-474b-a79c-19cbbc62e5ba", "ea192f25-ea5e-4a06-b166-8b136156f040"], "outcomes": {"task_failed": 2}}, {"campaignId": "44689992-6779-4465-9a7c-06f311efd8c2", "project": "project-04", "repeat": 2, "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef", "protocolSha256": "87e457ec9cf3716839df078fadd5cae1e5a1a1e5cc4b14eed2e06e72fe041141", "trialIds": ["f02c6078-1953-4544-bcc0-f877c849f6d7", "adda1977-924d-4adb-9bb7-250219b5d2be"], "outcomes": {"task_failed": 2}}, {"campaignId": "44689992-6779-4465-9a7c-06f311efd8c2", "project": "project-04", "repeat": 3, "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef", "protocolSha256": "87e457ec9cf3716839df078fadd5cae1e5a1a1e5cc4b14eed2e06e72fe041141", "trialIds": ["34290474-83eb-4792-9368-096c0ae83df0", "7eb6c8d1-896c-49ab-bfc3-fd4c1fd230c0"], "outcomes": {"task_failed": 2}}], "loops": [], "graphs": [], "budget": {"schemaVersion": 1, "limitUsd": null, "spentEstimateUsd": 14.880616995333343, "reservations": {"b6969def-4dd9-4763-8b73-6de7cdcb59c2": 4.194969599999999, "3b7cd608-2c28-4cb8-9d4f-aeb60ac3bc7a": 4.194969599999999, "70336779-611e-48d8-839d-7e92aa1f63cb": 4.194969599999999, "notebook-15316-editor-2": 2}, "settled": {"qualification-17b194af-b3ef-4d47-95cc-178676315b60": 0.003, "qualification-af9192de-dfe3-4631-934e-37729c2a4d56": 0.010988719333333332, "qualification-ed8a8028-bb60-4eff-a678-e5e74e94d2cc": 0.004988329333333333, "ace2d466-a1f6-4998-bb1c-130618b52651": 0.010633104666666665, "qualification-1c68ebdf-feba-4158-8192-d5be5b3e2a98": 2, "qualification-19560d68-131a-4318-8dd8-ed73a1219d2e": 0.0047544779999999995, "362291eb-95fb-4738-bb3e-225d4d2cca9b": 0.09284877866666667, "68bb08fa-4f9b-42af-9232-dd7e50da8414": 0.10960137866666667, "1916807d-73a5-4d64-8444-0d4301c5c3fa": 0.1191367, "edd880ec-d379-4c91-8f32-6037f1001a94": 0.11645551200000001, "c8a5365b-8cfa-4566-b28e-6577ce081948": 0.10871942466666666, "2e7a67cd-96cb-46e0-92d5-1099b69ea31b": 0.06132203533333333, "174cab45-166d-42e2-b60d-4fe6d7d1916e": 0.10383150466666666, "a023c020-433a-42db-84c7-9288ae55ac21": 0.09555698533333333, "bd070321-5fd7-45b6-940b-157df5f3b512": 0.08383703733333332, "notebook-15313-editor-1": 0.06123702666666666, "745b1def-40ac-4900-96c9-b189c6b2e6f0": 0.08479798733333334, "aac13172-183d-49ee-b15c-514b2eb552ed": 0.086645138, "18e9a4d0-fd46-4848-a174-e059c11ffe09": 0.09487573066666666, "9b862fb6-9f2a-4f12-8084-3419e33db29f": 0.06312064466666667, "051868b4-ba7f-4727-acd6-7265657fb2c9": 0.09934614866666666, "9502dff3-7f5a-4b62-a067-e2d884ddfa21": 0.08551259, "4d83ad1a-8ff8-4923-8605-eb7693603f8a": 0.12516100133333333, "concurrency-61ad1e33-0ede-46ff-b513-1a700e9798ce": 0.00214675, "3bf22b16-6480-4721-820a-0aaaf70155be": 0.07821951199999999, "03707b50-d426-4961-b8e3-522d7f674f6c": 0.09086439266666665, "05beeb69-67d8-4b7a-b47b-ec8bfe2ab6ae": 0.08657200533333334, "b7f85e4f-b18a-473f-8e71-32dced0e282b": 0.08104619466666667, "1e7c395e-243b-4ca2-856c-c72dc8a7968b": 0.078047814, "f444fd47-b470-4986-8d41-a6aafc97e7fd": 0.06749585266666666, "224d57f1-4850-49a9-bd6c-47061d8d9d3d": 0.080031782, "3db63440-2515-400f-87d9-f742a5d72925": 0.07326100266666667, "ea29fe78-55f5-407b-9076-0bccb6e8f2e2": 0.06903174266666666, "532b1822-b26a-438f-ba4f-3f6f30bcf837": 0.09327494933333333, "b6c3da9e-7fd8-474b-a79c-19cbbc62e5ba": 0.08953384933333333, "ea192f25-ea5e-4a06-b166-8b136156f040": 0.11259213266666668, "df2cdaca-e25b-4635-a687-e7198bed6f51": 0.0037488946666666663, "9a9d742f-a43a-43fe-95bc-d5290a6c07c5": 0.00433668, "eb9e30d3-5101-4b49-91cf-23ff1aae392a": 0.06654817333333334, "f02c6078-1953-4544-bcc0-f877c849f6d7": 0.078776972, "adda1977-924d-4adb-9bb7-250219b5d2be": 0.10302612733333333, "f6ae2a06-3a5e-4cf0-88c4-80a2b0b03c2b": 0.08430663799999999, "1d01f434-8b00-48e2-bac3-83a0d514c5cc": 0.0014785986666666666, "d894c72d-12ad-4cb4-93ee-133f958fdb41": 0.0032740466666666664, "34290474-83eb-4792-9368-096c0ae83df0": 0.07926355, "7eb6c8d1-896c-49ab-bfc3-fd4c1fd230c0": 0.09184524533333333, "287d745e-ca9f-49c1-bbf4-46048cc6dff9": 0.09711906666666667, "1155be34-4b89-4534-911a-dd47c22e322a": 0.002634384, "4df81aba-2c93-4281-8c74-197958708351": 0.004796665333333333, "5ffb5a34-8a2f-4c05-8f57-989b8e771374": 0.0022277906666666666, "fb58d0b1-4b1d-4f62-bc48-9c07f91d8df1": 0.0038028546666666664, "d007e5a8-749c-4610-9294-2ecb5e35174c": 0.001699172, "7044390c-06be-4cd7-ae30-9b063600ead1": 0.05652102, "4cb6d584-ecfc-4f41-a0f3-86a1bdcf3556": 0.08113195200000001, "29ff179d-b736-44f4-8b0a-7e064b4491f8": 0.0038955333333333332, "sandbox-qualification-f566ddc3-297f-4483-98a8-47c6d15a402c-interrupt": 0, "sandbox-qualification-f566ddc3-297f-4483-98a8-47c6d15a402c-resume": 0, "304a61f2-46ea-442c-a1bd-d0ac41a6c21d": 0.0013523133333333333, "3f742e3b-8f37-49bd-bfb5-d55ac89bed80": 0.061650915333333334, "3458c1a0-5de4-416b-81a9-1757d2093ef1": 0, "37ec7440-8567-4905-a12d-e1b7912474b1": 0.08172274133333333, "86cc7a68-d9b8-42b7-abb6-735c757a1ebc": 0.05882531866666667, "eaf9902f-f9a9-48c6-b832-c245b12404f7": 0.061622868666666664, "c0fbc6d2-2c3a-4337-82cf-6fa25e5c7403": 0.006286056, "40a0261f-7f59-4c1d-982e-8632252a65b3": 0.0010443626666666666, "fd1411d4-3aee-47ed-a788-5007df5047e2": 0.06744222866666667, "2ca8dcd3-e132-4296-8755-e9722cfa003b": 0.06827620133333334, "41593b90-6493-4ab7-a001-1dc24878eeb0": 0.08399786066666667, "c0f6a4ba-cfcf-47c4-aded-3d06efa982d3": 0.096558856, "f06b8818-6754-4f4e-8f7f-d36107665dc7": 0.0014403533333333333, "ea2d89fd-a929-4bbd-a582-e6838e19523d": 0.0027935186666666664, "c64948bf-1452-41af-b95f-58648e67e496": 0.07752370866666666, "46f51f6a-b922-42e0-bb94-854421e9209c": 0.09722744866666666, "6d90a4b6-a012-4cc8-9d8c-79846c6dec22": 0.06298989066666666, "5b0bb0d1-9ccc-484c-a021-23f8b2a92f30": 0.013786022666666668, "410489a4-7e8f-4473-9750-139c3bffd8ce": 0.015363832000000001, "8bdd0310-17ca-4722-a527-b2960d08ef3b": 0.09775738733333333, "dae011e2-5055-4a64-ad78-460ec8bac773": 0.09565158, "fbbb858f-935a-4281-b07d-1f4fb984e252": 0.09070795866666667, "d2f43853-7138-48a1-a20e-fde85aae76b4": 0.0025032706666666665, "bc1dd79b-44b3-425e-8e68-b81cea815635": 0.00481806, "ac047ec9-ebbc-43f8-8f21-5d47a2cb93e3": 0.10110698933333334, "11500f73-bc29-4c22-83f4-1e95f0a9abd1": 0.06954726466666666, "e375487d-4743-4f01-8c68-2e4aea50edd8": 0.080974124, "98c21d2f-01ff-4684-a3c8-dd50f9e795d8": 0.08554729866666667, "notebook-15314-editor-1": 0, "3ceefbaf-7a49-4191-9c8a-3b4a39f779ed": 0.06384134333333333, "ca2a84d5-44c1-47da-8f29-151fbc8a9475": 0.06783366533333333, "notebook-15314-editor-2": 0.08099254, "notebook-15314-editor-3": 0.02370623733333333, "notebook-15315-editor-1": 0.03206378933333333, "bc00b68c-a28a-4b94-89d7-81539505e165": 0.10494891066666667, "notebook-15316-editor-1": 0.039289033333333334, "notebook-15317-editor-1": 0.03926849066666667, "notebook-15318-editor-1": 0.03842378, "notebook-15319-editor-1": 0.041706157333333334, "notebook-15321-editor-1": 0.043352978666666674, "notebook-15320-editor-1": 0.03871421733333333, "notebook-15313-editor-2": 0.06194674266666666, "qualification-37a4f9ea-2162-45a1-8322-82c1e5259a02": 2, "qualification-cff12c5e-6a23-4d3b-a138-f1961945be14": 2, "qualification-e30ebcea-2c57-4e73-99cc-9b9b10c0f82f": 0.00512862, "ca53b79e-eab4-4b69-8c1e-072c2baff44f": 0.14421109799999998, "b043a7b3-1843-4914-af0b-0504623b1059": 0.129465934, "visible-ui-e493a2f0-5475-4ad9-8e2f-fcfb48c75ec9": 0.018997517333333335, "97cb6fd5-7fd6-466c-b5f1-598126cf2d52": 0.12316753666666667, "d52e75ef-81cb-4fc0-b551-0884405ad2c1": 0.10617438066666667, "visible-ui-56f1ef46-deba-48b8-8bc4-8b2169169b55": 0.003847821333333333, "qualification-2ebe0500-a0d6-47dc-b3ae-b4ef8ba988ff": 0.004789874666666666, "813076fb-3550-4e34-a3a3-831c7ed43f14": 0.10724251400000001, "20e034ff-32bc-4225-8416-044011f5f68d": 0.08327558333333332, "71581d99-5fb7-4e57-bee4-56ec354858a2": 0.15087467266666665, "643a867a-74e8-4987-aa56-5640b4c1982e": 0.139101264, "6260ba09-aa6d-4529-83b5-066df4a23a9e": 0.007807444, "8c43a910-9c22-4ac1-af63-613f12cc8ba2": 0.009347576, "c121b6fe-8826-451c-87d4-6a870ba54fbd": 0.0014941239999999999, "e53c3cad-a475-4e49-a79c-e64cfc0316a9": 0.056398679333333326, "a7dcf5cb-dd20-4c3f-921b-f8a51a21f8f8": 0.11957918066666667, "246ff80a-d14b-403a-9ecb-81f2c90fa404": 0.003924028, "3398c0d0-a9f2-4383-b64f-c7469ff9d0df": 0.14776984733333334, "a09c89fc-d730-4e6c-980c-62b4e7d4993e": 0.116543516, "b394d28a-ebed-4aba-9566-61d6cc5dbedf": 0.098560644, "6e00cd09-8cfb-495e-ab90-dc16c7938030": 0.08907325733333332, "notebook-15314-editor-4": 0.016457799999999998, "ec18a893-0de1-44ac-8541-7f1564e1e8d4": 0.08954740466666666, "22873518-2d13-475d-ba37-7b9e94c48407": 0.09839233533333333, "6aeae35a-525b-448d-93eb-469a22e6cedf": 0.09475115266666667, "64419d93-5073-4632-bff0-8ccd75f2e21f": 0.090931016, "54b81e30-0be0-470e-ab3c-2a3783ead0f5": 0.07664293666666668, "1500360a-62ce-42cf-aa87-c82962c43655": 0.08375966866666668, "d5a939ba-ee04-422d-a681-0322111156a1": 0.09202667266666667, "9d859517-72db-4b1a-a683-cd81b9f7ca14": 0.07956944466666667, "22fa3879-a8ff-4219-847c-c5972efedf78": 0.07049977866666667, "0809587e-cc59-4276-8285-02dc5072f2aa": 0.06192300666666667, "9c2869e2-d150-4c35-82df-9602ca48f17b": 0.110878108, "0865dc24-2666-4fda-b6ae-3f488f5339cb": 0.12874192133333334, "fadf2407-4ef3-4635-bab7-0a8d987096d8": 0.14088486333333333, "1b0a25e5-ba13-4931-9c4f-ff6100f6672a": 0.10046582266666666, "9feeffa8-1836-485a-a52c-2b398b40a195": 0.12556704133333335, "bdc971f7-1a51-437d-b46a-8ed3c268eb97": 0.12889706533333334, "notebook-15315-editor-2": 0.060377926666666665}, "reconciliations": [{"id": "qualification-17b194af-b3ef-4d47-95cc-178676315b60", "estimatedUsd": 0.003, "evidence": "qualification.json ended at the cancellation probe before runPi; sandbox/sandbox.json confirms terminated. Charge conservative 32 seconds at 2 CPU + 4 GiB ($0.3408/hour), rounding upward. No inference launched.", "at": "2026-11-06T07:32:03.996Z"}, {"id": "qualification-af9192de-dfe3-4631-934e-37729c2a4d56", "estimatedUsd": 0.010988719333333332, "evidence": "Both agent and app calls completed with returned token usage. Sandbox journal confirms terminated. Original accounting rejected metadata keys rather than missing billable rates. This estimate conservatively bills the entire qualification wall-clock duration as sandbox time, including app inference after termination.", "at": "2026-11-06T07:34:24.698Z"}, {"id": "ace2d466-a1f6-4998-bb1c-130618b52651", "estimatedUsd": 0.010633104666666665, "evidence": "All eight submitted model calls returned usage (actor/phase-1.json and tool logs). The ninth attempt was refused locally before the provider due to the frozen input-byte guard. Both actor and grader sandbox journals confirm termination. Preserve the original telemetry_missing attempt; this audited estimate reclassifies only its billing uncertainty.", "at": "2026-11-06T07:41:23.512Z"}, {"id": "sandbox-qualification-f566ddc3-297f-4483-98a8-47c6d15a402c-interrupt", "estimatedUsd": 0, "evidence": "Pinned cwsandbox 1.0.0 client validates sandbox tags before transport.start (grpc-transport-DlmDQLSO.js lines 2108-2114 and 533). The 64-character tag was rejected locally; no create request or inference was sent. Original failed qualification is preserved. Resume phase was never reached.", "at": "2026-11-06T08:57:06.638Z"}], "authorizations": [{"at": "2026-11-06T08:09:55.199Z", "evidence": "User answered \\"unlimited budget\\" to the explicit question about charging the full $2 reservation and continuing experiments and notebook publication.", "action": "Remove spending cap; retain accounting and bounded execution"}], "uncertainEstimates": [{"id": "qualification-1c68ebdf-feba-4158-8192-d5be5b3e2a98", "reservedEstimateUsd": 2, "evidence": "User authorized continued paid work with unlimited budget; charge the full $2 reservation conservatively. Actual token usage remains unknown and the original failed qualification is unchanged.", "at": "2026-11-06T08:09:55.202Z"}, {"id": "qualification-37a4f9ea-2162-45a1-8322-82c1e5259a02", "reservedEstimateUsd": 2, "evidence": "Existing user authorization: unlimited budget in response to retaining full reservations for timed-out inference and continuing experiments. Retain this additional full 2 USD reservation; actual app token usage remains unknown. Original failed attempt and terminated sandbox journal are preserved.", "at": "2026-11-06T10:41:47.979Z"}, {"id": "qualification-cff12c5e-6a23-4d3b-a138-f1961945be14", "reservedEstimateUsd": 2, "evidence": "Existing unlimited-budget user authorization permits retaining full reservations for timed-out inference while continuing. Retain the full 2 USD reservation; app token usage remains unknown. Original failed qualification preserved.", "at": "2026-11-06T10:44:23.710Z"}]}, "costScope": "Budget snapshot as of capturedAt. Final publication/editor costs are recorded separately in the delivery report and W&B audit artifact.", "visibleUiQualifications": [{"schemaVersion": 1, "id": "visible-ui-56f1ef46-deba-48b8-8bc4-8b2169169b55", "sourceCommit": "30db3581757e79b9791b1b70262e6ac499fab87f", "trialId": "b043a7b3-1843-4914-af0b-0504623b1059", "candidateSourceCommit": "7c563eb14f3999ab3e659b77c4095c883619002f", "candidateSha256": "5ee2a7eef6c7d52f05cf52f664db5151226586c1ac9821c69ba7023b3c359b5a", "startedAt": "2026-11-06T10:59:57.147Z", "passed": true, "qualification": true, "checkerSha256": "0c1c629ec8a0211b5432193cbc6e7584dda5a94ae6e2d8f8faee74845ef08f66", "sandboxId": "0c14919f-53fb-4d0e-9995-0c367decf45c", "grade": {"schemaVersion": 1, "task": "project-01", "checks": [{"name": "strict compile and renderer build", "passed": true}, {"name": "real import and persistence after reconstruction", "passed": true}, {"name": "actual indexing keeps every nonempty paragraph", "passed": true}, {"name": "actual retrieval and Q&A persist two turns", "passed": true}, {"name": "Electron window, preload, import, indexing and question UI under Xvfb", "passed": true}], "passed": true}, "estimatedCostUsd": 0.003847821333333333, "finishedAt": "2026-11-06T11:00:38.643Z"}, {"schemaVersion": 1, "id": "visible-ui-e493a2f0-5475-4ad9-8e2f-fcfb48c75ec9", "sourceCommit": "71b172121b15a7625e48bae9007b7b38551f9a07", "trialId": "b043a7b3-1843-4914-af0b-0504623b1059", "candidateSourceCommit": "7c563eb14f3999ab3e659b77c4095c883619002f", "candidateSha256": "5ee2a7eef6c7d52f05cf52f664db5151226586c1ac9821c69ba7023b3c359b5a", "startedAt": "2026-11-06T10:52:15.180Z", "passed": false, "qualification": true, "checkerSha256": "89497cb5b8533069477f6686e12ac7a9f01fb4c688f987f78f785c4c13b77d97", "sandboxId": "51242ad9-c70a-426d-be46-12cda0e031b2", "grade": {"schemaVersion": 1, "task": "project-01", "checks": [{"name": "strict compile and renderer build", "passed": true}, {"name": "real import and persistence after reconstruction", "passed": true}, {"name": "actual indexing keeps every nonempty paragraph", "passed": true}, {"name": "actual retrieval and Q&A persist two turns", "passed": true}, {"name": "Electron window, preload, import, indexing and question UI under Xvfb", "passed": false, "error": "Error: page.evaluate: TypeError: Cannot read properties of undefined (reading \'response\')\\n    at eval (eval at evaluate (:302:30), <anonymous>:1:89)\\n    at async <anonymous>:328:30"}], "passed": false}, "estimatedCostUsd": 0.018997517333333335, "finishedAt": "2026-11-06T10:55:36.666Z"}], "measurementCaveat": "Revision 2 and 3 native grades used unreliable asynchronous UI waits. They remain historical evidence. Revision 4 requires resolved IPC state and visible answer text; supplemental qualifications never rewrite original grades.", "scope": "project-04"}')
     variants = ['minimal', 'runtime-feedback']
     primary_ids = ['0809587e-cc59-4276-8285-02dc5072f2aa', '0865dc24-2666-4fda-b6ae-3f488f5339cb', '0cb15597-b43e-4295-985b-af7ea9c1454a', '1500360a-62ce-42cf-aa87-c82962c43655', '1b0a25e5-ba13-4931-9c4f-ff6100f6672a', '1fb04273-5ca5-4a79-9a9d-686149623068', '22873518-2d13-475d-ba37-7b9e94c48407', '22fa3879-a8ff-4219-847c-c5972efedf78', '3398c0d0-a9f2-4383-b64f-c7469ff9d0df', '33bdfb7f-4f5e-49b8-86c8-92d6ce0e7b0b', '3dd7e4f8-1155-4ffa-9da5-98c82c24c087', '4eb48651-306d-44e9-a468-a6ffc322bf27', '54b81e30-0be0-470e-ab3c-2a3783ead0f5', '58ac2e5b-4ee4-4313-bbbd-4022117855bb', '643a867a-74e8-4987-aa56-5640b4c1982e', '64419d93-5073-4632-bff0-8ccd75f2e21f', '6aeae35a-525b-448d-93eb-469a22e6cedf', '6e00cd09-8cfb-495e-ab90-dc16c7938030', '71581d99-5fb7-4e57-bee4-56ec354858a2', '73c46965-1093-4b68-a810-a901dd78bfc0', '79398b0b-a9eb-4892-bb24-194bdc289e2f', '9c2869e2-d150-4c35-82df-9602ca48f17b', '9d859517-72db-4b1a-a683-cd81b9f7ca14', '9feeffa8-1836-485a-a52c-2b398b40a195', 'a09c89fc-d730-4e6c-980c-62b4e7d4993e', 'a7bc0271-d547-4534-a15d-27b70072df40', 'a7dcf5cb-dd20-4c3f-921b-f8a51a21f8f8', 'b394d28a-ebed-4aba-9566-61d6cc5dbedf', 'b8f56d80-c72c-4e31-8c88-f8fc63d76f9a', 'bdc971f7-1a51-437d-b46a-8ed3c268eb97', 'bf9e17a2-c6a5-4a8d-b1d2-ccdff10121a3', 'ca16eac7-0eb5-4523-a975-638e30938a04', 'd3ef30ab-0f2c-4d0e-aee1-7bdf6a8a011e', 'd5a939ba-ee04-422d-a681-0322111156a1', 'e53c3cad-a475-4e49-a79c-e64cfc0316a9', 'ec18a893-0de1-44ac-8541-7f1564e1e8d4', 'ef04c221-aafe-4134-b9fc-0268fab0427f', 'fadf2407-4ef3-4635-bab7-0a8d987096d8', 'fd98af3b-1b52-448c-bc7b-b6cc47e785ea']
@@ -257,6 +257,7 @@ def _():
         launch cannot silently restart in a new notebook runtime.
         """
         import base64
+        import gzip
         import hashlib
         import io
         import json
@@ -272,6 +273,7 @@ def _():
         import threading
         import time
         import urllib.request
+        import uuid
         from pathlib import Path
 
 
@@ -299,12 +301,16 @@ def _():
                     "WANDB_ENTITY", "WANDB_PROJECT", "WANDB_NOTEBOOK_COLLECTION", "WANDB_NOTEBOOK_USER_ID")}
                 self.key = hashlib.sha256(json.dumps(self.identity, sort_keys=True).encode()).hexdigest()[:20]
                 self.base = Path(base or self.env.get("FORGE_LEARNER_HOME", "/workspace/forge-lessons")) / self.key
-                self.root = self.base / "course"
-                self.results = self.root / "forge/local-results"
+                self.root = self.base / "runners" / revision
+                self.results = self.base / "evidence"
                 self.state_file = self.base / "learner.json"
                 self.artifact_name = "learner-" + self.key
-                self.state = {"schemaVersion": 1, "identity": self.identity, "revision": revision,
+                self.state = {"schemaVersion": 2, "identity": self.identity, "revision": revision,
                               "status": "Not launched", "actions": [], "notes": {}}
+                self.env.update(FORGE_RESULTS_DIR=str(self.results), FORGE_BUDGET_MODE="incremental",
+                                FORGE_NOTEBOOK_OWNER=self.identity["WANDB_NOTEBOOK_USER_ID"],
+                                FORGE_NOTEBOOK_ID=self.identity["WANDB_NOTEBOOK_COLLECTION"])
+                self._cached_checkpoint = None
                 self.process = None
                 self.lock = threading.Lock()
 
@@ -374,46 +380,166 @@ def _():
                 if not shutil.which("uv", path=self.env["PATH"]):
                     raise RuntimeError("The standard Forge notebook image must include uv")
 
+            def safe_path(self, root, name):
+                parts = name.split("/")
+                if not name or any(p in ("", ".", "..") for p in parts) or "\\" in name or ":" in name:
+                    raise RuntimeError("Unsafe checkpoint entry")
+                path = Path(root)
+                if path.is_symlink():
+                    raise RuntimeError("Checkpoint root cannot be a symlink")
+                for part in parts:
+                    path = path / part
+                    if path.is_symlink():
+                        raise RuntimeError("Checkpoint cannot contain symlinks")
+                return path
+
+            def projection(self, data):
+                text = self.redact(data)
+                # Display/export projections never replace the protected local originals.
+                text = text.replace(str(self.results) + "/", "")
+                text = re.sub(r"/(?:Users|home)/[^/\s\"']+", "[home]", text)
+                text = re.sub(r"(?i)(authorization[\"' :]+(?:bearer|basic)\s+)[A-Za-z0-9_./+=-]+", r"\1[REDACTED]", text)
+                return text
+
+            def load_state(self, state):
+                if state.get("identity") != self.identity:
+                    raise RuntimeError("Checkpoint belongs to another learner, notebook, or destination")
+                if state.get("schemaVersion") not in (1, 2):
+                    raise RuntimeError("Unsupported progress version")
+                old = state.get("revision")
+                if state.get("pending"):
+                    state["pending"].setdefault("revision", old)
+                if old != self.revision or state["schemaVersion"] == 1:
+                    state.setdefault("migrations", []).append({"fromSchema": state["schemaVersion"], "fromRevision": old,
+                        "toRevision": self.revision, "at": time.time(), "reason": "Explicitly updated notebook source; spending and outcomes retained"})
+                state.update(schemaVersion=2, revision=self.revision)
+                self.state = state
+
             def bundle(self):
+                files = {"learner.json": self.state_file.read_bytes()}
+                if self.results.exists():
+                    for path in sorted(self.results.rglob("*")):
+                        name = path.relative_to(self.results).as_posix()
+                        self.safe_path(self.results, name)
+                        if path.is_file():
+                            files["results/" + name] = path.read_bytes()
+                        elif path.name.endswith((".lock", "-lock")):
+                            raise RuntimeError("A checkpoint writer is still active")
+                if sum(map(len, files.values())) > 200_000_000:
+                    raise RuntimeError("Checkpoint exceeds 200 MB; ask the instructor to archive evidence")
+                originals = {name: hashlib.sha256(data).hexdigest() for name, data in files.items()}
+                for name, data in list(files.items()):
+                    try:
+                        files[name] = self.projection(data.decode()).encode()
+                    except UnicodeDecodeError:
+                        if any(secret and secret.encode() in data for secret in self.secrets):
+                            raise RuntimeError("Credential detected in binary evidence")
+                # References in a sanitized projection point at the projected bytes. Keep
+                # original hashes in the manifest for comparison with private artifacts.
+                for name, data in list(files.items()):
+                    if name.startswith("results/operations/") and name.endswith(".json"):
+                        op = json.loads(data)
+                        for ref in op.get("evidence", {}).values():
+                            target = "results/" + ref["path"]
+                            if target in files:
+                                ref["sha256"] = hashlib.sha256(files[target]).hexdigest()
+                        files[name] = json.dumps(op, indent=2).encode()
+                manifest = {"schemaVersion": 2, "projection": "sanitized checkpoint; original evidence remains in private artifacts",
+                            "files": {name: {"sha256": hashlib.sha256(data).hexdigest(), "originalSha256": originals[name]} for name, data in files.items()}}
+                files["manifest.json"] = json.dumps(manifest, sort_keys=True).encode()
                 buffer = io.BytesIO()
-                with tarfile.open(fileobj=buffer, mode="w:gz") as archive:
-                    files = [(self.state_file, "learner.json")]
-                    if self.results.exists():
-                        files += [(p, "results/" + str(p.relative_to(self.results))) for p in self.results.rglob("*") if p.is_file()]
-                    total = 0
-                    for path, name in files:
-                        if path.is_symlink():
-                            raise RuntimeError("Checkpoint cannot contain symlinks")
-                        data = path.read_bytes()
-                        for secret in self.secrets:
-                            if secret:
-                                data = data.replace(secret.encode(), b"[REDACTED]")
-                        total += len(data)
-                        if total > 200_000_000:
-                            raise RuntimeError("Checkpoint exceeds 200 MB; download evidence and ask the instructor to archive it")
-                        info = tarfile.TarInfo(name)
-                        info.size, info.mode = len(data), 0o600
-                        archive.addfile(info, io.BytesIO(data))
+                with gzip.GzipFile(fileobj=buffer, mode="wb", mtime=0) as compressed:
+                    with tarfile.open(fileobj=compressed, mode="w") as archive:
+                        for name, data in sorted(files.items()):
+                            info = tarfile.TarInfo(name)
+                            info.size, info.mode = len(data), 0o600
+                            archive.addfile(info, io.BytesIO(data))
                 return buffer.getvalue()
 
             def restore_bundle(self, data):
-                # Validate the complete archive before writing any entry.
                 with tarfile.open(fileobj=io.BytesIO(data), mode="r:gz") as archive:
                     members = archive.getmembers()
                     if sum(m.size for m in members) > 200_000_000:
                         raise RuntimeError("Checkpoint is too large")
+                    files = {}
                     for member in members:
-                        path = Path(member.name)
-                        if not member.isfile() or path.is_absolute() or ".." in path.parts or not (member.name == "learner.json" or member.name.startswith("results/")):
+                        self.safe_path(self.base, member.name)
+                        if not member.isfile() or member.name in files or not (member.name in ("learner.json", "manifest.json") or member.name.startswith("results/")):
                             raise RuntimeError("Unsafe checkpoint entry")
-                    state = json.loads(archive.extractfile("learner.json").read())
-                    if state["identity"] != self.identity or state["revision"] != self.revision:
-                        raise RuntimeError("Checkpoint belongs to another learner, notebook, destination, or runner revision")
-                    for member in members:
-                        dest = self.state_file if member.name == "learner.json" else self.results / member.name.removeprefix("results/")
-                        dest.parent.mkdir(parents=True, exist_ok=True)
-                        dest.write_bytes(archive.extractfile(member).read())
-                self.state = state
+                        files[member.name] = archive.extractfile(member).read()
+                state = json.loads(files["learner.json"])
+                if state.get("identity") != self.identity:
+                    raise RuntimeError("Checkpoint belongs to another learner, notebook, or destination")
+                manifest = json.loads(files.pop("manifest.json")) if "manifest.json" in files else None
+                if manifest:
+                    if manifest.get("schemaVersion") != 2 or set(manifest["files"]) != set(files):
+                        raise RuntimeError("Checkpoint manifest does not cover every file")
+                    for name, value in files.items():
+                        if hashlib.sha256(value).hexdigest() != manifest["files"][name]["sha256"]:
+                            raise RuntimeError("Checkpoint checksum mismatch")
+                elif state.get("schemaVersion") != 1:
+                    raise RuntimeError("Checkpoint manifest missing")
+                # Validate all destination ancestors before making the first write.
+                destinations = {name: self.state_file if name == "learner.json" else self.safe_path(self.results, name.removeprefix("results/")) for name in files}
+                self.safe_path(self.base, "learner.json")
+                for name, dest in destinations.items():
+                    dest.parent.mkdir(parents=True, exist_ok=True)
+                    dest.write_bytes(files[name])
+                self.load_state(state)
+                self.connected = False
+                self._cached_checkpoint = None
+                self.write()
+
+            def operation_records(self):
+                schema_file = self.root / "forge/operation.schema.json"
+                schema = json.loads(schema_file.read_text()) if schema_file.exists() else None
+                rows = []
+                for path in sorted((self.results / "operations").glob("*.json")):
+                    self.safe_path(self.results, path.relative_to(self.results).as_posix())
+                    row = json.loads(path.read_text())
+                    if not schema:
+                        raise RuntimeError("Runner operation contract is missing")
+                    def validate(rule, value):
+                        if "const" in rule and value != rule["const"] or "enum" in rule and value not in rule["enum"]:
+                            raise RuntimeError("Unsupported operation state")
+                        kind = rule.get("type")
+                        types = {"object": dict, "array": list, "string": str, "integer": int}
+                        if kind in types and (not isinstance(value, types[kind]) or kind == "integer" and isinstance(value, bool)):
+                            raise RuntimeError("Invalid operation value")
+                        if "minimum" in rule and value < rule["minimum"] or "pattern" in rule and not re.search(rule["pattern"], value):
+                            raise RuntimeError("Invalid operation constraint")
+                        if kind == "object":
+                            if any(key not in value for key in rule.get("required", [])):
+                                raise RuntimeError("Operation is incomplete; retain its reservation")
+                            for key, item in value.items():
+                                nested = rule.get("properties", {}).get(key, rule.get("additionalProperties"))
+                                if isinstance(nested, dict):
+                                    validate(nested, item)
+                        if "items" in rule:
+                            for item in value:
+                                validate(rule["items"], item)
+                    validate(schema, row)
+                    if any(r["status"] == "reported" and ("inputTokens" not in r or "outputTokens" not in r) for r in row["requests"].values()):
+                        raise RuntimeError("Reported usage requires both token counts")
+                    identity = row["identity"]
+                    if identity.get("entity") != self.identity["WANDB_ENTITY"] or identity.get("project") != self.identity["WANDB_PROJECT"] or identity.get("owner") != self.identity["WANDB_NOTEBOOK_USER_ID"] or identity.get("notebook") != self.identity["WANDB_NOTEBOOK_COLLECTION"]:
+                        raise RuntimeError("Operation owner or destination mismatch")
+                    for ref in row["evidence"].values():
+                        target = self.safe_path(self.results, ref["path"])
+                        if hashlib.sha256(target.read_bytes()).hexdigest() != ref["sha256"]:
+                            raise RuntimeError("Operation evidence checksum mismatch")
+                    rows.append(row)
+                return rows
+
+            def incomplete_operations(self):
+                return [r for r in self.operation_records() if r["phase"] != "completed" or r["cleanup"] != "verified" or r["telemetry"] != "complete" or r["publication"] not in ("verified", "not_required")]
+
+            def cached_checkpoint_bytes(self):
+                if self.state.get("pending") or self.process and self.process.poll() is None or self.ledger().get("halted") or self.ledger().get("reservations"):
+                    return None
+                if self._cached_checkpoint and self.incomplete_operations():
+                    return None
+                return self._cached_checkpoint
 
             def restore_remote(self):
                 import wandb
@@ -433,29 +559,85 @@ def _():
                 return True
 
             def persist(self):
+                self._cached_checkpoint = None
+                self.state["progressUrl"] = f"https://wandb.ai/{self.identity['WANDB_ENTITY']}/{self.identity['WANDB_PROJECT']}/runs/lesson-{self.key}"
                 self.write()
+                data = self.bundle()
+                digest = hashlib.sha256(data).hexdigest()
                 checkpoint = self.base / "checkpoint.tar.gz"
-                checkpoint.write_bytes(self.bundle())
-                # W&B owns a background service. Give each save its own process so a
-                # completed coding child cannot invalidate the notebook's service handle.
+                checkpoint.write_bytes(data)
+                # Stable content aliases recover an interrupted save without a new agent
+                # attempt. A network failure during read-back never means "not found".
                 script = '''
-        import json,sys,wandb
+        import hashlib,json,sys,wandb
         from pathlib import Path
-        base=Path(sys.argv[1]); state=json.loads((base/'learner.json').read_text()); identity=state['identity']
-        key=sys.argv[2]; ledger=json.loads((base/'course/forge/local-results/budget.json').read_text())
-        with wandb.init(entity=identity['WANDB_ENTITY'],project=identity['WANDB_PROJECT'],id='lesson-'+key,resume='allow',job_type='course-learner-progress',group='self-service-lessons',settings=wandb.Settings(disable_git=True,disable_code=True,silent=True)) as run:
-         artifact=wandb.Artifact('learner-'+key,type='course-learner-state',metadata={'revision':state['revision'],'pending':bool(state.get('pending'))})
-         artifact.add_file(str(base/'checkpoint.tar.gz'),name='checkpoint.tar.gz')
-         run.log_artifact(artifact,aliases=['latest']).wait()
+        base=Path(sys.argv[1]); key=sys.argv[2]; digest=sys.argv[3]
+        state=json.loads((base/'learner.json').read_text()); identity=state['identity']
+        ledger=json.loads((base/'evidence/budget.json').read_text()); api=wandb.Api(timeout=30)
+        entity=identity['WANDB_ENTITY']; project=identity['WANDB_PROJECT']; name='learner-'+key
+        collections=api.artifact_collections(project_name=entity+'/'+project,type_name='course-learner-state')
+        collection=next((c for c in collections if c.name==name),None); existing=None
+        if collection:
+         for item in api.artifact_versions('course-learner-state',entity+'/'+project+'/'+name):
+          if item.metadata.get('checkpointSha256') == digest: existing=item; break
+        with wandb.init(entity=entity,project=project,id='lesson-'+key,resume='allow',job_type='course-learner-progress',group='self-service-lessons',settings=wandb.Settings(disable_git=True,disable_code=True,silent=True)) as run:
+         if existing is None:
+          artifact=wandb.Artifact(name,type='course-learner-state',metadata={'revision':state['revision'],'pending':bool(state.get('pending')),'checkpointSha256':digest})
+          artifact.add_file(str(base/'checkpoint.tar.gz'),name='checkpoint.tar.gz')
+          existing=run.log_artifact(artifact,aliases=['latest','sha-'+digest[:24]]).wait()
+         else:
+          if 'latest' not in existing.aliases: existing.aliases.append('latest'); existing.save()
          run.summary.update({'lesson_status':state['status'],'completed_actions':len(state['actions']),'spent_estimate_usd':ledger.get('spentEstimateUsd',0),'budget_usd':ledger.get('limitUsd')})
-         print(json.dumps({'progressUrl':run.url}))
+         downloaded=Path(existing.get_entry('checkpoint.tar.gz').download(root=str(base/'verify-save'))).read_bytes()
+         if hashlib.sha256(downloaded).hexdigest()!=digest: raise RuntimeError('Saved checkpoint checksum mismatch')
+         print(json.dumps({'progressUrl':run.url,'verified':True,'sha256':digest,'artifact':existing.qualified_name}))
         '''
                 env = {k: v for k, v in self.env.items() if k not in {"WANDB_SERVICE", "_WANDB_SERVICE"}}
-                result = subprocess.run([sys.executable, "-c", textwrap.dedent(script), str(self.base), self.key], env=env, capture_output=True, text=True, timeout=180)
+                result = subprocess.run([sys.executable, "-c", textwrap.dedent(script), str(self.base), self.key, digest], env=env, capture_output=True, text=True, timeout=180)
                 if result.returncode:
                     raise RuntimeError("Progress upload failed: " + self.redact(result.stderr[-2500:]))
-                self.state["progressUrl"] = json.loads(result.stdout.strip().splitlines()[-1])["progressUrl"]
-                self.write()
+                receipt = json.loads(result.stdout.strip().splitlines()[-1])
+                if receipt.get("verified") is not True or receipt.get("sha256") != digest:
+                    raise RuntimeError("Progress upload has no verified receipt")
+                (self.base / "save-receipt.json").write_text(json.dumps(receipt))
+                if not self.state.get("pending") and not self.ledger().get("halted") and not self.ledger().get("reservations") and not self.incomplete_operations():
+                    self._cached_checkpoint = data
+
+            def cli(self):
+                return ["node", "--import", str(self.root / "forge/node_modules/tsx/dist/loader.mjs"), str(self.root / "forge/src/cli.ts")]
+
+            def recover(self):
+                """Only inspect, settle verified receipts, and retry missing publication."""
+                if self.process and self.process.poll() is None:
+                    return {"recovered": False, "reason": "Worker is still active"}
+                report = json.loads(self.run_command(self.cli() + ["recovery-report", "--output", str(self.results)], cwd=self.root))
+                results = []
+                pending = self.state.get("pending")
+                for operation in report["operations"]:
+                    if operation["phase"] == "completed":
+                        continue
+                    try:
+                        text = self.run_command(self.cli() + ["recover", "--operation", operation["id"], "--output", str(self.results), "--publish"], cwd=self.root, timeout=360)
+                        results.append(json.loads(text))
+                    except Exception as error:
+                        results.append({"id": operation["id"], "recovered": False, "reason": self.redact(error)})
+                self.state["recovery"] = {"at": time.time(), "results": results}
+                ledger = self.ledger()
+                blocked = ledger.get("halted") or ledger.get("reservations") or any(not r.get("recovered") for r in results)
+                if pending and not blocked:
+                    ids = pending.get("operationIds", [pending["id"]])
+                    operations = {row["id"]: row for row in report["operations"]}
+                    # An action saved before Popen is provably not launched. Once the
+                    # launch boundary is crossed, absence of an operation is ambiguous.
+                    accounted = pending.get("launchStatus") == "not_created" or all(i in operations for i in ids[:pending.get("nextIndex", 0) + 1])
+                    if accounted:
+                        self.state.setdefault("actions", []).append({**pending, "recoveredAt": time.time(), "event": "recovered_without_replacement_work"})
+                        self.state.pop("pending", None)
+                    else:
+                        blocked = "Legacy or interrupted launch has no operation receipt; instructor reconciliation required"
+                self.state["status"] = "Recovery needs evidence: " + str(blocked) if blocked else "Workspace ready; recovered saved work"
+                self.persist()
+                return {"recovered": not bool(blocked), "results": results}
 
             def blocked(self):
                 """Why nothing new can start in this copy, or None."""
@@ -464,14 +646,16 @@ def _():
                 if self.state.get("pending"):
                     if self.process and self.process.poll() is None:
                         return "An action is still running. Wait until My work shows it has finished."
-                    return "This copy is stopped because an earlier action was interrupted. It will not start anything new until your instructor has checked it."
+                    return "An earlier action was interrupted. Prepare and Connect to inspect its saved work; no replacement work starts automatically."
                 return None
 
             def connect(self, api_key):
                 """Accept only a masked, session-memory credential; never save it."""
                 with self.lock:
-                    if self.blocked():
-                        raise RuntimeError(self.blocked())
+                    if not self.state.get("prepared"):
+                        raise RuntimeError("Prepare your workspace first (step 2).")
+                    if self.process and self.process.poll() is None:
+                        raise RuntimeError("An action is still running")
                     if not api_key.strip():
                         raise ValueError("A learner-owned Sandbox-capable API key is required")
                     previous = self.env.get("WANDB_API_KEY", "")
@@ -484,14 +668,16 @@ def _():
                         decoded = base64.b64decode(viewer_id).decode().split(":")[-1]
                         if decoded != self.identity["WANDB_NOTEBOOK_USER_ID"]:
                             raise RuntimeError("Use the API key belonging to the owner of this notebook session")
-                        script = "import {createSandboxClient} from '@coreweave/cwsandbox/wandb'; const c=createSandboxClient({apiKey:process.env.WANDB_API_KEY,entity:process.env.WANDB_ENTITY,project:process.env.WANDB_PROJECT}); await c.listAll({tags:['course-access-check'],timeoutMs:30000}); console.log('Sandbox access checked'); process.exit(0);"
+                        script = "import {createSandboxClient} from '@coreweave/cwsandbox/wandb'; const c=createSandboxClient({apiKey:process.env.WANDB_API_KEY,entity:process.env.WANDB_ENTITY,project:process.env.WANDB_PROJECT}); await c.listAll({tags:['course-access-check'],timeoutMs:30000}); await c.transport.clients.client._transport.close(); console.log('Sandbox access checked');"
                         self.run_command(["node", "--input-type=module", "-e", script], cwd=self.root / "forge", timeout=45)
                     except Exception:
                         self.env["WANDB_API_KEY"] = previous
                         self.connected = False
                         raise
                     self.connected = True
-                return "Sandbox access connected for this session. The key is held in memory only."
+                    if self.state.get("pending") or self.ledger().get("halted") or self.ledger().get("reservations"):
+                        self.recover()
+                return "Sandbox access connected for this session. The key is held in memory only. " + self.state["status"]
 
             def ledger(self):
                 file = self.results / "budget.json"
@@ -506,36 +692,44 @@ def _():
                     self.lock.release()
 
             def _prepare(self, limit):
+                if self.process and self.process.poll() is None:
+                    return self.view()
                 if not isinstance(limit, (float, int)) or not 5 <= limit <= 50:
                     raise ValueError("Choose a budget between $5 and $50")
                 self.private_project()
                 self.base.mkdir(parents=True, exist_ok=True)
                 if self.state_file.exists():
-                    self.state = json.loads(self.state_file.read_text())
+                    self.load_state(json.loads(self.state_file.read_text()))
                 else:
                     self.restore_remote()
-                if self.state.get("identity") != self.identity or self.state.get("revision") != self.revision:
-                    raise RuntimeError("Saved identity or revision differs; keep the original copy for its progress")
-                if self.state.get("pending"):
-                    if not (self.process and self.process.poll() is None):
-                        self.state["status"] = "Stopped: an earlier action was interrupted. This copy will not start anything new."
-                    raise RuntimeError("An earlier action was interrupted, usually because the notebook session ended while it was running. Its paid work may still exist, so this copy will not start anything new and setup will not reset your budget. Your earlier results are still listed under My work. Tell your instructor, who has to check what was left running before this copy can continue.")
+                legacy = self.base / "course/forge/local-results"
+                if legacy.exists() and not self.results.exists():
+                    if legacy.is_symlink():
+                        raise RuntimeError("Legacy evidence root cannot be a symlink")
+                    shutil.copytree(legacy, self.results, symlinks=True)
+                    self.state.setdefault("migrations", []).append({"event": "copied_v1_evidence", "originalRetained": True})
                 existing = self.ledger()
                 if existing and existing.get("limitUsd") != limit:
                     raise RuntimeError(f"This copy already has a ${existing.get('limitUsd')} budget. Keep that value when resuming.")
-                if existing.get("halted") or existing.get("reservations"):
-                    raise RuntimeError("This copy has stopped because the cost of an earlier action is uncertain: it was cancelled, it failed, or it did not report its usage. It will not start anything new until your instructor has checked it.")
                 self.results.mkdir(parents=True, exist_ok=True)
                 ledger = existing or {"schemaVersion": 1, "limitUsd": limit, "spentEstimateUsd": 0, "reservations": {}, "settled": {}}
                 session = "notebook-" + self.env.get("WANDB_NOTEBOOK_SESSION_ID", "")
                 if session == "notebook-":
                     raise RuntimeError("Forge did not supply a notebook session identity")
                 if session not in ledger["settled"]:
-                    if ledger["spentEstimateUsd"] + self.NOTEBOOK_ALLOWANCE > limit:
+                    if ledger["spentEstimateUsd"] + sum(ledger["reservations"].values()) + self.NOTEBOOK_ALLOWANCE > limit:
                         raise RuntimeError("Budget exhausted before notebook runtime allowance")
                     ledger["settled"][session] = self.NOTEBOOK_ALLOWANCE
                     ledger["spentEstimateUsd"] += self.NOTEBOOK_ALLOWANCE
-                (self.results / "budget.json").write_text(json.dumps(ledger, indent=2))
+                ledger_file = self.results / "budget.json"
+                lock = self.results / "budget.json.lock"
+                lock.mkdir()  # Same exclusion protocol as TypeScript; never steal a lock.
+                try:
+                    temporary = ledger_file.with_suffix(".tmp")
+                    temporary.write_text(json.dumps(ledger, indent=2))
+                    temporary.replace(ledger_file)
+                finally:
+                    lock.rmdir()
                 self.state["status"] = "Preparing workspace"
                 self.persist()  # Save the ledger before installing or launching anything.
                 self.install_tools()
@@ -557,42 +751,59 @@ def _():
                     shared_modules.symlink_to(self.root / "forge/sandbox/node_modules", target_is_directory=True)
                 self.run_command([str(self.root / "forge/sandbox/node_modules/.bin/tsc"), "-p", "projects/shared/tsconfig.node.json"], cwd=self.root)
                 self.env["FORGE_BUDGET_USD"] = str(limit)
-                self.state.update(status="Workspace ready", prepared=True)
+                self.state.update(status="Workspace ready; Connect to inspect unfinished work" if self.state.get("pending") or existing.get("halted") or existing.get("reservations") else "Workspace ready", prepared=True)
                 self.persist()
                 return self.view()
 
-            def command(self, action, variant, repeats=1, decision=None, sha256=None):
+            def active_checkpoint(self, variant):
+                name = self.state.get("checkpoints", {}).get(variant)
+                if not name:
+                    legacy = f"{self.project}-{variant}-checkpoint.json"
+                    name = legacy if (self.results / legacy).exists() else None
+                return self.safe_path(self.results, name) if name else None
+
+            def command(self, action, variant, repeats=1, decision=None, sha256=None, operation_id=None):
                 task = "project-01" if self.project == "overview" else self.project
                 spec = json.loads((self.root / "forge/tasks" / (task + ".json")).read_text())
                 if variant not in spec["variants"] or repeats not in [1, 2, 3]:
                     raise ValueError("Choose a listed treatment and one to three repeats")
-                prefix = ["node", "--import", str(self.root / "forge/node_modules/tsx/dist/loader.mjs"), str(self.root / "forge/src/cli.ts")]
-                checkpoint = str(self.results / (self.project + "-" + variant + "-checkpoint.json"))
+                prefix = self.cli()
+                operation_id = operation_id or str(uuid.uuid4())
+                common = ["--output", str(self.results), "--operation-id", operation_id]
                 if action == "qualify":
-                    return prefix + ["doctor", "--qualify", "--execute"]
+                    return prefix + ["doctor", "--qualify", "--execute"] + common
+                current = self.active_checkpoint(variant)
                 if action == "decision":
                     if self.project != "project-08" or decision not in ["approve", "reject"] or not re.fullmatch(r"[a-f0-9]{64}", sha256 or ""):
                         raise ValueError("Review the Project 08 candidate and enter its full SHA-256 before deciding")
-                    return prefix + ["graph", "--checkpoint", checkpoint, "--decision", decision,
+                    if not current:
+                        raise ValueError("No graph is waiting for a decision")
+                    return prefix + ["graph", "--checkpoint", str(current), "--output", str(self.results), "--decision", decision,
                                      "--actor", self.identity["WANDB_NOTEBOOK_USER_ID"], "--sha256", sha256]
                 if action not in ["run", "resume"]:
                     raise ValueError("Unknown lesson action")
+                if current and task == "project-08" and json.loads(current.read_text()).get("node") == "approval":
+                    raise ValueError("Review and decide the pending graph candidate before starting another graph")
+                if action == "resume":
+                    if not current:
+                        raise ValueError("No checkpoint exists to resume")
+                    checkpoint = current
+                    previous = json.loads(current.read_text())
+                    common = ["--output", str(self.results), "--operation-id", previous["id"]]
+                else:
+                    checkpoint = self.results / (self.project + "-" + variant + "-" + operation_id + "-checkpoint.json")
                 if task == "project-07":
-                    args = ["loop", "--mode", variant, "--checkpoint", checkpoint, "--duration-seconds", "600", "--max-rounds", "1", "--execute"]
+                    args = ["loop", "--mode", variant, "--checkpoint", str(checkpoint), "--duration-seconds", "600", "--max-rounds", "1", "--execute"] + common
                 elif task == "project-08":
-                    args = ["graph", "--checkpoint", checkpoint, "--execute"]
+                    args = ["graph", "--checkpoint", str(checkpoint), "--execute"] + common
                 else:
                     if action == "resume":
                         raise ValueError("Projects 01 to 06 always start a fresh attempt; choose the run action")
-                    args = ["compare", "--project", task, "--variant", variant, "--repeats", str(repeats), "--source", self.revision, "--execute"]
-                if task in ["project-07", "project-08"]:
-                    exists = Path(checkpoint).exists()
-                    if exists and action != "resume":
-                        raise ValueError("This copy has already run this treatment once, and a finished loop or graph cannot be started again in the same copy. Read where it stopped under My work, in Details: checkpoints and approval candidate. To run it again, make a fresh copy of the notebook.")
-                    if action == "resume":
-                        if not exists:
-                            raise ValueError("No checkpoint exists to resume")
-                        args.append("--resume")
+                    args = ["compare", "--project", task, "--variant", variant, "--repeats", str(repeats), "--source", self.revision, "--execute", "--output", str(self.results)]
+                    if repeats == 1:
+                        args += ["--operation-id", operation_id]
+                if task in ["project-07", "project-08"] and action == "resume":
+                    args.append("--resume")
                 return prefix + args
 
             def start(self, action, variant, repeats=1, decision=None, sha256=None):
@@ -602,53 +813,86 @@ def _():
                     if action != "decision" and not self.connected:
                         raise RuntimeError("Connect your sandbox access first (step 3). It has to be done again in every new notebook session.")
                     ledger = self.ledger()
-                    if ledger.get("halted") or ledger.get("reservations"):
-                        raise RuntimeError("This copy has stopped because the cost of an earlier action is uncertain: it was cancelled, it failed, or it did not report its usage. It will not start anything new until your instructor has checked it.")
+                    if action != "decision" and (ledger.get("halted") or ledger.get("reservations")):
+                        raise RuntimeError("The cost or cleanup of an earlier action is uncertain. Prepare and Connect to inspect its evidence.")
                     if action in ("run", "resume") and not any(q.get("passed") for q in self.view()["qualifications"]):
-                        # The runner refuses without one, and in Projects 07 and 08 a refused
-                        # launch still leaves a checkpoint that blocks the copy for good.
                         raise RuntimeError("Choose Check that everything works first, and wait for it to pass.")
-                    args = self.command(action, variant, repeats, decision, sha256)
+                    count = repeats if action == "run" and self.project not in ["project-07", "project-08"] else 1
+                    ids = [("qualification-" if action == "qualify" else "") + str(uuid.uuid4()) for _ in range(count)]
+                    commands = [self.command(action, variant, 1, decision, sha256, i) for i in ids]
+                    if action == "qualify":
+                        task = "project-01" if self.project == "overview" else self.project
+                        for kind in ("baseline", "reference", "regression"):
+                            control_id = "control-" + task + "-" + kind + "-" + str(uuid.uuid4())
+                            ids.append(control_id)
+                            commands.append(self.cli() + ["controls", "--project", task, "--kind", kind, "--source", self.revision,
+                                "--output", str(self.results), "--operation-id", control_id, "--execute"])
                     self.env["FORGE_BUDGET_USD"] = str(ledger["limitUsd"])
-                    action_id = str(time.time_ns())
-                    self.state.update(status="Starting " + action, pending={"id": action_id, "action": action, "variant": variant, "session": self.env.get("WANDB_NOTEBOOK_SESSION_ID")})
-                    self.persist()  # A new runtime sees this marker before any paid child exists.
-                    log_path = self.results / ("lesson-action-" + action_id + ".log")
-                    try:
-                        with log_path.open("w") as log:
-                            child_env = {k: v for k, v in self.env.items() if k not in {"WANDB_SERVICE", "_WANDB_SERVICE"}}
-                            self.process = subprocess.Popen(args, cwd=self.root, env=child_env, stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
-                    except Exception:
-                        self.state.update(status="Launch failed before process creation")
-                        self.state.pop("pending", None)
-                        self.persist()
-                        raise
-                    self.state["status"] = "Running " + action
-                    self.write()
-                    threading.Thread(target=self.finish, args=(self.process, action_id, log_path), daemon=True).start()
+                    self.state.update(status="Starting " + action, pending={"id": ids[0], "operationIds": ids, "action": action,
+                        "variant": variant, "revision": self.revision, "session": self.env.get("WANDB_NOTEBOOK_SESSION_ID"),
+                        "nextIndex": 0, "launchStatus": "not_created"})
+                    self._cached_checkpoint = None
+                    if "--checkpoint" in commands[0] and action != "decision":
+                        self.state.setdefault("checkpoints", {})[variant] = Path(commands[0][commands[0].index("--checkpoint") + 1]).relative_to(self.results).as_posix()
+                    self.persist()
+                    self.launch(commands, 0)
                 return self.view()
 
-            def finish(self, process, action_id, log_path):
+            def launch(self, commands, index):
+                pending = self.state["pending"]
+                pending.update(nextIndex=index, launchStatus="launching")
+                self.persist()  # A lost runtime at this boundary requires inspection.
+                log_path = self.results / ("lesson-action-" + pending["operationIds"][index] + ".log")
+                try:
+                    with log_path.open("w") as log:
+                        child_env = {k: v for k, v in self.env.items() if k not in {"WANDB_SERVICE", "_WANDB_SERVICE"}}
+                        self.process = subprocess.Popen(commands[index], cwd=self.root, env=child_env, stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
+                except Exception:
+                    pending["launchStatus"] = "not_created"
+                    self.write()
+                    raise
+                pending.update(launchStatus="started", pid=self.process.pid)
+                self.state["status"] = "Running " + pending["action"]
+                self.write()
+                threading.Thread(target=self.finish, args=(self.process, commands, index, log_path), daemon=True).start()
+
+            def finish(self, process, commands, index, log_path):
+                forced = False
                 try:
                     try:
                         code = process.wait(timeout=3000)
                     except subprocess.TimeoutExpired:
+                        forced = True
                         os.killpg(process.pid, signal.SIGTERM)
                         try:
-                            code = process.wait(timeout=90)
+                            code = process.wait(timeout=30)
                         except subprocess.TimeoutExpired:
                             os.killpg(process.pid, signal.SIGKILL)
                             code = process.wait(timeout=10)
                     with self.lock:
-                        self.state["actions"].append({"id": action_id, **self.state["pending"], "exitCode": code})
+                        pending = self.state["pending"]
+                        record = {**pending, "exitCode": code, "forced": forced}
+                        self.state["actions"].append(record)
+                        log_path.write_text(self.redact(log_path.read_text(errors="replace")))
+                        ledger = self.ledger()
+                        if forced or ledger.get("halted") or ledger.get("reservations") or self.incomplete_operations():
+                            self.state["status"] = "Action stopped; Connect to inspect accounting, cleanup and publication"
+                            self.persist()
+                            return
+                        # Each repeat has its own durable ID. A lost notebook never
+                        # continues the remaining queue without a new explicit Start.
+                        if code == 0 and index + 1 < len(commands):
+                            self.launch(commands, index + 1)
+                            return
                         self.state.pop("pending", None)
                         self.state["status"] = "Action finished; inspect results" if code == 0 else "Action failed; inspect evidence"
-                        log_path.write_text(self.redact(log_path.read_text(errors="replace")))
-                        self.persist()
+                        try:
+                            self.persist()
+                        except Exception:
+                            self.state["pending"] = {**pending, "launchStatus": "finished", "publicationRetry": True}
+                            raise
                 except Exception as error:
-                    # Never erase a pending marker after an uncertain save/cleanup.
                     self.state["status"] = "Checkpoint save needs attention: " + self.redact(error)
-                    self.state["pending"] = {"id": action_id, "action": "reconcile"}
                     self.write()
 
             def cancel(self):
@@ -703,16 +947,20 @@ def _():
                 for path in self.results.glob("qualification-*/qualification.json") if self.results.exists() else []:
                     qualifications.append(json.loads(path.read_text()))
                 logs = sorted(self.results.glob("lesson-action-*.log")) if self.results.exists() else []
+                controls = []
+                for path in self.results.glob("control-*/control.json") if self.results.exists() else []:
+                    controls.append(json.loads(path.read_text()))
                 qualifications.sort(key=lambda item: str(item.get("finishedAt") or item.get("startedAt") or ""))
                 # "active" is a process in this runtime. "pending" can also be a marker
                 # restored from a runtime that disappeared; that state must stay downloadable.
                 active = bool(self.process and self.process.poll() is None)
-                return {"status": self.state["status"], "destination": "/".join(self.identity[k] for k in ["WANDB_ENTITY", "WANDB_PROJECT"]),
+                view = {"status": self.state["status"], "destination": "/".join(self.identity[k] for k in ["WANDB_ENTITY", "WANDB_PROJECT"]),
                         "prepared": self.state.get("prepared", False), "sandboxConnected": self.connected, "pending": self.state.get("pending"), "revision": self.revision,
                         "active": active, "captures": [r["id"] for r in trials if isinstance(r.get("id"), str) and self.capture_path(r["id"])],
-                        "budget": self.ledger(), "trials": trials, "checkpoints": checkpoints, "qualifications": qualifications,
+                        "budget": self.ledger(), "controls": controls, "trials": trials, "checkpoints": checkpoints, "qualifications": qualifications,
                         "notes": self.state.get("notes", {}), "progressUrl": self.state.get("progressUrl"),
                         "log": self.redact(logs[-1].read_text(errors="replace")[-12000:]) if logs else ""}
+                return json.loads(self.projection(json.dumps(view)))
 
         return LessonWorkspace
     LessonWorkspace = _load_learner()
@@ -733,7 +981,7 @@ def _(mo, project_id, run_facts):
     _typical = (f"The recorded attempts for this lesson took {run_facts['minMinutes']} to {run_facts['maxMinutes']} minutes and an estimated ${run_facts['minUsd']:.2f} to ${run_facts['maxUsd']:.2f} each. " if run_facts else "")
     _where = "On this overview page the controls run the Project 01 exercise. If you are going to do Project 01, run it from the Project 01 notebook instead, so your attempts sit beside its lesson.\n\n" if project_id == "overview" else ""
     mo.vstack([
-        mo.md("## Run this lesson yourself\n\nYou have read the lab and looked at recorded attempts. Now run one of your own and compare. Work through the six steps in order, and stay in the editor view: the API key prompt in step 3 does not appear in Preview.\n\n" + _where + _typical + "Running an attempt is optional and costs money on your project. The spending limit below caps this copy's own estimate of what it has spent. Before each attempt the copy sets aside a worst case of about $4.20, and it will not start if that would pass the limit, so leave the limit at $20 unless you have a reason to lower it. Your project's own billing shows the real charge.\n\n**1. Use your own copy.** If you have not copied this notebook yet, open the **⋯** menu at the top right and choose **Copy to project**, then pick a private project you can write to. Come back to that same copy next time. A new copy starts with no saved work and a new spending limit.\n\n**2. Prepare your workspace.** This installs the course runner inside the notebook and restores anything this copy saved before. It takes a few minutes and starts no model call or coding attempt. Each notebook session also counts about $0.34 of notebook compute against your limit, so **My work** shows $0.34 as soon as setup finishes. A notebook session lasts one hour. Keep the same spending limit each time you return."),
+        mo.md("## Run this lesson yourself\n\nYou have read the lab and looked at recorded attempts. Now run one of your own and compare. Work through the six steps in order, and stay in the editor view: the API key prompt in step 3 does not appear in Preview.\n\n" + _where + _typical + "Running an attempt is optional and costs money on your project. The spending limit below caps this copy's own estimate of what it has spent. Before each sandbox or model request the copy sets aside its maximum estimated cost, and it stops before an operation that would pass the limit, so leave the limit at $20 unless you have a reason to lower it. Your project's own billing shows the real charge.\n\n**1. Use your own copy.** If you have not copied this notebook yet, open the **⋯** menu at the top right and choose **Copy to project**, then pick a private project you can write to. Come back to that same copy next time. A new copy starts with no saved work and a new spending limit.\n\n**2. Prepare your workspace.** This installs the course runner inside the notebook and restores anything this copy saved before. It takes a few minutes and starts no model call or coding attempt. Each notebook session also counts about $0.34 of notebook compute against your limit, so **My work** shows $0.34 as soon as setup finishes. A notebook session lasts one hour. Keep the same spending limit each time you return."),
         learner_budget, prepare_workspace
     ])
     return (
@@ -781,7 +1029,7 @@ def _(connect_sandbox, get_connect_click, learner, mo, set_connect_click):
     # Never ask for a key that cannot be used yet.
     if not _state["prepared"]:
         _message = mo.callout(mo.md("**Prepare your workspace first** (step 2). You have not been asked for your key."), kind="warn")
-    elif _state["pending"]:
+    elif _state["active"]:
         _message = mo.callout(mo.md(("**An action is still running.** Wait until **My work** shows it has finished, then connect." if _state["active"] else "**This copy is stopped** because an earlier action was interrupted, so a key cannot be used here.") + " You have not been asked for your key."), kind="warn")
     else:
         try:
@@ -826,14 +1074,14 @@ def _(mo, project_id, variant_notes, variants):
     _special = ""
     if project_id == "project-07":
         _compare = "Run goal and maker-checker, one after the other, so you have two different setups to compare under **My work**. In one round, timer gives the agent the same setup as goal."
-        _special = "\n\nIn this notebook each loop runs exactly one round, so the repeating described in the lab does not happen here. Goal and maker-checker finish as soon as their round has been graded. Timer runs the same single attempt as goal and then keeps the action open until its ten-minute deadline. Each treatment runs once per copy. The full two-hour monitoring exercise in the lab needs a runner that outlives a one-hour notebook session."
+        _special = "\n\nIn this notebook each loop runs exactly one round, so the repeating described in the lab does not happen here. Goal and maker-checker finish as soon as their round has been graded. Timer runs the same single attempt as goal and then keeps the action open until its ten-minute deadline. Start can run another completed treatment; each attempt keeps its own checkpoint. The full two-hour monitoring exercise in the lab needs a runner that outlives a one-hour notebook session."
     if project_id == "project-08":
-        _special = "\n\nHere the run action runs the whole graph once: up to three candidates by the agent, each followed by two verification sandboxes, so allow about three times the time and cost shown above. The graph pauses when a candidate passes its checks, and nothing is accepted until you review that exact patch and record a decision in the panel below. If no candidate passes, the graph stops at `failed`. Either way the graph runs once per copy."
+        _special = "\n\nHere the run action runs the whole graph once: up to three candidates by the agent, each followed by two verification sandboxes, so allow about three times the time and cost shown above. The graph pauses when a candidate passes its checks, and nothing is accepted until you review that exact patch and record a decision in the panel below. If no candidate passes, the graph stops at `failed`. Start can run another graph after the current graph finishes or you decide its approval candidate."
     mo.vstack([
-        mo.md("**5. Check that everything works, then run an attempt.** The first time, choose **Check that everything works**. It is a small paid test that the model, the sandbox and the tracing all respond, and it cleans up after itself. Its result appears under **My work**. If it does not pass, the reason is shown there, and a check that fails without reporting what it used stops this copy until your instructor has looked at it. Once it passes, choose **" + _run_name + "**.\n\nA treatment is the setup the agent starts with. In this lesson you can try:\n\n" + _setups + "\n\n" + _compare + " The coding agent gets at most ten minutes and 24 model calls per attempt, and one copy runs one action at a time. A notebook session lasts one hour, so click **Save my notes and progress** first to keep your prediction, and start only when there is time to finish. Keep this tab open while it runs: if the notebook session ends mid-run, this copy stops until your instructor has checked it. **Cancel the running action** has the same effect once an attempt has started, because its cost is then unknown. Count a failed attempt as a result to explain, and do not hide it." + _special),
+        mo.md("**5. Check that everything works, then run an attempt.** The first time, choose **Check that everything works**. It is a small paid test that the model, the sandbox and the tracing all respond, followed by checks that the unfinished app fails and the protected repair passes; it cleans up after itself. Its result appears under **My work**. If it does not pass, the reason is shown there, and a check that fails without reporting what it used stops this copy until your instructor has looked at it. Once it passes, choose **" + _run_name + "**.\n\nA treatment is the setup the agent starts with. In this lesson you can try:\n\n" + _setups + "\n\n" + _compare + " The coding agent gets at most ten minutes and 24 model calls per attempt, and one copy runs one action at a time. A notebook session lasts one hour, so click **Save my notes and progress** first to keep your prediction, and start only when there is time to finish. Keep this tab open while it runs: if the notebook session ends mid-run, use Prepare and Connect to inspect the saved work. **Cancel the running action** waits for cleanup; missing usage or unverified cleanup keeps new paid work blocked until your instructor can reconcile it. Count a failed attempt as a result to explain, and do not hide it." + _special),
         learner_action, learner_variant,
         learner_repeats if project_id not in ["project-07", "project-08"] else mo.md(""),
-        mo.accordion({"Project 08: record your review decision": mo.vstack([mo.md("Under **My work**, open **Details: checkpoints and approval candidate** and find `project-08-graph-checkpoint.json`. You can record a decision only when its `node` is `approval`. There, `candidate.trialId` names the attempt to review and `candidate.sha256` is its checksum. Read that attempt's patch and both verification results, paste the full checksum below and choose approve or reject. Then set **What to do** to **Record my reviewed graph decision** and press **Start**. Recording a decision starts no paid work and needs no tick in the box. An approval of a different candidate does not count."), learner_decision, learner_digest])}) if project_id == "project-08" else mo.md(""),
+        mo.accordion({"Project 08: record your review decision": mo.vstack([mo.md("Under **My work**, open **Details: checkpoints and approval candidate** and find the latest `project-08-graph-…-checkpoint.json`. You can record a decision only when its `node` is `approval`. There, `candidate.trialId` names the attempt to review and `candidate.sha256` is its checksum. Read that attempt's patch and both verification results, paste the full checksum below and choose approve or reject. Then set **What to do** to **Record my reviewed graph decision** and press **Start**. Recording a decision starts no paid work and needs no tick in the box. An approval of a different candidate does not count."), learner_decision, learner_digest])}) if project_id == "project-08" else mo.md(""),
         learner_consent, learner_launch, learner_cancel
     ])
     return (
@@ -948,7 +1196,7 @@ def _(base64, evidence_link, json, learner, learner_refresh, mo, phase_labels):
         mo.md("### Your saved notes\n\n" + _saved_notes) if _saved_notes else mo.md(""),
         mo.accordion({"Details: check that everything works": mo.md("```json\n" + json.dumps(_checks, indent=2) + "\n```"), "Details: checkpoints and approval candidate": mo.md("```json\n" + json.dumps(my_progress["checkpoints"], indent=2) + "\n```"), "Details: latest action log": mo.md("```text\n" + my_progress["log"] + "\n```")})
     ])
-    return (my_progress,)
+    return
 
 
 @app.cell(hide_code=True)
@@ -1015,10 +1263,10 @@ def _(
 
 
 @app.cell(hide_code=True)
-def _(learner, mo, my_progress):
-    if my_progress["prepared"] and not my_progress["pending"]:
-        # Built only when clicked, so the periodic refresh stays light.
-        _download = mo.download(data=learner.bundle, filename="my-lesson-checkpoint.tar.gz", mimetype="application/gzip", label="Download my progress and evidence")
+def _(learner, mo):
+    _checkpoint = learner.cached_checkpoint_bytes()
+    if _checkpoint is not None:
+        _download = mo.download(data=_checkpoint, filename="my-lesson-checkpoint.tar.gz", mimetype="application/gzip", label="Download my progress and evidence")
     else:
         _download = mo.md("Your progress download appears here after setup, and again once a running action has finished. Results are saved to your project after every completed action.")
     _download
@@ -1050,7 +1298,7 @@ def _(mo):
     - [The long-form write-up of the recorded Forge case](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-publication/docs/en/forge/04-runtime-feedback.md).
     - Dashboards for the recorded attempts: [evidence](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=su19wan3xra) · [main comparison](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=dfs83wdpatt) · [execution audit](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=l9e45ofb461).
 
-    The Agent Lens and dashboard links open the course's private project, so you need view access to it. Your own attempts in this copy run with course runner revision `b948c1fbac36`. Each recorded attempt shows its own source revision under **Inspect one attempt**.
+    The Agent Lens and dashboard links open the course's private project, so you need view access to it. Your own attempts in this copy run with course runner revision `1d207c2da0b7`. Each recorded attempt shows its own source revision under **Inspect one attempt**.
     """)
     return
 
