@@ -4,7 +4,7 @@ import {Type} from 'typebox';
 import type {ToolDefinition} from '@earendil-works/pi-coding-agent';
 import {mkdir, writeFile} from 'node:fs/promises';
 import {join} from 'node:path';
-import {randomUUID} from 'node:crypto';
+import {randomUUID,createHash} from 'node:crypto';
 import {writeJson} from './records.js';
 import {acquireSlot} from './slots.js';
 import {type Config, requireLive} from './config.js';
@@ -12,10 +12,16 @@ import {deadline} from './lifecycle.js';
 
 export interface SandboxJournal {
   trialId: string;
+  lookupTag?: string;
   sandboxId?: string;
   state: 'creating' | 'running' | 'terminated' | 'cleanup_failed' | 'creation_unknown';
   requestedAt?:string;runningAt?:string;terminatedAt?:string;
   recoveredSandboxIds?:string[];
+}
+
+/** Provider tags have a 59-character limit; durable operation IDs may be longer. */
+export function sandboxLookupTag(id:string){
+  return id.length<=59&&/^[A-Za-z0-9._-]*[A-Za-z0-9]$/.test(id)?id:`course-${createHash('sha256').update(id).digest('hex').slice(0,40)}`;
 }
 
 /** Adapter for pinned cwsandbox 1.0.0, which has no public client.dispose().
@@ -37,7 +43,8 @@ export async function withWorkspace<T>(options: {
 }, action: (sandbox: Sandbox) => Promise<T>): Promise<T> {
   requireLive(options.config);
   if (!/@sha256:[a-f0-9]{64}$/.test(options.image)) throw new Error('Sandbox image must be pinned by digest');
-  const journal: SandboxJournal = {trialId: options.trialId, state: 'creating'};
+  const lookupTag=sandboxLookupTag(options.trialId);
+  const journal: SandboxJournal = {trialId: options.trialId, lookupTag, state: 'creating'};
   const journalFile = join(options.evidenceDir, 'sandbox.json');
   const save=async()=>{await writeJson(journalFile,journal);await options.onJournal?.(journal);};
   await save();
@@ -51,13 +58,13 @@ export async function withWorkspace<T>(options: {
   let sandbox: Sandbox;
   try {
     sandbox = await client.create({containerImage: options.image, resources: {cpu: '2', memory: '4Gi'},
-      maxLifetimeSeconds: 1200, network: {denyEgress: true}, tags: ['harness-course', options.trialId],
+      maxLifetimeSeconds: 1200, network: {denyEgress: true}, tags: ['harness-course', lookupTag],
       annotations: {'course.trial': options.trialId}, waitUntilRunning: false, timeoutMs: 60000, signal: options.signal});
   } catch (error) {
     journal.state = 'creation_unknown';
     await save();
     // A timed-out create can still launch a billed workload. Reconcile before retrying.
-    const matches = await client.listAll({tags: [options.trialId], timeoutMs: 30000});
+    const matches = await client.listAll({tags: [lookupTag], timeoutMs: 30000});
     for (const match of matches) {
       ownedIds.push(match.sandboxId);
       await match.stop({missingOk: true, timeoutMs: 30000});
