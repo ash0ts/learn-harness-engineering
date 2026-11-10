@@ -4,6 +4,7 @@ import {randomUUID} from 'node:crypto';
 import {config as loadConfig, requireLive} from './config.js';
 import {writeJson} from './records.js';
 import {AppTracingLifecycle} from './app-tracing.js';
+import {deadline} from './lifecycle.js';
 
 const lifecycle=new AppTracingLifecycle(async()=>{
   const c=loadConfig();requireLive(c);
@@ -33,6 +34,9 @@ export async function createAppHooks(variant: string, options:{conversationId?:s
   }
   Object.assign(attributes,options.attributes);
   const usage = {inputTokens: 0, outputTokens: 0, calls: 0};
+  const requests:Array<{id:string;status:'dispatched'|'reported';inputTokens?:number;outputTokens?:number;outcome?:string}>=[];
+  let tracingStatus='pending';
+  const save=async()=>{if(evidencePath)await writeJson(evidencePath,{conversationId,usage,requests,attributes,tracingStatus});};
   const conversation = () => tracing.startConversation({agentName: 'course-knowledge-base',
     conversationId, model: config.model, attributes});
 
@@ -79,27 +83,31 @@ export async function createAppHooks(variant: string, options:{conversationId?:s
         {role: 'user' as const, content: JSON.stringify({question, citations})},
       ];
       let failure:Error|undefined;
+      const request={id:`${conversationId}-${requests.length+1}`,status:'dispatched' as 'dispatched'|'reported',inputTokens:undefined as number|undefined,outputTokens:undefined as number|undefined,outcome:undefined as string|undefined};
       try {
+        requests.push(request);await save();
         const response = await client.chat.completions.create({model: config.model, messages,
           temperature: 0, max_tokens: 1024});
         const choice = response.choices[0];
         llm.record({inputMessages: messages, outputMessages: [{role: 'assistant', content: choice?.message.content || ''}],
           responseId: response.id, responseModel: response.model,
           usage: {inputTokens: response.usage?.prompt_tokens, outputTokens: response.usage?.completion_tokens}});
-        if (!response.usage) throw new Error('telemetry_missing: inference omitted token usage');
+        if (!response.usage||![response.usage.prompt_tokens,response.usage.completion_tokens].every(n=>Number.isFinite(n)&&n>=0)||response.usage.prompt_tokens+response.usage.completion_tokens===0) throw new Error('telemetry_missing: inference omitted token usage');
         usage.inputTokens += response.usage.prompt_tokens;
         usage.outputTokens += response.usage.completion_tokens; usage.calls++;
+        request.status='reported';request.inputTokens=response.usage.prompt_tokens;request.outputTokens=response.usage.completion_tokens;await save();
         if (choice?.finish_reason !== 'stop' || !choice.message.content?.trim()) {
           throw new Error('Malformed or incomplete live inference response');
         }
         return choice.message.content;
       } catch (error) {failure=error as Error;throw error;}
-      finally {llm.end(failure?{error:failure}:{});}
+      finally {request.outcome=failure?'failed':'passed';await save();llm.end(failure?{error:failure}:{});}
     },
     async shutdown() {
-      try { await releaseTracing(); }
+      try {await deadline(releaseTracing(),30000,'App tracing shutdown');tracingStatus='complete';}
+      catch(error){tracingStatus='failed';throw error;}
       finally {
-        if (evidencePath) await writeJson(evidencePath, {conversationId, usage, attributes});
+        await save();
       }
     },
   };
