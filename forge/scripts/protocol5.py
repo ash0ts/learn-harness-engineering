@@ -29,9 +29,10 @@ def freeze(destination):
     if destination.exists():
         raise RuntimeError('A frozen schedule already exists; use its IDs and source')
     source = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
-    if subprocess.check_output(['git', 'diff', '--name-only', 'HEAD', '--', 'forge/src', 'forge/tasks', 'forge/graders', 'forge/protocol.json', 'forge/package-lock.json'], cwd=ROOT):
+    inputs = ['forge/src', 'forge/tasks', 'forge/graders', 'forge/fixtures', 'forge/protocol.json', 'forge/package-lock.json', 'forge/sandbox/package-lock.json', 'forge/scripts/protocol5.py', 'projects', 'shared']
+    if subprocess.check_output(['git', 'diff', '--name-only', 'HEAD', '--', *inputs], cwd=ROOT):
         raise RuntimeError('Commit runtime and measurement changes before freezing')
-    paths = subprocess.check_output(['git', 'ls-tree', '-r', '--name-only', source, '--', 'forge/src', 'forge/tasks', 'forge/graders', 'forge/fixtures', 'forge/protocol.json', 'forge/package-lock.json', 'forge/sandbox/package-lock.json', 'forge/scripts/protocol5.py'], cwd=ROOT, text=True).splitlines()
+    paths = subprocess.check_output(['git', 'ls-tree', '-r', '--name-only', source, '--', *inputs], cwd=ROOT, text=True).splitlines()
     hashes = {path:hashlib.sha256(subprocess.check_output(['git','show',source+':'+path],cwd=ROOT)).hexdigest() for path in paths}
     def step(kind, **values):
         return {'id':str(uuid.uuid4()), 'kind':kind, 'status':'prepared', **values}

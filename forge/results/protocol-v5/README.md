@@ -2,12 +2,12 @@
 
 **Rollout is blocked on missing provider usage.** Runtime repairs and candidate notebooks are locally validated. No corrected scored campaign or repaired notebook publication is claimed.
 
-Candidate notebook runner: `1d207c2da0b71264afd43523b6c3f4770322d2db`. Historical evidence remains byte-for-byte unchanged: 129 archived attempts and 39 primary comparisons.
+Candidate notebook runner: `dcf7e447f565961e790ed1f4a25815b278db124e`. Historical evidence remains byte-for-byte unchanged: 129 archived attempts and 39 primary comparisons.
 
 | Check | Actual result |
 | --- | --- |
-| TypeScript tests | 58 pass; 0 fail |
-| Learner and publication tests | 41 pass, plus 6 publication guards |
+| TypeScript tests | 61 pass; 0 fail |
+| Learner and publication tests | 47 pass, plus 6 publication guards |
 | Offline apps | 15/15 pass |
 | Local saved notebook views | 9/9 render without credentials |
 | Docs and anchors | Pass |
@@ -69,3 +69,9 @@ These links still show the preceding hosted iteration. Candidate source checksum
 - Local controller tests and locally compiled reference repairs are not live course-trial evidence.
 - The one new qualification failed before app qualification; the unknown second request is not charged as zero.
 - Remote notebook sources were read back unchanged. They still contain the preceding iteration, not these candidate repairs.
+
+## Private dashboard and evidence
+
+[Open the protocol 5 dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=43tvw98k2nm) · [Audit run](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/course-protocol5-repair-audit). The run and versioned artifact are separate from historical comparison runs.
+
+![Protocol 5 dashboard showing qualification blocked and zero scored attempts](dashboard.png)

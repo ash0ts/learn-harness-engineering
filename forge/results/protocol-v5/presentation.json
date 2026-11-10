@@ -34,63 +34,63 @@
       "cellCount": 32,
       "labelsAndImagesUnchanged": true,
       "historicalResultsUnchanged": true,
-      "sha256": "c870c889d1464cabe165c7b454ec138618bb1d32b0e43c00abf679f0027ce915"
+      "sha256": "16955f0508c739b222f7e652abe7b4753bbb79e6f4613a693654f4ec89c3e43f"
     },
     {
       "file": "forge/notebooks/01-minimal-harness.py",
       "cellCount": 33,
       "labelsAndImagesUnchanged": true,
       "historicalResultsUnchanged": true,
-      "sha256": "dfa8e9ffcaa5d0b5f3685925a2522f2b5b9fcc620f3dc5d9b23263933eba066e"
+      "sha256": "b214e5bdd915d4dfa4689150d6e9f0f3f5b107def7db33bb91631f1a552922e3"
     },
     {
       "file": "forge/notebooks/02-workspace-docs.py",
       "cellCount": 31,
       "labelsAndImagesUnchanged": true,
       "historicalResultsUnchanged": true,
-      "sha256": "b50f7706364a2e37cb69e481f211543d468df0b6886702a45fca5c4674639e04"
+      "sha256": "2e391f88a83977ffe982eea9b92f341da557c23b9eda5b30f7d8687a2bdee0bc"
     },
     {
       "file": "forge/notebooks/03-session-recovery.py",
       "cellCount": 32,
       "labelsAndImagesUnchanged": true,
       "historicalResultsUnchanged": true,
-      "sha256": "06bae2296a675ba2a5770571cd905e321b054090b15cb45525507c3f5de99657"
+      "sha256": "ab0788ecbc79691147af58236ceceae4a7f4e4e95fd90d2ad16de4a7ac9b74e6"
     },
     {
       "file": "forge/notebooks/04-runtime-feedback.py",
       "cellCount": 32,
       "labelsAndImagesUnchanged": true,
       "historicalResultsUnchanged": true,
-      "sha256": "2a218a4bd2380d8245e6f97e4bf0e6e7f0e1f80a9b9692fdb560b949069b2530"
+      "sha256": "afbfcb643e91b06b029adc542a26f10b3151c14155ff0d0607201b632fc9b16a"
     },
     {
       "file": "forge/notebooks/05-role-separation.py",
       "cellCount": 33,
       "labelsAndImagesUnchanged": true,
       "historicalResultsUnchanged": true,
-      "sha256": "575c8e643caa3b8a7aa756e4cf290fe8794f497e29de4870a175cccb0992f2fd"
+      "sha256": "5d2c20de0a924e5657a845d52399c72e556bfca4094ac5cc3b5d42a453c5180b"
     },
     {
       "file": "forge/notebooks/06-capstone.py",
       "cellCount": 32,
       "labelsAndImagesUnchanged": true,
       "historicalResultsUnchanged": true,
-      "sha256": "b3bfba77a62ab16ac114583328bdc7aaf3c6f0e9dd52b90c3e4dfb6a3ae72db3"
+      "sha256": "125e0ded1cd7770165b5cb6d797547a280523735c6fa3e47d4915d01a85129c4"
     },
     {
       "file": "forge/notebooks/07-bounded-loops.py",
       "cellCount": 32,
       "labelsAndImagesUnchanged": true,
       "historicalResultsUnchanged": true,
-      "sha256": "e9b0625f46ca6e5a00040f5f5c2328b5104bb005f31184a494b1026e06efdf5a"
+      "sha256": "3f4cf57486feb82c9ab404033a4806a472f1dbeed8cf2670dac6e601268402f8"
     },
     {
       "file": "forge/notebooks/08-state-machine.py",
       "cellCount": 32,
       "labelsAndImagesUnchanged": true,
       "historicalResultsUnchanged": true,
-      "sha256": "ba129ed60df76458495a5161eafa96399e133b65acc803e6ed25741a47511e77"
+      "sha256": "a1701c2b4bd4057df28b3fe513f1f7d091a775928d005d80d441884dba133195"
     }
   ]
 }

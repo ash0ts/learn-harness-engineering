@@ -1,4 +1,5 @@
 """Build the revision-five repair receipt without rewriting historical cohorts."""
+from collections import Counter
 import ast
 from datetime import datetime, timezone
 import hashlib
@@ -29,16 +30,31 @@ def build():
     attempts=[r for r in attempts if r.get('protocol',{}).get('protocolRevision')==5 and r.get('finishedAt')]
     comparisons=[r for r in attempts if r.get('project') in [f'project-{i:02}' for i in range(1,7)]]
     targets={'comparisonAttempts':39,'loopControllers':9,'realTwoHourTimers':3,'graphs':3,'verificationPairs':3,'newHumanDecisions':2}
-    # This repair receipt is gated on qualification; later campaign results must
-    # be compiled from their own frozen schedule instead of editing this archive.
-    completed={key:0 for key in targets};completed['comparisonAttempts']=len(comparisons)
+    operations={p.stem:read(p) for p in (LOCAL/'protocol-v5/operations').glob('*.json')}
+    loops=[read(p) for p in (LOCAL/'protocol-v5').glob('cohort-loop-*-checkpoint.json')]
+    graphs=[read(p) for p in (LOCAL/'protocol-v5').glob('cohort-graph-*-checkpoint.json')]
+    finished_loops=[r for r in loops if operations.get(r['id'],{}).get('phase')=='completed' and not r.get('pendingTrialId')]
+    timers=[r for r in finished_loops if r['mode']=='timer' and r['status']=='deadline' and r['deadlineAt']-r['startedAt']>=7200000 and datetime.fromisoformat(operations[r['id']]['updatedAt'].replace('Z','+00:00')).timestamp()*1000>=r['deadlineAt']]
+    finished_graphs=[r for r in graphs if operations.get(r['id'],{}).get('phase')=='completed' and r['node'] in ('approval','done','rejected','failed')]
+    decisions={r['approval']['decisionId'] for r in graphs if r.get('approval',{}).get('decisionId') and r['approval']['candidateSha256']==r.get('candidate',{}).get('sha256')}
+    pairs=[]
+    for path in (LOCAL/'protocol-v5').glob('verification-pairs-*.json'):
+        rows_for_patch=read(path)['pairs']
+        for repeat in (1,2,3):
+            group=[r for r in rows_for_patch if r['repeat']==repeat]
+            if len(group)==2 and {r['mode'] for r in group}=={'serial','parallel'} and all(r['completed'] for r in group) and len({r['candidateSha256'] for r in group})==1:pairs.append(group)
+    completed={'comparisonAttempts':len(comparisons),'loopControllers':len(finished_loops),'realTwoHourTimers':len(timers),'graphs':len(finished_graphs),'verificationPairs':len(pairs),'newHumanDecisions':len(decisions)}
+    groups=[]
+    for project,variant,source in sorted({(r['project'],r['variant'],r['sourceCommit']) for r in comparisons}):
+        group=[r for r in comparisons if (r['project'],r['variant'],r['sourceCommit'])==(project,variant,source)]
+        groups.append({'project':project,'variant':variant,'sourceCommit':source,'attempts':len(group),'outcomes':dict(Counter(r['outcome'] for r in group)),'trialIds':[r['id'] for r in group]})
     tests=(LOCAL/'repair-v5/validation/typescript.log').read_text()
     python_tests=(LOCAL/'repair-v5/validation/python.log').read_text()
     publication_tests=(LOCAL/'repair-v5/validation/publication.log').read_text()
     value={'schemaVersion':1,'protocolRevision':5,'generatedAt':datetime.now(timezone.utc).isoformat(),
         'status':'blocked_missing_usage','candidateRunnerCommit':validation[0]['runnerCommit'],
         'historical':{'archiveAttempts':len(archive['trials']),'primaryComparisonAttempts':len(primary),'snapshotSha256':hashlib.sha256((ROOT/'forge/results/snapshot.json').read_bytes()).hexdigest(),'unaltered':True},
-        'targets':targets,'completed':completed,'qualificationAttempts':rows,
+        'targets':targets,'completed':completed,'comparisonGroups':groups,'qualificationAttempts':rows,
         'budget':{'limitUsd':ledger['limitUsd'],'actualCostKnown':False,'knownSettledEstimateUsd':ledger['spentEstimateUsd'],
             'unresolvedReservationsUsd':sum(ledger['reservations'].values()),'halted':ledger.get('halted'),'billingReadback':read(LOCAL/'repair-v5/provider-usage.json')},
         'validation':{'typescriptTestsPassed':int(re.search(r'pass (\d+)',tests)[1]),'typescriptTestsFailed':int(re.search(r'fail (\d+)',tests)[1]),
@@ -65,6 +81,10 @@ def build():
     lines += ['', '## Notebook sources', '', 'These links still show the preceding hosted iteration. Candidate source checksums and current remote versions are recorded separately in `status.json`.','']
     lines += [f"- [{Path(row['file']).stem}]({row['url']}) — prior version {row['currentVersion']['versionIndex']}; candidate not published." for row in notebooks]
     lines += ['', '## Limits on the claims','']+['- '+item for item in value['limitations']]
+    dashboard=DEST/'dashboard.json'
+    if dashboard.exists():
+        hosted=read(dashboard)
+        lines += ['', '## Private dashboard and evidence', '', '[Open the protocol 5 dashboard]('+hosted['forgeUrl']+') · [Audit run]('+hosted['runUrl']+'). The run and versioned artifact are separate from historical comparison runs.', '', '![Protocol 5 dashboard showing qualification blocked and zero scored attempts](dashboard.png)']
     (DEST/'README.md').write_text('\n'.join(lines)+'\n')
     print(json.dumps({'status':value['status'],'validation':value['validation'],'completed':completed},indent=2))
 
