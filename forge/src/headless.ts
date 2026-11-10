@@ -1,5 +1,5 @@
 import {createRequire} from 'node:module';
-import {resolve, join} from 'node:path';
+import {resolve, join, relative} from 'node:path';
 import {mkdtemp, rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {performance} from 'node:perf_hooks';
@@ -13,7 +13,7 @@ export async function runServices(appDir: string, fixturePaths: string[], live =
   const {IndexingService} = require(join(app, 'dist/services/indexing-service.js'));
   const {QaService} = require(join(app, 'dist/services/qa-service.js'));
   const hooks = require(join(app, 'dist/services/forge-hooks.js'));
-  if (live) hooks.setForgeHooks(await (await import('./app.js')).createAppHooks(appDir));
+  if (live) hooks.setForgeHooks(await (await import('./app.js')).createAppHooks(relative(process.cwd(),app)));
   const dataDir = await mkdtemp(join(tmpdir(), 'forge-services-'));
   try {
     const persistence = new PersistenceService(dataDir);
@@ -32,7 +32,7 @@ export async function runServices(appDir: string, fixturePaths: string[], live =
       chunks: index.getAllChunks(), answers, history: qa.getHistory(),
       timingsMs: {import: importedAt-start, index: indexedAt-importedAt, qa: endedAt-indexedAt}};
   } finally {
-    await hooks.shutdownForgeHooks(); hooks.setForgeHooks(undefined);
-    await rm(dataDir, {recursive: true, force: true});
+    try {await hooks.shutdownForgeHooks();}
+    finally {hooks.setForgeHooks(undefined);await rm(dataDir, {recursive: true, force: true});}
   }
 }
