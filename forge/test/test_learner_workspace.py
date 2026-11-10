@@ -1,3 +1,5 @@
+import base64
+import hashlib
 import io
 import json
 from pathlib import Path
@@ -54,11 +56,12 @@ class LearnerWorkspaceTests(unittest.TestCase):
         def save_process(args, **kwargs):
             compile(args[2], "<isolated-progress-save>", "exec")
             self.assertNotIn("WANDB_SERVICE", kwargs["env"])
-            return SimpleNamespace(returncode=0, stdout='{"progressUrl":"https://wandb.ai/test"}', stderr="")
+            return SimpleNamespace(returncode=0, stdout=json.dumps({"progressUrl":"https://wandb.ai/test", "verified": True, "sha256": args[-1]}), stderr="")
         self.w.env["WANDB_SERVICE"] = "stale-service-handle"
         with patch("subprocess.run", side_effect=save_process):
             self.w.persist()
-        self.assertEqual(self.w.state["progressUrl"], "https://wandb.ai/test")
+        self.assertTrue(self.w.state["progressUrl"].endswith("/runs/lesson-" + self.w.key))
+        self.assertIsInstance(self.w.cached_checkpoint_bytes(), bytes)
 
     def test_identity_isolated_by_owner_notebook_and_destination(self):
         for key in ["WANDB_PROJECT", "WANDB_NOTEBOOK_COLLECTION", "WANDB_NOTEBOOK_USER_ID"]:
@@ -109,18 +112,28 @@ class LearnerWorkspaceTests(unittest.TestCase):
         self.seed("project-08", ["graph"])
         with self.assertRaisesRegex(ValueError, "SHA-256"):
             self.w.command("decision", "graph", decision="approve")
+        (self.w.results / "project-08-graph-checkpoint.json").write_text(json.dumps({"id": "graph-one", "node": "approval"}))
         command = self.w.command("decision", "graph", decision="reject", sha256="b" * 64)
         self.assertEqual(command[command.index("--actor") + 1], "12")
         self.assertNotIn("--execute", command)
 
-    def test_loop_checkpoint_cannot_be_overwritten(self):
+    def test_repeat_loop_uses_fresh_checkpoint_and_retains_previous(self):
         self.seed("project-07", ["goal"])
-        (self.w.results / "project-07-goal-checkpoint.json").write_text("{}")
-        with self.assertRaisesRegex(ValueError, "already run"):
-            self.w.command("run", "goal")
-        command = self.w.command("resume", "goal")
-        self.assertIn("--resume", command)
-        self.assertEqual(command[command.index("--duration-seconds") + 1], "600")
+        original = self.w.results / "project-07-goal-checkpoint.json"
+        original.write_text(json.dumps({"id": "old", "status": "finished", "deadlineAt": 123}))
+        first = self.w.command("run", "goal")
+        second = self.w.command("run", "goal")
+        self.assertNotEqual(first[first.index("--checkpoint") + 1], second[second.index("--checkpoint") + 1])
+        self.assertEqual(json.loads(original.read_text())["deadlineAt"], 123)
+        resumed = self.w.command("resume", "goal")
+        self.assertIn("--resume", resumed)
+        self.assertEqual(resumed[resumed.index("--duration-seconds") + 1], "600")
+
+    def test_pending_approval_prevents_new_graph(self):
+        self.seed("project-08", ["graph"])
+        (self.w.results / "project-08-graph-checkpoint.json").write_text('{"node":"approval"}')
+        with self.assertRaisesRegex(ValueError, "decide"):
+            self.w.command("run", "graph")
 
     def test_checkpoint_roundtrip_retains_budget_and_pending(self):
         self.seed()
@@ -156,14 +169,19 @@ class LearnerWorkspaceTests(unittest.TestCase):
             for member in archive.getmembers():
                 self.assertNotIn(b"secret-for-test", archive.extractfile(member).read())
 
-    def test_prepare_keeps_saved_budget_on_interruption(self):
+    def test_prepare_restores_pending_and_installs_recovery_tools(self):
         self.seed()
         self.w.state["pending"] = {"id": "uncertain"}
         self.w.write()
-        with patch.object(self.w, "private_project"), patch.object(self.w, "install_tools", side_effect=AssertionError):
-            with self.assertRaisesRegex(RuntimeError, "interrupted"):
-                self.w.prepare(20)
-        self.assertEqual(self.w.ledger()["spentEstimateUsd"], 1)
+        self.w.root.mkdir(parents=True, exist_ok=True)
+        (self.w.root / ".git").mkdir()
+        (self.w.root / "projects/shared").mkdir(parents=True)
+        with patch.object(self.w, "private_project"), patch.object(self.w, "persist"), patch.object(self.w, "install_tools") as install, patch.object(self.w, "run_command", return_value="a" * 40), patch("subprocess.run", return_value=SimpleNamespace(returncode=0)):
+            self.w.prepare(20)
+        install.assert_called_once()
+        self.assertEqual(self.w.state["pending"]["id"], "uncertain")
+        self.assertAlmostEqual(self.w.ledger()["spentEstimateUsd"], 1 + self.w.NOTEBOOK_ALLOWANCE)
+        self.assertIn("Connect", self.w.state["status"])
 
     def test_blank_worksheet_never_erases_saved_notes(self):
         # A fresh runtime shows an empty worksheet; saving must merge, not replace.
@@ -174,23 +192,18 @@ class LearnerWorkspaceTests(unittest.TestCase):
         self.assertEqual(self.w.state["notes"], {"prediction": "It will skip the launch check",
                                                  "observation": "Passed four of five checks", "observedHumanMinutes": "25"})
 
-    def test_interrupted_copy_says_so_and_asks_for_no_key(self):
-        # A restored marker with no live process is an interrupted copy, not a running action.
+    def test_interrupted_copy_can_authenticate_for_readback_only(self):
         self.seed()
         self.w.state["pending"] = {"id": "lost-runtime"}
         self.w.write()
-        view = self.w.view()
-        self.assertTrue(view["prepared"])
-        self.assertFalse(view["active"])
-        self.assertIn("interrupted", self.w.blocked())
-        for call in (lambda: self.w.start("run", "minimal"), lambda: self.w.connect("a-key"), lambda: self.w.save_notes("p", "o", "l")):
-            with patch("subprocess.Popen", side_effect=AssertionError), patch("urllib.request.urlopen", side_effect=AssertionError):
-                with self.assertRaisesRegex(RuntimeError, "interrupted"):
-                    call()
-        with patch.object(self.w, "private_project"), patch.object(self.w, "install_tools", side_effect=AssertionError):
+        with patch("subprocess.Popen", side_effect=AssertionError):
             with self.assertRaisesRegex(RuntimeError, "interrupted"):
-                self.w.prepare(20)
-        self.assertIn("Stopped", self.w.view()["status"])
+                self.w.start("run", "minimal")
+        viewer = base64.b64encode(b"User:12").decode()
+        with patch.object(self.w, "private_project"), patch.object(self.w, "query", return_value={"data":{"viewer":{"id":viewer}}}), patch.object(self.w, "run_command"), patch.object(self.w, "recover") as recovery:
+            self.w.connect("learner-key")
+        recovery.assert_called_once()
+        self.assertTrue(self.w.connected)
 
     def test_running_child_is_active_until_it_exits(self):
         self.seed()
@@ -252,6 +265,82 @@ class LearnerWorkspaceTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "network failed"):
                 self.w.prepare(20)
         self.assertFalse((self.w.results / "budget.json").exists())
+
+    def test_bundle_is_deterministic_sanitized_and_restores_disconnected(self):
+        self.seed()
+        self.w.state["notes"] = {"observation": "Retained notes"}
+        self.w.write()
+        (self.w.results / "old.log").write_text("/Users/student/private secret-for-test")
+        data = self.w.bundle()
+        self.assertEqual(data, self.w.bundle())
+        with tarfile.open(fileobj=io.BytesIO(data), mode="r:gz") as archive:
+            text = archive.extractfile("results/old.log").read()
+            self.assertNotIn(b"/Users/", text)
+            self.assertNotIn(b"secret-for-test", text)
+        with tempfile.TemporaryDirectory() as dest:
+            other = LessonWorkspace("b" * 40, "project-01", self.env, dest)
+            other.restore_bundle(data)
+            self.assertFalse(other.connected)
+            self.assertEqual(other.state["notes"], self.w.state["notes"])
+            self.assertEqual(other.ledger(), self.w.ledger())
+            self.assertNotIn("runners", str(other.results))
+            self.assertEqual(other.state["migrations"][-1]["fromRevision"], "a" * 40)
+
+    def test_manifest_tamper_and_symlink_ancestors_are_rejected(self):
+        self.seed()
+        buffer = io.BytesIO()
+        with tarfile.open(fileobj=io.BytesIO(self.w.bundle()), mode="r:gz") as source, tarfile.open(fileobj=buffer, mode="w:gz") as target:
+            for member in source.getmembers():
+                data = source.extractfile(member).read()
+                if member.name == "results/budget.json":
+                    data = data.replace(b'"spentEstimateUsd": 1', b'"spentEstimateUsd": 0')
+                member.size = len(data)
+                target.addfile(member, io.BytesIO(data))
+        with self.assertRaisesRegex(RuntimeError, "checksum"):
+            self.w.restore_bundle(buffer.getvalue())
+        outside = Path(self.temp.name) / "outside"
+        outside.mkdir()
+        (self.w.results / "link").symlink_to(outside, target_is_directory=True)
+        with self.assertRaisesRegex(RuntimeError, "symlink"):
+            self.w.bundle()
+
+    def test_native_download_is_only_cached_after_verified_save(self):
+        self.seed()
+        self.assertIsNone(self.w.cached_checkpoint_bytes())
+        def save(args, **kwargs):
+            return SimpleNamespace(returncode=0, stdout=json.dumps({"verified": True, "sha256": args[-1]}), stderr="")
+        with patch("subprocess.run", side_effect=save):
+            self.w.persist()
+        data = self.w.cached_checkpoint_bytes()
+        self.assertIsInstance(data, bytes)
+        self.w.state["pending"] = {"id":"pending"}
+        self.assertIsNone(self.w.cached_checkpoint_bytes())
+        self.w.state.pop("pending")
+        with patch("subprocess.run", return_value=SimpleNamespace(returncode=1, stdout="", stderr="network")):
+            with self.assertRaisesRegex(RuntimeError, "upload failed"):
+                self.w.persist()
+        self.assertIsNone(self.w.cached_checkpoint_bytes())
+
+    def test_unknown_recovery_never_clears_pending(self):
+        self.seed()
+        self.w.state["pending"] = {"id":"unknown"}
+        report = {"operations":[{"id":"unknown", "phase":"blocked_unknown"}]}
+        with patch.object(self.w, "run_command", side_effect=[json.dumps(report), json.dumps({"id":"unknown", "recovered":False})]), patch.object(self.w, "persist"), patch("subprocess.Popen", side_effect=AssertionError):
+            result = self.w.recover()
+        self.assertFalse(result["recovered"])
+        self.assertIn("pending", self.w.state)
+        self.assertEqual(self.w.ledger()["spentEstimateUsd"], 1)
+
+    def test_completed_publication_recovery_does_not_launch_agent(self):
+        self.seed()
+        self.w.state["pending"] = {"id":"done", "operationIds":["done"], "publicationRetry":True}
+        report = {"operations":[{"id":"done", "phase":"recoverable"}]}
+        with patch.object(self.w, "run_command", side_effect=[json.dumps(report), json.dumps({"id":"done", "recovered":True})]) as command, patch.object(self.w, "persist"), patch("subprocess.Popen", side_effect=AssertionError):
+            result = self.w.recover()
+        self.assertTrue(result["recovered"])
+        self.assertNotIn("pending", self.w.state)
+        self.assertIn("--publish", command.call_args.args[0])
+        self.assertEqual(self.w.ledger()["spentEstimateUsd"], 1)
 
 
 if __name__ == "__main__":

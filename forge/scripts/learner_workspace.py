@@ -5,6 +5,7 @@ paid action are explicit. Remote state is written before a launch; an interrupte
 launch cannot silently restart in a new notebook runtime.
 """
 import base64
+import gzip
 import hashlib
 import io
 import json
@@ -20,6 +21,7 @@ import textwrap
 import threading
 import time
 import urllib.request
+import uuid
 from pathlib import Path
 
 
@@ -47,12 +49,16 @@ class LessonWorkspace:
             "WANDB_ENTITY", "WANDB_PROJECT", "WANDB_NOTEBOOK_COLLECTION", "WANDB_NOTEBOOK_USER_ID")}
         self.key = hashlib.sha256(json.dumps(self.identity, sort_keys=True).encode()).hexdigest()[:20]
         self.base = Path(base or self.env.get("FORGE_LEARNER_HOME", "/workspace/forge-lessons")) / self.key
-        self.root = self.base / "course"
-        self.results = self.root / "forge/local-results"
+        self.root = self.base / "runners" / revision
+        self.results = self.base / "evidence"
         self.state_file = self.base / "learner.json"
         self.artifact_name = "learner-" + self.key
-        self.state = {"schemaVersion": 1, "identity": self.identity, "revision": revision,
+        self.state = {"schemaVersion": 2, "identity": self.identity, "revision": revision,
                       "status": "Not launched", "actions": [], "notes": {}}
+        self.env.update(FORGE_RESULTS_DIR=str(self.results), FORGE_BUDGET_MODE="incremental",
+                        FORGE_NOTEBOOK_OWNER=self.identity["WANDB_NOTEBOOK_USER_ID"],
+                        FORGE_NOTEBOOK_ID=self.identity["WANDB_NOTEBOOK_COLLECTION"])
+        self._cached_checkpoint = None
         self.process = None
         self.lock = threading.Lock()
 
@@ -122,46 +128,149 @@ class LessonWorkspace:
         if not shutil.which("uv", path=self.env["PATH"]):
             raise RuntimeError("The standard Forge notebook image must include uv")
 
+    def safe_path(self, root, name):
+        parts = name.split("/")
+        if not name or any(p in ("", ".", "..") for p in parts) or "\\" in name or ":" in name:
+            raise RuntimeError("Unsafe checkpoint entry")
+        path = Path(root)
+        if path.is_symlink():
+            raise RuntimeError("Checkpoint root cannot be a symlink")
+        for part in parts:
+            path = path / part
+            if path.is_symlink():
+                raise RuntimeError("Checkpoint cannot contain symlinks")
+        return path
+
+    def projection(self, data):
+        text = self.redact(data)
+        # Display/export projections never replace the protected local originals.
+        text = text.replace(str(self.results) + "/", "")
+        text = re.sub(r"/(?:Users|home)/[^/\s\"']+", "[home]", text)
+        text = re.sub(r"(?i)(authorization[\"' :]+(?:bearer|basic)\s+)[A-Za-z0-9_./+=-]+", r"\1[REDACTED]", text)
+        return text
+
+    def load_state(self, state):
+        if state.get("identity") != self.identity:
+            raise RuntimeError("Checkpoint belongs to another learner, notebook, or destination")
+        if state.get("schemaVersion") not in (1, 2):
+            raise RuntimeError("Unsupported progress version")
+        old = state.get("revision")
+        if state.get("pending"):
+            state["pending"].setdefault("revision", old)
+        if old != self.revision or state["schemaVersion"] == 1:
+            state.setdefault("migrations", []).append({"fromSchema": state["schemaVersion"], "fromRevision": old,
+                "toRevision": self.revision, "at": time.time(), "reason": "Explicitly updated notebook source; spending and outcomes retained"})
+        state.update(schemaVersion=2, revision=self.revision)
+        self.state = state
+
     def bundle(self):
+        files = {"learner.json": self.state_file.read_bytes()}
+        if self.results.exists():
+            for path in sorted(self.results.rglob("*")):
+                name = path.relative_to(self.results).as_posix()
+                self.safe_path(self.results, name)
+                if path.is_file():
+                    files["results/" + name] = path.read_bytes()
+                elif path.name.endswith((".lock", "-lock")):
+                    raise RuntimeError("A checkpoint writer is still active")
+        if sum(map(len, files.values())) > 200_000_000:
+            raise RuntimeError("Checkpoint exceeds 200 MB; ask the instructor to archive evidence")
+        originals = {name: hashlib.sha256(data).hexdigest() for name, data in files.items()}
+        for name, data in list(files.items()):
+            try:
+                files[name] = self.projection(data.decode()).encode()
+            except UnicodeDecodeError:
+                if any(secret and secret.encode() in data for secret in self.secrets):
+                    raise RuntimeError("Credential detected in binary evidence")
+        # References in a sanitized projection point at the projected bytes. Keep
+        # original hashes in the manifest for comparison with private artifacts.
+        for name, data in list(files.items()):
+            if name.startswith("results/operations/") and name.endswith(".json"):
+                op = json.loads(data)
+                for ref in op.get("evidence", {}).values():
+                    target = "results/" + ref["path"]
+                    if target in files:
+                        ref["sha256"] = hashlib.sha256(files[target]).hexdigest()
+                files[name] = json.dumps(op, indent=2).encode()
+        manifest = {"schemaVersion": 2, "projection": "sanitized checkpoint; original evidence remains in private artifacts",
+                    "files": {name: {"sha256": hashlib.sha256(data).hexdigest(), "originalSha256": originals[name]} for name, data in files.items()}}
+        files["manifest.json"] = json.dumps(manifest, sort_keys=True).encode()
         buffer = io.BytesIO()
-        with tarfile.open(fileobj=buffer, mode="w:gz") as archive:
-            files = [(self.state_file, "learner.json")]
-            if self.results.exists():
-                files += [(p, "results/" + str(p.relative_to(self.results))) for p in self.results.rglob("*") if p.is_file()]
-            total = 0
-            for path, name in files:
-                if path.is_symlink():
-                    raise RuntimeError("Checkpoint cannot contain symlinks")
-                data = path.read_bytes()
-                for secret in self.secrets:
-                    if secret:
-                        data = data.replace(secret.encode(), b"[REDACTED]")
-                total += len(data)
-                if total > 200_000_000:
-                    raise RuntimeError("Checkpoint exceeds 200 MB; download evidence and ask the instructor to archive it")
-                info = tarfile.TarInfo(name)
-                info.size, info.mode = len(data), 0o600
-                archive.addfile(info, io.BytesIO(data))
+        with gzip.GzipFile(fileobj=buffer, mode="wb", mtime=0) as compressed:
+            with tarfile.open(fileobj=compressed, mode="w") as archive:
+                for name, data in sorted(files.items()):
+                    info = tarfile.TarInfo(name)
+                    info.size, info.mode = len(data), 0o600
+                    archive.addfile(info, io.BytesIO(data))
         return buffer.getvalue()
 
     def restore_bundle(self, data):
-        # Validate the complete archive before writing any entry.
         with tarfile.open(fileobj=io.BytesIO(data), mode="r:gz") as archive:
             members = archive.getmembers()
             if sum(m.size for m in members) > 200_000_000:
                 raise RuntimeError("Checkpoint is too large")
+            files = {}
             for member in members:
-                path = Path(member.name)
-                if not member.isfile() or path.is_absolute() or ".." in path.parts or not (member.name == "learner.json" or member.name.startswith("results/")):
+                self.safe_path(self.base, member.name)
+                if not member.isfile() or member.name in files or not (member.name in ("learner.json", "manifest.json") or member.name.startswith("results/")):
                     raise RuntimeError("Unsafe checkpoint entry")
-            state = json.loads(archive.extractfile("learner.json").read())
-            if state["identity"] != self.identity or state["revision"] != self.revision:
-                raise RuntimeError("Checkpoint belongs to another learner, notebook, destination, or runner revision")
-            for member in members:
-                dest = self.state_file if member.name == "learner.json" else self.results / member.name.removeprefix("results/")
-                dest.parent.mkdir(parents=True, exist_ok=True)
-                dest.write_bytes(archive.extractfile(member).read())
-        self.state = state
+                files[member.name] = archive.extractfile(member).read()
+        state = json.loads(files["learner.json"])
+        if state.get("identity") != self.identity:
+            raise RuntimeError("Checkpoint belongs to another learner, notebook, or destination")
+        manifest = json.loads(files.pop("manifest.json")) if "manifest.json" in files else None
+        if manifest:
+            if manifest.get("schemaVersion") != 2 or set(manifest["files"]) != set(files):
+                raise RuntimeError("Checkpoint manifest does not cover every file")
+            for name, value in files.items():
+                if hashlib.sha256(value).hexdigest() != manifest["files"][name]["sha256"]:
+                    raise RuntimeError("Checkpoint checksum mismatch")
+        elif state.get("schemaVersion") != 1:
+            raise RuntimeError("Checkpoint manifest missing")
+        # Validate all destination ancestors before making the first write.
+        destinations = {name: self.state_file if name == "learner.json" else self.safe_path(self.results, name.removeprefix("results/")) for name in files}
+        self.safe_path(self.base, "learner.json")
+        for name, dest in destinations.items():
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            dest.write_bytes(files[name])
+        self.load_state(state)
+        self.connected = False
+        self._cached_checkpoint = None
+        self.write()
+
+    def operation_records(self):
+        schema_file = self.root / "forge/operation.schema.json"
+        schema = json.loads(schema_file.read_text()) if schema_file.exists() else None
+        rows = []
+        for path in sorted((self.results / "operations").glob("*.json")):
+            self.safe_path(self.results, path.relative_to(self.results).as_posix())
+            row = json.loads(path.read_text())
+            if not schema:
+                raise RuntimeError("Runner operation contract is missing")
+            if any(key not in row for key in schema["required"]):
+                raise RuntimeError("Operation is incomplete; retain its reservation")
+            for key, rule in schema["properties"].items():
+                if key in row and (("const" in rule and row[key] != rule["const"]) or ("enum" in rule and row[key] not in rule["enum"])):
+                    raise RuntimeError("Unsupported operation state")
+            identity = row["identity"]
+            if identity.get("entity") != self.identity["WANDB_ENTITY"] or identity.get("project") != self.identity["WANDB_PROJECT"] or identity.get("owner") != self.identity["WANDB_NOTEBOOK_USER_ID"] or identity.get("notebook") != self.identity["WANDB_NOTEBOOK_COLLECTION"]:
+                raise RuntimeError("Operation owner or destination mismatch")
+            for ref in row["evidence"].values():
+                target = self.safe_path(self.results, ref["path"])
+                if hashlib.sha256(target.read_bytes()).hexdigest() != ref["sha256"]:
+                    raise RuntimeError("Operation evidence checksum mismatch")
+            rows.append(row)
+        return rows
+
+    def incomplete_operations(self):
+        return [r for r in self.operation_records() if r["phase"] != "completed" or r["cleanup"] != "verified" or r["telemetry"] != "complete" or r["publication"] not in ("verified", "not_required")]
+
+    def cached_checkpoint_bytes(self):
+        if self.state.get("pending") or self.process and self.process.poll() is None or self.ledger().get("halted") or self.ledger().get("reservations"):
+            return None
+        if self._cached_checkpoint and self.incomplete_operations():
+            return None
+        return self._cached_checkpoint
 
     def restore_remote(self):
         import wandb
@@ -181,29 +290,85 @@ class LessonWorkspace:
         return True
 
     def persist(self):
+        self._cached_checkpoint = None
+        self.state["progressUrl"] = f"https://wandb.ai/{self.identity['WANDB_ENTITY']}/{self.identity['WANDB_PROJECT']}/runs/lesson-{self.key}"
         self.write()
+        data = self.bundle()
+        digest = hashlib.sha256(data).hexdigest()
         checkpoint = self.base / "checkpoint.tar.gz"
-        checkpoint.write_bytes(self.bundle())
-        # W&B owns a background service. Give each save its own process so a
-        # completed coding child cannot invalidate the notebook's service handle.
+        checkpoint.write_bytes(data)
+        # Stable content aliases recover an interrupted save without a new agent
+        # attempt. A network failure during read-back never means "not found".
         script = '''
-import json,sys,wandb
+import hashlib,json,sys,wandb
 from pathlib import Path
-base=Path(sys.argv[1]); state=json.loads((base/'learner.json').read_text()); identity=state['identity']
-key=sys.argv[2]; ledger=json.loads((base/'course/forge/local-results/budget.json').read_text())
-with wandb.init(entity=identity['WANDB_ENTITY'],project=identity['WANDB_PROJECT'],id='lesson-'+key,resume='allow',job_type='course-learner-progress',group='self-service-lessons',settings=wandb.Settings(disable_git=True,disable_code=True,silent=True)) as run:
- artifact=wandb.Artifact('learner-'+key,type='course-learner-state',metadata={'revision':state['revision'],'pending':bool(state.get('pending'))})
- artifact.add_file(str(base/'checkpoint.tar.gz'),name='checkpoint.tar.gz')
- run.log_artifact(artifact,aliases=['latest']).wait()
+base=Path(sys.argv[1]); key=sys.argv[2]; digest=sys.argv[3]
+state=json.loads((base/'learner.json').read_text()); identity=state['identity']
+ledger=json.loads((base/'evidence/budget.json').read_text()); api=wandb.Api(timeout=30)
+entity=identity['WANDB_ENTITY']; project=identity['WANDB_PROJECT']; name='learner-'+key
+collections=api.artifact_collections(project_name=entity+'/'+project,type_name='course-learner-state')
+collection=next((c for c in collections if c.name==name),None); existing=None
+if collection:
+ for item in api.artifact_versions('course-learner-state',entity+'/'+project+'/'+name):
+  if item.metadata.get('checkpointSha256') == digest: existing=item; break
+with wandb.init(entity=entity,project=project,id='lesson-'+key,resume='allow',job_type='course-learner-progress',group='self-service-lessons',settings=wandb.Settings(disable_git=True,disable_code=True,silent=True)) as run:
+ if existing is None:
+  artifact=wandb.Artifact(name,type='course-learner-state',metadata={'revision':state['revision'],'pending':bool(state.get('pending')),'checkpointSha256':digest})
+  artifact.add_file(str(base/'checkpoint.tar.gz'),name='checkpoint.tar.gz')
+  existing=run.log_artifact(artifact,aliases=['latest','sha-'+digest[:24]]).wait()
+ else:
+  if 'latest' not in existing.aliases: existing.aliases.append('latest'); existing.save()
  run.summary.update({'lesson_status':state['status'],'completed_actions':len(state['actions']),'spent_estimate_usd':ledger.get('spentEstimateUsd',0),'budget_usd':ledger.get('limitUsd')})
- print(json.dumps({'progressUrl':run.url}))
+ downloaded=Path(existing.get_entry('checkpoint.tar.gz').download(root=str(base/'verify-save'))).read_bytes()
+ if hashlib.sha256(downloaded).hexdigest()!=digest: raise RuntimeError('Saved checkpoint checksum mismatch')
+ print(json.dumps({'progressUrl':run.url,'verified':True,'sha256':digest,'artifact':existing.qualified_name}))
 '''
         env = {k: v for k, v in self.env.items() if k not in {"WANDB_SERVICE", "_WANDB_SERVICE"}}
-        result = subprocess.run([sys.executable, "-c", textwrap.dedent(script), str(self.base), self.key], env=env, capture_output=True, text=True, timeout=180)
+        result = subprocess.run([sys.executable, "-c", textwrap.dedent(script), str(self.base), self.key, digest], env=env, capture_output=True, text=True, timeout=180)
         if result.returncode:
             raise RuntimeError("Progress upload failed: " + self.redact(result.stderr[-2500:]))
-        self.state["progressUrl"] = json.loads(result.stdout.strip().splitlines()[-1])["progressUrl"]
-        self.write()
+        receipt = json.loads(result.stdout.strip().splitlines()[-1])
+        if receipt.get("verified") is not True or receipt.get("sha256") != digest:
+            raise RuntimeError("Progress upload has no verified receipt")
+        (self.base / "save-receipt.json").write_text(json.dumps(receipt))
+        if not self.state.get("pending") and not self.ledger().get("halted") and not self.ledger().get("reservations") and not self.incomplete_operations():
+            self._cached_checkpoint = data
+
+    def cli(self):
+        return ["node", "--import", str(self.root / "forge/node_modules/tsx/dist/loader.mjs"), str(self.root / "forge/src/cli.ts")]
+
+    def recover(self):
+        """Only inspect, settle verified receipts, and retry missing publication."""
+        if self.process and self.process.poll() is None:
+            return {"recovered": False, "reason": "Worker is still active"}
+        report = json.loads(self.run_command(self.cli() + ["recovery-report", "--output", str(self.results)], cwd=self.root))
+        results = []
+        pending = self.state.get("pending")
+        for operation in report["operations"]:
+            if operation["phase"] == "completed":
+                continue
+            try:
+                text = self.run_command(self.cli() + ["recover", "--operation", operation["id"], "--output", str(self.results), "--publish"], cwd=self.root, timeout=360)
+                results.append(json.loads(text))
+            except Exception as error:
+                results.append({"id": operation["id"], "recovered": False, "reason": self.redact(error)})
+        self.state["recovery"] = {"at": time.time(), "results": results}
+        ledger = self.ledger()
+        blocked = ledger.get("halted") or ledger.get("reservations") or any(not r.get("recovered") for r in results)
+        if pending and not blocked:
+            ids = pending.get("operationIds", [pending["id"]])
+            operations = {row["id"]: row for row in report["operations"]}
+            # An action saved before Popen is provably not launched. Once the
+            # launch boundary is crossed, absence of an operation is ambiguous.
+            accounted = pending.get("launchStatus") == "not_created" or all(i in operations for i in ids[:pending.get("nextIndex", 0) + 1])
+            if accounted:
+                self.state.setdefault("actions", []).append({**pending, "recoveredAt": time.time(), "event": "recovered_without_replacement_work"})
+                self.state.pop("pending", None)
+            else:
+                blocked = "Legacy or interrupted launch has no operation receipt; instructor reconciliation required"
+        self.state["status"] = "Recovery needs evidence: " + str(blocked) if blocked else "Workspace ready; recovered saved work"
+        self.persist()
+        return {"recovered": not bool(blocked), "results": results}
 
     def blocked(self):
         """Why nothing new can start in this copy, or None."""
@@ -212,14 +377,16 @@ with wandb.init(entity=identity['WANDB_ENTITY'],project=identity['WANDB_PROJECT'
         if self.state.get("pending"):
             if self.process and self.process.poll() is None:
                 return "An action is still running. Wait until My work shows it has finished."
-            return "This copy is stopped because an earlier action was interrupted. It will not start anything new until your instructor has checked it."
+            return "An earlier action was interrupted. Prepare and Connect to inspect its saved work; no replacement work starts automatically."
         return None
 
     def connect(self, api_key):
         """Accept only a masked, session-memory credential; never save it."""
         with self.lock:
-            if self.blocked():
-                raise RuntimeError(self.blocked())
+            if not self.state.get("prepared"):
+                raise RuntimeError("Prepare your workspace first (step 2).")
+            if self.process and self.process.poll() is None:
+                raise RuntimeError("An action is still running")
             if not api_key.strip():
                 raise ValueError("A learner-owned Sandbox-capable API key is required")
             previous = self.env.get("WANDB_API_KEY", "")
@@ -232,14 +399,16 @@ with wandb.init(entity=identity['WANDB_ENTITY'],project=identity['WANDB_PROJECT'
                 decoded = base64.b64decode(viewer_id).decode().split(":")[-1]
                 if decoded != self.identity["WANDB_NOTEBOOK_USER_ID"]:
                     raise RuntimeError("Use the API key belonging to the owner of this notebook session")
-                script = "import {createSandboxClient} from '@coreweave/cwsandbox/wandb'; const c=createSandboxClient({apiKey:process.env.WANDB_API_KEY,entity:process.env.WANDB_ENTITY,project:process.env.WANDB_PROJECT}); await c.listAll({tags:['course-access-check'],timeoutMs:30000}); console.log('Sandbox access checked'); process.exit(0);"
+                script = "import {createSandboxClient} from '@coreweave/cwsandbox/wandb'; const c=createSandboxClient({apiKey:process.env.WANDB_API_KEY,entity:process.env.WANDB_ENTITY,project:process.env.WANDB_PROJECT}); await c.listAll({tags:['course-access-check'],timeoutMs:30000}); await c.transport.clients.client._transport.close(); console.log('Sandbox access checked');"
                 self.run_command(["node", "--input-type=module", "-e", script], cwd=self.root / "forge", timeout=45)
             except Exception:
                 self.env["WANDB_API_KEY"] = previous
                 self.connected = False
                 raise
             self.connected = True
-        return "Sandbox access connected for this session. The key is held in memory only."
+            if self.state.get("pending") or self.ledger().get("halted") or self.ledger().get("reservations"):
+                self.recover()
+        return "Sandbox access connected for this session. The key is held in memory only. " + self.state["status"]
 
     def ledger(self):
         file = self.results / "budget.json"
@@ -254,36 +423,44 @@ with wandb.init(entity=identity['WANDB_ENTITY'],project=identity['WANDB_PROJECT'
             self.lock.release()
 
     def _prepare(self, limit):
+        if self.process and self.process.poll() is None:
+            return self.view()
         if not isinstance(limit, (float, int)) or not 5 <= limit <= 50:
             raise ValueError("Choose a budget between $5 and $50")
         self.private_project()
         self.base.mkdir(parents=True, exist_ok=True)
         if self.state_file.exists():
-            self.state = json.loads(self.state_file.read_text())
+            self.load_state(json.loads(self.state_file.read_text()))
         else:
             self.restore_remote()
-        if self.state.get("identity") != self.identity or self.state.get("revision") != self.revision:
-            raise RuntimeError("Saved identity or revision differs; keep the original copy for its progress")
-        if self.state.get("pending"):
-            if not (self.process and self.process.poll() is None):
-                self.state["status"] = "Stopped: an earlier action was interrupted. This copy will not start anything new."
-            raise RuntimeError("An earlier action was interrupted, usually because the notebook session ended while it was running. Its paid work may still exist, so this copy will not start anything new and setup will not reset your budget. Your earlier results are still listed under My work. Tell your instructor, who has to check what was left running before this copy can continue.")
+        legacy = self.base / "course/forge/local-results"
+        if legacy.exists() and not self.results.exists():
+            if legacy.is_symlink():
+                raise RuntimeError("Legacy evidence root cannot be a symlink")
+            shutil.copytree(legacy, self.results, symlinks=True)
+            self.state.setdefault("migrations", []).append({"event": "copied_v1_evidence", "originalRetained": True})
         existing = self.ledger()
         if existing and existing.get("limitUsd") != limit:
             raise RuntimeError(f"This copy already has a ${existing.get('limitUsd')} budget. Keep that value when resuming.")
-        if existing.get("halted") or existing.get("reservations"):
-            raise RuntimeError("This copy has stopped because the cost of an earlier action is uncertain: it was cancelled, it failed, or it did not report its usage. It will not start anything new until your instructor has checked it.")
         self.results.mkdir(parents=True, exist_ok=True)
         ledger = existing or {"schemaVersion": 1, "limitUsd": limit, "spentEstimateUsd": 0, "reservations": {}, "settled": {}}
         session = "notebook-" + self.env.get("WANDB_NOTEBOOK_SESSION_ID", "")
         if session == "notebook-":
             raise RuntimeError("Forge did not supply a notebook session identity")
         if session not in ledger["settled"]:
-            if ledger["spentEstimateUsd"] + self.NOTEBOOK_ALLOWANCE > limit:
+            if ledger["spentEstimateUsd"] + sum(ledger["reservations"].values()) + self.NOTEBOOK_ALLOWANCE > limit:
                 raise RuntimeError("Budget exhausted before notebook runtime allowance")
             ledger["settled"][session] = self.NOTEBOOK_ALLOWANCE
             ledger["spentEstimateUsd"] += self.NOTEBOOK_ALLOWANCE
-        (self.results / "budget.json").write_text(json.dumps(ledger, indent=2))
+        ledger_file = self.results / "budget.json"
+        lock = self.results / "budget.json.lock"
+        lock.mkdir()  # Same exclusion protocol as TypeScript; never steal a lock.
+        try:
+            temporary = ledger_file.with_suffix(".tmp")
+            temporary.write_text(json.dumps(ledger, indent=2))
+            temporary.replace(ledger_file)
+        finally:
+            lock.rmdir()
         self.state["status"] = "Preparing workspace"
         self.persist()  # Save the ledger before installing or launching anything.
         self.install_tools()
@@ -305,42 +482,59 @@ with wandb.init(entity=identity['WANDB_ENTITY'],project=identity['WANDB_PROJECT'
             shared_modules.symlink_to(self.root / "forge/sandbox/node_modules", target_is_directory=True)
         self.run_command([str(self.root / "forge/sandbox/node_modules/.bin/tsc"), "-p", "projects/shared/tsconfig.node.json"], cwd=self.root)
         self.env["FORGE_BUDGET_USD"] = str(limit)
-        self.state.update(status="Workspace ready", prepared=True)
+        self.state.update(status="Workspace ready; Connect to inspect unfinished work" if self.state.get("pending") or existing.get("halted") or existing.get("reservations") else "Workspace ready", prepared=True)
         self.persist()
         return self.view()
 
-    def command(self, action, variant, repeats=1, decision=None, sha256=None):
+    def active_checkpoint(self, variant):
+        name = self.state.get("checkpoints", {}).get(variant)
+        if not name:
+            legacy = f"{self.project}-{variant}-checkpoint.json"
+            name = legacy if (self.results / legacy).exists() else None
+        return self.safe_path(self.results, name) if name else None
+
+    def command(self, action, variant, repeats=1, decision=None, sha256=None, operation_id=None):
         task = "project-01" if self.project == "overview" else self.project
         spec = json.loads((self.root / "forge/tasks" / (task + ".json")).read_text())
         if variant not in spec["variants"] or repeats not in [1, 2, 3]:
             raise ValueError("Choose a listed treatment and one to three repeats")
-        prefix = ["node", "--import", str(self.root / "forge/node_modules/tsx/dist/loader.mjs"), str(self.root / "forge/src/cli.ts")]
-        checkpoint = str(self.results / (self.project + "-" + variant + "-checkpoint.json"))
+        prefix = self.cli()
+        operation_id = operation_id or str(uuid.uuid4())
+        common = ["--output", str(self.results), "--operation-id", operation_id]
         if action == "qualify":
-            return prefix + ["doctor", "--qualify", "--execute"]
+            return prefix + ["doctor", "--qualify", "--execute"] + common
+        current = self.active_checkpoint(variant)
         if action == "decision":
             if self.project != "project-08" or decision not in ["approve", "reject"] or not re.fullmatch(r"[a-f0-9]{64}", sha256 or ""):
                 raise ValueError("Review the Project 08 candidate and enter its full SHA-256 before deciding")
-            return prefix + ["graph", "--checkpoint", checkpoint, "--decision", decision,
+            if not current:
+                raise ValueError("No graph is waiting for a decision")
+            return prefix + ["graph", "--checkpoint", str(current), "--output", str(self.results), "--decision", decision,
                              "--actor", self.identity["WANDB_NOTEBOOK_USER_ID"], "--sha256", sha256]
         if action not in ["run", "resume"]:
             raise ValueError("Unknown lesson action")
+        if current and task == "project-08" and json.loads(current.read_text()).get("node") == "approval":
+            raise ValueError("Review and decide the pending graph candidate before starting another graph")
+        if action == "resume":
+            if not current:
+                raise ValueError("No checkpoint exists to resume")
+            checkpoint = current
+            previous = json.loads(current.read_text())
+            common = ["--output", str(self.results), "--operation-id", previous["id"]]
+        else:
+            checkpoint = self.results / (self.project + "-" + variant + "-" + operation_id + "-checkpoint.json")
         if task == "project-07":
-            args = ["loop", "--mode", variant, "--checkpoint", checkpoint, "--duration-seconds", "600", "--max-rounds", "1", "--execute"]
+            args = ["loop", "--mode", variant, "--checkpoint", str(checkpoint), "--duration-seconds", "600", "--max-rounds", "1", "--execute"] + common
         elif task == "project-08":
-            args = ["graph", "--checkpoint", checkpoint, "--execute"]
+            args = ["graph", "--checkpoint", str(checkpoint), "--execute"] + common
         else:
             if action == "resume":
                 raise ValueError("Projects 01 to 06 always start a fresh attempt; choose the run action")
-            args = ["compare", "--project", task, "--variant", variant, "--repeats", str(repeats), "--source", self.revision, "--execute"]
-        if task in ["project-07", "project-08"]:
-            exists = Path(checkpoint).exists()
-            if exists and action != "resume":
-                raise ValueError("This copy has already run this treatment once, and a finished loop or graph cannot be started again in the same copy. Read where it stopped under My work, in Details: checkpoints and approval candidate. To run it again, make a fresh copy of the notebook.")
-            if action == "resume":
-                if not exists:
-                    raise ValueError("No checkpoint exists to resume")
-                args.append("--resume")
+            args = ["compare", "--project", task, "--variant", variant, "--repeats", str(repeats), "--source", self.revision, "--execute", "--output", str(self.results)]
+            if repeats == 1:
+                args += ["--operation-id", operation_id]
+        if task in ["project-07", "project-08"] and action == "resume":
+            args.append("--resume")
         return prefix + args
 
     def start(self, action, variant, repeats=1, decision=None, sha256=None):
@@ -350,53 +544,86 @@ with wandb.init(entity=identity['WANDB_ENTITY'],project=identity['WANDB_PROJECT'
             if action != "decision" and not self.connected:
                 raise RuntimeError("Connect your sandbox access first (step 3). It has to be done again in every new notebook session.")
             ledger = self.ledger()
-            if ledger.get("halted") or ledger.get("reservations"):
-                raise RuntimeError("This copy has stopped because the cost of an earlier action is uncertain: it was cancelled, it failed, or it did not report its usage. It will not start anything new until your instructor has checked it.")
+            if action != "decision" and (ledger.get("halted") or ledger.get("reservations")):
+                raise RuntimeError("The cost or cleanup of an earlier action is uncertain. Prepare and Connect to inspect its evidence.")
             if action in ("run", "resume") and not any(q.get("passed") for q in self.view()["qualifications"]):
-                # The runner refuses without one, and in Projects 07 and 08 a refused
-                # launch still leaves a checkpoint that blocks the copy for good.
                 raise RuntimeError("Choose Check that everything works first, and wait for it to pass.")
-            args = self.command(action, variant, repeats, decision, sha256)
+            count = repeats if action == "run" and self.project not in ["project-07", "project-08"] else 1
+            ids = [("qualification-" if action == "qualify" else "") + str(uuid.uuid4()) for _ in range(count)]
+            commands = [self.command(action, variant, 1, decision, sha256, i) for i in ids]
+            if action == "qualify":
+                task = "project-01" if self.project == "overview" else self.project
+                for kind in ("baseline", "reference", "regression"):
+                    control_id = "control-" + task + "-" + kind + "-" + str(uuid.uuid4())
+                    ids.append(control_id)
+                    commands.append(self.cli() + ["controls", "--project", task, "--kind", kind, "--source", self.revision,
+                        "--output", str(self.results), "--operation-id", control_id, "--execute"])
             self.env["FORGE_BUDGET_USD"] = str(ledger["limitUsd"])
-            action_id = str(time.time_ns())
-            self.state.update(status="Starting " + action, pending={"id": action_id, "action": action, "variant": variant, "session": self.env.get("WANDB_NOTEBOOK_SESSION_ID")})
-            self.persist()  # A new runtime sees this marker before any paid child exists.
-            log_path = self.results / ("lesson-action-" + action_id + ".log")
-            try:
-                with log_path.open("w") as log:
-                    child_env = {k: v for k, v in self.env.items() if k not in {"WANDB_SERVICE", "_WANDB_SERVICE"}}
-                    self.process = subprocess.Popen(args, cwd=self.root, env=child_env, stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
-            except Exception:
-                self.state.update(status="Launch failed before process creation")
-                self.state.pop("pending", None)
-                self.persist()
-                raise
-            self.state["status"] = "Running " + action
-            self.write()
-            threading.Thread(target=self.finish, args=(self.process, action_id, log_path), daemon=True).start()
+            self.state.update(status="Starting " + action, pending={"id": ids[0], "operationIds": ids, "action": action,
+                "variant": variant, "revision": self.revision, "session": self.env.get("WANDB_NOTEBOOK_SESSION_ID"),
+                "nextIndex": 0, "launchStatus": "not_created"})
+            self._cached_checkpoint = None
+            if "--checkpoint" in commands[0] and action != "decision":
+                self.state.setdefault("checkpoints", {})[variant] = Path(commands[0][commands[0].index("--checkpoint") + 1]).relative_to(self.results).as_posix()
+            self.persist()
+            self.launch(commands, 0)
         return self.view()
 
-    def finish(self, process, action_id, log_path):
+    def launch(self, commands, index):
+        pending = self.state["pending"]
+        pending.update(nextIndex=index, launchStatus="launching")
+        self.persist()  # A lost runtime at this boundary requires inspection.
+        log_path = self.results / ("lesson-action-" + pending["operationIds"][index] + ".log")
+        try:
+            with log_path.open("w") as log:
+                child_env = {k: v for k, v in self.env.items() if k not in {"WANDB_SERVICE", "_WANDB_SERVICE"}}
+                self.process = subprocess.Popen(commands[index], cwd=self.root, env=child_env, stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
+        except Exception:
+            pending["launchStatus"] = "not_created"
+            self.write()
+            raise
+        pending.update(launchStatus="started", pid=self.process.pid)
+        self.state["status"] = "Running " + pending["action"]
+        self.write()
+        threading.Thread(target=self.finish, args=(self.process, commands, index, log_path), daemon=True).start()
+
+    def finish(self, process, commands, index, log_path):
+        forced = False
         try:
             try:
                 code = process.wait(timeout=3000)
             except subprocess.TimeoutExpired:
+                forced = True
                 os.killpg(process.pid, signal.SIGTERM)
                 try:
-                    code = process.wait(timeout=90)
+                    code = process.wait(timeout=30)
                 except subprocess.TimeoutExpired:
                     os.killpg(process.pid, signal.SIGKILL)
                     code = process.wait(timeout=10)
             with self.lock:
-                self.state["actions"].append({"id": action_id, **self.state["pending"], "exitCode": code})
+                pending = self.state["pending"]
+                record = {**pending, "exitCode": code, "forced": forced}
+                self.state["actions"].append(record)
+                log_path.write_text(self.redact(log_path.read_text(errors="replace")))
+                ledger = self.ledger()
+                if forced or ledger.get("halted") or ledger.get("reservations") or self.incomplete_operations():
+                    self.state["status"] = "Action stopped; Connect to inspect accounting, cleanup and publication"
+                    self.persist()
+                    return
+                # Each repeat has its own durable ID. A lost notebook never
+                # continues the remaining queue without a new explicit Start.
+                if code == 0 and index + 1 < len(commands):
+                    self.launch(commands, index + 1)
+                    return
                 self.state.pop("pending", None)
                 self.state["status"] = "Action finished; inspect results" if code == 0 else "Action failed; inspect evidence"
-                log_path.write_text(self.redact(log_path.read_text(errors="replace")))
-                self.persist()
+                try:
+                    self.persist()
+                except Exception:
+                    self.state["pending"] = {**pending, "launchStatus": "finished", "publicationRetry": True}
+                    raise
         except Exception as error:
-            # Never erase a pending marker after an uncertain save/cleanup.
             self.state["status"] = "Checkpoint save needs attention: " + self.redact(error)
-            self.state["pending"] = {"id": action_id, "action": "reconcile"}
             self.write()
 
     def cancel(self):
@@ -455,9 +682,10 @@ with wandb.init(entity=identity['WANDB_ENTITY'],project=identity['WANDB_PROJECT'
         # "active" is a process in this runtime. "pending" can also be a marker
         # restored from a runtime that disappeared; that state must stay downloadable.
         active = bool(self.process and self.process.poll() is None)
-        return {"status": self.state["status"], "destination": "/".join(self.identity[k] for k in ["WANDB_ENTITY", "WANDB_PROJECT"]),
+        view = {"status": self.state["status"], "destination": "/".join(self.identity[k] for k in ["WANDB_ENTITY", "WANDB_PROJECT"]),
                 "prepared": self.state.get("prepared", False), "sandboxConnected": self.connected, "pending": self.state.get("pending"), "revision": self.revision,
                 "active": active, "captures": [r["id"] for r in trials if isinstance(r.get("id"), str) and self.capture_path(r["id"])],
                 "budget": self.ledger(), "trials": trials, "checkpoints": checkpoints, "qualifications": qualifications,
                 "notes": self.state.get("notes", {}), "progressUrl": self.state.get("progressUrl"),
                 "log": self.redact(logs[-1].read_text(errors="replace")[-12000:]) if logs else ""}
+        return json.loads(self.projection(json.dumps(view)))
