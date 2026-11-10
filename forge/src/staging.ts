@@ -1,6 +1,6 @@
 import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
-import {mkdtemp, mkdir, writeFile, readFile, rm} from 'node:fs/promises';
+import {mkdtemp, mkdir, writeFile, readFile, rm,readdir} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join, dirname, resolve} from 'node:path';
 import {createHash} from 'node:crypto';
@@ -64,7 +64,11 @@ export async function stageTask(task: Task, variant: string, source: string) {
       await writeFile(join(dir,'FEEDBACK.md'),'Build the app, then run node runtime-feedback.cjs. Inspect actual chunks and indexing status.\n');
     }
     const tar=join(dir,'..',`${dir.split('/').pop()}.tar`);
-    try {await exec('tar',['-cf',tar,'-C',dir,'.'],{env:{...process.env,COPYFILE_DISABLE:'1'}}); return {archive:await readFile(tar),applicationSha256:hash.digest('hex'),fixtureSha256:createHash('sha256').update(fixture).digest('hex')};}
+    const filesSha256:Record<string,string>={};
+    for(const entry of (await readdir(dir,{recursive:true,withFileTypes:true})).filter(e=>e.isFile())){
+      const file=join(entry.parentPath,entry.name);filesSha256[file.slice(dir.length+1)]=createHash('sha256').update(await readFile(file)).digest('hex');
+    }
+    try {await exec('tar',['-cf',tar,'-C',dir,'.'],{env:{...process.env,COPYFILE_DISABLE:'1'}}); return {archive:await readFile(tar),applicationSha256:hash.digest('hex'),fixtureSha256:createHash('sha256').update(fixture).digest('hex'),filesSha256};}
     finally {await rm(tar,{force:true});}
   } finally {await rm(dir,{recursive:true,force:true});}
 }
