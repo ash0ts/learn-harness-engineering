@@ -2,7 +2,7 @@ import {readFile,mkdir,rm} from 'node:fs/promises';
 import {randomUUID} from 'node:crypto';
 import {dirname,relative,isAbsolute} from 'node:path';
 import {writeJson} from './records.js';
-import {verifyEvidence} from './operations.js';
+import {verifyEvidence,evidenceReference,operationFile,updateOperation} from './operations.js';
 
 export type Node='plan'|'make'|'verify'|'code_repair'|'infrastructure_recovery'|'rollback'|'approval'|'done'|'rejected'|'failed';
 export interface Candidate {patch:string;sha256:string;trialId:string;protectedGrade?:{passed:boolean;evidence:string;sha256?:string}}
@@ -89,7 +89,11 @@ export async function decideGraph(file:string,decision:'approve'|'reject',actor:
     await verifyEvidence(root,{path,sha256:expectedSha256});
     if(!actor.trim())throw new Error('Explicit human decision actor required');
     state.approval={decision,actor,candidateSha256:expectedSha256,at:new Date().toISOString(),decisionId:randomUUID()};
-    await transition(file,state,decision==='approve'?'done':'rejected',`explicit ${decision} decision`);return state;
+    await transition(file,state,decision==='approve'?'done':'rejected',`explicit ${decision} decision`);
+    // Keep the mutable checkpoint reference current after the human decision.
+    const exists=await readFile(operationFile(root,state.id),'utf8').then(()=>true,error=>{if(error.code==='ENOENT')return false;throw error;});
+    if(exists){const ref=await evidenceReference(root,file);await updateOperation(root,state.id,op=>{op.evidence.checkpoint=ref;op.executionOutcome=state.node;op.events.push({at:state.approval!.at,event:'human_decision',detail:state.approval!.decisionId});});}
+    return state;
   }finally{await rm(lock,{recursive:true});}
 }
 export function newGraph(sourceCommit:string,id:string=randomUUID()):GraphState{
