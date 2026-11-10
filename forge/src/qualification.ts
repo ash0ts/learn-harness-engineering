@@ -4,7 +4,7 @@ import {randomUUID,createHash} from 'node:crypto';
 import {config,requireLive,requirePrivateProject} from './config.js';
 import {protocol} from './trial.js';
 import {courseRoot,readTask,sourceHead,stageTask} from './staging.js';
-import {sandboxTools,stageWorkspace,withWorkspace,runSandboxCommand} from './sandbox.js';
+import {sandboxTools,stageWorkspace,withWorkspace,runSandboxCommand,SandboxCommandError} from './sandbox.js';
 import {runPi} from './pi.js';
 import {writeJson,redact} from './records.js';
 import {boundedChild} from './lifecycle.js';
@@ -29,7 +29,10 @@ export async function qualify(output=process.env.FORGE_RESULTS_DIR??join(courseR
     await withWorkspace({config:c,image:p.sandbox.image,trialId:id,evidenceDir:sandboxDir,signal:AbortSignal.timeout(300000),...execution.workspace('qualification',sandboxDir)},async sandbox=>{
       record.sandboxId=sandbox.sandboxId;await stageWorkspace(sandbox,staged.archive);
       try{await runSandboxCommand(sandbox,'sleep 30',{timeoutMs:500,cancellationEvidence:join(dir,'cancellation.json')});throw new Error('Timeout probe unexpectedly completed');}
-      catch(error){if(/unexpectedly|unverified/.test(String(error)))throw error;record.cancellationVerified=true;}
+      catch(error){
+        if(!(error instanceof SandboxCommandError)||!error.started||!error.cancellationVerified||!/timed out|timeout|deadline/i.test(String(error.cause)))throw error;
+        record.cancellationVerified=true;
+      }
       const result=await runPi({...c,maxTurns:3},{role:'qualification',prompt:'Call sandbox_command once to run node --version and python3 --version. Report the actual versions. Do not edit files.',attributes:{'course.project':'qualification','course.source_commit':source,'course.sandbox_id':sandbox.sandboxId},tools:sandboxTools(sandbox,join(dir,'tools')),signal:AbortSignal.timeout(180000),...execution.requestHooks('agent')});
       record.agent=result;
       if(!result.telemetryComplete||!result.completed)throw new Error('Pi capability/usage qualification failed');
