@@ -1,4 +1,5 @@
 import contextlib
+import ast
 import base64
 import hashlib
 import io
@@ -351,6 +352,29 @@ class LearnerWorkspaceTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "upload failed"):
                 self.w.persist()
         self.assertIsNone(self.w.cached_checkpoint_bytes())
+
+    def test_download_reacts_to_progress_and_completed_save(self):
+        from learner_cells import DOWNLOAD, PERSIST
+        # Marimo infers dependencies from reads, not the function signature;
+        # an unused progress argument gets removed by its formatter.
+        tree = ast.parse(DOWNLOAD)
+        reads = {n.id for n in ast.walk(tree) if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Load)}
+        self.assertTrue({"my_progress", "get_checkpoint_epoch"} <= reads)
+        namespace = {}
+        exec(PERSIST, namespace)
+        epochs = []
+        ui = SimpleNamespace(value="note")
+        mo = SimpleNamespace(stop=lambda value: None, md=lambda value: value, callout=lambda value, **kw: value)
+        learner = SimpleNamespace(save_notes=lambda *args: None, redact=str)
+        args = (lambda: 0, learner, SimpleNamespace(value=1), ui, ui, mo, ui, ui, epochs.append, lambda value: None)
+        namespace["_"](*args)
+        self.assertEqual(epochs[0](7), 8)
+        epochs.clear()
+        def failed_save(*args):
+            raise RuntimeError("publication failed")
+        learner.save_notes = failed_save
+        namespace["_"](*args)
+        self.assertEqual(epochs, [])
 
     def test_unknown_recovery_never_clears_pending(self):
         self.seed()
