@@ -8,6 +8,54 @@ import {operationFile,updateOperation,verifyEvidence,evidencePath,evidenceRefere
 import {disposeSandboxClient} from './sandbox.js';
 import {publishTrial} from './campaign.js';
 import {writeJson} from './records.js';
+import {createHash} from 'node:crypto';
+import {courseRoot,frozenFile} from './staging.js';
+
+/** Reproduce the pinned SDK's local tag rejection with transport disabled. */
+export async function proveRejectedTag(client:any,id:string){
+  if(id.length<=59)throw new Error('Only the observed overlength tag rejection is supported');
+  let calls=0,rejection='';const start=client.transport.start;
+  client.transport.start=async()=>{calls++;throw new Error('Transport reached; prelaunch rejection is unproven');};
+  try{await client.create({tags:['harness-course',id]});}
+  catch(error){rejection=String(error);}
+  finally{client.transport.start=start;}
+  if(calls!==0||!rejection.startsWith(`CWSandboxValidationError: tags contains invalid value: ${id}.`))throw new Error('Prelaunch rejection is unproven');
+  return {transportCalls:calls,rejection};
+}
+
+async function reconcileRejectedTag(root:string,op:Operation,evidence:any,evidenceFile:string){
+  const c=config();await requirePrivateProject(c);
+  if((process.env.FORGE_NOTEBOOK_OWNER&&op.identity.owner!==process.env.FORGE_NOTEBOOK_OWNER)||(process.env.FORGE_NOTEBOOK_ID&&op.identity.notebook!==process.env.FORGE_NOTEBOOK_ID))throw new Error('Reconciliation owner or notebook mismatch');
+  if(Object.keys(op.requests).length||op.sandboxIds.length||op.publication!=='not_required')throw new Error('Rejected-launch reconciliation cannot clear dispatched work');
+  if(op.events.find(e=>e.event==='execution_started')?.detail!==hostname())throw new Error('Inspect the rejected launch in its original runtime');
+  if(op.childPid)try{process.kill(op.childPid,0);throw new Error('Worker is still active');}catch(error){if((error as NodeJS.ErrnoException).code!=='ESRCH')throw error;}
+  const launches=op.events.filter(e=>e.event==='sandbox_launch');
+  if(launches.length!==1||!launches[0].detail||!op.evidence.control)throw new Error('One protected control launch receipt is required');
+  const control=JSON.parse(await readFile(await verifyEvidence(root,op.evidence.control),'utf8'));
+  const journalFile=await evidencePath(root,launches[0].detail),journal=await readOptional(journalFile);
+  if(control.grade!==null||!control.error?.startsWith(`CWSandboxValidationError: tags contains invalid value: ${op.id}.`)||journal?.trialId!==op.id||journal.state!=='creation_unknown'||journal.sandboxId||journal.recoveredSandboxIds?.length)throw new Error('Original evidence does not prove this local rejection');
+  const originalPackage=JSON.parse(await frozenFile(op.sourceCommit,'forge/package.json'));
+  const installedPackage=JSON.parse(await readFile(join(courseRoot,'forge/node_modules/@coreweave/cwsandbox/package.json'),'utf8'));
+  if(originalPackage.dependencies['@coreweave/cwsandbox']!=='1.0.0'||installedPackage.version!=='1.0.0')throw new Error('Pinned SDK version differs from the rejected launch');
+  const sdk=await readFile(join(courseRoot,'forge/node_modules/@coreweave/cwsandbox/dist/grpc-transport-DlmDQLSO.js'));
+  const client=createSandboxClient({apiKey:c.apiKey!,entity:c.entity,project:c.project});
+  let proof;try{proof=await proveRejectedTag(client,op.id);}finally{await disposeSandboxClient(client,[]);}
+  const attestation=await evidenceReference(root,await evidencePath(root,evidenceFile));
+  const receipt=join(root,op.id,'rejected-launch-reconciliation.json');
+  await writeJson(receipt,{schemaVersion:1,operationId:op.id,instructor:evidence.instructor,reason:evidence.reason,attestation,originalControl:op.evidence.control,originalJournal:await evidenceReference(root,journalFile),sdkVersion:'1.0.0',sdkSha256:createHash('sha256').update(sdk).digest('hex'),...proof,estimatedCostUsd:0,taskOutcomeRetained:op.executionOutcome,at:new Date().toISOString()});
+  const ref=await evidenceReference(root,receipt),budget=new Budget(join(root,'budget.json'),c.budgetUsd),ledger=await readOptional(budget.file);
+  for(const reservation of op.reservationIds){
+    if(!reservation.startsWith(`${op.id}-sandbox-`))throw new Error('Unexpected non-sandbox reservation');
+    if(reservation in ledger.reservations)await budget.reconcile(reservation,0,JSON.stringify(ref));
+    else if(ledger.settled[reservation]!==0)throw new Error('Reservation has no verified zero-dispatch settlement');
+  }
+  for(const slot of ['0','1']){
+    const directory=join(root,'.sandbox-slots',slot),owner=await readOptional(join(directory,'owner.json'));
+    if(owner?.owner===op.id){await evidencePath(root,`.sandbox-slots/${slot}/owner.json`);if(owner.pid!==op.childPid)throw new Error('Slot worker differs from rejected operation');await rm(directory,{recursive:true});}
+  }
+  await updateOperation(root,op.id,current=>{current.cleanup='verified';current.telemetry='complete';current.phase='completed';current.evidence.rejectedLaunch=ref;current.events.push({at:new Date().toISOString(),event:'instructor_verified_no_dispatch',detail:evidence.reason});});
+  return {id:op.id,recovered:true,estimatedCostUsd:0,receipt:ref,originalOutcomeRetained:true};
+}
 
 async function readOptional(file:string){try{return JSON.parse(await readFile(file,'utf8'));}catch(error){if((error as NodeJS.ErrnoException).code==='ENOENT')return null;throw error;}}
 export async function recoveryReport(root:string){
@@ -116,6 +164,7 @@ export async function reconcileOperation(root:string,id:string,evidenceFile:stri
   if(!op||op.identity.entity!==c.entity||op.identity.project!==c.project)throw new Error('Reconciliation destination mismatch');
   const evidence=await readOptional(await evidencePath(root,evidenceFile));
   if(evidence?.schemaVersion!==1||evidence.operationId!==id||!evidence.instructor?.trim()||!evidence.reason?.trim()||!Array.isArray(evidence.requests)||!Array.isArray(evidence.sandboxes))throw new Error('Reconciliation requires operation ID, instructor, reason, request usage and cleanup evidence');
+  if(evidence.prelaunchRejection===true)return reconcileRejectedTag(root,op,evidence,evidenceFile);
   for(const row of [...evidence.requests,...evidence.sandboxes])await verifyEvidence(root,row.receipt);
   for(const row of evidence.requests){
     if(!op.requests[row.key]||![row.inputTokens,row.outputTokens].every(n=>Number.isFinite(n)&&n>=0)||row.inputTokens+row.outputTokens===0)throw new Error('Every unknown dispatched request needs nonzero provider-reported usage');
