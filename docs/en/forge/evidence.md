@@ -21,7 +21,7 @@ The primary comparison contains **39 attempts and 19 complete passes**. The broa
 
 All images below are original captures or explicitly labeled data figures and workflow diagrams. Nothing was redrawn to look like a successful application. The examples use sample course documents. Reading this page does not start inference, allocate a sandbox, or open a notebook runtime.
 
-The separate [protocol 5 repair report](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-publication/forge/results/protocol-v5/README.md) and [qualification dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=43tvw98k2nm) track the new implementation. Qualification is blocked by missing usage; the repaired notebooks have not been republished. The historical counts below are unchanged.
+The separate [protocol 5 repair report](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-publication/forge/results/protocol-v5/README.md) and [qualification dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=43tvw98k2nm) track the new implementation. The later [owner rehearsal and rollout receipt](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-publication/forge/results/rollout-v5/README.md) records one live student attempt under a separate, bounded exception: execution and publication recovery completed, while its UI grade failed. All nine final notebook sources and rendered outputs are verified; native browser downloads remain unverified. The original unknown-usage reservation and the historical counts below are unchanged.
 
 ## Start with the complete comparison
 

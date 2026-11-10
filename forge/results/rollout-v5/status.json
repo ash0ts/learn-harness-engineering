@@ -1,0 +1,436 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-11-10T19:11:51.982Z",
+  "kind": "owner-rollout-verification",
+  "protocolRevision": 5,
+  "candidateRunnerCommit": "605b1d90c47eb309629589bf9d0f371aa27b8b12",
+  "canonicalNotebookCommit": "534efaab20e2354734a906e1572e7963569d9c43",
+  "executionSourceCommit": "24dc1b64f28b394100aa3ba64b068bc2062aa2f1",
+  "recoverySourceCommit": "605b1d90c47eb309629589bf9d0f371aa27b8b12",
+  "status": "published_download_gate_pending",
+  "completed": {
+    "ownerStudentAttempts": 1,
+    "taskPassed": 0,
+    "taskFailed": 1,
+    "project01ControlsQualified": 3,
+    "liveQualificationPassed": 1,
+    "finalCandidateNotebooksPublished": 9,
+    "nativeDownloadsVerified": 0,
+    "independentStudentRehearsals": 0
+  },
+  "trial": {
+    "id": "7d85a6fa-3bb8-4a4a-9ede-fe48d9ed60bc",
+    "project": "project-01",
+    "variant": "minimal",
+    "sourceCommit": "24dc1b64f28b394100aa3ba64b068bc2062aa2f1",
+    "outcome": "task_failed",
+    "inputTokens": 313467,
+    "outputTokens": 3384,
+    "estimatedCostUsd": 0.09470575266666667,
+    "grade": {
+      "schemaVersion": 1,
+      "task": "project-01",
+      "checks": [
+        {
+          "name": "strict compile and renderer build",
+          "passed": true
+        },
+        {
+          "name": "real import and persistence after reconstruction",
+          "passed": true
+        },
+        {
+          "name": "actual indexing keeps every nonempty paragraph",
+          "passed": true
+        },
+        {
+          "name": "actual retrieval and Q&A persist two turns",
+          "passed": true
+        },
+        {
+          "name": "Electron window, preload, import, indexing and question UI under Xvfb",
+          "passed": false,
+          "error": "Error: Timed out waiting for observed application state"
+        }
+      ],
+      "passed": false
+    },
+    "cleanupStatus": "verified",
+    "telemetryStatus": "complete",
+    "publicationStatus": "verified",
+    "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/7d85a6fa3bb84a4a",
+    "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-7d85a6fa-3bb8-4a4a-9ede-fe48d9ed60bc:v0"
+  },
+  "trace": {
+    "conversationId": "01a1c6b0-1706-7113-80c9-9be9290bb83d",
+    "inputTokens": 313467,
+    "outputTokens": 3384,
+    "sourceCommit": "24dc1b64f28b394100aa3ba64b068bc2062aa2f1",
+    "variant": "minimal",
+    "trialId": "7d85a6fa-3bb8-4a4a-9ede-fe48d9ed60bc",
+    "expectedModelCalls": 25,
+    "spanCount": 72,
+    "operations": {
+      "chat": 25,
+      "execute_tool": 46,
+      "invoke_agent": 1
+    },
+    "observedErrorSpans": 1,
+    "readbackInputTokens": 313467,
+    "readbackOutputTokens": 3384,
+    "verified": true,
+    "errors": [],
+    "url": "https://forge.coreweave.com/agent-lens/wandb/learn-harness-engineering-forge/conversations/01a1c6b0-1706-7113-80c9-9be9290bb83d",
+    "initialAudit": {
+      "verified": false,
+      "errors": [
+        "Unexpected model count"
+      ],
+      "expectedModelCalls": 24
+    },
+    "providerRequests": 24,
+    "locallyRejectedBeforeDispatch": 1,
+    "rejectedSpanId": "ec614dced90f8d6b",
+    "explanation": "Pi emitted an additional error span for a 25th attempted model call. The pinned provider-boundary guard rejects it before invoking stream/onPayload; the durable ledger has 24 request settlements. Model-level token totals match exactly."
+  },
+  "checkpoint": {
+    "schemaVersion": 1,
+    "checkpointSha256": "e35a10601237bd14a2bf56da5f265687907cca17d976b8bce002c2ac6b75ec39",
+    "filesVerified": 353,
+    "notesMatch": true,
+    "budgetMatches": true,
+    "spentEstimateUsd": 2.788428319333333,
+    "trialsRetained": 3,
+    "operationsComplete": 10,
+    "credentialsDisconnected": true,
+    "credentialAndHomePathScanPassed": true,
+    "nativeEditDownloadVerified": false,
+    "nativePreviewDownloadVerified": false,
+    "transfer": "SDK read of the verified checkpoint; does not count as a browser download",
+    "restore": "fresh temporary local LessonWorkspace"
+  },
+  "workerFinalization": {
+    "cleanExit": true,
+    "activeResources": []
+  },
+  "publication": {
+    "schemaVersion": 2,
+    "operationId": "7d85a6fa-3bb8-4a4a-9ede-fe48d9ed60bc",
+    "runId": "7d85a6fa3bb84a4a",
+    "artifactId": "QXJ0aWZhY3Q6NDUxODcyMzMwNw==",
+    "artifactVersion": "trial-7d85a6fa-3bb8-4a4a-9ede-fe48d9ed60bc:v0",
+    "evidenceSha256": "0aa7b7cdea511261c78b4921a5fd3689865312ae45085ba9a30642be2940ef74",
+    "verified": true,
+    "runUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/7d85a6fa3bb84a4a",
+    "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-7d85a6fa-3bb8-4a4a-9ede-fe48d9ed60bc:v0"
+  },
+  "budget": {
+    "approvedLimitUsd": 25,
+    "rolloutEstimateUsd": 2.034477163333334,
+    "reservationsUsd": 0,
+    "newMissingUsage": false,
+    "earlierUnknownReservationUsd": 2,
+    "earlierLedgerUnchanged": true,
+    "note": "Conservative estimate includes notebook allowances plus measured editor costs; these overlap. This is not a billing invoice.",
+    "studentCumulativeEstimateUsd": 3.1292283193333326
+  },
+  "validation": {
+    "typescriptTestsPassed": 67,
+    "pythonTestsPassed": 51,
+    "savedNotebookViewsPassed": 9,
+    "independentStudentAccountTested": false,
+    "documentationBuildPassed": true
+  },
+  "notebooks": [
+    {
+      "id": "Tm90ZWJvb2s6MTUzMTM=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTM%3D",
+      "file": "forge/notebooks/00-overview.py",
+      "candidateSha256": "82dec37004041e2a050687d25b34d4915a3682c059b37fbc61585a370ff70a8b",
+      "remoteSha256": "82dec37004041e2a050687d25b34d4915a3682c059b37fbc61585a370ff70a8b",
+      "remoteVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "Forge-track-evidence-before-conclusions",
+        "versionIndex": 41,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "6db9aade8a8c84c50bb3d27d6f6503dfb201f1c8a91c16e78f3b83c766eae4ff",
+      "verifiedAt": "2026-11-10T19:02:41.623882+00:00",
+      "candidatePublished": true
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMTQ=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTQ%3D",
+      "file": "forge/notebooks/01-minimal-harness.py",
+      "candidateSha256": "633c01351416eddba1fe102c213dc5d82c47fe223ef6f203f3a54b37c23c26dc",
+      "remoteSha256": "633c01351416eddba1fe102c213dc5d82c47fe223ef6f203f3a54b37c23c26dc",
+      "remoteVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "01-Minimal-instructions-and-explicit-harnesses",
+        "versionIndex": 27,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "7478898a82e33cb4a941aaf33148b22643676473eeedcbba5dfbd77f6a4a2e43",
+      "verifiedAt": "2026-11-10T19:02:43.669068+00:00",
+      "candidatePublished": true
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMTU=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTU%3D",
+      "file": "forge/notebooks/02-workspace-docs.py",
+      "candidateSha256": "1888efd6b00814d05ea130b6dc37a8c1b2973afc7443e2aed7b8fab91ec63e62",
+      "remoteSha256": "1888efd6b00814d05ea130b6dc37a8c1b2973afc7443e2aed7b8fab91ec63e62",
+      "remoteVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "02-An-agent-readable-workspace",
+        "versionIndex": 22,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "99bab2786215e59fc90cbfab0a70843c1a336bf06acfcabbbb008cdb61078fee",
+      "verifiedAt": "2026-11-10T19:02:45.291085+00:00",
+      "candidatePublished": true
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMTY=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTY%3D",
+      "file": "forge/notebooks/03-session-recovery.py",
+      "candidateSha256": "0e027f1b7509e8e9d484c04fdec98a16678e1aa71fbe3a860b3dc9a23603a21f",
+      "remoteSha256": "0e027f1b7509e8e9d484c04fdec98a16678e1aa71fbe3a860b3dc9a23603a21f",
+      "remoteVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "03-Interrupted-session-recovery",
+        "versionIndex": 21,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "fb888150e2fd49187faf12cb7b4c08e167b851942f8b3085ff495b1844a79b38",
+      "verifiedAt": "2026-11-10T19:02:46.909028+00:00",
+      "candidatePublished": true
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMTc=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTc%3D",
+      "file": "forge/notebooks/04-runtime-feedback.py",
+      "candidateSha256": "07db11e7056fe6a55cf518bbd4bc4d9b3557cba646becb8ab4ff0a23c63ba52a",
+      "remoteSha256": "07db11e7056fe6a55cf518bbd4bc4d9b3557cba646becb8ab4ff0a23c63ba52a",
+      "remoteVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "04-Runtime-evidence-and-the-seeded-defect",
+        "versionIndex": 18,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "9bee1957866fb43541e4dfc915b60959a0edf1acc1334dba3065133d5677d3b7",
+      "verifiedAt": "2026-11-10T19:02:48.565165+00:00",
+      "candidatePublished": true
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMTg=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTg%3D",
+      "file": "forge/notebooks/05-role-separation.py",
+      "candidateSha256": "07ad3ffce4bd68cc581ef7f9626df13aed3a66bc1a7a20a57b708fbfbd1370fb",
+      "remoteSha256": "07ad3ffce4bd68cc581ef7f9626df13aed3a66bc1a7a20a57b708fbfbd1370fb",
+      "remoteVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "05-One-feature-three-role-arrangements",
+        "versionIndex": 18,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "2a645d2b254f9a9db6f42561685c05742f543e53e0f11ee53625ceda5747fbc5",
+      "verifiedAt": "2026-11-10T19:02:50.150153+00:00",
+      "candidatePublished": true
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMTk=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTk%3D",
+      "file": "forge/notebooks/06-capstone.py",
+      "candidateSha256": "a527e86afc70eb127ba6e45f6311cdf7d0b128587e4f0615a82f4d0a6e85787b",
+      "remoteSha256": "a527e86afc70eb127ba6e45f6311cdf7d0b128587e4f0615a82f4d0a6e85787b",
+      "remoteVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "06-Capstone-reliability",
+        "versionIndex": 17,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "2c1fc100478e1858ea9966ae17bf1d6da63b42e36308ef3d023803c9e1032670",
+      "verifiedAt": "2026-11-10T19:02:51.816479+00:00",
+      "candidatePublished": true
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMjA=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjA%3D",
+      "file": "forge/notebooks/07-bounded-loops.py",
+      "candidateSha256": "707d9bcad6a3784fbb04b0d5b67cb4a03f12d436a2e2fe8fd597c73adda76d1e",
+      "remoteSha256": "707d9bcad6a3784fbb04b0d5b67cb4a03f12d436a2e2fe8fd597c73adda76d1e",
+      "remoteVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "07-Goal-timer-and-maker-checker-loops",
+        "versionIndex": 17,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "44681a259e2b14bc2abe239c905b5631669482033b410a12dd2cca4ce19f0395",
+      "verifiedAt": "2026-11-10T19:02:53.297608+00:00",
+      "candidatePublished": true
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMjE=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjE%3D",
+      "file": "forge/notebooks/08-state-machine.py",
+      "candidateSha256": "385410859723ab2cae4e81386e55a6e154f4a6aae28d6590c5745ba6eff3ffd9",
+      "remoteSha256": "385410859723ab2cae4e81386e55a6e154f4a6aae28d6590c5745ba6eff3ffd9",
+      "remoteVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "08-Checkpointed-graphs-and-human-approval",
+        "versionIndex": 20,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "d8eded988143e47ece4404ddc99664f6bfd6768181d1d6e882f1a09013f766da",
+      "verifiedAt": "2026-11-10T19:02:54.732301+00:00",
+      "candidatePublished": true
+    }
+  ],
+  "limitations": [
+    "Owner-only rehearsal, not independent student account.",
+    "One Project 01 rollout attempt; not the 39-attempt protocol-five comparison campaign.",
+    "CPU sandboxes and hosted inference; no GPU sandbox or model training.",
+    "Actual native Edit and Preview downloads unverified.",
+    "Original unknown usage remains unresolved and separately reserved."
+  ],
+  "readyToShareLessonLinks": true,
+  "classroomAcceptanceComplete": false,
+  "downloadRehearsal": {
+    "schemaVersion": 1,
+    "checkpointSha256": "d4019acc62fb79749d99c6eabfda516774b80e19fb406bad5966546026d51913",
+    "filesVerified": 353,
+    "notesMatch": true,
+    "budgetMatches": true,
+    "spentEstimateUsd": 3.1292283193333326,
+    "trialsRetained": 3,
+    "operationsComplete": 10,
+    "credentialsDisconnected": true,
+    "credentialAndHomePathScanPassed": true,
+    "nativeEditDownloadVerified": false,
+    "nativePreviewDownloadVerified": false,
+    "transfer": "SDK read of the verified checkpoint; does not count as a browser download",
+    "restore": "fresh temporary local LessonWorkspace"
+  },
+  "cleanup": {
+    "verifiedAt": "2026-11-10T19:11:51.982Z",
+    "allTerminal": true,
+    "editors": [
+      {
+        "receipt": "notebook-rollout-v5-00-final",
+        "sandboxId": "87b223fa-3a6b-4d8d-87b3-8f2f3d4e97c3",
+        "status": "completed",
+        "estimatedCostUsd": 0.030600053333333332
+      },
+      {
+        "receipt": "notebook-rollout-v5-00-resumed",
+        "sandboxId": "344f79b1-7a0b-4f54-9225-44f11356f128",
+        "status": "completed",
+        "estimatedCostUsd": 0.023854106666666666
+      },
+      {
+        "receipt": "notebook-rollout-v5-00-verified",
+        "sandboxId": "fb894ede-be08-44cb-937a-5e35529595ac",
+        "status": "completed",
+        "estimatedCostUsd": 0.019675898666666667
+      },
+      {
+        "receipt": "notebook-rollout-v5-00",
+        "sandboxId": "5cdeddb8-2eba-4b37-8f19-b292aad95aa3",
+        "status": "completed",
+        "estimatedCostUsd": 0.04578259866666667
+      },
+      {
+        "receipt": "notebook-rollout-v5-01-resumed",
+        "sandboxId": "fff1f837-cfc6-4d1b-9f41-bfb774cac292",
+        "status": "completed",
+        "estimatedCostUsd": 0.020631464
+      },
+      {
+        "receipt": "notebook-rollout-v5-01",
+        "sandboxId": "1c0ec63f-b728-4539-ab6f-d2c4db409d46",
+        "status": "completed",
+        "estimatedCostUsd": 0.02832862133333333
+      },
+      {
+        "receipt": "notebook-rollout-v5-02-resumed",
+        "sandboxId": "5d7885f5-4a87-4a2f-9f8f-bf19bd1b62d5",
+        "status": "completed",
+        "estimatedCostUsd": 0.016494341333333332
+      },
+      {
+        "receipt": "notebook-rollout-v5-03-resumed",
+        "sandboxId": "cf71b532-2fd3-4227-aaa6-6c6061ced13f",
+        "status": "completed",
+        "estimatedCostUsd": 0.0158898
+      },
+      {
+        "receipt": "notebook-rollout-v5-04-resumed",
+        "sandboxId": "5b4bb6e9-3eff-4375-b2df-23e33d218fcd",
+        "status": "completed",
+        "estimatedCostUsd": 0.015588854666666664
+      },
+      {
+        "receipt": "notebook-rollout-v5-05-resumed",
+        "sandboxId": "541f135f-ceb5-4ed7-9518-dcd539495cdf",
+        "status": "completed",
+        "estimatedCostUsd": 0.015329657333333333
+      },
+      {
+        "receipt": "notebook-rollout-v5-06-resumed",
+        "sandboxId": "cc43d053-b9a0-4d24-89a7-32d47eb46697",
+        "status": "completed",
+        "estimatedCostUsd": 0.020819661333333333
+      },
+      {
+        "receipt": "notebook-rollout-v5-07-resumed",
+        "sandboxId": "90fe6bbb-1d2d-4304-9c19-eca91e91926d",
+        "status": "completed",
+        "estimatedCostUsd": 0.014632532
+      },
+      {
+        "receipt": "notebook-rollout-v5-08-resumed",
+        "sandboxId": "744de7d6-e83e-4b49-bb2f-23dad460b289",
+        "status": "completed",
+        "estimatedCostUsd": 0.028183592
+      },
+      {
+        "receipt": "notebook-rollout-v5-download-final",
+        "sandboxId": "b657ba9b-4769-4d8c-a9af-c43edeb4c765",
+        "status": "completed",
+        "estimatedCostUsd": 0.0694167
+      },
+      {
+        "receipt": "notebook-rollout-v5-scratch-final",
+        "sandboxId": "7a682b5b-33d9-4e36-a7a5-1ab347f7b030",
+        "status": "completed",
+        "estimatedCostUsd": 0.19487890666666663
+      },
+      {
+        "receipt": "notebook-rollout-v5-scratch",
+        "sandboxId": "7642c7cd-80f6-42da-bf03-629b361832e5",
+        "status": "completed",
+        "estimatedCostUsd": 0.324585872
+      }
+    ],
+    "rolloutEstimateUsd": 2.034477163333334,
+    "reservationsUsd": 0
+  },
+  "downloadTest": {
+    "schemaVersion": 1,
+    "notebookId": "Tm90ZWJvb2s6MTU1OTg=",
+    "sandboxId": "b657ba9b-4769-4d8c-a9af-c43edeb4c765",
+    "runnerCommit": "605b1d90c47eb309629589bf9d0f371aa27b8b12",
+    "freshForgePrepareRestoredProgress": true,
+    "nativeEditDownloadVerified": false,
+    "nativePreviewDownloadVerified": false,
+    "editAttempt": "Native checkpoint click followed by a 15-second download-event wait timed out.",
+    "notesControl": "The existing small notes download also timed out.",
+    "previewAttempt": "Native checkpoint downloadMedia timed out with exactly one visible, enabled link.",
+    "iframeAllowsDownloads": true,
+    "nativeSaveDialogInspection": "Computer control refused access to the Codex app; no bypass attempted.",
+    "manualConfirmationRequested": true,
+    "actualDownloadedFileAvailable": false,
+    "interpretation": "Download remains unverified; these observations do not establish the cause. SDK retrieval and archive restoration are separate checks."
+  }
+}

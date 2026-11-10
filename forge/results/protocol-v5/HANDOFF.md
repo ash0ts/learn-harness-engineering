@@ -1,6 +1,8 @@
 # Resume the protocol 5 repair rollout
 
-The code is in the existing eight draft branches of `ash0ts/learn-harness-engineering`; `codex/forge-publication` contains the complete stack. No PR is merged. The nine candidate notebooks pin runner `dcf7e447f565961e790ed1f4a25815b278db124e`, retained by tag `forge-course-runner-v5-recovery-dcf7e447`. They have **not** replaced the hosted notebooks. Use [the status report](README.md), [machine-readable counts](status.json), and [dashboard receipt](dashboard.json) for current evidence.
+**Latest continuation:** read [the 10 November owner rehearsal and rollout handoff](../rollout-v5/README.md) first. It records the newer runner pin, live execution, recovered publication, settled rollout costs, and completed nine-notebook republication and remaining download/student-account gates. The original unknown-usage case below remains unresolved; its ledger is unchanged.
+
+The following records the earlier campaign checkpoint. The code is in the existing eight draft branches of `ash0ts/learn-harness-engineering`; `codex/forge-publication` contains the complete stack. No PR is merged. The nine candidate notebooks pin runner `dcf7e447f565961e790ed1f4a25815b278db124e`, retained by tag `forge-course-runner-v5-recovery-dcf7e447`. They have **not** replaced the hosted notebooks. Use [the status report](README.md), [machine-readable counts](status.json), and [dashboard receipt](dashboard.json) for current evidence.
 
 ## Blocking evidence
 
