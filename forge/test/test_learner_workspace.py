@@ -69,6 +69,24 @@ class LearnerWorkspaceTests(unittest.TestCase):
             other = LessonWorkspace("a" * 40, "project-01", {**self.env, key: "other"}, self.temp.name)
             self.assertNotEqual(self.w.key, other.key)
 
+    def test_save_before_runner_install_retains_operations_and_withholds_download(self):
+        self.seed()
+        operations = self.w.results / "operations"
+        operations.mkdir()
+        (operations / "previous.json").write_text(json.dumps({"evidence": {}}))
+        def save_process(args, **kwargs):
+            return SimpleNamespace(returncode=0, stdout=json.dumps({"verified": True, "sha256": args[-1]}), stderr="")
+        with patch("subprocess.run", side_effect=save_process):
+            self.w.persist()
+        self.assertTrue((self.w.base / "save-receipt.json").exists())
+        self.assertEqual(self.w.ledger()["spentEstimateUsd"], 1)
+        self.assertTrue((operations / "previous.json").exists())
+        self.assertIsNone(self.w.cached_checkpoint_bytes())
+        # The same unvalidated record must still be refused after installation.
+        (self.w.root / "forge/operation.schema.json").write_text((Path(__file__).resolve().parents[1] / "operation.schema.json").read_text())
+        with self.assertRaises(RuntimeError):
+            self.w.operation_records()
+
     def test_launch_requires_prepare(self):
         with patch("subprocess.Popen", side_effect=AssertionError):
             with self.assertRaisesRegex(RuntimeError, "Prepare"):
