@@ -4,7 +4,7 @@ import {join,relative} from 'node:path';
 import {createHash} from 'node:crypto';
 import {Budget,estimate} from './budget.js';
 import {config} from './config.js';
-import {createOperation,updateOperation,operationFile,evidenceReference,type Operation} from './operations.js';
+import {createOperation,updateOperation,operationFile,evidenceReference,evidencePath,type Operation} from './operations.js';
 import type {SandboxJournal} from './sandbox.js';
 import type {RequestUsage} from './pi.js';
 import {writeJson} from './records.js';
@@ -68,6 +68,13 @@ export class Execution {
   async finish(outcome:string){
     const op:Operation=JSON.parse(await readFile(operationFile(this.root,this.id),'utf8'));
     let seconds=0,cleanup=true;
+    for(const event of op.events.filter(e=>e.event==='child_launch')){
+      try{
+        const file=await evidencePath(this.root,event.detail??''),child=JSON.parse(await readFile(file,'utf8'));
+        if(child.cleanupVerified!==true)cleanup=false;
+        const ref=await evidenceReference(this.root,file);await updateOperation(this.root,this.id,current=>{current.evidence[`child-${Object.keys(current.evidence).length}`]=ref;});
+      }catch(error){if((error as NodeJS.ErrnoException).code!=='ENOENT')throw error;cleanup=false;}
+    }
     for(const [label,file]of this.journals){
       const j:SandboxJournal=JSON.parse(await readFile(file,'utf8'));
       if(j.requestedAt){

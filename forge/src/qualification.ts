@@ -1,5 +1,5 @@
 import {mkdir,readFile} from 'node:fs/promises';
-import {join,resolve} from 'node:path';
+import {join,resolve,relative} from 'node:path';
 import {randomUUID,createHash} from 'node:crypto';
 import {config,requireLive,requirePrivateProject} from './config.js';
 import {protocol} from './trial.js';
@@ -38,6 +38,7 @@ export async function qualify(output=process.env.FORGE_RESULTS_DIR??join(courseR
     // Both bounded app calls are covered before launching its isolated process.
     // Each dispatch and response is also journaled by the app before proceeding.
     await appHooks.beforeRequest(1,p.maxInputBytes);appReserved=1;await appHooks.beforeRequest(2,p.maxInputBytes);appReserved=2;
+    await execution.event('child_launch',relative(output,join(dir,'app-child.json')));
     appLaunched=true;
     const result=await boundedChild(process.execPath,['--import',join(courseRoot,'forge/node_modules/tsx/dist/loader.mjs'),join(courseRoot,'forge/src/cli.ts'),'services',join(courseRoot,'projects/shared'),join(dir,'app-results.json'),join(courseRoot,'forge/fixtures/course.txt'),'--live'],{cwd:courseRoot,log:join(dir,'app.log'),receipt:join(dir,'app-child.json'),timeoutMs:300000,env:{...process.env,FORGE_APP_EVIDENCE:appEvidence,FORGE_SOURCE_COMMIT:source}});
     const app=JSON.parse(await readFile(appEvidence,'utf8'));record.app=app;record.appChild=result;

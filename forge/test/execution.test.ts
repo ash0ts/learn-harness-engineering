@@ -6,6 +6,7 @@ import {tmpdir} from 'node:os';
 import {Execution} from '../src/execution.js';
 import {Budget} from '../src/budget.js';
 import {operationFile} from '../src/operations.js';
+import {writeJson} from '../src/records.js';
 
 const p={maxInputBytes:524288,maxOutputTokens:4096,pricing:{inputPerMillionUsd:.25,outputPerMillionUsd:1.25,cpuHourUsd:.128,memoryGiBHourUsd:.0212}};
 test('a low student budget stops before dispatch, while known failed-response usage settles once',async()=>{
@@ -25,4 +26,15 @@ test('a low student budget stops before dispatch, while known failed-response us
     await assert.rejects(new Budget(join(root,'budget.json'),.2).reserve({other:.01}),/Missing usage/);
     assert.equal(JSON.parse(await readFile(operationFile(root,'student-repeat'),'utf8')).requests['maker-1'].status,'unknown');
   }finally{process.env=prior;await rm(root,{recursive:true,force:true});}
+});
+test('finalization retains a cleanup block for a missing or unverified child receipt',async()=>{
+ const prior={...process.env};Object.assign(process.env,{WANDB_ENTITY:'test',WANDB_PROJECT:'private',FORGE_BUDGET_USD:'20',FORGE_BUDGET_MODE:'incremental'});
+ const root=await mkdtemp(join(tmpdir(),'operation-child-'));
+ try{
+  const run=new Execution(root,'child-test',p);await run.begin('qualification','a'.repeat(40));await run.event('child_launch','child-test/app-child.json');
+  assert.equal((await run.finish('qualification_failed')).cleanupVerified,false);
+  await writeJson(join(root,'child-test/app-child.json'),{exitCode:0,cleanupVerified:false});assert.equal((await run.finish('qualification_failed')).cleanupVerified,false);
+  assert.equal(JSON.parse(await readFile(operationFile(root,'child-test'),'utf8')).phase,'blocked_unknown');
+  await writeJson(join(root,'child-test/app-child.json'),{exitCode:0,cleanupVerified:true});assert.equal((await run.finish('qualification_failed')).cleanupVerified,true);
+ }finally{process.env=prior;await rm(root,{recursive:true,force:true});}
 });
