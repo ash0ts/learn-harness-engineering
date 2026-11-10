@@ -55,7 +55,7 @@ export class Execution {
         await this.event('sandbox_launch',relative(this.root,file));
       },
       onJournal:async(j:SandboxJournal)=>{
-        await updateOperation(this.root,this.id,op=>{if(j.sandboxId&&!op.sandboxIds.includes(j.sandboxId))op.sandboxIds.push(j.sandboxId);});
+        await updateOperation(this.root,this.id,op=>{for(const id of [...(j.sandboxId?[j.sandboxId]:[]),...(j.recoveredSandboxIds??[])])if(!op.sandboxIds.includes(id))op.sandboxIds.push(id);});
         if(j.state==='terminated'&&j.requestedAt&&j.terminatedAt){
           const seconds=(Date.parse(j.terminatedAt)-Date.parse(j.requestedAt))/1000;
           if(this.incremental)await this.budget.settle(reservation,estimate(0,0,seconds,this.p.pricing));
