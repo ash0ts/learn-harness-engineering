@@ -23,6 +23,12 @@ export async function recoverAccounting(root:string,op:Operation){
   if(!configuration?.protocol?.pricing)return {known:false as const,reason:'Frozen pricing receipt is missing'};
   const requests=Object.values(op.requests);
   if(requests.some(r=>r.status!=='reported'||![r.inputTokens,r.outputTokens].every(n=>Number.isFinite(n)&&n!>=0)))return {known:false as const,reason:'A dispatched request has missing usage'};
+  for(const event of op.events.filter(e=>e.event==='child_launch')){
+    let child=null;
+    try{child=event.detail?await readOptional(await evidencePath(root,event.detail)):null;}
+    catch(error){if((error as NodeJS.ErrnoException).code!=='ENOENT')throw error;}
+    if(child?.cleanupVerified!==true)return {known:false as const,reason:'Local child termination is unverified'};
+  }
   const journals:Array<{journal:import('./sandbox.js').SandboxJournal;seconds:number;reference:{path:string;sha256:string}}>=[];
   for(const event of op.events.filter(e=>e.event==='sandbox_launch')){
     if(!event.detail)return {known:false as const,reason:'Sandbox launch has no journal reference'};
