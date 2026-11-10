@@ -38,3 +38,21 @@ test('explicit unlimited authorization retains uncertain costs instead of invent
   assert.equal(ledger.reservations.large,100);
   await assert.rejects(new Budget(file,50).reserve({wrong:1}),/limit changed/);
 });
+
+test('concurrent reservations and repeated settlements never reset spending or clear another unknown',async()=>{
+  const dir=await mkdtemp(join(tmpdir(),'budget-recovery-'));const file=join(dir,'budget.json');
+  try {
+    const a=new Budget(file,1),b=new Budget(file,1);
+    const reservations=await Promise.allSettled([a.reserve({a:0.6}),b.reserve({b:0.6})]);
+    assert.equal(reservations.filter(r=>r.status==='fulfilled').length,1);
+    const first=Object.keys(JSON.parse(await readFile(file,'utf8')).reservations)[0];
+    await a.settle(first,0.1);await b.settle(first,0.1);
+    await assert.rejects(a.settle(first,0),/conflicts/);
+    await a.reserve({unknownA:0.2,unknownB:0.2});
+    await a.settle('unknownA',null);await b.settle('unknownB',null);
+    await a.settle('unknownA',0.05);await assert.rejects(a.reserve({next:0.1}),/unknownB/);
+    await b.reconcile('unknownB',0.03,'verified provider usage receipt');
+    await a.reserve({next:0.1});
+    assert.ok(Math.abs(JSON.parse(await readFile(file,'utf8')).spentEstimateUsd-0.18)<1e-9);
+  }finally{await rm(dir,{recursive:true,force:true});}
+});
