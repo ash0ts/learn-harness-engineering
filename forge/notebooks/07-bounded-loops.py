@@ -614,7 +614,11 @@ def _():
                 if receipt.get("verified") is not True or receipt.get("sha256") != digest:
                     raise RuntimeError("Progress upload has no verified receipt")
                 (self.base / "save-receipt.json").write_text(json.dumps(receipt))
-                if not self.state.get("pending") and not self.ledger().get("halted") and not self.ledger().get("reservations") and not self.incomplete_operations():
+                # Prepare must save restored evidence before installing the new runner.
+                # Its schema is unavailable at that point; withhold the download until
+                # installation and validation finish, but keep the verified remote save.
+                contract_ready = (self.root / "forge/operation.schema.json").is_file() or not any((self.results / "operations").glob("*.json"))
+                if contract_ready and not self.state.get("pending") and not self.ledger().get("halted") and not self.ledger().get("reservations") and not self.incomplete_operations():
                     self._cached_checkpoint = data
 
             def cli(self):
@@ -744,7 +748,7 @@ def _():
                     temporary.replace(ledger_file)
                 finally:
                     lock.rmdir()
-                self.state["status"] = "Preparing workspace"
+                self.state.update(status="Preparing workspace", prepared=False)
                 self.persist()  # Save the ledger before installing or launching anything.
                 self.install_tools()
                 if not (self.root / ".git").exists():
