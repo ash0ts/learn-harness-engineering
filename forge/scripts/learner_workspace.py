@@ -293,13 +293,23 @@ class LessonWorkspace:
         import wandb
         name = f"{self.identity['WANDB_ENTITY']}/{self.identity['WANDB_PROJECT']}/{self.artifact_name}:latest"
         api = wandb.Api(timeout=30)
-        result = self.query("query($e:String!,$p:String!,$n:String!){project(entityName:$e,name:$p){access artifactType(name:\"course-learner-state\"){artifactCollection(name:$n){id}}}}",
-                            {"e": self.identity["WANDB_ENTITY"], "p": self.identity["WANDB_PROJECT"], "n": self.artifact_name})
+        # A direct named lookup returns HTTP 404 for a learner's first save.
+        # An exact filtered list proves absence without suppressing API errors.
+        result = self.query("query($e:String!,$p:String!,$f:JSONString!){project(entityName:$e,name:$p){access artifactType(name:\"course-learner-state\"){artifactCollections(first:2,filters:$f){edges{node{name}} pageInfo{hasNextPage}}}}}",
+                            {"e": self.identity["WANDB_ENTITY"], "p": self.identity["WANDB_PROJECT"], "f": json.dumps({"name": self.artifact_name})})
         project = result.get("data", {}).get("project")
-        if not project or project.get("access") != "PRIVATE" or "artifactType" not in project:
+        if result.get("errors") or not project or project.get("access") != "PRIVATE" or "artifactType" not in project:
             raise RuntimeError("Cannot verify saved progress; no new budget was created")
         artifact_type = project["artifactType"]
-        if artifact_type is None or artifact_type.get("artifactCollection") is None:
+        if artifact_type is None:
+            return False
+        connection = artifact_type.get("artifactCollections")
+        if not isinstance(connection, dict) or not isinstance(connection.get("edges"), list) or connection.get("pageInfo", {}).get("hasNextPage") is not False:
+            raise RuntimeError("Saved progress response is incomplete; no new budget was created")
+        names = [edge.get("node", {}).get("name") for edge in connection["edges"]]
+        if len(names) > 1 or any(value != self.artifact_name for value in names):
+            raise RuntimeError("Saved progress filter was not exact; no new budget was created")
+        if not names:
             return False
         artifact = api.artifact(name, type="course-learner-state")
         path = artifact.get_entry("checkpoint.tar.gz").download(root=str(self.base / "download"))
@@ -323,17 +333,22 @@ base=Path(sys.argv[1]); key=sys.argv[2]; digest=sys.argv[3]
 state=json.loads((base/'learner.json').read_text()); identity=state['identity']
 ledger=json.loads((base/'evidence/budget.json').read_text()); api=wandb.Api(timeout=30)
 entity=identity['WANDB_ENTITY']; project=identity['WANDB_PROJECT']; name='learner-'+key
-query='query($e:String!,$p:String!,$n:String!){project(entityName:$e,name:$p){access artifactType(name:"course-learner-state"){artifactCollection(name:$n){id}}}}'
-body={'query':query,'variables':{'e':entity,'p':project,'n':name}}
+query='query($e:String!,$p:String!,$f:JSONString!){project(entityName:$e,name:$p){access artifactType(name:"course-learner-state"){artifactCollections(first:2,filters:$f){edges{node{name}} pageInfo{hasNextPage}}}}}'
+body={'query':query,'variables':{'e':entity,'p':project,'f':json.dumps({'name':name})}}
 auth=base64.b64encode(('api:'+os.environ['WANDB_API_KEY']).encode()).decode()
 request=urllib.request.Request('https://api.wandb.ai/graphql',data=json.dumps(body).encode(),headers={'Content-Type':'application/json','Authorization':'Basic '+auth})
 with urllib.request.urlopen(request,timeout=30) as response: result=json.load(response)
 project_value=result.get('data',{}).get('project')
 if result.get('errors') or not project_value or project_value.get('access')!='PRIVATE' or 'artifactType' not in project_value: raise RuntimeError('Cannot verify private saved progress; no new artifact was created')
 typ=project_value['artifactType']
-if typ is not None and 'artifactCollection' not in typ: raise RuntimeError('Saved progress response is incomplete')
-collection=typ and typ['artifactCollection'];existing=None
-if collection:
+names=[]
+if typ is not None:
+ connection=typ.get('artifactCollections')
+ if not isinstance(connection,dict) or not isinstance(connection.get('edges'),list) or connection.get('pageInfo',{}).get('hasNextPage') is not False: raise RuntimeError('Saved progress response is incomplete')
+ names=[edge.get('node',{}).get('name') for edge in connection['edges']]
+ if len(names)>1 or any(value!=name for value in names): raise RuntimeError('Saved progress filter was not exact')
+existing=None
+if names:
  for item in api.artifact_versions('course-learner-state',entity+'/'+project+'/'+name):
   if item.metadata.get('checkpointSha256') == digest: existing=item; break
 with wandb.init(entity=entity,project=project,id='lesson-'+key,resume='allow',job_type='course-learner-progress',group='self-service-lessons',settings=wandb.Settings(disable_git=True,disable_code=True,silent=True)) as run:

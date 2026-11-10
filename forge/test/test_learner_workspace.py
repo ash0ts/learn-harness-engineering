@@ -10,6 +10,7 @@ import sys
 import tarfile
 import tempfile
 import textwrap
+import urllib.error
 from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
@@ -431,7 +432,51 @@ class LearnerWorkspaceTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "constraint"):
             self.w.operation_records()
 
-    def test_first_private_save_handles_absent_artifact_type(self):
+    def test_new_copy_without_progress_uses_exact_collection_list(self):
+        response = {"data": {"project": {"access": "PRIVATE", "artifactType": {
+            "artifactCollections": {"edges": [], "pageInfo": {"hasNextPage": False}}}}}}
+        def request(req, **kwargs):
+            body = json.loads(req.data)
+            if "artifactCollection(name:" in body["query"]:
+                raise urllib.error.HTTPError(req.full_url, 404, "Not Found", {}, None)
+            self.assertEqual(json.loads(body["variables"]["f"]), {"name": self.w.artifact_name})
+            return io.BytesIO(json.dumps(response).encode())
+        with patch.dict(sys.modules, {"wandb": SimpleNamespace(Api=lambda **kwargs: object())}), patch("urllib.request.urlopen", side_effect=request):
+            self.assertFalse(self.w.restore_remote())
+        self.assertFalse(self.w.state_file.exists())
+        self.assertFalse((self.w.results / "budget.json").exists())
+
+    def test_existing_remote_progress_restores_spending_and_pending_work(self):
+        self.seed()
+        self.w.state["pending"] = {"id": "unfinished"}
+        self.w.write()
+        checkpoint = self.w.base / "remote.tar.gz"
+        checkpoint.write_bytes(self.w.bundle())
+        response = {"data": {"project": {"access": "PRIVATE", "artifactType": {
+            "artifactCollections": {"edges": [{"node": {"name": self.w.artifact_name}}], "pageInfo": {"hasNextPage": False}}}}}}
+        artifact = SimpleNamespace(get_entry=lambda name: SimpleNamespace(download=lambda root: str(checkpoint)))
+        api = SimpleNamespace(artifact=lambda name, **kwargs: artifact)
+        with tempfile.TemporaryDirectory() as destination:
+            restored = LessonWorkspace("a" * 40, "project-01", self.env, destination)
+            with patch.dict(sys.modules, {"wandb": SimpleNamespace(Api=lambda **kwargs: api)}), patch.object(restored, "query", return_value=response):
+                self.assertTrue(restored.restore_remote())
+            self.assertEqual(restored.ledger()["spentEstimateUsd"], 1)
+            self.assertEqual(restored.state["pending"]["id"], "unfinished")
+
+    def test_ambiguous_progress_lookup_does_not_create_a_budget(self):
+        connections = [None, {}, {"edges": [], "pageInfo": {"hasNextPage": True}},
+                       {"edges": [{"node": {"name": "someone-else"}}], "pageInfo": {"hasNextPage": False}}]
+        for connection in connections:
+            with self.subTest(connection=connection):
+                response = {"data": {"project": {"access": "PRIVATE", "artifactType": {"artifactCollections": connection}}}}
+                with patch.dict(sys.modules, {"wandb": SimpleNamespace(Api=lambda **kwargs: object())}), patch.object(self.w, "query", return_value=response):
+                    with self.assertRaises(RuntimeError): self.w.restore_remote()
+                self.assertFalse((self.w.results / "budget.json").exists())
+        with patch.dict(sys.modules, {"wandb": SimpleNamespace(Api=lambda **kwargs: object())}), patch.object(self.w, "query", side_effect=urllib.error.HTTPError("https://api.wandb.ai/graphql", 404, "Not Found", {}, None)):
+            with self.assertRaises(urllib.error.HTTPError): self.w.restore_remote()
+        self.assertFalse((self.w.results / "budget.json").exists())
+
+    def first_private_save(self, artifact_type):
         self.seed()
         uploaded=[]
         remote=SimpleNamespace(qualified_name='class/private-labs/learner:v0',get_entry=lambda name:SimpleNamespace(download=lambda root:str(self.w.base/'checkpoint.tar.gz')))
@@ -447,13 +492,25 @@ class LearnerWorkspaceTests(unittest.TestCase):
             Artifact=lambda *args,**kwargs:SimpleNamespace(add_file=lambda *args,**kwargs:None))
         def child(args,**kwargs):
             output=io.StringIO()
-            response={'data':{'project':{'access':'PRIVATE','artifactType':None}}}
-            with patch.dict(sys.modules,{'wandb':fake}),patch.object(sys,'argv',args[2:]),patch.dict('os.environ',{'WANDB_API_KEY':'test-only'}),patch('urllib.request.urlopen',return_value=io.BytesIO(json.dumps(response).encode())),contextlib.redirect_stdout(output):
+            response={'data':{'project':{'access':'PRIVATE','artifactType':artifact_type}}}
+            def request(req, **kwargs):
+                body=json.loads(req.data)
+                if 'artifactCollection(name:' in body['query']:
+                    raise urllib.error.HTTPError(req.full_url,404,'Not Found',{},None)
+                self.assertEqual(json.loads(body['variables']['f']),{'name':self.w.artifact_name})
+                return io.BytesIO(json.dumps(response).encode())
+            with patch.dict(sys.modules,{'wandb':fake}),patch.object(sys,'argv',args[2:]),patch.dict('os.environ',{'WANDB_API_KEY':'test-only'}),patch('urllib.request.urlopen',side_effect=request),contextlib.redirect_stdout(output):
                 exec(args[2],{})
             return SimpleNamespace(returncode=0,stdout=output.getvalue(),stderr='')
         with patch('subprocess.run',side_effect=child):self.w.persist()
         self.assertEqual(len(uploaded),1)
         self.assertIsInstance(self.w.cached_checkpoint_bytes(),bytes)
+
+    def test_first_private_save_handles_absent_artifact_type(self):
+        self.first_private_save(None)
+
+    def test_first_private_save_handles_absent_collection_in_existing_type(self):
+        self.first_private_save({'artifactCollections':{'edges':[],'pageInfo':{'hasNextPage':False}}})
 
 
 if __name__ == "__main__":
