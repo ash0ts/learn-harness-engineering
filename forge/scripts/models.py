@@ -55,8 +55,8 @@ def payload(file):
 
 
 def artifact_collection_exists(entity, project, type_name, name, request=None):
-    query = 'query($e:String!,$p:String!,$t:String!,$n:String!){project(entityName:$e,name:$p){access artifactType(name:$t){artifactCollection(name:$n){id}}}}'
-    payload = {'query':query,'variables':{'e':entity,'p':project,'t':type_name,'n':name}}
+    query = 'query($e:String!,$p:String!,$t:String!,$f:JSONString!){project(entityName:$e,name:$p){access artifactType(name:$t){artifactCollections(first:2,filters:$f){edges{node{name}} pageInfo{hasNextPage}}}}}'
+    payload = {'query':query,'variables':{'e':entity,'p':project,'t':type_name,'f':json.dumps({'name':name})}}
     authorization = base64.b64encode(('api:' + os.environ['WANDB_API_KEY']).encode()).decode()
     req = urllib.request.Request('https://api.wandb.ai/graphql',data=json.dumps(payload).encode(),headers={'Content-Type':'application/json','Authorization':'Basic '+authorization})
     with (request or urllib.request.urlopen)(req,timeout=30) as response:
@@ -66,8 +66,13 @@ def artifact_collection_exists(entity, project, type_name, name, request=None):
         raise RuntimeError('Cannot verify private artifact collection; no write is authorized by this response')
     kind=value['artifactType']
     if kind is None:return False
-    if 'artifactCollection' not in kind:raise RuntimeError('Artifact collection response is incomplete')
-    return kind['artifactCollection'] is not None
+    connection=kind.get('artifactCollections')
+    if not isinstance(connection,dict) or not isinstance(connection.get('edges'),list) or not isinstance(connection.get('pageInfo',{}).get('hasNextPage'),bool):
+        raise RuntimeError('Artifact collection response is incomplete')
+    names=[edge.get('node',{}).get('name') for edge in connection['edges']]
+    if any(value != name for value in names) or connection['pageInfo']['hasNextPage']:
+        raise RuntimeError('Artifact collection filter was not exact; reconcile before writing')
+    return bool(names)
 
 
 def remote_artifact(api, entity, project, name, fingerprint):

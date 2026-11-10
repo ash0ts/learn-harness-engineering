@@ -40,6 +40,20 @@ class PublicationTests(unittest.TestCase):
 
 
 class CollectionLookupTests(unittest.TestCase):
+    def test_new_collection_uses_exact_list_query_not_throwing_name_lookup(self):
+        response={'data':{'project':{'access':'PRIVATE','artifactType':{'artifactCollections':{'edges':[], 'pageInfo':{'hasNextPage':False}}}}}}
+        def request(req, **kwargs):
+            payload=json.loads(req.data)
+            self.assertNotIn('artifactCollection(name:',payload['query'])
+            self.assertEqual(json.loads(payload['variables']['f']),{'name':'trial-new'})
+            return io.BytesIO(json.dumps(response).encode())
+        with patch.dict(os.environ,{'WANDB_API_KEY':'test-only'}):
+            self.assertFalse(models.artifact_collection_exists('team','private','course-evidence','trial-new',request))
+            response['data']['project']['artifactType']['artifactCollections']['edges']=[{'node':{'name':'trial-new'}}]
+            self.assertTrue(models.artifact_collection_exists('team','private','course-evidence','trial-new',request))
+            response['data']['project']['artifactType']['artifactCollections']['pageInfo']['hasNextPage']=True
+            with self.assertRaises(RuntimeError):models.artifact_collection_exists('team','private','course-evidence','trial-new',request)
+
     def test_missing_type_is_absent_only_after_explicit_private_query(self):
         response={'data':{'project':{'access':'PRIVATE','artifactType':None}}}
         with patch.dict(os.environ,{'WANDB_API_KEY':'test-only'}):
