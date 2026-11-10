@@ -1,51 +1,53 @@
 ## Find the text that vanished
 
-A short document indexes successfully. A longer one produces chunks with empty content. The app can still show a reassuring status while retrieval has nothing useful to return.
+A short document indexes fine, but a longer one produces chunks with nothing in them. The app still shows a reassuring status, and retrieval has no text to return.
 
-This project asks you to add useful runtime observations and diagnose a seeded defect. Compare a condition with sparse feedback against one with structured startup, import, indexing, and error signals. Keep the defective application and task fixed.
+In this project you find that planted defect twice: once with sparse feedback from the running app, and once after adding structured signals for startup, import, indexing and errors. The broken app and the task stay the same both times.
 
-**Your deliverable:** a reproduction, a diagnosis supported by logs, a narrow repair, architecture checks, and an observed comparison of diagnostic time and repair scope. Predict which signal will first expose the defect.
+**What you hand in:** a reproduction, a diagnosis backed by logs, a narrow repair, architecture checks, and a comparison of how long diagnosis took and how much the repair touched. Before you start, predict which signal will expose the defect first.
 
 <!-- cell -->
-## Observe before repairing
+## The lab: observe before you repair
 
-Start with the original Project 04 application and the same sample documents in each condition. Include a document over 1,000 characters, a short control document, and a document containing more than one paragraph. Freeze the fixtures before running.
+Start both versions from the course's Project 04 app and the same sample documents. Include one document over 1,000 characters, a short one as a control, and one with more than one paragraph. Choose those before you run anything, and don't change them afterwards.
 
-Record startup state, import identity and size, indexing transitions, chunk counts, and errors. A useful log lets you connect one operation to its inputs and outcome. Avoid putting document text or credentials in logs when an identifier and length answer the diagnostic question.
+Have the app record its startup state, what was imported and how big it was, each change of indexing status, chunk counts, and errors. Each log line should let you tie one operation to its input and its outcome. Keep document text and credentials out of the logs; an identifier and a length usually answer the question.
 
-The seeded expression is:
+The planted line is:
 
 ```typescript
 const chunkContent = content.length > 1000 ? '' : buffer.trim();
 ```
 
-For a classroom blind diagnosis, the instructor can withhold this section until learners have captured a reproduction. Once revealed, ask why a small happy-path fixture missed it and what boundary case would have exposed it sooner.
+If you're an instructor teaching this as a blind diagnosis, hide this section until students have a reproduction; the course's Project 04 app also has a `// BUG:` comment above the planted line. Afterwards, ask them why a short sample document that indexes fine missed it, and which boundary case would have caught it sooner.
 
 <!-- cell -->
-## Compare debugging processes
+## The lab: compare two ways of debugging
 
-1. Start each condition from the same defective source and give it the same task.
-2. Record when the first supported diagnosis appears. Separate that timestamp from the first guess and the final repair.
-3. Preserve the logs and commands that connect the diagnosis to the defect.
-4. Grade the repair in a fresh workspace: import, index, inspect nonempty chunks, retrieve source text, and exercise the Electron UI.
-5. Run architecture checks. Seed a forbidden Node import in renderer code and confirm the guard rejects it, then remove the test mutation.
+1. Start each version from the same broken source with the same task.
+2. Note when the first diagnosis backed by evidence appears. Keep that time separate from the first guess and from the final repair.
+3. Keep the logs and commands that connect the diagnosis to the defect.
+4. Grade the repair in a clean workspace: import, index, check the chunks have text, retrieve a passage, and use the Electron window.
+5. Run the architecture checks. Add a forbidden Node import to renderer code, confirm the guard rejects it, then take it out again.
 
-Measure repair scope using the exported diff: changed files, changed behavior, and unrelated edits. A large patch is not automatically wrong, but unexplained changes make causal diagnosis harder. Human help belongs in the intervention record with its actual timestamp.
-
-<!-- cell -->
-## A working repair can still miss a guardrail
-
-In the saved Forge adaptation, minimal instructions passed 2/3 and runtime feedback passed 3/3. All six attempts preserved the long document's chunk text. The failing minimal attempt did not correctly reject a seeded Node import in the renderer.
-
-That result is more precise than “logs fixed the bug.” The full acceptance grade included an architecture guard, and the observed separation occurred there. The saved study did not establish a controlled difference in diagnosis time or fully grade the original structured-logging assignment.
-
-Inspect both the coding-agent and application conversations in Agent Lens. They are distinct: one records the work that changes the app; the other records the app's service and inference activity. A trace explains a path through execution. It does not, by itself, prove that every required behavior passed.
+Measure how much the repair touched from the exported diff: files changed, behavior changed, and edits that had nothing to do with the defect. A big patch can be correct, but every unexplained change makes it harder to say what fixed the bug. If you helped, write it down in `interventions.csv` with the time it happened.
 
 <!-- cell -->
-## Submit the diagnosis chain
+## What happened when we ran it
 
-Submit the fixtures, initial reproduction, timestamped observations, repair patch, architecture-guard evidence, service results, and actual UI capture. Add a short comparison of time to supported diagnosis and repair scope. Leave unobserved time fields blank.
+The main comparison is six attempts on the planted defect, three per treatment. `minimal` got the task. `runtime-feedback` also got an instructions file, an architecture note, and a small script that shows the real chunks and indexing status after a build.
 
-Ask a partner to identify the defect using your evidence before reading your explanation. If the logs only say “indexing failed,” improve their specificity. If they dump every internal value, remove noise until the causal path is readable.
+All six attempts fixed the defect: the long document's chunks kept their text. The source we gave the agent has a `// BUG:` comment above the planted line, and in all six attempts the agent read that file before it built or edited anything. `runtime-feedback` passed 3 of 3 and `minimal` passed 2 of 3. The grade also includes the architecture guard from the last step of the lab, a script we had the agent write, and in the one attempt that failed, the guard didn't reject the forbidden Node import in the renderer.
 
-**Discussion:** which requirement explains the difference between 2/3 and 3/3 here? What new controlled experiment would be needed to claim faster debugging? Which single log event would you keep if you could keep only one?
+Because every attempt fixed the bug, we can't say the extra feedback fixed it. In each of the three `runtime-feedback` attempts the agent ran the feedback script once, after it had rewritten the indexing code. The only difference in the grades was one attempt's architecture guard. Outside the grades, all three `runtime-feedback` attempts were stopped at the limit of 24 model calls, while the three `minimal` attempts finished on their own after 18 to 22 calls. We also didn't time diagnosis under controlled conditions or grade the structured logging and repair size the lab asks for, so we have no evidence about debugging speed.
+
+Under **Inspect one attempt** below, pick `0865dc24` (`runtime-feedback`, attempt 1) and click **Open in Agent Lens** in its **Coding agent** row. Find the command that prints `src/services/indexing-service.ts` and the `// BUG:` comment in its output, then the command that rewrites that file, then `node runtime-feedback.cjs`. In `9feeffa8`, the `minimal` attempt that failed, find what the agent ran to test the guard it had written. Each attempt has only the coding agent's conversation, because inside the sandbox the app makes no model call when it answers a question.
+
+<!-- cell -->
+## Hand in the chain from symptom to fix
+
+Hand in the sample documents, your first reproduction, your timestamped observations, your diagnosis and the logs behind it, each repair patch, the architecture-guard evidence, the clean-workspace grading results and a capture of the Electron window. Add a short comparison of time to a supported diagnosis and how much each repair touched. If you didn't observe a time, leave it blank.
+
+Ask a partner to find the defect from your evidence before they read your explanation. If your logs only say "indexing failed", make them more specific. If they dump every internal value, cut until the path from cause to symptom is readable.
+
+**Discuss:** which requirement explains 2 of 3 versus 3 of 3 here? What experiment would you need before claiming faster debugging? If you could keep one log event, which would it be?
