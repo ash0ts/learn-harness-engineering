@@ -342,6 +342,40 @@ class LearnerWorkspaceTests(unittest.TestCase):
         self.assertIn("--publish", command.call_args.args[0])
         self.assertEqual(self.w.ledger()["spentEstimateUsd"], 1)
 
+    def test_v1_migration_preserves_unresolved_revision_and_reservations(self):
+        self.seed()
+        self.w.state.update(schemaVersion=1, pending={"id":"old-operation"})
+        self.w.write()
+        budget = {"schemaVersion":1,"limitUsd":20,"spentEstimateUsd":3.2,"reservations":{"old-operation":2},"settled":{"old-trial":3.2},"halted":"Missing usage for old-operation"}
+        (self.w.results / "budget.json").write_text(json.dumps(budget))
+        buffer = io.BytesIO()
+        with tarfile.open(fileobj=buffer, mode="w:gz") as archive:
+            for name, data in [("learner.json", self.w.state_file.read_bytes()), ("results/budget.json", json.dumps(budget).encode())]:
+                member = tarfile.TarInfo(name); member.size=len(data); archive.addfile(member,io.BytesIO(data))
+        with tempfile.TemporaryDirectory() as dest:
+            other = LessonWorkspace("b"*40, "project-01", self.env, dest)
+            other.restore_bundle(buffer.getvalue())
+            self.assertEqual(other.ledger(), budget)
+            self.assertEqual(other.state["pending"]["revision"], "a"*40)
+            self.assertEqual(other.state["schemaVersion"], 2)
+            self.assertIsNone(other.cached_checkpoint_bytes())
+
+    def test_python_and_typescript_use_the_same_operation_contract(self):
+        self.seed()
+        source = Path(__file__).resolve().parents[1] / "operation.schema.json"
+        target = self.w.root / "forge/operation.schema.json"
+        target.write_bytes(source.read_bytes())
+        operation = {"schemaVersion":2,"id":"operation-one","kind":"qualification","sourceCommit":"a"*40,"protocolSha256":"b"*64,
+            "identity":{"entity":"class","project":"private-labs","owner":"12","notebook":"lesson-one"},"phase":"completed",
+            "cleanup":"verified","telemetry":"complete","publication":"not_required","createdAt":"now","updatedAt":"now",
+            "sandboxIds":[],"reservationIds":[],"requests":{"agent-1":{"status":"reported","payloadBytes":10,"inputTokens":1,"outputTokens":2}},"evidence":{},"events":[]}
+        folder=self.w.results/"operations";folder.mkdir()
+        path=folder/"operation-one.json";path.write_text(json.dumps(operation))
+        self.assertEqual(self.w.incomplete_operations(), [])
+        operation["requests"]["agent-1"]["inputTokens"]=-1;path.write_text(json.dumps(operation))
+        with self.assertRaisesRegex(RuntimeError, "constraint"):
+            self.w.operation_records()
+
 
 if __name__ == "__main__":
     unittest.main()
