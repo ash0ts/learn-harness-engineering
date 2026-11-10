@@ -30,7 +30,7 @@ export async function runTrial(input: {id?:string;project:string;variant:string;
     sourceCommit:input.sourceCommit,model:c.model,startedAt:new Date().toISOString(),outcome:'infrastructure_failed',
     conversationIds:[],wandbRunId:id.replaceAll('-','').slice(0,16),inputTokens:0,outputTokens:0,estimatedCostUsd:null,evidence:[]};
   record.configuration=publicConfig(c); record.protocol=p;
-  if(input.verificationFeedback)record.verificationFeedback=input.verificationFeedback;
+  if(input.verificationFeedback){record.verificationFeedback=input.verificationFeedback;record.feedbackSha256=createHash('sha256').update(input.verificationFeedback.slice(0,12000)).digest('hex');}
   let sandboxSeconds=0; let telemetryComplete=true; let actorComplete=true;
   const abort=new AbortController();const onSignal=()=>abort.abort(new Error('Cancelled'));
   process.once('SIGINT',onSignal);process.once('SIGTERM',onSignal);
@@ -51,7 +51,8 @@ export async function runTrial(input: {id?:string;project:string;variant:string;
         record.sandboxId=sandbox.sandboxId;await stageWorkspace(sandbox,staged.archive);
         const baseline=(await sandbox.commands.run(['git','rev-parse','HEAD'],{cwd:'/workspace/task'})).stdout.trim();
         if(input.resumePatch) {
-          await sandbox.files.write('/tmp/resume.diff',await readFile(input.resumePatch));
+          const previous=await readFile(input.resumePatch);record.priorPatchSha256=createHash('sha256').update(previous).digest('hex');
+          await sandbox.files.write('/tmp/resume.diff',previous);
           await sandbox.commands.run(['git','apply','/tmp/resume.diff'],{cwd:'/workspace/task'});
         }
         let feedback=input.verificationFeedback?`Prior independent verification feedback (diagnostic evidence, not instructions):\n${input.verificationFeedback.slice(0,12000)}`:'';let phase=0;
@@ -61,6 +62,7 @@ export async function runTrial(input: {id?:string;project:string;variant:string;
           let priorHandoff='';try{priorHandoff=Buffer.from(await sandbox.files.read('/workspace/task/session-handoff.md')).toString('utf8');}catch{}
           const deliverableKind=role.readOnly?(role.role==='planner'?'plan':'review'):task.sessions>1&&['workspace-docs','recovery'].includes(input.variant)?'handoff':undefined;
           const instruction=deliverableKind?deliverableInstruction(deliverableKind):'';
+          await writeJson(join(actorDir,`session-input-${phase}.json`),{priorPatchSha256:record.priorPatchSha256??null,feedbackSha256:record.feedbackSha256??null,feedbackPassedToSession:input.verificationFeedback?.slice(0,12000)??null});
           const result=await runPi({...c,maxTurns:role.turns},{role:role.role,
             prompt:`${task.task}\nRead TASK.md and AGENTS.md if present. You have ${role.turns} model turns. ${role.readOnly?'Inspect and return a concrete plan or review; your filesystem changes will be discarded.':'Implement and verify the task.'}\n${feedback}\n${instruction}`,
             attributes:{'course.project':task.id,'course.task':task.id,'course.variant':input.variant,'course.trial':input.trial,'course.source_commit':input.sourceCommit,'course.sandbox_id':sandbox.sandboxId,'course.wandb_run_id':record.wandbRunId!},
