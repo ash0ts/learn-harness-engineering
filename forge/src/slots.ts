@@ -6,7 +6,7 @@ import {setTimeout as delay} from 'node:timers/promises';
 import {writeJson} from './records.js';
 
 const packageRoot = fileURLToPath(new URL(existsSync(new URL('../package.json', import.meta.url)) ? '../' : '../../', import.meta.url));
-export const slotDirectory = join(packageRoot, 'local-results', '.sandbox-slots');
+export const slotDirectory = join(process.env.FORGE_RESULTS_DIR??join(packageRoot,'local-results'), '.sandbox-slots');
 /** Cross-process capacity shared by qualifications, campaigns and graph lanes.
  * Never reclaim an orphan automatically: its remote sandbox may still be billed. */
 export async function acquireSlot(owner: string, directory = slotDirectory, signal?: AbortSignal, timeoutMs = 1200000) {
