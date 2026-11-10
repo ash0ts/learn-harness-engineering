@@ -1,0 +1,231 @@
+{
+  "firstUsePrepared": true,
+  "repeatPreparePreservedBudget": true,
+  "freshDirectoryRemoteRestore": true,
+  "credentialDisconnected": true,
+  "inferenceRequests": 0,
+  "codingTrials": 0,
+  "spentEstimateUsd": 0.3408,
+  "runnerCommit": "4022ecfd34f76c870ea1f0c2aef973618d156c64",
+  "progressArtifact": "wandb/learn-harness-engineering-forge/learner-758c008be4558695f03c:v1",
+  "schemaVersion": 1,
+  "notebookId": "Tm90ZWJvb2s6MTUzMTQ=",
+  "notebookUrl": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTQ%3D",
+  "canonicalNotebookCommit": "75f7accbaf8eb7878332135070ded52e7b8c104b",
+  "cause": "First-use restore used a named artifact-collection lookup. Forge returns HTTP 404 when that learner collection does not exist.",
+  "fix": "Exact filtered collection list; malformed, incomplete, unauthorized and network-error responses still block setup.",
+  "pythonTests": 55,
+  "savedNotebookValidations": 9,
+  "presentation": "Cell order, text, headings, labels, images and historical results unchanged; coordinator code and runner revision only.",
+  "documentationBuildPassed": true,
+  "originalUnknownReservationUnchanged": true,
+  "verifiedAt": "2026-11-10T19:53:01.049473+00:00",
+  "publishedNotebooks": [
+    {
+      "id": "Tm90ZWJvb2s6MTUzMTM=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTM%3D",
+      "file": "forge/notebooks/00-overview.py",
+      "sourceCommit": "75f7accbaf8eb7878332135070ded52e7b8c104b",
+      "sha256": "770722d5f1d93c97f1ccecef19e35fd4cd5c3a7283ddafee2c9b6af6db610dca",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "Forge-track-evidence-before-conclusions",
+        "versionIndex": 43,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "14c9bbdd9ed01f33294176a92f8d85f84a6c58a0eda801c9db175e5ca9cb095d",
+      "verifiedAt": "2026-11-10T19:52:48.129353+00:00"
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMTQ=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTQ%3D",
+      "file": "forge/notebooks/01-minimal-harness.py",
+      "sourceCommit": "75f7accbaf8eb7878332135070ded52e7b8c104b",
+      "sha256": "c715490e58df17c6c0429e4ac59aeb51799ef7185679e70f84bde62b0aee7d1a",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "01-Minimal-instructions-and-explicit-harnesses",
+        "versionIndex": 31,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "b0a2cf313de112396e67038af1ed2f0ac654982e3198b06fc026262cd404d5f1",
+      "verifiedAt": "2026-11-10T19:52:49.710590+00:00"
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMTU=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTU%3D",
+      "file": "forge/notebooks/02-workspace-docs.py",
+      "sourceCommit": "75f7accbaf8eb7878332135070ded52e7b8c104b",
+      "sha256": "b801eed4968c148ff0d2b6fdd3fe97a4594f5783bee9b02018eb05857f5857ae",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "02-An-agent-readable-workspace",
+        "versionIndex": 24,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "35c8d4295c0ff120686f9a046e557f76a7d4a917bc921548260e5af4010dd632",
+      "verifiedAt": "2026-11-10T19:52:51.328872+00:00"
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMTY=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTY%3D",
+      "file": "forge/notebooks/03-session-recovery.py",
+      "sourceCommit": "75f7accbaf8eb7878332135070ded52e7b8c104b",
+      "sha256": "4350fb021fb7a0fc0d5cd957a056b7edb16afd06fe2e150204f1067c6cb26342",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "03-Interrupted-session-recovery",
+        "versionIndex": 23,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "aebb029e5e24ed6236de6cec063f1efa3b47dd75bccea1275702a6b25a51c594",
+      "verifiedAt": "2026-11-10T19:52:53.031225+00:00"
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMTc=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTc%3D",
+      "file": "forge/notebooks/04-runtime-feedback.py",
+      "sourceCommit": "75f7accbaf8eb7878332135070ded52e7b8c104b",
+      "sha256": "af8e947ec726b47803c16fdb66d689f35a2f42288cb63fac30df7cc6c78dfb6b",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "04-Runtime-evidence-and-the-seeded-defect",
+        "versionIndex": 20,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "65e61ef9d63a89afebe7300957f4ffcbb1fa598e69c662936de58a57b30ff457",
+      "verifiedAt": "2026-11-10T19:52:54.665609+00:00"
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMTg=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTg%3D",
+      "file": "forge/notebooks/05-role-separation.py",
+      "sourceCommit": "75f7accbaf8eb7878332135070ded52e7b8c104b",
+      "sha256": "15070ca0d86ca3409c6dc8a6c85d7c6f7a09c8b2cc35fd83a50bf4e6c7d48183",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "05-One-feature-three-role-arrangements",
+        "versionIndex": 20,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "e2f5028454642cd7c9c67182f53b40bf9c6edc0b48964ba4d761fa7f92e7d8df",
+      "verifiedAt": "2026-11-10T19:52:56.346768+00:00"
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMTk=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTk%3D",
+      "file": "forge/notebooks/06-capstone.py",
+      "sourceCommit": "75f7accbaf8eb7878332135070ded52e7b8c104b",
+      "sha256": "8ef220f2cd604be504fc1d3f9e37d9e554d2bc23a9972b13260aaafcbae4095d",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "06-Capstone-reliability",
+        "versionIndex": 19,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "67374fd4fa0051f6b772cb77cc2d533253d0176128821f8ad16d389809e92fb4",
+      "verifiedAt": "2026-11-10T19:52:57.947585+00:00"
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMjA=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjA%3D",
+      "file": "forge/notebooks/07-bounded-loops.py",
+      "sourceCommit": "75f7accbaf8eb7878332135070ded52e7b8c104b",
+      "sha256": "de7b6e60b4ab1296ebb1b67e37362f1ced05f3a812a761e7eba4857608f99a74",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "07-Goal-timer-and-maker-checker-loops",
+        "versionIndex": 19,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "6c7ac2a8431d9a1a5ffc201d14d354e019fd60e04e97c0c35c5872f01329e1e1",
+      "verifiedAt": "2026-11-10T19:52:59.521103+00:00"
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMjE=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjE%3D",
+      "file": "forge/notebooks/08-state-machine.py",
+      "sourceCommit": "75f7accbaf8eb7878332135070ded52e7b8c104b",
+      "sha256": "0b7d2a1657ac569062fc97d2c406154c043514eca15ddb1fa4b13e597af046c7",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "08-Checkpointed-graphs-and-human-approval",
+        "versionIndex": 22,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "d64a74817c3720248cc8c53391d96d54bce616fbcbe07b18c2f6d9aa43e3d7ce",
+      "verifiedAt": "2026-11-10T19:53:01.042215+00:00"
+    }
+  ],
+  "cleanup": {
+    "allNineEditorsTerminal": true,
+    "receipts": [
+      {
+        "id": "notebook-rollout-v5-firstuse05",
+        "sandboxId": "7e0fdd58-c145-4127-a995-90d5f1fa9997",
+        "status": "terminated",
+        "endedAt": "2026-11-10T19:48:17.773Z",
+        "estimatedCostUsd": 0.028205743999999998
+      },
+      {
+        "id": "notebook-rollout-v5-firstuse04",
+        "sandboxId": "0c092158-252b-49fb-8119-5f210ef75300",
+        "status": "terminated",
+        "endedAt": "2026-11-10T19:48:07.538Z",
+        "estimatedCostUsd": 0.02723720933333333
+      },
+      {
+        "id": "notebook-rollout-v5-firstuse08",
+        "sandboxId": "d4e806f0-49b6-4854-adea-51f84c1887f7",
+        "status": "terminated",
+        "endedAt": "2026-11-10T19:52:31.372Z",
+        "estimatedCostUsd": 0.05221198
+      },
+      {
+        "id": "notebook-rollout-v5-firstuse03",
+        "sandboxId": "bbf9f4d5-5d4e-4294-a8d5-c7a3c67d9a96",
+        "status": "terminated",
+        "endedAt": "2026-11-10T19:46:05.917Z",
+        "estimatedCostUsd": 0.015724133333333334
+      },
+      {
+        "id": "notebook-rollout-v5-firstuse02",
+        "sandboxId": "7f21bd0e-b1cc-4181-b302-a382a38ffb45",
+        "status": "terminated",
+        "endedAt": "2026-11-10T19:45:56.094Z",
+        "estimatedCostUsd": 0.014794885333333332
+      },
+      {
+        "id": "notebook-rollout-v5-firstuse00",
+        "sandboxId": "7ed46cae-e274-4de2-af70-bf8d1a7c7a25",
+        "status": "terminated",
+        "endedAt": "2026-11-10T19:43:07.539Z",
+        "estimatedCostUsd": 0.023184150666666667
+      },
+      {
+        "id": "notebook-rollout-v5-firstuse07",
+        "sandboxId": "bcc127bc-5a80-42b0-83bd-63def474bb77",
+        "status": "terminated",
+        "endedAt": "2026-11-10T19:50:26.700Z",
+        "estimatedCostUsd": 0.040410076
+      },
+      {
+        "id": "notebook-rollout-v5-firstuse06",
+        "sandboxId": "6b03bc0b-9cc5-4eeb-83ef-3baacf242f24",
+        "status": "terminated",
+        "endedAt": "2026-11-10T19:50:17.156Z",
+        "estimatedCostUsd": 0.039506955999999996
+      },
+      {
+        "id": "notebook-rollout-v5-prepare404",
+        "sandboxId": "4166bdae-54ff-408b-a5d6-0f59f24c5ece",
+        "status": "terminated",
+        "endedAt": "2026-11-10T19:43:08.565Z",
+        "estimatedCostUsd": 0.06368605333333333
+      }
+    ]
+  },
+  "additionalEditorEstimateUsd": 0.304961188,
+  "rolloutCumulativeEstimateUsd": 2.3394383513333343,
+  "outstandingRolloutReservationsUsd": 0
+}

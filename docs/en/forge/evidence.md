@@ -23,6 +23,8 @@ All images below are original captures or explicitly labeled data figures and wo
 
 The separate [protocol 5 repair report](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-publication/forge/results/protocol-v5/README.md) and [qualification dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=43tvw98k2nm) track the new implementation. The later [owner rehearsal and rollout receipt](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-publication/forge/results/rollout-v5/README.md) records one live student attempt under a separate, bounded exception: execution and publication recovery completed, while its UI grade failed. All nine final notebook sources and rendered outputs are verified; native browser downloads remain unverified. The original unknown-usage reservation and the historical counts below are unchanged.
 
+The subsequent [first-use setup repair](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-publication/forge/results/first-use-repair/README.md) fixes the reported Prepare HTTP 404 when a notebook has no saved progress yet. The actual Prepare button, repeated setup, and remote checkpoint restore passed; this check launched no new inference or coding trial.
+
 ## Start with the complete comparison
 
 <div class="forge-figure" tabindex="0" role="region" aria-label="Primary outcome matrix, horizontally scrollable on narrow screens">
