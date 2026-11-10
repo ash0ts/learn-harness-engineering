@@ -12,7 +12,7 @@ SLUGS = [
 def packet(index, lesson):
     files = {
         'LAB.md': lesson.replace('<!-- cell -->', ''),
-        'README.md': '# Course lab packet\n\nThese are editable submission templates, not a completed harness or a graded result. Fill every TODO using your own workspace and evidence. Keep original-course work separate from the saved Forge adaptation.\n\nOriginal revision: '+ORIGINAL+'\n',
+        'README.md': '# Lab packet\n\nThese are templates for your own lab work. Nothing in them is filled in or graded. Replace every TODO with what you did in your own workspace, and keep your lab work separate from the recorded attempts in the notebook.\n\nCourse revision: '+ORIGINAL+'\n',
         'observations.csv': 'condition,source_revision,fixture,started_at,finished_at,outcome,evidence_path,human_interventions,observed_human_minutes,limitations\n',
         'comparison.md': '# Comparison\n\n## Prediction made before running\nTODO\n\n## Frozen task and conditions\nTODO\n\n## Observations and evidence\nTODO\n\n## What remains unresolved\nTODO\n\n## Proposed follow-up (new experiment)\nTODO\n',
         'interventions.csv': 'timestamp,condition,round,reason,action,observed_minutes,evidence\n',

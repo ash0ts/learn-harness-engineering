@@ -1,47 +1,47 @@
 ## Make one feature the unit of progress
 
-A handoff that says “indexing mostly works” leaves the next session with a guess. This project makes the claim smaller: one named feature, one verification record, one commit.
+A handoff that says "indexing mostly works" leaves the next session guessing. In this project you shrink the claim until it can be checked: one named feature, one verification record, one commit.
 
-Build document chunking, metadata, indexing status, and source-grounded citations. These features depend on one another. Useful metadata supports chunking; chunks support retrieval; retrieval makes a citation meaningful. A status label that says “indexed” is only a claim until the underlying state is checked.
+You'll build four things into the app: document metadata, chunking, an indexing status, and answers with citations back to the source, which the starter calls grounded Q&A. Some of them depend on others: retrieval needs the chunks, and a citation only means something if retrieval found the right text. Treat a label that says "indexed" as a claim until you have looked at what was stored.
 
-**Your deliverable:** a feature ledger, feature-ID commits, a session handoff, and evidence that a fresh session can continue from a clean state. Predict where a broad “done” status could hide incomplete work.
-
-<!-- cell -->
-## Define the dependency order
-
-Use the original Project 03 starter. Draw the dependency chain before asking the agent to edit: metadata → chunking → indexing status and grounded Q&A. Adjust the exact feature IDs to the starter's ledger, but keep each acceptance test observable.
-
-Each feature entry should contain an ID, description, dependencies, status, verification command, evidence path, and last-tested timestamp. Reset inherited completion entries. An evidence path pointing at a deleted temporary directory is not durable evidence.
-
-The startup routine reads `AGENTS.md`, architecture and product docs, installs/checks the environment, and reads the feature list. `init.sh` should make those checks reproducible. The handoff and progress log explain the current boundary; the clean-state checklist records whether the tree, tests, and remaining work agree.
+**What you hand in:** a feature list with evidence, one commit per feature, a session handoff, and proof that a fresh session can carry on from a clean state. Before you start, predict where a broad "done" could be hiding unfinished work.
 
 <!-- cell -->
-## Enforce the one-feature cycle
+## The lab: write down the order
 
-1. Select one unfinished feature whose dependencies are satisfied.
-2. Implement only that feature. Record unrelated discoveries for later rather than silently expanding the task.
-3. Run its verification. Inspect actual metadata, chunk contents, status transitions, or citations as appropriate.
-4. Attach evidence and update status only if the check supports it. Record failures honestly.
-5. Commit with the feature ID. Write the next action in the handoff before selecting another feature.
+Start from the course's Project 03 starter. Before the agent edits anything, draw the dependency chain: metadata, then chunking, then indexing status and grounded Q&A. Use the feature IDs from the starter's list, and make sure each one has an acceptance test you can observe.
 
-Interrupt the process at a declared feature boundary and start a fresh conversation. Give it the files, not the previous chat. Ask it to explain the next eligible feature and the evidence for the completed dependencies before editing.
+Each feature entry needs an ID, a description, its dependencies, a status, the command that verifies it, a path to the evidence, and when it was last tested. Reset any entries that arrive already marked complete. Check the evidence paths too: one that points into a temporary folder that has since been deleted proves nothing.
 
-For grounded Q&A, check that a displayed citation resolves to the imported source and the relevant content. A plausible answer with a citation-shaped string is not enough. For indexing, test documents long enough to produce multiple chunks and check that nonempty text survives.
+The agent's startup routine reads `AGENTS.md` and the architecture and product notes, installs and checks the environment, and reads the feature list. Write the startup script, `init.sh`, so those checks are repeatable. Write the handoff and progress log to say where work stopped, and the clean-state checklist to record whether the working tree, the tests and the list of remaining work agree with each other. The starter has none of these four files, and **Download the lab brief and templates** further down this page gives you a template for each.
 
 <!-- cell -->
-## The saved recovery experiment is narrower
+## The lab: one feature at a time
 
-Our Forge adaptation preserved a patch between two Pi sessions and added recovery instructions. It did not stage the original feature list, startup script, and complete one-feature workflow. Its results therefore test a written recovery treatment on unfinished application code, not the full original discipline.
+1. Pick one unfinished feature whose dependencies are done.
+2. Build only that feature. If the agent finds something unrelated, it writes it down for later.
+3. Run the feature's verification. Look at the stored metadata, the chunk contents, the status changes or the citations, whichever applies.
+4. Attach the evidence and change the status only if the check supports it. Record failures as failures.
+5. Commit with the feature ID. Write the next step into the handoff before picking another feature.
 
-Both treatments passed 0/3 qualified attempts. Four attempts failed compilation; the two that compiled failed metadata acceptance, with `wordCount` the first failing assertion. One also failed the single-document indexing-status check. Some downstream checks never ran after an earlier failure; they should remain “not executed.”
+Stop the agent at a feature boundary and start a new conversation. Give it the files and nothing from the previous chat. Before it edits, ask it to tell you which feature is next and what evidence shows the earlier ones are done.
 
-Two compiled submissions displayed answers in Electron. That makes an instructive screenshot, but not a passing submission. Compare the visible answer with the full grade below. Identify one missing requirement that the screen alone cannot establish.
+For grounded Q&A, follow a displayed citation back to the imported document and confirm the text is there; a plausible answer with something citation-shaped after it doesn't count. For indexing, use documents long enough to produce several chunks and check that none of them is empty.
 
 <!-- cell -->
-## Submit a restart another person can reproduce
+## What happened when we ran it
 
-Submit the feature ledger before and after, feature-ID commits, startup script, progress log, handoff, clean-state checklist, and fresh-session transcript. Include the boundary patch and final independent checks.
+Our recorded version tests less than the lab does. We let the agent work for one session, kept its patch, and started a second session with no memory of the first. The main comparison is three attempts from each of two starting setups, which the notebook calls treatments. `minimal` got the task and the unfinished app, and `recovery` also got an architecture note and a short `AGENTS.md` with a rule to write `session-handoff.md` before a session ends and read it first on resume. We did not give the agent the feature list or the startup script. The closest it got to the one-feature-at-a-time routine was one sentence in that `AGENTS.md`: "Work one acceptance criterion at a time." Each session was allowed 12 model calls and the agent used all 12 every time, so the break fell wherever call 12 landed. The agent wrote no `session-handoff.md` in any `recovery` attempt, and in five of the six attempts its second session left the patch unchanged.
 
-Have a partner choose a feature marked complete and rerun its verification from a clean checkout. Then ask them to identify the next eligible feature. If they cannot do both, distinguish an application failure from a state-recording failure.
+Neither treatment passed in the main comparison: 0 of 3 each. Four of those six attempts didn't compile, so the grader stopped at the build. For those four, the six checks after the build are marked "not executed" in the figure below and left out of the table under **Inspect one attempt**. The other two compiled and then failed the metadata check, with `wordCount` as the first assertion to fail. One of those two, the `recovery` attempt 0809587e, also failed the check on a single document's indexing status. Its patch is empty, so its grade is the grade of the app we started from, which passed five of the seven checks, the build among them.
 
-**Discussion:** when a checker fails early, what can you conclude about downstream behavior? Which evidence belongs in the feature entry, and which belongs in the broader trial record? Describe how you would prevent a stale “passed” entry from surviving a later code change.
+The two attempts that compiled did show an answer in the Electron window, which makes a convincing screenshot even though both failed. Compare the screenshot below, from 9d859517, with that attempt's checks under **Inspect one attempt**, and name one requirement you can't check from the screen. Then pick 1500360a (`recovery`, attempt 1) and open Session 2 in Agent Lens. Find the command that looks for `session-handoff.md`, then follow what the agent does from there to its last command, `npm run check`, which fails with three type errors.
+
+<!-- cell -->
+## Hand in a restart someone else can repeat
+
+For the lab, hand in the feature list before and after, the per-feature commits, the startup script, the progress log, the handoff, the clean-state checklist and the transcript of the fresh session. Include the patch at the break and your own final checks.
+
+Ask a partner to pick a feature you marked complete and rerun its verification from a clean checkout. Then ask them which feature is next. If they can't do both, work out whether the app is wrong or your records are.
+
+**Discuss:** when a check fails early, what can you say about the behavior the later checks would have tested? Which evidence belongs in the feature entry, and which in the record of the whole attempt? How would you stop a stale "passed" from surviving a later code change?
