@@ -54,12 +54,26 @@ def payload(file):
     return record, projected, entries, fingerprint.hexdigest()
 
 
+def artifact_collection_exists(entity, project, type_name, name, request=None):
+    query = 'query($e:String!,$p:String!,$t:String!,$n:String!){project(entityName:$e,name:$p){access artifactType(name:$t){artifactCollection(name:$n){id}}}}'
+    payload = {'query':query,'variables':{'e':entity,'p':project,'t':type_name,'n':name}}
+    authorization = base64.b64encode(('api:' + os.environ['WANDB_API_KEY']).encode()).decode()
+    req = urllib.request.Request('https://api.wandb.ai/graphql',data=json.dumps(payload).encode(),headers={'Content-Type':'application/json','Authorization':'Basic '+authorization})
+    with (request or urllib.request.urlopen)(req,timeout=30) as response:
+        result=json.load(response)
+    value=result.get('data',{}).get('project')
+    if result.get('errors') or not value or value.get('access')!='PRIVATE' or 'artifactType' not in value:
+        raise RuntimeError('Cannot verify private artifact collection; no write is authorized by this response')
+    kind=value['artifactType']
+    if kind is None:return False
+    if 'artifactCollection' not in kind:raise RuntimeError('Artifact collection response is incomplete')
+    return kind['artifactCollection'] is not None
+
+
 def remote_artifact(api, entity, project, name, fingerprint):
-    # Listing the collection distinguishes absence from a network/read failure.
-    # Never treat an API exception as permission to create a duplicate artifact.
-    collections = api.artifact_collections(project_name=f'{entity}/{project}', type_name='course-evidence')
-    collection = next((c for c in collections if c.name == name), None)
-    if collection is None:
+    # The pinned SDK raises for a missing artifact type. Only an explicit GraphQL
+    # null proves absence; network, parse and authorization failures still stop.
+    if not artifact_collection_exists(entity, project, 'course-evidence', name):
         return None
     versions = list(api.artifact_versions('course-evidence', f'{entity}/{project}/{name}'))
     match = next((a for a in versions if a.metadata.get('evidenceSha256') == fingerprint), None)
