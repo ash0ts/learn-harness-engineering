@@ -247,11 +247,28 @@ class LessonWorkspace:
             row = json.loads(path.read_text())
             if not schema:
                 raise RuntimeError("Runner operation contract is missing")
-            if any(key not in row for key in schema["required"]):
-                raise RuntimeError("Operation is incomplete; retain its reservation")
-            for key, rule in schema["properties"].items():
-                if key in row and (("const" in rule and row[key] != rule["const"]) or ("enum" in rule and row[key] not in rule["enum"])):
+            def validate(rule, value):
+                if "const" in rule and value != rule["const"] or "enum" in rule and value not in rule["enum"]:
                     raise RuntimeError("Unsupported operation state")
+                kind = rule.get("type")
+                types = {"object": dict, "array": list, "string": str, "integer": int}
+                if kind in types and (not isinstance(value, types[kind]) or kind == "integer" and isinstance(value, bool)):
+                    raise RuntimeError("Invalid operation value")
+                if "minimum" in rule and value < rule["minimum"] or "pattern" in rule and not re.search(rule["pattern"], value):
+                    raise RuntimeError("Invalid operation constraint")
+                if kind == "object":
+                    if any(key not in value for key in rule.get("required", [])):
+                        raise RuntimeError("Operation is incomplete; retain its reservation")
+                    for key, item in value.items():
+                        nested = rule.get("properties", {}).get(key, rule.get("additionalProperties"))
+                        if isinstance(nested, dict):
+                            validate(nested, item)
+                if "items" in rule:
+                    for item in value:
+                        validate(rule["items"], item)
+            validate(schema, row)
+            if any(r["status"] == "reported" and ("inputTokens" not in r or "outputTokens" not in r) for r in row["requests"].values()):
+                raise RuntimeError("Reported usage requires both token counts")
             identity = row["identity"]
             if identity.get("entity") != self.identity["WANDB_ENTITY"] or identity.get("project") != self.identity["WANDB_PROJECT"] or identity.get("owner") != self.identity["WANDB_NOTEBOOK_USER_ID"] or identity.get("notebook") != self.identity["WANDB_NOTEBOOK_COLLECTION"]:
                 raise RuntimeError("Operation owner or destination mismatch")
@@ -678,6 +695,9 @@ with wandb.init(entity=entity,project=project,id='lesson-'+key,resume='allow',jo
         for path in self.results.glob("qualification-*/qualification.json") if self.results.exists() else []:
             qualifications.append(json.loads(path.read_text()))
         logs = sorted(self.results.glob("lesson-action-*.log")) if self.results.exists() else []
+        controls = []
+        for path in self.results.glob("control-*/control.json") if self.results.exists() else []:
+            controls.append(json.loads(path.read_text()))
         qualifications.sort(key=lambda item: str(item.get("finishedAt") or item.get("startedAt") or ""))
         # "active" is a process in this runtime. "pending" can also be a marker
         # restored from a runtime that disappeared; that state must stay downloadable.
@@ -685,7 +705,7 @@ with wandb.init(entity=entity,project=project,id='lesson-'+key,resume='allow',jo
         view = {"status": self.state["status"], "destination": "/".join(self.identity[k] for k in ["WANDB_ENTITY", "WANDB_PROJECT"]),
                 "prepared": self.state.get("prepared", False), "sandboxConnected": self.connected, "pending": self.state.get("pending"), "revision": self.revision,
                 "active": active, "captures": [r["id"] for r in trials if isinstance(r.get("id"), str) and self.capture_path(r["id"])],
-                "budget": self.ledger(), "trials": trials, "checkpoints": checkpoints, "qualifications": qualifications,
+                "budget": self.ledger(), "controls": controls, "trials": trials, "checkpoints": checkpoints, "qualifications": qualifications,
                 "notes": self.state.get("notes", {}), "progressUrl": self.state.get("progressUrl"),
                 "log": self.redact(logs[-1].read_text(errors="replace")[-12000:]) if logs else ""}
         return json.loads(self.projection(json.dumps(view)))
