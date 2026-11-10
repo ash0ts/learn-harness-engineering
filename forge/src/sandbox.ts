@@ -24,6 +24,7 @@ export function sandboxLookupTag(id:string){
   return id.length<=59&&/^[A-Za-z0-9._-]*[A-Za-z0-9]$/.test(id)?id:`course-${createHash('sha256').update(id).digest('hex').slice(0,40)}`;
 }
 
+
 /** Adapter for pinned cwsandbox 1.0.0, which has no public client.dispose().
  * Close only this owner's sandbox channels and control transport, never the
  * module-global channel pool. An SDK shape change must fail visibly. */
@@ -57,7 +58,10 @@ export async function withWorkspace<T>(options: {
   journal.requestedAt=new Date().toISOString();await save();launched=true;
   let sandbox: Sandbox;
   try {
-    sandbox = await client.create({containerImage: options.image, resources: {cpu: '2', memory: '4Gi'},
+    // Forge notebook workers cannot reach direct mTLS endpoints. The pinned SDK
+    // can retain a connecting socket after its direct readiness probe fails.
+    // Gateway mode prevents that probe and uses the same authenticated service.
+    sandbox = await client.create({containerImage: options.image, resources: {cpu: '2', memory: '4Gi'}, dataPlaneMode:'gateway',
       maxLifetimeSeconds: 1200, network: {denyEgress: true}, tags: ['harness-course', lookupTag],
       annotations: {'course.trial': options.trialId}, waitUntilRunning: false, timeoutMs: 60000, signal: options.signal});
   } catch (error) {
