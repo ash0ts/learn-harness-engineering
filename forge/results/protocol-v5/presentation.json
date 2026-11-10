@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "baselineCommit": "a33df54f2ae2fef63dcdf9377a469ef02ee10971",
+  "historicalFilesUnchanged": 32,
+  "factualSentenceEdits": [
+    {
+      "before": "Before each attempt the copy sets aside a worst case of about $4.20, and it will not start if that would pass the limit, so leave the limit at $20 unless you have a reason to lower it.",
+      "after": "Before each sandbox or model request the copy sets aside its maximum estimated cost, and it stops before an operation that would pass the limit, so leave the limit at $20 unless you have a reason to lower it."
+    },
+    {
+      "before": "Each treatment runs once per copy.",
+      "after": "Start can run another completed treatment; each attempt keeps its own checkpoint."
+    },
+    {
+      "before": "Either way the graph runs once per copy.",
+      "after": "Start can run another graph after the current graph finishes or you decide its approval candidate."
+    },
+    {
+      "before": "It is a small paid test that the model, the sandbox and the tracing all respond, and it cleans up after itself.",
+      "after": "It is a small paid test that the model, the sandbox and the tracing all respond, followed by checks that the unfinished app fails and the protected repair passes; it cleans up after itself."
+    },
+    {
+      "before": "if the notebook session ends mid-run, this copy stops until your instructor has checked it. **Cancel the running action** has the same effect once an attempt has started, because its cost is then unknown.",
+      "after": "if the notebook session ends mid-run, use Prepare and Connect to inspect the saved work. **Cancel the running action** waits for cleanup; missing usage or unverified cleanup keeps new paid work blocked until your instructor can reconcile it."
+    },
+    {
+      "before": "find `project-08-graph-checkpoint.json`",
+      "after": "find the latest `project-08-graph-\u2026-checkpoint.json`"
+    }
+  ],
+  "notebooks": [
+    {
+      "file": "forge/notebooks/00-overview.py",
+      "cellCount": 32,
+      "labelsAndImagesUnchanged": true,
+      "historicalResultsUnchanged": true,
+      "sha256": "c870c889d1464cabe165c7b454ec138618bb1d32b0e43c00abf679f0027ce915"
+    },
+    {
+      "file": "forge/notebooks/01-minimal-harness.py",
+      "cellCount": 33,
+      "labelsAndImagesUnchanged": true,
+      "historicalResultsUnchanged": true,
+      "sha256": "dfa8e9ffcaa5d0b5f3685925a2522f2b5b9fcc620f3dc5d9b23263933eba066e"
+    },
+    {
+      "file": "forge/notebooks/02-workspace-docs.py",
+      "cellCount": 31,
+      "labelsAndImagesUnchanged": true,
+      "historicalResultsUnchanged": true,
+      "sha256": "b50f7706364a2e37cb69e481f211543d468df0b6886702a45fca5c4674639e04"
+    },
+    {
+      "file": "forge/notebooks/03-session-recovery.py",
+      "cellCount": 32,
+      "labelsAndImagesUnchanged": true,
+      "historicalResultsUnchanged": true,
+      "sha256": "06bae2296a675ba2a5770571cd905e321b054090b15cb45525507c3f5de99657"
+    },
+    {
+      "file": "forge/notebooks/04-runtime-feedback.py",
+      "cellCount": 32,
+      "labelsAndImagesUnchanged": true,
+      "historicalResultsUnchanged": true,
+      "sha256": "2a218a4bd2380d8245e6f97e4bf0e6e7f0e1f80a9b9692fdb560b949069b2530"
+    },
+    {
+      "file": "forge/notebooks/05-role-separation.py",
+      "cellCount": 33,
+      "labelsAndImagesUnchanged": true,
+      "historicalResultsUnchanged": true,
+      "sha256": "575c8e643caa3b8a7aa756e4cf290fe8794f497e29de4870a175cccb0992f2fd"
+    },
+    {
+      "file": "forge/notebooks/06-capstone.py",
+      "cellCount": 32,
+      "labelsAndImagesUnchanged": true,
+      "historicalResultsUnchanged": true,
+      "sha256": "b3bfba77a62ab16ac114583328bdc7aaf3c6f0e9dd52b90c3e4dfb6a3ae72db3"
+    },
+    {
+      "file": "forge/notebooks/07-bounded-loops.py",
+      "cellCount": 32,
+      "labelsAndImagesUnchanged": true,
+      "historicalResultsUnchanged": true,
+      "sha256": "e9b0625f46ca6e5a00040f5f5c2328b5104bb005f31184a494b1026e06efdf5a"
+    },
+    {
+      "file": "forge/notebooks/08-state-machine.py",
+      "cellCount": 32,
+      "labelsAndImagesUnchanged": true,
+      "historicalResultsUnchanged": true,
+      "sha256": "ba129ed60df76458495a5161eafa96399e133b65acc803e6ed25741a47511e77"
+    }
+  ]
+}

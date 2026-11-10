@@ -102,6 +102,17 @@
       "en": 7
     }
   },
+  "forge/classroom.md": {
+    "ids": [
+      "run-the-forge-lessons-yourself",
+      "costs-progress-and-interrupted-work",
+      "loops-and-graph-decisions",
+      "teaching-a-group"
+    ],
+    "locales": {
+      "en": 4
+    }
+  },
   "forge/evidence.md": {
     "ids": [
       "see-the-runs-then-inspect-the-evidence",
