@@ -47,6 +47,7 @@ export async function compare(options: {project?:string;variant?:string;repeats?
     try{return JSON.parse(await readFile(join(output,name,'qualification.json'),'utf8'));}catch{return null;}
   }));
   if(!qualifications.some(q=>q?.passed && q.protocolSha256===plan.protocolSha256))throw new Error('Run doctor --qualify --execute for the frozen protocol before paid comparisons');
+  if(p.controlsRequired)await (await import('./controls.js')).requireControls(output,tasks.map(t=>t.id),source);
   await writeJson(join(output,`campaign-${campaignId}.json`),plan);
   const budget=new Budget(join(output,'budget.json'),c.budgetUsd);
   const completed:TrialRecord[]=[];
