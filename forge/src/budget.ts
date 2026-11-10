@@ -7,6 +7,7 @@ export interface Ledger {
   schemaVersion: 1; limitUsd: number | null; spentEstimateUsd: number;
   reservations: Record<string, number>; settled: Record<string, number>;
   halted?: string;
+  unresolved?:Record<string,string>;
   authorizations?: Array<{at:string;evidence:string;action:string}>;
   uncertainEstimates?: Array<{id:string;reservedEstimateUsd:number;evidence:string;at:string}>;
   reconciliations?: Array<{id:string;estimatedUsd:number;evidence:string;at:string}>;
@@ -31,6 +32,11 @@ export class Budget {
         ledger = {schemaVersion:1,limitUsd:Number.isFinite(this.limitUsd)?this.limitUsd:null,spentEstimateUsd:0,reservations:{},settled:{}};
       }
       if (ledger.limitUsd !== (Number.isFinite(this.limitUsd)?this.limitUsd:null)) throw new Error('Budget limit changed; use the original ledger');
+      ledger.unresolved??={};
+      if(ledger.halted&&!Object.keys(ledger.unresolved).length){
+        const id=/^Missing usage for (.+)$/.exec(ledger.halted)?.[1];
+        ledger.unresolved[id??'legacy']=ledger.halted;
+      }
       const result = fn(ledger); await writeJson(this.file, ledger); return result;
     } finally {await rm(lock, {recursive:true});}
   }
@@ -45,7 +51,7 @@ export class Budget {
     return this.change(ledger=>{
       if(ledger.halted!==`Missing usage for ${id}`||!(id in ledger.reservations)||!evidence.trim())throw new Error('Explicit authorization and the matching unresolved reservation are required');
       const amount=ledger.reservations[id];
-      ledger.spentEstimateUsd+=amount;ledger.settled[id]=amount;delete ledger.reservations[id];delete ledger.halted;
+      ledger.spentEstimateUsd+=amount;ledger.settled[id]=amount;delete ledger.reservations[id];delete ledger.unresolved![id];ledger.halted=Object.values(ledger.unresolved!).join('; ')||undefined;
       (ledger.uncertainEstimates??=[]).push({id,reservedEstimateUsd:amount,evidence,at:new Date().toISOString()});
     });
   }
@@ -63,20 +69,27 @@ export class Budget {
   }
   async settle(id: string, actual: number | null, haltReason?: string) {
     return this.change(ledger => {
+      if(id in ledger.settled){
+        if(actual===ledger.settled[id]&&!haltReason)return;
+        throw new Error(`Settlement conflicts with recorded cost for ${id}`);
+      }
       if (!(id in ledger.reservations)) throw new Error(`No reservation for ${id}`);
       if (actual === null || !Number.isFinite(actual) || actual < 0 || haltReason) {
-        ledger.halted = haltReason || `Missing usage for ${id}`; return;
+        ledger.unresolved![id]=haltReason||`Missing usage for ${id}`;
+        ledger.halted=Object.values(ledger.unresolved!).join('; ');return;
       }
-      if (actual > ledger.reservations[id]) ledger.halted = `Reservation exceeded by ${id}`;
+      if(actual>ledger.reservations[id])ledger.unresolved![id]=`Reservation exceeded by ${id}`;
+      else if(ledger.unresolved![id]===`Missing usage for ${id}`)delete ledger.unresolved![id];
       ledger.spentEstimateUsd += actual; ledger.settled[id] = actual; delete ledger.reservations[id];
+      ledger.halted=Object.values(ledger.unresolved!).join('; ')||undefined;
     });
   }
   async reconcile(id:string, estimatedUsd:number, evidence:string) {
     return this.change(ledger=>{
       if(!(id in ledger.reservations)||!evidence.trim()||!Number.isFinite(estimatedUsd)||estimatedUsd<0)throw new Error('Reconciliation requires a reservation, evidence and known cost');
-      if(ledger.halted!==`Missing usage for ${id}`)throw new Error('A different halt requires separate reconciliation');
+      if(ledger.unresolved![id]!==`Missing usage for ${id}`)throw new Error('A different halt requires separate reconciliation');
       if(estimatedUsd>ledger.reservations[id])throw new Error('Reconciled spend exceeds reservation');
-      ledger.spentEstimateUsd+=estimatedUsd;ledger.settled[id]=estimatedUsd;delete ledger.reservations[id];delete ledger.halted;
+      ledger.spentEstimateUsd+=estimatedUsd;ledger.settled[id]=estimatedUsd;delete ledger.reservations[id];delete ledger.unresolved![id];ledger.halted=Object.values(ledger.unresolved!).join('; ')||undefined;
       (ledger.reconciliations??=[]).push({id,estimatedUsd,evidence,at:new Date().toISOString()});
     });
   }
