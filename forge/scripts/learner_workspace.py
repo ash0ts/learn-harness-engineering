@@ -317,14 +317,22 @@ class LessonWorkspace:
         # Stable content aliases recover an interrupted save without a new agent
         # attempt. A network failure during read-back never means "not found".
         script = '''
-import hashlib,json,sys,wandb
+import base64,hashlib,json,os,sys,urllib.request,wandb
 from pathlib import Path
 base=Path(sys.argv[1]); key=sys.argv[2]; digest=sys.argv[3]
 state=json.loads((base/'learner.json').read_text()); identity=state['identity']
 ledger=json.loads((base/'evidence/budget.json').read_text()); api=wandb.Api(timeout=30)
 entity=identity['WANDB_ENTITY']; project=identity['WANDB_PROJECT']; name='learner-'+key
-collections=api.artifact_collections(project_name=entity+'/'+project,type_name='course-learner-state')
-collection=next((c for c in collections if c.name==name),None); existing=None
+query='query($e:String!,$p:String!,$n:String!){project(entityName:$e,name:$p){access artifactType(name:"course-learner-state"){artifactCollection(name:$n){id}}}}'
+body={'query':query,'variables':{'e':entity,'p':project,'n':name}}
+auth=base64.b64encode(('api:'+os.environ['WANDB_API_KEY']).encode()).decode()
+request=urllib.request.Request('https://api.wandb.ai/graphql',data=json.dumps(body).encode(),headers={'Content-Type':'application/json','Authorization':'Basic '+auth})
+with urllib.request.urlopen(request,timeout=30) as response: result=json.load(response)
+project_value=result.get('data',{}).get('project')
+if result.get('errors') or not project_value or project_value.get('access')!='PRIVATE' or 'artifactType' not in project_value: raise RuntimeError('Cannot verify private saved progress; no new artifact was created')
+typ=project_value['artifactType']
+if typ is not None and 'artifactCollection' not in typ: raise RuntimeError('Saved progress response is incomplete')
+collection=typ and typ['artifactCollection'];existing=None
 if collection:
  for item in api.artifact_versions('course-learner-state',entity+'/'+project+'/'+name):
   if item.metadata.get('checkpointSha256') == digest: existing=item; break
