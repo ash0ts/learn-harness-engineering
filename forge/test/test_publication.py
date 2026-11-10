@@ -1,3 +1,4 @@
+import io
 import importlib.util
 import json
 import os
@@ -29,11 +30,23 @@ class PublicationTests(unittest.TestCase):
     def test_network_read_errors_never_mean_artifact_absence(self):
         class Offline:
             def artifact_collections(self,**kwargs):raise ConnectionError('offline')
-        with self.assertRaises(ConnectionError):models.remote_artifact(Offline(),'team','private','trial-x','checksum')
+        with patch.object(models,'artifact_collection_exists',side_effect=ConnectionError('offline')),self.assertRaises(ConnectionError):models.remote_artifact(Offline(),'team','private','trial-x','checksum')
     def test_credentials_stop_publication_before_remote_writes(self):
         with tempfile.TemporaryDirectory() as directory,patch.dict(os.environ,{'WANDB_API_KEY':'fixture-private-secret'}):
             file=Path(directory,'trial.json');file.write_text('{"id":"sample"}')
             Path(directory,'worker.log').write_text('fixture-private-secret')
             with self.assertRaisesRegex(RuntimeError,'Credential'):models.payload(file)
+
+
+
+class CollectionLookupTests(unittest.TestCase):
+    def test_missing_type_is_absent_only_after_explicit_private_query(self):
+        response={'data':{'project':{'access':'PRIVATE','artifactType':None}}}
+        with patch.dict(os.environ,{'WANDB_API_KEY':'test-only'}):
+            self.assertFalse(models.artifact_collection_exists('team','private','new-type','new-name',lambda *a,**k:io.BytesIO(json.dumps(response).encode())))
+    def test_api_error_and_incomplete_response_cannot_create_artifacts(self):
+        for response in [{'errors':[{'message':'denied'}]}, {'data':{'project':{'access':'PRIVATE'}}}, {'data':{'project':{'access':'PUBLIC','artifactType':None}}}]:
+            with patch.dict(os.environ,{'WANDB_API_KEY':'test-only'}),self.assertRaises(RuntimeError):
+                models.artifact_collection_exists('team','private','new-type','new-name',lambda *a,**k:io.BytesIO(json.dumps(response).encode()))
 
 if __name__=='__main__':unittest.main()
