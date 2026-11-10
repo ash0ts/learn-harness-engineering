@@ -1,5 +1,5 @@
 import {spawn} from 'node:child_process';
-import {open} from 'node:fs/promises';
+import {open,readFile,readdir} from 'node:fs/promises';
 import {setTimeout as delay} from 'node:timers/promises';
 import {writeJson} from './records.js';
 
@@ -9,7 +9,24 @@ export async function deadline<T>(work:Promise<T>,ms:number,label:string):Promis
   finally {clearTimeout(timer);}
 }
 
-export interface ChildResult {exitCode:number;signal:string|null;forced:boolean;startedAt:string;finishedAt:string;cleanupVerified?:boolean;error?:string}
+export interface GroupMember {pid:number;state:string}
+export function parseLinuxProcessStat(text:string):{pid:number;group:number;state:string} {
+  // comm is parenthesized and may itself contain spaces or parentheses.
+  const end=text.lastIndexOf(')'), fields=text.slice(end+2).trim().split(/\s+/);
+  const pid=Number(text.slice(0,text.indexOf(' '))),group=Number(fields[2]),state=fields[0];
+  if(end<0||!Number.isInteger(pid)||pid<=0||!Number.isInteger(group)||!state?.match(/^[A-Za-z]$/))throw new Error('Malformed process status');
+  return {pid,group,state};
+}
+export async function linuxGroupMembers(group:number,root='/proc'):Promise<GroupMember[]> {
+  const members:GroupMember[]=[];
+  for(const entry of await readdir(root)){
+    if(!/^\d+$/.test(entry))continue;
+    try{const p=parseLinuxProcessStat(await readFile(`${root}/${entry}/stat`,'utf8'));if(p.group===group)members.push({pid:p.pid,state:p.state});}
+    catch(error){if((error as NodeJS.ErrnoException).code!=='ENOENT'&&(error as NodeJS.ErrnoException).code!=='ESRCH')throw error;}
+  }
+  return members;
+}
+export interface ChildResult {exitCode:number;signal:string|null;forced:boolean;startedAt:string;finishedAt:string;pid?:number;cleanupVerified?:boolean;terminatedMembers?:GroupMember[];error?:string}
 /** Bound both the work and its shutdown; a forced exit is always evidence. */
 export async function boundedChild(executable:string,args:string[],options:{cwd:string;log?:string;receipt?:string;timeoutMs:number;graceMs?:number;env?:NodeJS.ProcessEnv;signal?:AbortSignal}):Promise<ChildResult> {
   const file=options.log?await open(options.log,'a',0o600):undefined;
@@ -27,13 +44,24 @@ export async function boundedChild(executable:string,args:string[],options:{cwd:
       if(options.signal?.aborted)stop();
     });
     clearTimeout(timer);clearTimeout(killTimer);
-    const alive=()=>{if(!child.pid)return false;try{process.kill(-child.pid,0);return true;}catch(error){if((error as NodeJS.ErrnoException).code==='ESRCH')return false;throw error;}};
-    if(alive()){
+    result.pid=child.pid;
+    const alive=async()=>{
+      if(!child.pid)return false;
+      try{process.kill(-child.pid,0);}catch(error){if((error as NodeJS.ErrnoException).code==='ESRCH')return false;throw error;}
+      if(process.platform!=='linux')return true;
+      const members=await linuxGroupMembers(child.pid);
+      // Container PID 1 may retain orphaned esbuild zombies. They have exited
+      // and cannot execute or hold resources; kill(0) still finds their group.
+      // Keep the observed PIDs/states as evidence instead of reporting a kill.
+      result.terminatedMembers=members.filter(p=>p.state==='Z'||p.state==='X');
+      return members.length===0||members.some(p=>p.state!=='Z'&&p.state!=='X');
+    };
+    if(await alive()){
       result.forced=true;kill('SIGTERM');const until=Date.now()+(options.graceMs??15000);
-      while(alive()&&Date.now()<until)await delay(25);
-      if(alive()){kill('SIGKILL');const end=Date.now()+2000;while(alive()&&Date.now()<end)await delay(25);}
+      while(await alive()&&Date.now()<until)await delay(25);
+      if(await alive()){kill('SIGKILL');const end=Date.now()+2000;while(await alive()&&Date.now()<end)await delay(25);}
     }
-    result.cleanupVerified=!alive();result.finishedAt=new Date().toISOString();
+    result.cleanupVerified=!(await alive());result.finishedAt=new Date().toISOString();
     if(!result.cleanupVerified){result.forced=true;result.error='Child process group termination is unverified';}
     if(options.receipt)await writeJson(options.receipt,result);
     return result;

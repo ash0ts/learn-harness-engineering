@@ -1,9 +1,9 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdtemp,readFile,rm,writeFile,symlink} from 'node:fs/promises';
+import {mkdtemp,readFile,rm,writeFile,symlink,mkdir} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
-import {boundedChild,deadline} from '../src/lifecycle.js';
+import {boundedChild,deadline,linuxGroupMembers,parseLinuxProcessStat} from '../src/lifecycle.js';
 import {createOperation,evidenceReference,verifyEvidence,validateOperation} from '../src/operations.js';
 
 test('a lingering child is bounded and its forced shutdown remains explicit',async()=>{
@@ -12,6 +12,15 @@ test('a lingering child is bounded and its forced shutdown remains explicit',asy
   finally {await rm(dir,{recursive:true,force:true});}
 });
 test('shutdown timeouts are errors, never silent success',async()=>{await assert.rejects(deadline(new Promise(()=>{}),10,'trace shutdown'),/trace shutdown timed out/);});
+test('Linux group inspection distinguishes exited descendants and preserves live members',async()=>{
+ const root=await mkdtemp(join(tmpdir(),'course-proc-'));
+ try{
+  for(const [pid,state,group] of [[736,'Z',723],[737,'S',723],[738,'R',700]] as const){await mkdir(join(root,String(pid)));await writeFile(join(root,String(pid),'stat'),`${pid} (worker (test)) ${state} 1 ${group} 0 0`);}
+  assert.deepEqual(await linuxGroupMembers(723,root),[{pid:736,state:'Z'},{pid:737,state:'S'}]);
+  assert.deepEqual(parseLinuxProcessStat('736 (esbuild) Z 1 723 0 0'),{pid:736,group:723,state:'Z'});
+  await writeFile(join(root,'737/stat'),'invalid');await assert.rejects(linuxGroupMembers(723,root),/Malformed/);
+ }finally{await rm(root,{recursive:true,force:true});}
+});
 test('operation IDs cannot launch twice and evidence is portable but immutable',async()=>{
   const dir=await mkdtemp(join(tmpdir(),'course-operation-'));
   try {
