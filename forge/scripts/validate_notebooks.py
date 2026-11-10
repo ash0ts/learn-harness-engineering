@@ -39,7 +39,7 @@ def validate_course_view(session, tree):
     expected=[]
     for task,variant in sorted({(r['project'],r['variant']) for r in rows}):
         group=[r for r in rows if (r['project'],r['variant'])==(task,variant)]
-        expected.append({'Project':task,'Treatment':variant,'Passed':sum(r['outcome']=='passed' for r in group),'Attempts':len(group),'Other outcomes':', '.join(f'{v} {k}' for k,v in Counter(r['outcome'] for r in group if r['outcome']!='passed').items()) or 'None'})
+        expected.append({'Project':task,'Treatment':variant,'Passed':sum(r['outcome']=='passed' for r in group),'Attempts':len(group),'Other outcomes':', '.join(f"{v} {k.replace('_',' ')}" for k,v in Counter(r['outcome'] for r in group if r['outcome']!='passed').items()) or 'None'})
     actual=[t for t in content.tables if isinstance(t,list) and t and isinstance(t[0],dict) and 'Treatment' in t[0]]
     if actual != ([expected] if expected else []):raise RuntimeError('Primary displayed cohort does not match recorded evidence')
     if not content.images or any(not i.get('alt') or not i.get('src','').startswith('data:image/') for i in content.images):
