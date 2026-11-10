@@ -7,8 +7,8 @@
       "file": "forge/notebooks/00-overview.py",
       "project": "overview",
       "title": "Forge track: evidence before conclusions",
-      "sourceCommit": "79e60dd4780f7c2558bc849b5674295496df8660",
-      "sha256": "8accf0feb87c56ff0d297b38a05ca2395caf97d98c55fd3dea657297611db5d5",
+      "sourceCommit": "9448aa4326b933e5660126c2ba9c6f4cfbd26e35",
+      "sha256": "f27aaf4f4f9a87bc775055fbda1a33a225f749f7581f45ee8afab89a6070c516",
       "id": "Tm90ZWJvb2s6MTUzMTM=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTM%3D",
       "status": "published_verified",
@@ -16,22 +16,22 @@
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "Forge-track-evidence-before-conclusions",
-        "versionIndex": 27,
+        "versionIndex": 32,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:30Z",
-      "expectedRemoteSha256": "8accf0feb87c56ff0d297b38a05ca2395caf97d98c55fd3dea657297611db5d5",
+      "expectedRemoteSha256": "f27aaf4f4f9a87bc775055fbda1a33a225f749f7581f45ee8afab89a6070c516",
       "currentVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "Forge-track-evidence-before-conclusions",
-        "versionIndex": 27,
+        "versionIndex": 32,
         "sourceFileName": "notebook.py"
       },
-      "renderedOutputSha256": "061122d1af2c7bbab5fa44ef39b859aca0631e2f1b250be3f32aa775a7f3c5c1",
+      "renderedOutputSha256": "92662194fb3d7213d3f9e3b8ff042671bca85944d24a78afc67ed4c8b96d08d2",
       "renderedCellSourceVerified": true,
       "verifiedAggregateGroups": 43,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-09T19:45:55.224558+00:00",
+      "verifiedAt": "2026-11-10T13:38:51.735779+00:00",
       "reviewedRemoteEdit": {
         "version": {
           "artifactTypeName": "notebook",
@@ -45,7 +45,7 @@
       },
       "verifiedCourseView": {
         "primaryGroups": 13,
-        "nativeImages": 1,
+        "nativeImages": 2,
         "packetFiles": 5
       },
       "metadataOnlyVersions": [
@@ -60,14 +60,27 @@
           "sha256": "e8b56265a85de16d39a173cdabae24870a60f38680c79dcb417f64ee6863718f",
           "reason": "Opening EDIT created a new artifact version with byte-identical source; preserved and compared before replacement."
         }
+      ],
+      "reviewedIterationSources": [
+        {
+          "at": "2026-11-10T13:15:49.817599+00:00",
+          "version": {
+            "artifactTypeName": "notebook",
+            "artifactCollectionName": "Forge-track-evidence-before-conclusions",
+            "versionIndex": 30,
+            "sourceFileName": "notebook.py"
+          },
+          "sha256": "56ceb5134418f38d3e60087717046def198f49d2f0efef9f10ef76c726b5b6c6",
+          "reason": "Preserved and inspected the earlier iteration; user explicitly requested replacing it with the supplied 27-file iteration unchanged."
+        }
       ]
     },
     {
       "file": "forge/notebooks/01-minimal-harness.py",
       "project": "project-01",
       "title": "01 \u00b7 Minimal instructions and explicit harnesses",
-      "sourceCommit": "79e60dd4780f7c2558bc849b5674295496df8660",
-      "sha256": "8ce27f1040ccbb988b2116b3075f3cdff94ec41d06b314cc57101282fcbdd56e",
+      "sourceCommit": "9448aa4326b933e5660126c2ba9c6f4cfbd26e35",
+      "sha256": "01a0c0c173affe897f8db4889857c96f4420d3b478d056e5f6ccdf48ddd79909",
       "id": "Tm90ZWJvb2s6MTUzMTQ=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTQ%3D",
       "status": "published_verified",
@@ -75,22 +88,22 @@
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "01-Minimal-instructions-and-explicit-harnesses",
-        "versionIndex": 19,
+        "versionIndex": 24,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:36Z",
-      "expectedRemoteSha256": "8ce27f1040ccbb988b2116b3075f3cdff94ec41d06b314cc57101282fcbdd56e",
+      "expectedRemoteSha256": "01a0c0c173affe897f8db4889857c96f4420d3b478d056e5f6ccdf48ddd79909",
       "currentVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "01-Minimal-instructions-and-explicit-harnesses",
-        "versionIndex": 19,
+        "versionIndex": 24,
         "sourceFileName": "notebook.py"
       },
-      "renderedOutputSha256": "8c8ff623670d7491c757361fdec11776f4e2dc40510f5fa34807612b06340895",
+      "renderedOutputSha256": "95e56d665950d0084ff8247b3d5399fbbb863fa55370db8299a9218040a8e199",
       "renderedCellSourceVerified": true,
       "verifiedAggregateGroups": 6,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-09T19:45:56.805310+00:00",
+      "verifiedAt": "2026-11-10T13:38:53.372270+00:00",
       "reviewedRemoteEdit": {
         "version": {
           "artifactTypeName": "notebook",
@@ -104,7 +117,7 @@
       },
       "verifiedCourseView": {
         "primaryGroups": 2,
-        "nativeImages": 2,
+        "nativeImages": 3,
         "packetFiles": 14
       },
       "metadataOnlyVersions": [
@@ -119,14 +132,27 @@
           "sha256": "5b62357146bcf17ea951a015ea35544845aa444c2220bddd024c17fcfc8fb60f",
           "reason": "Opening EDIT created a new artifact version with byte-identical source; preserved and compared before replacement."
         }
+      ],
+      "reviewedIterationSources": [
+        {
+          "at": "2026-11-10T13:15:50.755142+00:00",
+          "version": {
+            "artifactTypeName": "notebook",
+            "artifactCollectionName": "01-Minimal-instructions-and-explicit-harnesses",
+            "versionIndex": 22,
+            "sourceFileName": "notebook.py"
+          },
+          "sha256": "3e6176f2bb8169d2d676992d1ad2a1051b5ff8a7b8f149ff3a571c9f15a10c65",
+          "reason": "Preserved and inspected the earlier iteration; user explicitly requested replacing it with the supplied 27-file iteration unchanged."
+        }
       ]
     },
     {
       "file": "forge/notebooks/02-workspace-docs.py",
       "project": "project-02",
       "title": "02 \u00b7 An agent-readable workspace",
-      "sourceCommit": "79e60dd4780f7c2558bc849b5674295496df8660",
-      "sha256": "9447e18fcb42833e92958d09b99b223192f4c8aefd54550a8815e043bed8d43b",
+      "sourceCommit": "9448aa4326b933e5660126c2ba9c6f4cfbd26e35",
+      "sha256": "678699a28516d07eb6231a44e4ed190e0c30eb88787ffa9b67562f5bcdaf644f",
       "id": "Tm90ZWJvb2s6MTUzMTU=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTU%3D",
       "status": "published_verified",
@@ -134,34 +160,47 @@
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "02-An-agent-readable-workspace",
-        "versionIndex": 18,
+        "versionIndex": 20,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:38Z",
-      "expectedRemoteSha256": "9447e18fcb42833e92958d09b99b223192f4c8aefd54550a8815e043bed8d43b",
+      "expectedRemoteSha256": "678699a28516d07eb6231a44e4ed190e0c30eb88787ffa9b67562f5bcdaf644f",
       "currentVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "02-An-agent-readable-workspace",
-        "versionIndex": 18,
+        "versionIndex": 20,
         "sourceFileName": "notebook.py"
       },
-      "renderedOutputSha256": "713c2e99f7c88171fd1ac2a8598c3499bd7123e0c1218f7a1eac6b3075317823",
+      "renderedOutputSha256": "e83111a34ce387b4b65aa8a07334b0ad504d947f4f19f7431ec3d84cfa8542e2",
       "renderedCellSourceVerified": true,
       "verifiedAggregateGroups": 4,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-09T19:45:58.345665+00:00",
+      "verifiedAt": "2026-11-10T13:38:55.138367+00:00",
       "verifiedCourseView": {
         "primaryGroups": 2,
         "nativeImages": 1,
         "packetFiles": 13
-      }
+      },
+      "reviewedIterationSources": [
+        {
+          "at": "2026-11-10T13:15:51.742919+00:00",
+          "version": {
+            "artifactTypeName": "notebook",
+            "artifactCollectionName": "02-An-agent-readable-workspace",
+            "versionIndex": 18,
+            "sourceFileName": "notebook.py"
+          },
+          "sha256": "9447e18fcb42833e92958d09b99b223192f4c8aefd54550a8815e043bed8d43b",
+          "reason": "Preserved and inspected the earlier iteration; user explicitly requested replacing it with the supplied 27-file iteration unchanged."
+        }
+      ]
     },
     {
       "file": "forge/notebooks/03-session-recovery.py",
       "project": "project-03",
       "title": "03 \u00b7 Interrupted-session recovery",
-      "sourceCommit": "79e60dd4780f7c2558bc849b5674295496df8660",
-      "sha256": "410bcbeaaef48659b1cb0614a82d126774bbb549ac279f429b807a54af69fcf8",
+      "sourceCommit": "9448aa4326b933e5660126c2ba9c6f4cfbd26e35",
+      "sha256": "c8bb5c432268798ee537a52151aaa2184ad9b9c77e366d98301380f5a1216531",
       "id": "Tm90ZWJvb2s6MTUzMTY=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTY%3D",
       "status": "published_verified",
@@ -169,34 +208,47 @@
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "03-Interrupted-session-recovery",
-        "versionIndex": 17,
+        "versionIndex": 19,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:40Z",
-      "expectedRemoteSha256": "410bcbeaaef48659b1cb0614a82d126774bbb549ac279f429b807a54af69fcf8",
+      "expectedRemoteSha256": "c8bb5c432268798ee537a52151aaa2184ad9b9c77e366d98301380f5a1216531",
       "currentVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "03-Interrupted-session-recovery",
-        "versionIndex": 17,
+        "versionIndex": 19,
         "sourceFileName": "notebook.py"
       },
-      "renderedOutputSha256": "83f39b9f92401e1059b6900b327b0148ef81eb524a60147fe9f5a94e6a2a3279",
+      "renderedOutputSha256": "f44084e4270de32a79adf41d228642f7776c48a8492a81ceb5e75f896e491b4f",
       "renderedCellSourceVerified": true,
       "verifiedAggregateGroups": 4,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-09T19:45:59.864783+00:00",
+      "verifiedAt": "2026-11-10T13:38:56.902992+00:00",
       "verifiedCourseView": {
         "primaryGroups": 2,
         "nativeImages": 2,
         "packetFiles": 13
-      }
+      },
+      "reviewedIterationSources": [
+        {
+          "at": "2026-11-10T13:15:52.577809+00:00",
+          "version": {
+            "artifactTypeName": "notebook",
+            "artifactCollectionName": "03-Interrupted-session-recovery",
+            "versionIndex": 17,
+            "sourceFileName": "notebook.py"
+          },
+          "sha256": "410bcbeaaef48659b1cb0614a82d126774bbb549ac279f429b807a54af69fcf8",
+          "reason": "Preserved and inspected the earlier iteration; user explicitly requested replacing it with the supplied 27-file iteration unchanged."
+        }
+      ]
     },
     {
       "file": "forge/notebooks/04-runtime-feedback.py",
       "project": "project-04",
       "title": "04 \u00b7 Runtime evidence and the seeded defect",
-      "sourceCommit": "79e60dd4780f7c2558bc849b5674295496df8660",
-      "sha256": "5b6ca182b6badfa0f72968c5bc540b883166ba2830619b6fabb9f8c8fabceaa2",
+      "sourceCommit": "9448aa4326b933e5660126c2ba9c6f4cfbd26e35",
+      "sha256": "03e45c55893865419c6cf25bc353f2958633ea0d25750acab1fe5a19f0ccd383",
       "id": "Tm90ZWJvb2s6MTUzMTc=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTc%3D",
       "status": "published_verified",
@@ -204,34 +256,47 @@
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "04-Runtime-evidence-and-the-seeded-defect",
-        "versionIndex": 14,
+        "versionIndex": 16,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:42Z",
-      "expectedRemoteSha256": "5b6ca182b6badfa0f72968c5bc540b883166ba2830619b6fabb9f8c8fabceaa2",
+      "expectedRemoteSha256": "03e45c55893865419c6cf25bc353f2958633ea0d25750acab1fe5a19f0ccd383",
       "currentVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "04-Runtime-evidence-and-the-seeded-defect",
-        "versionIndex": 14,
+        "versionIndex": 16,
         "sourceFileName": "notebook.py"
       },
-      "renderedOutputSha256": "296f90683992e30ef3f504f4509dff2a9adf552639c63880abeeb7bd9a079cf9",
+      "renderedOutputSha256": "e10ea87e930dbc004533d02ea6068f4b6bc316cb060073ee8c0f1cc55c77ab68",
       "renderedCellSourceVerified": true,
       "verifiedAggregateGroups": 4,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-09T19:46:01.602909+00:00",
+      "verifiedAt": "2026-11-10T13:38:58.486465+00:00",
       "verifiedCourseView": {
         "primaryGroups": 2,
         "nativeImages": 2,
         "packetFiles": 6
-      }
+      },
+      "reviewedIterationSources": [
+        {
+          "at": "2026-11-10T13:15:53.444797+00:00",
+          "version": {
+            "artifactTypeName": "notebook",
+            "artifactCollectionName": "04-Runtime-evidence-and-the-seeded-defect",
+            "versionIndex": 14,
+            "sourceFileName": "notebook.py"
+          },
+          "sha256": "5b6ca182b6badfa0f72968c5bc540b883166ba2830619b6fabb9f8c8fabceaa2",
+          "reason": "Preserved and inspected the earlier iteration; user explicitly requested replacing it with the supplied 27-file iteration unchanged."
+        }
+      ]
     },
     {
       "file": "forge/notebooks/05-role-separation.py",
       "project": "project-05",
       "title": "05 \u00b7 One feature, three role arrangements",
-      "sourceCommit": "79e60dd4780f7c2558bc849b5674295496df8660",
-      "sha256": "805cb21d6c1acadfdbbcdb441317e8d4be9c91c60c2f795a0d27e04d34ba0eab",
+      "sourceCommit": "9448aa4326b933e5660126c2ba9c6f4cfbd26e35",
+      "sha256": "c53219b3ec7e8d1076babec88b0cf0a353b9edfb9593249326422792641c5237",
       "id": "Tm90ZWJvb2s6MTUzMTg=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTg%3D",
       "status": "published_verified",
@@ -239,34 +304,47 @@
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "05-One-feature-three-role-arrangements",
-        "versionIndex": 13,
+        "versionIndex": 16,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:44Z",
-      "expectedRemoteSha256": "805cb21d6c1acadfdbbcdb441317e8d4be9c91c60c2f795a0d27e04d34ba0eab",
+      "expectedRemoteSha256": "c53219b3ec7e8d1076babec88b0cf0a353b9edfb9593249326422792641c5237",
       "currentVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "05-One-feature-three-role-arrangements",
-        "versionIndex": 13,
+        "versionIndex": 16,
         "sourceFileName": "notebook.py"
       },
-      "renderedOutputSha256": "d8cc9ac5accc28e418ef07d139d8f8bcfbeb22d562e8e0d9c8165726e8f02324",
+      "renderedOutputSha256": "f1adcd077b8738a98c285be3d49d3478523afa8f8e537424fe2d62fc5cb39f5c",
       "renderedCellSourceVerified": true,
       "verifiedAggregateGroups": 9,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-09T19:46:03.259270+00:00",
+      "verifiedAt": "2026-11-10T13:39:00.195899+00:00",
       "verifiedCourseView": {
         "primaryGroups": 3,
         "nativeImages": 3,
         "packetFiles": 8
-      }
+      },
+      "reviewedIterationSources": [
+        {
+          "at": "2026-11-10T13:15:54.294384+00:00",
+          "version": {
+            "artifactTypeName": "notebook",
+            "artifactCollectionName": "05-One-feature-three-role-arrangements",
+            "versionIndex": 13,
+            "sourceFileName": "notebook.py"
+          },
+          "sha256": "805cb21d6c1acadfdbbcdb441317e8d4be9c91c60c2f795a0d27e04d34ba0eab",
+          "reason": "Preserved and inspected the earlier iteration; user explicitly requested replacing it with the supplied 27-file iteration unchanged."
+        }
+      ]
     },
     {
       "file": "forge/notebooks/06-capstone.py",
       "project": "project-06",
       "title": "06 \u00b7 Capstone reliability",
-      "sourceCommit": "79e60dd4780f7c2558bc849b5674295496df8660",
-      "sha256": "b91d06bfd089fc83f18cef05ee487e3c013948335856a1706b8961940e430853",
+      "sourceCommit": "9448aa4326b933e5660126c2ba9c6f4cfbd26e35",
+      "sha256": "522b104339298358407a59ddd0096874ee45df7405c989fbbabeea4816c906db",
       "id": "Tm90ZWJvb2s6MTUzMTk=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTk%3D",
       "status": "published_verified",
@@ -274,34 +352,47 @@
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "06-Capstone-reliability",
-        "versionIndex": 13,
+        "versionIndex": 15,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:45Z",
-      "expectedRemoteSha256": "b91d06bfd089fc83f18cef05ee487e3c013948335856a1706b8961940e430853",
+      "expectedRemoteSha256": "522b104339298358407a59ddd0096874ee45df7405c989fbbabeea4816c906db",
       "currentVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "06-Capstone-reliability",
-        "versionIndex": 13,
+        "versionIndex": 15,
         "sourceFileName": "notebook.py"
       },
-      "renderedOutputSha256": "16a9f2728943991d7307ad8de11d5297d400dca2b6446bf9fd3d57f37e311c43",
+      "renderedOutputSha256": "32cd5e629dd051c4481abcf66b45c0a18641cd3cf418dc9196921ece8cb2c778",
       "renderedCellSourceVerified": true,
       "verifiedAggregateGroups": 6,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-09T19:46:04.948080+00:00",
+      "verifiedAt": "2026-11-10T13:39:01.949769+00:00",
       "verifiedCourseView": {
         "primaryGroups": 2,
         "nativeImages": 2,
         "packetFiles": 17
-      }
+      },
+      "reviewedIterationSources": [
+        {
+          "at": "2026-11-10T13:15:55.224158+00:00",
+          "version": {
+            "artifactTypeName": "notebook",
+            "artifactCollectionName": "06-Capstone-reliability",
+            "versionIndex": 13,
+            "sourceFileName": "notebook.py"
+          },
+          "sha256": "b91d06bfd089fc83f18cef05ee487e3c013948335856a1706b8961940e430853",
+          "reason": "Preserved and inspected the earlier iteration; user explicitly requested replacing it with the supplied 27-file iteration unchanged."
+        }
+      ]
     },
     {
       "file": "forge/notebooks/07-bounded-loops.py",
       "project": "project-07",
       "title": "07 \u00b7 Goal, timer and maker-checker loops",
-      "sourceCommit": "79e60dd4780f7c2558bc849b5674295496df8660",
-      "sha256": "bbed05074a8917ce2140ab3a72877c5787b4c0ef83b6dcc7b3385eaae3b4f5d5",
+      "sourceCommit": "9448aa4326b933e5660126c2ba9c6f4cfbd26e35",
+      "sha256": "116a6269ad783910675c2d4cdd892aa0caf3ca27886f4dab9655d45eb16a1625",
       "id": "Tm90ZWJvb2s6MTUzMjA=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjA%3D",
       "status": "published_verified",
@@ -309,34 +400,47 @@
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "07-Goal-timer-and-maker-checker-loops",
-        "versionIndex": 13,
+        "versionIndex": 15,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:47Z",
-      "expectedRemoteSha256": "bbed05074a8917ce2140ab3a72877c5787b4c0ef83b6dcc7b3385eaae3b4f5d5",
+      "expectedRemoteSha256": "116a6269ad783910675c2d4cdd892aa0caf3ca27886f4dab9655d45eb16a1625",
       "currentVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "07-Goal-timer-and-maker-checker-loops",
-        "versionIndex": 13,
+        "versionIndex": 15,
         "sourceFileName": "notebook.py"
       },
-      "renderedOutputSha256": "3c537153d30485a63316bf1d83cbfbfa8ac7d530d3b793cb774d91b70b96355d",
+      "renderedOutputSha256": "1ba2af5eb50d68777007b67c55ffaf074bb0eea3842eb56907b44fae8a135923",
       "renderedCellSourceVerified": true,
       "verifiedAggregateGroups": 6,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-09T19:46:06.529847+00:00",
+      "verifiedAt": "2026-11-10T13:39:03.592469+00:00",
       "verifiedCourseView": {
         "primaryGroups": 0,
         "nativeImages": 1,
         "packetFiles": 13
-      }
+      },
+      "reviewedIterationSources": [
+        {
+          "at": "2026-11-10T13:15:56.076850+00:00",
+          "version": {
+            "artifactTypeName": "notebook",
+            "artifactCollectionName": "07-Goal-timer-and-maker-checker-loops",
+            "versionIndex": 13,
+            "sourceFileName": "notebook.py"
+          },
+          "sha256": "bbed05074a8917ce2140ab3a72877c5787b4c0ef83b6dcc7b3385eaae3b4f5d5",
+          "reason": "Preserved and inspected the earlier iteration; user explicitly requested replacing it with the supplied 27-file iteration unchanged."
+        }
+      ]
     },
     {
       "file": "forge/notebooks/08-state-machine.py",
       "project": "project-08",
       "title": "08 \u00b7 Checkpointed graphs and human approval",
-      "sourceCommit": "79e60dd4780f7c2558bc849b5674295496df8660",
-      "sha256": "f969ce2dddfbdb6ab4ec14045882b01ed56bbf0d385898d6f31da964e8f4426e",
+      "sourceCommit": "9448aa4326b933e5660126c2ba9c6f4cfbd26e35",
+      "sha256": "323ecb6fb251e6bd04e720748ecda251ad8976e3f960fc4b973833583efb9fb2",
       "id": "Tm90ZWJvb2s6MTUzMjE=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjE%3D",
       "status": "published_verified",
@@ -344,27 +448,40 @@
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "08-Checkpointed-graphs-and-human-approval",
-        "versionIndex": 16,
+        "versionIndex": 18,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:49Z",
-      "expectedRemoteSha256": "f969ce2dddfbdb6ab4ec14045882b01ed56bbf0d385898d6f31da964e8f4426e",
+      "expectedRemoteSha256": "323ecb6fb251e6bd04e720748ecda251ad8976e3f960fc4b973833583efb9fb2",
       "currentVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "08-Checkpointed-graphs-and-human-approval",
-        "versionIndex": 16,
+        "versionIndex": 18,
         "sourceFileName": "notebook.py"
       },
-      "renderedOutputSha256": "a12bd0d2ea8ef1838ba82e6fb7918487930af3eaab137ff1e027906da4f6e2b1",
+      "renderedOutputSha256": "00fa91fa396c0f1d0f4ab83ded0340637afaaf1b64a5a87ff08a255029cc2500",
       "renderedCellSourceVerified": true,
       "verifiedAggregateGroups": 4,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-09T19:46:08.221808+00:00",
+      "verifiedAt": "2026-11-10T13:39:05.525625+00:00",
       "verifiedCourseView": {
         "primaryGroups": 0,
         "nativeImages": 1,
         "packetFiles": 9
-      }
+      },
+      "reviewedIterationSources": [
+        {
+          "at": "2026-11-10T13:15:57.084806+00:00",
+          "version": {
+            "artifactTypeName": "notebook",
+            "artifactCollectionName": "08-Checkpointed-graphs-and-human-approval",
+            "versionIndex": 16,
+            "sourceFileName": "notebook.py"
+          },
+          "sha256": "f969ce2dddfbdb6ab4ec14045882b01ed56bbf0d385898d6f31da964e8f4426e",
+          "reason": "Preserved and inspected the earlier iteration; user explicitly requested replacing it with the supplied 27-file iteration unchanged."
+        }
+      ]
     }
   ],
   "completedRollouts": [
@@ -504,6 +621,224 @@
       ],
       "verifiedNotebooks": 9,
       "completedAt": "2026-11-09T19:46:08.221808+00:00"
+    },
+    {
+      "name": "Supplied lesson and student-control iteration, 2026-11-10",
+      "sourceCommit": "9448aa4326b933e5660126c2ba9c6f4cfbd26e35",
+      "status": "published_verified",
+      "suppliedIterationUnchanged": true,
+      "verificationReport": "forge/results/iteration-2026-11-10.json",
+      "studentFlowStatus": "completed_with_instructor_interventions; browser checkpoint download unverified",
+      "notebooks": [
+        {
+          "file": "forge/notebooks/00-overview.py",
+          "project": "overview",
+          "id": "Tm90ZWJvb2s6MTUzMTM=",
+          "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTM%3D",
+          "sourceCommit": "9448aa4326b933e5660126c2ba9c6f4cfbd26e35",
+          "sha256": "f27aaf4f4f9a87bc775055fbda1a33a225f749f7581f45ee8afab89a6070c516",
+          "currentVersion": {
+            "artifactTypeName": "notebook",
+            "artifactCollectionName": "Forge-track-evidence-before-conclusions",
+            "versionIndex": 32,
+            "sourceFileName": "notebook.py"
+          },
+          "renderedOutputSha256": "92662194fb3d7213d3f9e3b8ff042671bca85944d24a78afc67ed4c8b96d08d2",
+          "renderedCellSourceVerified": true,
+          "verifiedAggregateGroups": 43,
+          "verifiedCourseView": {
+            "primaryGroups": 13,
+            "nativeImages": 2,
+            "packetFiles": 5
+          },
+          "verifiedAt": "2026-11-10T13:38:51.735779+00:00"
+        },
+        {
+          "file": "forge/notebooks/01-minimal-harness.py",
+          "project": "project-01",
+          "id": "Tm90ZWJvb2s6MTUzMTQ=",
+          "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTQ%3D",
+          "sourceCommit": "9448aa4326b933e5660126c2ba9c6f4cfbd26e35",
+          "sha256": "01a0c0c173affe897f8db4889857c96f4420d3b478d056e5f6ccdf48ddd79909",
+          "currentVersion": {
+            "artifactTypeName": "notebook",
+            "artifactCollectionName": "01-Minimal-instructions-and-explicit-harnesses",
+            "versionIndex": 24,
+            "sourceFileName": "notebook.py"
+          },
+          "renderedOutputSha256": "95e56d665950d0084ff8247b3d5399fbbb863fa55370db8299a9218040a8e199",
+          "renderedCellSourceVerified": true,
+          "verifiedAggregateGroups": 6,
+          "verifiedCourseView": {
+            "primaryGroups": 2,
+            "nativeImages": 3,
+            "packetFiles": 14
+          },
+          "verifiedAt": "2026-11-10T13:38:53.372270+00:00"
+        },
+        {
+          "file": "forge/notebooks/02-workspace-docs.py",
+          "project": "project-02",
+          "id": "Tm90ZWJvb2s6MTUzMTU=",
+          "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTU%3D",
+          "sourceCommit": "9448aa4326b933e5660126c2ba9c6f4cfbd26e35",
+          "sha256": "678699a28516d07eb6231a44e4ed190e0c30eb88787ffa9b67562f5bcdaf644f",
+          "currentVersion": {
+            "artifactTypeName": "notebook",
+            "artifactCollectionName": "02-An-agent-readable-workspace",
+            "versionIndex": 20,
+            "sourceFileName": "notebook.py"
+          },
+          "renderedOutputSha256": "e83111a34ce387b4b65aa8a07334b0ad504d947f4f19f7431ec3d84cfa8542e2",
+          "renderedCellSourceVerified": true,
+          "verifiedAggregateGroups": 4,
+          "verifiedCourseView": {
+            "primaryGroups": 2,
+            "nativeImages": 1,
+            "packetFiles": 13
+          },
+          "verifiedAt": "2026-11-10T13:38:55.138367+00:00"
+        },
+        {
+          "file": "forge/notebooks/03-session-recovery.py",
+          "project": "project-03",
+          "id": "Tm90ZWJvb2s6MTUzMTY=",
+          "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTY%3D",
+          "sourceCommit": "9448aa4326b933e5660126c2ba9c6f4cfbd26e35",
+          "sha256": "c8bb5c432268798ee537a52151aaa2184ad9b9c77e366d98301380f5a1216531",
+          "currentVersion": {
+            "artifactTypeName": "notebook",
+            "artifactCollectionName": "03-Interrupted-session-recovery",
+            "versionIndex": 19,
+            "sourceFileName": "notebook.py"
+          },
+          "renderedOutputSha256": "f44084e4270de32a79adf41d228642f7776c48a8492a81ceb5e75f896e491b4f",
+          "renderedCellSourceVerified": true,
+          "verifiedAggregateGroups": 4,
+          "verifiedCourseView": {
+            "primaryGroups": 2,
+            "nativeImages": 2,
+            "packetFiles": 13
+          },
+          "verifiedAt": "2026-11-10T13:38:56.902992+00:00"
+        },
+        {
+          "file": "forge/notebooks/04-runtime-feedback.py",
+          "project": "project-04",
+          "id": "Tm90ZWJvb2s6MTUzMTc=",
+          "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTc%3D",
+          "sourceCommit": "9448aa4326b933e5660126c2ba9c6f4cfbd26e35",
+          "sha256": "03e45c55893865419c6cf25bc353f2958633ea0d25750acab1fe5a19f0ccd383",
+          "currentVersion": {
+            "artifactTypeName": "notebook",
+            "artifactCollectionName": "04-Runtime-evidence-and-the-seeded-defect",
+            "versionIndex": 16,
+            "sourceFileName": "notebook.py"
+          },
+          "renderedOutputSha256": "e10ea87e930dbc004533d02ea6068f4b6bc316cb060073ee8c0f1cc55c77ab68",
+          "renderedCellSourceVerified": true,
+          "verifiedAggregateGroups": 4,
+          "verifiedCourseView": {
+            "primaryGroups": 2,
+            "nativeImages": 2,
+            "packetFiles": 6
+          },
+          "verifiedAt": "2026-11-10T13:38:58.486465+00:00"
+        },
+        {
+          "file": "forge/notebooks/05-role-separation.py",
+          "project": "project-05",
+          "id": "Tm90ZWJvb2s6MTUzMTg=",
+          "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTg%3D",
+          "sourceCommit": "9448aa4326b933e5660126c2ba9c6f4cfbd26e35",
+          "sha256": "c53219b3ec7e8d1076babec88b0cf0a353b9edfb9593249326422792641c5237",
+          "currentVersion": {
+            "artifactTypeName": "notebook",
+            "artifactCollectionName": "05-One-feature-three-role-arrangements",
+            "versionIndex": 16,
+            "sourceFileName": "notebook.py"
+          },
+          "renderedOutputSha256": "f1adcd077b8738a98c285be3d49d3478523afa8f8e537424fe2d62fc5cb39f5c",
+          "renderedCellSourceVerified": true,
+          "verifiedAggregateGroups": 9,
+          "verifiedCourseView": {
+            "primaryGroups": 3,
+            "nativeImages": 3,
+            "packetFiles": 8
+          },
+          "verifiedAt": "2026-11-10T13:39:00.195899+00:00"
+        },
+        {
+          "file": "forge/notebooks/06-capstone.py",
+          "project": "project-06",
+          "id": "Tm90ZWJvb2s6MTUzMTk=",
+          "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTk%3D",
+          "sourceCommit": "9448aa4326b933e5660126c2ba9c6f4cfbd26e35",
+          "sha256": "522b104339298358407a59ddd0096874ee45df7405c989fbbabeea4816c906db",
+          "currentVersion": {
+            "artifactTypeName": "notebook",
+            "artifactCollectionName": "06-Capstone-reliability",
+            "versionIndex": 15,
+            "sourceFileName": "notebook.py"
+          },
+          "renderedOutputSha256": "32cd5e629dd051c4481abcf66b45c0a18641cd3cf418dc9196921ece8cb2c778",
+          "renderedCellSourceVerified": true,
+          "verifiedAggregateGroups": 6,
+          "verifiedCourseView": {
+            "primaryGroups": 2,
+            "nativeImages": 2,
+            "packetFiles": 17
+          },
+          "verifiedAt": "2026-11-10T13:39:01.949769+00:00"
+        },
+        {
+          "file": "forge/notebooks/07-bounded-loops.py",
+          "project": "project-07",
+          "id": "Tm90ZWJvb2s6MTUzMjA=",
+          "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjA%3D",
+          "sourceCommit": "9448aa4326b933e5660126c2ba9c6f4cfbd26e35",
+          "sha256": "116a6269ad783910675c2d4cdd892aa0caf3ca27886f4dab9655d45eb16a1625",
+          "currentVersion": {
+            "artifactTypeName": "notebook",
+            "artifactCollectionName": "07-Goal-timer-and-maker-checker-loops",
+            "versionIndex": 15,
+            "sourceFileName": "notebook.py"
+          },
+          "renderedOutputSha256": "1ba2af5eb50d68777007b67c55ffaf074bb0eea3842eb56907b44fae8a135923",
+          "renderedCellSourceVerified": true,
+          "verifiedAggregateGroups": 6,
+          "verifiedCourseView": {
+            "primaryGroups": 0,
+            "nativeImages": 1,
+            "packetFiles": 13
+          },
+          "verifiedAt": "2026-11-10T13:39:03.592469+00:00"
+        },
+        {
+          "file": "forge/notebooks/08-state-machine.py",
+          "project": "project-08",
+          "id": "Tm90ZWJvb2s6MTUzMjE=",
+          "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjE%3D",
+          "sourceCommit": "9448aa4326b933e5660126c2ba9c6f4cfbd26e35",
+          "sha256": "323ecb6fb251e6bd04e720748ecda251ad8976e3f960fc4b973833583efb9fb2",
+          "currentVersion": {
+            "artifactTypeName": "notebook",
+            "artifactCollectionName": "08-Checkpointed-graphs-and-human-approval",
+            "versionIndex": 18,
+            "sourceFileName": "notebook.py"
+          },
+          "renderedOutputSha256": "00fa91fa396c0f1d0f4ab83ded0340637afaaf1b64a5a87ff08a255029cc2500",
+          "renderedCellSourceVerified": true,
+          "verifiedAggregateGroups": 4,
+          "verifiedCourseView": {
+            "primaryGroups": 0,
+            "nativeImages": 1,
+            "packetFiles": 9
+          },
+          "verifiedAt": "2026-11-10T13:39:05.525625+00:00"
+        }
+      ],
+      "verifiedAt": "2026-11-10T13:54:29.371068+00:00"
     }
   ]
 }
