@@ -5,8 +5,19 @@ import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {createOperation,updateOperation} from '../src/operations.js';
 import {writeJson} from '../src/records.js';
-import {recoverAccounting} from '../src/recovery.js';
+import {recoverAccounting,proveRejectedTag} from '../src/recovery.js';
+import {createSandboxClient} from '@coreweave/cwsandbox/wandb';
+import {disposeSandboxClient} from '../src/sandbox.js';
 const pricing={inputPerMillionUsd:0.25,outputPerMillionUsd:1.25,cpuHourUsd:0.128,memoryGiBHourUsd:0.0212};
+test('the actual pinned SDK rejects an overlength tag without reaching transport',async()=>{
+ const client=createSandboxClient({apiKey:'unused-test-key',entity:'test',project:'private'});
+ try{const proof=await proveRejectedTag(client,'control-project-01-baseline-43c63357-a96b-437a-aa01-c832eebace8e');assert.equal(proof.transportCalls,0);await assert.rejects(proveRejectedTag(client,'valid-tag'),/Only the observed/);}
+ finally{await disposeSandboxClient(client,[]);}
+});
+test('transport failures can never be reconciled as zero-dispatch validation',async()=>{
+ const transport={start:async()=>{}};const client={transport,create:()=>transport.start()};
+ await assert.rejects(proveRejectedTag(client,'x'.repeat(60)),/unproven/);
+});
 async function fixture(){
  const root=await mkdtemp(join(tmpdir(),'recovery-'));
  const op=await createOperation(root,{id:'test',kind:'qualification',sourceCommit:'a'.repeat(40),protocolSha256:'b'.repeat(64),identity:{entity:'class',project:'private'}});
