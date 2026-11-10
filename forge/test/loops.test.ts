@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {mkdtemp,rm,readFile} from 'node:fs/promises';
 import {join} from 'node:path';
 import {tmpdir} from 'node:os';
-import {driveLoop,type LoopState} from '../src/loops.js';
+import {driveLoop,NoTrialLaunchedError,type LoopState} from '../src/loops.js';
 import type {TrialRecord} from '../src/records.js';
 
 function state(mode:LoopState['mode']):LoopState{return {schemaVersion:1,id:'test-fixture',mode,sourceCommit:'fixture',startedAt:0,deadlineAt:7200000,intervalMs:900000,maxRounds:8,status:'running',rounds:[],interventions:[]};}
@@ -42,4 +42,9 @@ test('restart recovers completed work without replay and retains the original tw
     assert.equal(result.status,'deadline');assert.equal(result.deadlineAt,7200000);assert.equal(result.rounds.length,1);assert.equal(result.candidatePatch,'prior/candidate.diff');assert.equal(runs,0);
     assert.equal(result.interventions[0].source,'observed');
   }finally{await rm(dir,{recursive:true,force:true});}
+});
+
+test('a proven prelaunch budget stop leaves no ambiguous trial or invented round',async()=>{
+ const dir=await mkdtemp(join(tmpdir(),'loop-budget-'));
+ try{const result=await driveLoop(join(dir,'checkpoint.json'),state('goal'),{now:()=>0,sleep:async()=>{},run:async()=>{throw new NoTrialLaunchedError('budget exhausted');}});assert.equal(result.status,'blocked');assert.equal(result.pendingTrialId,undefined);assert.equal(result.rounds.length,0);assert.match(result.interventions[0].note,/before any worker/);}finally{await rm(dir,{recursive:true});}
 });
