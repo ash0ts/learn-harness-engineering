@@ -14,6 +14,7 @@ import {updateOperation,evidenceReference} from './operations.js';
 
 export async function protocol() {return JSON.parse(await readFile(join(courseRoot,'forge/protocol.json'),'utf8'));}
 export function roleSchedule(variant: string, sessions: number): Array<{role:string;turns:number;readOnly?:boolean}> {
+  if(variant==='graph')return [{role:'maker',turns:20}];
   if(variant==='gen-eval'||variant==='maker-checker')return [{role:'maker',turns:10},{role:'checker',turns:4,readOnly:true},{role:'maker-revision',turns:10}];
   if(variant==='plan-gen-eval')return [{role:'planner',turns:4,readOnly:true},{role:'maker',turns:8},{role:'checker',turns:4,readOnly:true},{role:'maker-revision',turns:8}];
   return Array.from({length:sessions},(_,i)=>({role:`maker-session-${i+1}`,turns:Math.floor(24/sessions)}));
@@ -21,7 +22,7 @@ export function roleSchedule(variant: string, sessions: number): Array<{role:str
 async function patch(sandbox: Sandbox, baseline: string) {
   const r=await sandbox.commands.run(['bash','-lc',`git add -N . && git diff --binary ${baseline}`],{cwd:'/workspace/task',timeoutMs:15000});return r.stdout;
 }
-export async function runTrial(input: {id?:string;project:string;variant:string;trial:number;sourceCommit:string;output:string;resumePatch?:string;verificationFeedback?:string}) {
+export async function runTrial(input: {id?:string;project:string;variant:string;trial:number;sourceCommit:string;output:string;resumePatch?:string;verificationFeedback?:string;agentTimeoutSeconds?:number}) {
   const c=config(), p=await protocol(), task=await readTask(input.project,input.sourceCommit);
   if(c.model!==p.model || c.inferenceUrl!==p.inferenceUrl || c.maxInputBytes!==p.maxInputBytes)throw new Error('Frozen campaign model/provider/context mismatch');
   const id=input.id || randomUUID(); const dir=join(input.output,id);await mkdir(dir,{recursive:true});
@@ -34,7 +35,10 @@ export async function runTrial(input: {id?:string;project:string;variant:string;
   let sandboxSeconds=0; let telemetryComplete=true; let actorComplete=true;
   const abort=new AbortController();const onSignal=()=>abort.abort(new Error('Cancelled'));
   process.once('SIGINT',onSignal);process.once('SIGTERM',onSignal);
-  const timer=setTimeout(()=>abort.abort(new Error('Trial timeout')),p.sandbox.agentTimeoutSeconds*1000);
+  const agentSeconds=input.agentTimeoutSeconds??p.sandbox.agentTimeoutSeconds;
+  if(!Number.isFinite(agentSeconds)||agentSeconds<=0||agentSeconds>p.sandbox.agentTimeoutSeconds)throw new Error('Actor timeout exceeds frozen allowance');
+  record.agentTimeoutSeconds=agentSeconds;
+  const timer=setTimeout(()=>abort.abort(new Error('Trial timeout')),agentSeconds*1000);
   try {
     const staged=await stageTask(task,input.variant,input.sourceCommit);
     record.applicationSha256=staged.applicationSha256;record.fixtureSha256=staged.fixtureSha256;
