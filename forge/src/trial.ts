@@ -8,6 +8,7 @@ import {withWorkspace, stageWorkspace, sandboxTools} from './sandbox.js';
 import {writeJson, redact, type TrialRecord} from './records.js';
 import {stageTask, readTask, courseRoot,frozenFile} from './staging.js';
 import {estimate} from './budget.js';
+import {hasDeliverable,deliverableInstruction,diagnosisEvidence} from './deliverables.js';
 import {Execution} from './execution.js';
 import {updateOperation,evidenceReference} from './operations.js';
 
@@ -53,12 +54,13 @@ export async function runTrial(input: {id?:string;project:string;variant:string;
           abort.signal.throwIfAborted();phase++;
           const saved=await patch(sandbox,baseline);
           let priorHandoff='';try{priorHandoff=Buffer.from(await sandbox.files.read('/workspace/task/session-handoff.md')).toString('utf8');}catch{}
+          const deliverableKind=role.readOnly?(role.role==='planner'?'plan':'review'):task.sessions>1&&['workspace-docs','recovery'].includes(input.variant)?'handoff':undefined;
+          const instruction=deliverableKind?deliverableInstruction(deliverableKind):'';
           const result=await runPi({...c,maxTurns:role.turns},{role:role.role,
-            prompt:`${task.task}\nRead TASK.md and AGENTS.md if present. You have ${role.turns} model turns. ${role.readOnly?'Inspect and return a concrete plan or review; your filesystem changes will be discarded.':'Implement and verify the task.'}\n${feedback}`,
+            prompt:`${task.task}\nRead TASK.md and AGENTS.md if present. You have ${role.turns} model turns. ${role.readOnly?'Inspect and return a concrete plan or review; your filesystem changes will be discarded.':'Implement and verify the task.'}\n${feedback}\n${instruction}`,
             attributes:{'course.project':task.id,'course.task':task.id,'course.variant':input.variant,'course.trial':input.trial,'course.source_commit':input.sourceCommit,'course.sandbox_id':sandbox.sandboxId,'course.wandb_run_id':record.wandbRunId!},
             tools:sandboxTools(sandbox,join(actorDir,`phase-${phase}`)),signal:abort.signal,...execution.requestHooks(`phase-${phase}`),
-            finalInstruction:role.readOnly?`This is your final allowed call. Return your concrete ${role.role==='planner'?'plan':'review'} now, with inspected files and observed checks. State omissions and failures explicitly.`:
-              task.sessions>1&&['workspace-docs','recovery'].includes(input.variant)?'This is your final allowed call before interruption. Produce session-handoff.md content now: changes made, exact file paths, observed test results, unfinished work and next steps. The controller will save your response verbatim.':
+            finalInstruction:instruction?`This is your final allowed call. ${instruction}`:
               'This is your final allowed call. Report changes and observed checks, including unfinished work. Do not invent tests or results.'});
           record.conversationIds.push(result.conversationId);
           record.inputTokens! += result.inputTokens;record.outputTokens! += result.outputTokens;
@@ -68,20 +70,22 @@ export async function runTrial(input: {id?:string;project:string;variant:string;
           const toolFiles=(await readdir(join(actorDir,`phase-${phase}`)).catch(()=>[])).filter(f=>/^tool-.*\.json$/.test(f));
           const toolRecords=await Promise.all(toolFiles.map(async f=>JSON.parse(await readFile(join(actorDir,`phase-${phase}`,f),'utf8'))));
           await writeJson(join(actorDir,`recovery-use-${phase}.json`),{priorHandoffSha256:priorHandoff?createHash('sha256').update(priorHandoff).digest('hex'):null,observedHandoffRead:Boolean(priorHandoff.trim()&&toolRecords.some(r=>r.stdout?.includes(priorHandoff.trim()))),patchBeforeSha256:createHash('sha256').update(saved).digest('hex'),patchAfterSha256:createHash('sha256').update(await patch(sandbox,baseline)).digest('hex')});
-          await writeJson(join(actorDir,`deliverable-${phase}.json`),{role:role.role,produced:Boolean(result.finalText.trim()),text:result.finalText});
-          if(task.sessions>1&&['workspace-docs','recovery'].includes(input.variant)&&result.finalText.trim())await sandbox.files.write('/workspace/task/session-handoff.md',result.finalText+'\n');
+          const produced=Boolean(result.completed&&result.finalText.trim()&&(!deliverableKind||hasDeliverable(result.finalText,deliverableKind)));
+          await writeJson(join(actorDir,`deliverable-${phase}.json`),{role:role.role,kind:deliverableKind,attempted:Boolean(result.finalText.trim()),produced,text:result.finalText,criterion:'completed response with required headings; semantic quality is separate'});
+          if(deliverableKind==='handoff'&&produced)await sandbox.files.write('/workspace/task/session-handoff.md',result.finalText+'\n');
+          if(task.id==='project-04')await writeJson(join(actorDir,`diagnosis-${phase}.json`),diagnosisEvidence(result.finalText,toolRecords));
           if(role.readOnly) {
             // Review cannot alter the candidate delivered to the maker or protected checker.
             await sandbox.commands.run(['bash','-lc',`git reset --hard ${baseline} && git clean -fd`],{cwd:'/workspace/task'});
             if(saved){await sandbox.files.write('/tmp/restore.diff',saved);await sandbox.commands.run(['git','apply','/tmp/restore.diff'],{cwd:'/workspace/task'});}
-            feedback=result.finalText.trim()?`Independent ${role.role} feedback:\n${result.finalText.slice(-12000)}`:`The ${role.role} did not produce a deliverable within its allowance.`;
+            feedback=produced?`Independent ${role.role} feedback:\n${result.finalText.slice(-12000)}`:`The ${role.role} did not produce a deliverable within its allowance.`;
           } else {
             feedback=task.sessions>1?'This is a fresh session after an interruption. Recover from the workspace files only.':feedback;
           }
           await writeFile(join(actorDir,`checkpoint-${phase}.diff`),await patch(sandbox,baseline));
           if(task.sessions>1){
             let handoff='';try{handoff=Buffer.from(await sandbox.files.read('/workspace/task/session-handoff.md')).toString('utf8');}catch{}
-            await writeJson(join(actorDir,`interruption-${phase}.json`),{phase,at:new Date().toISOString(),conversationId:result.conversationId,patchSha256:createHash('sha256').update(await patch(sandbox,baseline)).digest('hex'),handoffProduced:Boolean(handoff),handoffSha256:handoff?createHash('sha256').update(handoff).digest('hex'):null,nextSessionContext:'fresh; recover from workspace files'});
+            await writeJson(join(actorDir,`interruption-${phase}.json`),{phase,at:new Date().toISOString(),conversationId:result.conversationId,patchSha256:createHash('sha256').update(await patch(sandbox,baseline)).digest('hex'),handoffProduced:Boolean(handoff.trim()),handoffComplete:hasDeliverable(handoff,'handoff'),handoffAttempted:produced||toolRecords.some(r=>r.command?.includes('session-handoff.md')),handoffSha256:handoff?createHash('sha256').update(handoff).digest('hex'):null,nextSessionContext:'fresh; recover from workspace files'});
           }
         }
         await writeFile(join(dir,'candidate.diff'),await patch(sandbox,baseline));
