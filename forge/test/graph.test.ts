@@ -35,3 +35,24 @@ test('passing parallel lanes cannot override a failed protected grade',async()=>
     assert.ok(!state.transitions.some(t=>t.to==='approval'));
   }finally{await rm(dir,{recursive:true,force:true});}
 });
+
+test('an interrupted verification retains completed lanes and recovers the other without replay',async()=>{
+  const dir=await mkdtemp(join(tmpdir(),'graph-lanes-'));let calls=0,recoveries=0;
+  const s=newGraph('fixture');s.node='verify';s.candidate={patch:'fixture.diff',sha256:'fixture',trialId:'fixture'};
+  s.pendingOperation='verify-1';s.lanes={services:{id:'service-durable',status:'completed',result:{lane:'services',passed:true,evidence:'service.json'}},electron:{id:'electron-durable',status:'running'}};
+  const driver:GraphDriver={plan:async()=>'',make:async()=>s.candidate!,rollback:async()=>{},verify:async()=>{calls++;throw new Error('must not replay');},recoverLane:async(_candidate,lane,state)=>{recoveries++;assert.equal(state.lanes![lane]!.id,'electron-durable');return {lane,passed:true,evidence:'electron.json'};}};
+  try{const result=await driveGraph(join(dir,'graph.json'),s,driver);assert.equal(result.node,'approval');assert.equal(calls,0);assert.equal(recoveries,1);assert.equal(result.previous?.trialId,'fixture');}
+  finally{await rm(dir,{recursive:true,force:true});}
+});
+
+test('infrastructure failures pause on their own route and preserve failed candidate evidence',async()=>{
+  const dir=await mkdtemp(join(tmpdir(),'graph-infra-'));const driver:GraphDriver={plan:async()=> 'plan',make:async()=>({patch:'patch.diff',sha256:'checksum',trialId:'maker'}),verify:async(_candidate,lane)=>{if(lane==='electron')throw new Error('gateway unavailable');return {lane,passed:true,evidence:'service.json'};},rollback:async()=>{throw new Error('infrastructure must not discard code');}};
+  try{const s=await driveGraph(join(dir,'graph.json'),newGraph('fixture'),driver);assert.equal(s.node,'infrastructure_recovery');assert.equal(s.candidate?.trialId,'maker');assert.equal(s.lanes?.services?.status,'completed');assert.equal(s.lanes?.electron?.status,'blocked');}
+  finally{await rm(dir,{recursive:true,force:true});}
+});
+
+test('each graph requires a new human decision even for an identical patch',async()=>{
+  const dir=await mkdtemp(join(tmpdir(),'graph-decisions-')),patch=join(dir,'candidate.diff');await writeFile(patch,'same patch');const sha256=createHash('sha256').update('same patch').digest('hex');
+  try{const decisions=[];for(const name of ['a','b']){const file=join(dir,name+'.json'),s=newGraph('fixture');s.node='approval';s.candidate={patch:'candidate.diff',sha256,trialId:name};await writeFile(file,JSON.stringify(s));const decided=await decideGraph(file,'approve','test-human',sha256);decisions.push(decided.approval!.decisionId);await assert.rejects(decideGraph(file,'approve','test-human',sha256),/not awaiting/);}assert.notEqual(decisions[0],decisions[1]);}
+  finally{await rm(dir,{recursive:true,force:true});}
+});
