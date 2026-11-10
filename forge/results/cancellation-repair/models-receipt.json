@@ -1,0 +1,7 @@
+{
+  "runUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/course-cancellation-repair-20261110",
+  "artifact": "wandb/learn-harness-engineering-forge/course-cancellation-repair-20261110:v0",
+  "sha256": "3dfda2b7b172fc6c5642074e666d48c610e54a5d1844917df01155189b118c41",
+  "readbackVerified": true,
+  "summaryRecovery": "Completed run summary was empty; updated the same run from verified evidence without rerunning qualification."
+}

@@ -25,6 +25,8 @@ The separate [protocol 5 repair report](https://github.com/ash0ts/learn-harness-
 
 The subsequent [first-use setup repair](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-publication/forge/results/first-use-repair/README.md) fixes the reported Prepare HTTP 404 when a notebook has no saved progress yet. The actual Prepare button, repeated setup, and remote checkpoint restore passed; this check launched no new inference or coding trial.
 
+The [command cancellation repair](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-publication/forge/results/cancellation-repair/README.md) fixes a later startup race in the small paid check. A fresh qualification and all three Project 01 acceptance controls passed, including Electron checks under Xvfb; Agent Lens usage was read back and reconciled. The failed learner attempt and its cost remain in history. These checks do not add to the comparison denominators below.
+
 ## Start with the complete comparison
 
 <div class="forge-figure" tabindex="0" role="region" aria-label="Primary outcome matrix, horizontally scrollable on narrow screens">

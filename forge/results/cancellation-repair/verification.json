@@ -1,0 +1,440 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-11-10T20:53:40.629027+00:00",
+  "runnerCommit": "4f5e5bedd473f04ebb7e362193af70119279b862",
+  "rootCause": "The 500 ms cancellation probe timed out during gateway startup, leaving a pending PID marker that cleanup parsed as an integer.",
+  "originalFailure": {
+    "id": "qualification-3d611cf3-e3b4-477f-b647-77d082d342f0",
+    "sourceCommit": "4022ecfd34f76c870ea1f0c2aef973618d156c64",
+    "sandboxId": "fd8ad732-9caf-4f19-9975-493a425d23f5",
+    "modelCalls": 0,
+    "cleanupVerified": true,
+    "usageComplete": true,
+    "estimatedCostUsd": 0.0018406986666666665,
+    "retainedInLearnerHistory": true
+  },
+  "repair": {
+    "startupDeadlineMs": 30000,
+    "executionAllowanceUnchanged": true,
+    "atomicLaunchAndCancellation": true,
+    "pendingCancellationPreventsLateLaunch": true,
+    "qualificationRequiresRunningCommandTimeout": true
+  },
+  "qualification": {
+    "id": "qualification-cancel-repair-20261110",
+    "sourceCommit": "4f5e5bedd473f04ebb7e362193af70119279b862",
+    "passed": true,
+    "sandboxId": "1209fd7a-b07b-4663-8d5d-fe99c59a57ba",
+    "cancellationVerified": true,
+    "inputTokens": 1379,
+    "outputTokens": 1827,
+    "sandboxSeconds": 28.542,
+    "cleanupVerified": true,
+    "usageComplete": true,
+    "estimatedCostUsd": 0.005330476000000001
+  },
+  "controls": [
+    {
+      "id": "control-project-01-cancellation-baseline",
+      "project": "project-01",
+      "kind": "baseline",
+      "sourceCommit": "4f5e5bedd473f04ebb7e362193af70119279b862",
+      "qualified": true,
+      "inputsSha256": "b0089b58982b0ac71244df388fce484f3a09228bc007aaf59d6884660a303c21",
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "sandboxSeconds": 32.87,
+      "cleanupVerified": true,
+      "usageComplete": true,
+      "estimatedCostUsd": 0.003111693333333333,
+      "applicationPassed": false,
+      "checks": [
+        {
+          "name": "strict compile and renderer build",
+          "passed": true
+        },
+        {
+          "name": "real import and persistence after reconstruction",
+          "passed": true
+        },
+        {
+          "name": "actual indexing keeps every nonempty paragraph",
+          "passed": true
+        },
+        {
+          "name": "actual retrieval and Q&A persist two turns",
+          "passed": true
+        },
+        {
+          "name": "Electron window, preload, import, indexing and question UI under Xvfb",
+          "passed": false
+        }
+      ]
+    },
+    {
+      "id": "control-project-01-cancellation-reference",
+      "project": "project-01",
+      "kind": "reference",
+      "sourceCommit": "4f5e5bedd473f04ebb7e362193af70119279b862",
+      "qualified": true,
+      "inputsSha256": "b0089b58982b0ac71244df388fce484f3a09228bc007aaf59d6884660a303c21",
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "sandboxSeconds": 25.286,
+      "cleanupVerified": true,
+      "usageComplete": true,
+      "estimatedCostUsd": 0.0023937413333333336,
+      "applicationPassed": true,
+      "checks": [
+        {
+          "name": "strict compile and renderer build",
+          "passed": true
+        },
+        {
+          "name": "real import and persistence after reconstruction",
+          "passed": true
+        },
+        {
+          "name": "actual indexing keeps every nonempty paragraph",
+          "passed": true
+        },
+        {
+          "name": "actual retrieval and Q&A persist two turns",
+          "passed": true
+        },
+        {
+          "name": "Electron window, preload, import, indexing and question UI under Xvfb",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "control-project-01-cancellation-regression",
+      "project": "project-01",
+      "kind": "regression",
+      "sourceCommit": "4f5e5bedd473f04ebb7e362193af70119279b862",
+      "qualified": true,
+      "inputsSha256": "b0089b58982b0ac71244df388fce484f3a09228bc007aaf59d6884660a303c21",
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "sandboxSeconds": 45.913,
+      "cleanupVerified": true,
+      "usageComplete": true,
+      "estimatedCostUsd": 0.004346430666666666,
+      "applicationPassed": false,
+      "checks": [
+        {
+          "name": "strict compile and renderer build",
+          "passed": true
+        },
+        {
+          "name": "real import and persistence after reconstruction",
+          "passed": true
+        },
+        {
+          "name": "actual indexing keeps every nonempty paragraph",
+          "passed": true
+        },
+        {
+          "name": "actual retrieval and Q&A persist two turns",
+          "passed": true
+        },
+        {
+          "name": "Electron window, preload, import, indexing and question UI under Xvfb",
+          "passed": false
+        }
+      ]
+    }
+  ],
+  "traceReadback": [
+    {
+      "conversationId": "01a1c725-77e0-7443-9dbf-c43a83af9ab8",
+      "inputTokens": 919,
+      "outputTokens": 138,
+      "sourceCommit": "4f5e5bedd473f04ebb7e362193af70119279b862",
+      "expectedModelCalls": 2,
+      "kind": "agent",
+      "spanCount": 4,
+      "operations": {
+        "chat": 2,
+        "execute_tool": 1,
+        "invoke_agent": 1
+      },
+      "observedErrorSpans": 0,
+      "readbackInputTokens": 919,
+      "readbackOutputTokens": 138,
+      "verified": true,
+      "errors": [],
+      "url": "https://forge.coreweave.com/agent-lens/wandb/learn-harness-engineering-forge/conversations/01a1c725-77e0-7443-9dbf-c43a83af9ab8"
+    },
+    {
+      "conversationId": "app-8ff47b10-6a45-4193-8dc0-2c6466ba9e92",
+      "inputTokens": 460,
+      "outputTokens": 1689,
+      "sourceCommit": "4f5e5bedd473f04ebb7e362193af70119279b862",
+      "expectedModelCalls": 2,
+      "kind": "app",
+      "spanCount": 12,
+      "operations": {
+        "execute_tool": 6,
+        "chat": 2,
+        "invoke_agent": 4
+      },
+      "observedErrorSpans": 0,
+      "readbackInputTokens": 460,
+      "readbackOutputTokens": 1689,
+      "verified": true,
+      "errors": [],
+      "url": "https://forge.coreweave.com/agent-lens/wandb/learn-harness-engineering-forge/conversations/app-8ff47b10-6a45-4193-8dc0-2c6466ba9e92"
+    }
+  ],
+  "tests": {
+    "typescript": 71,
+    "learnerPython": 39,
+    "savedNotebookViews": 9,
+    "allPassed": true
+  },
+  "presentation": {
+    "onlyRunnerRevisionChangedInAllNineNotebooks": true,
+    "lessonTextCellOrderLabelsAndHistoricalResultsPreserved": true
+  },
+  "progressRestore": {
+    "actualPrepareButtonPassed": true,
+    "runnerMigrated": true,
+    "originalFailedAttemptAndSpendingRetained": true,
+    "newNotebookSessionAllowanceUsd": 0.3408,
+    "personalKeyEnteredByAgent": false
+  },
+  "notebooks": [
+    {
+      "id": "Tm90ZWJvb2s6MTUzMTM=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTM%3D",
+      "file": "forge/notebooks/00-overview.py",
+      "sourceCommit": "b56f12b4562683efadcf4b705e27635ad56a9ece",
+      "sha256": "ea5f7df01663531c7557794394035cf35fb8192261925e2031fd7f41d9a695e6",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "Forge-track-evidence-before-conclusions",
+        "versionIndex": 44,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "c5f62e3353dc2ff292fc9d51da0b2c20b16502235451d69f4657a8c046e6b6c1",
+      "verifiedAt": "2026-11-10T20:53:02.035921+00:00"
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMTQ=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTQ%3D",
+      "file": "forge/notebooks/01-minimal-harness.py",
+      "sourceCommit": "b56f12b4562683efadcf4b705e27635ad56a9ece",
+      "sha256": "638e604d509386d676ac607ecd6646fb5c7c11deb520fdd605cef85f4f0fa972",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "01-Minimal-instructions-and-explicit-harnesses",
+        "versionIndex": 37,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "299286ae80bb42e04785a5018de2bd6e86cbc4e8a86541b559a0ebd53eee8b12",
+      "verifiedAt": "2026-11-10T20:53:03.632830+00:00"
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMTU=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTU%3D",
+      "file": "forge/notebooks/02-workspace-docs.py",
+      "sourceCommit": "b56f12b4562683efadcf4b705e27635ad56a9ece",
+      "sha256": "a394c7fb335dfc21e14eb6e0d5be11c5f93435b3bb6498525e3ac5762f32927d",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "02-An-agent-readable-workspace",
+        "versionIndex": 26,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "40b809f4ac986cf665fac4534f3b61f6dbc31a5c632533e7aa2ee247781df57b",
+      "verifiedAt": "2026-11-10T20:53:05.233025+00:00"
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMTY=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTY%3D",
+      "file": "forge/notebooks/03-session-recovery.py",
+      "sourceCommit": "b56f12b4562683efadcf4b705e27635ad56a9ece",
+      "sha256": "fe0b60ba2911983fac7da4428d860f4fd03ba8d2992210e6b9e71d6e6055366b",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "03-Interrupted-session-recovery",
+        "versionIndex": 25,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "f887b3bff90d78f832c4ecaab2ef463ce6d48db9ae5e11e70b9b1620fe190a19",
+      "verifiedAt": "2026-11-10T20:53:07.078232+00:00"
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMTc=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTc%3D",
+      "file": "forge/notebooks/04-runtime-feedback.py",
+      "sourceCommit": "b56f12b4562683efadcf4b705e27635ad56a9ece",
+      "sha256": "f080b175c59d8e6bb620378b79a41243906cd556f1fbd9467c6b96aa829014b0",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "04-Runtime-evidence-and-the-seeded-defect",
+        "versionIndex": 23,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "0de9a7dda676809d798149d4db51363d37ceb83d4edaa49840f48cabe157006e",
+      "verifiedAt": "2026-11-10T20:53:08.788457+00:00"
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMTg=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTg%3D",
+      "file": "forge/notebooks/05-role-separation.py",
+      "sourceCommit": "b56f12b4562683efadcf4b705e27635ad56a9ece",
+      "sha256": "6e9dc2947e09c7c014aeef2a01ffe2fcc2f8036aae6b1a3b74d329aa8773012e",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "05-One-feature-three-role-arrangements",
+        "versionIndex": 21,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "03ae6bbcf1c24d18d7fd44eccddb52955517df281975a0750a6cb278de0a4670",
+      "verifiedAt": "2026-11-10T20:53:10.266216+00:00"
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMTk=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTk%3D",
+      "file": "forge/notebooks/06-capstone.py",
+      "sourceCommit": "b56f12b4562683efadcf4b705e27635ad56a9ece",
+      "sha256": "7b9d50304c4caf98713245fe95ef805200ed0ece2dd5f5dedb36ef38166aa351",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "06-Capstone-reliability",
+        "versionIndex": 21,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "226b34064d8ffc30de93cf16c60f6f2981f2a76676421a436087a1a41cfcd2ea",
+      "verifiedAt": "2026-11-10T20:53:11.762413+00:00"
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMjA=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjA%3D",
+      "file": "forge/notebooks/07-bounded-loops.py",
+      "sourceCommit": "b56f12b4562683efadcf4b705e27635ad56a9ece",
+      "sha256": "5f1ddc7a2bf883d7c8548e2be3397607b30f61621bfd1c46c72612a18c20f9db",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "07-Goal-timer-and-maker-checker-loops",
+        "versionIndex": 21,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "e57bff5593186ddfd7d157400925d4a844c0d43bef6bbec9af01fbea080c4af1",
+      "verifiedAt": "2026-11-10T20:53:13.171379+00:00"
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMjE=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjE%3D",
+      "file": "forge/notebooks/08-state-machine.py",
+      "sourceCommit": "b56f12b4562683efadcf4b705e27635ad56a9ece",
+      "sha256": "473e33807c035b18698d7cb36392a6f9eed443aca5f9062c77decf7cabc11bf1",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "08-Checkpointed-graphs-and-human-approval",
+        "versionIndex": 24,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "a365d818c8361b2f2d73d6b8a51ecd2e35a103e75d327a1ae472cb265e04625c",
+      "verifiedAt": "2026-11-10T20:53:14.676307+00:00"
+    }
+  ],
+  "editorCleanup": [
+    {
+      "id": "notebook-rollout-v5-cancellation01",
+      "sandboxId": "f8ef4a08-7dc9-4269-9b93-3e9997ccbf18",
+      "status": "terminated",
+      "endedAt": "2026-11-10T20:35:09.539Z",
+      "estimatedCostUsd": 0.027831716000000003,
+      "cleanupError": null
+    },
+    {
+      "id": "notebook-rollout-v5-cancellation00",
+      "sandboxId": "a0a1d9af-7d18-4889-a0a1-991250efda0f",
+      "status": "terminated",
+      "endedAt": "2026-11-10T20:34:41.837Z",
+      "estimatedCostUsd": 0.013072046666666667,
+      "cleanupError": null
+    },
+    {
+      "id": "notebook-rollout-v5-cancellation07",
+      "sandboxId": "c0f46ab2-a878-4655-9f3c-689a1cbf99d8",
+      "status": "terminated",
+      "endedAt": "2026-11-10T20:46:19.156Z",
+      "estimatedCostUsd": 0.07863893733333333,
+      "cleanupError": null
+    },
+    {
+      "id": "notebook-rollout-v5-cancellation06",
+      "sandboxId": "6247127a-4216-49ff-ae5a-73383322500c",
+      "status": "terminated",
+      "endedAt": "2026-11-10T20:42:48.490Z",
+      "estimatedCostUsd": 0.058765279999999996,
+      "cleanupError": null
+    },
+    {
+      "id": "notebook-rollout-v5-cancellation05",
+      "sandboxId": "0f4779e3-606e-43e5-b139-d55e2a22ac10",
+      "status": "terminated",
+      "endedAt": "2026-11-10T20:40:25.016Z",
+      "estimatedCostUsd": 0.045267044,
+      "cleanupError": null
+    },
+    {
+      "id": "notebook-rollout-v5-cancellation08",
+      "sandboxId": "68879bc8-f3bd-4b47-88b2-02f555d068b0",
+      "status": "cleanup_unverified",
+      "endedAt": null,
+      "estimatedCostUsd": null,
+      "cleanupError": "Forge terminateSandbox returned HTTP 500 with CoreWeave PermissionDenied/access denied; SDK get/stop also rejected"
+    },
+    {
+      "id": "notebook-rollout-v5-cancellation04",
+      "sandboxId": "6f3d19f5-b5dc-4301-a649-b8e9415df62e",
+      "status": "terminated",
+      "endedAt": "2026-11-10T20:39:38.699Z",
+      "estimatedCostUsd": 0.040970976,
+      "cleanupError": null
+    },
+    {
+      "id": "notebook-rollout-v5-cancellation04-final",
+      "sandboxId": "d800d44c-1016-4a4d-b535-3943ec017dad",
+      "status": "cleanup_unverified",
+      "endedAt": null,
+      "estimatedCostUsd": null,
+      "cleanupError": "Forge terminateSandbox returned HTTP 500 with CoreWeave PermissionDenied/access denied; SDK get/stop also rejected"
+    },
+    {
+      "id": "notebook-rollout-v5-cancellation03",
+      "sandboxId": "f5d7be56-f04b-4573-b782-d4c08e34bb83",
+      "status": "terminated",
+      "endedAt": "2026-11-10T20:37:50.199Z",
+      "estimatedCostUsd": 0.03076269066666667,
+      "cleanupError": null
+    },
+    {
+      "id": "notebook-rollout-v5-cancellation02",
+      "sandboxId": "4edecbb8-c97b-418c-be01-0c5e41660346",
+      "status": "terminated",
+      "endedAt": "2026-11-10T20:37:21.112Z",
+      "estimatedCostUsd": 0.02807482,
+      "cleanupError": null
+    }
+  ],
+  "repairExecutionEstimateUsd": 0.015182341333333333,
+  "publicationEstimateUsd": 0.32338351066666665,
+  "rolloutCumulativeEstimateUsd": 2.678004203333335,
+  "outstandingReservationsUsd": 4,
+  "paidRolloutHalted": true,
+  "cleanupVerified": false,
+  "limits": [
+    "Forge began returning PermissionDenied for sandbox management after publication; two editor terminations are unverified and their $4 reservations remain held. Further paid rollout launches are halted.",
+    "Independent student-account rehearsal remains unverified.",
+    "Native download remains unverified at user request.",
+    "This verifies qualification and Project 01 acceptance controls, not the full corrected research campaign.",
+    "Existing open notebook sessions retain their old runner until reopened on the updated source."
+  ]
+}
