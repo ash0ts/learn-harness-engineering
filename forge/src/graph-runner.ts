@@ -115,7 +115,7 @@ export async function runGraph(file:string,execute:boolean,resume=false,options:
   const ref=await evidenceReference(output,file);
   const childIds=[state.makerOperationId,...Object.values(state.lanes??{}).map(l=>l?.id)].filter((id):id is string=>Boolean(id));
   const children=await Promise.all(childIds.map(async id=>{try{return JSON.parse(await readFile(operationFile(output,id),'utf8'));}catch{return null;}}));
-  const unresolved=children.some(child=>child&&(child.cleanup!=='verified'||child.telemetry!=='complete'));
+  const unresolved=children.some(child=>!child||child.cleanup!=='verified'||child.telemetry!=='complete'||!['verified','not_required'].includes(child.publication));
   await updateOperation(output,state.id,op=>{op.evidence.checkpoint=ref;op.publication='not_required';op.phase=!accounting.usageComplete||unresolved?'blocked_unknown':result.node==='infrastructure_recovery'?'recoverable':'completed';op.executionOutcome=result.node;if(unresolved)op.cleanup='unknown';});return result;
 }
 
@@ -130,7 +130,7 @@ export async function verificationPairs(output:string,trialId:string,execute=fal
   const c=config(),p=await protocol();await requirePrivateProject(c);await requireControls(output,['project-08'],record.sourceCommit);
   const budget=new Budget(join(output,'budget.json'),c.budgetUsd),pairs=[];
   for(let repeat=0;repeat<3;repeat++){
-    const block=schedule[repeat].map(mode=>({mode,state:{...newGraph(record.sourceCommit),node:'verify' as const,candidate,verificationMode:mode}}));
+    const block=schedule[repeat].map(mode=>({mode,state:{...newGraph(record.sourceCommit),node:'verify' as const,attempts:1,maxAttempts:1,candidate,verificationMode:mode}}));
     const {randomUUID}=await import('node:crypto');
     for(const item of block)item.state.lanes={services:{id:randomUUID(),status:'prepared'},electron:{id:randomUUID(),status:'prepared'}};
     if(process.env.FORGE_BUDGET_MODE!=='incremental')await budget.reserve(Object.fromEntries(block.flatMap(item=>Object.values(item.state.lanes!).map(l=>[l!.id,estimate(0,0,1500,p.pricing)]))));
@@ -139,7 +139,13 @@ export async function verificationPairs(output:string,trialId:string,execute=fal
       const s=await driveGraph(join(output,`verification-${item.state.id}.json`),item.state,{plan:async()=>'',make:async()=>{throw new Error('Verification cannot invoke a coding agent');},rollback:async()=>{},verify:(candidate,lane,state)=>verifyGraphLane(output,state.lanes![lane]!.id,candidate,lane,state.sourceCommit)});
       const row={repeat:repeat+1,order:schedule[repeat],mode:item.mode,candidateSha256:patch.sha256,elapsedMs:Date.now()-start,lanes:s.verification??[],completed:s.node==='approval'};pairs.push(row);
       await writeJson(join(output,`verification-pairs-${trialId}.json`),{schemaVersion:1,protocolRevision:5,sourceCommit:record.sourceCommit,candidateSha256:patch.sha256,pairs});
-      if(!row.completed)return {pairs,stopReason:s.error??'Verification failed'};
+      if(!row.completed){
+        for(const remaining of block)for(const lane of Object.values(remaining.state.lanes??{}))if(lane?.status==='prepared'){
+          const exists=await readFile(operationFile(output,lane.id),'utf8').then(()=>true,error=>{if(error.code==='ENOENT')return false;throw error;});
+          if(!exists){await writeJson(join(output,lane.id,'not-launched.json'),{id:lane.id,externalLaunch:false,reason:'Pair stopped before this lane'});if(process.env.FORGE_BUDGET_MODE!=='incremental')await budget.settle(lane.id,0);}
+        }
+        return {pairs,stopReason:s.error??'Verification failed'};
+      }
     }
   }
   return {pairs};
