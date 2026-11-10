@@ -171,22 +171,25 @@ RESULTS = '''def _(base64, evidence_link, json, learner, learner_refresh, mo, ph
 SAVE = '''def _(mo):
     learner_save = mo.ui.button(value=0, on_click=lambda value: value + 1, label="Save my notes and progress")
     get_save_click, set_save_click = mo.state(0)
+    get_checkpoint_epoch, set_checkpoint_epoch = mo.state(0)
     learner_save
-    return get_save_click, learner_save, set_save_click'''
+    return get_checkpoint_epoch, get_save_click, learner_save, set_checkpoint_epoch, set_save_click'''
 
-PERSIST = '''def _(get_save_click, learner, learner_save, limitation, measured_minutes, mo, observation, prediction, set_save_click):
+PERSIST = '''def _(get_save_click, learner, learner_save, limitation, measured_minutes, mo, observation, prediction, set_checkpoint_epoch, set_save_click):
     mo.stop(learner_save.value <= get_save_click())
     set_save_click(learner_save.value)
     try:
         learner.save_notes(prediction.value, observation.value, limitation.value, measured_minutes.value)
+        set_checkpoint_epoch(lambda value: value + 1)
         _message = mo.callout(mo.md("**Saved to your private project.** Anything you left blank keeps what you saved earlier."), kind="success")
     except Exception as _error:
         _message = mo.callout(mo.md("**Not saved.** " + learner.redact(_error).rstrip(".") + ". You can still use **Download my notes** below."), kind="warn")
     _message
     return'''
 
-DOWNLOAD = '''def _(learner, mo, my_progress):
-    _checkpoint = learner.cached_checkpoint_bytes()
+DOWNLOAD = '''def _(get_checkpoint_epoch, learner, mo, my_progress):
+    get_checkpoint_epoch()
+    _checkpoint = learner.cached_checkpoint_bytes() if my_progress["prepared"] else None
     if _checkpoint is not None:
         _download = mo.download(data=_checkpoint, filename="my-lesson-checkpoint.tar.gz", mimetype="application/gzip", label="Download my progress and evidence")
     else:
