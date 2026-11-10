@@ -8,25 +8,46 @@ import {randomUUID} from 'node:crypto';
 import {writeJson} from './records.js';
 import {acquireSlot} from './slots.js';
 import {type Config, requireLive} from './config.js';
+import {deadline} from './lifecycle.js';
 
 export interface SandboxJournal {
   trialId: string;
   sandboxId?: string;
   state: 'creating' | 'running' | 'terminated' | 'cleanup_failed' | 'creation_unknown';
+  requestedAt?:string;runningAt?:string;terminatedAt?:string;
+  recoveredSandboxIds?:string[];
+}
+
+/** Adapter for pinned cwsandbox 1.0.0, which has no public client.dispose().
+ * Close only this owner's sandbox channels and control transport, never the
+ * module-global channel pool. An SDK shape change must fail visibly. */
+export async function disposeSandboxClient(client:SandboxClient,ids:string[]) {
+  const transport=(client as unknown as {transport?:{directDataPlane?:{discardSandbox:(id:string)=>void};clients?:{client?:{_transport?:{close:()=>void|Promise<void>}}}}}).transport;
+  const control=transport?.clients?.client?._transport;
+  if(!control?.close||!transport?.directDataPlane?.discardSandbox)throw new Error('Pinned sandbox transport disposal contract changed');
+  for(const id of ids)transport.directDataPlane.discardSandbox(id);
+  await deadline(Promise.resolve(control.close()),10000,'Sandbox transport shutdown');
 }
 
 export async function withWorkspace<T>(options: {
   config: Config; image: string; trialId: string; evidenceDir: string;
   signal?: AbortSignal; client?: SandboxClient; slotDir?: string;
+  beforeLaunch?:()=>Promise<void>;
+  onJournal?:(journal:SandboxJournal)=>Promise<void>;
 }, action: (sandbox: Sandbox) => Promise<T>): Promise<T> {
   requireLive(options.config);
   if (!/@sha256:[a-f0-9]{64}$/.test(options.image)) throw new Error('Sandbox image must be pinned by digest');
-  const client = options.client ?? createSandboxClient({apiKey: options.config.apiKey, entity: options.config.entity, project: options.config.project});
   const journal: SandboxJournal = {trialId: options.trialId, state: 'creating'};
   const journalFile = join(options.evidenceDir, 'sandbox.json');
-  await writeJson(journalFile, journal);
+  const save=async()=>{await writeJson(journalFile,journal);await options.onJournal?.(journal);};
+  await save();
   const slot = await acquireSlot(options.trialId, options.slotDir, options.signal);
+  const client = options.client ?? createSandboxClient({apiKey: options.config.apiKey, entity: options.config.entity, project: options.config.project});
+  const ownedIds:string[]=[];let launched=false;
   try {
+  await options.beforeLaunch?.();
+  options.signal?.throwIfAborted();
+  journal.requestedAt=new Date().toISOString();await save();launched=true;
   let sandbox: Sandbox;
   try {
     sandbox = await client.create({containerImage: options.image, resources: {cpu: '2', memory: '4Gi'},
@@ -34,43 +55,51 @@ export async function withWorkspace<T>(options: {
       annotations: {'course.trial': options.trialId}, waitUntilRunning: false, timeoutMs: 60000, signal: options.signal});
   } catch (error) {
     journal.state = 'creation_unknown';
-    await writeJson(journalFile, journal);
+    await save();
     // A timed-out create can still launch a billed workload. Reconcile before retrying.
     const matches = await client.listAll({tags: [options.trialId], timeoutMs: 30000});
     for (const match of matches) {
+      ownedIds.push(match.sandboxId);
       await match.stop({missingOk: true, timeoutMs: 30000});
       await match.wait({targetStatus: 'terminal', timeoutMs: 30000});
     }
+    journal.recoveredSandboxIds=ownedIds;await save();
     throw error;
   }
   journal.sandboxId = sandbox.sandboxId;
-  await writeJson(journalFile, journal);
+  ownedIds.push(sandbox.sandboxId);
   try {
+    await save();
     await sandbox.wait({targetStatus: 'running', timeoutMs: 180000, signal: options.signal});
     journal.state = 'running';
-    await writeJson(journalFile, journal);
+    journal.runningAt=new Date().toISOString();await save();
     return await action(sandbox);
   } finally {
+    let collectionFailure:unknown;
     try {
       const patch = await sandbox.commands.run(['bash', '-lc', 'cd /workspace/task && git add -N . && git diff --binary HEAD'], {timeoutMs: 15000, check: false});
       await writeFile(join(options.evidenceDir, 'patch.diff'), patch.stdout);
     } catch (error) {
-      await writeJson(join(options.evidenceDir, 'collection-error.json'), {error: String(error)});
+      try {await writeJson(join(options.evidenceDir, 'collection-error.json'), {error: String(error)});}
+      catch(writeError){collectionFailure=writeError;}
     }
     try {
       await sandbox.stop({missingOk: true, timeoutMs: 30000, gracefulShutdownSeconds: 3});
       await sandbox.wait({targetStatus: 'terminal', timeoutMs: 30000});
       journal.state = 'terminated';
+      journal.terminatedAt=new Date().toISOString();
     } catch (error) {
       journal.state = 'cleanup_failed';
-      await writeJson(journalFile, journal);
+      await save();
       throw new Error(`Cleanup unverified for sandbox ${sandbox.sandboxId}; stop the campaign`, {cause: error});
     }
-    await writeJson(journalFile, journal);
+    await save();
+    if(collectionFailure)throw collectionFailure;
   }
   } finally {
     // Unknown creation/cleanup retains the slot until an operator proves termination.
-    if (journal.state === 'terminated') await slot.release();
+    try {if (journal.state === 'terminated'||!launched) await slot.release();}
+    finally {if(!options.client)await disposeSandboxClient(client,ownedIds);}
   }
 }
 
