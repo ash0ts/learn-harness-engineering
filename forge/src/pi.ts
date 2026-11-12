@@ -21,6 +21,9 @@ export interface AgentRequest {
   /** Awaited before the next request, including failed model responses. */
   afterRequest?: (usage:RequestUsage)=>Promise<void>;
   finalInstruction?: string;
+  /** Workshop-only provider controls; archived research defaults stay frozen. */
+  nonThinking?: boolean;
+  pricing?: {input:number;output:number};
 }
 
 export async function runPi(c: Config, request: AgentRequest) {
@@ -43,7 +46,7 @@ export async function runPi(c: Config, request: AgentRequest) {
     baseUrl: c.inferenceUrl, apiKey: c.apiKey, api: 'openai-completions',
     headers: {'OpenAI-Project': `${c.entity}/${c.project}`},
     models: [{id: c.model, name: c.model, reasoning: false, input: ['text'], contextWindow: 262144, maxTokens: c.maxOutputTokens,
-      cost: {input: 0.25, output: 1.25, cacheRead: 0.25, cacheWrite: 0.25}}],
+      cost: {input: request.pricing?.input??0.25, output: request.pricing?.output??1.25, cacheRead: request.pricing?.input??0.25, cacheWrite: request.pricing?.input??0.25}}],
   });
   const model = runtime.getModel('forge', c.model);
   if (!model) throw new Error(`Forge model unavailable: ${c.model}`);
@@ -76,6 +79,12 @@ export async function runPi(c: Config, request: AgentRequest) {
       onPayload: async payload => {
         const changed = await options?.onPayload?.(payload, model);
         const final = changed ?? payload;
+        if(request.nonThinking){
+          // Pi's thinkingLevel alone does not set Qwen's server template flag.
+          // A reasoning-only response is not a completed review deliverable.
+          Object.assign(final as object,{chat_template_kwargs:{enable_thinking:false}});
+          if(request.finalInstruction&&requests===c.maxTurns-1)Object.assign(final as object,{tools:[],tool_choice:'none'});
+        }
         payloadBytes=Buffer.byteLength(JSON.stringify(final),'utf8');
         if (payloadBytes > c.maxInputBytes) throw new Error('Frozen provider payload byte budget exceeded');
         await request.beforeRequest?.(requests+1,payloadBytes);
