@@ -119,8 +119,14 @@ export async function withWorkspace<T>(options: {
   }
 }
 
-export async function stageWorkspace(sandbox: Sandbox, archive: Uint8Array) {
+export async function stageWorkspace(sandbox: Sandbox, archive: Uint8Array, preserveSource=false) {
   await sandbox.files.write('/tmp/task.tar', archive);
+  if(preserveSource){
+    // Workshop snapshots are content-addressed. Runtime exclusions belong in
+    // Git metadata, never in a submitted source file.
+    await sandbox.commands.run(['bash','-lc','mkdir -p /workspace/task && tar -xf /tmp/task.tar -C /workspace/task && cd /workspace/task && cp -as /opt/app/node_modules . && git init -q && printf "\\nnode_modules/\\ndist/\\n.workshop-evidence/\\n.workshop-data/\\n" >> .git/info/exclude && git config user.email learner@example.invalid && git config user.name Learner && git add . && git commit -qm baseline'],{timeoutMs:60000});
+    return;
+  }
   await sandbox.commands.run(['bash', '-lc', 'mkdir -p /workspace/task && tar -xf /tmp/task.tar -C /workspace/task && cd /workspace/task && cp -as /opt/app/node_modules . && printf "\\nnode_modules/\\ndist/\\n" >> .gitignore && git init -q && git config user.email learner@example.invalid && git config user.name Learner && git add . && git commit -qm baseline'], {timeoutMs: 60000});
 }
 
