@@ -21,7 +21,7 @@ async function main(){
   const launch=async(live)=>{
     app=await _electron.launch({executablePath:requireApp('electron'),args:[...(process.platform==='linux'?['--no-sandbox']:[]),path.join(root,'dist/main/main.js')],env:{...process.env,WORKSHOP_DATA_DIR:data,FORGE_APP_MODE:live?'live':'offline'},timeout:30000});
     page=await app.firstWindow();page.on('pageerror',e=>events.push({type:'renderer-error',message:String(e)}));page.on('console',m=>events.push({type:'console',level:m.type(),text:m.text()}));
-    await page.getByRole('heading',{name:'Knowledge Base',exact:true}).waitFor({timeout:20000});
+    await page.getByRole('heading',{name:'Knowledge Base · workshop',exact:true}).waitFor({timeout:20000});
     await app.evaluate(({ipcMain})=>{globalThis.__workshopIPC=[];for(const [name,fn]of ipcMain._invokeHandlers)ipcMain._invokeHandlers.set(name,async(...args)=>{try{const value=await fn(...args);globalThis.__workshopIPC.push({channel:name,ok:true});return value;}catch(error){globalThis.__workshopIPC.push({channel:name,ok:false,error:String(error)});throw error;}});});
   };
   try{
@@ -48,6 +48,7 @@ async function main(){
       const files=fs.readdirSync(path.join(data,'chunks')).filter(f=>f.endsWith('.json'));
       const chunks=files.flatMap(file=>JSON.parse(fs.readFileSync(path.join(data,'chunks',file),'utf8')));
       save('chunks.json',chunks);assert.ok(chunks.length);assert.ok(chunks.every(c=>c.content.trim()));
+      await page.getByText(/^Chunk 0 \(/).first().scrollIntoViewIfNeeded();
     });
     await capture('03-index');if(scenario.scenario==='index')return;
     const questions=[scenario.question||'How does indexing preserve document text?','What is the orbital period of the invented planet Glorp?'];
@@ -58,7 +59,8 @@ async function main(){
         await until(()=>fs.existsSync(path.join(data,'qa-history.json'))&&JSON.parse(fs.readFileSync(path.join(data,'qa-history.json'),'utf8')).some(h=>h.question===questions[i]),scenario.live?140000:15000);
         const history=JSON.parse(fs.readFileSync(path.join(data,'qa-history.json'),'utf8'));
         const answer=history.find(h=>h.question===questions[i]).response.answer;
-        await page.getByText(answer,{exact:true}).first().waitFor({timeout:10000});save('answers.json',history);
+        const visibleAnswer=page.getByText(answer,{exact:true}).first();
+        await visibleAnswer.waitFor({timeout:10000});await visibleAnswer.scrollIntoViewIfNeeded();save('answers.json',history);
       });
       await capture('04-answer-'+(i+1));
     }
