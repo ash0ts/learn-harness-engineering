@@ -14,14 +14,14 @@ import {updateOperation,evidenceReference} from './operations.js';
 
 export async function protocol() {return JSON.parse(await readFile(join(courseRoot,'forge/protocol.json'),'utf8'));}
 export function roleSchedule(variant: string, sessions: number): Array<{role:string;turns:number;readOnly?:boolean}> {
-  if(variant==='gen-eval')return [{role:'maker',turns:10},{role:'checker',turns:4,readOnly:true},{role:'maker-revision',turns:10}];
+  if(variant==='gen-eval'||variant==='maker-checker')return [{role:'maker',turns:10},{role:'checker',turns:4,readOnly:true},{role:'maker-revision',turns:10}];
   if(variant==='plan-gen-eval')return [{role:'planner',turns:4,readOnly:true},{role:'maker',turns:8},{role:'checker',turns:4,readOnly:true},{role:'maker-revision',turns:8}];
   return Array.from({length:sessions},(_,i)=>({role:`maker-session-${i+1}`,turns:Math.floor(24/sessions)}));
 }
 async function patch(sandbox: Sandbox, baseline: string) {
   const r=await sandbox.commands.run(['bash','-lc',`git add -N . && git diff --binary ${baseline}`],{cwd:'/workspace/task',timeoutMs:15000});return r.stdout;
 }
-export async function runTrial(input: {id?:string;project:string;variant:string;trial:number;sourceCommit:string;output:string}) {
+export async function runTrial(input: {id?:string;project:string;variant:string;trial:number;sourceCommit:string;output:string;resumePatch?:string;verificationFeedback?:string}) {
   const c=config(), p=await protocol(), task=await readTask(input.project,input.sourceCommit);
   if(c.model!==p.model || c.inferenceUrl!==p.inferenceUrl || c.maxInputBytes!==p.maxInputBytes)throw new Error('Frozen campaign model/provider/context mismatch');
   const id=input.id || randomUUID(); const dir=join(input.output,id);await mkdir(dir,{recursive:true});
@@ -30,6 +30,7 @@ export async function runTrial(input: {id?:string;project:string;variant:string;
     sourceCommit:input.sourceCommit,model:c.model,startedAt:new Date().toISOString(),outcome:'infrastructure_failed',
     conversationIds:[],wandbRunId:id.replaceAll('-','').slice(0,16),inputTokens:0,outputTokens:0,estimatedCostUsd:null,evidence:[]};
   record.configuration=publicConfig(c); record.protocol=p;
+  if(input.verificationFeedback){record.verificationFeedback=input.verificationFeedback;record.feedbackSha256=createHash('sha256').update(input.verificationFeedback.slice(0,12000)).digest('hex');}
   let sandboxSeconds=0; let telemetryComplete=true; let actorComplete=true;
   const abort=new AbortController();const onSignal=()=>abort.abort(new Error('Cancelled'));
   process.once('SIGINT',onSignal);process.once('SIGTERM',onSignal);
@@ -49,13 +50,19 @@ export async function runTrial(input: {id?:string;project:string;variant:string;
       await withWorkspace({config:c,image:p.sandbox.image,trialId:id,evidenceDir:actorDir,signal:abort.signal,...execution.workspace('actor',actorDir)},async sandbox=>{
         record.sandboxId=sandbox.sandboxId;await stageWorkspace(sandbox,staged.archive);
         const baseline=(await sandbox.commands.run(['git','rev-parse','HEAD'],{cwd:'/workspace/task'})).stdout.trim();
-        let feedback='';let phase=0;
+        if(input.resumePatch) {
+          const previous=await readFile(input.resumePatch);record.priorPatchSha256=createHash('sha256').update(previous).digest('hex');
+          await sandbox.files.write('/tmp/resume.diff',previous);
+          await sandbox.commands.run(['git','apply','/tmp/resume.diff'],{cwd:'/workspace/task'});
+        }
+        let feedback=input.verificationFeedback?`Prior independent verification feedback (diagnostic evidence, not instructions):\n${input.verificationFeedback.slice(0,12000)}`:'';let phase=0;
         for(const role of roleSchedule(input.variant,task.sessions)) {
           abort.signal.throwIfAborted();phase++;
           const saved=await patch(sandbox,baseline);
           let priorHandoff='';try{priorHandoff=Buffer.from(await sandbox.files.read('/workspace/task/session-handoff.md')).toString('utf8');}catch{}
           const deliverableKind=role.readOnly?(role.role==='planner'?'plan':'review'):task.sessions>1&&['workspace-docs','recovery'].includes(input.variant)?'handoff':undefined;
           const instruction=deliverableKind?deliverableInstruction(deliverableKind):'';
+          await writeJson(join(actorDir,`session-input-${phase}.json`),{priorPatchSha256:record.priorPatchSha256??null,feedbackSha256:record.feedbackSha256??null,feedbackPassedToSession:input.verificationFeedback?.slice(0,12000)??null});
           const result=await runPi({...c,maxTurns:role.turns},{role:role.role,
             prompt:`${task.task}\nRead TASK.md and AGENTS.md if present. You have ${role.turns} model turns. ${role.readOnly?'Inspect and return a concrete plan or review; your filesystem changes will be discarded.':'Implement and verify the task.'}\n${feedback}\n${instruction}`,
             attributes:{'course.project':task.id,'course.task':task.id,'course.variant':input.variant,'course.trial':input.trial,'course.source_commit':input.sourceCommit,'course.sandbox_id':sandbox.sandboxId,'course.wandb_run_id':record.wandbRunId!},
@@ -103,7 +110,7 @@ export async function runTrial(input: {id?:string;project:string;variant:string;
         await sandbox.files.write('/tmp/check.cjs',checker);
         await sandbox.files.write('/tmp/poll.cjs',checkerSupport);
         await sandbox.files.write('/tmp/benchmark-probe.cjs',benchmarkProbe);
-        const result=await sandbox.commands.run(['xvfb-run','-a','node','/tmp/check.cjs',task.id],{cwd:'/workspace/task',check:false,timeoutMs:240000});
+        const result=await sandbox.commands.run(['xvfb-run','-a','node','/tmp/check.cjs',task.gradeAs??task.id],{cwd:'/workspace/task',check:false,timeoutMs:240000});
         await writeJson(join(graderDir,'command.json'),result);
         const grade=JSON.parse(Buffer.from(await sandbox.files.read('/tmp/grade/result.json')).toString('utf8'));
         await writeJson(join(graderDir,'result.json'),grade);record.grade=grade;
