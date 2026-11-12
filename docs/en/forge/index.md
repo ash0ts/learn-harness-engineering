@@ -6,6 +6,8 @@ import forgeImage2 from './assets/captures/dashboard-comparisons-final.jpg?url'
 
 # A harness course with results you can inspect
 
+For the classroom, start with the [five hands-on labs and local Electron workflow](./workshop). Students edit and instrument the app, then inspect evidence from their own saved source. The research results below remain a separate historical cohort.
+
 We ran a coding agent through eight projects to see what happened when we changed the instructions, workspace documentation, feedback, and control flow around it. The agent built and repaired an Electron knowledge-base app. We kept its patches, opened the app, exercised its services, and recorded the failures alongside the successful runs.
 
 The primary comparison finished with 19 passing attempts out of 39. That is enough to examine particular failures and design another experiment. It is nowhere near enough to announce the best way to build an agent.

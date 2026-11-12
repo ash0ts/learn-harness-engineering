@@ -1,5 +1,7 @@
 # Run the Forge lessons yourself
 
+Projects **01–05 now use the [hands-on workbench](./workshop)**: edit files, save a snapshot, check it, then execute it. Use that guide for the three-hour workshop and local Electron setup. The numbered run-and-compare flow below remains the guide for Projects 06–08 and older notebook copies.
+
 ::: info What has been checked
 The shared learner workflow passed a live owner-account rehearsal and a
 fresh-runtime progress restore. We have not yet rehearsed it with a student
@@ -10,7 +12,7 @@ records which published notebook versions match the committed source. See the
 
 Open the [overview](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTM%3D),
 then start with Project 01. Each lesson is its own notebook. The steps below
-match the numbered steps inside every notebook.
+match the numbered steps in Projects 06–08 and older notebook copies.
 
 **Before the numbered steps**
 
