@@ -13,7 +13,12 @@ const exec=promisify(execFile);
 /** No provider credentials, inference, notebook or sandbox launch. */
 export async function checkWorkshop(snapshot:WorkshopSnapshot,manifest:WorkshopManifest,output:string){
   const id=randomUUID(),dir=join(output,id);await mkdir(dir,{recursive:true});
-  const temp=await mkdtemp(join(tmpdir(),'workshop-check-'));
+  // Vite 6's HTML proxy cache cannot resolve a C: workspace through dependencies
+  // junctioned from D:. Keep Windows scratch builds on the runner's volume.
+  // This remains an isolated directory, never the pinned source or student draft.
+  const scratchRoot=process.platform==='win32'?join(workshopCourseRoot,'forge/local-results/check-workspaces'):tmpdir();
+  await mkdir(scratchRoot,{recursive:true});
+  const temp=await mkdtemp(join(scratchRoot,'workshop-check-'));
   const checks:WorkshopResult['checks']=[];
   const env={...process.env};for(const key of Object.keys(env))if(/(?:KEY|TOKEN|SECRET|PASSWORD|CREDENTIAL)/i.test(key))delete env[key];
   const record:WorkshopResult={schemaVersion:1,protocol:'workshop-v1',id,project:snapshot.project,snapshotId:snapshot.id,snapshotSha256:snapshot.sha256,sourceCommit:snapshot.sourceCommit,action:'check',startedAt:new Date().toISOString(),outcome:'task_failed',checks,evidence:[],conversationIds:[],sandboxIds:[],cleanupStatus:'pending',telemetryStatus:'not_requested',publicationStatus:'local',estimatedCostUsd:0};
