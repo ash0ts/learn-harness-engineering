@@ -34,3 +34,8 @@ Repository path: [`projects/project-05/`](https://github.com/walkinglabs/learn-h
 
 The checked-in feature is multi-turn Q&A conversation history. Keep that feature
 constant across all three variants so the only variable is role separation.
+
+
+## Optional Forge experiment
+
+Read [A reviewer costs turns](/en/forge/05-role-separation) for the executed Forge experiment and its saved notebook. The [Forge overview](/en/forge/) explains the shared setup. The offline exercise remains the default.

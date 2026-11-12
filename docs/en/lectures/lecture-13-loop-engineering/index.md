@@ -492,3 +492,8 @@ Most teams are currently between Level 2 and Level 3. Level 1 is the fastest pat
    - How well can you explain the code your loop most recently produced? (Comprehension rot)
    - How many times did you think "I'll look later" and never looked? (Cognitive surrender)
    - How is the loop's context size trending? Is it repeating redundant information? (Token blowout)
+
+
+## Optional Forge experiment
+
+The Forge article [Two hours of agent work, with a stop condition](/en/forge/07-bounded-loops) follows an executed example with recorded failures and saved results. The [Forge overview](/en/forge/) links the full series. The offline exercise remains the default.

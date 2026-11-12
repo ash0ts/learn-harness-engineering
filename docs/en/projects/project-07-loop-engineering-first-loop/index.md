@@ -143,3 +143,8 @@ This is the most important of the three experiments. You'll build a **complete l
 - [Lecture 12 — Why Every Session Must Leave a Clean State](../../lectures/lecture-12-why-every-session-must-leave-a-clean-state/index.md) (every round of a loop needs clean state)
 - [Lecture 11 — Why Observability Belongs Inside the Harness](../../lectures/lecture-11-why-observability-belongs-inside-the-harness/index.md) (you need to see what's happening inside the loop)
 - [Lecture 05 — Why State Files Are the Backbone of Continuity](../../lectures/lecture-05-why-long-running-tasks-lose-continuity/index.md) (loop state files are an extension of state files)
+
+
+## Optional Forge experiment
+
+Read [Two hours of agent work, with a stop condition](/en/forge/07-bounded-loops) for the executed Forge experiment and its saved notebook. The [Forge overview](/en/forge/) explains the shared setup. The offline exercise remains the default.

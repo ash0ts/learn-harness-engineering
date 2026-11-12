@@ -35,3 +35,8 @@ Repository path: [`projects/project-02/`](https://github.com/walkinglabs/learn-h
 The product features are document import, full document detail/content loading,
 and persistence across restart. The harness feature is the handoff-readable
 workspace.
+
+
+## Optional Forge experiment
+
+Read [Writing a repository guide an agent can use](/en/forge/02-workspace-docs) for the executed Forge experiment and its saved notebook. The [Forge overview](/en/forge/) explains the shared setup. The offline exercise remains the default.

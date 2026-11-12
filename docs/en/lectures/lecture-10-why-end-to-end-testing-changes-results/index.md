@@ -154,3 +154,8 @@ All 5 defects were caught by end-to-end tests; unit tests caught none. The end-t
 2. **Architectural Rule Automation**: Pick an architectural constraint from your project and turn it into an executable check (complete with an agent-oriented error message). Integrate it into the harness and verify its effectiveness using a baseline task.
 
 3. **Review Feedback Promotion**: Find a recurring comment type from code review history and convert it into an automated check following the five-step process. Compare the frequency of that issue category before and after the promotion.
+
+
+## Optional Forge experiment
+
+The Forge article [A reset button has to clear more than the screen](/en/forge/06-capstone) follows an executed example with recorded failures and saved results. The [Forge overview](/en/forge/) links the full series. The offline exercise remains the default.
