@@ -8,7 +8,7 @@ import {importWorkshop} from './workshop-workspace.js';
 import {checkWorkshop} from './workshop-local.js';
 import {config} from './config.js';
 import {createOperation,updateOperation,operationFile,evidenceReference} from './operations.js';
-import {protocol} from './trial.js';
+import {workshopProtocol} from './workshop-protocol.js';
 import {boundedChild} from './lifecycle.js';
 import {publishTrial} from './campaign.js';
 import {writeJson} from './records.js';
@@ -40,7 +40,7 @@ export async function workshopCLI(args:string[]){
   try{const operation=JSON.parse(await readFile(operationFile(output,id),'utf8'));return {operation,launched:false,recoveryRequired:operation.phase!=='completed'};}
   catch(error){if((error as NodeJS.ErrnoException).code!=='ENOENT')throw error;}
   process.env.FORGE_BUDGET_USD??='20';process.env.FORGE_BUDGET_MODE='incremental';
-  const dir=join(output,id);await mkdir(dir,{recursive:true});const c=config(),p=await protocol();
+  const dir=join(output,id);await mkdir(dir,{recursive:true});const c=config(),p=await workshopProtocol();
   await createOperation(output,{id,kind:'trial',sourceCommit:snapshot.sourceCommit,protocolSha256:sha256(JSON.stringify(p)),identity:{entity:c.entity,project:c.project,owner:process.env.FORGE_NOTEBOOK_OWNER,notebook:process.env.FORGE_NOTEBOOK_ID}});
   const receipt=join(dir,'child.json');
   await updateOperation(output,id,op=>{op.events.push({event:'child_launch',at:new Date().toISOString(),detail:id+'/child.json'});});
