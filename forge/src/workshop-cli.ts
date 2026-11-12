@@ -7,7 +7,7 @@ import {writeWorkshopEdits,readWorkshopFiles,validateSnapshot,sha256,type Worksh
 import {importWorkshop} from './workshop-workspace.js';
 import {checkWorkshop} from './workshop-local.js';
 import {config} from './config.js';
-import {createOperation,updateOperation,operationFile} from './operations.js';
+import {createOperation,updateOperation,operationFile,evidenceReference} from './operations.js';
 import {protocol} from './trial.js';
 import {boundedChild} from './lifecycle.js';
 import {publishTrial} from './campaign.js';
@@ -58,6 +58,8 @@ export async function workshopCLI(args:string[]){
   const settled=await finalExecution.finish(record.outcome);
   Object.assign(record,{cleanupStatus:settled.cleanupVerified?'verified':'unknown',estimatedCostUsd:settled.estimatedCostUsd});
   await writeJson(join(dir,'trial.json'),record);
+  const trialRef=await evidenceReference(output,join(dir,'trial.json'));
+  await updateOperation(output,id,op=>{op.evidence.trial=trialRef;});
   if(!v['no-publish'])await publishTrial(output,id);
   return JSON.parse(await readFile(join(dir,'trial.json'),'utf8'));
 }
