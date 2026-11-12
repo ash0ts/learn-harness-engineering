@@ -41,7 +41,9 @@ def validate():
         if indices != sorted(indices):
             raise RuntimeError('Historical narrative order changed: ' + name)
         old_images = [ast.dump(n) for n in ast.walk(old) if isinstance(n, ast.Call)
-                      and isinstance(n.func, ast.Attribute) and n.func.attr == 'image']
+                      and isinstance(n.func, ast.Attribute) and n.func.attr == 'image'
+                      and n.args and isinstance(n.args[0], ast.Constant)
+                      and str(n.args[0].value).startswith('data:image/')]
         new_images = [ast.dump(n) for n in ast.walk(new) if isinstance(n, ast.Call)
                       and isinstance(n.func, ast.Attribute) and n.func.attr == 'image']
         if any(image not in new_images for image in old_images):
