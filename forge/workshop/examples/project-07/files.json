@@ -1,0 +1,4 @@
+{
+  "workshop/loop.ts": "export interface Observation {round:number; maxRounds:number; now:number; deadline:number; outcome:string; checks:Array<{name:string;passed:boolean}>}\nexport function nextAction(observation:Observation):'run'|'stop' {\n  if(observation.round>=observation.maxRounds || observation.now>=observation.deadline) return 'stop';\n  return observation.outcome==='passed' ? 'stop' : 'run';\n}\nexport function nextPrompt(observation:Observation):string {\n  return 'Preserve the existing patch. Repair these observed failures: '+JSON.stringify(observation.checks.filter(check=>!check.passed));\n}\n",
+  "src/services/workshop-metadata.ts": "export function documentMetadata(content:string) {\n  return {\n    wordCount: content.trim() ? content.trim().split(/\\s+/).length : 0,\n    lineCount: content.split(/\\r?\\n/).length,\n    paragraphCount: content.split(/\\n\\s*\\n/).filter(p=>p.trim()).length,\n  };\n}\n"
+}

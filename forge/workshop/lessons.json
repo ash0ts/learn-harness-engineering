@@ -203,5 +203,36 @@
       "restart",
       "reset"
     ]
+  },
+  {
+    "schemaVersion": 1,
+    "protocol": "workshop-v1",
+    "project": "project-07",
+    "title": "Make the next attempt use the last result",
+    "task": "Repair persisted document word counts. Implement the loop stop rule and the feedback message sent to the next fresh Pi session. Run one bounded round, inspect the checks and checkpoint, then explicitly continue only if your rule allows it. Each round keeps the previous candidate; limits remain enforced by the supplied runner.",
+    "editable": [
+      "workshop/loop.ts",
+      "src/services/workshop-metadata.ts"
+    ],
+    "overlays": {
+      "workshop/loop.ts": "export interface Observation {round:number; maxRounds:number; now:number; deadline:number; outcome:string; checks:Array<{name:string;passed:boolean}>}\nexport function nextAction(observation:Observation):'run'|'stop' {\n  // TODO: stop on success, exhausted rounds or deadline; otherwise run.\n  return 'run';\n}\nexport function nextPrompt(observation:Observation):string {\n  // TODO: carry the actual failed check names into the fresh session.\n  return 'Try again';\n}\n",
+      "src/services/workshop-metadata.ts": "export function documentMetadata(content:string) {\n  return {\n    wordCount: content.trim() ? 0 : 0,\n    lineCount: content.split(/\\r?\\n/).length,\n    paragraphCount: content.split(/\\n\\s*\\n/).filter(p=>p.trim()).length,\n  };\n}\n"
+    },
+    "hints": [
+      "Test success, failure, round limit and deadline separately. A deadline is an absolute timestamp saved once, not a new allowance on resume.",
+      "Use the observed failed checks in nextPrompt. The previous candidate source is staged separately; the prior conversation is not.",
+      "Run one round at a time. The checkpoint shows the original deadline, source hashes and feedback hash. A stopped loop needs an explicit new execution; recovery never replaces a missing trial."
+    ],
+    "checks": [
+      "loop-stop-policy",
+      "loop-feedback",
+      "metadata-persistence"
+    ],
+    "scenarios": [
+      "import",
+      "index",
+      "ask",
+      "restart"
+    ]
   }
 ]

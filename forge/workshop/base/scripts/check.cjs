@@ -77,6 +77,17 @@ async function main(){
       await assert.rejects(()=>observe(sdk,'indexing.start',{},async()=>{throw new Error('controlled');}));
       assert.ok(events[1]?.end.error);
     });
+    if(manifest.project==='project-07'){
+      const policy=load('workshop/loop.ts');
+      const observation={round:0,maxRounds:2,now:10,deadline:100,outcome:'task_failed',checks:[{name:'Persist word count',passed:false},{name:'Import',passed:true}]};
+      await check('Loop stops on success, round limit and the saved deadline',()=>{
+        assert.equal(policy.nextAction(observation),'run');
+        assert.equal(policy.nextAction({...observation,outcome:'passed'}),'stop');
+        assert.equal(policy.nextAction({...observation,round:2}),'stop');
+        assert.equal(policy.nextAction({...observation,now:100}),'stop');
+      });
+      await check('Loop feedback names the actual failed check',()=>assert.match(policy.nextPrompt(observation),/Persist word count/));
+    }
     if(manifest.project==='project-06'){
       const {QaService}=require('../dist/services/qa-service.js');
       const qa=new QaService(p,index);
