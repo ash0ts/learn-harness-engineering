@@ -1,0 +1,5 @@
+{
+  "src/services/workshop-metadata.ts": "export function documentMetadata(content:string) {\n  return {\n    wordCount: content.trim() ? content.trim().split(/\\s+/).length : 0,\n    lineCount: content.split(/\\r?\\n/).length,\n    paragraphCount: content.split(/\\n\\s*\\n/).filter(p=>p.trim()).length,\n  };\n}\n",
+  "feature_list.json": "{\n  \"features\": [\n    {\n      \"id\": \"document-detail\",\n      \"acceptance\": \"Import through the button, display the complete text, restart and find the same persisted content.\",\n      \"status\": \"unverified\",\n      \"command\": \"npm test\"\n    },\n    {\n      \"id\": \"metadata\",\n      \"acceptance\": \"Display and persist correct word, line and paragraph counts.\",\n      \"status\": \"unverified\",\n      \"command\": \"npm test\"\n    }\n  ]\n}\n",
+  "session-handoff.md": "# Session handoff\n\n## Completed\nDescribe the edit to src/services/workshop-metadata.ts.\n\n## Checks\nRecord npm test output and its evidence path; do not claim an unexecuted check passed.\n\n## Unfinished\nName what still fails.\n\n## Next\nVerify the persisted metadata in the app window before changing the next feature.\n"
+}
