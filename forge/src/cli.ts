@@ -4,7 +4,9 @@ import {writeJson} from './records.js';
 import {parseArgs} from 'node:util';
 
 const command = process.argv[2] ?? 'help';
-if (command === 'doctor' && process.argv.includes('--qualify')) {
+if(command==='workshop'){
+  console.log(JSON.stringify(await (await import('./workshop-cli.js')).workshopCLI(process.argv.slice(3)),null,2));
+} else if (command === 'doctor' && process.argv.includes('--qualify')) {
   if(!process.argv.includes('--execute'))throw new Error('Qualification requires --execute');
   const {values}=parseArgs({args:process.argv.slice(3),options:{qualify:{type:'boolean'},execute:{type:'boolean'},output:{type:'string'},'operation-id':{type:'string'}}});
   const result=await (await import('./qualification.js')).qualify(values.output,values['operation-id']);console.log(JSON.stringify(result,null,2));if(!result.passed)process.exitCode=1;
