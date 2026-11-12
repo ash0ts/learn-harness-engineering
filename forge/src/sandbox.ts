@@ -42,6 +42,8 @@ export async function withWorkspace<T>(options: {
   signal?: AbortSignal; client?: SandboxClient; slotDir?: string;
   beforeLaunch?:()=>Promise<void>;
   onJournal?:(journal:SandboxJournal)=>Promise<void>;
+  /** Only the app rehearsal needs hosted inference/tracing; coding trials remain isolated. */
+  forgeAppNetwork?: boolean;
 }, action: (sandbox: Sandbox) => Promise<T>): Promise<T> {
   requireLive(options.config);
   if (!/@sha256:[a-f0-9]{64}$/.test(options.image)) throw new Error('Sandbox image must be pinned by digest');
@@ -63,7 +65,9 @@ export async function withWorkspace<T>(options: {
     // can retain a connecting socket after its direct readiness probe fails.
     // Gateway mode prevents that probe and uses the same authenticated service.
     sandbox = await client.create({containerImage: options.image, resources: {cpu: '2', memory: '4Gi'}, dataPlaneMode:'gateway',
-      maxLifetimeSeconds: 1200, network: {denyEgress: true}, tags: ['harness-course', lookupTag],
+      maxLifetimeSeconds: 1200, network: options.forgeAppNetwork
+        ? {denyIngress:true,egress:[{dnsName:'api.inference.wandb.ai'},{dnsName:'api.wandb.ai'},{dnsName:'trace.wandb.ai'}]}
+        : {denyEgress: true}, tags: ['harness-course', lookupTag],
       annotations: {'course.trial': options.trialId}, waitUntilRunning: false, timeoutMs: 60000, signal: options.signal});
   } catch (error) {
     journal.state = 'creation_unknown';
