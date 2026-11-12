@@ -5,11 +5,11 @@ import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {initWorkshop,snapshotWorkshop,workshopHead,importWorkshop} from '../src/workshop-workspace.js';
 import {writeWorkshopEdits,type WorkshopProject} from '../src/workshop-contract.js';
-test('five independent checkpoints freeze actual edits and round-trip without changing protected code',async()=>{
+test('eight independent checkpoints freeze actual edits and round-trip without changing protected code',async()=>{
   const root=await mkdtemp(join(tmpdir(),'five-workshops-'));
   try{
     const source=await workshopHead(),fileSets=[];
-    for(let n=1;n<=5;n++){
+    for(let n=1;n<=8;n++){
       const project=`project-0${n}` as WorkshopProject,workspace=join(root,project),evidence=join(root,'evidence');
       const manifest=await initWorkshop(project,workspace,source);fileSets.push(manifest.editable.join(','));
       const first=await snapshotWorkshop(workspace,evidence);
@@ -25,6 +25,6 @@ test('five independent checkpoints freeze actual edits and round-trip without ch
       await writeFile(join(workspace,'scripts/dev.cjs'),'changed');
       await assert.rejects(snapshotWorkshop(workspace,evidence),/Protected/);
     }
-    assert.equal(new Set(fileSets).size,5);
+    assert.equal(new Set(fileSets).size,8);
   }finally{await rm(root,{recursive:true,force:true});}
 });

@@ -77,6 +77,23 @@ async function main(){
       await assert.rejects(()=>observe(sdk,'indexing.start',{},async()=>{throw new Error('controlled');}));
       assert.ok(events[1]?.end.error);
     });
+    if(manifest.project==='project-08'){
+      const policy=load('workshop/graph.ts');
+      await check('Graph separates verification, repair, recovery and approval',()=>{
+        const input={phase:'plan',outcome:'not_run',repairs:0,maxRepairs:2,cleanupVerified:true,usageComplete:true};
+        assert.equal(policy.route(input),'verify');
+        assert.equal(policy.route({...input,phase:'verified',outcome:'task_failed'}),'repair');
+        assert.equal(policy.route({...input,phase:'verified',outcome:'passed'}),'approval');
+        assert.equal(policy.route({...input,phase:'verified',outcome:'task_failed',repairs:2}),'stop');
+        assert.equal(policy.route({...input,cleanupVerified:false}),'recover');
+        assert.equal(policy.route({...input,usageComplete:false}),'recover');
+        assert.ok(['serial','parallel'].includes(policy.verificationMode()));
+      });
+      await check('The repair plan names the feature and independent verification',()=>{
+        const plan=fs.readFileSync(path.join(root,'workshop/plan.md'),'utf8');
+        assert.match(plan,/word count/i);assert.match(plan,/restart|fresh service/i);assert.ok(plan.length>140);
+      });
+    }
     if(manifest.project==='project-07'){
       const policy=load('workshop/loop.ts');
       const observation={round:0,maxRounds:2,now:10,deadline:100,outcome:'task_failed',checks:[{name:'Persist word count',passed:false},{name:'Import',passed:true}]};

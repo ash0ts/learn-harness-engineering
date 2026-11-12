@@ -30,7 +30,7 @@ export async function workshopAttempt(workspace:string,output:string,manifest:Wo
   await createOperation(output,{id,kind:'trial',sourceCommit:snapshot.sourceCommit,protocolSha256:sha256(JSON.stringify(p)),identity:{entity:c.entity,project:c.project,owner:process.env.FORGE_NOTEBOOK_OWNER,notebook:process.env.FORGE_NOTEBOOK_ID}});
   const receipt=join(dir,'child.json');
   await updateOperation(output,id,op=>{op.events.push({event:'child_launch',at:new Date().toISOString(),detail:id+'/child.json'});});
-  const request=join(dir,'request.json');await writeJson(request,{manifest,snapshot,options:{id,action:command,output,live:v.live,scenario:v.scenario,fixture:v.fixture,question:v.question,singleRole:v['single-role'],...extra}});
+  const request=join(dir,'request.json');await writeJson(request,{manifest,snapshot,options:{id,action:command,output,live:v.live,scenario:v.scenario,fixture:v.fixture,question:v.question,singleRole:v['single-role'],parallel:v.parallel,...extra}});
   const child=await boundedChild(process.execPath,['--import',join(workshopCourseRoot,'forge/node_modules/tsx/dist/loader.mjs'),join(workshopCourseRoot,'forge/src/workshop-worker.ts'),request],{cwd:workshopCourseRoot,log:join(dir,'worker.log'),receipt,timeoutMs:1250000,graceMs:120000});
   const record=JSON.parse(await readFile(join(dir,'trial.json'),'utf8'));
   const finalization=JSON.parse(await readFile(join(dir,'worker-finalization.json'),'utf8'));

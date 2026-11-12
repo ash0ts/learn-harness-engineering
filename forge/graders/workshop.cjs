@@ -1,20 +1,28 @@
 // Protected runner, delivered separately from the editable student snapshot.
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
-const {spawnSync}=require('node:child_process');
+const {spawnSync,execFile}=require('node:child_process');
 const {createRequire}=require('node:module');
 const root=process.cwd(),out=process.env.WORKSHOP_GRADE_DIR||'/tmp/workshop-grade';
 const scenario=JSON.parse(fs.readFileSync(process.argv[2],'utf8'));
 const requireApp=createRequire(path.join(root,'package.json'));
 fs.mkdirSync(out,{recursive:true});
-const checks=[],events=[],images=[];
+const checks=[],events=[],images=[],lanes=[];let servicePromise;
 const save=(name,value)=>fs.writeFileSync(path.join(out,name),JSON.stringify(value,null,2));
 async function check(name,action){try{await action();checks.push({name,passed:true});return true;}catch(error){checks.push({name,passed:false,detail:String(error)});return false;}}
 function command(args){const result=spawnSync(process.execPath,args,{cwd:root,encoding:'utf8',timeout:90000});fs.appendFileSync(path.join(out,'build.log'),[args.join(' '),result.stdout,result.stderr].join('\n'));if(result.error)throw result.error;assert.equal(result.status,0,'command failed; see build.log');return result.stdout;}
 async function until(fn,timeout=15000){const end=Date.now()+timeout;while(Date.now()<end){if(await fn())return;await new Promise(r=>setTimeout(r,150));}throw new Error('Timed out waiting for observed app state');}
 async function main(){
   if(!await check('TypeScript and Electron build',()=>{command([requireApp.resolve('typescript/bin/tsc'),'--noEmit','-p','tsconfig.json']);command(['scripts/build.cjs']);}))return;
-  await check('Focused lesson checks',()=>command(['scripts/check.cjs']));
-  try{save('local-check.json',JSON.parse(fs.readFileSync(path.join(root,'.workshop-evidence/local-check.json'),'utf8')));}catch{}
+  const serviceLane=async()=>{
+    const receipt={name:'services',snapshot:scenario.snapshotSha256,startedAt:Date.now()};
+    await check('Focused lesson checks',()=>new Promise((resolve,reject)=>execFile(process.execPath,['scripts/check.cjs'],{cwd:root,timeout:90000,maxBuffer:2000000},(error,stdout,stderr)=>{
+      fs.appendFileSync(path.join(out,'build.log'),stdout+stderr);error?reject(error):resolve();
+    })));
+    receipt.finishedAt=Date.now();receipt.passed=checks.find(c=>c.name==='Focused lesson checks').passed;lanes.push(receipt);
+    try{save('local-check.json',JSON.parse(fs.readFileSync(path.join(root,'.workshop-evidence/local-check.json'),'utf8')));}catch{}
+  };
+  servicePromise=serviceLane();if(!scenario.parallel)await servicePromise;
+  const electronLane={name:'electron',snapshot:scenario.snapshotSha256,startedAt:Date.now()};
   const {_electron}=requireApp('playwright');
   const data=path.join(out,'app-data');let app,page;
   const capture=async step=>{if(!page)return;const file=step+'.png';await page.screenshot({path:path.join(out,file)});images.push({file,step,snapshot:scenario.snapshotId,sha256:scenario.snapshotSha256});};
@@ -114,9 +122,10 @@ async function main(){
       const body=await page.locator('body').innerText();assert.ok(!body.includes(questions[0]));await capture('06-clear-history');
     });
   }catch(error){checks.push({name:'Electron scenario',passed:false,detail:String(error)});try{await capture('failure');}catch{}}
-  finally{if(app){try{events.push(...await app.evaluate(()=>globalThis.__workshopIPC??[]));await app.close();}catch(error){checks.push({name:'Electron shutdown',passed:false,detail:String(error)});}}save('ui-events.json',events);save('images.json',images);}
+  finally{if(app){try{events.push(...await app.evaluate(()=>globalThis.__workshopIPC??[]));await app.close();}catch(error){checks.push({name:'Electron shutdown',passed:false,detail:String(error)});}}electronLane.finishedAt=Date.now();electronLane.passed=checks.filter(c=>c.name!=='Focused lesson checks').every(c=>c.passed);lanes.push(electronLane);save('ui-events.json',events);save('images.json',images);}
 }
-main().catch(error=>checks.push({name:'runner',passed:false,detail:String(error)})).finally(()=>{
+main().catch(error=>checks.push({name:'runner',passed:false,detail:String(error)})).finally(async()=>{
+  if(servicePromise)await servicePromise;save('lanes.json',{mode:scenario.parallel?'parallel':'serial',snapshot:scenario.snapshotSha256,lanes});
   const result={schemaVersion:1,protocol:'workshop-v1',...scenario,checks,images,passed:checks.length>0&&checks.every(c=>c.passed),pickerMode:'actual Import button; automated native dialog selection'};
   save('result.json',result);process.exitCode=result.passed?0:1;
 });
