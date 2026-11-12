@@ -29,6 +29,8 @@ The [command cancellation repair](https://github.com/ash0ts/learn-harness-engine
 
 The [hands-on workshop release](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-publication/forge/results/workshop-v1/README.md) adds editable application, harness and SDK exercises to Projects 01–05. Its separate [workshop dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=leid7r3frfp) retains 17 owner rehearsals: eight passes, six task failures and three infrastructure failures. A fresh private notebook copy completed the native edit/check/live-run path with matching source, screenshots, usage and traces. The [workshop guide](./workshop.md) covers the three-hour class and the laptop workflow. Assisted examples, browser upload/download limits, native picker limits and the absence of an independent student-account test are recorded in the release evidence. These rehearsals do not change the historical counts below.
 
+The [eight-lab candidate](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-publication/forge/results/workshop-v1.1/README.md) extends the practical workbench through Projects 06–08 and replaces the action selector with named exercises in all eight labs. Local checks and nine saved views pass. Live rehearsal encountered Sandbox access denial and was deferred; **the new candidate has not replaced the published Forge notebooks**. Its validation receipts and retained failure are separate from both the earlier workshop cohort and the research results.
+
 ## Start with the complete comparison
 
 <div class="forge-figure" tabindex="0" role="region" aria-label="Primary outcome matrix, horizontally scrollable on narrow screens">
