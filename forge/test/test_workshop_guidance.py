@@ -7,6 +7,18 @@ from workshop_workspace import WorkshopWorkspace
 from workshop_teaching import LABS
 from workshop_cells import action_cells
 class GuidanceTest(unittest.TestCase):
+    def test_retry_needs_verified_recovery_and_never_bypasses_approval(self):
+        learner=WorkshopWorkspace.__new__(WorkshopWorkspace)
+        learner.ledger=lambda:{'reservations':{'unsettled':2}}
+        learner.incomplete_operations=lambda:[]
+        self.assertFalse(learner.workshop_controller_terminal({'node':'recover'}))
+        learner.ledger=lambda:{'reservations':{}}
+        learner.incomplete_operations=lambda:[{'cleanup':'unknown'}]
+        self.assertFalse(learner.workshop_controller_terminal({'status':'blocked'}))
+        learner.incomplete_operations=lambda:[]
+        self.assertTrue(learner.workshop_controller_terminal({'node':'recover'}))
+        self.assertFalse(learner.workshop_controller_terminal({'node':'recover','pending':{'id':'same'}}))
+        self.assertFalse(learner.workshop_controller_terminal({'node':'approval'}))
     def test_every_lab_has_distinct_named_actions_and_evidence_questions(self):
         self.assertEqual(len(LABS),8)
         labels=[]

@@ -37,7 +37,7 @@ Prepare and Connect inspect interrupted work; they do not automatically launch a
 | 07 | Write the stop rule and next-session feedback | Fixed deadline, candidate/check hashes, actual received feedback and the observed stop |
 | 08 | Write graph routes, a repair plan and verification order | Independent lane receipts, preserved failures, deliberate rollback and a checksum-bound decision |
 
-Project 03's first agent action ends after its bounded session. Select its saved candidate and preview the diff, apply the files, then **Load my saved files**. Write your handoff from the observed patch and failures, save it, and choose **Resume in a fresh session**. The runner verifies that its parent belongs to a recorded first session.
+Project 03's first agent action ends after its bounded session. Select its saved candidate and preview the diff, apply the files, then **Load my saved files**. Write your handoff from the observed patch and failures, save it, and choose **Resume from my saved handoff**. The runner verifies that its parent belongs to a recorded first session.
 
 Project 05 gives the maker 10 calls, checker 4, and maker revision 10. The final call in each allowance is reserved for its deliverable. A missing review stays missing. The optional single-role comparison gets the same 24 calls. Your Python evaluation executes against the recorded checks; its `run.log` call is captured and published to the stable W&B run. Protected acceptance checks remain separate from your evaluation.
 

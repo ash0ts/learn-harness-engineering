@@ -94,7 +94,7 @@ class WorkshopWorkspace(LessonWorkspace):
                     identifier = current['pending'] if isinstance(current['pending'], str) else current['pending']['id']
                 if current and current.get('node') == 'approval':
                     raise RuntimeError('Review the displayed candidate and record your approval or rejection first.')
-                terminal = current and (current.get('status') == 'stopped' or current.get('node') in ('approved', 'rejected', 'stopped'))
+                terminal = self.workshop_controller_terminal(current)
                 controller_id = identifier if not current or terminal else current['id']
                 state['controllerId'] = controller_id
             command = self.workshop_command('scenario' if action.endswith('-app') else action,
@@ -179,6 +179,18 @@ class WorkshopWorkspace(LessonWorkspace):
             return None
         path = self.safe_path(self.results, 'workshop/controllers/' + identifier + '.json')
         return json.loads(path.read_text()) if path.exists() else None
+
+    def workshop_controller_terminal(self, current):
+        if not current or current.get('pending'):
+            return False
+        if current.get('status') == 'stopped' or current.get('node') in ('approved', 'rejected', 'stopped'):
+            return True
+        # Recovery settles the existing attempt first. Only a later explicit
+        # action may start a fresh controller; its predecessor remains saved.
+        if current.get('status') == 'blocked' or current.get('node') == 'recover':
+            ledger = self.ledger()
+            return not (ledger.get('halted') or ledger.get('reservations') or self.incomplete_operations())
+        return False
 
     def decide_workshop_graph(self, decision, checksum, reason):
         with self.lock:
