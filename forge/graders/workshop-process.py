@@ -16,7 +16,7 @@ out = Path('/tmp/workshop-grade')
 out.mkdir(exist_ok=True)
 started = time.time()
 child = subprocess.Popen(['xvfb-run', '-a', 'node', '/tmp/workshop.cjs', '/tmp/scenario.json'], env=env,
-                         stdout=subprocess.PIPE, stderr=subprocess.STDOUT, start_new_session=True)
+                         stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, start_new_session=True)
 forced = False
 try:
     text, _ = child.communicate(timeout=420)

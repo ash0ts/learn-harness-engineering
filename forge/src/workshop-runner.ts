@@ -90,8 +90,12 @@ export async function runWorkshop(snapshot:WorkshopSnapshot,manifest:WorkshopMan
       if(options.live)env.WANDB_API_KEY=c.apiKey!;
       try{
         const child=await sandbox.commands.start(['python3','/tmp/workshop-process.py'],{stdin:true,cwd:'/workspace/task',check:false,timeoutMs:500000});
-        await child.stdin.writeln(JSON.stringify({environment:env}));await child.stdin.close();
+        // The pinned gateway imposes a five-second completion probe on stdin
+        // close. The wrapper reads one newline-delimited message, so keep stdin
+        // open until the bounded command has actually exited.
+        await child.stdin.writeln(JSON.stringify({environment:env}));
         const completed=await child.wait({timeoutMs:470000,signal:abort.signal});
+        await child.stdin.close();
         await writeJson(join(grader,'command.json'),{exitCode:completed.exitCode,stdout:redact(completed.stdout,[c.apiKey??'']),stderr:redact(completed.stderr,[c.apiKey??''])});
       }finally{
         // Collect before termination even when grading or the connection failed.
