@@ -35,6 +35,9 @@ jobs:
       - name: Electron desktop scenarios (Linux Xvfb)
         if: always() && runner.os == 'Linux'
         run: xvfb-run -a node --import ./forge/node_modules/tsx/dist/loader.mjs forge/scripts/workshop_platform.ts
+      - name: Retain Windows coordinator diagnostics
+        if: always() && runner.os == 'Windows'
+        run: node --import ./forge/node_modules/tsx/dist/loader.mjs forge/src/cli.ts workshop check --workspace forge/local-results/platform-win32/project-01/workspace --output forge/local-results/platform-win32/project-01/evidence/cli-check
       - uses: actions/upload-artifact@v4
         if: always()
         with:
