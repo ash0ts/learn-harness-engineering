@@ -181,7 +181,7 @@
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "01-Minimal-instructions-and-explicit-harnesses",
-        "versionIndex": 37,
+        "versionIndex": 39,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:36Z",
@@ -234,6 +234,17 @@
             "sourceFileName": "notebook.py"
           },
           "sha256": "c3cd9dc46ea0daeddcf0900fb96b901870353bc80f1c28ad459c3626d3f434ab",
+          "reason": "Opening the reserved native editor saved byte-identical source."
+        },
+        {
+          "at": "2026-11-12T13:09:54.749571+00:00",
+          "version": {
+            "artifactTypeName": "notebook",
+            "artifactCollectionName": "01-Minimal-instructions-and-explicit-harnesses",
+            "versionIndex": 39,
+            "sourceFileName": "notebook.py"
+          },
+          "sha256": "638e604d509386d676ac607ecd6646fb5c7c11deb520fdd605cef85f4f0fa972",
           "reason": "Opening the reserved native editor saved byte-identical source."
         }
       ],
