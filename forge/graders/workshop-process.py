@@ -8,6 +8,9 @@ import sys
 import time
 
 settings = json.loads(sys.stdin.readline())
+# The gateway acknowledges stdin close only after output or exit. Emit a fixed,
+# nonsecret acknowledgment before the bounded build/UI work starts.
+print('Workshop input received; starting bounded app checks', flush=True)
 env = dict(os.environ, **settings['environment'])
 out = Path('/tmp/workshop-grade')
 out.mkdir(exist_ok=True)
