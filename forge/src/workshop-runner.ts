@@ -15,6 +15,7 @@ import {makeSnapshot,storeSnapshot,sha256,validateSnapshot,type WorkshopSnapshot
 import {bundleWorkshop,stageWorkshop} from './workshop-stage.js';
 import {workshopCourseRoot,workshopHead} from './workshop-workspace.js';
 import {deadline} from './lifecycle.js';
+import {verifyWorkshopTraces} from './workshop-traces.js';
 
 export interface WorkshopRunOptions {action:'scenario'|'agent'|'resume';output:string;id?:string;live?:boolean;scenario?:string;fixture?:string;question?:string;singleRole?:boolean;internalChild?:boolean}
 export async function runWorkshop(snapshot:WorkshopSnapshot,manifest:WorkshopManifest,options:WorkshopRunOptions){
@@ -49,14 +50,15 @@ export async function runWorkshop(snapshot:WorkshopSnapshot,manifest:WorkshopMan
     if(options.action!=='scenario'){
       const actor=join(dir,'actor');await mkdir(actor,{recursive:true});
       await withWorkspace({config:c,image:p.sandbox.image,trialId:id,evidenceDir:actor,signal:abort.signal,...execution.workspace('actor',actor)},async sandbox=>{
-        record.sandboxIds.push(sandbox.sandboxId);await stageWorkspace(sandbox,await stageWorkshop(snapshot,manifest));
+        record.sandboxIds.push(sandbox.sandboxId);await stageWorkspace(sandbox,await stageWorkshop(snapshot,manifest),true);
         const roles=snapshot.project==='project-05'&&!options.singleRole?roleSchedule('gen-eval',1):[{role:options.action==='resume'?'fresh-session':'maker',turns:snapshot.project==='project-03'?12:24,readOnly:false}];
+        const actorSignal=AbortSignal.any([abort.signal,AbortSignal.timeout(600000)]);
         let feedback='';let phase=0;
         for(const role of roles){
           phase++;const toolsDir=join(actor,`phase-${phase}`);await mkdir(toolsDir,{recursive:true});
           const before:Record<string,string>={};for(const name of Object.keys(snapshot.files))before[name]=Buffer.from(await sandbox.files.read('/workspace/task/'+name)).toString('utf8');
           const roleText=snapshot.project==='project-05'?snapshot.files[role.readOnly?'prompts/checker.md':'prompts/maker.md']:'';
-          const result=await runPi({...c,maxTurns:role.turns},{role:role.role,prompt:`${manifest.task}\nRead TASK.md and AGENTS.md. You may edit only these files: ${manifest.editable.join(', ')}. ${roleText}\n${options.action==='resume'?'This is a fresh session. Recover from the workspace files, including session-handoff.md, before editing. No previous conversation is supplied.':''}\n${feedback}\n${role.readOnly?'Inspect the candidate and produce a concrete REVIEW with findings and verification. Your filesystem edits will be discarded.':'Implement the narrow task and run its checks.'}`,attributes:{'course.protocol':'workshop-v1','course.project':snapshot.project,'course.snapshot':snapshot.id,'course.source_commit':snapshot.sourceCommit,'course.sandbox_id':sandbox.sandboxId,'course.wandb_run_id':String(record.wandbRunId)},tools:sandboxTools(sandbox,toolsDir),signal:abort.signal,...execution.requestHooks(`phase-${phase}`),finalInstruction:role.readOnly?'Final allowed call: deliver your REVIEW, with findings and observed checks. Do not invent results.':'Final allowed call: describe completed changes, observed checks, failures and next steps. Do not invent results.'});
+          const result=await runPi({...c,maxTurns:role.turns},{role:role.role,prompt:`${manifest.task}\nRead TASK.md and AGENTS.md. You may edit only these files: ${manifest.editable.join(', ')}. ${roleText}\n${options.action==='resume'?'This is a fresh session. Recover from the workspace files, including session-handoff.md, before editing. No previous conversation is supplied.':''}\n${feedback}\n${role.readOnly?'Inspect the candidate and produce a concrete REVIEW with findings and verification. Your filesystem edits will be discarded.':'Implement the narrow task and run its checks.'}`,attributes:{'course.protocol':'workshop-v1','course.variant':String(record.variant),'course.trial':String(record.trial),'course.project':snapshot.project,'course.snapshot':snapshot.id,'course.source_commit':snapshot.sourceCommit,'course.sandbox_id':sandbox.sandboxId,'course.wandb_run_id':String(record.wandbRunId)},tools:sandboxTools(sandbox,toolsDir),signal:actorSignal,...execution.requestHooks(`phase-${phase}`),finalInstruction:role.readOnly?'Final allowed call: deliver your REVIEW, with findings and observed checks. Do not invent results.':'Final allowed call: describe completed changes, observed checks, failures and next steps. Do not invent results.'});
           record.conversationIds.push(result.conversationId);telemetry&&=result.telemetryComplete;
           await writeJson(join(actor,`phase-${phase}.json`),result);
           const files:Record<string,string>={};for(const name of Object.keys(snapshot.files))files[name]=Buffer.from(await sandbox.files.read('/workspace/task/'+name)).toString('utf8');
@@ -78,7 +80,7 @@ export async function runWorkshop(snapshot:WorkshopSnapshot,manifest:WorkshopMan
     const bundle=await bundleWorkshop(candidate,manifest);
     await updateOperation(options.output,id,op=>{op.phase='grading';});
     await withWorkspace({config:c,image:p.sandbox.image,trialId:id+'-grade',evidenceDir:grader,signal:abort.signal,forgeAppNetwork:options.live,...execution.workspace('grader',grader)},async sandbox=>{
-      record.sandboxIds.push(sandbox.sandboxId);await stageWorkspace(sandbox,await stageWorkshop(candidate,manifest));
+      record.sandboxIds.push(sandbox.sandboxId);await stageWorkspace(sandbox,await stageWorkshop(candidate,manifest),true);
       for(const file of ['workshop.cjs','workshop-process.py','workshop-evaluation.py']){const data=await readFile(join(workshopCourseRoot,'forge/graders',file));await sandbox.files.write('/tmp/'+file,data);record[file+'Sha256']=sha256(data);}
       await sandbox.files.write('/tmp/workshop-adapter.cjs',bundle.app);
       await sandbox.files.write('/tmp/scenario.json',JSON.stringify({project:snapshot.project,snapshotId:candidate.id,snapshotSha256:candidate.sha256,live:Boolean(options.live),scenario,fixture:options.fixture??'long',question:options.question}));
@@ -95,7 +97,7 @@ export async function runWorkshop(snapshot:WorkshopSnapshot,manifest:WorkshopMan
         for(let number=1;number<=reserved;number++)await hooks.afterRequest({request:number,payloadBytes:0,inputTokens:0,outputTokens:0,complete:true});
         throw error;
       }
-      const env:Record<string,string>={WORKSHOP_PRE_RESERVED:'true',WORKSHOP_MAX_REQUESTS:'2',WORKSHOP_SNAPSHOT:candidate.id,FORGE_PROJECT:snapshot.project,FORGE_TASK:snapshot.project,FORGE_SOURCE_COMMIT:snapshot.sourceCommit,FORGE_SANDBOX_ID:sandbox.sandboxId,FORGE_WANDB_RUN_ID:String(record.wandbRunId),FORGE_APP_ADAPTER:'file:///tmp/workshop-adapter.cjs',FORGE_CONVERSATION_ID:`app-${id}`,FORGE_APP_EVIDENCE_DIR:'/tmp/workshop-grade/app-evidence',FORGE_BUDGET_USD:String(c.budgetUsd),WANDB_ENTITY:c.entity,WANDB_PROJECT:c.project};
+      const env:Record<string,string>={WORKSHOP_PRE_RESERVED:'true',WORKSHOP_MAX_REQUESTS:'2',WORKSHOP_SNAPSHOT:candidate.id,FORGE_PROJECT:snapshot.project,FORGE_TASK:snapshot.project,FORGE_VARIANT:String(record.variant),FORGE_TRIAL:String(record.trial),FORGE_SOURCE_COMMIT:snapshot.sourceCommit,FORGE_SANDBOX_ID:sandbox.sandboxId,FORGE_WANDB_RUN_ID:String(record.wandbRunId),FORGE_APP_ADAPTER:'file:///tmp/workshop-adapter.cjs',FORGE_CONVERSATION_ID:`app-${id}`,FORGE_APP_EVIDENCE_DIR:'/tmp/workshop-grade/app-evidence',FORGE_BUDGET_USD:String(c.budgetUsd),WANDB_ENTITY:c.entity,WANDB_PROJECT:c.project};
       if(options.live)env.WANDB_API_KEY=c.apiKey!;
       try{
         const child=await sandbox.commands.start(['python3','/tmp/workshop-process.py'],{stdin:true,cwd:'/workspace/task',check:false,timeoutMs:500000});
@@ -136,6 +138,8 @@ export async function runWorkshop(snapshot:WorkshopSnapshot,manifest:WorkshopMan
   finally{
     clearTimeout(timer);process.removeListener('SIGINT',onSignal);process.removeListener('SIGTERM',onSignal);
     const settled=await execution.finish(record.outcome);Object.assign(record,{inputTokens:settled.inputTokens,outputTokens:settled.outputTokens,estimatedCostUsd:settled.estimatedCostUsd,sandboxSecondsUpperBound:settled.sandboxSeconds,cleanupStatus:settled.cleanupVerified?'verified':'unknown',telemetryStatus:settled.usageComplete&&telemetry?'complete':'missing'});
+    try{const audit=await verifyWorkshopTraces(dir,record,c);record.traceReadbackVerified=audit.verified;telemetry&&=audit.verified;}catch(error){telemetry=false;record.traceReadbackError=redact(String(error),[c.apiKey??'']);}
+    if(!telemetry)record.telemetryStatus='missing';
     record.grade={passed:record.outcome==='passed',checks:record.checks};record.finishedAt=new Date().toISOString();record.evidence=['submission.json','candidate.json','grader/result.json'];
     await writeJson(join(dir,'trial.json'),record);const ref=await evidenceReference(options.output,join(dir,'trial.json'));await updateOperation(options.output,id,op=>{op.evidence.trial=ref;if(!telemetry){op.telemetry='missing';op.phase='recoverable';}});
   }
