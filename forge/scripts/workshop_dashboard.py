@@ -34,7 +34,9 @@ class EvidenceLayout(ws.SectionLayoutSettings):
 def collect():
     rows = []
     native = ROOT/'forge/local-results/workshop-v1/student-native/evidence'
-    for path in sorted([*LOCAL.glob('workshop-*/trial.json'), *native.glob('*/trial.json')]):
+    browser = ROOT/'forge/local-results/workshop-v1/browser-qa'
+    for path in sorted([*LOCAL.glob('workshop-*/trial.json'), *native.glob('*/trial.json'),
+                        *browser.glob('project-*/evidence/*/trial.json')]):
         r = json.loads(path.read_bytes())
         if r.get('protocol') != 'workshop-v1':
             continue
@@ -45,8 +47,11 @@ def collect():
             'outputTokens','estimatedCostUsd','cleanupStatus','telemetryStatus','publicationStatus',
             'wandbRunUrl','artifactUrl','conversationIds','startedAt','finishedAt']}
         row['recordSha256'] = hashlib.sha256(path.read_bytes()).hexdigest()
-        row['rehearsalMethod'] = 'native-notebook-controls' if native in path.parents else 'cli'
+        row['rehearsalMethod'] = 'native-notebook-controls' if native in path.parents or browser in path.parents else 'cli'
+        row['rehearsalCohort'] = 'workshop-v1-browser-qa' if browser in path.parents else 'workshop-v1-initial-qualification'
         rows.append(row)
+    if len({row['id'] for row in rows}) != len(rows):
+        raise RuntimeError('Duplicate rehearsal operation')
     publication = json.loads((ROOT/'forge/publication-manifest.json').read_text())
     canonical = []
     for r in publication['notebooks'][:6]:
@@ -57,10 +62,14 @@ def collect():
     data = {'schemaVersion':1,'cohort':'workshop-v1-owner-rehearsal','capturedAt':datetime.now(timezone.utc).isoformat(),
         'runnerCommit':RUNNER,'tag':'forge-workshop-v1.0.0','platformQualification':CI,
         'attempts':rows,'outcomes':dict(counts),'notebooks':canonical,
+        'methods':dict(Counter(r['rehearsalMethod'] for r in rows)),
+        'cohorts':dict(Counter(r['rehearsalCohort'] for r in rows)),
+        'notebookCoordinatorCommit':'55ffc010',
+        'browserCoverage':json.loads((browser/'coverage.json').read_text()) if (browser/'coverage.json').exists() else None,
         'attemptEstimateUsd':sum(r['estimatedCostUsd'] for r in rows),
         'rolloutLedgerEstimateUsd':json.loads((LOCAL/'budget.json').read_text())['spentEstimateUsd'],
         'limitations':['Owner-account rehearsal only; no independent student account.',
-            'Native browser progress download remains unverified at the owner’s request.',
+            'Native browser downloads remain unverified; repeat clicks produced no observable download event or inspected file.',
             'Native notebook upload chooser automation timed out; CLI source import/export passed separately.',
             'CI exercises the actual Import button with a stubbed OS picker; native picker acceptance is separate.',
             'Windows local dev/build/check/source exchange qualified; paid CLI worker cleanup is not qualified.',
@@ -82,15 +91,19 @@ def collect():
     text += 'The eight dependent PRs remain draft and unmerged: '+', '.join(f'[{n}](https://github.com/ash0ts/learn-harness-engineering/pull/{n})' for n in [1,2,3,5,6,7,8,9])+'.\n\n'
     text += 'These are owner qualification rehearsals, separate from the preserved 129-attempt archive and 39-attempt main comparison. Every failed attempt remains listed. A successful protected example demonstrates the execution path; it does not predict a student pass rate.\n\n'
     text += f"{len(rows)} completed attempts: "+', '.join(f'{n} {k}' for k,n in sorted(counts.items()))+'.\n\n'
-    text += '| Attempt | Project | Action | Outcome | Evidence |\n|---|---|---|---|---|\n'
+    text += 'Execution methods: '+', '.join(f'{n} {method}' for method,n in sorted(data['methods'].items()))+'. Browser rehearsals have a separate cohort label; they are assisted qualification, not a student pass-rate estimate.\n\n'
+    text += '| Attempt | Project | Action | Outcome | Method | Evidence |\n|---|---|---|---|---|---|\n'
     for r in rows:
-        text += f"| `{r['id']}` | {r['project']} | {r['variant']} | {r['outcome']} | [run]({r['wandbRunUrl']}) |\n"
+        text += f"| `{r['id']}` | {r['project']} | {r['variant']} | {r['outcome']} | {r['rehearsalMethod']} | [run]({r['wandbRunUrl']}) |\n"
     text += '\nInterventions: repaired the SDK stdin lifetime and staging mutation; disabled provider thinking explicitly within existing output limits; fixed a whitespace-sensitive history assertion; rewrote the student handoff to include its required evidence sections; and batched checker file reads to produce a review within its unchanged four-call allowance. Earlier failures were retained.\n\n'
     text += 'Successful Project 01 inference included abstention to the original ambiguous question. That answer is recorded, not relabelled as factual success. Project 04 records student-authored indexing/retrieval spans. Project 03 records the fresh session reading the handoff. Project 05 records the actual checker review and subsequent patch.\n\n'
     text += 'A fresh private Project 01 copy also completed the native Prepare → edit → Save → Check → Connect → Execute workflow. Its unfinished checkpoint failed first. The assisted implementation and an edited answer instruction then passed eight Electron checks, including restart persistence. The supported answer identified paragraph chunks; the unsupported answer abstained. Agent Lens readback matched two calls with 493 input and 45 output tokens. Source reload preserved progress and spending.\n\n'
-    text += 'The live rehearsal exposed a fast-tab-switch editor race. Disabling the input debounce fixed it without changing the explicit Save and Execute gates. The final immutable snapshot contains both edited files; seven screenshots identify that snapshot and their app step.\n\n'
+    text += 'Browser testing exposed two editor update races. Disabling debounce addressed rapid tab switching, but edits grouped under one dictionary still lost earlier values while the kernel was busy. Each file now has its own native editor identity. A browser regression using the actual shared cells verifies both edits survive an eight-second save, and the live Project 03 copy retained all three edited files. Save and Execute remain explicit controls.\n\n'
+    text += 'A notebook rename exposed a second recovery defect: the old progress key used its mutable display name. The coordinator now uses Forge’s stable notebook anchor, while retaining exact legacy identity receipts for recovery. The private rehearsal restored its original failure and saved files, reconciled both recorded session allowances, and retained spending before another explicit launch. A second native rename and fresh kernel restored the accepted patch, both attempts, and the prior spending plus only the new notebook allowance. Sandbox credentials were disconnected. No historical outcome or reservation was discarded.\n\n'
+    if data['browserCoverage']:
+        text += 'The browser coverage record in `status.json` lists each exercised activity, its exact execution IDs, recovery observations and remaining limits. Screenshots, saved snapshots and read-back receipts are in the private rehearsal artifact.\n\n'
     text += f"Completed attempt estimate: ${data['attemptEstimateUsd']:.4f}. Shared rollout ledger, including prior rollout work and notebook sessions: ${data['rolloutLedgerEstimateUsd']:.4f}. These are estimates, not provider billing caps. The separate unresolved historical $2 reservation remains unchanged.\n\n"
-    text += 'Validation: 77 TypeScript tests, 56 Python tests, nine unpaid saved views and the documentation build pass. A preservation audit checks 544 original files, all historical notebook payloads and the unchanged Project 06–08 sources.\n\n'
+    text += 'Validation: the 77 TypeScript tests, Python suites, nine unpaid saved views and documentation build pass. The latest browser-repair check includes 50 Python recovery/workbench tests. A preservation audit checks 544 original files, all historical notebook payloads and the unchanged Project 06–08 sources.\n\n'
     text += 'Remaining limits:\n\n'+'\n'.join('- '+s for s in data['limitations'])+'\n'
     (OUT/'README.md').write_text(text)
     return data
@@ -123,6 +136,13 @@ def publish():
             if path.is_file():files.append((path,'platform/'+path.relative_to(local/'platform-final').as_posix()))
         for path in sorted((LOCAL/'notebook-sessions').glob('notebook-workshop-*.json')):
             files.append((path,'notebook-sessions/'+path.name))
+        for path in sorted([*(LOCAL/'notebook-sessions').glob('notebook-browserqa*.json'), *(LOCAL/'notebook-sessions').glob('notebook-anchor*.json')]):
+            files.append((path,'notebook-sessions/'+path.name))
+        for path in sorted((local/'browser-qa').glob('*')):
+            if path.is_file() and path.suffix in {'.json','.png','.log'}:
+                files.append((path,'browser-qa/'+path.name))
+        for path in sorted((local/'browser-qa').glob('project-*/evidence/*/trace-readback.json')):
+            files.append((path,'browser-qa/'+path.relative_to(local/'browser-qa').as_posix()))
         digest,payload=snapshot(files,root/'upload',os.environ['WANDB_API_KEY'].encode())
         name='workshop-v1-owner-rehearsal'
         exists=artifact_collection_exists(entity,project,'course-workshop-audit',name)
@@ -131,8 +151,8 @@ def publish():
             group='workshop-v1-owner-rehearsal',config={'protocol':'workshop-v1','dashboardKind':'workshop-owner-rehearsal','runnerCommit':RUNNER},
             settings=wandb.Settings(disable_git=True,disable_code=True,silent=True)) as run:
             run.summary.update(metrics)
-            run.summary['attempts']=wandb.Table(columns=['Attempt','Project','Action','Outcome','Assisted','Estimate USD','Run','Source SHA'],data=[
-                [r['id'],r['project'],r['variant'],r['outcome'],r['assisted'],r['estimatedCostUsd'],r['wandbRunUrl'],r['snapshotSha256']] for r in data['attempts']])
+            run.summary['attempts']=wandb.Table(columns=['Attempt','Project','Action','Outcome','Assisted','Method','Cohort','Estimate USD','Run','Source SHA'],data=[
+                [r['id'],r['project'],r['variant'],r['outcome'],r['assisted'],r['rehearsalMethod'],r['rehearsalCohort'],r['estimatedCostUsd'],r['wandbRunUrl'],r['snapshotSha256']] for r in data['attempts']])
             run.summary['limits']=wandb.Table(columns=['Remaining qualification limit'],data=[[s] for s in data['limitations']])
             if artifact is None:
                 new=wandb.Artifact(name,type='course-workshop-audit',metadata={'payloadSha256':digest,'protocol':'workshop-v1'})
@@ -147,9 +167,9 @@ def publish():
     # Forge currently omits the legacy Weave summary-table panels from its UI.
     # Keep the native W&B Tables on the run and expose the same evidence through
     # supported Markdown panels, with each retained attempt linked directly.
-    evidence = '## Every retained attempt\n\n| Project | Action | Outcome | Evidence |\n|---|---|---|---|\n'
+    evidence = '## Every retained attempt\n\n| Project | Action | Outcome | Method | Evidence |\n|---|---|---|---|---|\n'
     for row in data['attempts']:
-        evidence += f"| {row['project']} | {row['variant']} | {row['outcome']} | [{row['id']}]({row['wandbRunUrl']}) |\n"
+        evidence += f"| {row['project']} | {row['variant']} | {row['outcome']} | {row['rehearsalMethod']} | [{row['id']}]({row['wandbRunUrl']}) |\n"
     limits = '## Qualification limits\n\n'+'\n'.join('- '+s for s in data['limitations'])
     view.sections=[ws.Section(name='Owner rehearsals — separate from research comparisons',is_open=True,layout_settings=ws.SectionLayoutSettings(columns=3,rows=2),panels=[wr.ScalarChart(title=t,metric=m,layout=wr.Layout(x=i%2*12,y=i//2*6,w=12,h=6)) for i,(t,m) in enumerate(panel_specs)]),
         ws.Section(name='Every attempt and its limits',is_open=True,layout_settings=EvidenceLayout(columns=1,rows=2),panels=[wr.MarkdownPanel(markdown=evidence,layout=wr.Layout(x=0,y=0,w=24,h=14)),wr.MarkdownPanel(markdown=limits,layout=wr.Layout(x=0,y=14,w=24,h=8))])]

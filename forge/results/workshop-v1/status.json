@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "cohort": "workshop-v1-owner-rehearsal",
-  "capturedAt": "2026-11-12T14:35:11.131572+00:00",
+  "capturedAt": "2026-11-12T16:43:17.881164+00:00",
   "runnerCommit": "d760596a441c76b797c9224641accc4a416a9af0",
   "tag": "forge-workshop-v1.0.0",
   "platformQualification": "https://github.com/ash0ts/learn-harness-engineering/actions/runs/43227923247",
@@ -30,7 +30,8 @@
       "startedAt": "2026-11-12T12:32:15.532Z",
       "finishedAt": "2026-11-12T12:32:38.950Z",
       "recordSha256": "9b5f408f9af5a8324b2e0e6aa51f3543347db9f7f0a5c9adc2c31772a763fc1f",
-      "rehearsalMethod": "cli"
+      "rehearsalMethod": "cli",
+      "rehearsalCohort": "workshop-v1-initial-qualification"
     },
     {
       "id": "workshop-access-20261112-b",
@@ -56,7 +57,8 @@
       "startedAt": "2026-11-12T12:33:15.695Z",
       "finishedAt": "2026-11-12T12:33:36.589Z",
       "recordSha256": "c642e476dfb7dc984711e167e25e8c3608668ba54215655c235bac38b5faac80",
-      "rehearsalMethod": "cli"
+      "rehearsalMethod": "cli",
+      "rehearsalCohort": "workshop-v1-initial-qualification"
     },
     {
       "id": "workshop-access-20261112-c",
@@ -82,7 +84,8 @@
       "startedAt": "2026-11-12T12:34:12.391Z",
       "finishedAt": "2026-11-12T12:34:40.588Z",
       "recordSha256": "81a883badf9f6eed5a551435dc9d1afcfaa2bba59712ef1ccea66e0aef389b0c",
-      "rehearsalMethod": "cli"
+      "rehearsalMethod": "cli",
+      "rehearsalCohort": "workshop-v1-initial-qualification"
     },
     {
       "id": "workshop-agent02-20261112",
@@ -110,7 +113,8 @@
       "startedAt": "2026-11-12T12:54:57.338Z",
       "finishedAt": "2026-11-12T12:56:25.889Z",
       "recordSha256": "96d43768d998df6e9f9ebd2a83f4fed407ae6b66fa609521e28075a997ae2fa3",
-      "rehearsalMethod": "cli"
+      "rehearsalMethod": "cli",
+      "rehearsalCohort": "workshop-v1-initial-qualification"
     },
     {
       "id": "workshop-agent02-20261112-b",
@@ -138,7 +142,8 @@
       "startedAt": "2026-11-12T13:05:35.617Z",
       "finishedAt": "2026-11-12T13:07:53.553Z",
       "recordSha256": "39060fba3cb0180b85c12d37901b0afdbc33df50ac825648064a879b8035af0a",
-      "rehearsalMethod": "cli"
+      "rehearsalMethod": "cli",
+      "rehearsalCohort": "workshop-v1-initial-qualification"
     },
     {
       "id": "workshop-agent03-first-20261112",
@@ -166,7 +171,8 @@
       "startedAt": "2026-11-12T13:09:07.687Z",
       "finishedAt": "2026-11-12T13:10:45.689Z",
       "recordSha256": "dac12834818188219bf7b3b1fc048078cba50871570ec2a1bcf3d74e15654251",
-      "rehearsalMethod": "cli"
+      "rehearsalMethod": "cli",
+      "rehearsalCohort": "workshop-v1-initial-qualification"
     },
     {
       "id": "workshop-agent03-resume-20261112",
@@ -194,7 +200,8 @@
       "startedAt": "2026-11-12T13:13:39.194Z",
       "finishedAt": "2026-11-12T13:15:10.943Z",
       "recordSha256": "5c03692acead8d3723ba2dd5ec8631525a9adc615445c4caad17c1b520c2e277",
-      "rehearsalMethod": "cli"
+      "rehearsalMethod": "cli",
+      "rehearsalCohort": "workshop-v1-initial-qualification"
     },
     {
       "id": "workshop-agent03-resume-20261112-b",
@@ -222,7 +229,8 @@
       "startedAt": "2026-11-12T13:17:35.147Z",
       "finishedAt": "2026-11-12T13:19:03.934Z",
       "recordSha256": "d6e65eb9bbdf1b3fab10389ab2a5b88e9607d3af429235aa682d72d6ed8b4699",
-      "rehearsalMethod": "cli"
+      "rehearsalMethod": "cli",
+      "rehearsalCohort": "workshop-v1-initial-qualification"
     },
     {
       "id": "workshop-agent03-resume-20261112-c",
@@ -250,7 +258,8 @@
       "startedAt": "2026-11-12T13:20:54.220Z",
       "finishedAt": "2026-11-12T13:22:20.913Z",
       "recordSha256": "171d6e096ae335b9e71fbd9f99b3d10e71be41987db75afd0e17f55332ec0907",
-      "rehearsalMethod": "cli"
+      "rehearsalMethod": "cli",
+      "rehearsalCohort": "workshop-v1-initial-qualification"
     },
     {
       "id": "workshop-agent05-20261112",
@@ -280,7 +289,8 @@
       "startedAt": "2026-11-12T13:07:10.344Z",
       "finishedAt": "2026-11-12T13:10:33.906Z",
       "recordSha256": "56097cff8c1bd91e2a2bb3fc9cd2e1a4549035c6d3cf6da9187cdc3a3835a056",
-      "rehearsalMethod": "cli"
+      "rehearsalMethod": "cli",
+      "rehearsalCohort": "workshop-v1-initial-qualification"
     },
     {
       "id": "workshop-agent05-20261112-b",
@@ -310,7 +320,8 @@
       "startedAt": "2026-11-12T13:13:35.437Z",
       "finishedAt": "2026-11-12T13:16:16.684Z",
       "recordSha256": "7f270513a1c22b7f8eb143376320b0c3f61559555a294f4443441417ec8212eb",
-      "rehearsalMethod": "cli"
+      "rehearsalMethod": "cli",
+      "rehearsalCohort": "workshop-v1-initial-qualification"
     },
     {
       "id": "workshop-agent05-20261112-c",
@@ -340,7 +351,8 @@
       "startedAt": "2026-11-12T13:17:38.435Z",
       "finishedAt": "2026-11-12T13:20:22.441Z",
       "recordSha256": "5387882cdf316951479f6a62c08cbd68e3abf674e09e473fa1dc0bec9e255ab1",
-      "rehearsalMethod": "cli"
+      "rehearsalMethod": "cli",
+      "rehearsalCohort": "workshop-v1-initial-qualification"
     },
     {
       "id": "workshop-live01-20261112",
@@ -368,7 +380,8 @@
       "startedAt": "2026-11-12T12:36:41.983Z",
       "finishedAt": "2026-11-12T12:41:50.852Z",
       "recordSha256": "081fd20eb39076e58a0aa8ae6249e1b4a09f60e6e772cb0724817c2bde844385",
-      "rehearsalMethod": "cli"
+      "rehearsalMethod": "cli",
+      "rehearsalCohort": "workshop-v1-initial-qualification"
     },
     {
       "id": "workshop-live01-20261112-b",
@@ -396,7 +409,8 @@
       "startedAt": "2026-11-12T12:45:38.661Z",
       "finishedAt": "2026-11-12T12:46:17.704Z",
       "recordSha256": "4c88a5fae79f6e7924cfa7e7fd6473d0341927db53610c80cbda5e0162beb5f2",
-      "rehearsalMethod": "cli"
+      "rehearsalMethod": "cli",
+      "rehearsalCohort": "workshop-v1-initial-qualification"
     },
     {
       "id": "workshop-live04-20261112",
@@ -424,7 +438,8 @@
       "startedAt": "2026-11-12T12:54:56.697Z",
       "finishedAt": "2026-11-12T12:55:29.530Z",
       "recordSha256": "c659c98928f588e966d7a0071ab301784687edc67b7ab717cbf26da09a4f2d70",
-      "rehearsalMethod": "cli"
+      "rehearsalMethod": "cli",
+      "rehearsalCohort": "workshop-v1-initial-qualification"
     },
     {
       "id": "workshop-live04-20261112-b",
@@ -452,7 +467,294 @@
       "startedAt": "2026-11-12T13:05:30.592Z",
       "finishedAt": "2026-11-12T13:06:03.875Z",
       "recordSha256": "1c0b6fd415fc68350dafd93fb1776d2675ea797f777cd408104482189fb57d2f",
-      "rehearsalMethod": "cli"
+      "rehearsalMethod": "cli",
+      "rehearsalCohort": "workshop-v1-initial-qualification"
+    },
+    {
+      "id": "001a81e3-067f-41d0-a6c3-e0bb13c05b55",
+      "project": "project-02",
+      "variant": "offline-app",
+      "outcome": "task_failed",
+      "sourceCommit": "d760596a441c76b797c9224641accc4a416a9af0",
+      "runnerRevision": "d760596a441c76b797c9224641accc4a416a9af0",
+      "snapshotId": "2c1dc010-c46c-4a7c-814c-ffe9c489ab79",
+      "snapshotSha256": "371250556e8d1c93c27b2f40e28ada00f165664fb86e20363d570048e852c171",
+      "candidateId": "2c1dc010-c46c-4a7c-814c-ffe9c489ab79",
+      "candidateSha256": "371250556e8d1c93c27b2f40e28ada00f165664fb86e20363d570048e852c171",
+      "assisted": true,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "estimatedCostUsd": 0.003179853333333334,
+      "cleanupStatus": "verified",
+      "telemetryStatus": "complete",
+      "publicationStatus": "verified",
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/0b83ae394d5d880d2b69",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-001a81e3-067f-41d0-a6c3-e0bb13c05b55:v0",
+      "conversationIds": [],
+      "startedAt": "2026-11-12T14:50:43.470Z",
+      "finishedAt": "2026-11-12T14:51:17.369Z",
+      "recordSha256": "2bbfc67fbc398c390866f3b036806532472d8549739cb81bb6c1458b1ada5875",
+      "rehearsalMethod": "native-notebook-controls",
+      "rehearsalCohort": "workshop-v1-browser-qa"
+    },
+    {
+      "id": "dec2a1cb-4318-4b95-803e-f6c9ac04a648",
+      "project": "project-02",
+      "variant": "agent",
+      "outcome": "task_failed",
+      "sourceCommit": "d760596a441c76b797c9224641accc4a416a9af0",
+      "runnerRevision": "d760596a441c76b797c9224641accc4a416a9af0",
+      "snapshotId": "2c1dc010-c46c-4a7c-814c-ffe9c489ab79",
+      "snapshotSha256": "371250556e8d1c93c27b2f40e28ada00f165664fb86e20363d570048e852c171",
+      "candidateId": "c856d330-3c34-443b-8727-a00b4f8353e1",
+      "candidateSha256": "371250556e8d1c93c27b2f40e28ada00f165664fb86e20363d570048e852c171",
+      "assisted": true,
+      "inputTokens": 208039,
+      "outputTokens": 1264,
+      "estimatedCostUsd": 0.03223361066666667,
+      "cleanupStatus": "verified",
+      "telemetryStatus": "complete",
+      "publicationStatus": "verified",
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/199c8b9ab2f857f401fc",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-dec2a1cb-4318-4b95-803e-f6c9ac04a648:v0",
+      "conversationIds": [
+        "01a1d03f-c9a0-74f1-9ced-acd106839d2c"
+      ],
+      "startedAt": "2026-11-12T14:52:54.468Z",
+      "finishedAt": "2026-11-12T14:54:44.783Z",
+      "recordSha256": "2f0c742b7c196b2fa4c393b89dfde666df2b73b25e00d89d9a7b75987005c969",
+      "rehearsalMethod": "native-notebook-controls",
+      "rehearsalCohort": "workshop-v1-browser-qa"
+    },
+    {
+      "id": "8ef29b23-c2ef-48f5-945a-e71adc27ba49",
+      "project": "project-03",
+      "variant": "agent",
+      "outcome": "passed",
+      "sourceCommit": "d760596a441c76b797c9224641accc4a416a9af0",
+      "runnerRevision": "d760596a441c76b797c9224641accc4a416a9af0",
+      "snapshotId": "68ce4bdf-0274-4119-ab02-61cc643e9e3a",
+      "snapshotSha256": "73250942f3eddf724ec339cf29a7533150b8c8cde170cd7a8898dc596bfee537",
+      "candidateId": "a8246871-9b79-4d39-b3ba-02d590920a42",
+      "candidateSha256": "73250942f3eddf724ec339cf29a7533150b8c8cde170cd7a8898dc596bfee537",
+      "assisted": true,
+      "inputTokens": 36029,
+      "outputTokens": 409,
+      "estimatedCostUsd": 0.010480828666666666,
+      "cleanupStatus": "verified",
+      "telemetryStatus": "complete",
+      "publicationStatus": "verified",
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/a6be5f79655ad5d1f670",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-8ef29b23-c2ef-48f5-945a-e71adc27ba49:v0",
+      "conversationIds": [
+        "01a1d051-c75b-7367-82fc-6221c7630533"
+      ],
+      "startedAt": "2026-11-12T15:12:49.394Z",
+      "finishedAt": "2026-11-12T15:13:59.590Z",
+      "recordSha256": "2b8d901aed80386152dbd9dfb36c0ec9216a578d8a014df7d4d327dfaa829d58",
+      "rehearsalMethod": "native-notebook-controls",
+      "rehearsalCohort": "workshop-v1-browser-qa"
+    },
+    {
+      "id": "c782dce0-97a4-4aa9-9f13-80b089912e1c",
+      "project": "project-03",
+      "variant": "resume",
+      "outcome": "passed",
+      "sourceCommit": "d760596a441c76b797c9224641accc4a416a9af0",
+      "runnerRevision": "d760596a441c76b797c9224641accc4a416a9af0",
+      "snapshotId": "898224fa-e3e0-4338-9eeb-e9166d967157",
+      "snapshotSha256": "8f38033f4d8e45ae5399688be7f304526ab7e438b6cf3bdd9da3c66f69670362",
+      "candidateId": "a084ec58-30c8-44f0-9f98-7eaa13713a8c",
+      "candidateSha256": "8f38033f4d8e45ae5399688be7f304526ab7e438b6cf3bdd9da3c66f69670362",
+      "assisted": true,
+      "inputTokens": 27917,
+      "outputTokens": 446,
+      "estimatedCostUsd": 0.010709244,
+      "cleanupStatus": "verified",
+      "telemetryStatus": "complete",
+      "publicationStatus": "verified",
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/f05910917b55d0fe9e35",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-c782dce0-97a4-4aa9-9f13-80b089912e1c:v0",
+      "conversationIds": [
+        "01a1d059-c182-7556-892a-474a53b321c9"
+      ],
+      "startedAt": "2026-11-12T15:21:26.805Z",
+      "finishedAt": "2026-11-12T15:22:47.151Z",
+      "recordSha256": "4f71a51643dd754ebc4ab2095d1e11944dce87f92e9f54cc691d690d34ffc349",
+      "rehearsalMethod": "native-notebook-controls",
+      "rehearsalCohort": "workshop-v1-browser-qa"
+    },
+    {
+      "id": "ee03a668-dca7-496d-bb5d-d096cb391697",
+      "project": "project-03",
+      "variant": "offline-app",
+      "outcome": "passed",
+      "sourceCommit": "d760596a441c76b797c9224641accc4a416a9af0",
+      "runnerRevision": "d760596a441c76b797c9224641accc4a416a9af0",
+      "snapshotId": "68ce4bdf-0274-4119-ab02-61cc643e9e3a",
+      "snapshotSha256": "73250942f3eddf724ec339cf29a7533150b8c8cde170cd7a8898dc596bfee537",
+      "candidateId": "68ce4bdf-0274-4119-ab02-61cc643e9e3a",
+      "candidateSha256": "73250942f3eddf724ec339cf29a7533150b8c8cde170cd7a8898dc596bfee537",
+      "assisted": true,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "estimatedCostUsd": 0.0023485853333333334,
+      "cleanupStatus": "verified",
+      "telemetryStatus": "complete",
+      "publicationStatus": "verified",
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/21738650b3f013807e0d",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-ee03a668-dca7-496d-bb5d-d096cb391697:v0",
+      "conversationIds": [],
+      "startedAt": "2026-11-12T15:10:32.446Z",
+      "finishedAt": "2026-11-12T15:10:57.679Z",
+      "recordSha256": "1c68cfd2330a34c05fecdcdb40de6a1c793a557c74731223b245c1d2f7f9d4ab",
+      "rehearsalMethod": "native-notebook-controls",
+      "rehearsalCohort": "workshop-v1-browser-qa"
+    },
+    {
+      "id": "0ab8d97f-ed37-4ac4-b3dc-15aa0110b6ef",
+      "project": "project-04",
+      "variant": "offline-app",
+      "outcome": "passed",
+      "sourceCommit": "d760596a441c76b797c9224641accc4a416a9af0",
+      "runnerRevision": "d760596a441c76b797c9224641accc4a416a9af0",
+      "snapshotId": "415f4b72-253d-4c76-bd82-c2c6fcdad551",
+      "snapshotSha256": "46c8f6b44fdd0d64bf3fb17198560c9afd1233d48d697e798b3080ffedba08f8",
+      "candidateId": "415f4b72-253d-4c76-bd82-c2c6fcdad551",
+      "candidateSha256": "46c8f6b44fdd0d64bf3fb17198560c9afd1233d48d697e798b3080ffedba08f8",
+      "assisted": false,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "estimatedCostUsd": 0.0028541999999999994,
+      "cleanupStatus": "verified",
+      "telemetryStatus": "complete",
+      "publicationStatus": "verified",
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/6cf38a9295b2c55125ce",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-0ab8d97f-ed37-4ac4-b3dc-15aa0110b6ef:v0",
+      "conversationIds": [],
+      "startedAt": "2026-11-12T15:29:20.854Z",
+      "finishedAt": "2026-11-12T15:29:51.273Z",
+      "recordSha256": "68c42a08bcdf8924c6f084f44df39f2972e7e2515d13a349924428482ea3d424",
+      "rehearsalMethod": "native-notebook-controls",
+      "rehearsalCohort": "workshop-v1-browser-qa"
+    },
+    {
+      "id": "b0678251-b5ca-46c6-8af3-9652e05bcec5",
+      "project": "project-04",
+      "variant": "live-app",
+      "outcome": "passed",
+      "sourceCommit": "d760596a441c76b797c9224641accc4a416a9af0",
+      "runnerRevision": "d760596a441c76b797c9224641accc4a416a9af0",
+      "snapshotId": "415f4b72-253d-4c76-bd82-c2c6fcdad551",
+      "snapshotSha256": "46c8f6b44fdd0d64bf3fb17198560c9afd1233d48d697e798b3080ffedba08f8",
+      "candidateId": "415f4b72-253d-4c76-bd82-c2c6fcdad551",
+      "candidateSha256": "46c8f6b44fdd0d64bf3fb17198560c9afd1233d48d697e798b3080ffedba08f8",
+      "assisted": false,
+      "inputTokens": 457,
+      "outputTokens": 31,
+      "estimatedCostUsd": 0.0030029393333333336,
+      "cleanupStatus": "verified",
+      "telemetryStatus": "complete",
+      "publicationStatus": "verified",
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/d3a141be05b705b79611",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-b0678251-b5ca-46c6-8af3-9652e05bcec5:v0",
+      "conversationIds": [
+        "app-b0678251-b5ca-46c6-8af3-9652e05bcec5"
+      ],
+      "startedAt": "2026-11-12T15:31:50.670Z",
+      "finishedAt": "2026-11-12T15:32:22.211Z",
+      "recordSha256": "c674e51d6abd27f5d7ec73cb917927bb74ea796e16a7bcc909910eea96d1676b",
+      "rehearsalMethod": "native-notebook-controls",
+      "rehearsalCohort": "workshop-v1-browser-qa"
+    },
+    {
+      "id": "c4581195-e195-4b80-af29-4d7b7acf1558",
+      "project": "project-04",
+      "variant": "offline-app",
+      "outcome": "task_failed",
+      "sourceCommit": "d760596a441c76b797c9224641accc4a416a9af0",
+      "runnerRevision": "d760596a441c76b797c9224641accc4a416a9af0",
+      "snapshotId": "0128f61e-7d38-444f-a76c-013e004ad76f",
+      "snapshotSha256": "3634fd3a93d553d9102d303f1882fdba3c00f4373ddbd18725f00d23a935ac54",
+      "candidateId": "0128f61e-7d38-444f-a76c-013e004ad76f",
+      "candidateSha256": "3634fd3a93d553d9102d303f1882fdba3c00f4373ddbd18725f00d23a935ac54",
+      "assisted": false,
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "estimatedCostUsd": 0.0029356133333333337,
+      "cleanupStatus": "verified",
+      "telemetryStatus": "complete",
+      "publicationStatus": "verified",
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/4ddd2c94dde58895c125",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-c4581195-e195-4b80-af29-4d7b7acf1558:v0",
+      "conversationIds": [],
+      "startedAt": "2026-11-12T15:26:23.887Z",
+      "finishedAt": "2026-11-12T15:26:55.158Z",
+      "recordSha256": "3432bb41b5b417b99ca041d1b7f00e6f48403efb2ba2f5dac82fc662835d982d",
+      "rehearsalMethod": "native-notebook-controls",
+      "rehearsalCohort": "workshop-v1-browser-qa"
+    },
+    {
+      "id": "e5652d9f-5129-4283-909b-cbca5af826d5",
+      "project": "project-05",
+      "variant": "maker-checker",
+      "outcome": "task_failed",
+      "sourceCommit": "d760596a441c76b797c9224641accc4a416a9af0",
+      "runnerRevision": "d760596a441c76b797c9224641accc4a416a9af0",
+      "snapshotId": "6e7db42d-2f7f-4a1d-9995-e26bb678927e",
+      "snapshotSha256": "b7dc81fe021e22bf02a265d277c2e324a6598c35255fdcefe99616dced0849ef",
+      "candidateId": "aa2f795a-89f1-4904-8f4e-85c5d5c3007f",
+      "candidateSha256": "b7dc81fe021e22bf02a265d277c2e324a6598c35255fdcefe99616dced0849ef",
+      "assisted": true,
+      "inputTokens": 74407,
+      "outputTokens": 1244,
+      "estimatedCostUsd": 0.023683166666666665,
+      "cleanupStatus": "verified",
+      "telemetryStatus": "complete",
+      "publicationStatus": "verified",
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/2d00ae2b486b0fc32e2d",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-e5652d9f-5129-4283-909b-cbca5af826d5:v0",
+      "conversationIds": [
+        "01a1d068-71d4-74ba-9181-57a299ead53c",
+        "01a1d068-f3b3-74ba-9181-57a599a20caf",
+        "01a1d069-9c80-74ba-9181-57a6b67de962"
+      ],
+      "startedAt": "2026-11-12T15:37:31.518Z",
+      "finishedAt": "2026-11-12T15:40:13.248Z",
+      "recordSha256": "9ab67ab094b9d33628643e82143ef24b64e9e3179c7a800a342e2c686aa17aea",
+      "rehearsalMethod": "native-notebook-controls",
+      "rehearsalCohort": "workshop-v1-browser-qa"
+    },
+    {
+      "id": "fb8b61e4-c7b9-482c-8c36-3a64cba125c5",
+      "project": "project-05",
+      "variant": "maker-checker",
+      "outcome": "passed",
+      "sourceCommit": "d760596a441c76b797c9224641accc4a416a9af0",
+      "runnerRevision": "d760596a441c76b797c9224641accc4a416a9af0",
+      "snapshotId": "8c8f61c5-3daa-435d-9341-fc2b51059ed8",
+      "snapshotSha256": "8c2dcc5ba8706541a443d1841ee73c35b7d79a0dfdeb563aa28184693c2f5661",
+      "candidateId": "efb466ac-a3fa-43c2-b4b4-0b0355a8da5c",
+      "candidateSha256": "2e3def9b6b7d22f2739ddb2b6d468b6d86da819320f294e0c620b40c281c6dbc",
+      "assisted": true,
+      "inputTokens": 103809,
+      "outputTokens": 3736,
+      "estimatedCostUsd": 0.02844146933333333,
+      "cleanupStatus": "verified",
+      "telemetryStatus": "complete",
+      "publicationStatus": "verified",
+      "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/5644ab1c53d29522cbb9",
+      "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-fb8b61e4-c7b9-482c-8c36-3a64cba125c5:v0",
+      "conversationIds": [
+        "01a1d090-77a9-7320-a10b-7185a06eff84",
+        "01a1d091-402b-7320-a10b-7187daeee257",
+        "01a1d091-cae7-7320-a10b-718894fa0a60"
+      ],
+      "startedAt": "2026-11-12T16:21:16.719Z",
+      "finishedAt": "2026-11-12T16:23:54.642Z",
+      "recordSha256": "567720ca0be372c6839ba6c05c2de230958ef9de05d51a7eb7bb9644c376ad2a",
+      "rehearsalMethod": "native-notebook-controls",
+      "rehearsalCohort": "workshop-v1-browser-qa"
     },
     {
       "id": "9558b327-e562-41e6-8236-b9a265bbf31d",
@@ -480,13 +782,14 @@
       "startedAt": "2026-11-12T14:09:55.976Z",
       "finishedAt": "2026-11-12T14:10:26.155Z",
       "recordSha256": "7e89df132bf68d12e0270c3f717faaf8a691d25e3f3229403c3150e8a6e93611",
-      "rehearsalMethod": "native-notebook-controls"
+      "rehearsalMethod": "native-notebook-controls",
+      "rehearsalCohort": "workshop-v1-initial-qualification"
     }
   ],
   "outcomes": {
     "infrastructure_failed": 3,
-    "passed": 8,
-    "task_failed": 6
+    "passed": 14,
+    "task_failed": 10
   },
   "notebooks": [
     {
@@ -510,11 +813,11 @@
       "currentVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "01-Minimal-instructions-and-explicit-harnesses",
-        "versionIndex": 47,
+        "versionIndex": 53,
         "sourceFileName": "notebook.py"
       },
-      "sha256": "412d5ea9e0c3cf85649b2c1a4860620d6009ee2dc6c4013930323de45f0b52ba",
-      "verifiedAt": "2026-11-12T14:30:36.019040+00:00",
+      "sha256": "00943cc1e9a8cb3b73ca7a07771bad6df012310be9aed585fb588616482ee02d",
+      "verifiedAt": "2026-11-12T16:18:42.090231+00:00",
       "currentCanonicalVerified": true
     },
     {
@@ -524,11 +827,11 @@
       "currentVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "02-An-agent-readable-workspace",
-        "versionIndex": 34,
+        "versionIndex": 40,
         "sourceFileName": "notebook.py"
       },
-      "sha256": "1c86b86c2c8281f63e10468e26326a286306d9bb07b10ae966e1a8e45b7799b2",
-      "verifiedAt": "2026-11-12T14:30:37.736924+00:00",
+      "sha256": "4c129a8bb5e57a7923dc0d657e327b20d5d58218b08687c7431b36a2cff058ee",
+      "verifiedAt": "2026-11-12T16:32:04.048288+00:00",
       "currentCanonicalVerified": true
     },
     {
@@ -538,11 +841,11 @@
       "currentVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "03-Interrupted-session-recovery",
-        "versionIndex": 34,
+        "versionIndex": 40,
         "sourceFileName": "notebook.py"
       },
-      "sha256": "880e7f682a9a855e637267b5ae02861711bb2eb0a97f8d2d3b487713313a3463",
-      "verifiedAt": "2026-11-12T14:30:40.273820+00:00",
+      "sha256": "dab365ae8324ebaa9078da8b50d07651638038c835246dd279792d6eb6f302cf",
+      "verifiedAt": "2026-11-12T16:38:26.209740+00:00",
       "currentCanonicalVerified": true
     },
     {
@@ -552,11 +855,11 @@
       "currentVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "04-Runtime-evidence-and-the-seeded-defect",
-        "versionIndex": 27,
+        "versionIndex": 33,
         "sourceFileName": "notebook.py"
       },
-      "sha256": "9ffe778d6dc3f36d0070fca77d3c459180a7273cf8551dc7a61451f683d160df",
-      "verifiedAt": "2026-11-12T14:30:41.977833+00:00",
+      "sha256": "804d505fcad64db60a2ae8c472606072a4e3fa51136cbaf3ccf1077730e3e3b2",
+      "verifiedAt": "2026-11-12T16:41:01.635718+00:00",
       "currentCanonicalVerified": true
     },
     {
@@ -566,19 +869,124 @@
       "currentVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "05-One-feature-three-role-arrangements",
-        "versionIndex": 26,
+        "versionIndex": 32,
         "sourceFileName": "notebook.py"
       },
-      "sha256": "de1bdf57cbc2278594107838953354f34ca31b46d000150e5457ba8dd5d02240",
-      "verifiedAt": "2026-11-12T14:30:49.908762+00:00",
+      "sha256": "e8df866f91640f12475eecc3aff188d7ef8f20d6e6ee8936bc601e076d04186a",
+      "verifiedAt": "2026-11-12T16:42:50.727347+00:00",
       "currentCanonicalVerified": true
     }
   ],
-  "attemptEstimateUsd": 0.26483702200000003,
-  "rolloutLedgerEstimateUsd": 4.515203154666667,
+  "methods": {
+    "cli": 16,
+    "native-notebook-controls": 11
+  },
+  "cohorts": {
+    "workshop-v1-initial-qualification": 17,
+    "workshop-v1-browser-qa": 10
+  },
+  "notebookCoordinatorCommit": "55ffc010",
+  "browserCoverage": {
+    "schemaVersion": 1,
+    "cohort": "workshop-v1-browser-qa",
+    "ownerOnly": true,
+    "project01": {
+      "priorBrowserTrial": "9558b327-e562-41e6-8236-b9a265bbf31d",
+      "liveApp": "passed in prior owner rehearsal",
+      "currentEditorReverification": "Canonical repaired source/render verified. Shared native editor busy-kernel regression passed; prior live Project 01 trial retained, no new paid trial claimed."
+    },
+    "project02": {
+      "copy": "Tm90ZWJvb2s6MTU2ODM=",
+      "baseline": "failed intended checks",
+      "sourceEditing": "multi-tab lost-update failure reproduced and repaired in bad8954f; saved final harness contained intended files",
+      "sdkAction": "001a81e3-067f-41d0-a6c3-e0bb13c05b55",
+      "sdkCommand": "npm run check, exit 0",
+      "piAction": "dec2a1cb-4318-4b95-803e-f6c9ac04a648",
+      "piObservation": "24 model requests; read task, architecture, feature list and app files; made no patch. Application checks correctly failed.",
+      "candidatePreview": "passed; empty candidate diff accurately displayed",
+      "candidateApply": "passed",
+      "loadSavedFiles": "passed",
+      "saveProgress": "passed",
+      "cleanup": "verified; notebook terminated"
+    },
+    "project03": {
+      "copy": "Tm90ZWJvb2s6MTU2ODQ=",
+      "baseline": "failed intended metadata and handoff checks",
+      "repairedEditors": "all three edits visible in dirty-state message",
+      "currentSnapshot": "68ce4bdf-0274-4119-ab02-61cc643e9e3a",
+      "status": "complete",
+      "snapshot": "898224fa-e3e0-4338-9eeb-e9166d967157",
+      "offlineApp": "ee03a668-dca7-496d-bb5d-d096cb391697",
+      "firstSession": "8ef29b23-c2ef-48f5-945a-e71adc27ba49",
+      "resume": "c782dce0-97a4-4aa9-9f13-80b089912e1c",
+      "observedHandoffRead": true,
+      "outcomes": "all three passed",
+      "cleanup": "verified; notebook terminated"
+    },
+    "project04": {
+      "copy": "Tm90ZWJvb2s6MTU2OTU=",
+      "status": "complete",
+      "baseline": "c4581195-e195-4b80-af29-4d7b7acf1558: intended empty-chunk and instrumentation failures",
+      "repairedOffline": "0ab8d97f-ed37-4ac4-b3dc-15aa0110b6ef: passed",
+      "liveApp": "b0678251-b5ca-46c6-8af3-9652e05bcec5: passed",
+      "negativeControl": "a6eabb26-3737-44b3-b6f2-6ad90a51587e: removing spans failed instrumentation check while retaining indexing repair",
+      "recovery": "Connect recovered pending publication for the same execution; no repeated inference",
+      "usage": {
+        "inputTokens": 457,
+        "outputTokens": 31,
+        "calls": 2
+      },
+      "browserTrace": "Agent Lens Timeline displays student.indexing.start under the matching app turn",
+      "cleanup": "verified; notebook terminated"
+    },
+    "project05": {
+      "copy": "Tm90ZWJvb2s6MTU3MDE=",
+      "status": "complete",
+      "firstAttempt": "e5652d9f-5129-4283-909b-cbca5af826d5",
+      "firstOutcome": "task_failed: no actual checker review or patch",
+      "revisedAttempt": "fb8b61e4-c7b9-482c-8c36-3a64cba125c5",
+      "revisedOutcome": "passed",
+      "snapshot": "8c8f61c5-3daa-435d-9341-fc2b51059ed8",
+      "snapshotSha256": "8c2dcc5ba8706541a443d1841ee73c35b7d79a0dfdeb563aa28184693c2f5661",
+      "reviewProduced": true,
+      "makerPatchFiles": [
+        "src/renderer/components/ConversationHistory.tsx"
+      ],
+      "revisionPatch": "empty: checker requested no repair; retained as observed",
+      "studentEvaluation": {
+        "checks_passed": 9,
+        "checks_total": 9
+      },
+      "usage": {
+        "inputTokens": 103809,
+        "outputTokens": 3736
+      },
+      "recovery": "Prepare restored original saved prompt files, failed trial, and 1.046 USD estimate including retained session allowances; sandbox credentials disconnected",
+      "intervention": "Replaced only role prompts with the earlier qualified bounded-read instructions using native editors; original allowance unchanged",
+      "candidatePreview": "passed: actual ConversationHistory diff",
+      "candidateApply": "passed",
+      "loadSavedFiles": "passed",
+      "acceptedSnapshot": "4b75aa2f-fb62-4753-8cc7-877d62392dfa",
+      "acceptedSnapshotCheck": "passed",
+      "modelsReadback": "verified: student/checks_passed=9, student/checks_total=9",
+      "renameRecovery": "passed after native rename and fresh kernel: same snapshot, both trials, prior spending plus only new notebook allowance; credentials disconnected",
+      "cleanup": "verified: both trial workers terminated; all rehearsal notebook runtimes terminated",
+      "singleRoleComparison": "optional extension not exercised in this browser cohort"
+    },
+    "nativeTransfers": "unverified; see native-transfer.json",
+    "repairedEditorRegression": "passed; see editor-regression.json",
+    "stableNotebookIdentityRegression": "passed; see rename-restoration.json and project05-rename-restored.png",
+    "publication": {
+      "method": "Native Marimo file editor and normal save; fresh render verification",
+      "coordinatorCommit": "55ffc010",
+      "project02SaveRecovery": "Initial saved output had only introductory cells. Native source edit/save refreshed all output; exact canonical source restored and verified. No HTML import."
+    }
+  },
+  "attemptEstimateUsd": 0.38470653266666666,
+  "rolloutLedgerEstimateUsd": 5.9262000919999975,
   "limitations": [
     "Owner-account rehearsal only; no independent student account.",
-    "Native browser progress download remains unverified at the owner\u2019s request.",
+    "Native browser downloads remain unverified; repeat clicks produced no observable download event or inspected file.",
     "Native notebook upload chooser automation timed out; CLI source import/export passed separately.",
     "CI exercises the actual Import button with a stubbed OS picker; native picker acceptance is separate.",
     "Windows local dev/build/check/source exchange qualified; paid CLI worker cleanup is not qualified.",

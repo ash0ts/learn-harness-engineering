@@ -3,21 +3,8 @@
   "url": "https://forge.coreweave.com/wandb/learn-harness-engineering-forge?nw=leid7r3frfp",
   "forgeUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=leid7r3frfp",
   "runUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/course-workshop-v1-owner",
-  "artifact": "wandb/learn-harness-engineering-forge/workshop-v1-owner-rehearsal:v1",
-  "payloadSha256": "23807b02ab36a221747ed6765a07bcec4ef3c5830b952b9b923a029933092574",
+  "artifact": "wandb/learn-harness-engineering-forge/workshop-v1-owner-rehearsal:v2",
+  "payloadSha256": "c213c11ab0b2bcd301a2474f0b7a86846d3f0878705fa6d718b70d6e4e56af7e",
   "artifactReadBackVerified": true,
-  "dashboardReadBackVerified": true,
-  "nativeUiVerification": {
-    "summaryCards": {
-      "completed": 17,
-      "passed": 8,
-      "taskFailed": 6,
-      "infrastructureFailed": 3,
-      "verifiedNotebooks": 6
-    },
-    "linkedAttemptRows": 17,
-    "qualificationLimitsVisible": true,
-    "nativeEvidencePanel": "MarkdownPanel",
-    "modelsTableReadBackRows": 17
-  }
+  "dashboardReadBackVerified": true
 }
