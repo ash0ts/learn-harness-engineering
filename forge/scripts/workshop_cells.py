@@ -41,7 +41,7 @@ EDITORS = '''def _(get_files_epoch, learner, mo, workshop_initial):
     get_files_epoch()
     workshop_loaded = learner.workshop_files() or workshop_initial
     _languages = {".ts":"typescript", ".tsx":"typescript", ".md":"markdown", ".json":"json", ".py":"python"}
-    workshop_editors = mo.ui.dictionary({_name: mo.ui.code_editor(value=_text, language=_languages.get("." + _name.rsplit(".",1)[-1], "text"), label=_name, min_height=220, max_height=440, debounce=500) for _name, _text in workshop_loaded['files'].items()})
+    workshop_editors = mo.ui.dictionary({_name: mo.ui.code_editor(value=_text, language=_languages.get("." + _name.rsplit(".",1)[-1], "text"), label=_name, min_height=220, max_height=440, debounce=False) for _name, _text in workshop_loaded['files'].items()})
     mo.vstack([mo.md("### 1. Inspect and edit your implementation\\n\\nThe deliberate gaps are marked `TODO(workshop)`. Open each file tab. Typing changes only the draft in this editor; it cannot launch work. Save before checking or executing. Files outside this list belong to the supplied checkpoint."), mo.ui.tabs({_name:workshop_editors[_name] for _name in workshop_loaded['files']})])
     return workshop_editors, workshop_loaded'''
 

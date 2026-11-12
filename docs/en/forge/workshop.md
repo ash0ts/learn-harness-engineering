@@ -58,7 +58,7 @@ npm run dev
 
 Use `project-02`, `project-03`, `project-04` or `project-05` and a separate directory to initialize another lesson. The immutable workshop tag identifies the course version; `workshop.json` records the exact base and editable file list. Do not edit that manifest or the protected runner.
 
-The window title labels the default **offline fixture answers** mode. Import `fixtures/short.txt` or `fixtures/long.txt` using the native file picker. Select the document, index it, ask a question, and inspect History. Each workspace has its own `.workshop-data` directory.
+The launcher prints an **offline fixture answers** notice for the default mode. Import `fixtures/short.txt` or `fixtures/long.txt` using the native file picker. Select the document, index it, ask a question, and inspect History. Each workspace has its own `.workshop-data` directory.
 
 ```sh
 npm run check
