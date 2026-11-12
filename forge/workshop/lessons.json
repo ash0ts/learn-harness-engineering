@@ -1,0 +1,173 @@
+[
+  {
+    "schemaVersion": 1,
+    "protocol": "workshop-v1",
+    "project": "project-01",
+    "title": "Build and connect",
+    "task": "Wire the native Import button and build a bounded Forge request from the question and retrieved citations. Test supported and unsupported questions.",
+    "editable": [
+      "src/renderer/workshop-import.ts",
+      "workshop/inference.ts"
+    ],
+    "overlays": {
+      "src/renderer/workshop-import.ts": "export async function importFromPicker() {\n  // TODO: ask the typed bridge to choose a file; import it only when not cancelled.\n}\n",
+      "workshop/inference.ts": "import type OpenAI from 'openai';\ntype WorkshopRequest = OpenAI.Chat.Completions.ChatCompletionCreateParamsNonStreaming & {chat_template_kwargs:{enable_thinking:boolean}};\nexport function makeRequest(question:string,citations:unknown[],model:string):WorkshopRequest {\n  // TODO: return model, max_tokens <= 1024, and system/user messages containing the excerpts.\n  throw new Error('Complete the Forge request before running live inference');\n}\n"
+    },
+    "hints": [
+      "Inspect documents.choose and documents.import in src/preload/preload.ts.",
+      "A cancelled picker returns null. The supplied caller refreshes the document list.",
+      "Use the supplied model argument. Put the question and citations in the user message; explain how to handle unsupported questions in the system message.",
+      "Keep the bounded Qwen request in non-thinking mode: chat_template_kwargs: {enable_thinking: false}. The 512-token answer allowance is not a thinking budget."
+    ],
+    "checks": [
+      "button-picker",
+      "bounded-inference",
+      "visible-answer"
+    ],
+    "scenarios": [
+      "import",
+      "index",
+      "ask",
+      "restart"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "protocol": "workshop-v1",
+    "project": "project-02",
+    "title": "Give the agent a usable workspace",
+    "task": "Complete document-detail content through typed IPC. Start with the student-written workspace docs, preserve persistence, and verify the full document after restart.",
+    "editable": [
+      "AGENTS.md",
+      "docs/ARCHITECTURE.md",
+      "feature_list.json",
+      "workshop/sandbox-task.ts",
+      "src/main/ipc-handlers.ts",
+      "src/renderer/components/DocumentDetail.tsx"
+    ],
+    "overlays": {
+      "AGENTS.md": "# Working agreement\n\nTODO: name the task entry point, architecture boundary, and checks.\n",
+      "docs/ARCHITECTURE.md": "# Architecture\n\nTODO: map renderer \u2192 preload \u2192 main \u2192 persistence with real file paths.\n",
+      "feature_list.json": "{\n  \"features\": [\n    {\n      \"id\": \"document-detail\",\n      \"acceptance\": \"TODO\",\n      \"status\": \"unverified\",\n      \"command\": \"npm test\"\n    }\n  ]\n}\n",
+      "workshop/sandbox-task.ts": "import type {Sandbox} from '@coreweave/cwsandbox';\nexport async function inspectWorkspace(sandbox:Sandbox) {\n  // TODO: return sandbox.commands.run(['npm','run','check'], {cwd:'/workspace/task', timeoutMs:60000, check:false}).\n  throw new Error('Choose the command to execute in your sandbox');\n}\n",
+      "src/main/ipc-handlers.ts": "import { IpcMain, dialog } from 'electron';\nimport { DocumentService } from '../services/document-service';\nimport { IndexingService } from '../services/indexing-service';\nimport { QaService } from '../services/qa-service';\nimport { PersistenceService } from '../services/persistence-service';\nimport { IPC_CHANNELS } from '../shared/types';\nimport { logger } from '../services/logger';\n\nconst SERVICE = 'ipc-handlers';\n\nexport interface Services {\n  documentService: DocumentService;\n  indexingService: IndexingService;\n  qaService: QaService;\n  persistence: PersistenceService;\n}\n\nexport function registerIpcHandlers(ipcMain: IpcMain, services: Services) {\n  const { documentService, indexingService, qaService, persistence } = services;\n\n  ipcMain.handle('documents:choose', async () => {\n    const picked = await dialog.showOpenDialog({properties:['openFile'], filters:[{name:'Text documents',extensions:['txt','md']}]});\n    return picked.canceled ? null : picked.filePaths[0] ?? null;\n  });\n  ipcMain.handle('documents:content', async (_event, id:string) => null);\n  // ---- Document operations ----\n\n  ipcMain.handle(IPC_CHANNELS.LIST_DOCUMENTS, async () => {\n    logger.debug(SERVICE, 'IPC: LIST_DOCUMENTS');\n    return documentService.listDocuments();\n  });\n\n  ipcMain.handle(IPC_CHANNELS.IMPORT_DOCUMENT, async (_event, filePath: string) => {\n    logger.info(SERVICE, 'IPC: IMPORT_DOCUMENT', { filePath });\n    return documentService.importDocument(filePath);\n  });\n\n  ipcMain.handle(IPC_CHANNELS.GET_DOCUMENT, async (_event, id: string) => {\n    logger.debug(SERVICE, 'IPC: GET_DOCUMENT', { id });\n    return documentService.getDocument(id);\n  });\n\n  ipcMain.handle(IPC_CHANNELS.DELETE_DOCUMENT, async (_event, id: string) => {\n    logger.info(SERVICE, 'IPC: DELETE_DOCUMENT', { id });\n    return documentService.deleteDocument(id);\n  });\n\n  // ---- Indexing ----\n\n  ipcMain.handle(IPC_CHANNELS.START_INDEXING, async (_event, documentId?: string) => {\n    logger.info(SERVICE, 'IPC: START_INDEXING', { documentId: documentId ?? 'all' });\n    return indexingService.startIndexing(documentId);\n  });\n\n  ipcMain.handle(IPC_CHANNELS.GET_INDEXING_STATUS, async () => {\n    logger.debug(SERVICE, 'IPC: GET_INDEXING_STATUS');\n    return indexingService.getStatus();\n  });\n\n  ipcMain.handle(IPC_CHANNELS.GET_CHUNKS, async (_event, documentId: string) => {\n    logger.debug(SERVICE, 'IPC: GET_CHUNKS', { documentId });\n    return indexingService.getChunksForDocument(documentId);\n  });\n\n  // ---- Q&A ----\n\n  ipcMain.handle(IPC_CHANNELS.ASK_QUESTION, async (_event, question: string) => {\n    logger.info(SERVICE, 'IPC: ASK_QUESTION', { question });\n    return qaService.ask(question);\n  });\n\n  ipcMain.handle(IPC_CHANNELS.GET_HISTORY, async () => {\n    logger.debug(SERVICE, 'IPC: GET_HISTORY');\n    return qaService.getHistory();\n  });\n\n  ipcMain.handle(IPC_CHANNELS.CLEAR_HISTORY, async () => {\n    logger.info(SERVICE, 'IPC: CLEAR_HISTORY');\n    return qaService.clearHistory();\n  });\n\n  // ---- Feedback ----\n\n  ipcMain.handle(IPC_CHANNELS.SUBMIT_FEEDBACK, async (_event, qaTimestamp: string, question: string, rating: 'positive' | 'negative', comment?: string) => {\n    logger.info(SERVICE, 'IPC: SUBMIT_FEEDBACK', { qaTimestamp, rating });\n    return qaService.submitFeedback(qaTimestamp, question, rating, comment ?? '');\n  });\n\n  ipcMain.handle(IPC_CHANNELS.GET_FEEDBACK, async () => {\n    logger.debug(SERVICE, 'IPC: GET_FEEDBACK');\n    return qaService.getFeedback();\n  });\n\n  // ---- Clean state ----\n\n  ipcMain.handle(IPC_CHANNELS.RESET_DATA, async () => {\n    logger.warn(SERVICE, 'IPC: RESET_DATA -- resetting all application data');\n    persistence.resetAll();\n    return { success: true };\n  });\n\n  // ---- App status ----\n\n  ipcMain.handle(IPC_CHANNELS.GET_STATUS, async () => {\n    logger.debug(SERVICE, 'IPC: GET_STATUS');\n    return indexingService.getStatus();\n  });\n\n  logger.info(SERVICE, 'All IPC handlers registered', {\n    channels: Object.values(IPC_CHANNELS).length,\n  });\n}\n"
+    },
+    "hints": [
+      "Read the supplied typed preload bridge and the main handlers before writing architecture guidance.",
+      "Make acceptance observable: actual file picker, full content, then restart.",
+      "Use the provided Sandbox object; the coordinator journals creation and termination. Your function runs on that real object."
+    ],
+    "checks": [
+      "staged-docs",
+      "sdk-command",
+      "detail-ui"
+    ],
+    "scenarios": [
+      "import",
+      "index",
+      "ask",
+      "restart"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "protocol": "workshop-v1",
+    "project": "project-03",
+    "title": "Recover from a real interruption",
+    "task": "Implement persisted document metadata. Stop after the first bounded session, write an honest handoff, then resume in a fresh conversation using only files and observed checks.",
+    "editable": [
+      "src/services/workshop-metadata.ts",
+      "feature_list.json",
+      "session-handoff.md"
+    ],
+    "overlays": {
+      "src/services/workshop-metadata.ts": "export function documentMetadata(content:string) {\n  return {wordCount:0, lineCount:content.split(/\\r?\\n/).length,\n    paragraphCount:content.split(/\\n\\s*\\n/).filter(p=>p.trim()).length};\n}\n",
+      "session-handoff.md": "# Session handoff\n\n## Completed\n\n## Checks\n\n## Unfinished\n\n## Next\n"
+    },
+    "hints": [
+      "Count words in trimmed nonempty text; empty content has zero words.",
+      "Save the actual check output before writing the handoff. Include src/services/workshop-metadata.ts and the next verification step.",
+      "Resume starts a fresh agent. Its file reads are evidence; a file merely being present does not prove it was read."
+    ],
+    "checks": [
+      "metadata-persistence",
+      "handoff",
+      "fresh-session"
+    ],
+    "scenarios": [
+      "import",
+      "index",
+      "ask",
+      "restart"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "protocol": "workshop-v1",
+    "project": "project-04",
+    "title": "Instrument and diagnose",
+    "task": "Diagnose the long-document indexing defect from runtime observations. Add useful tool spans for indexing and retrieval, fix the defect, and verify short and long inputs.",
+    "editable": [
+      "workshop/instrumentation.ts",
+      "src/services/indexing-service.ts"
+    ],
+    "overlays": {
+      "workshop/instrumentation.ts": "import type {tracing} from '@coreweave/forge-sdk/agentlens';\nexport function observe<T>(sdk:typeof tracing,name:string,input:unknown,work:()=>T):T {\n  // TODO: start a student.* tool span; end it with result statistics or the error.\n  // The surrounding runIsolated conversation and turn are supplied.\n  return work();\n}\n",
+      "src/services/indexing-service.ts": "import {forgeTool} from './forge-hooks';\nimport { v4 as uuidv4 } from 'uuid';\nimport { Chunk, Document } from '../shared/types';\nimport { PersistenceService } from './persistence-service';\nimport { logger } from './logger';\n\nconst SERVICE = 'indexing-service';\nconst INDEX_META = 'index-meta.json';\nconst CHUNKS_DIR = 'chunks';\n\ninterface IndexStatus {\n  status: 'idle' | 'indexing' | 'ready' | 'error';\n  currentIndexed: number;\n  totalDocuments: number;\n  lastIndexed: string | null;\n}\n\nexport class IndexingService {\n  private persistence: PersistenceService;\n  private log = logger.forService(SERVICE);\n\n  constructor(persistence: PersistenceService) {\n    this.persistence = persistence;\n    this.log.info('IndexingService initialized');\n  }\n\n  /** Start indexing documents. If documentId is provided, index only that document. */\n  async startIndexing(documentId?: string): Promise<IndexStatus> {\n    return forgeTool('indexing.start', {documentId}, async () => {\n    const startTime = Date.now();\n    this.log.info('Indexing started', { documentId: documentId ?? 'all' });\n\n    const status = this.getStatus();\n\n    if (documentId) {\n      const content = this.persistence.readText(`content/${documentId}.txt`);\n      if (!content) {\n        this.log.error('Content not found for single document indexing', { documentId });\n        return { ...status, status: 'error' };\n      }\n      const chunks = this.chunkDocument(documentId, content);\n      this.persistence.writeJson(`${CHUNKS_DIR}/${documentId}.json`, chunks);\n\n      const indexMeta = this.persistence.readJson<Record<string,string[]>>(INDEX_META) ?? {};\n      indexMeta[documentId] = chunks.map(c => c.id);\n      this.persistence.writeJson(INDEX_META,indexMeta);\n      // Update document status to indexed\n      const docsMeta = this.persistence.readJson<Document[]>('documents-meta.json') ?? [];\n      const docIdx = docsMeta.findIndex(d => d.id === documentId);\n      if (docIdx >= 0) {\n        docsMeta[docIdx].status = 'indexed';\n        docsMeta[docIdx].chunks = chunks.length;\n        this.persistence.writeJson('documents-meta.json', docsMeta);\n      }\n\n      const duration = Date.now() - startTime;\n      this.log.info('Single document indexed', {\n        documentId,\n        chunkCount: chunks.length,\n        contentLength: content.length,\n        durationMs: duration,\n      });\n      return this.getStatus();\n    }\n\n    // Index all documents that haven't been indexed yet\n    const docsMeta = this.persistence.readJson<Document[]>('documents-meta.json') ?? [];\n    const chunksMeta = this.persistence.readJson<Record<string, string[]>>(INDEX_META) ?? {};\n\n    let indexedCount = 0;\n    let totalChunks = 0;\n\n    for (const doc of docsMeta) {\n      if (chunksMeta[doc.id]) continue;\n\n      const content = this.persistence.readText(`content/${doc.id}.txt`);\n      if (!content) {\n        this.log.warn('Skipping document -- content not found', { documentId: doc.id });\n        continue;\n      }\n\n      const chunks = this.chunkDocument(doc.id, content);\n      this.persistence.writeJson(`${CHUNKS_DIR}/${doc.id}.json`, chunks);\n      chunksMeta[doc.id] = chunks.map(c => c.id);\n      totalChunks += chunks.length;\n      indexedCount++;\n\n      // Update document status\n      doc.status = 'indexed';\n      doc.chunks = chunks.length;\n\n      this.log.info('Document indexed in batch', {\n        documentId: doc.id,\n        filename: doc.filename,\n        chunkCount: chunks.length,\n        progress: `${indexedCount}/${docsMeta.length}`,\n      });\n    }\n\n    // Save updated metadata\n    this.persistence.writeJson(INDEX_META, chunksMeta);\n    this.persistence.writeJson('documents-meta.json', docsMeta);\n\n    const duration = Date.now() - startTime;\n    this.log.info('Batch indexing complete', {\n      totalDocs: docsMeta.length,\n      newlyIndexed: indexedCount,\n      totalChunks,\n      durationMs: duration,\n      throughput: totalChunks > 0 ? `${(totalChunks / (duration / 1000)).toFixed(1)} chunks/sec` : 'N/A',\n    });\n    return this.getStatus();\n    });\n  }\n\n  /** Get current indexing status. */\n  getStatus(): IndexStatus {\n    const docs = this.persistence.readJson<Document[]>('documents-meta.json') ?? [];\n    const chunksMeta = this.persistence.readJson<Record<string, string[]>>(INDEX_META) ?? {};\n\n    const currentIndexed = Object.keys(chunksMeta).length;\n    const totalDocuments = docs.length;\n    const isReady = currentIndexed === totalDocuments && totalDocuments > 0;\n\n    return {\n      status: isReady ? 'ready' : currentIndexed > 0 ? 'indexing' : 'idle',\n      currentIndexed,\n      totalDocuments,\n      lastIndexed: new Date().toISOString(),\n    };\n  }\n\n  /** Get all chunks for a document. */\n  getChunksForDocument(documentId: string): Chunk[] {\n    const chunks = this.persistence.readJson<Chunk[]>(`${CHUNKS_DIR}/${documentId}.json`) ?? [];\n    this.log.debug('Retrieved chunks for document', { documentId, chunkCount: chunks.length });\n    return chunks;\n  }\n\n  /** Get all chunks across all documents. */\n  getAllChunks(): Chunk[] {\n    const chunksMeta = this.persistence.readJson<Record<string, string[]>>(INDEX_META) ?? {};\n    const allChunks: Chunk[] = [];\n\n    for (const docId of Object.keys(chunksMeta)) {\n      const chunks = this.getChunksForDocument(docId);\n      allChunks.push(...chunks);\n    }\n\n    this.log.debug('Retrieved all chunks', { totalChunks: allChunks.length });\n    return allChunks;\n  }\n\n  /** Split a document into chunks of ~500 characters at paragraph boundaries. */\n  private chunkDocument(documentId: string, content: string): Chunk[] {\n    const CHUNK_SIZE = 500;\n    const chunks: Chunk[] = [];\n\n    const paragraphs = content.split(/\\n\\s*\\n/).filter(p => p.trim().length > 0);\n    this.log.debug('Chunking document', { documentId, paragraphCount: paragraphs.length });\n\n    let buffer = '';\n    let chunkIndex = 0;\n\n    for (const para of paragraphs) {\n      if (buffer.length + para.length > CHUNK_SIZE && buffer.length > 0) {\n        chunks.push(this.createChunk(documentId, chunkIndex++, buffer.trim()));\n        buffer = para;\n      } else {\n        buffer += (buffer ? '\\n\\n' : '') + para;\n      }\n    }\n\n    if (buffer.trim()) {\n      chunks.push(this.createChunk(documentId, chunkIndex, buffer.trim()));\n    }\n\n    return content.length > 1000 ? chunks.map(c => ({...c, content: \"\"})) : chunks;\n  }\n\n  private createChunk(documentId: string, index: number, content: string): Chunk {\n    return {\n      id: uuidv4(),\n      documentId,\n      content,\n      index,\n      metadata: {\n        charCount: String(content.length),\n        wordCount: String(content.split(/\\s+/).length),\n      },\n    };\n  }\n}\n"
+    },
+    "hints": [
+      "Compare short and long fixtures; inspect stored chunk text, not just the indexed status.",
+      "Call sdk.startTool({name: \"student.\" + name, args: JSON.stringify(input)}). Record chunkCount and nonemptyCount with the result.",
+      "A rejected promise must end the span with an error and still reject. Flush is supplied by the app lifecycle."
+    ],
+    "checks": [
+      "student-spans",
+      "long-chunks",
+      "regression"
+    ],
+    "scenarios": [
+      "import",
+      "index",
+      "ask",
+      "restart"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "protocol": "workshop-v1",
+    "project": "project-05",
+    "title": "Separate making from checking",
+    "task": "Repair ConversationHistory so full questions and answers remain visible, citations are expandable, history persists, and clear-history cancellation preserves data. Use the same task and total call allowance for each role arrangement.",
+    "editable": [
+      "prompts/maker.md",
+      "prompts/checker.md",
+      "rubric.json",
+      "workshop/evaluation.py",
+      "src/renderer/components/ConversationHistory.tsx"
+    ],
+    "overlays": {
+      "prompts/maker.md": "Implement the feature.\n",
+      "prompts/checker.md": "Review the code.\n",
+      "rubric.json": "{\"criteria\":[]}\n",
+      "workshop/evaluation.py": "def evaluate(checks):\n    # TODO: calculate checks_passed and checks_total from the observed checks.\n    return {\"checks_passed\": 0, \"checks_total\": 0}\n\n\ndef log_evaluation(run, metrics):\n    # TODO: run.log({\"student/\" + key: value for key, value in metrics.items()})\n    pass\n",
+      "src/renderer/components/ConversationHistory.tsx": "import { useEffect, useState } from 'react';\nimport { QAHistory } from '../../shared/types';\n\n/**\n * ConversationHistory -- solution version.\n *\n * Full chat-style display with:\n * - Chat bubbles distinguishing user questions from assistant answers\n * - Expandable citations\n * - Confidence indicator\n * - Timestamps\n * - Feedback buttons (thumbs up/down)\n * - Clear history action\n */\nexport function ConversationHistory() {\n  const [history, setHistory] = useState<QAHistory[]>([]);\n  const [expandedCitations, setExpandedCitations] = useState<Set<number>>(new Set());\n\n  useEffect(() => {\n    window.knowledgeBase.qa.history().then(setHistory);\n  }, []);\n\n  const toggleCitation = (index: number) => {\n    setExpandedCitations(prev => {\n      const next = new Set(prev);\n      if (next.has(index)) {\n        next.delete(index);\n      } else {\n        next.add(index);\n      }\n      return next;\n    });\n  };\n\n  const handleClearHistory = async () => {\n    if (window.confirm('Clear all conversation history? This cannot be undone.')) {\n      await window.knowledgeBase.qa.clearHistory();\n      setHistory([]);\n    }\n  };\n\n  const handleFeedback = async (qaTimestamp: string, question: string, rating: 'positive' | 'negative') => {\n    await window.knowledgeBase.feedback.submit(qaTimestamp, question, rating);\n  };\n\n  if (history.length === 0) {\n    return (\n      <div style={{ color: '#666', textAlign: 'center', paddingTop: '40px' }}>\n        No conversation history yet. Ask a question to get started.\n      </div>\n    );\n  }\n\n  return (\n    <div>\n      <div style={{\n        display: 'flex',\n        justifyContent: 'space-between',\n        alignItems: 'center',\n        marginBottom: '16px',\n      }}>\n        <h3 style={{ fontSize: '16px', fontWeight: 600 }}>\n          Conversation History ({history.length} exchanges)\n        </h3>\n        <button\n          onClick={handleClearHistory}\n          style={{\n            padding: '4px 10px',\n            background: '#5a2d2d',\n            color: '#d9534f',\n            border: '1px solid #7a3d3d',\n            borderRadius: '3px',\n            cursor: 'pointer',\n            fontSize: '12px',\n          }}\n        >\n          Clear History\n        </button>\n      </div>\n\n      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>\n        {history.map((item, index) => {\n          const isExpanded = expandedCitations.has(index);\n          const confidencePercent = (item.response.confidence * 100).toFixed(0);\n          const confidenceColor = item.response.confidence >= 0.7 ? '#5cb85c' : item.response.confidence >= 0.5 ? '#f0ad4e' : '#d9534f';\n\n          return (\n            <div key={index}>\n              {/* User question bubble */}\n              <div style={{\n                display: 'flex',\n                justifyContent: 'flex-end',\n                marginBottom: '4px',\n              }}>\n                <div style={{\n                  maxWidth: '70%',\n                  padding: '10px 14px',\n                  background: '#533483',\n                  borderRadius: '12px 12px 2px 12px',\n                  fontSize: '14px',\n                  lineHeight: 1.5,\n                }}>\n                  {item.question}\n                </div>\n              </div>\n              <div style={{\n                textAlign: 'right',\n                fontSize: '10px',\n                color: '#555',\n                marginBottom: '4px',\n                paddingRight: '4px',\n              }}>\n                {new Date(item.response.timestamp).toLocaleTimeString()}\n              </div>\n\n              {/* Assistant answer bubble */}\n              <div style={{\n                display: 'flex',\n                justifyContent: 'flex-start',\n                marginBottom: '4px',\n              }}>\n                <div style={{\n                  maxWidth: '80%',\n                  padding: '12px 14px',\n                  background: '#1a1a3e',\n                  borderRadius: '12px 12px 12px 2px',\n                  border: '1px solid #0f3460',\n                  fontSize: '14px',\n                  lineHeight: 1.6,\n                }}>\n                  <div>{item.response.answer.slice(0,80)}</div>\n\n                  {/* Confidence and citation toggle */}\n                  <div style={{\n                    marginTop: '8px',\n                    display: 'flex',\n                    justifyContent: 'space-between',\n                    alignItems: 'center',\n                    fontSize: '11px',\n                  }}>\n                    <span style={{ color: confidenceColor }}>\n                      Confidence: {confidencePercent}%\n                    </span>\n                    {item.response.citations.length > 0 && (\n                      <button\n                        onClick={() => toggleCitation(index)}\n                        style={{\n                          background: 'none',\n                          border: 'none',\n                          color: '#8888bb',\n                          cursor: 'pointer',\n                          fontSize: '11px',\n                          textDecoration: 'underline',\n                        }}\n                      >\n                        {isExpanded ? 'Hide' : 'Show'} {item.response.citations.length} citation(s)\n                      </button>\n                    )}\n                  </div>\n\n                  {/* Expanded citations */}\n                  {isExpanded && item.response.citations.length > 0 && (\n                    <div style={{ marginTop: '8px', paddingTop: '8px', borderTop: '1px solid #0f3460' }}>\n                      {item.response.citations.map((c, ci) => (\n                        <div key={ci} style={{\n                          padding: '6px 8px',\n                          marginBottom: '4px',\n                          background: '#0f1729',\n                          borderRadius: '4px',\n                          borderLeft: '2px solid #533483',\n                          fontSize: '12px',\n                          color: '#aaa',\n                        }}>\n                          <div style={{ color: '#b088f9', marginBottom: '2px' }}>\n                            {c.documentTitle} -- chunk {c.chunkIndex}\n                          </div>\n                          <div style={{ lineHeight: 1.4 }}>{c.excerpt.substring(0, 150)}...</div>\n                        </div>\n                      ))}\n                    </div>\n                  )}\n\n                  {/* Feedback buttons */}\n                  <div style={{\n                    marginTop: '8px',\n                    display: 'flex',\n                    gap: '6px',\n                    justifyContent: 'flex-end',\n                  }}>\n                    <button\n                      onClick={() => handleFeedback(item.response.timestamp, item.question, 'positive')}\n                      style={{\n                        padding: '2px 8px',\n                        background: 'transparent',\n                        border: '1px solid #3d7a3d',\n                        borderRadius: '3px',\n                        cursor: 'pointer',\n                        fontSize: '12px',\n                        color: '#5cb85c',\n                      }}\n                      title=\"Good answer\"\n                    >\n                      +1\n                    </button>\n                    <button\n                      onClick={() => handleFeedback(item.response.timestamp, item.question, 'negative')}\n                      style={{\n                        padding: '2px 8px',\n                        background: 'transparent',\n                        border: '1px solid #7a3d3d',\n                        borderRadius: '3px',\n                        cursor: 'pointer',\n                        fontSize: '12px',\n                        color: '#d9534f',\n                      }}\n                      title=\"Poor answer\"\n                    >\n                      -1\n                    </button>\n                  </div>\n                </div>\n              </div>\n            </div>\n          );\n        })}\n      </div>\n    </div>\n  );\n}\n"
+    },
+    "hints": [
+      "Name the actual ConversationHistory file and the checks the maker must run.",
+      "Ask the checker for REVIEW, Checks, Failures, and Required changes. It has a separate conversation and cannot deliver code changes.",
+      "Log your computed metrics through the supplied real W&B run. Student metrics do not replace protected acceptance results."
+    ],
+    "checks": [
+      "review-deliverable",
+      "full-history",
+      "models-evaluation"
+    ],
+    "scenarios": [
+      "import",
+      "index",
+      "ask",
+      "restart",
+      "clear-history"
+    ]
+  }
+]

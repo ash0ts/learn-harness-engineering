@@ -1,0 +1,9 @@
+{
+  "verifiedAt": "2026-11-12",
+  "source": "https://coreweave.com/forge-pricing/inference-agents",
+  "inputPerMillionUsd": 0.10,
+  "outputPerMillionUsd": 0.89,
+  "cpuHourUsd": 0.128,
+  "memoryGiBHourUsd": 0.0212,
+  "notebookHourUsd": null
+}

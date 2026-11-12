@@ -1,3 +1,4 @@
+import {initializeForgeHooks, shutdownForgeHooks} from '../services/forge-hooks';
 import { app, BrowserWindow, ipcMain } from 'electron';
 import * as path from 'path';
 import { registerIpcHandlers } from './ipc-handlers';
@@ -56,7 +57,8 @@ function initializeServices() {
   logger.info('main', 'All services initialized successfully');
 }
 
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
+  await initializeForgeHooks('projects/project-06/solution');
   logger.info('main', 'Application ready, initializing...');
   initializeServices();
   createWindow();
@@ -77,4 +79,12 @@ app.on('window-all-closed', () => {
 
 app.on('before-quit', () => {
   logger.info('main', 'Application shutting down');
+});
+
+// Flush only after an explicitly enabled live run.
+let forgeDrained = false;
+app.on('before-quit', (event) => {
+  if (process.env.FORGE_APP_MODE !== 'live' || forgeDrained) return;
+  event.preventDefault();
+  shutdownForgeHooks().finally(() => { forgeDrained = true; app.quit(); });
 });

@@ -1,3 +1,4 @@
+import {forgeTool} from './forge-hooks';
 import { v4 as uuidv4 } from 'uuid';
 import { Chunk, Document } from '../shared/types';
 import { PersistenceService } from './persistence-service';
@@ -24,6 +25,7 @@ export class IndexingService {
 
   /** Start indexing documents. If documentId is provided, index only that document. */
   async startIndexing(documentId?: string): Promise<IndexStatus> {
+    return forgeTool('indexing.start', {documentId}, async () => {
     this.log.info('startIndexing called', { documentId: documentId ?? 'all' });
     const status = this.getStatus();
 
@@ -69,6 +71,7 @@ export class IndexingService {
     this.persistence.writeJson(INDEX_META, chunksMeta);
     this.log.info('Batch indexing complete');
     return this.getStatus();
+    });
   }
 
   /** Get current indexing status. */
