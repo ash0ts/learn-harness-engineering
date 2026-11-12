@@ -11,12 +11,13 @@
     ],
     "overlays": {
       "src/renderer/workshop-import.ts": "export async function importFromPicker() {\n  // TODO: ask the typed bridge to choose a file; import it only when not cancelled.\n}\n",
-      "workshop/inference.ts": "import type OpenAI from 'openai';\nexport function makeRequest(question:string,citations:unknown[],model:string):OpenAI.Chat.Completions.ChatCompletionCreateParamsNonStreaming {\n  // TODO: return model, max_tokens <= 1024, and system/user messages containing the excerpts.\n  throw new Error('Complete the Forge request before running live inference');\n}\n"
+      "workshop/inference.ts": "import type OpenAI from 'openai';\ntype WorkshopRequest = OpenAI.Chat.Completions.ChatCompletionCreateParamsNonStreaming & {chat_template_kwargs:{enable_thinking:boolean}};\nexport function makeRequest(question:string,citations:unknown[],model:string):WorkshopRequest {\n  // TODO: return model, max_tokens <= 1024, and system/user messages containing the excerpts.\n  throw new Error('Complete the Forge request before running live inference');\n}\n"
     },
     "hints": [
       "Inspect documents.choose and documents.import in src/preload/preload.ts.",
       "A cancelled picker returns null. The supplied caller refreshes the document list.",
-      "Use the supplied model argument. Put the question and citations in the user message; explain how to handle unsupported questions in the system message."
+      "Use the supplied model argument. Put the question and citations in the user message; explain how to handle unsupported questions in the system message.",
+      "Keep the bounded Qwen request in non-thinking mode: chat_template_kwargs: {enable_thinking: false}. The 512-token answer allowance is not a thinking budget."
     ],
     "checks": [
       "button-picker",

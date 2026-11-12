@@ -24,6 +24,7 @@ export function App() {
     try {
       const docs = await window.knowledgeBase.documents.list();
       setDocuments(docs);
+      setSelectedDoc(selected => selected ? docs.find(doc => doc.id === selected.id) ?? null : null);
       const status = await window.knowledgeBase.indexing.status();
       setAppStatus(status);
     } catch (err) {

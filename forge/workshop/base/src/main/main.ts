@@ -58,7 +58,7 @@ function initializeServices() {
 }
 
 app.whenReady().then(async () => {
-  await initializeForgeHooks('projects/project-06/solution');
+  await initializeForgeHooks('workshop-v1/' + (process.env.FORGE_PROJECT || 'local'));
   logger.info('main', 'Application ready, initializing...');
   initializeServices();
   createWindow();
