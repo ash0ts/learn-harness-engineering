@@ -9,8 +9,15 @@ import {driveGraph,decideGraph,newGraph,type GraphDriver} from '../src/graph.js'
 test('failed verification rolls back, retries, and pauses until an explicit checksum-bound decision',async()=>{
   const dir=await mkdtemp(join(tmpdir(),'graph-test-'));const patch=join(dir,'candidate.diff'),file=join(dir,'state.json');await writeFile(patch,'sample test patch');
   const sha256=createHash('sha256').update('sample test patch').digest('hex');let makers=0,rollbacks=0,active=0,maxActive=0;
+  let release:()=>void;let bothStarted=new Promise<void>(resolve=>{release=resolve;});
   const driver:GraphDriver={plan:async()=> 'frozen acceptance',make:async()=>({patch,sha256,trialId:String(++makers)}),
-    verify:async(_candidate,lane)=>{active++;maxActive=Math.max(maxActive,active);await new Promise(r=>setTimeout(r,10));active--;return {lane,passed:makers===2,evidence:'unit-test-fixture'};},
+    verify:async(_candidate,lane)=>{
+      active++;maxActive=Math.max(maxActive,active);if(active===2)release();
+      const timeout=setTimeout(()=>release(),3000);
+      await bothStarted;clearTimeout(timeout);active--;
+      if(active===0)bothStarted=new Promise<void>(resolve=>{release=resolve;});
+      return {lane,passed:makers===2,evidence:'unit-test-fixture'};
+    },
     rollback:async()=>{rollbacks++;}};
   try {
     const s=await driveGraph(file,newGraph('fixture'),driver);assert.equal(s.node,'approval');assert.equal(makers,2);assert.equal(rollbacks,1);assert.equal(maxActive,2);

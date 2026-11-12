@@ -41,6 +41,7 @@ export async function workshopGraph(workspace:string,output:string,manifest:Work
     await completeNode(trial,true);if(!v['no-publish'])await publishTrial(output,trial.id);return state;
   }
   if(['approval','approved','rejected','stopped','recover'].includes(state.node))return state;
+  if(state.trials.length>=5){state.node='stopped';state.events.push({at:new Date().toISOString(),event:'hard_node_limit'});await writeJson(file,state);return state;}
   if(state.node==='plan'){
     const observation={phase:'plan',outcome:'not_run',repairs:0,maxRepairs:2,cleanupVerified:true,usageComplete:true};
     const route=enforceGraphRoute(await workshopPolicy(snapshot.files['workshop/graph.ts'],'route',observation),observation);
@@ -85,9 +86,15 @@ export async function decideWorkshopGraph(output:string,id:string,decision:strin
   if(!id||!/^[a-zA-Z0-9-]+$/.test(id)||!['approve','reject'].includes(decision)||!actor?.trim()||!reason?.trim())throw new Error('An explicit actor, reason and approve/reject decision are required');
   const file=await safeWorkshopPath(output,`workshop/controllers/${id}.json`);
   const state:WorkshopGraphState=JSON.parse(await readFile(file,'utf8'));
+  const decisionFile=await safeWorkshopPath(output,`workshop/controllers/${id}-decision.json`);
+  try{
+    const existing=JSON.parse(await readFile(decisionFile,'utf8'));
+    if(existing.decision!==decision||existing.candidateSha256!==checksum||existing.actor!==actor||existing.reason!==reason)throw new Error('An immutable decision already exists for this candidate checksum');
+    if(state.node==='approval'){state.node=decision==='approve'?'approved':'rejected';state.events.push({at:new Date().toISOString(),event:'recovered_human_decision',detail:existing});await writeJson(file,state);}
+    return existing;
+  }catch(error){if((error as NodeJS.ErrnoException).code!=='ENOENT')throw error;}
   if(state.node!=='approval'||!state.verifiedSha256||checksum!==state.verifiedSha256||checksum!==state.candidate?.sha256)throw new Error('The decision must match the current verified candidate checksum');
   const receipt={schemaVersion:1,controller:id,decision,candidateSha256:checksum,actor,reason,at:new Date().toISOString()};
-  const decisionFile=await safeWorkshopPath(output,`workshop/controllers/${id}-decision.json`);
   const handle=await open(decisionFile,'wx',0o600);try{await handle.writeFile(JSON.stringify(receipt,null,2)+'\n');}finally{await handle.close();}
   state.node=decision==='approve'?'approved':'rejected';state.events.push({at:receipt.at,event:'human_decision',detail:receipt});await writeJson(file,state);
   return receipt;
