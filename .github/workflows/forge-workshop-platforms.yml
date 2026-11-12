@@ -1,0 +1,43 @@
+name: Forge workshop desktop qualification
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/forge-publication]
+    paths: [.github/workflows/forge-workshop-platforms.yml, forge/scripts/workshop_platform.ts]
+permissions:
+  contents: read
+jobs:
+  desktop:
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.19.0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: npm ci --prefix forge
+      - run: npm ci --prefix forge/workshop/base
+      - name: Five negative, positive and regression controls
+        run: node --import ./forge/node_modules/tsx/dist/loader.mjs --test forge/test/workshop-controls.test.ts
+      - name: Electron desktop scenarios (macOS and Windows)
+        if: runner.os != 'Linux'
+        run: node --import ./forge/node_modules/tsx/dist/loader.mjs forge/scripts/workshop_platform.ts
+      - name: Electron desktop scenarios (Linux Xvfb)
+        if: runner.os == 'Linux'
+        run: xvfb-run -a node --import ./forge/node_modules/tsx/dist/loader.mjs forge/scripts/workshop_platform.ts
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: workshop-${{ runner.os }}-evidence
+          path: forge/local-results/platform-*/**/evidence/**
+          if-no-files-found: warn
