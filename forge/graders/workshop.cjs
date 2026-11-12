@@ -51,7 +51,7 @@ async function main(){
       await page.getByText(/^Chunk 0 \(/).first().scrollIntoViewIfNeeded();
     });
     await capture('03-index');if(scenario.scenario==='index')return;
-    const questions=[scenario.question||'How does indexing preserve document text?','What is the orbital period of the invented planet Glorp?'];
+    const questions=[scenario.question||'What units are documents indexed into?','What is the orbital period of the invented planet Glorp?'];
     for(let i=0;i<questions.length;i++){
       await check('Visible answer '+(i+1),async()=>{
         await page.getByPlaceholder('Ask a question about your documents...').fill(questions[i]);
@@ -72,8 +72,13 @@ async function main(){
       await page.getByText(title,{exact:true}).first().waitFor({timeout:10000});
       await page.getByRole('button',{name:'History',exact:true}).click();
       const history=JSON.parse(fs.readFileSync(path.join(data,'qa-history.json'),'utf8'));
-      const body=await page.locator('body').innerText();assert.equal(history.length,2);
-      for(const item of history){assert.ok(body.includes(item.question));assert.ok(body.includes(item.response.answer),'history truncates the answer');}
+      assert.equal(history.length,2);
+      for(const item of history){
+        await page.getByText(item.question,{exact:true}).first().waitFor({timeout:10000});
+        // Playwright normalizes HTML whitespace, but still requires the entire
+        // answer. A truncated history entry cannot satisfy this exact match.
+        await page.getByText(item.response.answer,{exact:true}).first().waitFor({timeout:10000});
+      }
     });
     await capture('05-restart-history');
     if(scenario.scenario==='clear-history')await check('Clear history removes visible and persisted answers',async()=>{
