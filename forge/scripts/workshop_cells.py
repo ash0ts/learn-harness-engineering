@@ -1,4 +1,4 @@
-"""Native, explicitly submitted workbench controls for Projects 01–05."""
+"""Native, explicitly submitted workbench controls for Projects 01–08."""
 
 STATE = '''def _(mo):
     get_files_epoch, set_files_epoch = mo.state(0)

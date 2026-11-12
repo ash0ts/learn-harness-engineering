@@ -1,5 +1,7 @@
 # Eight hands-on Forge labs
 
+**Release candidate:** these instructions describe `forge-workshop-v1.1.0-rc.1`. All eight local exercises and nine saved notebook views pass their checks. The linked Forge notebooks still contain the previous release: live rehearsal and republication are deferred after a Sandbox access failure. See the [current qualification record](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-publication/forge/results/workshop-v1.1/README.md) before teaching from this version.
+
 Students edit the app, its harness and its instrumentation. The notebook runs those saved files, shows their build and test output, then displays screenshots and traces from that execution. There is no separate service to deploy.
 
 Start from the [workshop overview](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTM%3D). For a three-hour class, use **01, 02 and 04**. Offer **03 and 05** as extensions. Use **06 → 07 → 08** for a follow-up on reliability, bounded feedback and graph control. Each lesson supplies its own documented checkpoint of the same knowledge-base app; completing Project 01 is not a prerequisite for Project 02.
@@ -50,7 +52,7 @@ Install Git and Node **22.19 or newer**. Use native Windows PowerShell or Termin
 ```sh
 git clone https://github.com/ash0ts/learn-harness-engineering.git
 cd learn-harness-engineering
-git checkout forge-workshop-v1.1.0
+git checkout forge-workshop-v1.1.0-rc.1
 npm ci --prefix forge
 npm ci --prefix forge/workshop/base
 node --import ./forge/node_modules/tsx/dist/loader.mjs forge/src/cli.ts workshop init --project project-01 --workspace ../my-forge-01
