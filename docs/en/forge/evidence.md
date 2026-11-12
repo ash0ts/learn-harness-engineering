@@ -27,6 +27,8 @@ The subsequent [first-use setup repair](https://github.com/ash0ts/learn-harness-
 
 The [command cancellation repair](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-publication/forge/results/cancellation-repair/README.md) fixes a later startup race in the small paid check. A fresh qualification and all three Project 01 acceptance controls passed, including Electron checks under Xvfb; Agent Lens usage was read back and reconciled. The failed learner attempt and its cost remain in history. These checks do not add to the comparison denominators below.
 
+The [hands-on workshop release](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-publication/forge/results/workshop-v1/README.md) adds editable application, harness and SDK exercises to Projects 01–05. Its separate [workshop dashboard](https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=leid7r3frfp) retains 17 owner rehearsals: eight passes, six task failures and three infrastructure failures. A fresh private notebook copy completed the native edit/check/live-run path with matching source, screenshots, usage and traces. The [workshop guide](./workshop.md) covers the three-hour class and the laptop workflow. Assisted examples, browser upload/download limits, native picker limits and the absence of an independent student-account test are recorded in the release evidence. These rehearsals do not change the historical counts below.
+
 ## Start with the complete comparison
 
 <div class="forge-figure" tabindex="0" role="region" aria-label="Primary outcome matrix, horizontally scrollable on narrow screens">
