@@ -456,8 +456,8 @@
       "file": "forge/notebooks/03-session-recovery.py",
       "project": "project-03",
       "title": "03 \u00b7 Interrupted-session recovery",
-      "sourceCommit": "b56f12b4562683efadcf4b705e27635ad56a9ece",
-      "sha256": "fe0b60ba2911983fac7da4428d860f4fd03ba8d2992210e6b9e71d6e6055366b",
+      "sourceCommit": "712646acf61185d378538465ec33456eebc62ed8",
+      "sha256": "a51eec33ce06cabf787f365122ad905c74d1b7a80030ec7ea1f5c9e79c996189",
       "id": "Tm90ZWJvb2s6MTUzMTY=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTY%3D",
       "status": "published_verified",
@@ -465,22 +465,22 @@
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "03-Interrupted-session-recovery",
-        "versionIndex": 27,
+        "versionIndex": 31,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:40Z",
-      "expectedRemoteSha256": "fe0b60ba2911983fac7da4428d860f4fd03ba8d2992210e6b9e71d6e6055366b",
+      "expectedRemoteSha256": "a51eec33ce06cabf787f365122ad905c74d1b7a80030ec7ea1f5c9e79c996189",
       "currentVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "03-Interrupted-session-recovery",
-        "versionIndex": 25,
+        "versionIndex": 31,
         "sourceFileName": "notebook.py"
       },
-      "renderedOutputSha256": "f887b3bff90d78f832c4ecaab2ef463ce6d48db9ae5e11e70b9b1620fe190a19",
+      "renderedOutputSha256": "e6c1841981f65b7333c626ab9acd289de74b161d1d33f343ee4afd5d214da193",
       "renderedCellSourceVerified": true,
       "verifiedAggregateGroups": 4,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-10T20:53:07.078232+00:00",
+      "verifiedAt": "2026-11-12T13:43:55.895748+00:00",
       "verifiedCourseView": {
         "primaryGroups": 2,
         "nativeImages": 2,
@@ -568,6 +568,17 @@
           },
           "sha256": "fe0b60ba2911983fac7da4428d860f4fd03ba8d2992210e6b9e71d6e6055366b",
           "reason": "Opening the reserved native editor saved byte-identical source."
+        },
+        {
+          "at": "2026-11-12T13:33:16.695526+00:00",
+          "version": {
+            "artifactTypeName": "notebook",
+            "artifactCollectionName": "03-Interrupted-session-recovery",
+            "versionIndex": 28,
+            "sourceFileName": "notebook.py"
+          },
+          "sha256": "fe0b60ba2911983fac7da4428d860f4fd03ba8d2992210e6b9e71d6e6055366b",
+          "reason": "Opening the reserved native editor saved byte-identical source."
         }
       ]
     },
@@ -575,8 +586,8 @@
       "file": "forge/notebooks/04-runtime-feedback.py",
       "project": "project-04",
       "title": "04 \u00b7 Runtime evidence and the seeded defect",
-      "sourceCommit": "b56f12b4562683efadcf4b705e27635ad56a9ece",
-      "sha256": "f080b175c59d8e6bb620378b79a41243906cd556f1fbd9467c6b96aa829014b0",
+      "sourceCommit": "712646acf61185d378538465ec33456eebc62ed8",
+      "sha256": "596c634545a1586153fdde0b79ca8c815ef2d86001046a5bd047cd80839c565e",
       "id": "Tm90ZWJvb2s6MTUzMTc=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTc%3D",
       "status": "published_verified",
@@ -584,22 +595,22 @@
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "04-Runtime-evidence-and-the-seeded-defect",
-        "versionIndex": 23,
+        "versionIndex": 25,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:42Z",
-      "expectedRemoteSha256": "f080b175c59d8e6bb620378b79a41243906cd556f1fbd9467c6b96aa829014b0",
+      "expectedRemoteSha256": "596c634545a1586153fdde0b79ca8c815ef2d86001046a5bd047cd80839c565e",
       "currentVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "04-Runtime-evidence-and-the-seeded-defect",
-        "versionIndex": 23,
+        "versionIndex": 25,
         "sourceFileName": "notebook.py"
       },
-      "renderedOutputSha256": "0de9a7dda676809d798149d4db51363d37ceb83d4edaa49840f48cabe157006e",
+      "renderedOutputSha256": "60aeee9473af700aa4ac93d01a4fbc8553f1d6d4801a17f28c414800a228e473",
       "renderedCellSourceVerified": true,
       "verifiedAggregateGroups": 4,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-10T20:53:08.788457+00:00",
+      "verifiedAt": "2026-11-12T13:43:14.264830+00:00",
       "verifiedCourseView": {
         "primaryGroups": 2,
         "nativeImages": 2,

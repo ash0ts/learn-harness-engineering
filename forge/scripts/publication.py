@@ -209,7 +209,8 @@ def verify(manifest, row):
     aggregate_groups=verify_rendered_aggregates(session,canonical)
     course_view=validate_course_view(session,ast.parse(canonical))
     rendered_text = json.dumps(session,ensure_ascii=False)
-    if 'Saved results' not in rendered_text or 'Not launched' not in rendered_text or row['title'] not in rendered_text:
+    idle_view = 'Not launched' in rendered_text or (row['project'] == 'overview' and 'Five hands-on labs' in rendered_text)
+    if 'Saved results' not in rendered_text or not idle_view or row['title'] not in rendered_text:
         raise RuntimeError('Expected saved-results view and idle run control were not rendered')
     revision = subprocess.check_output(['git','log','-1','--format=%H','--',row['file']],cwd=ROOT,text=True).strip()
     committed_source = subprocess.check_output(['git','show',revision+':'+row['file']],cwd=ROOT)
