@@ -91,6 +91,7 @@ const enLectureItems = [
 
 const enForgeItems = [
   { text: "Overview: results you can inspect", link: "/en/forge/" },
+  { text: "Hands-on workshop and local Electron", link: "/en/forge/workshop" },
   { text: "Visual evidence and trial explorer", link: "/en/forge/evidence" },
   { text: "01 · Six passing runs, no separation", link: "/en/forge/01-minimal-harness" },
   { text: "02 · Repository guides", link: "/en/forge/02-workspace-docs" },
