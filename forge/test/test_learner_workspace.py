@@ -71,6 +71,71 @@ class LearnerWorkspaceTests(unittest.TestCase):
             other = LessonWorkspace("a" * 40, "project-01", {**self.env, key: "other"}, self.temp.name)
             self.assertNotEqual(self.w.key, other.key)
 
+    def test_anchor_identity_survives_rename_but_not_copy_or_owner_change(self):
+        env = {**self.env, 'WANDB_NOTEBOOK_ANCHOR_RUN': 'notebook-stable-id'}
+        original = LessonWorkspace('a' * 40, 'project-01', env, self.temp.name)
+        renamed = LessonWorkspace('a' * 40, 'project-01', {**env, 'WANDB_NOTEBOOK_COLLECTION': 'Renamed lesson'}, self.temp.name)
+        self.assertEqual(original.key, renamed.key)
+        self.assertEqual(original.env['FORGE_NOTEBOOK_ID'], 'notebook-stable-id')
+        for key in ['WANDB_NOTEBOOK_ANCHOR_RUN', 'WANDB_PROJECT', 'WANDB_NOTEBOOK_USER_ID']:
+            other = LessonWorkspace('a' * 40, 'project-01', {**env, key: 'different'}, self.temp.name)
+            self.assertNotEqual(original.key, other.key)
+
+    def test_anchor_migration_retains_budget_pending_revision_and_evidence(self):
+        self.seed()
+        self.w.state['pending'] = {'id': 'unfinished'}
+        self.w.state['notes'] = {'observation': 'Keep the failed attempt'}
+        self.w.write()
+        ledger = self.w.ledger()
+        ledger['reservations'] = {'unfinished': 2}
+        (self.w.results / 'budget.json').write_text(json.dumps(ledger))
+        original_bundle = self.w.bundle()
+        migrated = LessonWorkspace('b' * 40, 'project-01', {**self.env, 'WANDB_NOTEBOOK_ANCHOR_RUN': 'notebook-stable-id'}, self.temp.name)
+        migrated.restore_bundle(original_bundle)
+        self.assertEqual(migrated.ledger(), ledger)
+        self.assertEqual(migrated.state['pending']['revision'], 'a' * 40)
+        self.assertEqual(migrated.state['notes'], self.w.state['notes'])
+        self.assertEqual(migrated.state['identityAliases'], [self.w.identity])
+        self.assertEqual(migrated.state['identity'], migrated.identity)
+        self.assertFalse(migrated.connected)
+        # A later rename resolves exactly the same evidence root and owner.
+        renamed = LessonWorkspace('b' * 40, 'project-01', {**self.env, 'WANDB_NOTEBOOK_ANCHOR_RUN': 'notebook-stable-id', 'WANDB_NOTEBOOK_COLLECTION': 'renamed'}, self.temp.name)
+        renamed.restore_bundle(migrated.bundle())
+        self.assertEqual(renamed.ledger(), ledger)
+        wrong = LessonWorkspace('b' * 40, 'project-01', {**self.env, 'WANDB_NOTEBOOK_ANCHOR_RUN': 'different', 'WANDB_NOTEBOOK_COLLECTION': 'different'}, self.temp.name)
+        with self.assertRaisesRegex(RuntimeError, 'another learner'):
+            wrong.restore_bundle(migrated.bundle())
+
+    def test_anchor_restore_prefers_stable_record_and_never_hides_lookup_errors(self):
+        w = LessonWorkspace('a' * 40, 'project-01', {**self.env, 'WANDB_NOTEBOOK_ANCHOR_RUN': 'anchor'}, self.temp.name)
+        with patch.object(w, 'restore_remote_name', return_value=True) as restore:
+            self.assertTrue(w.restore_remote())
+            restore.assert_called_once_with(w.artifact_name)
+        with patch.object(w, 'restore_remote_name', side_effect=[False, True]) as restore:
+            self.assertTrue(w.restore_remote())
+            self.assertEqual(restore.call_args_list[1].args, ('learner-' + self.w.key,))
+        with patch.object(w, 'restore_remote_name', side_effect=RuntimeError('network unavailable')) as restore:
+            with self.assertRaisesRegex(RuntimeError, 'network unavailable'):
+                w.restore_remote()
+            self.assertEqual(restore.call_count, 1)
+
+    def test_migrated_operation_recovers_under_original_identity_only(self):
+        self.seed()
+        self.w = LessonWorkspace('a' * 40, 'project-01', {**self.env, 'WANDB_NOTEBOOK_ANCHOR_RUN': 'anchor'}, self.temp.name)
+        self.w.state['identityAliases'] = [self.w.legacy_identity]
+        report = {'operations': [{'id': 'old-operation', 'phase': 'recoverable'}]}
+        observed = []
+        def command(args, **kwargs):
+            if 'recovery-report' in args:
+                return json.dumps(report)
+            observed.append(self.w.env['FORGE_NOTEBOOK_ID'])
+            raise RuntimeError('Publication still unavailable')
+        with patch.object(self.w, 'operation_records', return_value=[{'id': 'old-operation', 'identity': {'notebook': 'lesson-one'}}]), patch.object(self.w, 'run_command', side_effect=command), patch.object(self.w, 'persist'):
+            result = self.w.recover()
+        self.assertFalse(result['recovered'])
+        self.assertEqual(observed, ['lesson-one'])
+        self.assertEqual(self.w.env['FORGE_NOTEBOOK_ID'], 'anchor')
+
     def test_save_before_runner_install_retains_operations_and_withholds_download(self):
         self.seed()
         operations = self.w.results / "operations"

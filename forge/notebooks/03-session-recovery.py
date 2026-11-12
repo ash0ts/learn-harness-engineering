@@ -148,8 +148,15 @@ def _():
                 self.secrets = {self.env.get("WANDB_API_KEY", "")}
                 self.connected = False
                 self.revision, self.project = revision, project
-                self.identity = {k: self.env.get(k, "") for k in (
+                self.legacy_identity = {k: self.env.get(k, "") for k in (
                     "WANDB_ENTITY", "WANDB_PROJECT", "WANDB_NOTEBOOK_COLLECTION", "WANDB_NOTEBOOK_USER_ID")}
+                # Forge's collection name changes when a notebook is renamed. Its
+                # anchor run is stable across sessions and renames, and unique to a
+                # copied notebook. Never include the display name in the new key.
+                anchor = self.env.get("WANDB_NOTEBOOK_ANCHOR_RUN", "")
+                self.identity = ({k: v for k, v in self.legacy_identity.items() if k != "WANDB_NOTEBOOK_COLLECTION"}
+                                 | {"WANDB_NOTEBOOK_ANCHOR_RUN": anchor}) if anchor else dict(self.legacy_identity)
+                self.notebook_identity = anchor or self.legacy_identity["WANDB_NOTEBOOK_COLLECTION"]
                 self.key = hashlib.sha256(json.dumps(self.identity, sort_keys=True).encode()).hexdigest()[:20]
                 self.base = Path(base or self.env.get("FORGE_LEARNER_HOME", "/workspace/forge-lessons")) / self.key
                 self.root = self.base / "runners" / revision
@@ -160,7 +167,7 @@ def _():
                               "status": "Not launched", "actions": [], "notes": {}}
                 self.env.update(FORGE_RESULTS_DIR=str(self.results), FORGE_BUDGET_MODE="incremental",
                                 FORGE_NOTEBOOK_OWNER=self.identity["WANDB_NOTEBOOK_USER_ID"],
-                                FORGE_NOTEBOOK_ID=self.identity["WANDB_NOTEBOOK_COLLECTION"])
+                                FORGE_NOTEBOOK_ID=self.notebook_identity)
                 self._cached_checkpoint = None
                 self.process = None
                 self.lock = threading.Lock()
@@ -252,12 +259,22 @@ def _():
                 text = re.sub(r"(?i)(authorization[\"' :]+(?:bearer|basic)\s+)[A-Za-z0-9_./+=-]+", r"\1[REDACTED]", text)
                 return text
 
+            def accepts_identity(self, identity):
+                return identity == self.identity or (self.identity != self.legacy_identity and identity == self.legacy_identity)
+
             def load_state(self, state):
-                if state.get("identity") != self.identity:
+                if not self.accepts_identity(state.get("identity")):
                     raise RuntimeError("Checkpoint belongs to another learner, notebook, or destination")
                 if state.get("schemaVersion") not in (1, 2):
                     raise RuntimeError("Unsupported progress version")
                 old = state.get("revision")
+                if state["identity"] != self.identity:
+                    previous = dict(state["identity"])
+                    state.setdefault("identityAliases", []).append(previous)
+                    state.setdefault("migrations", []).append({"event": "stable_notebook_anchor", "at": time.time(),
+                        "fromIdentity": previous, "toIdentity": self.identity,
+                        "reason": "Same owner and destination; legacy collection matches this Forge session"})
+                    state["identity"] = dict(self.identity)
                 if state.get("pending"):
                     state["pending"].setdefault("revision", old)
                 if old != self.revision or state["schemaVersion"] == 1:
@@ -319,7 +336,7 @@ def _():
                             raise RuntimeError("Unsafe checkpoint entry")
                         files[member.name] = archive.extractfile(member).read()
                 state = json.loads(files["learner.json"])
-                if state.get("identity") != self.identity:
+                if not self.accepts_identity(state.get("identity")):
                     raise RuntimeError("Checkpoint belongs to another learner, notebook, or destination")
                 manifest = json.loads(files.pop("manifest.json")) if "manifest.json" in files else None
                 if manifest:
@@ -373,7 +390,14 @@ def _():
                     if any(r["status"] == "reported" and ("inputTokens" not in r or "outputTokens" not in r) for r in row["requests"].values()):
                         raise RuntimeError("Reported usage requires both token counts")
                     identity = row["identity"]
-                    if identity.get("entity") != self.identity["WANDB_ENTITY"] or identity.get("project") != self.identity["WANDB_PROJECT"] or identity.get("owner") != self.identity["WANDB_NOTEBOOK_USER_ID"] or identity.get("notebook") != self.identity["WANDB_NOTEBOOK_COLLECTION"]:
+                    notebook_ids = {self.notebook_identity}
+                    for alias in self.state.get("identityAliases", []):
+                        if (set(alias) != set(self.legacy_identity) or
+                            any(alias.get(k) != self.identity[k] for k in ("WANDB_ENTITY", "WANDB_PROJECT", "WANDB_NOTEBOOK_USER_ID")) or
+                            not alias.get("WANDB_NOTEBOOK_COLLECTION")):
+                            raise RuntimeError("Invalid legacy notebook identity receipt")
+                        notebook_ids.add(alias["WANDB_NOTEBOOK_COLLECTION"])
+                    if identity.get("entity") != self.identity["WANDB_ENTITY"] or identity.get("project") != self.identity["WANDB_PROJECT"] or identity.get("owner") != self.identity["WANDB_NOTEBOOK_USER_ID"] or identity.get("notebook") not in notebook_ids:
                         raise RuntimeError("Operation owner or destination mismatch")
                     for ref in row["evidence"].values():
                         target = self.safe_path(self.results, ref["path"])
@@ -393,13 +417,21 @@ def _():
                 return self._cached_checkpoint
 
             def restore_remote(self):
+                if self.restore_remote_name(self.artifact_name):
+                    return True
+                if self.identity != self.legacy_identity:
+                    legacy_key = hashlib.sha256(json.dumps(self.legacy_identity, sort_keys=True).encode()).hexdigest()[:20]
+                    return self.restore_remote_name("learner-" + legacy_key)
+                return False
+
+            def restore_remote_name(self, artifact_name):
                 import wandb
-                name = f"{self.identity['WANDB_ENTITY']}/{self.identity['WANDB_PROJECT']}/{self.artifact_name}:latest"
+                name = f"{self.identity['WANDB_ENTITY']}/{self.identity['WANDB_PROJECT']}/{artifact_name}:latest"
                 api = wandb.Api(timeout=30)
                 # A direct named lookup returns HTTP 404 for a learner's first save.
                 # An exact filtered list proves absence without suppressing API errors.
                 result = self.query("query($e:String!,$p:String!,$f:JSONString!){project(entityName:$e,name:$p){access artifactType(name:\"course-learner-state\"){artifactCollections(first:2,filters:$f){edges{node{name}} pageInfo{hasNextPage}}}}}",
-                                    {"e": self.identity["WANDB_ENTITY"], "p": self.identity["WANDB_PROJECT"], "f": json.dumps({"name": self.artifact_name})})
+                                    {"e": self.identity["WANDB_ENTITY"], "p": self.identity["WANDB_PROJECT"], "f": json.dumps({"name": artifact_name})})
                 project = result.get("data", {}).get("project")
                 if result.get("errors") or not project or project.get("access") != "PRIVATE" or "artifactType" not in project:
                     raise RuntimeError("Cannot verify saved progress; no new budget was created")
@@ -410,7 +442,7 @@ def _():
                 if not isinstance(connection, dict) or not isinstance(connection.get("edges"), list) or connection.get("pageInfo", {}).get("hasNextPage") is not False:
                     raise RuntimeError("Saved progress response is incomplete; no new budget was created")
                 names = [edge.get("node", {}).get("name") for edge in connection["edges"]]
-                if len(names) > 1 or any(value != self.artifact_name for value in names):
+                if len(names) > 1 or any(value != artifact_name for value in names):
                     raise RuntimeError("Saved progress filter was not exact; no new budget was created")
                 if not names:
                     return False
@@ -489,16 +521,26 @@ def _():
                 if self.process and self.process.poll() is None:
                     return {"recovered": False, "reason": "Worker is still active"}
                 report = json.loads(self.run_command(self.cli() + ["recovery-report", "--output", str(self.results)], cwd=self.root))
+                migrated_operations = {row["id"]: row for row in self.operation_records()} if self.state.get("identityAliases") else None
                 results = []
                 pending = self.state.get("pending")
                 for operation in report["operations"]:
                     if operation["phase"] == "completed":
                         continue
+                    expected_notebook = self.env["FORGE_NOTEBOOK_ID"]
                     try:
+                        if migrated_operations is not None:
+                            # The protected receipt was validated against the same
+                            # owner/destination and recorded legacy identity above.
+                            # Recovery must use that original identity; new launches
+                            # continue to use the stable anchor.
+                            self.env["FORGE_NOTEBOOK_ID"] = migrated_operations[operation["id"]]["identity"]["notebook"]
                         text = self.run_command(self.cli() + ["recover", "--operation", operation["id"], "--output", str(self.results), "--publish"], cwd=self.root, timeout=360)
                         results.append(json.loads(text))
                     except Exception as error:
                         results.append({"id": operation["id"], "recovered": False, "reason": self.redact(error)})
+                    finally:
+                        self.env["FORGE_NOTEBOOK_ID"] = expected_notebook
                 self.state["recovery"] = {"at": time.time(), "results": results}
                 ledger = self.ledger()
                 blocked = ledger.get("halted") or ledger.get("reservations") or any(not r.get("recovered") for r in results)
