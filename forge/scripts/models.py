@@ -92,17 +92,25 @@ def log_trial(file):
     entity, project = require_private_project()
     api = wandb.Api(timeout=60)
     name = 'trial-' + record['id']
+    workshop = record.get('protocol') == 'workshop-v1'
+    protocol_revision = 'workshop-v1' if workshop else record.get('protocol', {}).get('protocolRevision', 'unknown')
     artifact = remote_artifact(api, entity, project, name, fingerprint)
     existing = next(iter(api.runs(f'{entity}/{project}', filters={'name': record['wandbRunId']})), None)
     if existing and existing.summary.get('evidenceSha256') not in (None, fingerprint):
         raise RuntimeError('Stable run ID contains different evidence')
     if artifact is None or existing is None or existing.summary.get('evidenceSha256') != fingerprint:
-        with wandb.init(entity=entity, project=project, id=record['wandbRunId'], resume='allow', job_type='course-trial',
-                        group=f"protocol-{record.get('protocol', {}).get('protocolRevision', 'unknown')}-{record['project']}",
+        with wandb.init(entity=entity, project=project, id=record['wandbRunId'], resume='allow', job_type='workshop' if workshop else 'course-trial',
+                        group=f"{protocol_revision if workshop else 'protocol-' + str(protocol_revision)}-{record['project']}",
                         name=f"{record['project']}-{record['variant']}-{record['trial']}",
-                        config={key: projected[key] for key in ['sourceCommit', 'model', 'variant', 'trial', 'configuration', 'protocol', 'applicationSha256', 'checkerSha256'] if key in projected},
+                        config={key: projected[key] for key in ['sourceCommit', 'model', 'variant', 'trial', 'configuration', 'protocol', 'applicationSha256', 'checkerSha256', 'snapshotId', 'snapshotSha256', 'candidateSha256', 'assisted', 'action', 'runnerRevision'] if key in projected},
                         settings=wandb.Settings(disable_git=True, disable_code=True)) as run:
-            metrics = {'passed': int(record['outcome'] == 'passed'), 'outcome': record['outcome'], 'protocolRevision': record.get('protocol', {}).get('protocolRevision')}
+            metrics = {'passed': int(record['outcome'] == 'passed'), 'outcome': record['outcome'], 'protocolRevision': protocol_revision}
+            if workshop and 'student-evaluation.json' in entries:
+                evaluation = json.loads(entries['student-evaluation.json'])
+                for call in evaluation['calls']:
+                    if call['step'] != 0 or any(not key.startswith('student/') for key in call['metrics']):
+                        raise RuntimeError('Invalid student metric log')
+                    run.log(call['metrics'], step=0)
             for key in ['inputTokens', 'outputTokens', 'estimatedCostUsd', 'sandboxSecondsUpperBound']:
                 if record.get(key) is not None:
                     metrics[key] = record[key]
