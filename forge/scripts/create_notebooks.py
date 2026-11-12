@@ -151,7 +151,7 @@ def generate(runner_commit=None, projects=None, refresh_evidence=False):
             extension=(ROOT/'forge/scripts/workshop_workspace.py').read_text().replace('from learner_workspace import LessonWorkspace\n','')
             helper_cell='def _():\n    def _load_learner():\n'+textwrap.indent(helper+'\n'+extension,'        ')+'\n        return WorkshopWorkspace\n    LessonWorkspace = _load_learner()\n    return (LessonWorkspace,)'
             cells += [workshop.SPEC, helper_cell, learner.INIT, workshop.STATE, workshop.SETUP, workshop.PREPARE,
-                      lc.PREDICTION.replace('**4. Write your prediction.**','**Write your prediction.**').replace('where the agent is most likely to fall short','which check or app behavior your edit should change').replace('in step 6','in your observation worksheet'), workshop.EDITORS, workshop.EDIT_BUTTONS, workshop.SAVE, workshop.DIRTY,
+                      lc.PREDICTION.replace('**4. Write your prediction.**','**Write your prediction.**').replace('where the agent is most likely to fall short','which check or app behavior your edit should change').replace('in step 6','in your observation worksheet'), *workshop.editor_cells(json.loads(workshop_payload(project,commit))['manifest']['editable']), workshop.EDIT_BUTTONS, workshop.SAVE, workshop.DIRTY,
                       workshop.RELOAD, workshop.CHECK, workshop.HINTS, workshop.EXAMPLE,
                       learner.CONNECT, learner.AUTHENTICATE.replace('Go on to step 4.','Choose a lesson action below.'), workshop.ACTIONS, workshop.EXECUTE,
                       learner.CANCEL, learner.REFRESH, workshop.RESULTS, workshop.TRANSFER,

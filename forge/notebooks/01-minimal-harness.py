@@ -1124,10 +1124,17 @@ def _(mo):
 def _(get_files_epoch, learner, mo, workshop_initial):
     get_files_epoch()
     workshop_loaded = learner.workshop_files() or workshop_initial
-    _languages = {".ts":"typescript", ".tsx":"typescript", ".md":"markdown", ".json":"json", ".py":"python"}
-    workshop_editors = mo.ui.dictionary({_name: mo.ui.code_editor(value=_text, language=_languages.get("." + _name.rsplit(".",1)[-1], "text"), label=_name, min_height=220, max_height=440, debounce=False) for _name, _text in workshop_loaded['files'].items()})
-    mo.vstack([mo.md("### 1. Inspect and edit your implementation\n\nThe deliberate gaps are marked `TODO(workshop)`. Open each file tab. Typing changes only the draft in this editor; it cannot launch work. Save before checking or executing. Files outside this list belong to the supplied checkpoint."), mo.ui.tabs({_name:workshop_editors[_name] for _name in workshop_loaded['files']})])
-    return workshop_editors, workshop_loaded
+    _languages = {'.ts':'typescript', '.tsx':'typescript', '.md':'markdown', '.json':'json', '.py':'python'}
+    workshop_editor_0 = mo.ui.code_editor(value=workshop_loaded['files']['src/renderer/workshop-import.ts'], language=_languages.get('.ts', 'text'), label='src/renderer/workshop-import.ts', min_height=220, max_height=440, debounce=False)
+    workshop_editor_1 = mo.ui.code_editor(value=workshop_loaded['files']['workshop/inference.ts'], language=_languages.get('.ts', 'text'), label='workshop/inference.ts', min_height=220, max_height=440, debounce=False)
+    mo.vstack([mo.md('### 1. Inspect and edit your implementation\n\nThe deliberate gaps are in the files below. Open each file tab. Typing changes only the draft in this editor; it cannot launch work. Save before checking or executing. Files outside this list belong to the supplied checkpoint.'), mo.ui.tabs({'src/renderer/workshop-import.ts': workshop_editor_0, 'workshop/inference.ts': workshop_editor_1})])
+    return workshop_editor_0, workshop_editor_1, workshop_loaded
+
+
+@app.cell(hide_code=True)
+def _(workshop_editor_0, workshop_editor_1):
+    workshop_editors = {'src/renderer/workshop-import.ts': workshop_editor_0.value, 'workshop/inference.ts': workshop_editor_1.value}
+    return (workshop_editors,)
 
 
 @app.cell(hide_code=True)
@@ -1151,7 +1158,8 @@ def _(
     mo.stop(workshop_save.value <= get_workshop_save())
     set_workshop_save(workshop_save.value)
     try:
-        _saved = learner.save_edits(workshop_editors.value)
+        with mo.status.spinner(title="Saving your source snapshot and verifying the private checkpoint"):
+            _saved = learner.save_edits(workshop_editors)
         _message = mo.callout(mo.md("Saved snapshot `" + _saved['snapshot']['id'] + "` · SHA-256 `" + _saved['snapshot']['sha256'] + "`. Run the checks next."), kind="success")
     except Exception as _error:
         _message = mo.callout(mo.md("**Edits not saved.** " + learner.redact(_error)), kind="warn")
@@ -1163,7 +1171,7 @@ def _(
 def _(get_workshop_save, learner, mo, workshop_editors, workshop_loaded):
     get_workshop_save()
     _current = learner.workshop_files() or workshop_loaded
-    _changed = [_name for _name, _text in workshop_editors.value.items() if _current['files'].get(_name) != _text]
+    _changed = [_name for _name, _text in workshop_editors.items() if _current['files'].get(_name) != _text]
     _state = learner.state.get('workshop', {})
     mo.md(("**Unsaved edits:** " + ", ".join("`" + _name + "`" for _name in _changed) + ". Save these edits before executing." if _changed else "**Editor matches the saved files.**") + (" Your last saved snapshot is `" + _state['draftSnapshot'] + "`." if _state.get('draftSnapshot') else " Save once to create your first snapshot."))
     return
@@ -1315,7 +1323,7 @@ def _(
     try:
         if not workshop_consent.value:
             raise RuntimeError("Confirm the paid action before executing.")
-        if learner.workshop_files()['files'] != workshop_editors.value:
+        if learner.workshop_files()['files'] != workshop_editors:
             raise RuntimeError("There are unsaved edits. Save these edits first.")
         _identifier = learner.start_workshop(workshop_action.value, workshop_scenario.value, workshop_fixture.value, workshop_question.value, workshop_single.value)
         _message = mo.callout(mo.md("Started execution `" + _identifier + "`. My work refreshes below. You can edit a new draft while it runs; the running snapshot cannot change."), kind="info")
@@ -1358,7 +1366,7 @@ def _(
     _rows = []
     _cards = []
     for _r in sorted(_trials, key=lambda r:r.get('startedAt',''), reverse=True):
-        _stale = _r.get('snapshotSha256') != _work.get('draftSha256') or (learner.workshop_files() or {}).get('files') != workshop_editors.value
+        _stale = _r.get('snapshotSha256') != _work.get('draftSha256') or (learner.workshop_files() or {}).get('files') != workshop_editors
         _rows.append({'Execution':_r['id'], 'Snapshot':_r.get('snapshotId'), 'Action':_r.get('variant'), 'Outcome':_r.get('outcome'), 'Current draft':not _stale, 'Estimated USD':_r.get('estimatedCostUsd'), 'Publication':_r.get('publicationStatus')})
         _links = [f"[Conversation {_i+1}](https://forge.coreweave.com/agent-lens/{my_progress['destination']}/conversations/{_c})" for _i,_c in enumerate(_r.get('conversationIds',[]))]
         if _r.get('wandbRunUrl'):_links.append('[W&B run]('+_r['wandbRunUrl']+')')

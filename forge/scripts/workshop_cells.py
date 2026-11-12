@@ -37,13 +37,29 @@ PREPARE = '''def _(get_prepare_click, learner, learner_budget, mo, prepare_works
     _message
     return'''
 
-EDITORS = '''def _(get_files_epoch, learner, mo, workshop_initial):
-    get_files_epoch()
-    workshop_loaded = learner.workshop_files() or workshop_initial
-    _languages = {".ts":"typescript", ".tsx":"typescript", ".md":"markdown", ".json":"json", ".py":"python"}
-    workshop_editors = mo.ui.dictionary({_name: mo.ui.code_editor(value=_text, language=_languages.get("." + _name.rsplit(".",1)[-1], "text"), label=_name, min_height=220, max_height=440, debounce=False) for _name, _text in workshop_loaded['files'].items()})
-    mo.vstack([mo.md("### 1. Inspect and edit your implementation\\n\\nThe deliberate gaps are marked `TODO(workshop)`. Open each file tab. Typing changes only the draft in this editor; it cannot launch work. Save before checking or executing. Files outside this list belong to the supplied checkpoint."), mo.ui.tabs({_name:workshop_editors[_name] for _name in workshop_loaded['files']})])
-    return workshop_editors, workshop_loaded'''
+def editor_cells(files):
+    """Give each editor an independent reactive identity.
+
+    Marimo 0.25.1 coalesces queued updates by the parent UI element ID.
+    Dictionary children can therefore drop all but the last edited file while
+    a check/save is busy. Independent roots retain every file's pending value.
+    The second cell reads those roots explicitly so dirty state stays reactive.
+    """
+    names = [f"workshop_editor_{i}" for i in range(len(files))]
+    lines = ["def _(get_files_epoch, learner, mo, workshop_initial):",
+             "    get_files_epoch()",
+             "    workshop_loaded = learner.workshop_files() or workshop_initial",
+             "    _languages = {'.ts':'typescript', '.tsx':'typescript', '.md':'markdown', '.json':'json', '.py':'python'}"]
+    for name, path in zip(names, files):
+        language = path.rsplit('.', 1)[-1]
+        lines.append(f"    {name} = mo.ui.code_editor(value=workshop_loaded['files'][{path!r}], language=_languages.get('.{language}', 'text'), label={path!r}, min_height=220, max_height=440, debounce=False)")
+    tabs = ', '.join(f'{path!r}: {name}' for path, name in zip(files, names))
+    explanation = "### 1. Inspect and edit your implementation\n\nThe deliberate gaps are in the files below. Open each file tab. Typing changes only the draft in this editor; it cannot launch work. Save before checking or executing. Files outside this list belong to the supplied checkpoint."
+    lines.append(f"    mo.vstack([mo.md({explanation!r}), mo.ui.tabs({{{tabs}}})])")
+    lines.append('    return ' + ', '.join([*names, 'workshop_loaded']))
+    values = ', '.join(f'{path!r}: {name}.value' for path, name in zip(files, names))
+    value_cell = 'def _(' + ', '.join(names) + '):\n    workshop_editors = {' + values + '}\n    return (workshop_editors,)'
+    return ['\n'.join(lines), value_cell]
 
 EDIT_BUTTONS = '''def _(mo):
     workshop_save = mo.ui.button(value=0, on_click=lambda v:v+1, label="Save these edits")
@@ -56,7 +72,8 @@ SAVE = '''def _(get_workshop_save, learner, mo, set_workshop_save, workshop_edit
     mo.stop(workshop_save.value <= get_workshop_save())
     set_workshop_save(workshop_save.value)
     try:
-        _saved = learner.save_edits(workshop_editors.value)
+        with mo.status.spinner(title="Saving your source snapshot and verifying the private checkpoint"):
+            _saved = learner.save_edits(workshop_editors)
         _message = mo.callout(mo.md("Saved snapshot `" + _saved['snapshot']['id'] + "` · SHA-256 `" + _saved['snapshot']['sha256'] + "`. Run the checks next."), kind="success")
     except Exception as _error:
         _message = mo.callout(mo.md("**Edits not saved.** " + learner.redact(_error)), kind="warn")
@@ -66,7 +83,7 @@ SAVE = '''def _(get_workshop_save, learner, mo, set_workshop_save, workshop_edit
 DIRTY = '''def _(get_workshop_save, learner, mo, workshop_editors, workshop_loaded):
     get_workshop_save()
     _current = learner.workshop_files() or workshop_loaded
-    _changed = [_name for _name, _text in workshop_editors.value.items() if _current['files'].get(_name) != _text]
+    _changed = [_name for _name, _text in workshop_editors.items() if _current['files'].get(_name) != _text]
     _state = learner.state.get('workshop', {})
     mo.md(("**Unsaved edits:** " + ", ".join("`" + _name + "`" for _name in _changed) + ". Save these edits before executing." if _changed else "**Editor matches the saved files.**") + (" Your last saved snapshot is `" + _state['draftSnapshot'] + "`." if _state.get('draftSnapshot') else " Save once to create your first snapshot."))
     return'''
@@ -137,7 +154,7 @@ EXECUTE = '''def _(get_workshop_start, learner, mo, set_workshop_start, workshop
     try:
         if not workshop_consent.value:
             raise RuntimeError("Confirm the paid action before executing.")
-        if learner.workshop_files()['files'] != workshop_editors.value:
+        if learner.workshop_files()['files'] != workshop_editors:
             raise RuntimeError("There are unsaved edits. Save these edits first.")
         _identifier = learner.start_workshop(workshop_action.value, workshop_scenario.value, workshop_fixture.value, workshop_question.value, workshop_single.value)
         _message = mo.callout(mo.md("Started execution `" + _identifier + "`. My work refreshes below. You can edit a new draft while it runs; the running snapshot cannot change."), kind="info")
@@ -154,7 +171,7 @@ RESULTS = '''def _(base64, evidence_link, json, learner, learner_refresh, mo, wo
     _rows = []
     _cards = []
     for _r in sorted(_trials, key=lambda r:r.get('startedAt',''), reverse=True):
-        _stale = _r.get('snapshotSha256') != _work.get('draftSha256') or (learner.workshop_files() or {}).get('files') != workshop_editors.value
+        _stale = _r.get('snapshotSha256') != _work.get('draftSha256') or (learner.workshop_files() or {}).get('files') != workshop_editors
         _rows.append({'Execution':_r['id'], 'Snapshot':_r.get('snapshotId'), 'Action':_r.get('variant'), 'Outcome':_r.get('outcome'), 'Current draft':not _stale, 'Estimated USD':_r.get('estimatedCostUsd'), 'Publication':_r.get('publicationStatus')})
         _links = [f"[Conversation {_i+1}](https://forge.coreweave.com/agent-lens/{my_progress['destination']}/conversations/{_c})" for _i,_c in enumerate(_r.get('conversationIds',[]))]
         if _r.get('wandbRunUrl'):_links.append('[W&B run]('+_r['wandbRunUrl']+')')
