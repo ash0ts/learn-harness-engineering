@@ -17,7 +17,7 @@ import {workshopCourseRoot,workshopHead} from './workshop-workspace.js';
 import {deadline} from './lifecycle.js';
 import {verifyWorkshopTraces} from './workshop-traces.js';
 
-export interface WorkshopRunOptions {action:'scenario'|'agent'|'resume';output:string;id?:string;live?:boolean;scenario?:string;fixture?:string;question?:string;singleRole?:boolean;internalChild?:boolean;feedback?:string;controllerId?:string}
+export interface WorkshopRunOptions {action:'scenario'|'agent'|'resume';output:string;id?:string;live?:boolean;scenario?:string;fixture?:string;question?:string;singleRole?:boolean;internalChild?:boolean;feedback?:string;controllerId?:string;parallel?:boolean}
 export async function runWorkshop(snapshot:WorkshopSnapshot,manifest:WorkshopManifest,options:WorkshopRunOptions){
   validateSnapshot(snapshot,manifest,[process.env.WANDB_API_KEY??'']);
   if(options.action==='resume'&&(snapshot.project!=='project-03'||!snapshot.parent))throw new Error('Resume requires Project 03 and an explicit parent snapshot');
@@ -37,7 +37,7 @@ export async function runWorkshop(snapshot:WorkshopSnapshot,manifest:WorkshopMan
   if(c.model!==p.model||c.inferenceUrl!==p.inferenceUrl)throw new Error('Workshop model/provider changed; capability qualification is required');
   const execution=new Execution(options.output,id,p);await execution.budget.reserve({});
   await mkdir(dir,{recursive:true});await execution.begin('trial',snapshot.sourceCommit);
-  const record:WorkshopResult={schemaVersion:1,protocol:'workshop-v1',id,project:snapshot.project,sourceCommit:snapshot.sourceCommit,runnerRevision:await workshopHead(),snapshotId:snapshot.id,snapshotSha256:snapshot.sha256,assisted:snapshot.assisted,action:options.action,variant:options.action==='scenario'?(options.live?'live-app':'offline-app'):options.singleRole?'single-role':snapshot.project==='project-05'?'maker-checker':options.action,controllerId:options.controllerId,feedbackSha256:options.feedback?sha256(options.feedback):undefined,trial:1,startedAt:new Date().toISOString(),outcome:'infrastructure_failed',checks:[],evidence:[],conversationIds:[],sandboxIds:[],cleanupStatus:'pending',telemetryStatus:'pending',publicationStatus:'pending',wandbRunId:id.replaceAll('-','').slice(0,20),model:c.model,configuration:publicConfig(c)};
+  const record:WorkshopResult={schemaVersion:1,protocol:'workshop-v1',workshopRelease:'all-eight-v1.1',id,project:snapshot.project,sourceCommit:snapshot.sourceCommit,runnerRevision:await workshopHead(),snapshotId:snapshot.id,snapshotSha256:snapshot.sha256,assisted:snapshot.assisted,action:options.action,variant:options.action==='scenario'?(options.live?'live-app':'offline-app'):options.singleRole?'single-role':snapshot.project==='project-05'?'maker-checker':options.action,controllerId:options.controllerId,feedbackSha256:options.feedback?sha256(options.feedback):undefined,trial:1,startedAt:new Date().toISOString(),outcome:'infrastructure_failed',checks:[],evidence:[],conversationIds:[],sandboxIds:[],cleanupStatus:'pending',telemetryStatus:'pending',publicationStatus:'pending',wandbRunId:id.replaceAll('-','').slice(0,20),model:c.model,configuration:publicConfig(c)};
   record.wandbRunId=sha256(id).slice(0,20);
   record.pricing=p.pricing;record.sandboxImage=p.sandbox.image;record.generation={temperature:0,enableThinking:false,maxAgentOutputTokens:c.maxOutputTokens,maxAppOutputTokens:512};
   if(resumedFrom)record.resumedFrom={id:resumedFrom.id,candidateId:resumedFrom.candidateId,sha256:resumedFrom.candidateSha256,conversationIds:resumedFrom.conversationIds};
@@ -83,7 +83,7 @@ export async function runWorkshop(snapshot:WorkshopSnapshot,manifest:WorkshopMan
       record.sandboxIds.push(sandbox.sandboxId);await stageWorkspace(sandbox,await stageWorkshop(candidate,manifest),true);
       for(const file of ['workshop.cjs','workshop-process.py','workshop-evaluation.py']){const data=await readFile(join(workshopCourseRoot,'forge/graders',file));await sandbox.files.write('/tmp/'+file,data);record[file+'Sha256']=sha256(data);}
       await sandbox.files.write('/tmp/workshop-adapter.cjs',bundle.app);
-      await sandbox.files.write('/tmp/scenario.json',JSON.stringify({project:snapshot.project,snapshotId:candidate.id,snapshotSha256:candidate.sha256,live:Boolean(options.live),scenario,fixture:options.fixture??'long',question:options.question}));
+      await sandbox.files.write('/tmp/scenario.json',JSON.stringify({project:snapshot.project,snapshotId:candidate.id,snapshotSha256:candidate.sha256,live:Boolean(options.live),parallel:Boolean(options.parallel),scenario,fixture:options.fixture??'long',question:options.question}));
       if(snapshot.project==='project-02'){
         const temp=await mkdtemp(join(tmpdir(),'workshop-sdk-'));
         try{const file=join(temp,'exercise.mjs');await writeFile(file,bundle.sdk);const sdk=await import(pathToFileURL(file).href);const result=await deadline(sdk.inspectWorkspace(sandbox),70000,'Student sandbox command');await writeJson(join(grader,'student-sdk.json'),{sourceSha256:candidate.checksums['workshop/sandbox-task.ts'],result});}
@@ -110,7 +110,7 @@ export async function runWorkshop(snapshot:WorkshopSnapshot,manifest:WorkshopMan
         await writeJson(join(grader,'command.json'),{exitCode:completed.exitCode,stdout:redact(completed.stdout,[c.apiKey??'']),stderr:redact(completed.stderr,[c.apiKey??''])});
       }finally{
         // Collect before termination even when grading or the connection failed.
-        const names=['result.json','local-check.json','build.log','process.log','process.json','chunks.json','answers.json','ui-events.json','images.json','app-evidence/app.json','app-evidence/request-receipts.json'];
+        const names=['result.json','local-check.json','build.log','process.log','process.json','chunks.json','answers.json','ui-events.json','images.json','lanes.json','app-evidence/app.json','app-evidence/request-receipts.json'];
         for(const name of names){try{const bytes=await sandbox.files.read('/tmp/workshop-grade/'+name);await mkdir(join(grader,name,'..'),{recursive:true});await writeFile(join(grader,name),bytes);}catch{}}
         try{const images=JSON.parse(await readFile(join(grader,'images.json'),'utf8'));for(const item of images){if(!/^[a-z0-9-]+\.png$/.test(item.file))throw new Error('Unsafe screenshot name');await writeFile(join(grader,item.file),await sandbox.files.read('/tmp/workshop-grade/'+item.file));}}catch{}
         if(options.live){

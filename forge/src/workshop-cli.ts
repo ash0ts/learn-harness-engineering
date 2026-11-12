@@ -18,11 +18,12 @@ import {writeJson} from './records.js';
 import {Execution} from './execution.js';
 
 import {workshopAttempt} from './workshop-attempt.js';
+import {workshopGraph,decideWorkshopGraph} from './workshop-graph.js';
 import {workshopLoop} from './workshop-loop.js';
 
 export async function workshopCLI(args:string[]){
   const command=args[0];
-  const {values:v}=parseArgs({args:args.slice(1),options:{project:{type:'string'},workspace:{type:'string'},source:{type:'string'},output:{type:'string'},input:{type:'string'},artifact:{type:'string'},candidate:{type:'boolean'},edits:{type:'string'},parent:{type:'string'},snapshot:{type:'string'},'operation-id':{type:'string'},scenario:{type:'string'},fixture:{type:'string'},question:{type:'string'},execute:{type:'boolean'},live:{type:'boolean'},apply:{type:'boolean'},assisted:{type:'boolean'},'single-role':{type:'boolean'},'no-publish':{type:'boolean'},controller:{type:'string'}}});
+  const {values:v}=parseArgs({args:args.slice(1),options:{project:{type:'string'},workspace:{type:'string'},source:{type:'string'},output:{type:'string'},input:{type:'string'},artifact:{type:'string'},candidate:{type:'boolean'},edits:{type:'string'},parent:{type:'string'},snapshot:{type:'string'},'operation-id':{type:'string'},scenario:{type:'string'},fixture:{type:'string'},question:{type:'string'},execute:{type:'boolean'},live:{type:'boolean'},apply:{type:'boolean'},assisted:{type:'boolean'},'single-role':{type:'boolean'},'no-publish':{type:'boolean'},controller:{type:'string'},decision:{type:'string'},sha256:{type:'string'},actor:{type:'string'},reason:{type:'string'},parallel:{type:'boolean'}}});
   if(!v.workspace)throw new Error('workshop requires --workspace DIRECTORY');
   const workspace=resolve(v.workspace),output=resolve(v.output??join(workspace,'.workshop-evidence'));
   if(command==='init'){if(!v.project)throw new Error('Choose --project project-01 through project-08');return initWorkshop(v.project as WorkshopProject,workspace,v.source);}
@@ -53,6 +54,8 @@ export async function workshopCLI(args:string[]){
     if(command==='export')await writeJson(resolve(v.input!),snapshot);
     return {snapshot,diff:await workshopDiff(workspace,snapshot)};
   }
+  if(command==='graph')return workshopGraph(workspace,output,manifest,snapshot,v);
+  if(command==='decide')return decideWorkshopGraph(output,v.controller??'',v.decision??'',v.sha256??'',v.actor??'',v.reason??'');
   if(command==='loop')return workshopLoop(workspace,output,manifest,snapshot,v);
   if(command==='check')return checkWorkshop(snapshot,manifest,output);
   if(!['scenario','agent','resume'].includes(command))throw new Error('workshop: init | inspect | save | check | scenario | agent | resume | export | import');

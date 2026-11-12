@@ -234,5 +234,38 @@
       "ask",
       "restart"
     ]
+  },
+  {
+    "schemaVersion": 1,
+    "protocol": "workshop-v1",
+    "project": "project-08",
+    "title": "Make control flow inspectable",
+    "task": "Write the graph routing policy and a narrow repair plan. Verify the unfinished candidate, route its observed failure to repair, and inspect the next candidate. Choose serial or parallel independent service and Electron checks. A verified candidate pauses for your explicit checksum-bound decision. Failed candidates remain available; a failed repair rolls back to the starting snapshot.",
+    "editable": [
+      "workshop/graph.ts",
+      "workshop/plan.md",
+      "src/services/workshop-metadata.ts"
+    ],
+    "overlays": {
+      "workshop/graph.ts": "export interface GraphObservation {phase:'plan'|'verified'; outcome:string; repairs:number; maxRepairs:number; cleanupVerified:boolean; usageComplete:boolean}\nexport function route(observation:GraphObservation):'verify'|'repair'|'approval'|'stop'|'recover' {\n  // TODO: route unknown cleanup/usage to recovery; plan to verify; pass to approval; bounded failures to repair.\n  return 'approval';\n}\nexport function verificationMode():'serial'|'parallel' { return 'serial'; }\n",
+      "workshop/plan.md": "# Candidate plan\n\nTODO: name the change, the files, the checks, and what must survive.\n",
+      "src/services/workshop-metadata.ts": "export function documentMetadata(content:string) {\n  return {\n    wordCount: content.trim() ? 0 : 0,\n    lineCount: content.split(/\\r?\\n/).length,\n    paragraphCount: content.split(/\\n\\s*\\n/).filter(p=>p.trim()).length,\n  };\n}\n"
+    },
+    "hints": [
+      "Approval is a pause. The route function cannot grant it; only a recorded human decision tied to this candidate hash can.",
+      "Infrastructure uncertainty is different from a failed application check. Route uncertain usage or cleanup to recovery, without launching another repair.",
+      "Serial and parallel verification must use the same snapshot and both checks. Their lane receipts show timing, exit status and source hashes; faster alone does not mean more correct."
+    ],
+    "checks": [
+      "graph-routing",
+      "parallel-lanes",
+      "candidate-approval"
+    ],
+    "scenarios": [
+      "import",
+      "index",
+      "ask",
+      "restart"
+    ]
   }
 ]

@@ -34,5 +34,11 @@
   "publication": "idempotent-stable-operation-and-artifact",
   "controlsRequired": true,
   "referenceRepairsVisibleToAgents": false,
-  "roleDeliverable": "final-call-within-original-allowance"
+  "roleDeliverable": "final-call-within-original-allowance",
+  "graphAllocation": {
+    "plannerCalls": 4,
+    "makerCalls": 20,
+    "plannerTimeoutSeconds": 180,
+    "makerTimeoutSeconds": 420
+  }
 }
