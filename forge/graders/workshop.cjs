@@ -75,7 +75,7 @@ async function main(){
       await capture('05-feedback');
       await check('Reset removes visible documents, answers and citations',async()=>{
         const oldAnswers=JSON.parse(fs.readFileSync(path.join(data,'qa-history.json'),'utf8')).map(h=>h.response.answer);
-        page.once('dialog',d=>d.accept());await page.getByRole('button',{name:'Reset Data',exact:true}).click();
+        page.once('dialog',d=>d.accept());await page.getByRole('button',{name:'Reset',exact:true}).click();
         await until(()=>!fs.existsSync(path.join(data,'qa-history.json')));
         const body=await page.locator('body').innerText();
         for(const answer of oldAnswers)assert.ok(!body.includes(answer),'A stale answer survived reset');
