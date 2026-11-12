@@ -1,0 +1,11 @@
+import {readFile} from 'node:fs/promises';
+import {join} from 'node:path';
+import {runWorkshop} from './workshop-runner.js';
+import {writeJson} from './records.js';
+import {updateOperation} from './operations.js';
+const {snapshot,manifest,options}=JSON.parse(await readFile(process.argv[2],'utf8'));
+await runWorkshop(snapshot,manifest,{...options,internalChild:true});
+const file=join(options.output,options.id,'worker-finalization.json');
+await writeJson(file,{phase:'grading_complete',cleanExit:false,activeResources:process.getActiveResourcesInfo()});
+const watchdog=setTimeout(async()=>{await writeJson(file,{phase:'forced_shutdown',cleanExit:false,activeResources:process.getActiveResourcesInfo()});await updateOperation(options.output,options.id,op=>{op.phase='recoverable';op.events.push({event:'forced_worker_shutdown',at:new Date().toISOString()});});process.exit(1);},30000);watchdog.unref();
+process.once('beforeExit',async()=>{clearTimeout(watchdog);await writeJson(file,{phase:'terminated',cleanExit:true,activeResources:process.getActiveResourcesInfo()});});
