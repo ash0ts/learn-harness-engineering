@@ -84,7 +84,12 @@ CHECK = '''def _(get_workshop_check, learner, mo, set_workshop_check, workshop_c
     try:
         with mo.status.spinner(title="Building and checking the saved snapshot"):
             _result = learner.check_edits()
-        _display = mo.vstack([mo.md("**" + _result['outcome'].replace('_',' ') + "** · snapshot `" + _result['snapshotId'] + "`"), mo.ui.table(_result['checks'], selection=None, pagination=False), mo.accordion({"Build output": mo.md("```text\\n" + learner.projection(learner.workshop_evidence(_result['id'], 'build.log').decode(errors='replace'))[-18000:] + "\\n```"), "Focused check output": mo.md("```text\\n" + learner.projection(learner.workshop_evidence(_result['id'], 'checks.log').decode(errors='replace'))[-18000:] + "\\n```")})])
+        _logs = {}
+        for _label, _file in [('Build output','build.log'),('Focused check output','checks.log')]:
+            try: _text=learner.projection(learner.workshop_evidence(_result['id'],_file).decode(errors='replace'))[-18000:]
+            except FileNotFoundError: _text='This step did not run; inspect the preceding failure.'
+            _logs[_label]=mo.md("```text\\n"+_text+"\\n```")
+        _display = mo.vstack([mo.md("**" + _result['outcome'].replace('_',' ') + "** · snapshot `" + _result['snapshotId'] + "`"), mo.ui.table(_result['checks'], selection=None, pagination=False), mo.accordion(_logs)])
     except Exception as _error:
         _display = mo.callout(mo.md("**Check stopped.** " + learner.redact(_error)), kind="warn")
     _display
@@ -159,7 +164,7 @@ RESULTS = '''def _(base64, evidence_link, json, learner, learner_refresh, mo, wo
             _images = json.loads(learner.workshop_evidence(_r['id'],'grader/images.json'))
             for _image in _images:
                 _bytes=learner.workshop_evidence(_r['id'],'grader/'+_image['file'])
-                _parts.append(mo.image('data:image/png;base64,'+base64.b64encode(_bytes).decode(), caption=_image['step']+' · snapshot '+_image['snapshot'], width='100%'))
+                _parts.append(mo.image('data:image/png;base64,'+base64.b64encode(_bytes).decode(), alt=_image['step']+' from the student Electron build', caption=_image['step']+' · snapshot '+_image['snapshot'], width='100%'))
         except (OSError, ValueError):pass
         _details = {}
         for _name in ['grader/answers.json','grader/chunks.json','grader/ui-events.json','grader/app-evidence/app.json','grader/student-sdk.json','actor/review.json','actor/reads-1.json','actor/changes-1.json','actor/changes-3.json','student-evaluation.json']:

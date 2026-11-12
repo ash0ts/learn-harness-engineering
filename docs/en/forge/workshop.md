@@ -68,7 +68,7 @@ npm test
 
 The unfinished lesson should fail its intended checks. Do not treat that failure as an installation problem. When ready for live app inference, supply `WANDB_ENTITY`, `WANDB_PROJECT`, and `WANDB_API_KEY` through your process environment, then run `npm run dev -- --live`. Keep the key out of source, shell scripts and notebooks. The main/service process handles it; the renderer has no SDK or credential access.
 
-The same shared CLI supports `workshop check`, `scenario`, `agent` and `resume`. Paid CLI actions require `--execute`; live app inference additionally requires `--live`. Set `FORGE_BUDGET_USD=20` for student work and keep the evidence directory when returning. Python 3.11+ and `uv` are needed for private W&B publication; the scripts pin `wandb==0.31.0`.
+The same shared CLI supports `workshop check`, `scenario`, `agent` and `resume`. On Windows, use the notebook for paid sandbox/agent actions: process-tree cleanup for the paid CLI worker is not yet qualified there. Local Electron, deterministic checks and source exchange are available through the portable scripts. Paid CLI actions require `--execute`; live app inference additionally requires `--live`. Set `FORGE_BUDGET_USD=20` for student work and keep the evidence directory when returning. Python 3.11+ and `uv` are needed for private W&B publication; the scripts pin `wandb==0.31.0`.
 
 ## Move source between notebook and laptop
 
@@ -91,7 +91,13 @@ node --import ./forge/node_modules/tsx/dist/loader.mjs forge/src/cli.ts workshop
 
 Upload that JSON through the notebook's native file upload. Click **Preview uploaded source diff**, inspect it, then **Apply the previewed files**. **Load my saved files** refreshes the editors and replaces unsaved text. Save and check before executing. The import validates paths, file hashes, editable files and base revision. It cannot overwrite runner or accounting files.
 
-Every published execution also stores `submission.json` and `candidate.json` in its private W&B artifact. These provide an authenticated source-retrieval path when a browser download is unavailable; the publication report records which transfer paths were actually verified.
+Every published execution also stores `submission.json` and `candidate.json` in its private W&B artifact. With your W&B credentials in process configuration, retrieve the exact version shown by the execution's artifact link:
+
+```sh
+node --import ./forge/node_modules/tsx/dist/loader.mjs forge/src/cli.ts workshop import --workspace ../my-forge-01 --artifact trial-EXECUTION-ID:v0
+```
+
+This previews changes. Add `--apply` to import them, or `--candidate` to retrieve Pi's candidate instead of your original submission. The command checks the private destination, source revision, file allowlist and hashes. It requires Python 3.11+ and `uv`, with the W&B dependency pinned by the script. Browser-download verification is reported separately.
 
 ## Three-hour teaching schedule
 
