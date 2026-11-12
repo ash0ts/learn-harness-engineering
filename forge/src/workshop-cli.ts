@@ -22,7 +22,7 @@ export async function workshopCLI(args:string[]){
   const {values:v}=parseArgs({args:args.slice(1),options:{project:{type:'string'},workspace:{type:'string'},source:{type:'string'},output:{type:'string'},input:{type:'string'},artifact:{type:'string'},candidate:{type:'boolean'},edits:{type:'string'},parent:{type:'string'},snapshot:{type:'string'},'operation-id':{type:'string'},scenario:{type:'string'},fixture:{type:'string'},question:{type:'string'},execute:{type:'boolean'},live:{type:'boolean'},apply:{type:'boolean'},assisted:{type:'boolean'},'single-role':{type:'boolean'},'no-publish':{type:'boolean'}}});
   if(!v.workspace)throw new Error('workshop requires --workspace DIRECTORY');
   const workspace=resolve(v.workspace),output=resolve(v.output??join(workspace,'.workshop-evidence'));
-  if(command==='init'){if(!v.project)throw new Error('Choose --project project-01 through project-05');return initWorkshop(v.project as WorkshopProject,workspace,v.source);}
+  if(command==='init'){if(!v.project)throw new Error('Choose --project project-01 through project-08');return initWorkshop(v.project as WorkshopProject,workspace,v.source);}
   const manifest=await readManifest(workspace);
   if(command==='inspect')return {manifest,files:await readWorkshopFiles(workspace,manifest)};
   if(command==='import'){

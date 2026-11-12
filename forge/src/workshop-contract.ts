@@ -3,7 +3,7 @@ import {lstat, readFile, mkdir, writeFile} from 'node:fs/promises';
 import {dirname, join, relative, resolve, sep} from 'node:path';
 
 export const WORKSHOP_PROTOCOL = 'workshop-v1' as const;
-export type WorkshopProject = 'project-01'|'project-02'|'project-03'|'project-04'|'project-05';
+export type WorkshopProject = 'project-01'|'project-02'|'project-03'|'project-04'|'project-05'|'project-06'|'project-07'|'project-08';
 export interface WorkshopManifest {
   schemaVersion: 1; protocol: typeof WORKSHOP_PROTOCOL; project: WorkshopProject;
   sourceCommit: string; title: string; editable: string[]; files: Record<string,string>;
@@ -54,7 +54,7 @@ function fingerprint(snapshot:Pick<WorkshopSnapshot,'project'|'sourceCommit'|'ch
   return sha256(JSON.stringify([WORKSHOP_PROTOCOL,snapshot.project,snapshot.sourceCommit,Object.entries(snapshot.checksums).sort()]));
 }
 export function validateSnapshot(value:WorkshopSnapshot,manifest?:WorkshopManifest,secrets:string[]=[]) {
-  if(value.schemaVersion!==1 || value.protocol!==WORKSHOP_PROTOCOL || !/^project-0[1-5]$/.test(value.project) ||
+  if(value.schemaVersion!==1 || value.protocol!==WORKSHOP_PROTOCOL || !/^project-0[1-8]$/.test(value.project) ||
      !/^[a-f0-9]{40}$/.test(value.sourceCommit) || !/^[A-Za-z0-9-]+$/.test(value.id))throw new Error('Invalid workshop snapshot');
   if(!value.files || typeof value.files!=='object' || Object.keys(value.files).length>250)throw new Error('Invalid snapshot files');
   let bytes=0;

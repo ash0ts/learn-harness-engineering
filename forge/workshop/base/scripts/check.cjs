@@ -77,6 +77,22 @@ async function main(){
       await assert.rejects(()=>observe(sdk,'indexing.start',{},async()=>{throw new Error('controlled');}));
       assert.ok(events[1]?.end.error);
     });
+    if(manifest.project==='project-06'){
+      const {QaService}=require('../dist/services/qa-service.js');
+      const qa=new QaService(p,index);
+      await check('Feedback is persisted and survives a fresh service instance',()=>{
+        const entry=qa.submitFeedback('test-timestamp','test-question','negative','missing excerpt');
+        assert.ok(new QaService(new PersistenceService(data)).getFeedback().some(row=>row.id===entry.id&&row.comment==='missing excerpt'));
+      });
+      await check('Benchmark executes import, index and question against real services',async()=>{
+        p.resetAll();
+        const observed=await load('workshop/benchmark.ts').benchmark({documents,index,qa},path.join(root,'fixtures/short.txt'),'What units are documents indexed into?');
+        assert.ok(observed.chunkCount>0);assert.equal(observed.chunkCount,index.getChunksForDocument(observed.documentId).length);
+        assert.equal(qa.getHistory().length,1);assert.equal(observed.answer,qa.getHistory()[0].response.answer);
+        assert.ok(observed.citationCount>0);assert.equal(observed.citationCount,qa.getHistory()[0].response.citations.length);
+        p.resetAll();assert.equal(documents.listDocuments().length,0);assert.equal(index.getAllChunks().length,0);assert.equal(qa.getHistory().length,0);assert.equal(qa.getFeedback().length,0);
+      });
+    }
     if(manifest.project==='project-05'){
       await check('Role prompts require a concrete review and protect renderer boundaries',()=>{
         const maker=fs.readFileSync(path.join(root,'prompts/maker.md'),'utf8'),checker=fs.readFileSync(path.join(root,'prompts/checker.md'),'utf8');

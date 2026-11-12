@@ -7,12 +7,12 @@ import {makeSnapshot,type WorkshopProject} from '../src/workshop-contract.js';
 import {workshopHead,workshopTemplate,workshopCourseRoot} from '../src/workshop-workspace.js';
 import {checkWorkshop} from '../src/workshop-local.js';
 
-test('five unfinished labs fail; completed examples pass; isolated regressions fail',{timeout:300000},async()=>{
+test('six unfinished labs fail; completed examples pass; isolated regressions fail',{timeout:300000},async()=>{
   const output=await mkdtemp(join(tmpdir(),'workshop-controls-'));
   const source=await workshopHead();
-  const regressions=['src/renderer/workshop-import.ts','workshop/sandbox-task.ts','src/services/workshop-metadata.ts','workshop/instrumentation.ts','workshop/evaluation.py'];
+  const regressions=['src/renderer/workshop-import.ts','workshop/sandbox-task.ts','src/services/workshop-metadata.ts','workshop/instrumentation.ts','workshop/evaluation.py','workshop/benchmark.ts'];
   try{
-    for(let number=1;number<=5;number++){
+    for(let number=1;number<=6;number++){
       const project=`project-0${number}` as WorkshopProject;
       const {manifest,files}=await workshopTemplate(project,source);
       const baseline=await checkWorkshop(makeSnapshot(manifest,files),manifest,output);

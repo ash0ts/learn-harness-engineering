@@ -17,7 +17,7 @@ export async function workshopTemplate(project:WorkshopProject,source:string){
 async function loadTemplate(project:WorkshopProject,source:string){
   if(!/^[a-f0-9]{40}$/.test(source))throw new Error('Pin a complete source commit');
   const lessons=JSON.parse(await frozen(source,'forge/workshop/lessons.json'));
-  const lesson=lessons.find((l:any)=>l.project===project);if(!lesson)throw new Error('Choose workshop project-01 through project-05');
+  const lesson=lessons.find((l:any)=>l.project===project);if(!lesson)throw new Error('Choose workshop project-01 through project-08');
   const prefix='forge/workshop/base/';
   const files:Record<string,string>={};
   const list=(await exec('git',['ls-tree','-r','--name-only',source,'--',prefix],{cwd:workshopCourseRoot})).stdout.trim().split('\n');

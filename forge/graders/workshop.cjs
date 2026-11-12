@@ -65,6 +65,33 @@ async function main(){
       await capture('04-answer-'+(i+1));
     }
     if(scenario.scenario==='ask')return;
+    if(scenario.scenario==='reset'){
+      await check('Feedback button persists the observed rating',async()=>{
+        await page.getByRole('button',{name:'History',exact:true}).click();
+        await page.getByTitle('Poor answer').first().click();
+        await until(()=>fs.existsSync(path.join(data,'feedback.json'))&&JSON.parse(fs.readFileSync(path.join(data,'feedback.json'),'utf8')).length>0);
+        await page.getByRole('button',{name:'Documents',exact:true}).click();
+      });
+      await capture('05-feedback');
+      await check('Reset removes visible documents, answers and citations',async()=>{
+        const oldAnswers=JSON.parse(fs.readFileSync(path.join(data,'qa-history.json'),'utf8')).map(h=>h.response.answer);
+        page.once('dialog',d=>d.accept());await page.getByRole('button',{name:'Reset Data',exact:true}).click();
+        await until(()=>!fs.existsSync(path.join(data,'qa-history.json')));
+        const body=await page.locator('body').innerText();
+        for(const answer of oldAnswers)assert.ok(!body.includes(answer),'A stale answer survived reset');
+        assert.equal(await page.getByTestId('document-content').count(),0);
+        assert.equal(await page.getByText(title,{exact:true}).count(),0);
+        await page.getByRole('button',{name:'History',exact:true}).click();
+        assert.equal(await page.getByTitle('Poor answer').count(),0);
+      });
+      await capture('06-reset');await app.close();app=null;await launch(false);
+      await check('Reset remains empty after restart',async()=>{
+        assert.equal(await page.getByText(title,{exact:true}).count(),0);
+        await page.getByRole('button',{name:'History',exact:true}).click();assert.equal(await page.getByTitle('Poor answer').count(),0);
+        for(const name of ['documents-meta.json','qa-history.json','feedback.json'])if(fs.existsSync(path.join(data,name)))assert.equal(JSON.parse(fs.readFileSync(path.join(data,name),'utf8')).length,0);
+      });
+      await capture('07-reset-restart');return;
+    }
     events.push(...await app.evaluate(()=>globalThis.__workshopIPC));await app.close();app=null;
     // Restart checks persistence only. It never issues replacement inference.
     await launch(false);
