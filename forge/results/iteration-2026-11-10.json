@@ -1,0 +1,793 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "9448aa4326b933e5660126c2ba9c6f4cfbd26e35",
+  "suppliedIterationUnchanged": true,
+  "inputFiles": {
+    "docs/en/forge/classroom.md": "68cc142d09ce11c48c4d50634c75dde8042d7723f5ebcf6a63172977f8ad69fb",
+    "forge/lessons/00-overview.md": "27e18a24d6400ff6a63dd99bb111bb0c7523853bcefffd742982713712bce2f0",
+    "forge/lessons/01-minimal-harness.md": "9abf4495144e12e6a8509e0d7bd24250ff1c25488f158c5d54a6c6ad92e945b6",
+    "forge/lessons/02-workspace-docs.md": "97e9846b46b4d05c13c5bc2afb4716980b56ce509c1045640d4f5fa38b5a61bc",
+    "forge/lessons/03-session-recovery.md": "04099a779c9f391a62e4472cfb07d76acdcf6c39f5302c70472b38eaa1228a71",
+    "forge/lessons/04-runtime-feedback.md": "560749ed28e2d769623b93baabca5b6b3b51d68f0ee762dc6efd16a47bb30c72",
+    "forge/lessons/05-role-separation.md": "f48f46b0cae979b3ee702b2a3103992d9f29d3ad650da2abdeeb1ca6b32434a0",
+    "forge/lessons/06-capstone.md": "6b29f4004a52c3a34e0d3b2262fbbc8203f787c35d2c19a080986d59bb342508",
+    "forge/lessons/07-bounded-loops.md": "19a2601a45b693ea38465928c85fc6ebf644b3f4bd4efd7a9ade779d1a9b3fa9",
+    "forge/lessons/08-state-machine.md": "727dd9c5bdd0b9eb917b17c3438c56f3fa373763725f12e80ab0111cea46ce62",
+    "forge/lessons/evidence.json": "5af9c83c40f4764537698746b584b7ccb136fedc2b158698c0ac2710243cc0da",
+    "forge/notebooks/00-overview.py": "f27aaf4f4f9a87bc775055fbda1a33a225f749f7581f45ee8afab89a6070c516",
+    "forge/notebooks/01-minimal-harness.py": "01a0c0c173affe897f8db4889857c96f4420d3b478d056e5f6ccdf48ddd79909",
+    "forge/notebooks/02-workspace-docs.py": "678699a28516d07eb6231a44e4ed190e0c30eb88787ffa9b67562f5bcdaf644f",
+    "forge/notebooks/03-session-recovery.py": "c8bb5c432268798ee537a52151aaa2184ad9b9c77e366d98301380f5a1216531",
+    "forge/notebooks/04-runtime-feedback.py": "03e45c55893865419c6cf25bc353f2958633ea0d25750acab1fe5a19f0ccd383",
+    "forge/notebooks/05-role-separation.py": "c53219b3ec7e8d1076babec88b0cf0a353b9edfb9593249326422792641c5237",
+    "forge/notebooks/06-capstone.py": "522b104339298358407a59ddd0096874ee45df7405c989fbbabeea4816c906db",
+    "forge/notebooks/07-bounded-loops.py": "116a6269ad783910675c2d4cdd892aa0caf3ca27886f4dab9655d45eb16a1625",
+    "forge/notebooks/08-state-machine.py": "323ecb6fb251e6bd04e720748ecda251ad8976e3f960fc4b973833583efb9fb2",
+    "forge/scripts/course_packets.py": "42154a65e994e5f3c847b9515094440c6e9405c274fef82700750b73af2394c1",
+    "forge/scripts/create_notebooks.py": "bc815cb2712a21f8e6910d8b01262fd6620156d8b722aba27347b85a8fa92047",
+    "forge/scripts/learner_cells.py": "78d6e0110c1034d3eb679327bea0cf2b19862085cdf29a4e8a62cb26377aec6a",
+    "forge/scripts/learner_workspace.py": "83ef7eb17ef0f417cb527714964b65dd0c6ba65fa0081f9de33a7dff9f9d961b",
+    "forge/scripts/lesson_cells.py": "8972f436fda5c1509642dd1a5fbb79fa796e1f572a1617b1bb8101cf2b01e154",
+    "forge/scripts/validate_notebooks.py": "e35f0ab477ce0deea6a5ddbbf0d48c25c7ad2c5b484773be7d8d4f032202d488",
+    "forge/test/test_learner_workspace.py": "d56eed7c304175590898ee7d3ff26239adf5b2688fec895c5bdaca4c79f4aab3"
+  },
+  "validation": {
+    "learnerTests": 23,
+    "runnerTests": 39,
+    "typeCheck": "passed",
+    "docsBuild": "passed",
+    "savedViews": 9
+  },
+  "notebooks": [
+    {
+      "file": "forge/notebooks/00-overview.py",
+      "project": "overview",
+      "id": "Tm90ZWJvb2s6MTUzMTM=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTM%3D",
+      "sourceCommit": "9448aa4326b933e5660126c2ba9c6f4cfbd26e35",
+      "sha256": "f27aaf4f4f9a87bc775055fbda1a33a225f749f7581f45ee8afab89a6070c516",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "Forge-track-evidence-before-conclusions",
+        "versionIndex": 32,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "92662194fb3d7213d3f9e3b8ff042671bca85944d24a78afc67ed4c8b96d08d2",
+      "renderedCellSourceVerified": true,
+      "verifiedAggregateGroups": 43,
+      "verifiedCourseView": {
+        "primaryGroups": 13,
+        "nativeImages": 2,
+        "packetFiles": 5
+      },
+      "verifiedAt": "2026-11-10T13:38:51.735779+00:00"
+    },
+    {
+      "file": "forge/notebooks/01-minimal-harness.py",
+      "project": "project-01",
+      "id": "Tm90ZWJvb2s6MTUzMTQ=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTQ%3D",
+      "sourceCommit": "9448aa4326b933e5660126c2ba9c6f4cfbd26e35",
+      "sha256": "01a0c0c173affe897f8db4889857c96f4420d3b478d056e5f6ccdf48ddd79909",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "01-Minimal-instructions-and-explicit-harnesses",
+        "versionIndex": 24,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "95e56d665950d0084ff8247b3d5399fbbb863fa55370db8299a9218040a8e199",
+      "renderedCellSourceVerified": true,
+      "verifiedAggregateGroups": 6,
+      "verifiedCourseView": {
+        "primaryGroups": 2,
+        "nativeImages": 3,
+        "packetFiles": 14
+      },
+      "verifiedAt": "2026-11-10T13:38:53.372270+00:00"
+    },
+    {
+      "file": "forge/notebooks/02-workspace-docs.py",
+      "project": "project-02",
+      "id": "Tm90ZWJvb2s6MTUzMTU=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTU%3D",
+      "sourceCommit": "9448aa4326b933e5660126c2ba9c6f4cfbd26e35",
+      "sha256": "678699a28516d07eb6231a44e4ed190e0c30eb88787ffa9b67562f5bcdaf644f",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "02-An-agent-readable-workspace",
+        "versionIndex": 20,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "e83111a34ce387b4b65aa8a07334b0ad504d947f4f19f7431ec3d84cfa8542e2",
+      "renderedCellSourceVerified": true,
+      "verifiedAggregateGroups": 4,
+      "verifiedCourseView": {
+        "primaryGroups": 2,
+        "nativeImages": 1,
+        "packetFiles": 13
+      },
+      "verifiedAt": "2026-11-10T13:38:55.138367+00:00"
+    },
+    {
+      "file": "forge/notebooks/03-session-recovery.py",
+      "project": "project-03",
+      "id": "Tm90ZWJvb2s6MTUzMTY=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTY%3D",
+      "sourceCommit": "9448aa4326b933e5660126c2ba9c6f4cfbd26e35",
+      "sha256": "c8bb5c432268798ee537a52151aaa2184ad9b9c77e366d98301380f5a1216531",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "03-Interrupted-session-recovery",
+        "versionIndex": 19,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "f44084e4270de32a79adf41d228642f7776c48a8492a81ceb5e75f896e491b4f",
+      "renderedCellSourceVerified": true,
+      "verifiedAggregateGroups": 4,
+      "verifiedCourseView": {
+        "primaryGroups": 2,
+        "nativeImages": 2,
+        "packetFiles": 13
+      },
+      "verifiedAt": "2026-11-10T13:38:56.902992+00:00"
+    },
+    {
+      "file": "forge/notebooks/04-runtime-feedback.py",
+      "project": "project-04",
+      "id": "Tm90ZWJvb2s6MTUzMTc=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTc%3D",
+      "sourceCommit": "9448aa4326b933e5660126c2ba9c6f4cfbd26e35",
+      "sha256": "03e45c55893865419c6cf25bc353f2958633ea0d25750acab1fe5a19f0ccd383",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "04-Runtime-evidence-and-the-seeded-defect",
+        "versionIndex": 16,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "e10ea87e930dbc004533d02ea6068f4b6bc316cb060073ee8c0f1cc55c77ab68",
+      "renderedCellSourceVerified": true,
+      "verifiedAggregateGroups": 4,
+      "verifiedCourseView": {
+        "primaryGroups": 2,
+        "nativeImages": 2,
+        "packetFiles": 6
+      },
+      "verifiedAt": "2026-11-10T13:38:58.486465+00:00"
+    },
+    {
+      "file": "forge/notebooks/05-role-separation.py",
+      "project": "project-05",
+      "id": "Tm90ZWJvb2s6MTUzMTg=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTg%3D",
+      "sourceCommit": "9448aa4326b933e5660126c2ba9c6f4cfbd26e35",
+      "sha256": "c53219b3ec7e8d1076babec88b0cf0a353b9edfb9593249326422792641c5237",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "05-One-feature-three-role-arrangements",
+        "versionIndex": 16,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "f1adcd077b8738a98c285be3d49d3478523afa8f8e537424fe2d62fc5cb39f5c",
+      "renderedCellSourceVerified": true,
+      "verifiedAggregateGroups": 9,
+      "verifiedCourseView": {
+        "primaryGroups": 3,
+        "nativeImages": 3,
+        "packetFiles": 8
+      },
+      "verifiedAt": "2026-11-10T13:39:00.195899+00:00"
+    },
+    {
+      "file": "forge/notebooks/06-capstone.py",
+      "project": "project-06",
+      "id": "Tm90ZWJvb2s6MTUzMTk=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTk%3D",
+      "sourceCommit": "9448aa4326b933e5660126c2ba9c6f4cfbd26e35",
+      "sha256": "522b104339298358407a59ddd0096874ee45df7405c989fbbabeea4816c906db",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "06-Capstone-reliability",
+        "versionIndex": 15,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "32cd5e629dd051c4481abcf66b45c0a18641cd3cf418dc9196921ece8cb2c778",
+      "renderedCellSourceVerified": true,
+      "verifiedAggregateGroups": 6,
+      "verifiedCourseView": {
+        "primaryGroups": 2,
+        "nativeImages": 2,
+        "packetFiles": 17
+      },
+      "verifiedAt": "2026-11-10T13:39:01.949769+00:00"
+    },
+    {
+      "file": "forge/notebooks/07-bounded-loops.py",
+      "project": "project-07",
+      "id": "Tm90ZWJvb2s6MTUzMjA=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjA%3D",
+      "sourceCommit": "9448aa4326b933e5660126c2ba9c6f4cfbd26e35",
+      "sha256": "116a6269ad783910675c2d4cdd892aa0caf3ca27886f4dab9655d45eb16a1625",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "07-Goal-timer-and-maker-checker-loops",
+        "versionIndex": 15,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "1ba2af5eb50d68777007b67c55ffaf074bb0eea3842eb56907b44fae8a135923",
+      "renderedCellSourceVerified": true,
+      "verifiedAggregateGroups": 6,
+      "verifiedCourseView": {
+        "primaryGroups": 0,
+        "nativeImages": 1,
+        "packetFiles": 13
+      },
+      "verifiedAt": "2026-11-10T13:39:03.592469+00:00"
+    },
+    {
+      "file": "forge/notebooks/08-state-machine.py",
+      "project": "project-08",
+      "id": "Tm90ZWJvb2s6MTUzMjE=",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjE%3D",
+      "sourceCommit": "9448aa4326b933e5660126c2ba9c6f4cfbd26e35",
+      "sha256": "323ecb6fb251e6bd04e720748ecda251ad8976e3f960fc4b973833583efb9fb2",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "08-Checkpointed-graphs-and-human-approval",
+        "versionIndex": 18,
+        "sourceFileName": "notebook.py"
+      },
+      "renderedOutputSha256": "00fa91fa396c0f1d0f4ab83ded0340637afaaf1b64a5a87ff08a255029cc2500",
+      "renderedCellSourceVerified": true,
+      "verifiedAggregateGroups": 4,
+      "verifiedCourseView": {
+        "primaryGroups": 0,
+        "nativeImages": 1,
+        "packetFiles": 9
+      },
+      "verifiedAt": "2026-11-10T13:39:05.525625+00:00"
+    }
+  ],
+  "publicationSessions": [
+    {
+      "id": "notebook-iteration-20261110-00",
+      "notebookId": "Tm90ZWJvb2s6MTUzMTM=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-10T13:19:15.524Z",
+      "status": "terminated",
+      "sandboxId": "d02315a4-df6c-4e32-9b35-c77ab43cb2e0",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-10T13:22:00.730Z",
+      "secondsUpperBound": 165.206,
+      "estimatedCostUsd": 0.015639501333333333
+    },
+    {
+      "id": "notebook-iteration-20261110-01",
+      "notebookId": "Tm90ZWJvb2s6MTUzMTQ=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-10T13:15:57.786Z",
+      "status": "terminated",
+      "sandboxId": "ac7df932-c0c4-4047-911f-856c29c47ebe",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-10T13:19:36.481Z",
+      "secondsUpperBound": 218.695,
+      "estimatedCostUsd": 0.020703126666666665
+    },
+    {
+      "id": "notebook-iteration-20261110-02",
+      "notebookId": "Tm90ZWJvb2s6MTUzMTU=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-10T13:22:01.278Z",
+      "status": "terminated",
+      "sandboxId": "33f614a1-84a0-4e33-86b4-64fc8ce8e698",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-10T13:24:21.227Z",
+      "secondsUpperBound": 139.949,
+      "estimatedCostUsd": 0.013248505333333334
+    },
+    {
+      "id": "notebook-iteration-20261110-03",
+      "notebookId": "Tm90ZWJvb2s6MTUzMTY=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-10T13:24:21.634Z",
+      "status": "terminated",
+      "sandboxId": "1ca8dc7b-893d-432c-83ab-5d7560cdaddb",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-10T13:27:15.105Z",
+      "secondsUpperBound": 173.471,
+      "estimatedCostUsd": 0.016421921333333332
+    },
+    {
+      "id": "notebook-iteration-20261110-04",
+      "notebookId": "Tm90ZWJvb2s6MTUzMTc=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-10T13:27:15.532Z",
+      "status": "terminated",
+      "sandboxId": "a65612df-9ae5-49ab-8f2e-50e12d6bf83e",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-10T13:29:22.681Z",
+      "secondsUpperBound": 127.149,
+      "estimatedCostUsd": 0.012036772
+    },
+    {
+      "id": "notebook-iteration-20261110-05",
+      "notebookId": "Tm90ZWJvb2s6MTUzMTg=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-10T13:29:23.066Z",
+      "status": "terminated",
+      "sandboxId": "a698ef52-5d15-4a8b-abd9-56fa329b4d75",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-10T13:32:12.499Z",
+      "secondsUpperBound": 169.433,
+      "estimatedCostUsd": 0.016039657333333332
+    },
+    {
+      "id": "notebook-iteration-20261110-06",
+      "notebookId": "Tm90ZWJvb2s6MTUzMTk=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-10T13:32:12.910Z",
+      "status": "terminated",
+      "sandboxId": "6eb559e0-e7f3-4b7c-b4d9-05d8ffafb803",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-10T13:34:12.572Z",
+      "secondsUpperBound": 119.662,
+      "estimatedCostUsd": 0.011328002666666667
+    },
+    {
+      "id": "notebook-iteration-20261110-07",
+      "notebookId": "Tm90ZWJvb2s6MTUzMjA=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-10T13:34:12.965Z",
+      "status": "terminated",
+      "sandboxId": "424b8550-d96f-4f08-8814-824fa69a4938",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-10T13:36:20.416Z",
+      "secondsUpperBound": 127.451,
+      "estimatedCostUsd": 0.012065361333333333
+    },
+    {
+      "id": "notebook-iteration-20261110-08",
+      "notebookId": "Tm90ZWJvb2s6MTUzMjE=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-10T13:36:20.836Z",
+      "status": "terminated",
+      "sandboxId": "d8954689-b4c2-4e48-ab07-4a2439fd060e",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-10T13:38:10.387Z",
+      "secondsUpperBound": 109.551,
+      "estimatedCostUsd": 0.010370828
+    }
+  ],
+  "verifiedAt": "2026-11-10T13:54:29.371068+00:00",
+  "publicationMethod": "Native Marimo file editor; execute display cells; installed unmodified save_worker.py --once; committed source/output readback after runtime teardown.",
+  "publicationStatus": "published_verified",
+  "studentFlowStatus": "completed_with_instructor_interventions; browser checkpoint download unverified",
+  "liveVerification": {
+    "scope": "One owner-account Project 01 minimal-treatment trial, two qualification attempts; not a fresh campaign for all eight projects.",
+    "runnerCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+    "qualifications": [
+      {
+        "id": "qualification-67d4043e-a88c-49eb-850e-a4de2e0a4de4",
+        "passed": false,
+        "error": "Error: Live app service qualification failed",
+        "estimatedCostUsd": 0.007749397333333333
+      },
+      {
+        "id": "qualification-c3d73ea5-4b53-405f-b4aa-476e9cedb332",
+        "passed": true,
+        "error": null,
+        "estimatedCostUsd": 0.008784692666666667
+      }
+    ],
+    "trial": {
+      "id": "d3b99b76-12ca-4b30-8d07-0f3b1a018206",
+      "project": "project-01",
+      "variant": "minimal",
+      "trial": 1,
+      "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+      "outcome": "passed",
+      "startedAt": "2026-11-10T13:31:43.386Z",
+      "finishedAt": "2026-11-10T13:40:43.033Z",
+      "actorCompleted": false,
+      "grade": {
+        "schemaVersion": 1,
+        "task": "project-01",
+        "checks": [
+          {
+            "name": "strict compile and renderer build",
+            "passed": true
+          },
+          {
+            "name": "real import and persistence after reconstruction",
+            "passed": true
+          },
+          {
+            "name": "actual indexing keeps every nonempty paragraph",
+            "passed": true
+          },
+          {
+            "name": "actual retrieval and Q&A persist two turns",
+            "passed": true
+          },
+          {
+            "name": "Electron window, preload, import, indexing and question UI under Xvfb",
+            "passed": true
+          }
+        ],
+        "passed": true
+      },
+      "inputTokens": 383880,
+      "outputTokens": 7800,
+      "estimatedCostUsd": 0.15678783866666668,
+      "sandboxId": "038610d0-242d-469b-a98b-20f63d244c89",
+      "graderSandboxId": "087414e9-5d87-4cd4-86cf-00d2c8e4ba49",
+      "conversationIds": [
+        "01a1c5a8-6555-7344-8d5f-9d329e1c26a3"
+      ]
+    },
+    "actor": {
+      "requests": 24,
+      "turns": 25,
+      "completed": false,
+      "errors": [
+        "Model-call budget exhausted"
+      ],
+      "telemetryComplete": true
+    },
+    "modelReadback": [
+      {
+        "trialId": "d3b99b76-12ca-4b30-8d07-0f3b1a018206",
+        "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+        "verified": true,
+        "errors": [],
+        "runId": "d3b99b7612ca4b30",
+        "runUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/d3b99b7612ca4b30",
+        "artifact": "wandb/learn-harness-engineering-forge/trial-d3b99b76-12ca-4b30-8d07-0f3b1a018206:v0",
+        "committedTrialSha256": "5f2c4e8f038797d0dd7c8f83674348b479108fbb737bdca9dbdd8c974f661b66"
+      }
+    ],
+    "traceReadback": {
+      "verified": true,
+      "conversations": [
+        {
+          "conversationId": "01a1c5a0-9dee-7410-8c7f-5c90d1210f93",
+          "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+          "inputTokens": 919,
+          "outputTokens": 138,
+          "kind": "agent-qualification",
+          "telemetryComplete": true,
+          "spanCount": 4,
+          "operations": {
+            "chat": 2,
+            "execute_tool": 1,
+            "invoke_agent": 1
+          },
+          "observedErrorSpans": 0,
+          "readbackInputTokens": 919,
+          "readbackOutputTokens": 138,
+          "verified": true,
+          "errors": [],
+          "url": "https://forge.coreweave.com/agent-lens/wandb/learn-harness-engineering-forge/conversations/01a1c5a0-9dee-7410-8c7f-5c90d1210f93"
+        },
+        {
+          "conversationId": "app-adfe348f-76aa-4a76-b8c5-efd6d22e3de6",
+          "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+          "inputTokens": 456,
+          "outputTokens": 1819,
+          "kind": "app-qualification",
+          "telemetryComplete": true,
+          "expectedModelCalls": 2,
+          "expectedError": true,
+          "spanCount": 12,
+          "operations": {
+            "execute_tool": 6,
+            "chat": 2,
+            "invoke_agent": 4
+          },
+          "observedErrorSpans": 2,
+          "readbackInputTokens": 456,
+          "readbackOutputTokens": 1819,
+          "verified": true,
+          "errors": [],
+          "url": "https://forge.coreweave.com/agent-lens/wandb/learn-harness-engineering-forge/conversations/app-adfe348f-76aa-4a76-b8c5-efd6d22e3de6"
+        },
+        {
+          "conversationId": "01a1c5a4-cb35-7453-9bd5-5120225c29d2",
+          "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+          "inputTokens": 919,
+          "outputTokens": 138,
+          "kind": "agent-qualification",
+          "telemetryComplete": true,
+          "spanCount": 4,
+          "operations": {
+            "chat": 2,
+            "execute_tool": 1,
+            "invoke_agent": 1
+          },
+          "observedErrorSpans": 0,
+          "readbackInputTokens": 919,
+          "readbackOutputTokens": 138,
+          "verified": true,
+          "errors": [],
+          "url": "https://forge.coreweave.com/agent-lens/wandb/learn-harness-engineering-forge/conversations/01a1c5a4-cb35-7453-9bd5-5120225c29d2"
+        },
+        {
+          "conversationId": "app-34e4a8fb-ad59-4dfa-abfc-00e6187d2521",
+          "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+          "inputTokens": 464,
+          "outputTokens": 1320,
+          "kind": "app-qualification",
+          "telemetryComplete": true,
+          "expectedModelCalls": 2,
+          "expectedError": false,
+          "spanCount": 12,
+          "operations": {
+            "execute_tool": 6,
+            "chat": 2,
+            "invoke_agent": 4
+          },
+          "observedErrorSpans": 0,
+          "readbackInputTokens": 464,
+          "readbackOutputTokens": 1320,
+          "verified": true,
+          "errors": [],
+          "url": "https://forge.coreweave.com/agent-lens/wandb/learn-harness-engineering-forge/conversations/app-34e4a8fb-ad59-4dfa-abfc-00e6187d2521"
+        },
+        {
+          "conversationId": "01a1c5a8-6555-7344-8d5f-9d329e1c26a3",
+          "inputTokens": 383880,
+          "outputTokens": 7800,
+          "telemetryComplete": true,
+          "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+          "variant": "minimal",
+          "kind": "coding-agent",
+          "spanCount": 76,
+          "operations": {
+            "chat": 25,
+            "execute_tool": 50,
+            "invoke_agent": 1
+          },
+          "observedErrorSpans": 0,
+          "readbackInputTokens": 383880,
+          "readbackOutputTokens": 7800,
+          "verified": true,
+          "errors": [],
+          "url": "https://forge.coreweave.com/agent-lens/wandb/learn-harness-engineering-forge/conversations/01a1c5a8-6555-7344-8d5f-9d329e1c26a3"
+        }
+      ]
+    },
+    "interventions": [
+      {
+        "id": "qualification-67d4043e-a88c-49eb-850e-a4de2e0a4de4",
+        "inputTokens": 1375,
+        "outputTokens": 1957,
+        "secondsUpperBound": 52.388,
+        "estimatedUsd": 0.007749397333333333,
+        "workerStatus": "completed",
+        "originalOutcome": "failed"
+      },
+      {
+        "time": "2026-11-10T13:46:22.518646+00:00",
+        "intervention": "SIGTERM completed local worker PID 994 after verifying persisted final grade and both remote sandboxes completed; no source changed",
+        "trialId": "d3b99b76-12ca-4b30-8d07-0f3b1a018206",
+        "gradeFinishedAt": "2026-11-10T13:40:43.033Z"
+      }
+    ],
+    "restore": {
+      "runtimeId": "8fd0340c-9aa2-43f6-a395-060bd944496a",
+      "workspaceAbsentBeforePrepare": true,
+      "status": "Workspace ready",
+      "notesMatch": true,
+      "trialMatches": true,
+      "priorSettlementsPreserved": true,
+      "ledgerReserved": {},
+      "ledgerHalted": null,
+      "accountKeyConnected": false,
+      "accountKeyStatusEvidence": "Native My work shows Sandbox access: not connected",
+      "sourceByteEqualityVerified": true
+    },
+    "credentialScan": {
+      "filesChecked": 3273,
+      "credentialMatches": []
+    },
+    "checkpoint": {
+      "sha256": "266b9ff0d1b7eaf3613f11c1b108db9e532f50ed26ce58d8bbf47daf26ed57f5",
+      "artifactSaveAndFreshRestoreVerified": true,
+      "browserDownloadVerified": false,
+      "browserDownloadObservation": "The control was present and clicked, but browser automation did not observe a completed download; no browser download file was verified. The saved artifact bundle was collected separately through the SDK and successfully restored."
+    }
+  },
+  "testSessions": [
+    {
+      "id": "notebook-iteration-20261110-scratch",
+      "notebookId": "Tm90ZWJvb2s6MTU1OTg=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-10T13:19:16.012Z",
+      "status": "terminated",
+      "sandboxId": "230ec624-37c9-4e6e-b6e0-d4e7ce8c34d0",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-10T13:49:54.247Z",
+      "secondsUpperBound": 1838.235,
+      "estimatedCostUsd": 0.17401957999999998
+    },
+    {
+      "id": "notebook-iteration-20261110-restore",
+      "notebookId": "Tm90ZWJvb2s6MTU1OTg=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-10T13:50:04.661Z",
+      "status": "terminated",
+      "sandboxId": "8fd0340c-9aa2-43f6-a395-060bd944496a",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-10T13:53:10.268Z",
+      "secondsUpperBound": 185.607,
+      "estimatedCostUsd": 0.017570796
+    }
+  ],
+  "workers": {
+    "states": [
+      {
+        "id": "7a3cb9ed-2cfb-45b5-8c13-414032275de4",
+        "status": "completed"
+      },
+      {
+        "id": "115e99ca-9545-4bff-b817-beccf58b15cc",
+        "status": "completed"
+      },
+      {
+        "id": "038610d0-242d-469b-a98b-20f63d244c89",
+        "status": "completed"
+      },
+      {
+        "id": "087414e9-5d87-4cd4-86cf-00d2c8e4ba49",
+        "status": "completed"
+      }
+    ],
+    "costs": [
+      {
+        "id": "qualification-67d4043e-a88c-49eb-850e-a4de2e0a4de4",
+        "estimatedUsd": 0.007749397333333333
+      },
+      {
+        "id": "qualification-c3d73ea5-4b53-405f-b4aa-476e9cedb332",
+        "estimatedUsd": 0.008784692666666667
+      },
+      {
+        "id": "d3b99b76-12ca-4b30-8d07-0f3b1a018206",
+        "estimatedUsd": 0.15678783866666668
+      }
+    ],
+    "estimatedWorkerAndInferenceUsd": 0.17332192866666668
+  },
+  "costs": {
+    "publicationNotebookUsd": 0.127853676,
+    "testNotebookUsd": 0.19159037599999998,
+    "workerAndInferenceUsd": 0.17332192866666668,
+    "totalEstimatedUsd": 0.49276598066666666,
+    "basis": "Recorded tokens and conservative CPU/memory wall-time estimates; not a provider billing reconciliation. Project 01 publication runtime was already active; its estimate covers this verification window only."
+  },
+  "accounting": {
+    "outstandingReservations": {},
+    "usageHalt": null
+  },
+  "limitations": [
+    "The first qualification failed on malformed live app inference output; its known usage was reconciled before an unchanged retry passed.",
+    "A completed local trial worker remained open for more than five minutes after grading; an instructor sent SIGTERM after verifying persisted final results and terminal remote workers. The existing parent then completed W&B publication and progress save. The underlying cause was not established or fixed.",
+    "The new browser checkpoint download remains unverified. Artifact persistence and fresh-runtime restoration passed.",
+    "The pinned actor reached its model-call bound; a checker pass is not actor completion or full original-course completion.",
+    "No actual student-account entitlement check, new Project 07 two-hour run, new Project 08 graph run, GPU sandbox, or model training was performed in this iteration.",
+    "The frozen historical comparisons and original-course coverage limitations are unchanged."
+  ],
+  "screenshots": [
+    "forge/results/assets/iteration-2026-11-10-project05.png",
+    "forge/results/assets/iteration-2026-11-10-restored.png"
+  ]
+}

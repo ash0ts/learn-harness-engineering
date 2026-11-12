@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "protocolRevision": 5,
+  "url": "https://forge.coreweave.com/wandb/learn-harness-engineering-forge?nw=43tvw98k2nm",
+  "forgeUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=43tvw98k2nm",
+  "runUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/course-protocol5-repair-audit",
+  "artifact": "wandb/learn-harness-engineering-forge/protocol5-repair-audit:v2",
+  "sourceSha256": "95d803e0aff3e5f190c84b62c034b48d8950ea60945ba49ff8a508327c976e58",
+  "payloadSha256": "3ae8f5937d0faa82e42117261933476744b5a3866b7d16c7d39c144145535340",
+  "verifiedEvidenceFiles": 17,
+  "readBackVerified": true
+}

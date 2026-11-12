@@ -1,0 +1,145 @@
+# /// script
+# requires-python = ">=3.11"
+# dependencies = ["wandb==0.31.0"]
+# ///
+"""Upload existing evidence and exact source archives; launches no inference or sandbox."""
+from pathlib import Path
+import hashlib
+import json
+import os
+import tarfile
+import subprocess
+import time
+import wandb
+from models import require_private_project
+from measurement import qualified
+
+ROOT=Path(__file__).resolve().parents[2]
+LOCAL=ROOT/'forge/local-results'
+
+def add_evidence_file(artifact, path, *, name):
+    """Reject accidental credential capture before any evidence file is staged."""
+    path=Path(path)
+    credential=os.environ['WANDB_API_KEY'].encode()
+    if credential in path.read_bytes():
+        raise RuntimeError('Credential detected in evidence file: '+name)
+    if path.name.endswith('.tar.gz'):
+        with tarfile.open(path,'r:gz') as archive:
+            for member in archive:
+                if member.isfile() and credential in archive.extractfile(member).read():
+                    raise RuntimeError('Credential detected in source archive: '+name+'/'+member.name)
+    artifact.add_file(str(path),name=name)
+
+def publish():
+    entity,project=require_private_project()
+    saved=json.loads((ROOT/'forge/results/snapshot.json').read_text())
+    ledger=json.loads((LOCAL/'budget.json').read_text())
+    sources=LOCAL/'audit-sources';sources.mkdir(exist_ok=True)
+    concurrent=[json.loads(p.read_text()) for p in LOCAL.glob('concurrency-*/concurrency.json')]
+    publications=json.loads((ROOT/'forge/publication-manifest.json').read_text())
+    diagnostics=[json.loads(p.read_text()) for p in LOCAL.glob('*-diagnostic-*/diagnostic.json')]
+    supplemental=diagnostics+saved.get('sandboxQualifications',[])+saved.get('visibleUiQualifications',[])+saved.get('graphs',[])+saved.get('loops',[])
+    publisher_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
+    commits=sorted({publisher_commit}|{r['sourceCommit'] for r in saved['trials']+saved['qualifications']+concurrent+supplemental+publications['notebooks'] if r.get('sourceCommit')})
+    archives=[]
+    for commit in commits:
+        path=sources/(commit+'.tar.gz')
+        subprocess.run(['git','archive','--format=tar.gz','-o',str(path),commit,'forge','projects'],cwd=ROOT,check=True)
+        archives.append({'sourceCommit':commit,'file':path.name,'sha256':hashlib.sha256(path.read_bytes()).hexdigest()})
+    (sources/'manifest.json').write_text(json.dumps(archives,indent=2)+'\n')
+    blocks=len(saved.get('completedComparisonBlocks',[]))
+    uncertain=sum(r['reservedEstimateUsd'] for r in ledger.get('uncertainEstimates',[]))
+    verified_ui=[r for r in saved['trials'] if qualified(r)]
+    audit_metrics={'qualificationAttempts':len(saved['qualifications']),'qualificationPassed':sum(r['passed'] for r in saved['qualifications']),'codingTrialAttempts':len(saved['trials']),'passedCodingTrials':sum(r['outcome']=='passed' for r in saved['trials']),'completeComparisonBlocks':blocks,'knownEstimatedSpendUsd':ledger['spentEstimateUsd']-uncertain,'chargedUnknownReservationsUsd':uncertain,'totalChargedEstimateUsd':ledger['spentEstimateUsd'],'unresolvedReservationsUsd':sum(ledger['reservations'].values()),'budgetHalted':bool(ledger.get('halted')),'notebooksPublishedVerified':sum(r['status']=='published_verified' for r in publications['notebooks'])}
+    audit_metrics.update(verifiedUiAttempts=len(verified_ui),verifiedUiPasses=sum(r['outcome']=='passed' for r in verified_ui))
+    loops=saved.get('loops',[]);graphs=saved.get('graphs',[])
+    audit_metrics.update(realTwoHourTimersCompleted=sum(s['mode']=='timer' and s['status']=='deadline' and s['deadlineAt']-s['startedAt']>=7200000 for s in loops),
+                         goalLoopsPassed=sum(s['mode']=='goal' and s['status']=='passed' for s in loops),
+                         piGraphApprovalPauses=sum(not s.get('qualification') and s['node']=='approval' for s in graphs),
+                         manualGraphApprovalPauses=sum(bool(s.get('qualification')) and s['node']=='approval' for s in graphs))
+    traces=json.loads((LOCAL/'trace-audit.json').read_text())
+    models=json.loads((LOCAL/'models-audit.json').read_text())
+    cleanup=json.loads((LOCAL/'sandbox-final-audit.json').read_text())
+    comparisons=json.loads((LOCAL/'comparison-audit.json').read_text())
+    audit_metrics.update(agentLensConversationsVerified=sum(r['verified'] for r in traces['conversations']),
+                         modelsTrialArtifactsVerified=sum(r['verified'] for r in models['trials']),
+                         cleanupRecordsVerified=sum(r['verified'] for r in cleanup['workers']),
+                         activeCourseWorkers=len(cleanup['active']),comparisonBlocksVerified=sum(r['verified'] for r in comparisons['blocks']))
+    with wandb.init(entity=entity,project=project,id='course-audit-20261106',resume='allow',job_type='qualification-audit',name='Forge course execution and publication evidence',config={'protocol':json.loads((ROOT/'forge/protocol.json').read_text()),'upstreamCommit':'a9342ff471f2c0e60be0c08b9f4a7c502df4e442'},allow_val_change=True,settings=wandb.Settings(disable_git=True,disable_code=True)) as run:
+        run.name='Forge course execution and publication evidence'
+        run.log(audit_metrics)
+        table=wandb.Table(columns=['id','kind','outcome','original_estimate_usd','audited_estimate_usd','source_commit'])
+        for row in saved['qualifications']:
+            table.add_data(row['id'],'qualification','passed' if row['passed'] else 'failed',row.get('estimatedCostUsd'),ledger['settled'].get(row['id']),row['sourceCommit'])
+        for row in saved['trials']:
+            table.add_data(row['id'],'coding-trial',row['outcome'],row.get('estimatedCostUsd'),ledger['settled'].get(row['id']),row['sourceCommit'])
+        run.log({'attempts':table})
+        by_id={r['id']:r for r in saved['trials']}
+        def evidence_links(trial_id):
+            row=by_id.get(trial_id,{})
+            conversations=row.get('conversationIds',[])
+            trace=f'https://forge.coreweave.com/agent-lens/{entity}/{project}/conversations/{conversations[0]}' if conversations else None
+            return row.get('wandbRunUrl'),row.get('artifactUrl'),trace
+        link_columns=['latest_trial_run','latest_trial_artifact','latest_agent_trace']
+        loop_table=wandb.Table(columns=['checkpoint','mode','status','rounds','observed_interventions','duration_limit_seconds','source_commit']+link_columns,data=[])
+        for state in loops:
+            trial_id=state['rounds'][-1]['trialId'] if state['rounds'] else None
+            loop_table.add_data(state['file'],state['mode'],state['status'],len(state['rounds']),len(state.get('interventions',[])),(state['deadlineAt']-state['startedAt'])/1000,state['sourceCommit'],*evidence_links(trial_id))
+        graph_table=wandb.Table(columns=['checkpoint','manual_qualification','node','maker_attempts','transitions','candidate_sha256','protected_grade_passed','source_commit']+link_columns,data=[])
+        for state in graphs:
+            grade=state.get('lastProtectedGrade') or {};candidate=state.get('candidate') or {}
+            trial_id=candidate.get('trialId') or (Path(grade['evidence']).parent.name if grade.get('evidence') else None)
+            graph_table.add_data(state['file'],bool(state.get('qualification')),state['node'],state['attempts'],len(state['transitions']),candidate.get('sha256'),grade.get('passed'),state['sourceCommit'],*evidence_links(trial_id))
+        run.log({'loopEvidence':loop_table,'graphEvidence':graph_table})
+        artifact=wandb.Artifact('forge-course-qualification-evidence',type='course-evidence',metadata={'schemaVersion':1,'status':'recorded-evidence','completedComparisonBlocks':blocks,'publisherSourceCommit':publisher_commit})
+        for row in saved['qualifications']+saved['trials']+concurrent+saved.get('sandboxQualifications',[])+saved.get('visibleUiQualifications',[]):
+            directory=LOCAL/row['id']
+            for path in sorted(directory.rglob('*')):
+                if path.is_file() and path.suffix in {'.json','.diff','.txt','.log','.png'}:
+                    add_evidence_file(artifact,str(path),name=str(path.relative_to(LOCAL)))
+        for path in sorted(sources.iterdir()):add_evidence_file(artifact,str(path),name='source-archives/'+path.name)
+        for filename in ['budget.json','app-checks.json','notebook-validation.json','trace-audit.json','models-audit.json','comparison-audit.json','checker-qualification-summary.json','forge-tests-final.log','sandbox-final-audit.json','local-checks.json','docs-check.log','anchors-check.log']:
+            path=LOCAL/filename
+            if path.exists():add_evidence_file(artifact,str(path),name=filename)
+        for pattern in ['project-07-*.json','project-08-*.json','rollback-*.json','report-*.json','graph-*/*.json','graph-*/*.png','notebook-sessions/*.json','trace-readback/*.json','reconciliations/*.json','publication/*/notebook.py','publication/*/rendered.html','publication/*.jpg','history-diagnostic-*/*.json','history-diagnostic-*/*.png','history-diagnostic-*/*.cjs','checker-diagnostic-*/*.json','checker-diagnostic-*/*.png','checker-diagnostic-*/*.cjs','notebook-rerun-qualification.json','notebook-rerun-qualification/*','publication-guards-final.log']:
+            for path in sorted(LOCAL.glob(pattern)):
+                if path.is_file():add_evidence_file(artifact,str(path),name=str(path.relative_to(LOCAL)))
+        for directory in sorted(LOCAL.glob('graph-qualification-*')):
+            for path in sorted(directory.rglob('*')):
+                if path.is_file() and path.suffix in {'.json','.diff','.png','.log'}:
+                    add_evidence_file(artifact,str(path),name=str(path.relative_to(LOCAL)))
+        for path in sorted((ROOT/'forge/results').glob('*')):
+            if path.name in {'README.md','evidence-publication.json'}:continue
+            if path.is_file():add_evidence_file(artifact,str(path),name='results/'+path.name)
+        for path in sorted((ROOT/'forge/notebooks').glob('*.py')):add_evidence_file(artifact,str(path),name='notebooks/'+path.name)
+        add_evidence_file(artifact,str(ROOT/'forge/publication-manifest.json'),name='publication-manifest.json')
+        committed=run.log_artifact(artifact).wait()
+        receipt={'schemaVersion':1,'runId':run.id,'runUrl':run.url,'artifact':f'{entity}/{project}/{committed.name}','artifactUrl':f'https://wandb.ai/{entity}/{project}/artifacts/course-evidence/{committed.name}','publisherSourceCommit':publisher_commit,'sourceArchives':archives}
+    api=wandb.Api();remote=api.artifact(receipt['artifact'],type='course-evidence')
+    receipt['artifactFileCount']=len(list(remote.files()))
+    # Run summary reads can briefly lag a successful finish. Require the final
+    # values, with bounded retries, rather than recording a stale earlier state.
+    for attempt in range(16):
+        summary=wandb.Api().run(f'{entity}/{project}/{receipt["runId"]}').summary
+        observed={key:summary.get(key) for key in audit_metrics}
+        if observed==audit_metrics and summary.get('loopEvidence') and summary.get('graphEvidence'):break
+        if attempt==15:raise RuntimeError('Final audit run summary does not match recorded evidence')
+        time.sleep(2)
+    receipt['verifiedRunSummary']=observed
+    receipt['verifiedRunBudgetHalted']=observed['budgetHalted']
+    readback=LOCAL/'evidence-readback';readback.mkdir(exist_ok=True)
+    for source in archives:
+        downloaded=Path(remote.get_entry('source-archives/'+source['file']).download(root=str(readback)))
+        if hashlib.sha256(downloaded.read_bytes()).hexdigest()!=source['sha256']:
+            raise RuntimeError('Committed source archive checksum mismatch: '+source['sourceCommit'])
+    manifest_copy=Path(remote.get_entry('publication-manifest.json').download(root=str(readback)))
+    if manifest_copy.read_bytes()!=(ROOT/'forge/publication-manifest.json').read_bytes():
+        raise RuntimeError('Committed publication manifest differs from verified local manifest')
+    receipt['sourceArchivesReadBackVerified']=True
+    receipt['publicationManifestReadBackVerified']=True
+    receipt['completedComparisonBlocks']=blocks
+    receipt['completedCodingAttempts']=len(saved['trials'])
+    (ROOT/'forge/results/evidence-publication.json').write_text(json.dumps(receipt,indent=2)+'\n')
+    print(json.dumps(receipt,indent=2))
+
+if __name__=='__main__':publish()

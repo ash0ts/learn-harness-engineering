@@ -1,0 +1,650 @@
+{
+  "schemaVersion": 1,
+  "status": "published_verified",
+  "sourceCommit": "79e60dd4780f7c2558bc849b5674295496df8660",
+  "localNotebooksValidated": 9,
+  "regressionTestsPassed": 17,
+  "historicalEvidenceUnchanged": true,
+  "publishedMastersUnchanged": false,
+  "liveTest": {
+    "notebookId": "Tm90ZWJvb2s6MTU1OTg=",
+    "runnerRevision": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+    "nativeControlsVerified": [
+      "prepare",
+      "masked-key connection",
+      "paid qualification",
+      "save observations"
+    ],
+    "qualifications": [
+      {
+        "id": "qualification-06bc8f0c-495b-4361-b3f7-f13c1d9680ad",
+        "passed": false,
+        "estimatedCostUsd": null,
+        "agentConversationId": null,
+        "appConversationId": null
+      },
+      {
+        "id": "qualification-f361f7fa-a4bd-4bbe-98e5-8a4865943a25",
+        "passed": true,
+        "estimatedCostUsd": 0.004733254,
+        "agentConversationId": "01a1c1a8-4570-74e3-a7d0-cee41464e835",
+        "appConversationId": "app-e606cf04-1311-42ff-98b9-37c698e5f320"
+      },
+      {
+        "id": "qualification-09328c8b-509c-4c86-8879-593ba7d3c49a",
+        "passed": true,
+        "estimatedCostUsd": 0.0034453279999999997,
+        "agentConversationId": "01a1c1b1-47b7-7089-a1e7-314e766f2a1e",
+        "appConversationId": "app-db5494a0-8453-4978-96b9-c581aacf71d4"
+      }
+    ],
+    "trials": [
+      {
+        "id": "c547bb71-3edb-49cc-a60c-9a727b62c4c5",
+        "variant": "minimal",
+        "outcome": "passed",
+        "actorCompleted": false,
+        "grade": {
+          "schemaVersion": 1,
+          "task": "project-01",
+          "checks": [
+            {
+              "name": "strict compile and renderer build",
+              "passed": true
+            },
+            {
+              "name": "real import and persistence after reconstruction",
+              "passed": true
+            },
+            {
+              "name": "actual indexing keeps every nonempty paragraph",
+              "passed": true
+            },
+            {
+              "name": "actual retrieval and Q&A persist two turns",
+              "passed": true
+            },
+            {
+              "name": "Electron window, preload, import, indexing and question UI under Xvfb",
+              "passed": true
+            }
+          ],
+          "passed": true
+        },
+        "inputTokens": 342897,
+        "outputTokens": 2514,
+        "estimatedCostUsd": 0.09807639666666666,
+        "wandbRunUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/c547bb713edb49cc",
+        "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/trial-c547bb71-3edb-49cc-a60c-9a727b62c4c5:v0",
+        "conversationIds": [
+          "01a1c1a9-25a8-7358-9abf-8fb4828faa49"
+        ]
+      }
+    ],
+    "traceAudit": {
+      "conversations": 5,
+      "verified": true
+    },
+    "modelsAudit": {
+      "trialId": "c547bb71-3edb-49cc-a60c-9a727b62c4c5",
+      "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+      "verified": true,
+      "errors": [],
+      "runId": "c547bb713edb49cc",
+      "runUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/c547bb713edb49cc",
+      "artifact": "wandb/learn-harness-engineering-forge/trial-c547bb71-3edb-49cc-a60c-9a727b62c4c5:v0",
+      "committedTrialSha256": "a1bb8258155b25d0d6994e9b168cde6ef037a4561750bc6dbfa9ae405b899de1",
+      "evidenceFiles": [
+        "candidate.diff",
+        "grader/electron.png",
+        "grader/result.json",
+        "trial.json"
+      ]
+    },
+    "credentialScan": {
+      "filesChecked": 3190,
+      "credentialMatches": [],
+      "checkpointRawOrEncodedCredentialMatches": []
+    },
+    "workerCleanup": {
+      "statuses": [
+        {
+          "id": "e5532915-3c77-4771-84bd-d6656cdc6a9b",
+          "status": "completed"
+        },
+        {
+          "id": "ddda2fc2-5505-4d4c-bca4-0f1ead876801",
+          "status": "completed"
+        },
+        {
+          "id": "f397f930-2598-4fec-bf1d-09501830ad6d",
+          "status": "completed"
+        },
+        {
+          "id": "84c8c1d0-6b2a-4e05-897d-309c65ca9fab",
+          "status": "completed"
+        }
+      ],
+      "estimatedWorkerAndInferenceUsd": 0.10625497866666667
+    },
+    "notebookSession": {
+      "id": "notebook-student-e2e-2",
+      "notebookId": "Tm90ZWJvb2s6MTU1OTg=",
+      "reservedUsd": 2,
+      "startedAt": "2026-11-09T18:48:52.170Z",
+      "status": "terminated",
+      "sandboxId": "cf6804eb-d630-4a62-b5f5-74385ab25492",
+      "resourceRequests": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "resourceLimits": {
+        "cpu": "2",
+        "memory": "4Gi"
+      },
+      "cpu": 2,
+      "memoryGiB": 4,
+      "estimatedHourlyUsd": 0.3408,
+      "endedAt": "2026-11-09T19:07:28.996Z",
+      "secondsUpperBound": 1116.826,
+      "estimatedCostUsd": 0.10572619466666666
+    },
+    "checkpointSha256": "593569b31dde40b9a86e8fcbf0602c60d2210c6a17afa8a57b3e196e78d0fb0b",
+    "restore": {
+      "sandboxId": "1a68bd81-7438-4373-82c7-656eb7b9ecc5",
+      "sessionId": "90732",
+      "workspaceAbsentBeforeExplicitAction": true,
+      "trialRestored": "c547bb71-3edb-49cc-a60c-9a727b62c4c5",
+      "notesMatch": true,
+      "budgetHistoryPreserved": true,
+      "accountKeyConnected": false,
+      "session": {
+        "id": "notebook-student-restore-3",
+        "notebookId": "Tm90ZWJvb2s6MTU1OTg=",
+        "reservedUsd": 2,
+        "startedAt": "2026-11-09T19:07:29.403Z",
+        "status": "terminated",
+        "sandboxId": "1a68bd81-7438-4373-82c7-656eb7b9ecc5",
+        "resourceRequests": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "resourceLimits": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "cpu": 2,
+        "memoryGiB": 4,
+        "estimatedHourlyUsd": 0.3408,
+        "endedAt": "2026-11-09T19:13:52.075Z",
+        "secondsUpperBound": 382.672,
+        "estimatedCostUsd": 0.036226282666666665
+      }
+    },
+    "rejectedCredentialInventory": {
+      "id": "qualification-06bc8f0c-495b-4361-b3f7-f13c1d9680ad",
+      "at": "2026-11-09T19:35:39.372Z",
+      "sandboxes": [],
+      "includesTerminalSandboxes": true,
+      "reason": "Notebook JWT rejected by Sandbox API before Pi/model call; account-authorized inventory includes active and terminal sandboxes"
+    }
+  },
+  "limitations": [
+    "One owner-account trial validates the shared workflow; student entitlements need a classroom rehearsal.",
+    "The Pi actor reached its bound (actorCompleted=false); its exported patch passed all five independent checks.",
+    "This is the adapted Forge task, not certification of every original-course deliverable.",
+    "CPU sandboxes and hosted inference were used; no GPU training was run."
+  ],
+  "nextCheck": null,
+  "notebooksPublishedAndVerified": 9,
+  "publication": {
+    "sourceCommit": "79e60dd4780f7c2558bc849b5674295496df8660",
+    "verifiedAt": "2026-11-09T19:46:08.221808+00:00",
+    "notebooks": [
+      {
+        "id": "Tm90ZWJvb2s6MTUzMTM=",
+        "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTM%3D",
+        "file": "forge/notebooks/00-overview.py",
+        "sourceCommit": "79e60dd4780f7c2558bc849b5674295496df8660",
+        "sha256": "8accf0feb87c56ff0d297b38a05ca2395caf97d98c55fd3dea657297611db5d5",
+        "currentVersion": {
+          "artifactTypeName": "notebook",
+          "artifactCollectionName": "Forge-track-evidence-before-conclusions",
+          "versionIndex": 27,
+          "sourceFileName": "notebook.py"
+        },
+        "verifiedAt": "2026-11-09T19:45:55.224558+00:00"
+      },
+      {
+        "id": "Tm90ZWJvb2s6MTUzMTQ=",
+        "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTQ%3D",
+        "file": "forge/notebooks/01-minimal-harness.py",
+        "sourceCommit": "79e60dd4780f7c2558bc849b5674295496df8660",
+        "sha256": "8ce27f1040ccbb988b2116b3075f3cdff94ec41d06b314cc57101282fcbdd56e",
+        "currentVersion": {
+          "artifactTypeName": "notebook",
+          "artifactCollectionName": "01-Minimal-instructions-and-explicit-harnesses",
+          "versionIndex": 19,
+          "sourceFileName": "notebook.py"
+        },
+        "verifiedAt": "2026-11-09T19:45:56.805310+00:00"
+      },
+      {
+        "id": "Tm90ZWJvb2s6MTUzMTU=",
+        "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTU%3D",
+        "file": "forge/notebooks/02-workspace-docs.py",
+        "sourceCommit": "79e60dd4780f7c2558bc849b5674295496df8660",
+        "sha256": "9447e18fcb42833e92958d09b99b223192f4c8aefd54550a8815e043bed8d43b",
+        "currentVersion": {
+          "artifactTypeName": "notebook",
+          "artifactCollectionName": "02-An-agent-readable-workspace",
+          "versionIndex": 18,
+          "sourceFileName": "notebook.py"
+        },
+        "verifiedAt": "2026-11-09T19:45:58.345665+00:00"
+      },
+      {
+        "id": "Tm90ZWJvb2s6MTUzMTY=",
+        "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTY%3D",
+        "file": "forge/notebooks/03-session-recovery.py",
+        "sourceCommit": "79e60dd4780f7c2558bc849b5674295496df8660",
+        "sha256": "410bcbeaaef48659b1cb0614a82d126774bbb549ac279f429b807a54af69fcf8",
+        "currentVersion": {
+          "artifactTypeName": "notebook",
+          "artifactCollectionName": "03-Interrupted-session-recovery",
+          "versionIndex": 17,
+          "sourceFileName": "notebook.py"
+        },
+        "verifiedAt": "2026-11-09T19:45:59.864783+00:00"
+      },
+      {
+        "id": "Tm90ZWJvb2s6MTUzMTc=",
+        "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTc%3D",
+        "file": "forge/notebooks/04-runtime-feedback.py",
+        "sourceCommit": "79e60dd4780f7c2558bc849b5674295496df8660",
+        "sha256": "5b6ca182b6badfa0f72968c5bc540b883166ba2830619b6fabb9f8c8fabceaa2",
+        "currentVersion": {
+          "artifactTypeName": "notebook",
+          "artifactCollectionName": "04-Runtime-evidence-and-the-seeded-defect",
+          "versionIndex": 14,
+          "sourceFileName": "notebook.py"
+        },
+        "verifiedAt": "2026-11-09T19:46:01.602909+00:00"
+      },
+      {
+        "id": "Tm90ZWJvb2s6MTUzMTg=",
+        "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTg%3D",
+        "file": "forge/notebooks/05-role-separation.py",
+        "sourceCommit": "79e60dd4780f7c2558bc849b5674295496df8660",
+        "sha256": "805cb21d6c1acadfdbbcdb441317e8d4be9c91c60c2f795a0d27e04d34ba0eab",
+        "currentVersion": {
+          "artifactTypeName": "notebook",
+          "artifactCollectionName": "05-One-feature-three-role-arrangements",
+          "versionIndex": 13,
+          "sourceFileName": "notebook.py"
+        },
+        "verifiedAt": "2026-11-09T19:46:03.259270+00:00"
+      },
+      {
+        "id": "Tm90ZWJvb2s6MTUzMTk=",
+        "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTk%3D",
+        "file": "forge/notebooks/06-capstone.py",
+        "sourceCommit": "79e60dd4780f7c2558bc849b5674295496df8660",
+        "sha256": "b91d06bfd089fc83f18cef05ee487e3c013948335856a1706b8961940e430853",
+        "currentVersion": {
+          "artifactTypeName": "notebook",
+          "artifactCollectionName": "06-Capstone-reliability",
+          "versionIndex": 13,
+          "sourceFileName": "notebook.py"
+        },
+        "verifiedAt": "2026-11-09T19:46:04.948080+00:00"
+      },
+      {
+        "id": "Tm90ZWJvb2s6MTUzMjA=",
+        "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjA%3D",
+        "file": "forge/notebooks/07-bounded-loops.py",
+        "sourceCommit": "79e60dd4780f7c2558bc849b5674295496df8660",
+        "sha256": "bbed05074a8917ce2140ab3a72877c5787b4c0ef83b6dcc7b3385eaae3b4f5d5",
+        "currentVersion": {
+          "artifactTypeName": "notebook",
+          "artifactCollectionName": "07-Goal-timer-and-maker-checker-loops",
+          "versionIndex": 13,
+          "sourceFileName": "notebook.py"
+        },
+        "verifiedAt": "2026-11-09T19:46:06.529847+00:00"
+      },
+      {
+        "id": "Tm90ZWJvb2s6MTUzMjE=",
+        "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjE%3D",
+        "file": "forge/notebooks/08-state-machine.py",
+        "sourceCommit": "79e60dd4780f7c2558bc849b5674295496df8660",
+        "sha256": "f969ce2dddfbdb6ab4ec14045882b01ed56bbf0d385898d6f31da964e8f4426e",
+        "currentVersion": {
+          "artifactTypeName": "notebook",
+          "artifactCollectionName": "08-Checkpointed-graphs-and-human-approval",
+          "versionIndex": 16,
+          "sourceFileName": "notebook.py"
+        },
+        "verifiedAt": "2026-11-09T19:46:08.221808+00:00"
+      }
+    ],
+    "sessions": [
+      {
+        "id": "notebook-selfserve-08-edit",
+        "notebookId": "Tm90ZWJvb2s6MTUzMjE=",
+        "reservedUsd": 2,
+        "startedAt": "2026-11-09T19:29:57.885Z",
+        "status": "terminated",
+        "sandboxId": "ded0920f-31b8-42de-aefe-9ab74c147454",
+        "resourceRequests": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "resourceLimits": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "cpu": 2,
+        "memoryGiB": 4,
+        "estimatedHourlyUsd": 0.3408,
+        "endedAt": "2026-11-09T19:32:46.512Z",
+        "secondsUpperBound": 168.627,
+        "estimatedCostUsd": 0.015963356
+      },
+      {
+        "id": "notebook-selfserve-00-render",
+        "notebookId": "Tm90ZWJvb2s6MTUzMTM=",
+        "reservedUsd": 2,
+        "startedAt": "2026-11-09T19:29:58.319Z",
+        "status": "terminated",
+        "sandboxId": "8b2e14ea-e6c8-4b67-ab32-361463dd49f8",
+        "resourceRequests": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "resourceLimits": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "cpu": 2,
+        "memoryGiB": 4,
+        "estimatedHourlyUsd": 0.3408,
+        "endedAt": "2026-11-09T19:32:55.426Z",
+        "secondsUpperBound": 177.107,
+        "estimatedCostUsd": 0.01676612933333333
+      },
+      {
+        "id": "notebook-selfserve-05-edit",
+        "notebookId": "Tm90ZWJvb2s6MTUzMTg=",
+        "reservedUsd": 2,
+        "startedAt": "2026-11-09T19:24:37.876Z",
+        "status": "terminated",
+        "sandboxId": "f2673809-c0f6-49bb-bcfb-374a9579d7de",
+        "resourceRequests": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "resourceLimits": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "cpu": 2,
+        "memoryGiB": 4,
+        "estimatedHourlyUsd": 0.3408,
+        "endedAt": "2026-11-09T19:26:56.141Z",
+        "secondsUpperBound": 138.265,
+        "estimatedCostUsd": 0.013089086666666664
+      },
+      {
+        "id": "notebook-selfserve-03-edit",
+        "notebookId": "Tm90ZWJvb2s6MTUzMTY=",
+        "reservedUsd": 2,
+        "startedAt": "2026-11-09T19:21:40.648Z",
+        "status": "terminated",
+        "sandboxId": "ee0ca955-02b4-4f76-9e8d-61b8cc734a7f",
+        "resourceRequests": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "resourceLimits": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "cpu": 2,
+        "memoryGiB": 4,
+        "estimatedHourlyUsd": 0.3408,
+        "endedAt": "2026-11-09T19:24:29.772Z",
+        "secondsUpperBound": 169.124,
+        "estimatedCostUsd": 0.01601040533333333
+      },
+      {
+        "id": "notebook-selfserve-04-edit",
+        "notebookId": "Tm90ZWJvb2s6MTUzMTc=",
+        "reservedUsd": 2,
+        "startedAt": "2026-11-09T19:24:37.463Z",
+        "status": "terminated",
+        "sandboxId": "c6ffd238-7f97-430d-970c-b822819e2340",
+        "resourceRequests": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "resourceLimits": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "cpu": 2,
+        "memoryGiB": 4,
+        "estimatedHourlyUsd": 0.3408,
+        "endedAt": "2026-11-09T19:26:46.636Z",
+        "secondsUpperBound": 129.173,
+        "estimatedCostUsd": 0.012228377333333332
+      },
+      {
+        "id": "notebook-selfserve-03-render",
+        "notebookId": "Tm90ZWJvb2s6MTUzMTY=",
+        "reservedUsd": 2,
+        "startedAt": "2026-11-09T19:33:04.643Z",
+        "status": "terminated",
+        "sandboxId": "e0dc0406-0f8d-4fa8-9ce2-cd4ff167e76f",
+        "resourceRequests": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "resourceLimits": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "cpu": 2,
+        "memoryGiB": 4,
+        "estimatedHourlyUsd": 0.3408,
+        "endedAt": "2026-11-09T19:44:41.267Z",
+        "secondsUpperBound": 696.624,
+        "estimatedCostUsd": 0.065947072
+      },
+      {
+        "id": "notebook-selfserve-02-edit",
+        "notebookId": "Tm90ZWJvb2s6MTUzMTU=",
+        "reservedUsd": 2,
+        "startedAt": "2026-11-09T19:21:40.245Z",
+        "status": "terminated",
+        "sandboxId": "a2b8f271-a260-4638-9ea7-7e416358278c",
+        "resourceRequests": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "resourceLimits": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "cpu": 2,
+        "memoryGiB": 4,
+        "estimatedHourlyUsd": 0.3408,
+        "endedAt": "2026-11-09T19:24:20.494Z",
+        "secondsUpperBound": 160.249,
+        "estimatedCostUsd": 0.015170238666666665
+      },
+      {
+        "id": "notebook-selfserve-07-edit",
+        "notebookId": "Tm90ZWJvb2s6MTUzMjA=",
+        "reservedUsd": 2,
+        "startedAt": "2026-11-09T19:27:04.755Z",
+        "status": "terminated",
+        "sandboxId": "a0cc1b6f-3658-4770-a4db-b3ae23f741cd",
+        "resourceRequests": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "resourceLimits": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "cpu": 2,
+        "memoryGiB": 4,
+        "estimatedHourlyUsd": 0.3408,
+        "endedAt": "2026-11-09T19:29:51.122Z",
+        "secondsUpperBound": 166.367,
+        "estimatedCostUsd": 0.015749409333333332
+      },
+      {
+        "id": "notebook-selfserve-08-render",
+        "notebookId": "Tm90ZWJvb2s6MTUzMjE=",
+        "reservedUsd": 2,
+        "startedAt": "2026-11-09T19:35:40.280Z",
+        "status": "terminated",
+        "sandboxId": "70294762-18c6-4562-991d-69476b66bd1c",
+        "resourceRequests": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "resourceLimits": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "cpu": 2,
+        "memoryGiB": 4,
+        "estimatedHourlyUsd": 0.3408,
+        "endedAt": "2026-11-09T19:44:48.223Z",
+        "secondsUpperBound": 547.943,
+        "estimatedCostUsd": 0.051871937333333326
+      },
+      {
+        "id": "notebook-selfserve-01-edit",
+        "notebookId": "Tm90ZWJvb2s6MTUzMTQ=",
+        "reservedUsd": 2,
+        "startedAt": "2026-11-09T19:13:53.228Z",
+        "status": "terminated",
+        "sandboxId": "f0b15e15-846f-4f08-b974-11a13747410f",
+        "resourceRequests": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "resourceLimits": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "cpu": 2,
+        "memoryGiB": 4,
+        "estimatedHourlyUsd": 0.3408,
+        "endedAt": "2026-11-09T19:21:08.890Z",
+        "secondsUpperBound": 435.662,
+        "estimatedCostUsd": 0.04124266933333333
+      },
+      {
+        "id": "notebook-selfserve-02-render",
+        "notebookId": "Tm90ZWJvb2s6MTUzMTU=",
+        "reservedUsd": 2,
+        "startedAt": "2026-11-09T19:33:03.920Z",
+        "status": "terminated",
+        "sandboxId": "60eb6a63-d92d-45ef-b9d8-90dc705e05be",
+        "resourceRequests": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "resourceLimits": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "cpu": 2,
+        "memoryGiB": 4,
+        "estimatedHourlyUsd": 0.3408,
+        "endedAt": "2026-11-09T19:44:31.537Z",
+        "secondsUpperBound": 687.617,
+        "estimatedCostUsd": 0.06509440933333333
+      },
+      {
+        "id": "notebook-selfserve-06-edit",
+        "notebookId": "Tm90ZWJvb2s6MTUzMTk=",
+        "reservedUsd": 2,
+        "startedAt": "2026-11-09T19:27:04.291Z",
+        "status": "terminated",
+        "sandboxId": "ccf58316-3495-482a-8eed-04d72505273f",
+        "resourceRequests": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "resourceLimits": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "cpu": 2,
+        "memoryGiB": 4,
+        "estimatedHourlyUsd": 0.3408,
+        "endedAt": "2026-11-09T19:29:41.876Z",
+        "secondsUpperBound": 157.585,
+        "estimatedCostUsd": 0.014918046666666665
+      },
+      {
+        "id": "notebook-selfserve-00-render-final",
+        "notebookId": "Tm90ZWJvb2s6MTUzMTM=",
+        "reservedUsd": 2,
+        "startedAt": "2026-11-09T19:35:39.830Z",
+        "status": "terminated",
+        "sandboxId": "12d417b2-66a9-4360-b36d-2b17677ad068",
+        "resourceRequests": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "resourceLimits": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "cpu": 2,
+        "memoryGiB": 4,
+        "estimatedHourlyUsd": 0.3408,
+        "endedAt": "2026-11-09T19:44:22.502Z",
+        "secondsUpperBound": 522.672,
+        "estimatedCostUsd": 0.049479616000000004
+      },
+      {
+        "id": "notebook-selfserve-00-edit",
+        "notebookId": "Tm90ZWJvb2s6MTUzMTM=",
+        "reservedUsd": 2,
+        "startedAt": "2026-11-09T19:13:52.710Z",
+        "status": "terminated",
+        "sandboxId": "a18561c5-6dba-447c-b9b1-accd0fe3d382",
+        "resourceRequests": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "resourceLimits": {
+          "cpu": "2",
+          "memory": "4Gi"
+        },
+        "cpu": 2,
+        "memoryGiB": 4,
+        "estimatedHourlyUsd": 0.3408,
+        "endedAt": "2026-11-09T19:20:57.804Z",
+        "secondsUpperBound": 425.094,
+        "estimatedCostUsd": 0.040242232
+      }
+    ],
+    "estimatedNotebookUsd": 0.4337729853333333,
+    "sourceWorkflow": "Canonical source loaded through the native Marimo editor. The installed unmodified save worker --once command flushed four lagging previews after full cell execution."
+  },
+  "accounting": {
+    "globalAccountedEstimateUsd": 20.53988847600002,
+    "outstandingReservations": {},
+    "halted": null,
+    "note": "Estimates include prior campaign work and previously authorized conservative charges for unknown usage; not a provider billing total."
+  }
+}

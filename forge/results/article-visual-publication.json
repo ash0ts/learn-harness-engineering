@@ -1,0 +1,955 @@
+{
+  "schemaVersion": 1,
+  "publishedAt": "2026-11-06T16:40:45.016036+00:00",
+  "entity": "wandb",
+  "project": "learn-harness-engineering-forge",
+  "access": "PRIVATE",
+  "sourceCommit": "2763962fda6dda9177e0e8405a4bf7de6e0b2b93",
+  "sourceReportCommit": "258cf51fdc692f9be60952d8dd811de90588a0c4",
+  "publisherSha256": "fe61a728d9233cec5dd90ac58c7e24933e59993267ef3cba427cfd0c74025751",
+  "runId": "course-article-evidence-20261106",
+  "runUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/course-article-evidence-20261106",
+  "workspaceUrl": "https://forge.coreweave.com/wandb/learn-harness-engineering-forge?nw=su19wan3xra",
+  "forgeUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=su19wan3xra",
+  "artifact": "wandb/learn-harness-engineering-forge/forge-article-visual-evidence:v2",
+  "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-article-visual-evidence:v2",
+  "bundleSha256": "84acc1e948631a830281252498fc3aef8e18bca6fe16deb6c567421fedb3ad1d",
+  "counts": {
+    "recordedAttempts": 129,
+    "primaryAttempts": 39,
+    "primaryPasses": 19,
+    "originalCaptureCount": 123,
+    "dataFigures": 9,
+    "verifiedSourceFiles": 7850
+  },
+  "readback": {
+    "verified": true,
+    "files": 165,
+    "downloadedBundleMatches": true,
+    "attemptTableRows": 129,
+    "captureTableRows": 123,
+    "workspaceSections": 4
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "9389c4660581a3fca54ac82ee5e429383716c651636dc5235f63dc0983632400",
+      "bytes": 7455
+    },
+    {
+      "path": "articles/01-minimal-harness.md",
+      "sha256": "4e037ba70b2895b44dc6783e988f654f952bd941fc7b43ae9c3beb0a490977a2",
+      "bytes": 8319
+    },
+    {
+      "path": "articles/02-workspace-docs.md",
+      "sha256": "665c46582e831b5f2c673761f867b6b59f10bea8989d16b58c2f029e0773762a",
+      "bytes": 8416
+    },
+    {
+      "path": "articles/03-session-recovery.md",
+      "sha256": "54503a70cdeb75e8e2d5f2e1204d0707db55a7c48a88ebd9ac3bb37ebb1cd987",
+      "bytes": 9347
+    },
+    {
+      "path": "articles/04-runtime-feedback.md",
+      "sha256": "709affacca7e5041da1d7091388a6318e3c7c9ac7299580b7a36ae5e487e7dc7",
+      "bytes": 9521
+    },
+    {
+      "path": "articles/05-role-separation.md",
+      "sha256": "2fd4e9f8afc0b6ea722fdf32b5aa1b967e6c747e858f3a5687e5f1a1aa627325",
+      "bytes": 9408
+    },
+    {
+      "path": "articles/06-capstone.md",
+      "sha256": "e31e6a69c86d2f8407ca8677b8b67431a579370f7fe63cae712b62f7017e7f28",
+      "bytes": 9365
+    },
+    {
+      "path": "articles/07-bounded-loops.md",
+      "sha256": "ef0d9b3539168db8ac8ffed6598d7f84dccf7951f221c138c18bfd289f72c751",
+      "bytes": 8537
+    },
+    {
+      "path": "articles/08-state-machine.md",
+      "sha256": "e5937fc748025d37e59bcb941c659f20c4aa4b2d529490a1b60cacf93ef5c814",
+      "bytes": 10193
+    },
+    {
+      "path": "articles/assets/captures/03ca01ca-eb64-45ae-9317-824ca4a26026-grader-electron.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/03ca01ca-eb64-45ae-9317-824ca4a26026-grader-visible-answer.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/0809587e-cc59-4276-8285-02dc5072f2aa-grader-electron.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/0809587e-cc59-4276-8285-02dc5072f2aa-grader-visible-answer.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/0865dc24-2666-4fda-b6ae-3f488f5339cb-grader-electron.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/0865dc24-2666-4fda-b6ae-3f488f5339cb-grader-visible-answer.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/0c88671b-326d-4c20-b1b9-aaf95782c93c-grader-visible-answer.png",
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf",
+      "bytes": 66113
+    },
+    {
+      "path": "articles/assets/captures/1b0a25e5-ba13-4931-9c4f-ff6100f6672a-grader-electron.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/1b0a25e5-ba13-4931-9c4f-ff6100f6672a-grader-visible-answer.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/1c1228c9-2625-4256-9aa2-694d37def359-grader-electron.png",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709
+    },
+    {
+      "path": "articles/assets/captures/1c1228c9-2625-4256-9aa2-694d37def359-grader-visible-answer.png",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709
+    },
+    {
+      "path": "articles/assets/captures/20e034ff-32bc-4225-8416-044011f5f68d-grader-electron.png",
+      "sha256": "cc2a7062f504669f7f202e1680836bb71c6b4f08de8bb0235cc25e37f097b698",
+      "bytes": 24935
+    },
+    {
+      "path": "articles/assets/captures/22955029-2de6-4aed-8c35-dda6059b023d-grader-electron.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/22955029-2de6-4aed-8c35-dda6059b023d-grader-visible-answer.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/3398c0d0-a9f2-4383-b64f-c7469ff9d0df-grader-electron.png",
+      "sha256": "53714078fc78f75bd5d55a5cc79c07dff5175dd1d4d35b4a75f5b1d3a7fa7ea9",
+      "bytes": 70946
+    },
+    {
+      "path": "articles/assets/captures/3398c0d0-a9f2-4383-b64f-c7469ff9d0df-grader-visible-answer.png",
+      "sha256": "53714078fc78f75bd5d55a5cc79c07dff5175dd1d4d35b4a75f5b1d3a7fa7ea9",
+      "bytes": 70946
+    },
+    {
+      "path": "articles/assets/captures/33bdfb7f-4f5e-49b8-86c8-92d6ce0e7b0b-grader-visible-answer.png",
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf",
+      "bytes": 66113
+    },
+    {
+      "path": "articles/assets/captures/39c8c943-15bf-4d53-a99e-aaa4cd9ff5a3-grader-electron.png",
+      "sha256": "035b15bcd80de52bf919e12779aee1b6db7984d73f159a8e9ed558e63c13c8bf",
+      "bytes": 41613
+    },
+    {
+      "path": "articles/assets/captures/39c8c943-15bf-4d53-a99e-aaa4cd9ff5a3-grader-visible-answer.png",
+      "sha256": "035b15bcd80de52bf919e12779aee1b6db7984d73f159a8e9ed558e63c13c8bf",
+      "bytes": 41613
+    },
+    {
+      "path": "articles/assets/captures/3b7cd608-2c28-4cb8-9d4f-aeb60ac3bc7a-grader-visible-answer.png",
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf",
+      "bytes": 66113
+    },
+    {
+      "path": "articles/assets/captures/3dd7e4f8-1155-4ffa-9da5-98c82c24c087-grader-electron.png",
+      "sha256": "7ea3edcc6cbdff3d6f7291567855c632813c965963dc6f7a55e90ba91d227b20",
+      "bytes": 28287
+    },
+    {
+      "path": "articles/assets/captures/3dd7e4f8-1155-4ffa-9da5-98c82c24c087-grader-visible-answer.png",
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf",
+      "bytes": 66113
+    },
+    {
+      "path": "articles/assets/captures/3e5cd770-94e5-49f9-b478-a2043dc9a682-grader-electron.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/3e5cd770-94e5-49f9-b478-a2043dc9a682-grader-visible-answer.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/44762357-664b-4d30-b390-8121b6d51b07-grader-electron.png",
+      "sha256": "035b15bcd80de52bf919e12779aee1b6db7984d73f159a8e9ed558e63c13c8bf",
+      "bytes": 41613
+    },
+    {
+      "path": "articles/assets/captures/44762357-664b-4d30-b390-8121b6d51b07-grader-visible-answer.png",
+      "sha256": "035b15bcd80de52bf919e12779aee1b6db7984d73f159a8e9ed558e63c13c8bf",
+      "bytes": 41613
+    },
+    {
+      "path": "articles/assets/captures/4eb48651-306d-44e9-a468-a6ffc322bf27-grader-electron.png",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709
+    },
+    {
+      "path": "articles/assets/captures/4eb48651-306d-44e9-a468-a6ffc322bf27-grader-visible-answer.png",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709
+    },
+    {
+      "path": "articles/assets/captures/534ab4c7-9100-4d94-a379-fbfc4ad381c7-grader-visible-answer.png",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709
+    },
+    {
+      "path": "articles/assets/captures/54bb7391-48b0-47f5-9ded-36194f52a76d-grader-electron.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/54bb7391-48b0-47f5-9ded-36194f52a76d-grader-visible-answer.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/5609c89b-f73f-4a9e-8702-a57758c3403c-grader-visible-answer.png",
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf",
+      "bytes": 66113
+    },
+    {
+      "path": "articles/assets/captures/643a867a-74e8-4987-aa56-5640b4c1982e-grader-electron.png",
+      "sha256": "3bafb83798eaf79aeb09bd192ddedaa7e8771cde02a88272815cb216f3ca28d1",
+      "bytes": 70757
+    },
+    {
+      "path": "articles/assets/captures/643a867a-74e8-4987-aa56-5640b4c1982e-grader-visible-answer.png",
+      "sha256": "3bafb83798eaf79aeb09bd192ddedaa7e8771cde02a88272815cb216f3ca28d1",
+      "bytes": 70757
+    },
+    {
+      "path": "articles/assets/captures/66558826-6e1a-46e0-abe9-ef951eff0c16-grader-visible-answer.png",
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf",
+      "bytes": 66113
+    },
+    {
+      "path": "articles/assets/captures/71581d99-5fb7-4e57-bee4-56ec354858a2-grader-electron.png",
+      "sha256": "cb1fa171e8a2a6fc0c65b955cd0bcdd838febae9ce68ccffb943687ef277cd94",
+      "bytes": 68278
+    },
+    {
+      "path": "articles/assets/captures/71581d99-5fb7-4e57-bee4-56ec354858a2-grader-visible-answer.png",
+      "sha256": "cb1fa171e8a2a6fc0c65b955cd0bcdd838febae9ce68ccffb943687ef277cd94",
+      "bytes": 68278
+    },
+    {
+      "path": "articles/assets/captures/73c46965-1093-4b68-a810-a901dd78bfc0-grader-electron.png",
+      "sha256": "e22eb15841575f5ea5e27525fd9426754ec6ae7c5f0fb7dc7953ba037e844f52",
+      "bytes": 69026
+    },
+    {
+      "path": "articles/assets/captures/73c46965-1093-4b68-a810-a901dd78bfc0-grader-visible-answer.png",
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf",
+      "bytes": 66113
+    },
+    {
+      "path": "articles/assets/captures/79398b0b-a9eb-4892-bb24-194bdc289e2f-grader-visible-answer.png",
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf",
+      "bytes": 66113
+    },
+    {
+      "path": "articles/assets/captures/813076fb-3550-4e34-a3a3-831c7ed43f14-grader-electron.png",
+      "sha256": "cc2a7062f504669f7f202e1680836bb71c6b4f08de8bb0235cc25e37f097b698",
+      "bytes": 24935
+    },
+    {
+      "path": "articles/assets/captures/97cb6fd5-7fd6-466c-b5f1-598126cf2d52-grader-electron.png",
+      "sha256": "f1eb0baf7279bfcccb0b273e89e0b9fc93ba03b5c0191f0a5d1243a4720bfec2",
+      "bytes": 27290
+    },
+    {
+      "path": "articles/assets/captures/9c2869e2-d150-4c35-82df-9602ca48f17b-grader-electron.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/9c2869e2-d150-4c35-82df-9602ca48f17b-grader-visible-answer.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/9d859517-72db-4b1a-a683-cd81b9f7ca14-grader-electron.png",
+      "sha256": "7e3ac894326b95018bc4d8933b79a351dbeebb8101a5435f9b9d8f01b81e21d5",
+      "bytes": 65514
+    },
+    {
+      "path": "articles/assets/captures/9d859517-72db-4b1a-a683-cd81b9f7ca14-grader-visible-answer.png",
+      "sha256": "7e3ac894326b95018bc4d8933b79a351dbeebb8101a5435f9b9d8f01b81e21d5",
+      "bytes": 65514
+    },
+    {
+      "path": "articles/assets/captures/9feeffa8-1836-485a-a52c-2b398b40a195-grader-electron.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/9feeffa8-1836-485a-a52c-2b398b40a195-grader-visible-answer.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/a09c89fc-d730-4e6c-980c-62b4e7d4993e-grader-electron.png",
+      "sha256": "c27cf77b3abf4f319cf381c89d92dfc864c3866d532d1b067233f4c8fc0b3c31",
+      "bytes": 67667
+    },
+    {
+      "path": "articles/assets/captures/a09c89fc-d730-4e6c-980c-62b4e7d4993e-grader-visible-answer.png",
+      "sha256": "c27cf77b3abf4f319cf381c89d92dfc864c3866d532d1b067233f4c8fc0b3c31",
+      "bytes": 67667
+    },
+    {
+      "path": "articles/assets/captures/a2d447ed-75a6-4477-9308-e8eb60885b2b-grader-visible-answer.png",
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf",
+      "bytes": 66113
+    },
+    {
+      "path": "articles/assets/captures/a7bc0271-d547-4534-a15d-27b70072df40-grader-electron.png",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709
+    },
+    {
+      "path": "articles/assets/captures/a7bc0271-d547-4534-a15d-27b70072df40-grader-visible-answer.png",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709
+    },
+    {
+      "path": "articles/assets/captures/a7dcf5cb-dd20-4c3f-921b-f8a51a21f8f8-grader-electron.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/a7dcf5cb-dd20-4c3f-921b-f8a51a21f8f8-grader-visible-answer.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/agent-lens-agent-revision4.jpg",
+      "sha256": "efc3a266247e3203126953e85338bf16042d8054ebe5b45ee8993838919f36bd",
+      "bytes": 79693
+    },
+    {
+      "path": "articles/assets/captures/agent-lens-revision4.jpg",
+      "sha256": "adfffd7d27c1d84cf2eeae4d38f6786238e176d9a3badbbcf25cf8b9e084c15c",
+      "bytes": 80409
+    },
+    {
+      "path": "articles/assets/captures/b043a7b3-1843-4914-af0b-0504623b1059-grader-electron.png",
+      "sha256": "1be5418b33f7f4dd7ea7f01e8fdfe0a36a9987b4308082b880f75d2e12971fc3",
+      "bytes": 30375
+    },
+    {
+      "path": "articles/assets/captures/b6969def-4dd9-4763-8b73-6de7cdcb59c2-grader-visible-answer.png",
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf",
+      "bytes": 66113
+    },
+    {
+      "path": "articles/assets/captures/b8f56d80-c72c-4e31-8c88-f8fc63d76f9a-grader-electron.png",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709
+    },
+    {
+      "path": "articles/assets/captures/b8f56d80-c72c-4e31-8c88-f8fc63d76f9a-grader-visible-answer.png",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709
+    },
+    {
+      "path": "articles/assets/captures/bdc971f7-1a51-437d-b46a-8ed3c268eb97-grader-electron.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/bdc971f7-1a51-437d-b46a-8ed3c268eb97-grader-visible-answer.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/ca16eac7-0eb5-4523-a975-638e30938a04-grader-electron.png",
+      "sha256": "4fc92e5ccdc241c3ad6aa7ae9abec02d30dc2d71dc35f25459ede393c67de92f",
+      "bytes": 68645
+    },
+    {
+      "path": "articles/assets/captures/ca16eac7-0eb5-4523-a975-638e30938a04-grader-visible-answer.png",
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf",
+      "bytes": 66113
+    },
+    {
+      "path": "articles/assets/captures/ca53b79e-eab4-4b69-8c1e-072c2baff44f-grader-electron.png",
+      "sha256": "a5ec7e758f5015a9c0f5cab1dbf3ff5540c040b36e41607fe2356cbdd58aa5cc",
+      "bytes": 29600
+    },
+    {
+      "path": "articles/assets/captures/d3ef30ab-0f2c-4d0e-aee1-7bdf6a8a011e-grader-electron.png",
+      "sha256": "c6f7521570700fa0e81befbdec5f74092970cb9ab5881d10dbcd2b5561143713",
+      "bytes": 28299
+    },
+    {
+      "path": "articles/assets/captures/d3ef30ab-0f2c-4d0e-aee1-7bdf6a8a011e-grader-visible-answer.png",
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf",
+      "bytes": 66113
+    },
+    {
+      "path": "articles/assets/captures/d52e75ef-81cb-4fc0-b551-0884405ad2c1-grader-electron.png",
+      "sha256": "cc2a7062f504669f7f202e1680836bb71c6b4f08de8bb0235cc25e37f097b698",
+      "bytes": 24935
+    },
+    {
+      "path": "articles/assets/captures/dashboard-comparisons-final.jpg",
+      "sha256": "b5d0610852e69dcb7fb18046ae7d37042846ccf4231e4162b22630996c51b45e",
+      "bytes": 113359
+    },
+    {
+      "path": "articles/assets/captures/dashboard-graph-evidence-final.jpg",
+      "sha256": "011824ad3f54f6af44dd171ffd1495bff5fdaf278b4096d25f4c325fc9254f20",
+      "bytes": 83659
+    },
+    {
+      "path": "articles/assets/captures/dashboard-loop-evidence-final.jpg",
+      "sha256": "14c75488acecc20a968fcec25a3d5c9e2dfda419f8e6d8f61f42b4b6d23cad15",
+      "bytes": 91119
+    },
+    {
+      "path": "articles/assets/captures/dashboard-operations-final.jpg",
+      "sha256": "1484cfc26b1d05bb4fafff8b412b50a4aa7b2ac6d3b40253b412248c37448065",
+      "bytes": 80109
+    },
+    {
+      "path": "articles/assets/captures/dashboard-source-evidence-final.jpg",
+      "sha256": "5581c63f8f11a1e4fa0fcf09bc9cf758a9be8b7f9ff982c0c2c0eb83ece05b5d",
+      "bytes": 108909
+    },
+    {
+      "path": "articles/assets/captures/dd818c1d-aea4-4e7f-b2a2-a6398ac33877-grader-visible-answer.png",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709
+    },
+    {
+      "path": "articles/assets/captures/e53c3cad-a475-4e49-a79c-e64cfc0316a9-grader-electron.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/e53c3cad-a475-4e49-a79c-e64cfc0316a9-grader-visible-answer.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/f5e5ab53-b1b4-4d70-af9d-5fb31516bd39-grader-electron.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/f5e5ab53-b1b4-4d70-af9d-5fb31516bd39-grader-visible-answer.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/f6edbfa3-3682-4e3b-bff2-ba4b864e2511-grader-visible-answer.png",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709
+    },
+    {
+      "path": "articles/assets/captures/fadf2407-4ef3-4635-bab7-0a8d987096d8-grader-electron.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/fadf2407-4ef3-4635-bab7-0a8d987096d8-grader-visible-answer.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/fc80b4f3-6178-454f-a003-3e311dab6617-grader-electron.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/fc80b4f3-6178-454f-a003-3e311dab6617-grader-visible-answer.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/fd98af3b-1b52-448c-bc7b-b6cc47e785ea-grader-electron.png",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709
+    },
+    {
+      "path": "articles/assets/captures/fd98af3b-1b52-448c-bc7b-b6cc47e785ea-grader-visible-answer.png",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709
+    },
+    {
+      "path": "articles/assets/captures/notebook-00-overview.jpg",
+      "sha256": "d5e25efa6b44893f0f3a15529b642ac72246be7c671748fb81a35b616c175ecf",
+      "bytes": 83589
+    },
+    {
+      "path": "articles/assets/captures/notebook-01.jpg",
+      "sha256": "0f63902eecd2983be79c64a3578ede2caa730c975495b7a06949ff9a93c29a42",
+      "bytes": 95268
+    },
+    {
+      "path": "articles/assets/captures/notebook-02.jpg",
+      "sha256": "2cf988629d8a000c16a162cb9142cd03fd0b307109fce94b9a9caa090705e02b",
+      "bytes": 92952
+    },
+    {
+      "path": "articles/assets/captures/notebook-03.jpg",
+      "sha256": "39bf6822ac253eb7986bf59e159c90834e05d7d63e03b626b4657f113d51a5cf",
+      "bytes": 86252
+    },
+    {
+      "path": "articles/assets/captures/notebook-04.jpg",
+      "sha256": "fa7f4ddc925ed16ad2b69ff3cc00cdacb26fa46f448c6c3d1af9c906baca5546",
+      "bytes": 95187
+    },
+    {
+      "path": "articles/assets/captures/notebook-05.jpg",
+      "sha256": "bf4244fa7ec320c1b27138d6549236a4514808d6b56cf3887d24eacad4e2aad7",
+      "bytes": 80670
+    },
+    {
+      "path": "articles/assets/captures/notebook-06.jpg",
+      "sha256": "2e28df1e18e759692c4fa4bb907b2fbdb37939bd142bf667edc0cc7195595870",
+      "bytes": 77958
+    },
+    {
+      "path": "articles/assets/captures/notebook-07.jpg",
+      "sha256": "84a4b32a4858468bd373ab751d2fb4139ff3d1ddbfc6123e8ba37baa76d40638",
+      "bytes": 93349
+    },
+    {
+      "path": "articles/assets/captures/notebook-08.jpg",
+      "sha256": "b6240d91d1b70944ad88a5da465530ebc02623851c5284a570dc05314c79959e",
+      "bytes": 93724
+    },
+    {
+      "path": "articles/assets/captures/supplemental-checker-diagnostic-57f14e90-d62e-4fcb-ab78-60b52a12935a-electron.png",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709
+    },
+    {
+      "path": "articles/assets/captures/supplemental-checker-diagnostic-57f14e90-d62e-4fcb-ab78-60b52a12935a-visible-answer.png",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709
+    },
+    {
+      "path": "articles/assets/captures/supplemental-checker-diagnostic-d3c1c8a4-481f-4d17-b794-38f69702c9dc-electron.png",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709
+    },
+    {
+      "path": "articles/assets/captures/supplemental-checker-diagnostic-d3c1c8a4-481f-4d17-b794-38f69702c9dc-visible-answer.png",
+      "sha256": "8980965a9bc31f5b17bcb8c63191bcf270fad6d595e2c33417852658715e0481",
+      "bytes": 67709
+    },
+    {
+      "path": "articles/assets/captures/supplemental-checker-diagnostic-de8f9f04-3fa4-4332-b3a5-03f5fdf57808-electron.png",
+      "sha256": "bca51b77a7690a8e58565d9deb752d30b21c8bb0196e8e4ee20af77d311a259e",
+      "bytes": 30460
+    },
+    {
+      "path": "articles/assets/captures/supplemental-checker-diagnostic-de8f9f04-3fa4-4332-b3a5-03f5fdf57808-history-diagnostic.png",
+      "sha256": "bf9e597a4fbcc3fb38463e9929ebbc8dd3f1996aabba336b29207ee2584c1ad3",
+      "bytes": 122320
+    },
+    {
+      "path": "articles/assets/captures/supplemental-checker-diagnostic-de8f9f04-3fa4-4332-b3a5-03f5fdf57808-visible-answer.png",
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf",
+      "bytes": 66113
+    },
+    {
+      "path": "articles/assets/captures/supplemental-graph-40688e0f-33dd-4a53-bdf5-cdebec3c469b-electron.png",
+      "sha256": "9b615b0e297a6adac67e16dbf6d8d6f4c3a14660eb9626119a369f4b0db35b74",
+      "bytes": 44122
+    },
+    {
+      "path": "articles/assets/captures/supplemental-graph-577d6b8a-6bf2-424d-9682-41e28d025da1-electron.png",
+      "sha256": "9b615b0e297a6adac67e16dbf6d8d6f4c3a14660eb9626119a369f4b0db35b74",
+      "bytes": 44122
+    },
+    {
+      "path": "articles/assets/captures/supplemental-graph-983ba1bb-86da-4900-a452-e80c2959390d-electron.png",
+      "sha256": "9b615b0e297a6adac67e16dbf6d8d6f4c3a14660eb9626119a369f4b0db35b74",
+      "bytes": 44122
+    },
+    {
+      "path": "articles/assets/captures/supplemental-graph-e80b044a-800d-445e-a88e-ae1a0ba74bdd-electron.png",
+      "sha256": "9b615b0e297a6adac67e16dbf6d8d6f4c3a14660eb9626119a369f4b0db35b74",
+      "bytes": 44122
+    },
+    {
+      "path": "articles/assets/captures/supplemental-graph-f0da5cdf-bad6-4e14-a246-74621916258d-electron.png",
+      "sha256": "9b615b0e297a6adac67e16dbf6d8d6f4c3a14660eb9626119a369f4b0db35b74",
+      "bytes": 44122
+    },
+    {
+      "path": "articles/assets/captures/supplemental-graph-qualification-6fcc2091-f526-45e0-8fb1-aa0c1802aae5-attempt-2-electron-electron.png",
+      "sha256": "1286ea8de1dd56d6d58b620100577c9fc966e797f3c5d8a5b9abd40e44d46a1c",
+      "bytes": 27245
+    },
+    {
+      "path": "articles/assets/captures/supplemental-graph-qualification-74896eb2-b69a-4e53-be6c-44a010bbf07d-attempt-1-electron-electron.png",
+      "sha256": "9b615b0e297a6adac67e16dbf6d8d6f4c3a14660eb9626119a369f4b0db35b74",
+      "bytes": 44122
+    },
+    {
+      "path": "articles/assets/captures/supplemental-graph-qualification-74896eb2-b69a-4e53-be6c-44a010bbf07d-attempt-2-electron-electron.png",
+      "sha256": "9b615b0e297a6adac67e16dbf6d8d6f4c3a14660eb9626119a369f4b0db35b74",
+      "bytes": 44122
+    },
+    {
+      "path": "articles/assets/captures/supplemental-graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb-attempt-1-electron-electron.png",
+      "sha256": "9b615b0e297a6adac67e16dbf6d8d6f4c3a14660eb9626119a369f4b0db35b74",
+      "bytes": 44122
+    },
+    {
+      "path": "articles/assets/captures/supplemental-graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb-attempt-1-protected-electron.png",
+      "sha256": "035b15bcd80de52bf919e12779aee1b6db7984d73f159a8e9ed558e63c13c8bf",
+      "bytes": 41613
+    },
+    {
+      "path": "articles/assets/captures/supplemental-graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb-attempt-1-protected-visible-answer.png",
+      "sha256": "035b15bcd80de52bf919e12779aee1b6db7984d73f159a8e9ed558e63c13c8bf",
+      "bytes": 41613
+    },
+    {
+      "path": "articles/assets/captures/supplemental-graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb-attempt-2-electron-electron.png",
+      "sha256": "9b615b0e297a6adac67e16dbf6d8d6f4c3a14660eb9626119a369f4b0db35b74",
+      "bytes": 44122
+    },
+    {
+      "path": "articles/assets/captures/supplemental-graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb-attempt-2-protected-electron.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/supplemental-graph-qualification-7cbcac1f-849c-4b2a-affb-04f142ae03fb-attempt-2-protected-visible-answer.png",
+      "sha256": "7c02b8fb85e301bbe53e09892aac7f61e2bcedbf3a87e731550ab21c189c4666",
+      "bytes": 65468
+    },
+    {
+      "path": "articles/assets/captures/supplemental-history-diagnostic-5410a71b-9980-4ad4-bc47-98e3df5b1f22-history-diagnostic.png",
+      "sha256": "a62338149bf72cb6ccb9cf7bcfe1f4b014f3ba2fad72ca3b0bcfa38d51bb1908",
+      "bytes": 121402
+    },
+    {
+      "path": "articles/assets/captures/supplemental-history-diagnostic-5410a71b-9980-4ad4-bc47-98e3df5b1f22-visible-answer.png",
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf",
+      "bytes": 66113
+    },
+    {
+      "path": "articles/assets/captures/supplemental-history-diagnostic-e8a1ea54-0fe5-4ba8-9929-76b07e2b5e29-electron.png",
+      "sha256": "bca51b77a7690a8e58565d9deb752d30b21c8bb0196e8e4ee20af77d311a259e",
+      "bytes": 30460
+    },
+    {
+      "path": "articles/assets/captures/supplemental-history-diagnostic-e8a1ea54-0fe5-4ba8-9929-76b07e2b5e29-history-diagnostic.png",
+      "sha256": "ef0ee15b565c3a29dfff68849fb7f60f230096ff2828e8f7e1a362bc7d969e5a",
+      "bytes": 122302
+    },
+    {
+      "path": "articles/assets/captures/supplemental-history-diagnostic-e8a1ea54-0fe5-4ba8-9929-76b07e2b5e29-visible-answer.png",
+      "sha256": "24445baf0858580599ec2eef190858b73f5f55a0f7b4b55b790e5c20bdf998cf",
+      "bytes": 66113
+    },
+    {
+      "path": "articles/assets/captures/supplemental-visible-ui-56f1ef46-deba-48b8-8bc4-8b2169169b55-electron.png",
+      "sha256": "c5d1bf1668e92b809393948c01a0955dee7f6507b5782a19fc930a6d5aae8659",
+      "bytes": 71136
+    },
+    {
+      "path": "articles/assets/captures/supplemental-visible-ui-56f1ef46-deba-48b8-8bc4-8b2169169b55-visible-answer.png",
+      "sha256": "c5d1bf1668e92b809393948c01a0955dee7f6507b5782a19fc930a6d5aae8659",
+      "bytes": 71136
+    },
+    {
+      "path": "articles/assets/diagrams/graph-attempts.svg",
+      "sha256": "7d8804a82315ac1be02f138ac5f0e6ea4463c98562248339f1857cf29eba6a84",
+      "bytes": 2875
+    },
+    {
+      "path": "articles/assets/diagrams/session-boundary.svg",
+      "sha256": "f870593be802f3a7d28a7ef7975dea0f6e7e8b09284eab2ead79ed99d5cd8d07",
+      "bytes": 2335
+    },
+    {
+      "path": "articles/assets/diagrams/trial-evidence-chain.svg",
+      "sha256": "9fccf7dfc9784a88b4920e0946eab20987e68301350be0e302b4fe93357c298c",
+      "bytes": 2623
+    },
+    {
+      "path": "articles/assets/figures/primary-outcomes.png",
+      "sha256": "5aed714dd40ac90cbee3322e7adc0ab11df1fe0242bdd43e07489b17b709cae2",
+      "bytes": 126688
+    },
+    {
+      "path": "articles/assets/figures/primary-outcomes.svg",
+      "sha256": "c231b527cccb1407ca2f3cf0a88cfdefae29ab1c95c23378d15976e84a58e29d",
+      "bytes": 25854
+    },
+    {
+      "path": "articles/assets/figures/project-01-checks.png",
+      "sha256": "ef79eb2dcca8f93f8f81e9deafeaefbddd300f7b4874441c2a32fd8dae7f26ee",
+      "bytes": 77299
+    },
+    {
+      "path": "articles/assets/figures/project-01-checks.svg",
+      "sha256": "0fd3b0d00d9c9871f26d8530e8a04b5034c6c4fa1a5608b6a1a1f9d93663f064",
+      "bytes": 17915
+    },
+    {
+      "path": "articles/assets/figures/project-02-checks.png",
+      "sha256": "51c26a964322ae6abb3301be9898ceb16038fb4297572f8a71c774e697f3fd8b",
+      "bytes": 83897
+    },
+    {
+      "path": "articles/assets/figures/project-02-checks.svg",
+      "sha256": "72d0b89aaa2c22453efc79d7a368c553a28e12988a10826edaeb61197432f90f",
+      "bytes": 17915
+    },
+    {
+      "path": "articles/assets/figures/project-03-checks.png",
+      "sha256": "c0a966471fbe9e6419a49fbaf7e48b8d72d66055d7db3fae341fa244d085a6cb",
+      "bytes": 83191
+    },
+    {
+      "path": "articles/assets/figures/project-03-checks.svg",
+      "sha256": "6e47a6f9d84c0c2e1c5189e3689832174c71eb0efdd0a884ce96c95f70141370",
+      "bytes": 24534
+    },
+    {
+      "path": "articles/assets/figures/project-04-checks.png",
+      "sha256": "c65bee68f45e84aa260a8c472763775533bef8194584431ba7656cc57d287d06",
+      "bytes": 83069
+    },
+    {
+      "path": "articles/assets/figures/project-04-checks.svg",
+      "sha256": "3208528a724ee2d9f45064ffabfea4dfde61a8ef739b27e3bf9bb4f507a389d8",
+      "bytes": 20878
+    },
+    {
+      "path": "articles/assets/figures/project-05-checks.png",
+      "sha256": "1045499e0b1e63e57d324e10e3f6e0616f4622b73943377931f32ada5b913b14",
+      "bytes": 104117
+    },
+    {
+      "path": "articles/assets/figures/project-05-checks.svg",
+      "sha256": "92e9c5c89f74a3e4f88d1120d3fb21b1bd858cd20c48b6cc9d35a131776a59e8",
+      "bytes": 25381
+    },
+    {
+      "path": "articles/assets/figures/project-06-checks.png",
+      "sha256": "306d8626fb2fc1c7659ce41be1fbff5c958a952206eb33dcfeac679e12dba31a",
+      "bytes": 77523
+    },
+    {
+      "path": "articles/assets/figures/project-06-checks.svg",
+      "sha256": "adc32767131eea7dfcdf64751f2e22eaf9c3de072e2cd973221eb56f8d4c419a",
+      "bytes": 17913
+    },
+    {
+      "path": "articles/assets/figures/role-allowances.png",
+      "sha256": "0b05ca9c15f02b396295911c95f8623cfbd20033659f2714de414e890944c26a",
+      "bytes": 70170
+    },
+    {
+      "path": "articles/assets/figures/role-allowances.svg",
+      "sha256": "85344742c1e9677402cdbec91ac9335d58f1c5ada87cb2468081ae42ed463b49",
+      "bytes": 10452
+    },
+    {
+      "path": "articles/assets/figures/timer-timeline.png",
+      "sha256": "73e4a96848a4f6bbb03532db67f6731ac5884cff2e0917f0d346f4354d027c81",
+      "bytes": 86165
+    },
+    {
+      "path": "articles/assets/figures/timer-timeline.svg",
+      "sha256": "28b63f2f16aeed28c26fc95d245cd1aec3a04a37d2a6d77f797bf44eff9a26d7",
+      "bytes": 13563
+    },
+    {
+      "path": "articles/evidence.md",
+      "sha256": "b9d9d9c53fbe31c6cd9d92020a98322633f259809d113ce56011177ad1837d54",
+      "bytes": 13860
+    },
+    {
+      "path": "articles/index.md",
+      "sha256": "5b5b5e7e58e837511f699a2f343b3bed32c67322e19e11289c265138ebaf7969",
+      "bytes": 11575
+    },
+    {
+      "path": "articles/running.md",
+      "sha256": "f3789410173afad415bfc2587c33d20017b354309a4b8391e193f95627b17530",
+      "bytes": 5749
+    },
+    {
+      "path": "catalog.json",
+      "sha256": "50bece686adee8773ced48163c8943b030a33f5458af8321875bf6548b876564",
+      "bytes": 2400891
+    },
+    {
+      "path": "forge-visual-evidence.zip",
+      "sha256": "84acc1e948631a830281252498fc3aef8e18bca6fe16deb6c567421fedb3ad1d",
+      "bytes": 8269403
+    },
+    {
+      "path": "manifest.json",
+      "sha256": "2859c0dc1552a2cd396235857abcf4a6ac267e319ea1ee4a5ad468ee5dc8a867",
+      "bytes": 124548
+    },
+    {
+      "path": "scripts/publish_article_visuals.py",
+      "sha256": "fe61a728d9233cec5dd90ac58c7e24933e59993267ef3cba427cfd0c74025751",
+      "bytes": 9252
+    },
+    {
+      "path": "scripts/publish_article_visuals.py.lock",
+      "sha256": "c5fe9f93b855ee1081ce2b85680f9395972ea9670c37527352ce0ede90c6194b",
+      "bytes": 216166
+    },
+    {
+      "path": "trials.csv",
+      "sha256": "2fdbb9818b5e2428d48e890dd5b33bdd334d2f91dea49d3d1fa2541521e5d9b1",
+      "bytes": 64609
+    },
+    {
+      "path": "validation.json",
+      "sha256": "e7c48f39f47815cd71bcfa0917dab1751ee97039c17df52fcf5f6ff57f585fab",
+      "bytes": 10189
+    },
+    {
+      "path": "viewer/ForgeCaptureGallery.vue",
+      "sha256": "ffe6940e48256fdc1cefbaee0935c1cef1a3f82ed39ce34471b155409a074627",
+      "bytes": 2037
+    },
+    {
+      "path": "viewer/ForgeEvidenceExplorer.vue",
+      "sha256": "b395f800482dcc39c4dc704b0dbd157db6135ed7f89d79bb88242c878b9d38e0",
+      "bytes": 13504
+    }
+  ],
+  "browserVerification": {
+    "verified": true,
+    "forgeUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=su19wan3xra",
+    "sourceArtifact": "wandb/learn-harness-engineering-forge/forge-article-visual-evidence:v2",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "observed": {
+      "summary": {
+        "recordedAttempts": 129,
+        "primaryAttempts": 39,
+        "primaryPasses": 19,
+        "originalCaptures": 123,
+        "dataFigures": 9,
+        "verifiedSourceFiles": 7850
+      },
+      "figurePanelsRendered": 9,
+      "attemptTableRows": 129,
+      "captureTableRows": 123,
+      "originalImageThumbnailsVisible": true,
+      "savedViewReopened": true
+    },
+    "captures": [
+      {
+        "path": "dashboard-attempts.jpg",
+        "sha256": "b6ba679af4d6bcfffb2f304b682c1f64a12552919e912f50421a4aeeed45467b",
+        "bytes": 82161
+      },
+      {
+        "path": "dashboard-captures.jpg",
+        "sha256": "dd827711dd36a51dcf38c931fa4d1afa9dbd3d7bb3dd0e1434f20ec5713538bf",
+        "bytes": 105117
+      },
+      {
+        "path": "dashboard-primary-figure.jpg",
+        "sha256": "3f95fb2fbfafdc43854f3e95d7a30eab962355d8203a90b73c6019a9cca9385b",
+        "bytes": 72330
+      },
+      {
+        "path": "dashboard-project-01-checks.jpg",
+        "sha256": "9bd4044ee19164e326e9977cfcafb4fd1c0216e0d8cb6d1d1e20e81015be66c3",
+        "bytes": 79394
+      },
+      {
+        "path": "dashboard-project-02-checks.jpg",
+        "sha256": "8da72164ea51acb6585f3fd8e24cc4797d01e53e5f84f2f1024ef656d3dfd8eb",
+        "bytes": 80523
+      },
+      {
+        "path": "dashboard-project-03-checks.jpg",
+        "sha256": "117a46c1d6c40db7dd55b23b8c0e45e625faee3f156c5ed8c3c20591caa36b41",
+        "bytes": 79429
+      },
+      {
+        "path": "dashboard-project-04-checks.jpg",
+        "sha256": "7024e114433ef95c0c4a41e60a10c6a4f5e1898f39d8e9c775ee152df7f3a254",
+        "bytes": 82199
+      },
+      {
+        "path": "dashboard-project-05-checks.jpg",
+        "sha256": "b1701f165c1d109398ffb024856dbb881738f42708812893cc2a3cb0bdc18e55",
+        "bytes": 77970
+      },
+      {
+        "path": "dashboard-project-06-checks.jpg",
+        "sha256": "4bab994208dd6fddc9642431823ef6089431e53256499be6beeaedcad27c1b7d",
+        "bytes": 77194
+      },
+      {
+        "path": "dashboard-role-allowances.jpg",
+        "sha256": "177b75c4d65484f12b8d6bca9b18fef51254df48df97c6e47bf20de1d0924cec",
+        "bytes": 71721
+      },
+      {
+        "path": "dashboard-summary.jpg",
+        "sha256": "a1854f53c06c61705a947a326b7f3c95ea8238dd0cb86d5440554cf6a5619c7f",
+        "bytes": 72924
+      },
+      {
+        "path": "dashboard-timer-timeline.jpg",
+        "sha256": "57ab324bf882792de162793ecb5d408d0375c4d5ecaf561e54f3fb53d87120dc",
+        "bytes": 67109
+      }
+    ],
+    "limitations": [
+      "Native UI inspected at 1280 by 720. The course explorer was separately tested at 1440 and 390 pixels.",
+      "Some native media panels clip footer text at this viewport; the complete original PNG and SVG files remain in the downloadable artifact.",
+      "The project run-list total includes derived publications and aggregates; it is not the coding-attempt denominator."
+    ],
+    "recordedAt": "2026-11-06T16:47:31.549739+00:00",
+    "proofArtifact": "wandb/learn-harness-engineering-forge/forge-article-visual-browser-proof:v0",
+    "proofArtifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-article-visual-browser-proof:v0",
+    "artifactFilesVerified": 13
+  }
+}

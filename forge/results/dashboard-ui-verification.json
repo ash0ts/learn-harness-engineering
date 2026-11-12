@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-11-06T13:31:51.047854+00:00",
+  "verified": true,
+  "method": "Observed native Forge charts, scalar panels, checkpoint tables, evidence links and report through authenticated browser UI. Backend readback is recorded separately in dashboards.json and evidence-publication.json.",
+  "comparison": {
+    "url": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=dfs83wdpatt",
+    "treatmentGroups": 13,
+    "attemptsPerTreatment": 3,
+    "completedAttempts": 39,
+    "passes": 19,
+    "visibleSourceColumns": [
+      "project",
+      "treatment",
+      "repeat",
+      "outcome",
+      "run",
+      "artifact",
+      "agent_lens",
+      "other_trace_ids",
+      "trial_id"
+    ]
+  },
+  "operations": {
+    "url": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge?nw=l9e45ofb461",
+    "codingAttempts": 129,
+    "qualifiedVisibleAnswerPasses": 21,
+    "verifiedNotebooks": 9,
+    "displayedChargedEstimateUsd": 19.042,
+    "unknownUsageChargesUsd": 6,
+    "unresolvedReservationsUsd": 0,
+    "agentLensConversationsVerified": 223,
+    "trialArtifactsVerified": 129,
+    "cleanupRecordsVerified": 337,
+    "activeWorkers": 0,
+    "goalCheckpointStatus": "passed",
+    "graphCheckpointStatus": "approval",
+    "graphProtectedGradePassed": true,
+    "graphCandidateSha256": "c74cf9cf37169db868996c2aa5328a527377a0c8656678d874edb4a0195c96d3"
+  },
+  "report": {
+    "url": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/reports/Forge-harness-course-\u2014-verified-execution-and-comparison-evidence--VmlldzoxODI2MzgyOA==",
+    "primaryPasses": 19,
+    "primaryAttempts": 39,
+    "realTimerStatus": "deadline",
+    "realTimerRounds": 8,
+    "realTimerObservedInterventions": 1,
+    "chargedEstimateUsd": 19.042267
+  },
+  "dashboardScriptSha256": "5f6f45626df3e7ff74faeed14f467135c259772eaddc17399231c6c07920844b",
+  "screenshots": [
+    {
+      "file": "publication/dashboard-comparisons-final.jpg",
+      "sha256": "b5d0610852e69dcb7fb18046ae7d37042846ccf4231e4162b22630996c51b45e"
+    },
+    {
+      "file": "publication/dashboard-operations-final.jpg",
+      "sha256": "1484cfc26b1d05bb4fafff8b412b50a4aa7b2ac6d3b40253b412248c37448065"
+    },
+    {
+      "file": "publication/dashboard-source-evidence-final.jpg",
+      "sha256": "5581c63f8f11a1e4fa0fcf09bc9cf758a9be8b7f9ff982c0c2c0eb83ece05b5d"
+    },
+    {
+      "file": "publication/dashboard-loop-evidence-final.jpg",
+      "sha256": "14c75488acecc20a968fcec25a3d5c9e2dfda419f8e6d8f61f42b4b6d23cad15"
+    },
+    {
+      "file": "publication/dashboard-graph-evidence-final.jpg",
+      "sha256": "011824ad3f54f6af44dd171ffd1495bff5fdaf278b4096d25f4c325fc9254f20"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "frozenSources": [
+    {
+      "tag": "forge-course-r2",
+      "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef",
+      "url": "https://github.com/ash0ts/learn-harness-engineering/tree/forge-course-r2"
+    },
+    {
+      "tag": "forge-course-r3",
+      "sourceCommit": "7c563eb14f3999ab3e659b77c4095c883619002f",
+      "url": "https://github.com/ash0ts/learn-harness-engineering/tree/forge-course-r3"
+    },
+    {
+      "tag": "forge-course-r4",
+      "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+      "url": "https://github.com/ash0ts/learn-harness-engineering/tree/forge-course-r4"
+    },
+    {
+      "tag": "forge-course-qualified-controls",
+      "sourceCommit": "b874b96b7c896004c9f261db7bd7c7de6dd78411",
+      "url": "https://github.com/ash0ts/learn-harness-engineering/tree/forge-course-qualified-controls"
+    },
+    {
+      "tag": "forge-course-graph-qualified",
+      "sourceCommit": "945c5d3073026a4fea427372843ea79072221dde",
+      "url": "https://github.com/ash0ts/learn-harness-engineering/tree/forge-course-graph-qualified"
+    },
+    {
+      "tag": "forge-course-graph-contract",
+      "sourceCommit": "24ff7909edb286b0e66faae1d78968d12aac6c0c",
+      "url": "https://github.com/ash0ts/learn-harness-engineering/tree/forge-course-graph-contract"
+    },
+    {
+      "tag": "forge-course-full-graph-control",
+      "sourceCommit": "e76a8dfa984116bbab4b8c31570da13b11daf87e",
+      "url": "https://github.com/ash0ts/learn-harness-engineering/tree/forge-course-full-graph-control"
+    }
+  ]
+}

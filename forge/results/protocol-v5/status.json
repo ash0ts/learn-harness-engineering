@@ -1,0 +1,306 @@
+{
+  "schemaVersion": 1,
+  "protocolRevision": 5,
+  "generatedAt": "2026-11-10T16:46:57.682793+00:00",
+  "status": "blocked_missing_usage",
+  "candidateRunnerCommit": "dcf7e447f565961e790ed1f4a25815b278db124e",
+  "historical": {
+    "archiveAttempts": 129,
+    "primaryComparisonAttempts": 39,
+    "snapshotSha256": "271c12e5c4c28a6a257436eab8b3e868f536b345826fd7cd46793dd516abfef5",
+    "unaltered": true
+  },
+  "targets": {
+    "comparisonAttempts": 39,
+    "loopControllers": 9,
+    "realTwoHourTimers": 3,
+    "graphs": 3,
+    "verificationPairs": 3,
+    "newHumanDecisions": 2
+  },
+  "completed": {
+    "comparisonAttempts": 0,
+    "loopControllers": 0,
+    "realTwoHourTimers": 0,
+    "graphs": 0,
+    "verificationPairs": 0,
+    "newHumanDecisions": 0
+  },
+  "comparisonGroups": [],
+  "qualificationAttempts": [
+    {
+      "id": "qualification-b9c2070d-c685-41e6-8734-baac3fee02bb",
+      "sourceCommit": "bed84c0dd83e64e9c2be0ee982572174ba30eda2",
+      "startedAt": "2026-11-10T15:40:39.565Z",
+      "finishedAt": "2026-11-10T15:44:10.636Z",
+      "passed": false,
+      "inputTokens": 396,
+      "outputTokens": 61,
+      "sandboxSeconds": 209.785,
+      "cleanupVerified": true,
+      "usageComplete": false,
+      "estimatedCostUsd": null,
+      "error": "Error: Pi capability/usage qualification failed",
+      "conversationId": "01a1c61e-b070-71d3-9b75-61e94eed0389"
+    }
+  ],
+  "budget": {
+    "limitUsd": null,
+    "actualCostKnown": false,
+    "knownSettledEstimateUsd": 0,
+    "unresolvedReservationsUsd": 2,
+    "halted": "Missing usage for qualification-b9c2070d-c685-41e6-8734-baac3fee02bb",
+    "billingReadback": {
+      "checkedAt": "2026-11-10T15:48:47.779435+00:00",
+      "status": "unavailable",
+      "httpStatus": 403,
+      "usageKnown": false,
+      "operationId": "qualification-b9c2070d-c685-41e6-8734-baac3fee02bb"
+    }
+  },
+  "validation": {
+    "typescriptTestsPassed": 61,
+    "typescriptTestsFailed": 0,
+    "pythonTestsPassed": 47,
+    "publicationGuardsPassed": 6,
+    "offlineAppsPassed": 15,
+    "offlineAppsTotal": 15,
+    "localNotebooksRendered": 9,
+    "docsBuild": true,
+    "anchorCheck": true
+  },
+  "presentation": {
+    "historicalFilesUnchanged": 32,
+    "cellOrderLabelsImagesAndResultsPreserved": true,
+    "factualSentenceEdits": [
+      {
+        "before": "Before each attempt the copy sets aside a worst case of about $4.20, and it will not start if that would pass the limit, so leave the limit at $20 unless you have a reason to lower it.",
+        "after": "Before each sandbox or model request the copy sets aside its maximum estimated cost, and it stops before an operation that would pass the limit, so leave the limit at $20 unless you have a reason to lower it."
+      },
+      {
+        "before": "Each treatment runs once per copy.",
+        "after": "Start can run another completed treatment; each attempt keeps its own checkpoint."
+      },
+      {
+        "before": "Either way the graph runs once per copy.",
+        "after": "Start can run another graph after the current graph finishes or you decide its approval candidate."
+      },
+      {
+        "before": "It is a small paid test that the model, the sandbox and the tracing all respond, and it cleans up after itself.",
+        "after": "It is a small paid test that the model, the sandbox and the tracing all respond, followed by checks that the unfinished app fails and the protected repair passes; it cleans up after itself."
+      },
+      {
+        "before": "if the notebook session ends mid-run, this copy stops until your instructor has checked it. **Cancel the running action** has the same effect once an attempt has started, because its cost is then unknown.",
+        "after": "if the notebook session ends mid-run, use Prepare and Connect to inspect the saved work. **Cancel the running action** waits for cleanup; missing usage or unverified cleanup keeps new paid work blocked until your instructor can reconcile it."
+      },
+      {
+        "before": "find `project-08-graph-checkpoint.json`",
+        "after": "find the latest `project-08-graph-\u2026-checkpoint.json`"
+      }
+    ]
+  },
+  "notebooks": [
+    {
+      "id": "Tm90ZWJvb2s6MTUzMTM=",
+      "file": "forge/notebooks/00-overview.py",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTM%3D",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "Forge-track-evidence-before-conclusions",
+        "versionIndex": 32,
+        "sourceFileName": "notebook.py"
+      },
+      "sourceSha256": "f27aaf4f4f9a87bc775055fbda1a33a225f749f7581f45ee8afab89a6070c516",
+      "remoteUnchanged": true,
+      "candidateSha256": "16955f0508c739b222f7e652abe7b4753bbb79e6f4613a693654f4ec89c3e43f",
+      "candidatePublished": false
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMTQ=",
+      "file": "forge/notebooks/01-minimal-harness.py",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTQ%3D",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "01-Minimal-instructions-and-explicit-harnesses",
+        "versionIndex": 24,
+        "sourceFileName": "notebook.py"
+      },
+      "sourceSha256": "01a0c0c173affe897f8db4889857c96f4420d3b478d056e5f6ccdf48ddd79909",
+      "remoteUnchanged": true,
+      "candidateSha256": "b214e5bdd915d4dfa4689150d6e9f0f3f5b107def7db33bb91631f1a552922e3",
+      "candidatePublished": false
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMTU=",
+      "file": "forge/notebooks/02-workspace-docs.py",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTU%3D",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "02-An-agent-readable-workspace",
+        "versionIndex": 20,
+        "sourceFileName": "notebook.py"
+      },
+      "sourceSha256": "678699a28516d07eb6231a44e4ed190e0c30eb88787ffa9b67562f5bcdaf644f",
+      "remoteUnchanged": true,
+      "candidateSha256": "2e391f88a83977ffe982eea9b92f341da557c23b9eda5b30f7d8687a2bdee0bc",
+      "candidatePublished": false
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMTY=",
+      "file": "forge/notebooks/03-session-recovery.py",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTY%3D",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "03-Interrupted-session-recovery",
+        "versionIndex": 19,
+        "sourceFileName": "notebook.py"
+      },
+      "sourceSha256": "c8bb5c432268798ee537a52151aaa2184ad9b9c77e366d98301380f5a1216531",
+      "remoteUnchanged": true,
+      "candidateSha256": "ab0788ecbc79691147af58236ceceae4a7f4e4e95fd90d2ad16de4a7ac9b74e6",
+      "candidatePublished": false
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMTc=",
+      "file": "forge/notebooks/04-runtime-feedback.py",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTc%3D",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "04-Runtime-evidence-and-the-seeded-defect",
+        "versionIndex": 16,
+        "sourceFileName": "notebook.py"
+      },
+      "sourceSha256": "03e45c55893865419c6cf25bc353f2958633ea0d25750acab1fe5a19f0ccd383",
+      "remoteUnchanged": true,
+      "candidateSha256": "afbfcb643e91b06b029adc542a26f10b3151c14155ff0d0607201b632fc9b16a",
+      "candidatePublished": false
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMTg=",
+      "file": "forge/notebooks/05-role-separation.py",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTg%3D",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "05-One-feature-three-role-arrangements",
+        "versionIndex": 16,
+        "sourceFileName": "notebook.py"
+      },
+      "sourceSha256": "c53219b3ec7e8d1076babec88b0cf0a353b9edfb9593249326422792641c5237",
+      "remoteUnchanged": true,
+      "candidateSha256": "5d2c20de0a924e5657a845d52399c72e556bfca4094ac5cc3b5d42a453c5180b",
+      "candidatePublished": false
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMTk=",
+      "file": "forge/notebooks/06-capstone.py",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTk%3D",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "06-Capstone-reliability",
+        "versionIndex": 15,
+        "sourceFileName": "notebook.py"
+      },
+      "sourceSha256": "522b104339298358407a59ddd0096874ee45df7405c989fbbabeea4816c906db",
+      "remoteUnchanged": true,
+      "candidateSha256": "125e0ded1cd7770165b5cb6d797547a280523735c6fa3e47d4915d01a85129c4",
+      "candidatePublished": false
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMjA=",
+      "file": "forge/notebooks/07-bounded-loops.py",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjA%3D",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "07-Goal-timer-and-maker-checker-loops",
+        "versionIndex": 15,
+        "sourceFileName": "notebook.py"
+      },
+      "sourceSha256": "116a6269ad783910675c2d4cdd892aa0caf3ca27886f4dab9655d45eb16a1625",
+      "remoteUnchanged": true,
+      "candidateSha256": "3f4cf57486feb82c9ab404033a4806a472f1dbeed8cf2670dac6e601268402f8",
+      "candidatePublished": false
+    },
+    {
+      "id": "Tm90ZWJvb2s6MTUzMjE=",
+      "file": "forge/notebooks/08-state-machine.py",
+      "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjE%3D",
+      "currentVersion": {
+        "artifactTypeName": "notebook",
+        "artifactCollectionName": "08-Checkpointed-graphs-and-human-approval",
+        "versionIndex": 18,
+        "sourceFileName": "notebook.py"
+      },
+      "sourceSha256": "323ecb6fb251e6bd04e720748ecda251ad8976e3f960fc4b973833583efb9fb2",
+      "remoteUnchanged": true,
+      "candidateSha256": "a1701c2b4bd4057df28b3fe513f1f7d091a775928d005d80d441884dba133195",
+      "candidatePublished": false
+    }
+  ],
+  "traceReadback": {
+    "checkedAt": "2026-11-10T16:29:34.551587+00:00",
+    "conversationId": "01a1c61e-b070-71d3-9b75-61e94eed0389",
+    "spans": 4,
+    "modelCalls": [
+      {
+        "spanId": "4d7b222bae171fd2",
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0
+      },
+      {
+        "spanId": "806e09cff9cf2e96",
+        "inputTokens": 396,
+        "outputTokens": 61,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 0
+      }
+    ],
+    "usageKnown": false,
+    "note": "A failed chat span with zero or absent counters does not establish zero billable usage."
+  },
+  "validationEvidence": [
+    {
+      "path": "repair-v5/validation/anchors.log",
+      "sha256": "78f0a04acc7ac7cb24dd8bda79fcf576fe8a27707743b5f74d36921a02b4f4a5"
+    },
+    {
+      "path": "repair-v5/validation/docs.log",
+      "sha256": "c244167273b3c3f7e4e5c945c490d08879cd8561b5d6985bc9b85df0d71c117f"
+    },
+    {
+      "path": "repair-v5/validation/notebooks.log",
+      "sha256": "3b0cc095e23231d36361aa85cf78e2b61c47ab394c1202d477a32bc305b7ce4b"
+    },
+    {
+      "path": "repair-v5/validation/publication.log",
+      "sha256": "5f7eadc47e1c00264ad4e27c90eb6707e02e8f03a8264bff3303b1aaa601fe83"
+    },
+    {
+      "path": "repair-v5/validation/python.log",
+      "sha256": "5bc7c9710e3ff1989e1d952bacb3a862f653d9a4e2d854a285a5a6f6c60ce556"
+    },
+    {
+      "path": "repair-v5/validation/typescript.log",
+      "sha256": "f11270d443e8a1b0cc607bb0df032f389c69796d43aed3ba286aacdcbda5b367"
+    }
+  ],
+  "unverifiedGates": [
+    "Corrected controls in the pinned CPU image under Xvfb",
+    "Complete protocol-5 scored campaign",
+    "Three real two-hour timers",
+    "Three graph executions and three serial/parallel pairs",
+    "Two new human graph decisions",
+    "Reproduction of the original full Pi lingering-worker failure",
+    "Authenticated Forge Edit and Preview downloads plus fresh runtime restore",
+    "Publication of these nine candidate sources through the native editor",
+    "Independent student-account rehearsal; user said only the owner can test"
+  ],
+  "limitations": [
+    "No GPU sandbox or training experiment is part of this CPU-only track. Forge serverless inference is separately qualified.",
+    "Two SDK-only lifecycle probes exited cleanly; they did not reproduce the original Pi worker hang.",
+    "Local controller tests and locally compiled reference repairs are not live course-trial evidence.",
+    "The one new qualification failed before app qualification; the unknown second request is not charged as zero.",
+    "Remote notebook sources were read back unchanged. They still contain the preceding iteration, not these candidate repairs."
+  ]
+}

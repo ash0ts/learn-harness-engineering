@@ -1,0 +1,215 @@
+{
+  "schemaVersion": 1,
+  "runId": "course-audit-20261106",
+  "runUrl": "https://forge.coreweave.com/wandb/wandb/learn-harness-engineering-forge/runs/course-audit-20261106",
+  "artifact": "wandb/learn-harness-engineering-forge/forge-course-qualification-evidence:v4",
+  "artifactUrl": "https://wandb.ai/wandb/learn-harness-engineering-forge/artifacts/course-evidence/forge-course-qualification-evidence:v4",
+  "publisherSourceCommit": "21787d90f526a7359f216c5cb7cfc247eb38bda9",
+  "sourceArchives": [
+    {
+      "sourceCommit": "09a716af4cdd8467729f4185081dab019d7a8e1a",
+      "file": "09a716af4cdd8467729f4185081dab019d7a8e1a.tar.gz",
+      "sha256": "ddcb500877fff634c53ef19c649842c691d25b577c6bf9245f83a89757f8db76"
+    },
+    {
+      "sourceCommit": "0cbd4fdb330cbc1c9346b4b8a7062c2a33fcb517",
+      "file": "0cbd4fdb330cbc1c9346b4b8a7062c2a33fcb517.tar.gz",
+      "sha256": "27c51e5997e683f7d48433c2c93507d4aa37eacbb8f4e5ae9352cc9d0196b246"
+    },
+    {
+      "sourceCommit": "192f40f150b9240dc8ce38e374ec897472d9937b",
+      "file": "192f40f150b9240dc8ce38e374ec897472d9937b.tar.gz",
+      "sha256": "b3d8df454b73cf1e889f83e7714d6e08f676f00c74c98b9406f8c40d49b58c46"
+    },
+    {
+      "sourceCommit": "1b316ef2aadd5f0a2d87fbaac1c2c5a505054dd7",
+      "file": "1b316ef2aadd5f0a2d87fbaac1c2c5a505054dd7.tar.gz",
+      "sha256": "74c16981996f56ff2592ec436c90932b6a36b11772a84019db63a0362f93a49d"
+    },
+    {
+      "sourceCommit": "21787d90f526a7359f216c5cb7cfc247eb38bda9",
+      "file": "21787d90f526a7359f216c5cb7cfc247eb38bda9.tar.gz",
+      "sha256": "db3b89c243f44b323d3970809d24761e25179727754f3060d8eee0da04aa4fc1"
+    },
+    {
+      "sourceCommit": "23f50a21e66e4baaf9a2c05e6298c114699865ae",
+      "file": "23f50a21e66e4baaf9a2c05e6298c114699865ae.tar.gz",
+      "sha256": "9070170c878dce55af7c983e04a5fbeee8473f7b40ed9190d7ca7e69dbb8e11b"
+    },
+    {
+      "sourceCommit": "24ff7909edb286b0e66faae1d78968d12aac6c0c",
+      "file": "24ff7909edb286b0e66faae1d78968d12aac6c0c.tar.gz",
+      "sha256": "687af38afd21925197c9b970c83ea88d77764f9c96ddfac161637c81cc87023f"
+    },
+    {
+      "sourceCommit": "2947d9f6386cefefd1977fb2dd569a4d4226d74d",
+      "file": "2947d9f6386cefefd1977fb2dd569a4d4226d74d.tar.gz",
+      "sha256": "f69c278dfbc221cdaca84a4028d4e6d97977d6fa1938469bc6b397925dc65de0"
+    },
+    {
+      "sourceCommit": "30db3581757e79b9791b1b70262e6ac499fab87f",
+      "file": "30db3581757e79b9791b1b70262e6ac499fab87f.tar.gz",
+      "sha256": "ce2f6802aa7ee2b8b93eb0d0984c047fc7e1920d65746156bb541d83c2e7abea"
+    },
+    {
+      "sourceCommit": "3627ca6dea154b1a875ac323616284bd00d331a1",
+      "file": "3627ca6dea154b1a875ac323616284bd00d331a1.tar.gz",
+      "sha256": "5006d03e5d4abcb04cc95ee0f5a1cafa20e64876d7ac9c182ab3d5d0f5c90e55"
+    },
+    {
+      "sourceCommit": "3a1f5b1944849fdaa88451102e809c9cb48fb528",
+      "file": "3a1f5b1944849fdaa88451102e809c9cb48fb528.tar.gz",
+      "sha256": "6ddd862d89c08e7823d3ff541707de9ecbfd330242726ff5d7c4e86ba2609da7"
+    },
+    {
+      "sourceCommit": "3afbf9bf93c337492164a8c3980a8cc287eec0dd",
+      "file": "3afbf9bf93c337492164a8c3980a8cc287eec0dd.tar.gz",
+      "sha256": "e364e86f81c764868b54a6479de979312fa819f86bb827ff56cbd75f14c75ae2"
+    },
+    {
+      "sourceCommit": "3bff22b8f229f4735986c44c3aaa28b5bde5370c",
+      "file": "3bff22b8f229f4735986c44c3aaa28b5bde5370c.tar.gz",
+      "sha256": "1ded959fdc0d23ceaff615d87f6201b101e9b0bb3007cdedd745f659a095bad0"
+    },
+    {
+      "sourceCommit": "3ebea13e260921c0c231ff43b6d13bc265d25157",
+      "file": "3ebea13e260921c0c231ff43b6d13bc265d25157.tar.gz",
+      "sha256": "d27b882721db4ebd3c2ec9453b6f0b904edceea14b9fafb947228dadfb377a25"
+    },
+    {
+      "sourceCommit": "45c49b70d56e81c8fb709e2b09bd5ed51ad64772",
+      "file": "45c49b70d56e81c8fb709e2b09bd5ed51ad64772.tar.gz",
+      "sha256": "267c46d0fae894058f4a6cea19285556f697c2c13c180fbe44a277a1fd661f81"
+    },
+    {
+      "sourceCommit": "4a247914feab11d0f868ab4083146e45fc28acda",
+      "file": "4a247914feab11d0f868ab4083146e45fc28acda.tar.gz",
+      "sha256": "cd248542e4419ae35d4c877aa3cd16d4795a83cd0ab3a95b8f115f3bb688ef42"
+    },
+    {
+      "sourceCommit": "5ab40f10d6c5275815bb9962006f445800d53d6b",
+      "file": "5ab40f10d6c5275815bb9962006f445800d53d6b.tar.gz",
+      "sha256": "81c09b8568a96a7dd8e9f41c8d843b37e8de5f1517b8b75597db8bd1aef6a04d"
+    },
+    {
+      "sourceCommit": "6907491cc07b3cad91f26bbdfaf60570fc1f246b",
+      "file": "6907491cc07b3cad91f26bbdfaf60570fc1f246b.tar.gz",
+      "sha256": "b8d7dcffff39ee23b1dcdbe2a077f4f14ba8dbe80fb3e5a8369197fd01836246"
+    },
+    {
+      "sourceCommit": "71b172121b15a7625e48bae9007b7b38551f9a07",
+      "file": "71b172121b15a7625e48bae9007b7b38551f9a07.tar.gz",
+      "sha256": "2fb1a6dde89874467d9e1ee004e02e7057d60c1a52789483dd0e138ea908634f"
+    },
+    {
+      "sourceCommit": "7c563eb14f3999ab3e659b77c4095c883619002f",
+      "file": "7c563eb14f3999ab3e659b77c4095c883619002f.tar.gz",
+      "sha256": "aa2753919a8b0e1c44e5f861a01dc5e81c3b8d6b64f9cefba67d8511d6caec58"
+    },
+    {
+      "sourceCommit": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef",
+      "file": "8f4521bc34bb340dd4aa75e5bf1a6e6c49a68bef.tar.gz",
+      "sha256": "744d23770f3b4ddf9a8c668c5ee38867a429b01c4a104883112c75c765f5e663"
+    },
+    {
+      "sourceCommit": "945c5d3073026a4fea427372843ea79072221dde",
+      "file": "945c5d3073026a4fea427372843ea79072221dde.tar.gz",
+      "sha256": "19b7aa0282bd597424dbdbc871ce8c3824a2989bcaed5c2e2a7e3342c07e61c5"
+    },
+    {
+      "sourceCommit": "9d831288c607a8488d1cc97de1421f2ecf6829ad",
+      "file": "9d831288c607a8488d1cc97de1421f2ecf6829ad.tar.gz",
+      "sha256": "97b2c589bcff3237184e6bf7a4d56a1025f99e047d552d60338d24528af5a84d"
+    },
+    {
+      "sourceCommit": "b874b96b7c896004c9f261db7bd7c7de6dd78411",
+      "file": "b874b96b7c896004c9f261db7bd7c7de6dd78411.tar.gz",
+      "sha256": "cf8e817a0afbc94db9493e457d40ee044ff0e4270ca016c81fa93d423651dde0"
+    },
+    {
+      "sourceCommit": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3",
+      "file": "b948c1fbac36bca7dae458795d9bfca3f5d2b7d3.tar.gz",
+      "sha256": "598e399d7f86b6b7dbcac0f02ca53d8b85c3cd1ac1b7c2c3a1a1b7c9d42007f8"
+    },
+    {
+      "sourceCommit": "bf760399391f0862c6b642c62854c9baf4ca7523",
+      "file": "bf760399391f0862c6b642c62854c9baf4ca7523.tar.gz",
+      "sha256": "44b7f31ece546eb1d09c785a43d538ed32fa83dd763bc68dc2db589013fbc813"
+    },
+    {
+      "sourceCommit": "c54f248978eda1296c183ca252cfb628ac9ea47e",
+      "file": "c54f248978eda1296c183ca252cfb628ac9ea47e.tar.gz",
+      "sha256": "2f99f8bc6264b87ddd95e865f633626b308100d711aa8a6c6c2fc6fbeb87509e"
+    },
+    {
+      "sourceCommit": "c80c9c5cc4e735fe206ba511da3391446f10c395",
+      "file": "c80c9c5cc4e735fe206ba511da3391446f10c395.tar.gz",
+      "sha256": "817284a49f8b590d79fa3367163a71f8f4071dc724199ca32b7b66c41b26d47e"
+    },
+    {
+      "sourceCommit": "d6a3b3483df641d94396c88b0f18c5bb228d043a",
+      "file": "d6a3b3483df641d94396c88b0f18c5bb228d043a.tar.gz",
+      "sha256": "1416604faf0b59e7c353c6bdef2184d1668439fea30a9756c5bb13c6401135a8"
+    },
+    {
+      "sourceCommit": "e76a8dfa984116bbab4b8c31570da13b11daf87e",
+      "file": "e76a8dfa984116bbab4b8c31570da13b11daf87e.tar.gz",
+      "sha256": "308eb54f0b77582d4ddff85c1e4fb7725665ad843fdbbae32ecc70b2a577f7c1"
+    },
+    {
+      "sourceCommit": "e8ce7010369b1ac87a196f1f5abfdadbbf517a1d",
+      "file": "e8ce7010369b1ac87a196f1f5abfdadbbf517a1d.tar.gz",
+      "sha256": "60d1c44f23a035281a391ea24162ca7ea51104334786a06feccf3778803a159f"
+    },
+    {
+      "sourceCommit": "f176ac0c3afe7b1cd0dc2042800a51472e422074",
+      "file": "f176ac0c3afe7b1cd0dc2042800a51472e422074.tar.gz",
+      "sha256": "289c5e692bd493391f075b4a5f0d45dd325fbdc843c3e84c2147efdf70680b5a"
+    },
+    {
+      "sourceCommit": "f3dc2cf8e55a3a58cb9d7f476d04c985fded0261",
+      "file": "f3dc2cf8e55a3a58cb9d7f476d04c985fded0261.tar.gz",
+      "sha256": "4c3c20497e6006270cc4821bf47455130fd917e34e5c5184aacddee5e0bdfa3a"
+    },
+    {
+      "sourceCommit": "f77f1d0b365c666736b24efddd1a9b9901c62579",
+      "file": "f77f1d0b365c666736b24efddd1a9b9901c62579.tar.gz",
+      "sha256": "b6e059d875404de988043e6825fa99a8bf3d9392473f4edd06cc641961e3a2c2"
+    },
+    {
+      "sourceCommit": "f9f40f862ada5fb9c355c9f2c22823072f679489",
+      "file": "f9f40f862ada5fb9c355c9f2c22823072f679489.tar.gz",
+      "sha256": "c3f51eb052d336f6e33191acc8d86c0340abe1e2c49e75568971f538269b7e6d"
+    }
+  ],
+  "artifactFileCount": 8512,
+  "verifiedRunSummary": {
+    "qualificationAttempts": 9,
+    "qualificationPassed": 4,
+    "codingTrialAttempts": 129,
+    "passedCodingTrials": 28,
+    "completeComparisonBlocks": 45,
+    "knownEstimatedSpendUsd": 13.042266945333353,
+    "chargedUnknownReservationsUsd": 6,
+    "totalChargedEstimateUsd": 19.042266945333353,
+    "unresolvedReservationsUsd": 0,
+    "budgetHalted": false,
+    "notebooksPublishedVerified": 9,
+    "verifiedUiAttempts": 46,
+    "verifiedUiPasses": 21,
+    "realTwoHourTimersCompleted": 1,
+    "goalLoopsPassed": 1,
+    "piGraphApprovalPauses": 1,
+    "manualGraphApprovalPauses": 3,
+    "agentLensConversationsVerified": 223,
+    "modelsTrialArtifactsVerified": 129,
+    "cleanupRecordsVerified": 337,
+    "activeCourseWorkers": 0,
+    "comparisonBlocksVerified": 45
+  },
+  "verifiedRunBudgetHalted": false,
+  "sourceArchivesReadBackVerified": true,
+  "publicationManifestReadBackVerified": true,
+  "completedComparisonBlocks": 45,
+  "completedCodingAttempts": 129
+}
