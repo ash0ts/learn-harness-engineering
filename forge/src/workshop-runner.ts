@@ -30,6 +30,7 @@ export async function runWorkshop(snapshot:WorkshopSnapshot,manifest:WorkshopMan
   const execution=new Execution(options.output,id,p);await execution.budget.reserve({});
   await mkdir(dir,{recursive:true});await execution.begin('trial',snapshot.sourceCommit);
   const record:WorkshopResult={schemaVersion:1,protocol:'workshop-v1',id,project:snapshot.project,sourceCommit:snapshot.sourceCommit,runnerRevision:await workshopHead(),snapshotId:snapshot.id,snapshotSha256:snapshot.sha256,assisted:snapshot.assisted,action:options.action,variant:options.action==='scenario'?(options.live?'live-app':'offline-app'):options.singleRole?'single-role':snapshot.project==='project-05'?'maker-checker':options.action,trial:1,startedAt:new Date().toISOString(),outcome:'infrastructure_failed',checks:[],evidence:[],conversationIds:[],sandboxIds:[],cleanupStatus:'pending',telemetryStatus:'pending',publicationStatus:'pending',wandbRunId:id.replaceAll('-','').slice(0,20),model:c.model,configuration:publicConfig(c)};
+  record.wandbRunId=sha256(id).slice(0,20);
   await writeJson(join(dir,'submission.json'),snapshot);await writeJson(join(dir,'manifest.json'),manifest);
   const abort=new AbortController(),onSignal=()=>abort.abort(new Error('Cancelled'));
   process.once('SIGINT',onSignal);process.once('SIGTERM',onSignal);
