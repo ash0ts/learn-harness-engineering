@@ -30,10 +30,10 @@ jobs:
       - name: Five negative, positive and regression controls
         run: node --import ./forge/node_modules/tsx/dist/loader.mjs --test forge/test/workshop-controls.test.ts
       - name: Electron desktop scenarios (macOS and Windows)
-        if: runner.os != 'Linux'
+        if: always() && runner.os != 'Linux'
         run: node --import ./forge/node_modules/tsx/dist/loader.mjs forge/scripts/workshop_platform.ts
       - name: Electron desktop scenarios (Linux Xvfb)
-        if: runner.os == 'Linux'
+        if: always() && runner.os == 'Linux'
         run: xvfb-run -a node --import ./forge/node_modules/tsx/dist/loader.mjs forge/scripts/workshop_platform.ts
       - uses: actions/upload-artifact@v4
         if: always()
