@@ -25,6 +25,7 @@ async function main(){
     await check('Inference request includes question, excerpts, model and bounded output',()=>{
       const request=load('workshop/inference.ts').makeRequest('unique-question',[{excerpt:'unique-excerpt'}],'fixed-model');
       assert.equal(request.model,'fixed-model');assert.ok(request.max_tokens>0&&request.max_tokens<=1024);
+      assert.equal(request.chat_template_kwargs?.enable_thinking,false,'Use the documented non-thinking setting for this bounded exercise');
       assert.ok(request.messages.some(m=>m.role==='system'&&m.content.length>20));
       assert.match(JSON.stringify(request.messages),/unique-question/);assert.match(JSON.stringify(request.messages),/unique-excerpt/);
     });
