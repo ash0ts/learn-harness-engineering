@@ -1,0 +1,8 @@
+{
+  "criteria": [
+    "Full questions and answers in order",
+    "Expandable citations attached to the correct answer",
+    "Cancel preserves history; confirmation clears it",
+    "History persists after restart"
+  ]
+}

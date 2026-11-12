@@ -1,0 +1,5 @@
+node_modules/
+dist/
+.workshop-data/
+.workshop-evidence/
+.env
