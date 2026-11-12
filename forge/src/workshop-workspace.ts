@@ -8,7 +8,13 @@ const exec=promisify(execFile);
 export const workshopCourseRoot=resolve(import.meta.dirname,'../..');
 export async function workshopHead(){return (await exec('git',['rev-parse','HEAD'],{cwd:workshopCourseRoot})).stdout.trim();}
 async function frozen(source:string,path:string){return (await exec('git',['show',`${source}:${path}`],{cwd:workshopCourseRoot,maxBuffer:8_000_000})).stdout;}
+const templates=new Map<string,Promise<{manifest:WorkshopManifest;files:Record<string,string>}>>();
 export async function workshopTemplate(project:WorkshopProject,source:string){
+  const key=`${source}:${project}`;
+  if(!templates.has(key))templates.set(key,loadTemplate(project,source).catch(error=>{templates.delete(key);throw error;}));
+  return structuredClone(await templates.get(key)!);
+}
+async function loadTemplate(project:WorkshopProject,source:string){
   if(!/^[a-f0-9]{40}$/.test(source))throw new Error('Pin a complete source commit');
   const lessons=JSON.parse(await frozen(source,'forge/workshop/lessons.json'));
   const lesson=lessons.find((l:any)=>l.project===project);if(!lesson)throw new Error('Choose workshop project-01 through project-05');
