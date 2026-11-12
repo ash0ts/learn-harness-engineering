@@ -1,0 +1,1 @@
+Implement the ConversationHistory feature in TASK.md. Keep main/preload/renderer boundaries. Run npm run check, npm run build, and npm test. In your final call state what changed and the checks you actually observed.

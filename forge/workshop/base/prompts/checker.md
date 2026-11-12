@@ -1,0 +1,1 @@
+Review ConversationHistory against rubric.json. Run npm run check and inspect the visible full answers, citations and clear-history confirmation. Do not edit code. End with REVIEW, Checks, Failures, and Required changes, citing actual evidence.

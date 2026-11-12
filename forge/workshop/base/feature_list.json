@@ -1,0 +1,16 @@
+{
+  "features": [
+    {
+      "id": "document-detail",
+      "acceptance": "Import through the button, display the complete text, restart and find the same persisted content.",
+      "status": "unverified",
+      "command": "npm test"
+    },
+    {
+      "id": "metadata",
+      "acceptance": "Display and persist correct word, line and paragraph counts.",
+      "status": "unverified",
+      "command": "npm test"
+    }
+  ]
+}
