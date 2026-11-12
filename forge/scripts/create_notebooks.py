@@ -11,6 +11,7 @@ import textwrap
 import lesson_cells as lc
 import learner_cells as learner
 import workshop_cells as workshop
+from workshop_teaching import teaching_cell, LABS
 from course_packets import ORIGINAL, SLUGS, packet
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -83,12 +84,12 @@ def markdown_cell(text):
     return 'def _(mo):\n    mo.md(r\"\"\"\n'+''.join('    '+line+'\n' for line in text.splitlines())+'    \"\"\")\n    return'
 
 def workshop_payload(project, commit):
-    script = "import {workshopTemplate} from './forge/src/workshop-workspace.ts'; const {manifest,files}=await workshopTemplate(process.argv[1],process.argv[2]);console.log(JSON.stringify({manifest,files:Object.fromEntries(manifest.editable.map(name=>[name,files[name]]))}));"
+    script = "import {workshopTemplate} from './forge/src/workshop-workspace.ts'; const {manifest,files}=await workshopTemplate(process.argv[1],process.argv[2]);console.log(JSON.stringify({manifest,files:Object.fromEntries(manifest.editable.map(name=>[name,files[name]])),referenceFiles:Object.fromEntries(['src/preload/preload.ts','src/services/forge-hooks.ts','runtime/app-tracing.ts','workshop/inference.ts','workshop/instrumentation.ts','workshop/sandbox-task.ts','workshop/loop.ts','workshop/graph.ts'].filter(name=>name in files).map(name=>[name,files[name]]))}));"
     return subprocess.check_output(['node','--import',str(ROOT/'forge/node_modules/tsx/dist/loader.mjs'),'--input-type=module','-e',script,project,commit],cwd=ROOT,text=True)
 
-WORKSHOP_ENTRY = '''## Five hands-on labs
+WORKSHOP_ENTRY = '''## Eight hands-on labs
 
-Use **01, 02 and 04** for the three-hour workshop. **03 and 05** are complete extensions. Each lab starts from its own checkpoint, so nobody has to finish an earlier project to begin the next.
+Use **01, 02 and 04** for the three-hour workshop. **03 and 05** are complete extensions. Continue with **06, 07 and 08** for reliability, bounded loops and explicit graph control. Each lab starts from its own checkpoint, so nobody has to finish an earlier project to begin the next.
 
 | Lab | Your edit | What you inspect |
 | --- | --- | --- |
@@ -98,7 +99,11 @@ Use **01, 02 and 04** for the three-hour workshop. **03 and 05** are complete ex
 | [04 · Instrument and diagnose](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTc%3D) | Forge SDK spans, chunk statistics and the indexing repair | Short/long fixtures, actual chunks, errors and Agent Lens |
 | [05 · Make and check](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTg%3D) | Role prompts, a rubric, evaluation code and W&B logging | The checker's review, revision patch, UI and your metrics |
 
-**How to begin:** open a lab, copy it into a private Forge project, run its cells with ▶, and use **Prepare or restore my workspace**. Edit the named files, **Save these edits**, then **Check my edits**. Connect your own sandbox-capable API key only when you are ready to execute. Opening a notebook starts no agent or inference request. A notebook's CPU session and later sandbox/model actions do cost money; the default $20 estimate limit belongs to that copy, not the whole class.
+| [06 · Prove the reset](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTk%3D) | Feedback persistence, service benchmark and reset state | Real service results, clean UI and restart |
+| [07 · Build a feedback loop](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjA%3D) | Stop policy and next-session feedback | Saved deadline, candidate and received failure evidence |
+| [08 · Route and approve](https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMjE%3D) | Graph routes, plan and verification order | Lane receipts, rollback and your checksum-bound decision |
+
+**How to begin:** open a lab, copy it into a private Forge project, run its cells with ▶, and use **Prepare or restore my workspace**. Edit the named files, **Save and check my edits**. Connect your own sandbox-capable API key only when you are ready to execute. Opening a notebook starts no agent or inference request. A notebook's CPU session and later sandbox/model actions do cost money; the default $20 estimate limit belongs to that copy, not the whole class.
 
 No separate service deployment is required. The notebook installs the runner and creates bounded sandboxes. To use the Electron app with your own mouse and keyboard, follow the [clone-and-run guide](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-publication/docs/en/forge/workshop.md). Notebook and laptop edits use the same source files and checks.
 
@@ -112,8 +117,24 @@ No separate service deployment is required. The notebook installs the runner and
 | 2:30–2:45 | Demonstrate and discuss 03 and 05 |
 | 2:45–3:00 | Explain one edit, its observed effect, and its evidence |
 
-The original lesson prose and historical comparisons follow. Workshop executions use a separate `workshop-v1` cohort. Projects 06–08 retain their existing course flow.
+The original lesson prose and historical comparisons follow. Workshop executions use a separate `workshop-v1` cohort. All eight workbenches execute editable source. Their historical research treatments and evidence remain separate.
 '''
+
+WORKSHOP_ENTRY = WORKSHOP_ENTRY.replace('your metrics |\n\n| [06', 'your metrics |\n| [06')
+
+OVERVIEW_PLANNER = """def _(mo):
+    workshop_route = mo.ui.radio(options=['Three-hour introduction','Reliability and control follow-up','All eight at my own pace'],value='Three-hour introduction',label='Choose your learning route')
+    mo.vstack([mo.md('### Plan your workshop\\n\\nYou should leave each lab able to explain **one edit → one observed effect → one piece of evidence**. A green dashboard alone is not the exercise. Choose a route below; it starts no runtime, inference or sandbox.'),workshop_route])
+    return (workshop_route,)"""
+
+OVERVIEW_ROUTE = """def _(mo, workshop_route):
+    _routes={
+      'Three-hour introduction':('01 → 02 → 04','Wire a model-backed app, give Pi usable workspace context, then instrument and diagnose a real defect. Use 03 and 05 for extensions.','Show a button-driven import, a file Pi actually read, and a span you wrote.'),
+      'Reliability and control follow-up':('06 → 07 → 08','Prove persistence and reset, pass observed failures into a bounded loop, then make graph routes and approval explicit.','Show an empty app after reset, a fresh session receiving the previous failure, and a checksum-bound graph decision.'),
+      'All eight at my own pace':('01 → 02 → 03 → 04 → 05 → 06 → 07 → 08','Each lesson has an independent checkpoint. Read the code, predict the failure, edit, check, execute and explain. Keep your own private copies.','Keep one source snapshot, screenshot/check receipt and matching Forge evidence link per lab.')}
+    _order,_task,_evidence=_routes[workshop_route.value]
+    mo.callout(mo.md('**Your route: '+_order+'**\\n\\n'+_task+'\\n\\n**Your final demonstration:** '+_evidence+'\\n\\nThe Notebook is your workbench; Sandboxes execute isolated builds; inference runs on the hosted model; Agent Lens shows behavior; W&B keeps outcomes and source. You do not deploy a separate service.'),kind='info')
+    return"""
 
 def generate(runner_commit=None, projects=None, refresh_evidence=False):
     evidence=json.loads((ROOT/'forge/lessons/evidence.json').read_text())
@@ -138,10 +159,10 @@ def generate(runner_commit=None, projects=None, refresh_evidence=False):
                '3. **Read, inspect, run.** Read the lab, open a recorded attempt in Agent Lens to see what the agent did, then run an attempt of your own.\n\n'
                'Jump to [recorded attempts](#inspect-one-attempt) · [run this lesson yourself](#run-this-lesson-yourself) · [my work](#my-work) · [my observations](#your-observation-worksheet). These links work once the cells have run.\n\n'
                'Each lesson is a separate notebook with its own copy and spending limit. The lesson links above open the course originals.')
-        intro='# '+title+'\n\n'+nav+'\n\n'+description+'\n\n'+start
-        practical = project in [f'project-{i:02}' for i in range(1,6)]
+        intro='# '+title+'\n\n'+nav+'\n\n'+(LABS[project]['learn'] if project in LABS else description)+'\n\n'+start
+        practical = project in [f'project-{i:02}' for i in range(1,9)]
         if practical:
-            intro=intro.replace('3. **Read, inspect, run.** Read the lab, open a recorded attempt in Agent Lens to see what the agent did, then run an attempt of your own.', '3. **Edit, check, execute.** Open the file tabs, save a small change, run its deterministic checks, then exercise that saved snapshot. The historical comparison follows the workbench.')
+            intro=intro.replace('3. **Read, inspect, run.** Read the lab, open a recorded attempt in Agent Lens to see what the agent did, then run an attempt of your own.', '3. **Edit, check, execute.** Open the file tabs, make a small change, use **Save and check my edits**, then exercise that saved snapshot. The historical comparison follows the workbench.')
             intro=intro.replace('[run this lesson yourself](#run-this-lesson-yourself)','[your hands-on lab](#your-hands-on-lab)')
         elif project=='overview':
             intro='# '+title+'\n\n'+nav+'\n\n'+description+'\n\nStart with the lab links below. Copy the selected lab into your own private project; you do not need to copy this overview.'
@@ -150,15 +171,16 @@ def generate(runner_commit=None, projects=None, refresh_evidence=False):
             helper=(ROOT/'forge/scripts/learner_workspace.py').read_text()
             extension=(ROOT/'forge/scripts/workshop_workspace.py').read_text().replace('from learner_workspace import LessonWorkspace\n','')
             helper_cell='def _():\n    def _load_learner():\n'+textwrap.indent(helper+'\n'+extension,'        ')+'\n        return WorkshopWorkspace\n    LessonWorkspace = _load_learner()\n    return (LessonWorkspace,)'
-            cells += [workshop.SPEC, helper_cell, learner.INIT, workshop.STATE, workshop.SETUP, workshop.PREPARE,
+            cells += [workshop.SPEC, helper_cell, learner.INIT, workshop.STATE, teaching_cell(project), workshop.SETUP, workshop.PREPARE,
                       lc.PREDICTION.replace('**4. Write your prediction.**','**Write your prediction.**').replace('where the agent is most likely to fall short','which check or app behavior your edit should change').replace('in step 6','in your observation worksheet'), *workshop.editor_cells(json.loads(workshop_payload(project,commit))['manifest']['editable']), workshop.EDIT_BUTTONS, workshop.SAVE, workshop.DIRTY,
-                      workshop.RELOAD, workshop.CHECK, workshop.HINTS, workshop.EXAMPLE,
-                      learner.CONNECT, learner.AUTHENTICATE.replace('Go on to step 4.','Choose a lesson action below.'), workshop.ACTIONS, workshop.EXECUTE,
-                      learner.CANCEL, learner.REFRESH, workshop.RESULTS, workshop.TRANSFER,
+                      workshop.RELOAD, workshop.CHECK, workshop.GUIDANCE, workshop.HINTS, workshop.EXAMPLE, workshop.SOURCE, workshop.SOURCE_VIEW,
+                      learner.CONNECT.replace('**3. Connect your sandbox access.**','**Connect your sandbox access.**'), learner.AUTHENTICATE.replace('Go on to step 4.','Use the named exercise below.'), workshop.ACTION_SETTINGS, *workshop.action_cells(project),
+                      learner.CANCEL, learner.REFRESH, workshop.CONTROLLER, workshop.RESULTS, workshop.DECISION_CONTROLS, workshop.DECIDE, workshop.CANDIDATE_OPTIONS, workshop.TRANSFER,
                       workshop.IMPORT, workshop.CANDIDATE, workshop.APPLY, workshop.DOWNLOAD,
                       markdown_cell('### Use the same app on your laptop\n\nFollow the [Mac, Windows and Linux setup guide](https://github.com/ash0ts/learn-harness-engineering/blob/codex/forge-publication/docs/en/forge/workshop.md). Initialize `'+project+'`, then run `npm ci` and `npm run dev` in that generated workspace. It starts in clearly labelled offline mode. Export your source with the workshop CLI and preview its diff here before applying it. No separate service is needed.\n\nThe recorded comparison below uses the original research treatments. This practical lab uses an independent supplied checkpoint of the same app. Your new attempts never change those recorded results.')]
         elif project=='overview':
-            cells.append(markdown_cell(WORKSHOP_ENTRY))
+            cells += [markdown_cell(WORKSHOP_ENTRY), OVERVIEW_PLANNER, OVERVIEW_ROUTE]
+        cells.append(markdown_cell('## Historical course material\n\nThe original lesson narrative and recorded comparisons are preserved below. They describe earlier research executions, separately from your workshop snapshots.'))
         cells += [markdown_cell(part.strip()) for part in sections[:-1]]
         for image in evidence['assets'][project]:
             path=ROOT/'forge/lessons/assets'/image['file']

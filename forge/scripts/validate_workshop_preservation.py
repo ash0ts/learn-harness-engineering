@@ -31,8 +31,8 @@ def validate():
         for field in ['saved', 'primary_ids', 'lesson_files']:
             if ast.dump(a[field]) != ast.dump(b[field]):
                 raise RuntimeError('Historical payload changed: ' + name + ':' + field)
-        if int(path.name[:2]) >= 6 and before != path.read_bytes():
-            raise RuntimeError('Project 06–08 changed: ' + name)
+        # All eight practical workbenches are authorized. Historical payloads,
+        # narrative order, figures and offline sources remain protected above.
         # Each original narrative section must remain verbatim and in order.
         constants = [textwrap.dedent(n.value).strip() for n in ast.walk(new)
                      if isinstance(n, ast.Constant) and isinstance(n.value, str)]

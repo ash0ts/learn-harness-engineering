@@ -83,13 +83,26 @@ class WorkshopWorkspace(LessonWorkspace):
                 raise RuntimeError('Save these edits first; execution uses that exact snapshot.')
             if action == 'resume' and not state.get('parent'):
                 raise RuntimeError('Load a first-session candidate, then write and save its handoff before resuming.')
-            if action not in ('offline-app', 'live-app', 'agent', 'resume'):
+            if action not in ('offline-app', 'live-app', 'agent', 'resume', 'loop', 'graph'):
                 raise ValueError('Unknown workshop action')
             identifier = str(uuid.uuid4())
+            controller_id = None
+            if action in ('loop', 'graph'):
+                current = self.workshop_controller()
+                if current and current.get('pending'):
+                    # The same round is read back; the CLI refuses replacement work.
+                    identifier = current['pending'] if isinstance(current['pending'], str) else current['pending']['id']
+                if current and current.get('node') == 'approval':
+                    raise RuntimeError('Review the displayed candidate and record your approval or rejection first.')
+                terminal = current and (current.get('status') == 'stopped' or current.get('node') in ('approved', 'rejected', 'stopped'))
+                controller_id = identifier if not current or terminal else current['id']
+                state['controllerId'] = controller_id
             command = self.workshop_command('scenario' if action.endswith('-app') else action,
                 '--snapshot', self.results / 'snapshots' / (state['draftSnapshot'] + '.json'),
                 '--operation-id', identifier, '--scenario', scenario, '--fixture', fixture,
                 '--question', question, '--execute')
+            if controller_id:
+                command += ['--controller', controller_id]
             if action == 'live-app':
                 command.append('--live')
             if single_role:
@@ -159,3 +172,48 @@ class WorkshopWorkspace(LessonWorkspace):
 
     def workshop_evidence(self, identifier, name):
         return self.safe_path(self.results, identifier + '/' + name).read_bytes()
+
+    def workshop_controller(self):
+        identifier = self.state.get('workshop', {}).get('controllerId')
+        if not identifier:
+            return None
+        path = self.safe_path(self.results, 'workshop/controllers/' + identifier + '.json')
+        return json.loads(path.read_text()) if path.exists() else None
+
+    def decide_workshop_graph(self, decision, checksum, reason):
+        with self.lock:
+            if self.blocked():
+                raise RuntimeError(self.blocked())
+            current = self.workshop_controller()
+            if not current or current.get('node') != 'approval':
+                raise RuntimeError('No verified graph candidate is awaiting your decision.')
+            if checksum != current.get('verifiedSha256'):
+                raise RuntimeError('The displayed candidate changed; review its new checksum.')
+            if not reason.strip() or self.redact(reason) != reason:
+                raise ValueError('Record a short review reason without credentials.')
+            result = json.loads(self.run_command(self.workshop_command('decide', '--controller', current['id'],
+                '--decision', decision, '--sha256', checksum, '--actor', self.identity['WANDB_NOTEBOOK_USER_ID'],
+                '--reason', reason), cwd=self.root))
+            self.state['status'] = 'Graph candidate ' + result['decision'] + 'd; decision retained'
+            self.persist()
+            return result
+
+    def workshop_next_step(self, editors):
+        if not self.state.get('workshop', {}).get('ready'):
+            return 'Prepare or restore my workspace. You can read the code before setup.'
+        if self.blocked():
+            return self.blocked()
+        current = self.workshop_controller()
+        if current and current.get('node') == 'approval':
+            return 'Review the verified candidate below, then approve or reject that checksum.'
+        files = (self.workshop_files() or {}).get('files', {})
+        if files != editors or not self.state.get('workshop', {}).get('draftSnapshot'):
+            return 'Save and check my edits. This executes no inference or sandbox.'
+        check = self.state['workshop'].get('lastCheck')
+        if not check or check.get('snapshotSha256') != self.state['workshop'].get('draftSha256'):
+            return 'Save and check my edits to see the checks for this snapshot.'
+        if not self.connected:
+            return 'Local checks: ' + check.get('outcome', 'unavailable').replace('_', ' ') + '. Connect sandbox access before a paid action; keep failed baseline evidence for comparison.'
+        if current:
+            return 'Controller: ' + str(current.get('node') or current.get('status')) + '. Inspect its saved route before continuing.'
+        return 'Choose the named exercise below. Compare its evidence with your prediction.'

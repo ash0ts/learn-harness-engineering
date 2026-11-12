@@ -9,6 +9,7 @@ import subprocess
 from html.parser import HTMLParser
 from collections import Counter
 from create_notebooks import project_snapshot,TITLES
+from workshop_teaching import LABS
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -87,10 +88,14 @@ def validate(export=True,projects=None):
                       if item.get('type') == 'error' or 'application/vnd.marimo+error' in item.get('data', {})]
             if errors:
                 raise RuntimeError(f'{source.name}: rendering errors: {errors}')
-            if ('Not launched' not in html and not (project=='overview' and 'Five hands-on labs' in html)) or 'Saved results' not in html:
+            if ('Not launched' not in html and not (project=='overview' and 'Eight hands-on labs' in html)) or 'Saved results' not in html:
                 raise RuntimeError(f'{source.name}: missing expected saved view')
-            if 'workshop_initial' in assignments and ('marimo-code-editor' not in html or 'Save these edits' not in html or 'Execute my saved snapshot' not in html):
+            if 'workshop_initial' in assignments and ('marimo-code-editor' not in html or 'Save and check my edits' not in html or 'Next step:' not in html):
                 raise RuntimeError(f'{source.name}: missing native workshop workbench')
+            if project in LABS:
+                for _,label,_,_ in LABS[project]['actions']:
+                    if label not in html:raise RuntimeError(source.name+': missing named activity '+label)
+                if 'Lesson action' in html:raise RuntimeError('Obsolete action dropdown remains')
             row.update(rendered=True, htmlSha256=hashlib.sha256(dest.read_bytes()).hexdigest(),courseView=validate_course_view(session,tree))
         rows.append(row)
         print(source.name, 'passed', flush=True)

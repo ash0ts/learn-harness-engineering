@@ -23,3 +23,11 @@ Factual control-text changes are limited to these areas:
 New workshop results are labelled `workshop-v1`. A passed app check is distinct from source provenance, telemetry completeness, cleanup, publication and a student's explanation. Worked-example use is recorded as assisted; unsuccessful agent attempts remain results.
 
 Validation on 2026-11-12: all nine saved views rendered without credentials, inference or coding launches. The historical payload comparison passed, and the three untouched notebooks matched exactly. Live publication and platform rehearsal receipts are recorded separately in the release evidence; this file does not claim those gates are complete.
+
+## Extension to all eight projects
+
+The subsequent all-notebooks workshop request supersedes the five-lab scope above. Projects 06–08 now receive native editable workbenches before their preserved historical narratives. Their original evidence payloads, figures and offline exercises remain unchanged.
+
+The new controls combine saving with deterministic checks, replace the action dropdown with named exercise buttons, select recorded candidates without copying IDs, and show the current controller route and prerequisites. The overview adds an unpaid learning-route selector. Each lab adds a concrete learning objective, expected starting failure, edit instructions, a Forge inspection checkpoint and a question requiring evidence. A read-only source viewer exposes the supplied lifecycle and SDK code. Project 08 decisions require an explicit review and remain tied to the displayed verified checksum.
+
+This extension has its own qualification and browser/publication receipts. Earlier five-lab verification is historical evidence, not proof that these new controls were already tested.
