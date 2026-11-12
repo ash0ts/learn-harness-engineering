@@ -7,8 +7,8 @@
       "file": "forge/notebooks/00-overview.py",
       "project": "overview",
       "title": "Forge track: evidence before conclusions",
-      "sourceCommit": "b56f12b4562683efadcf4b705e27635ad56a9ece",
-      "sha256": "ea5f7df01663531c7557794394035cf35fb8192261925e2031fd7f41d9a695e6",
+      "sourceCommit": "712646acf61185d378538465ec33456eebc62ed8",
+      "sha256": "e768d237bb0b9ce8d40ab638a253f006b957f007fbb2460e5d5dc7ce6cdaca54",
       "id": "Tm90ZWJvb2s6MTUzMTM=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTM%3D",
       "status": "published_verified",
@@ -16,22 +16,22 @@
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "Forge-track-evidence-before-conclusions",
-        "versionIndex": 44,
+        "versionIndex": 47,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:30Z",
-      "expectedRemoteSha256": "ea5f7df01663531c7557794394035cf35fb8192261925e2031fd7f41d9a695e6",
+      "expectedRemoteSha256": "e768d237bb0b9ce8d40ab638a253f006b957f007fbb2460e5d5dc7ce6cdaca54",
       "currentVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "Forge-track-evidence-before-conclusions",
-        "versionIndex": 44,
+        "versionIndex": 47,
         "sourceFileName": "notebook.py"
       },
-      "renderedOutputSha256": "c5f62e3353dc2ff292fc9d51da0b2c20b16502235451d69f4657a8c046e6b6c1",
+      "renderedOutputSha256": "5182e2f7e2b03914cc97f57c05964a0e44626350542f42efc8e8966ad4aa4ee3",
       "renderedCellSourceVerified": true,
       "verifiedAggregateGroups": 43,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-10T20:53:02.035921+00:00",
+      "verifiedAt": "2026-11-12T13:54:09.272594+00:00",
       "reviewedRemoteEdit": {
         "version": {
           "artifactTypeName": "notebook",
@@ -69,6 +69,17 @@
             "sourceFileName": "notebook.py"
           },
           "sha256": "a1fba0b1150025cddc02fd8935b2516d949403db389112dcd7dfa7a55ced922a",
+          "reason": "Opening the reserved native editor saved byte-identical source."
+        },
+        {
+          "at": "2026-11-12T13:47:56.639551+00:00",
+          "version": {
+            "artifactTypeName": "notebook",
+            "artifactCollectionName": "Forge-track-evidence-before-conclusions",
+            "versionIndex": 45,
+            "sourceFileName": "notebook.py"
+          },
+          "sha256": "ea5f7df01663531c7557794394035cf35fb8192261925e2031fd7f41d9a695e6",
           "reason": "Opening the reserved native editor saved byte-identical source."
         }
       ],
@@ -181,7 +192,7 @@
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "01-Minimal-instructions-and-explicit-harnesses",
-        "versionIndex": 42,
+        "versionIndex": 43,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:36Z",
@@ -245,6 +256,17 @@
             "sourceFileName": "notebook.py"
           },
           "sha256": "638e604d509386d676ac607ecd6646fb5c7c11deb520fdd605cef85f4f0fa972",
+          "reason": "Opening the reserved native editor saved byte-identical source."
+        },
+        {
+          "at": "2026-11-12T13:54:32.816476+00:00",
+          "version": {
+            "artifactTypeName": "notebook",
+            "artifactCollectionName": "01-Minimal-instructions-and-explicit-harnesses",
+            "versionIndex": 43,
+            "sourceFileName": "notebook.py"
+          },
+          "sha256": "dfe4a725b49e352b72a4b7b24fb6f9d580a7dec31d6cefd00df551da0fa55e6a",
           "reason": "Opening the reserved native editor saved byte-identical source."
         }
       ],
@@ -692,8 +714,8 @@
       "file": "forge/notebooks/05-role-separation.py",
       "project": "project-05",
       "title": "05 \u00b7 One feature, three role arrangements",
-      "sourceCommit": "b56f12b4562683efadcf4b705e27635ad56a9ece",
-      "sha256": "6e9dc2947e09c7c014aeef2a01ffe2fcc2f8036aae6b1a3b74d329aa8773012e",
+      "sourceCommit": "712646acf61185d378538465ec33456eebc62ed8",
+      "sha256": "1733160f4cbc1eefd2e132263f9d5fda150fb447a30f046bbb80316edef9e64f",
       "id": "Tm90ZWJvb2s6MTUzMTg=",
       "url": "https://forge.coreweave.com/notebooks/Tm90ZWJvb2s6MTUzMTg%3D",
       "status": "published_verified",
@@ -701,22 +723,22 @@
       "expectedRemoteVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "05-One-feature-three-role-arrangements",
-        "versionIndex": 21,
+        "versionIndex": 24,
         "sourceFileName": "notebook.py"
       },
       "expectedRemoteEditedAt": "2026-11-06T08:00:44Z",
-      "expectedRemoteSha256": "6e9dc2947e09c7c014aeef2a01ffe2fcc2f8036aae6b1a3b74d329aa8773012e",
+      "expectedRemoteSha256": "1733160f4cbc1eefd2e132263f9d5fda150fb447a30f046bbb80316edef9e64f",
       "currentVersion": {
         "artifactTypeName": "notebook",
         "artifactCollectionName": "05-One-feature-three-role-arrangements",
-        "versionIndex": 21,
+        "versionIndex": 24,
         "sourceFileName": "notebook.py"
       },
-      "renderedOutputSha256": "03ae6bbcf1c24d18d7fd44eccddb52955517df281975a0750a6cb278de0a4670",
+      "renderedOutputSha256": "34c43a4a865f5bc49c9485c815ce4acbc4d52f6f1aa3d6e2c860e91903a630e6",
       "renderedCellSourceVerified": true,
       "verifiedAggregateGroups": 9,
       "lastStaticOutputAt": null,
-      "verifiedAt": "2026-11-10T20:53:10.266216+00:00",
+      "verifiedAt": "2026-11-12T13:52:53.233274+00:00",
       "verifiedCourseView": {
         "primaryGroups": 3,
         "nativeImages": 3,
@@ -791,6 +813,19 @@
           },
           "renderedOutputSha256": "e2f5028454642cd7c9c67182f53b40bf9c6edc0b48964ba4d761fa7f92e7d8df",
           "verifiedAt": "2026-11-10T19:52:56.346768+00:00"
+        }
+      ],
+      "metadataOnlyVersions": [
+        {
+          "at": "2026-11-12T13:44:51.653311+00:00",
+          "version": {
+            "artifactTypeName": "notebook",
+            "artifactCollectionName": "05-One-feature-three-role-arrangements",
+            "versionIndex": 22,
+            "sourceFileName": "notebook.py"
+          },
+          "sha256": "6e9dc2947e09c7c014aeef2a01ffe2fcc2f8036aae6b1a3b74d329aa8773012e",
+          "reason": "Opening the reserved native editor saved byte-identical source."
         }
       ]
     },
